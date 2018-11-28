@@ -49,7 +49,7 @@ class AddVehicle extends Component {
                 <label><span className="required">*</span>Year</label>
               </div>
               <div>
-                <input type="text" ref="year" onChange={this.props.handleChange} value={this.props.year} name="year" placeholder="2010"></input>
+                <input type="text" ref="year" onChange={this.props.handleChange} value={this.props.year} name="year" placeholder="2010"/>
               </div>
             </div>
             <div className="col-md-3" required>
@@ -57,7 +57,7 @@ class AddVehicle extends Component {
                 <label><span className="required">*</span>Make</label>
               </div>
               <div>
-                <input type="text" ref="make" onChange={this.props.handleChange} value={this.props.make} name="make" placeholder="Lexus"></input>
+                <input type="text" ref="make" onChange={this.props.handleChange} value={this.props.make} name="make" placeholder="Lexus"/>
               </div>
             </div>
             <div className="col-md-3" required>
@@ -65,7 +65,7 @@ class AddVehicle extends Component {
                 <label><span className="required">*</span>Model</label>
               </div>
               <div>
-                <input type="text" ref="model" onChange={this.props.handleChange} value={this.props.model} name="model" placeholder="RX 350"></input>
+                <input type="text" ref="model" onChange={this.props.handleChange} value={this.props.model} name="model" placeholder="RX 350"/>
               </div>
             </div>
           </div>
