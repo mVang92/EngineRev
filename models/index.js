@@ -1,3 +1,4 @@
+console.log("model index loaded")
 module.exports = {
-  Vehicle: require("./carLogModel")
+  Vehicle: require("./vehicle")
 };

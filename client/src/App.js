@@ -14,7 +14,7 @@ export default class App extends Component {
     this.state = {
       showModal: false,
       loggedin: false,
-      uid: "3",
+      uid: "",
       currentModal: String,
       vehicles: [],
       // User Authentication
@@ -32,9 +32,16 @@ export default class App extends Component {
     Modal.setAppElement("body");
     this.onAuthStateChanged();
     this.setState({
-      vehicles: [
-      ]
+      vehicles: []
     });
+  };
+
+  componentDidMount = () => {
+    this.getVehicles();
+  };
+
+  getVehicles = () => {
+    console.log("getVehicles")
   };
 
   authClick = e => {
@@ -56,7 +63,7 @@ export default class App extends Component {
         let userName = document.createTextNode(user.email);
         document.getElementById("userEmail").innerHTML = "";
         document.getElementById("userEmail").appendChild(userName);
-        const id = user.uid;
+        // const id = user.uid;
         //need to call API.getMenu or something like that or a function that does the same (loadMenus?) while passing in user.uid as the required param to search the db for
         // API.getMenu(id).then(res => { this.setState({ menu: res.data, uid: user.uid }) }
         // );
@@ -140,19 +147,26 @@ export default class App extends Component {
     this.setState({
       vehicles: vehicles
     });
-    let element = this.state.vehicles.length - 1
-    // console.log(this.state.vehicles[counter].year);
-    const id = this.state.uid;
-    const bindThis = this;
-    const data = {
+    let element = this.state.vehicles.length - 1;
+    // console.log(this.state.vehicles[element].year);
+    // const id = this.state.uid;
+    // const bindThis = this;
+    // // const data = {
+    //   year: this.state.vehicles[element].year,
+    //   make: this.state.vehicles[element].make,
+    //   model: this.state.vehicles[element].model
+    // };
+    // API.addVehicle(id, data)
+    // .then(function (){
+    //   bindThis.onAuthStateChanged();
+    // });
+    API.addVehicle({
       year: this.state.vehicles[element].year,
       make: this.state.vehicles[element].make,
       model: this.state.vehicles[element].model
-    };
-    API.add(id, data)
-    .then(function (){
-      bindThis.onAuthStateChanged();
-    });
+    })
+      .then(res => this.componentDidMount())
+      .catch(err => console.log(err));
     // this.componentWillMount();
   };
 

@@ -1,16 +1,16 @@
 const router = require("express").Router();
-const carLogController = require("../../controllers/carLogController");
-console.log("vehicles.js")
+const controller = require("../../controllers/controller");
+console.log("route api loaded")
 // Matches with "/api/vehicles"
 router.route("/")
-  .get(carLogController.findAll)
-  .post(carLogController.create);
+  .get(controller.findAll)
+  .post(controller.create);
 
 // Matches with "/api/vehicles/:id"
 router
   .route("/:id")
-  .get(carLogController.findById)
-  .put(carLogController.update)
-  .delete(carLogController.remove);
+  .get(controller.findById)
+  .put(controller.update)
+  .delete(controller.remove);
 
 module.exports = router;

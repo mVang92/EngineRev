@@ -1,4 +1,5 @@
 const db = require("../models");
+console.log("controller loaded")
 // Defining methods for the carLogController
 module.exports = {
   findAll: function(req, res) {
@@ -15,6 +16,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
+    // console.log(req.body)
     db.Vehicle
       .create(req.body)
       .then(dbModel => res.json(dbModel))
