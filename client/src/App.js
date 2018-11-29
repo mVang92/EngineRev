@@ -31,17 +31,18 @@ export default class App extends Component {
   componentWillMount = () => {
     Modal.setAppElement("body");
     this.onAuthStateChanged();
+    this.loadVehicles();
     this.setState({
       vehicles: []
     });
   };
 
-  componentDidMount = () => {
-    this.getVehicles();
-  };
-
-  getVehicles = () => {
-    console.log("getVehicles")
+  loadVehicles = () => {
+    API.getVehicles()
+      .then(res =>
+        this.setState({ vehicles: res.data, year: "", make: "", model: "" })
+      )
+      .catch(err => console.log(err));
   };
 
   authClick = e => {
@@ -165,7 +166,7 @@ export default class App extends Component {
       make: this.state.vehicles[element].make,
       model: this.state.vehicles[element].model
     })
-      .then(res => this.componentDidMount())
+      .then(res => this.componentWillMount())
       .catch(err => console.log(err));
     // this.componentWillMount();
   };
