@@ -9,6 +9,8 @@ class LoggedIn extends Component {
       <div className="loggedIn rounded">
         <MyVehicles
           vehicles={this.props.vehicles}
+          // Pass this deleteVehicle function to App.js
+          deleteVehicle={this.props.deleteVehicle}
         />
         <hr></hr>
         <AddVehicle

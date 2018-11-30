@@ -142,33 +142,39 @@ export default class App extends Component {
   };
 
   // Receives our states from MyVehicles.js to be used in this main component
-  handleAddVehicle = vehicle => {
+  handleAddVehicle = newVehicle => {
     let vehicles = this.state.vehicles;
-    vehicles.push(vehicle);
+    vehicles.push(newVehicle);
     this.setState({
       vehicles: vehicles
     });
     let element = this.state.vehicles.length - 1;
     // console.log(this.state.vehicles[element].year);
-    // const id = this.state.uid;
-    // const bindThis = this;
-    // // const data = {
-    //   year: this.state.vehicles[element].year,
-    //   make: this.state.vehicles[element].make,
-    //   model: this.state.vehicles[element].model
-    // };
-    // API.addVehicle(id, data)
-    // .then(function (){
-    //   bindThis.onAuthStateChanged();
-    // });
-    API.addVehicle({
-      year: this.state.vehicles[element].year,
-      make: this.state.vehicles[element].make,
-      model: this.state.vehicles[element].model
-    })
-      .then(res => this.componentWillMount())
-      .catch(err => console.log(err));
-    // this.componentWillMount();
+    // Check to see if the year is a number.
+    if (isNaN(this.state.vehicles[element].year)) {
+      alert("Please enter numerical values for year.");
+      // Refreshes page, simple way of preventing
+      // bad user input to populate dropdown menu
+      this.componentWillMount();
+    } else {
+      API.addVehicle({
+        year: this.state.vehicles[element].year,
+        make: this.state.vehicles[element].make,
+        model: this.state.vehicles[element].model
+      })
+        .then(res => this.componentWillMount())
+        .catch(err => console.log(err));
+    }
+  };
+
+  handleDeleteVehicle = (e) => {
+    e.preventDefault();
+    var element = document.getElementById("vehicleDropDown");
+    var toDelete = element.options[element.selectedIndex].value;
+    console.log(toDelete);
+    // API.deleteVehicle(toDeleteId)
+    //   .then(res => this.loadVehicles())
+    //   .catch(err => console.log(err));
   };
 
   render() {
@@ -187,6 +193,7 @@ export default class App extends Component {
               vehicles={this.state.vehicles}
               handleChange={this.handleChange}
               addVehicle={this.handleAddVehicle.bind(this)}
+              deleteVehicle={this.handleDeleteVehicle.bind(this)}
             />
           ) : (
               <LoggedOut />

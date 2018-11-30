@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 
 class MyVehicles extends Component {
+  
   handleViewLog = e => {
     e.preventDefault();
     // This captures the selected value from the dropdown menu
     var element = document.getElementById("vehicleDropDown");
     var strUser = element.options[element.selectedIndex].value;
     console.log(strUser);
-  }
+  };
 
   render() {
     let vehicleOptions;
@@ -55,7 +56,15 @@ class MyVehicles extends Component {
                   </select>
                 </div>
                 <div className="col-md-4">
-                  <button type="submit" className="btn-success">View Logs</button>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <button type="submit" className="btn-success">View Logs</button>
+                    </div>
+                    <div className="col-md-6">
+                      {/* Pass this onClick function up to LoggedIn component */}
+                      <button type="button" onClick={this.props.deleteVehicle} className="btn-danger">Delete</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}

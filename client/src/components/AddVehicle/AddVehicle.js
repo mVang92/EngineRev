@@ -22,7 +22,7 @@ class AddVehicle extends Component {
           make: this.refs.make.value,
           model: this.refs.model.value
         }}, function() {
-          // console.log(this.state);
+          console.log(this.state);
           // IMPORTANT: This allows this component to pass states up to App.js
           // States pass through LoggedIn component first, then to App.js
           this.props.addVehicle(this.state.newVehicle);
