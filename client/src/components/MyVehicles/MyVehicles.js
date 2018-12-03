@@ -29,6 +29,7 @@ class MyVehicles extends Component {
         );
       });
     };
+    
     return (
       <form onSubmit={this.handleViewLog.bind(this)}>
         <div className="text-center">

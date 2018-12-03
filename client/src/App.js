@@ -170,9 +170,10 @@ export default class App extends Component {
   handleDeleteVehicle = (e) => {
     e.preventDefault();
     var element = document.getElementById("vehicleDropDown");
-    var toDelete = element.options[element.selectedIndex].value;
-    console.log(toDelete);
-    // API.deleteVehicle(toDeleteId)
+    var value = element.options[element.selectedIndex].value;
+    console.log(value);
+    
+    // API.deleteVehicle(toDelete)
     //   .then(res => this.loadVehicles())
     //   .catch(err => console.log(err));
   };
