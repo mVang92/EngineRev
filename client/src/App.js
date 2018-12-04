@@ -17,6 +17,7 @@ export default class App extends Component {
       uid: "",
       currentModal: String,
       vehicles: [],
+      newVehicle: {},
       // User Authentication
       message: "",
       email: "",
@@ -40,8 +41,9 @@ export default class App extends Component {
   loadVehicles = () => {
     API.getVehicles()
       .then(res =>
-        this.setState({ vehicles: res.data, year: "", make: "", model: "" })
-      )
+        this.setState({ vehicles: res.data, year: "", make: "", model: "" },
+        console.log(res.data[0]._id))
+        )
       .catch(err => console.log(err));
   };
 
@@ -167,15 +169,24 @@ export default class App extends Component {
     }
   };
 
+  deleteFunction (res){
+    API.deleteVehicle(res)
+      .then(res => this.loadVehicles())
+      .catch(err => console.log(err))
+  }
+
   handleDeleteVehicle = (e) => {
     e.preventDefault();
-    var element = document.getElementById("vehicleDropDown");
-    var value = element.options[element.selectedIndex].value;
-    console.log(value);
-    
-    // API.deleteVehicle(toDelete)
-    //   .then(res => this.loadVehicles())
-    //   .catch(err => console.log(err));
+    // var element = document.getElementById("vehicleDropDown");
+    // var value = element.options[element.selectedIndex].value;
+    // console.log(value);
+    API.getVehicles()
+      .then(res => this.deleteFunction(res.data[0]._id))
+  };
+
+  handleReset = () => {
+    console.log("Form Reset")
+    document.getElementById("field").reset();
   };
 
   render() {
@@ -193,6 +204,7 @@ export default class App extends Component {
             <LoggedIn
               vehicles={this.state.vehicles}
               handleChange={this.handleChange}
+              handleReset={this.handleReset}
               addVehicle={this.handleAddVehicle.bind(this)}
               deleteVehicle={this.handleDeleteVehicle.bind(this)}
             />

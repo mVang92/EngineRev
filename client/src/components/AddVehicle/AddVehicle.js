@@ -21,22 +21,18 @@ class AddVehicle extends Component {
           year: this.refs.year.value,
           make: this.refs.make.value,
           model: this.refs.model.value
-        }}, function() {
-          console.log(this.state);
-          // IMPORTANT: This allows this component to pass states up to App.js
-          // States pass through LoggedIn component first, then to App.js
-          this.props.addVehicle(this.state.newVehicle);
-        });
+        }
+      }, function () {
+        console.log(this.state);
+        // IMPORTANT: This allows this component to pass states up to App.js
+        // States pass through LoggedIn component first, then to App.js
+        this.props.addVehicle(this.state.newVehicle);
+      });
       document.getElementById("field").reset();
     };
   };
 
-  resetForm = e => {
-    document.getElementById("field").reset();
-  };
-
   render() {
-
     return (
       <React.Fragment>
         <form id="field">
@@ -49,7 +45,13 @@ class AddVehicle extends Component {
                 <label><span className="required">*</span>Year</label>
               </div>
               <div>
-                <input type="text" ref="year" onChange={this.props.handleChange} value={this.props.year} name="year" placeholder="2010"/>
+                <input
+                  type="text"
+                  ref="year"
+                  onChange={this.props.handleChange}
+                  value={this.props.year}
+                  name="year"
+                  placeholder="2010" />
               </div>
             </div>
             <div className="col-md-3" required>
@@ -57,7 +59,13 @@ class AddVehicle extends Component {
                 <label><span className="required">*</span>Make</label>
               </div>
               <div>
-                <input type="text" ref="make" onChange={this.props.handleChange} value={this.props.make} name="make" placeholder="Lexus"/>
+                <input
+                  type="text"
+                  ref="make"
+                  onChange={this.props.handleChange}
+                  value={this.props.make}
+                  name="make"
+                  placeholder="Lexus" />
               </div>
             </div>
             <div className="col-md-3" required>
@@ -65,12 +73,18 @@ class AddVehicle extends Component {
                 <label><span className="required">*</span>Model</label>
               </div>
               <div>
-                <input type="text" ref="model" onChange={this.props.handleChange} value={this.props.model} name="model" placeholder="RX 350"/>
+                <input
+                  type="text"
+                  ref="model"
+                  onChange={this.props.handleChange} 
+                  value={this.props.model}
+                  name="model"
+                  placeholder="RX 350" />
               </div>
             </div>
           </div>
         </form>
-        <br></br>
+        <br />
         {/* Form and Buttons*/}
         <form onSubmit={this.handleSubmit.bind(this)}>
           <div className="row">
@@ -79,10 +93,10 @@ class AddVehicle extends Component {
             <div className="col-md-3">
               <div className="row">
                 <div className="col-md-6">
-                  <button type="button" onClick={this.resetForm} className="btn-danger">Reset</button>
+                  <button type="submit" className="btn-success">Add</button>
                 </div>
                 <div className="col-md-6">
-                  <button type="submit" className="btn-success">Add</button>
+                  <button type="button" onClick={this.props.handleReset} className="btn-danger">Reset</button>
                 </div>
               </div>
             </div>

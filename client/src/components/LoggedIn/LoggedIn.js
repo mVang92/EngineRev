@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import MyVehicles from "../MyVehicles";
 import AddVehicle from "../AddVehicle";
 
@@ -16,6 +16,7 @@ const LoggedIn = props => {
       <AddVehicle
         vehicles={props.vehicles}
         handleChange={props.handleChange}
+        handleReset={props.handleReset}
         // Pass states from AddVehicle component using props to App.js
         addVehicle={props.addVehicle}
       />
