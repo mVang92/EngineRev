@@ -3,12 +3,13 @@ import axios from "axios";
 export default {
   // Get all vehicles
   getVehicles: function () {
-    return axios.get("/api/vehicles");
+    return axios.get("/api/vehicles")
   },
   // Add a new vehicle
-  addVehicle: function (id) {
-    console.log(id)
-    return axios.post("/api/vehicles", id);
+  addVehicle: function (id, data) {
+    console.log("id: " + id)
+    console.log("data: " + data)
+    return axios.post("/api/vehicles", data);
   },
   deleteVehicle: function (id) {
     console.log(id)

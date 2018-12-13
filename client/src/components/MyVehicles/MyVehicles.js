@@ -1,15 +1,20 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { VehicleItem } from "../VehicleItem";
+import DeleteBtn from "../DeleteBtn";
 
 class MyVehicles extends Component {
-  
+
   handleViewLog = e => {
     e.preventDefault();
     // This captures the selected value from the dropdown menu
-    var element = document.getElementById("vehicleDropDown");
-    var strUser = element.options[element.selectedIndex].value;
-    console.log(strUser);
+    // var element = document.getElementById("vehicleDropDown");
+    // var strUser = element.options[element.selectedIndex].value;
+    console.log("hit");
   };
+
+  deleteBook = e => {
+    console.log("yay")
+  }
 
   render() {
     let vehicleOptions;
@@ -22,21 +27,24 @@ class MyVehicles extends Component {
       vehicleOptions = this.props.vehicles.map(({ year, make, model }) => {
         // Note the syntax to how I grouped the value of the year, make, and model together.
         return (
-          <option
-            key={year + " " + make + " " + model}
-            value={year + " " + make + " " + model}>
-            {year} {make} {model}
-          </option>
+          <div>
+            {/* <div className="text-left">
+              <option
+                key={year + " " + make + " " + model}
+                value={year + " " + make + " " + model}>
+                {year} {make} {model}
+
+              </option>
+              <DeleteBtn onClick={() => this.deleteBook(vehicles._id)} />
+            </div> */}
+          </div>
         );
       });
     };
-    
+
     return (
-      <form onSubmit={this.handleViewLog.bind(this)}>
-        <div className="text-center">
-          <p>Hello <span id="userEmail"></span>!</p>
-          <hr></hr>
-        </div>
+      <React.Fragment>
+        
         <div className="text-center">
           {/* If no vehicles are found in record, display no vehicles found,
         else display the vehicles with a dropdown menu */}
@@ -48,31 +56,44 @@ class MyVehicles extends Component {
               </div>
             </div>
           ) : (
-              <div className="row">
-                <div className="col-md-4">
-                  <p>My Vehicles</p>
-                </div>
-                <div className="col-md-4 noVehicles">
-                  <select id="vehicleDropDown" ref="myVehicles">
+              <React.Fragment>
+                <div className="row">
+                  <div className="col-md-4">
+                    <p>My Vehicles</p>
+                  </div>
+                  <div className="col-md-8">
+                    {this.props.vehicles.map(vehicle => (
+                      <div>
+                        <VehicleItem key={vehicle._id}>
+                          {vehicle.year} {vehicle.make} {vehicle.model}
+                          <DeleteBtn onClick={() => this.deleteBook(vehicle._id)} />
+                        </VehicleItem>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* <div className="col-md-8">
+                  <div id="vehicleDropDown" ref="myVehicles">
                     {vehicleOptions}
-                  </select>
-                </div>
-                <div className="col-md-4">
+                  </div>
+                </div> */}
+                  {/* <div className="col-md-4">
                   <div className="row">
                     <div className="col-md-6">
                       <button type="submit" className="btn-success">View Logs</button>
                     </div>
-                    <div className="col-md-6">
-                      {/* Pass this onClick function up to LoggedIn component */}
-                      <button type="button" onClick={this.props.deleteVehicle} className="btn-danger">Delete</button>
+                    <div className="col-md-6"> */}
+                  {/* Pass this onClick function up to LoggedIn component */}
+                  {/* <button type="button" onClick={this.props.deleteVehicle} className="btn-danger">Delete</button>
                     </div>
-                  </div>
+                  </div> */}
+                  {/* </div> */}
                 </div>
-              </div>
+              </React.Fragment>
             )}
           {/* End ternary */}
         </div>
-      </form>
+      </React.Fragment>
     );
   };
 };

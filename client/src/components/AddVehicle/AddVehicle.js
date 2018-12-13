@@ -13,9 +13,6 @@ class AddVehicle extends Component {
     if (this.refs.year.value === "" || this.refs.make.value === "" || this.refs.model.value === "") {
       alert("Please fill in all of the neccessary fields.");
     } else {
-      // console.log("year: " + this.refs.year.value);
-      // console.log("make: " + this.refs.make.value);
-      // console.log("model: " + this.refs.model.value);
       this.setState({
         newVehicle: {
           year: this.refs.year.value,
@@ -35,6 +32,10 @@ class AddVehicle extends Component {
   render() {
     return (
       <React.Fragment>
+        <div className="text-center">
+          <p>Hello <span id="userEmail"></span>!</p>
+          <hr></hr>
+        </div>
         <form id="field">
           <div className="row">
             <div className="col-md-3">
@@ -76,7 +77,7 @@ class AddVehicle extends Component {
                 <input
                   type="text"
                   ref="model"
-                  onChange={this.props.handleChange} 
+                  onChange={this.props.handleChange}
                   value={this.props.model}
                   name="model"
                   placeholder="RX 350" />

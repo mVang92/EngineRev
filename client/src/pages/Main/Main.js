@@ -17,7 +17,6 @@ export default class App extends Component {
       uid: "",
       currentModal: String,
       vehicles: [],
-      newVehicle: {},
       // User Authentication
       message: "",
       email: "",
@@ -42,8 +41,9 @@ export default class App extends Component {
     API.getVehicles()
       .then(res =>
         this.setState({ vehicles: res.data, year: "", make: "", model: "" },
-        console.log(res.data[0]._id))
+          // console.log(res.data[0]._id)
         )
+      )
       .catch(err => console.log(err));
   };
 
@@ -66,11 +66,14 @@ export default class App extends Component {
         let userName = document.createTextNode(user.email);
         document.getElementById("userEmail").innerHTML = "";
         document.getElementById("userEmail").appendChild(userName);
-        // const id = user.uid;
-        //need to call API.getMenu or something like that or a function that does the same (loadMenus?) while passing in user.uid as the required param to search the db for
-        // API.getMenu(id).then(res => { this.setState({ menu: res.data, uid: user.uid }) }
-        // );
-
+        const id = user.uid;
+        // need to call API.getMenu or something like that or a function that does the same (loadMenus?)
+        // while passing in user.uid as the required param to search the db for
+        API.getVehicles(id)
+          .then(res =>
+            this.setState({ vehicles: res.data, uid: user.uid })
+          )
+          .catch(err => console.log(err));
       } else {
         console.log("Please sign-in or sign-up.");
       };
@@ -151,7 +154,6 @@ export default class App extends Component {
       vehicles: vehicles
     });
     let element = this.state.vehicles.length - 1;
-    // console.log(this.state.vehicles[element].year);
     // Check to see if the year is a number.
     if (isNaN(this.state.vehicles[element].year)) {
       alert("Please enter numerical values for year.");
@@ -159,29 +161,36 @@ export default class App extends Component {
       // bad user input to populate dropdown menu
       this.componentWillMount();
     } else {
-      API.addVehicle({
-        year: this.state.vehicles[element].year,
-        make: this.state.vehicles[element].make,
-        model: this.state.vehicles[element].model
+      const bindThis = this;
+      firebase.auth.onAuthStateChanged(function (user) {
+        if (user) {
+          API.addVehicle(user.uid, {
+            year: bindThis.state.vehicles[element].year,
+            make: bindThis.state.vehicles[element].make,
+            model: bindThis.state.vehicles[element].model
+          })
+            .then(res => bindThis.componentWillMount())
+            .catch(err => console.log(err));
+        }
       })
-        .then(res => this.componentWillMount())
-        .catch(err => console.log(err));
     }
   };
 
-  deleteFunction (res){
+  deleteFunction = res => {
     API.deleteVehicle(res)
       .then(res => this.loadVehicles())
       .catch(err => console.log(err))
   }
 
-  handleDeleteVehicle = (e) => {
+  handleDeleteVehicle = e => {
     e.preventDefault();
     // var element = document.getElementById("vehicleDropDown");
     // var value = element.options[element.selectedIndex].value;
     // console.log(value);
-    API.getVehicles()
-      .then(res => this.deleteFunction(res.data[0]._id))
+    var x = document.getElementById("vehicleDropDown");
+    x.remove(x.selectedIndex);
+    // API.getVehicles()
+    //   .then(res => this.deleteFunction(res.data[0]._id))
   };
 
   handleReset = () => {
@@ -196,7 +205,6 @@ export default class App extends Component {
           loggedin={this.state.loggedin}
           authClick={this.authClick}
           signOut={this.handleSignOut}
-          openOptions={this.openOptions}
         />
         <Container>
           {this.state.loggedin === true ? (
