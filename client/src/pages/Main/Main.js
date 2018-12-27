@@ -176,21 +176,18 @@ export default class App extends Component {
     }
   };
 
-  deleteFunction = res => {
-    API.deleteVehicle(res)
-      .then(res => this.loadVehicles())
-      .catch(err => console.log(err))
-  }
-
-  handleDeleteVehicle = e => {
-    e.preventDefault();
+  handleDeleteVehicle = id => {
+    // e.preventDefault();
     // var element = document.getElementById("vehicleDropDown");
     // var value = element.options[element.selectedIndex].value;
     // console.log(value);
-    var x = document.getElementById("vehicleDropDown");
-    x.remove(x.selectedIndex);
+    // var x = document.getElementById("vehicleDropDown");
+    // x.remove(x.selectedIndex);
     // API.getVehicles()
     //   .then(res => this.deleteFunction(res.data[0]._id))
+    console.log("hit")
+    API.deleteVehicle(id)
+      .then(res => this.componentWillMount());
   };
 
   handleReset = () => {

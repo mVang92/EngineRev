@@ -4,19 +4,10 @@ import { VehicleItem } from "../VehicleItem";
 import DeleteBtn from "../DeleteBtn";
 
 class MyVehicles extends Component {
-
-  handleViewLog = e => {
-    e.preventDefault();
-    // This captures the selected value from the dropdown menu
-    // var element = document.getElementById("vehicleDropDown");
-    // var strUser = element.options[element.selectedIndex].value;
-    console.log("hit");
-  };
-
-  deleteVehicle = id => {
-    console.log("delete" + id)
-    API.deleteVehicle(id);
-  }
+  // deleteVehicle = id => {
+  //   console.log("delete" + id)
+  //   API.deleteVehicle(id);
+  // }
 
   render() {
     let vehicleOptions;
@@ -46,7 +37,6 @@ class MyVehicles extends Component {
 
     return (
       <React.Fragment>
-        
         <div className="text-center">
           {/* If no vehicles are found in record, display no vehicles found,
         else display the vehicles with a dropdown menu */}
@@ -65,12 +55,10 @@ class MyVehicles extends Component {
                   </div>
                   <div className="col-md-8">
                     {this.props.vehicles.map(vehicle => (
-                      <div>
-                        <VehicleItem key={vehicle._id}>
-                          {vehicle.year} {vehicle.make} {vehicle.model}
-                          <DeleteBtn onClick={() => this.deleteVehicle(vehicle._id)} />
-                        </VehicleItem>
-                      </div>
+                      <VehicleItem key={vehicle._id}>
+                        {vehicle.year} {vehicle.make} {vehicle.model}
+                        <DeleteBtn onClick={() => this.props.deleteVehicle(vehicle._id)} />
+                      </VehicleItem>
                     ))}
                   </div>
 
