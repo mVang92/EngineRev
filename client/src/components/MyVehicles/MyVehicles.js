@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import API from "../../utils/API";
 import { VehicleItem } from "../VehicleItem";
 import DeleteBtn from "../DeleteBtn";
 
@@ -12,8 +13,9 @@ class MyVehicles extends Component {
     console.log("hit");
   };
 
-  deleteBook = e => {
-    console.log("yay")
+  deleteVehicle = id => {
+    console.log("delete" + id)
+    API.deleteVehicle(id);
   }
 
   render() {
@@ -35,7 +37,7 @@ class MyVehicles extends Component {
                 {year} {make} {model}
 
               </option>
-              <DeleteBtn onClick={() => this.deleteBook(vehicles._id)} />
+              <DeleteBtn onClick={() => this.deleteVehicle(vehicles._id)} />
             </div> */}
           </div>
         );
@@ -66,7 +68,7 @@ class MyVehicles extends Component {
                       <div>
                         <VehicleItem key={vehicle._id}>
                           {vehicle.year} {vehicle.make} {vehicle.model}
-                          <DeleteBtn onClick={() => this.deleteBook(vehicle._id)} />
+                          <DeleteBtn onClick={() => this.deleteVehicle(vehicle._id)} />
                         </VehicleItem>
                       </div>
                     ))}
