@@ -32,8 +32,18 @@ input {
     border-radius: 5px;
 }
 
+.commentsBox {
+    width: 100%;
+    margin: auto;
+}
+
 .required {
     color: red;
+}
+
+.logResetBtn,
+.logSubmitBtn {
+    text-align: center;
 }
 
 .addBtn,
