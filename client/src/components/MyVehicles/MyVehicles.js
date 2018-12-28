@@ -43,7 +43,7 @@ class MyVehicles extends Component {
           {/* Begin ternary */}
           {this.props.vehicles.length === 0 ? (
             <div className="row">
-              <div className="col-md-12">
+              <div className="col-md-12 text-danger">
                 <strong>No Vehicles on record.</strong>
               </div>
             </div>
@@ -55,9 +55,9 @@ class MyVehicles extends Component {
                   </div>
                   <div className="col-md-8">
                     {this.props.vehicles.map(vehicle => (
-                      <div className="row">
+                      <div key={vehicle._id} className="row">
                         <div className="col-md-10">
-                          {console.log(vehicle)}
+                          {/* {console.log(vehicle)} */}
                           <VehicleItem key={vehicle._id}>
                             {/* {vehicle.year} {vehicle.make} {vehicle.model} */}
                             <Link to={"/vehicle/" + vehicle._id}>
@@ -67,7 +67,7 @@ class MyVehicles extends Component {
                             </Link>
                           </VehicleItem>
                         </div>
-                        <div className="col-md-2 deleteBtn">
+                        <div id="deleteBtn" className="col-md-2">
                           <DeleteBtn onClick={() => this.props.deleteVehicle(vehicle._id)} />
                         </div>
                       </div>

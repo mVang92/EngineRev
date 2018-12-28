@@ -94,10 +94,10 @@ class AddVehicle extends Component {
             <div className="col-md-3">
               <div className="row">
                 <div className="col-md-6">
-                  <button type="submit" className="btn-success">Add</button>
+                  <button type="submit" className="addBtn">Add</button>
                 </div>
                 <div className="col-md-6">
-                  <button type="button" onClick={this.props.handleReset} className="btn-danger">Reset</button>
+                  <button type="button" onClick={this.props.handleReset} className="resetBtn">Reset</button>
                 </div>
               </div>
             </div>

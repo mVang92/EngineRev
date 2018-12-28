@@ -19,7 +19,7 @@ input {
     margin-top: 10px;
 }
 
-.loggedIn {
+.box {
     background: rgb(235, 235, 235);
     margin-top: 10px;
     padding: 1em;
@@ -29,7 +29,42 @@ input {
     color: red;
 }
 
+.addBtn,
+.resetBtn,
+.deleteBtn {
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+.addBtn {
+    background: rgb(200, 255, 200);
+}
+
+.resetBtn,
+.deleteBtn {
+    background: rgb(255, 200, 200);
+}
+
+#deleteBtn {
+    margin: auto;
+}
+
 .deleteBtn {
     margin: auto;
-    color: #e74944;
+}
+
+.addBtn:hover,
+.resetBtn:hover,
+.deleteBtn:hover {
+    transition-duration: 0.2s;
+}
+
+.addBtn:hover {
+    background: rgb(128, 255, 128);
+}
+
+.resetBtn:hover,
+.deleteBtn:hover {
+    background: rgb(255, 128, 128);
 }
