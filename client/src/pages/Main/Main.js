@@ -159,7 +159,7 @@ export default class App extends Component {
       alert("Please enter numerical values for year.");
       // Refreshes page, simple way of preventing
       // bad user input to populate dropdown menu
-      this.componentWillMount();
+      this.loadVehicles();
     } else {
       const bindThis = this;
       firebase.auth.onAuthStateChanged(function (user) {
@@ -169,7 +169,7 @@ export default class App extends Component {
             make: bindThis.state.vehicles[element].make,
             model: bindThis.state.vehicles[element].model
           })
-            .then(res => bindThis.componentWillMount())
+            .then(res => bindThis.loadVehicles())
             .catch(err => console.log(err));
         }
       })
@@ -177,17 +177,9 @@ export default class App extends Component {
   };
 
   handleDeleteVehicle = id => {
-    // e.preventDefault();
-    // var element = document.getElementById("vehicleDropDown");
-    // var value = element.options[element.selectedIndex].value;
-    // console.log(value);
-    // var x = document.getElementById("vehicleDropDown");
-    // x.remove(x.selectedIndex);
-    // API.getVehicles()
-    //   .then(res => this.deleteFunction(res.data[0]._id))
-    console.log("hit")
+    console.log("Deleted: " + id)
     API.deleteVehicle(id)
-      .then(res => this.componentWillMount());
+      .then(res => this.loadVehicles());
   };
 
   handleReset = () => {

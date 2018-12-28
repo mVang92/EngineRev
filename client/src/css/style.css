@@ -30,6 +30,6 @@ input {
 }
 
 .deleteBtn {
-    float: right;
+    margin: auto;
     color: #e74944;
 }
