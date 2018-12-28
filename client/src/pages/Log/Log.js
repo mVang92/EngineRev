@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import Container from "../../components/Container";
+import AddLog from "../../components/AddLog";
 
 class Log extends Component {
   state = {
     vehicle: {},
-    logs: {},
+    logs: [],
     date: "",
     mileage: "",
     service: "",
@@ -30,28 +31,35 @@ class Log extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.refs.date.value === "" || this.refs.mileage.value === "" || this.refs.service.value === "") {
+
+    if (this.state.date === "" || this.state.mileage === "" || this.state.service === "") {
       alert("Please fill in all of the neccessary fields.");
     } else {
+      let log = {
+        date: this.state.date,
+        mileage: this.state.mileage,
+        service: this.state.service,
+        comment: this.state.comment
+      };
+      this.state.logs.push(log);
       this.setState({
-        newVehicle: {
-          year: this.refs.year.value,
-          make: this.refs.make.value,
-          model: this.refs.model.value
-        }
-      }, function () {
-        console.log(this.state);
-        // IMPORTANT: This allows this component to pass states up to App.js
-        // States pass through LoggedIn component first, then to App.js
-        this.props.addVehicle(this.state.newVehicle);
+        date: "",
+        mileage: "",
+        service: "",
+        comment: ""
       });
-      document.getElementById("field").reset();
+      console.log(this.state.logs)
     };
   };
 
   handleReset = () => {
     console.log("Form Reset")
-    document.getElementById("field").reset();
+    this.setState({
+      date: "",
+      mileage: "",
+      service: "",
+      comment: ""
+    });
   };
 
   render() {
@@ -85,64 +93,15 @@ class Log extends Component {
             </div>
           </div>
           <div className="innerBox">
-            <form id="field" onSubmit={this.handleSubmit.bind(this)}>
-              <div className="row">
-                <div className="col-md-4">
-                  <label><span className="required">*</span><strong>Date</strong></label>
-                  <input
-                    type="date"
-                    ref="date"
-                    onChange={this.handleChange}
-                    value={this.date}
-                    name="date"
-                    placeholder="Required"></input>
-                </div>
-                <div className="col-md-4">
-                  <label><span className="required">*</span><strong>Mileage</strong></label>
-                  <input
-                    type="text"
-                    ref="mileage"
-                    onChange={this.handleChange}
-                    value={this.mileage}
-                    name="mileage"
-                    placeholder="Required"></input>
-                </div>
-                <div className="col-md-4">
-                  <label><span className="required">*</span><strong>Services</strong></label>
-                  <input
-                    type="text"
-                    ref="service"
-                    onChange={this.handleChange}
-                    value={this.service}
-                    name="service"
-                    placeholder="Required"></input>
-                </div>
-              </div>
-              <br />
-              <div className="row">
-                <div className="col-md-2">
-                  <label><strong>Comments</strong></label>
-                </div>
-                <div className="col-md-10">
-                  <textarea
-                    className="commentsBox"
-                    ref="comment"
-                    onChange={this.handleChange}
-                    value={this.comment}
-                    name="comment"
-                    placeholder="Optional"></textarea>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-8"></div>
-                <div className="col-md-2 logResetBtn">
-                  <button type="button" onClick={this.handleReset}>Reset</button>
-                </div>
-                <div className="col-md-2 logSubmitBtn">
-                  <button type="submit">Submit</button>
-                </div>
-              </div>
-            </form>
+            <AddLog
+              date={this.state.date}
+              mileage={this.state.mileage}
+              service={this.state.service}
+              comment={this.state.comment}
+              handleChange={this.handleChange}
+              handleReset={this.handleReset}
+              handleSubmit={this.handleSubmit}
+            />
           </div>
         </div>
       </Container>
