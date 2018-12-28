@@ -25,6 +25,13 @@ input {
     padding: 1em;
 }
 
+.innerBox {
+    background: rgb(200, 200, 200);
+    margin: 10px;
+    padding: 1em;
+    border-radius: 5px;
+}
+
 .required {
     color: red;
 }
@@ -47,10 +54,6 @@ input {
 }
 
 #deleteBtn {
-    margin: auto;
-}
-
-.deleteBtn {
     margin: auto;
 }
 

@@ -50,10 +50,13 @@ class MyVehicles extends Component {
           ) : (
               <React.Fragment>
                 <div className="row">
-                  <div className="col-md-4">
-                    <p>My Vehicles</p>
+                  <div className="col-md-12">
+                    <strong>My Vehicles</strong>
                   </div>
-                  <div className="col-md-8">
+                </div>
+                <div className="row innerBox">
+                <div className="col-md-2"></div>
+                  <div className="col-md-10">
                     {this.props.vehicles.map(vehicle => (
                       <div key={vehicle._id} className="row">
                         <div className="col-md-10">

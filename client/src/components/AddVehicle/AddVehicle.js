@@ -34,13 +34,15 @@ class AddVehicle extends Component {
       <React.Fragment>
         <div className="text-center">
           <p>Hello <span id="userEmail"></span>!</p>
-          <hr></hr>
-        </div>
+        </div>  
+        <hr></hr>
         <form id="field">
           <div className="row">
-            <div className="col-md-3">
-              Add a Vehicle
+            <div className="col-md-12 text-center">
+              <strong>Add a Vehicle</strong>
+            </div>
           </div>
+          <div className="row innerBox">
             <div className="col-md-3">
               <div>
                 <label><span className="required">*</span>Year</label>
@@ -83,26 +85,24 @@ class AddVehicle extends Component {
                   placeholder="RX 350" />
               </div>
             </div>
+            <div className="col-md-3">
+              {/* Form and Buttons*/}
+              <form onSubmit={this.handleSubmit.bind(this)}>
+                {/* <div className="row"> */}
+                  <div className="col-md-12 text-center">
+                    <button type="submit" className="addBtn">Add Vehicle</button>
+                  </div>
+                  <br />
+                  <div className="col-md-12 text-center">
+                    <button type="button" onClick={this.props.handleReset} className="resetBtn">Reset Fields</button>
+                  </div>
+                {/* </div> */}
+              </form>
+            </div>
           </div>
         </form>
         <br />
-        {/* Form and Buttons*/}
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <div className="row">
-            <div className="col-md-9">
-            </div>
-            <div className="col-md-3">
-              <div className="row">
-                <div className="col-md-6">
-                  <button type="submit" className="addBtn">Add</button>
-                </div>
-                <div className="col-md-6">
-                  <button type="button" onClick={this.props.handleReset} className="resetBtn">Reset</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
+
       </React.Fragment>
     );
   };
