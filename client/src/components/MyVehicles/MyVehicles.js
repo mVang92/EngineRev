@@ -60,7 +60,7 @@ class MyVehicles extends Component {
                           {console.log(vehicle)}
                           <VehicleItem key={vehicle._id}>
                             {/* {vehicle.year} {vehicle.make} {vehicle.model} */}
-                            <Link to={"/log/" + vehicle._id}>
+                            <Link to={"/vehicle/" + vehicle._id}>
                               <div className="text-dark">
                                 {vehicle.year} {vehicle.make} {vehicle.model}
                               </div>

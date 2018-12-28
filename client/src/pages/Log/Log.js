@@ -1,10 +1,24 @@
 import React, { Component } from "react";
+import API from "../../utils/API";
+
 class Log extends Component {
+  state = {
+    vehicle: {}
+  };
+
+  // When this component mounts, grab the vehicle with the _id of this.props.match.params.id
+  // e.g. localhost:3000/vehicle/599dcb67f0f16317844583fc
+    componentDidMount() {
+      console.log("here")
+      API.getVehicle(this.props.match.params.id)
+        .then(res => this.setState({ vehicle: res.data }))
+        .catch(err => console.log(err));
+    }
 
   render() {
     return (
       <div>
-        hi
+        {this.state.vehicle.year} {this.state.vehicle.make} {this.state.vehicle.model} 
       </div>
     )
   }

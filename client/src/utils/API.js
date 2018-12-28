@@ -5,6 +5,9 @@ export default {
   getVehicles: function () {
     return axios.get("/api/vehicles")
   },
+  getVehicle: function(id) {
+    return axios.get("/api/vehicles/" + id);
+  },
   // Add a new vehicle
   addVehicle: function (id, data) {
     return axios.post("/api/vehicles", data);
