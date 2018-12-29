@@ -8,7 +8,6 @@ const LoggedIn = props => {
       <AddVehicle
         vehicles={props.vehicles}
         handleChange={props.handleChange}
-        handleReset={props.handleReset}
         // Pass states from AddVehicle component using props to App.js
         addVehicle={props.addVehicle}
       />

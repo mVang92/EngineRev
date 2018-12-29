@@ -17,9 +17,8 @@ class Log extends Component {
   // e.g. localhost:3000/vehicle/599dcb67f0f16317844583fc
   componentDidMount() {
     API.getVehicle(this.props.match.params.id)
-      .then(res => this.setState({ vehicle: res.data }))
+      .then(res => this.setState({ vehicle: res.data.vehicle[0] }))
       .catch(err => console.log(err));
-      console.log(this.state.vehicle)
   };
 
   handleChange = e => {

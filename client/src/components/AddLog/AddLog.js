@@ -54,10 +54,10 @@ class AddLog extends Component {
         <div className="row">
           <div className="col-md-8"></div>
           <div className="col-md-2 logResetBtn">
-            <button type="button" onClick={this.props.handleReset}>Reset</button>
+            <button type="reset" className="resetBtn" onClick={this.props.handleReset}>Reset</button>
           </div>
           <div className="col-md-2 logSubmitBtn">
-            <button type="submit">Submit</button>
+            <button type="submit" className="addBtn">Submit</button>
           </div>
         </div>
       </form>

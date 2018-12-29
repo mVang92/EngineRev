@@ -25,18 +25,17 @@ class AddVehicle extends Component {
         // States pass through LoggedIn component first, then to App.js
         this.props.addVehicle(this.state.newVehicle);
       });
-      document.getElementById("field").reset();
     };
   };
 
   render() {
     return (
-      <React.Fragment>
+      <form onSubmit={this.handleSubmit.bind(this)}>
         <div className="text-center">
           <p>Hello <span id="userEmail"></span>!</p>
-        </div>  
+        </div>
         <hr></hr>
-        <form id="field">
+        <div>
           <div className="row">
             <div className="col-md-12 text-center">
               <strong>Add a Vehicle</strong>
@@ -57,7 +56,7 @@ class AddVehicle extends Component {
                   placeholder="2010" />
               </div>
             </div>
-            <div className="col-md-3" required>
+            <div className="col-md-3">
               <div>
                 <label><span className="required">*</span>Make</label>
               </div>
@@ -71,7 +70,7 @@ class AddVehicle extends Component {
                   placeholder="Lexus" />
               </div>
             </div>
-            <div className="col-md-3" required>
+            <div className="col-md-3">
               <div>
                 <label><span className="required">*</span>Model</label>
               </div>
@@ -86,25 +85,19 @@ class AddVehicle extends Component {
               </div>
             </div>
             <div className="col-md-3">
-              {/* Form and Buttons*/}
-              <form onSubmit={this.handleSubmit.bind(this)}>
-                {/* <div className="row"> */}
-                  <div className="col-md-12 text-center">
-                    <button type="submit" className="addBtn">Add Vehicle</button>
-                  </div>
-                  <br />
-                  <div className="col-md-12 text-center">
-                    <button type="button" onClick={this.props.handleReset} className="resetBtn">Reset Fields</button>
-                  </div>
-                {/* </div> */}
-              </form>
+              <div className="col-md-12 text-center">
+                <button type="submit" className="addBtn">Add Vehicle</button>
+              </div>
+              <br />
+              <div className="col-md-12 text-center">
+                <button type="reset" className="resetBtn">Reset Fields</button>
+              </div>
             </div>
           </div>
-        </form>
-        <br />
-
-      </React.Fragment>
+        </div>
+      </form>
     );
   };
 };
+
 export default AddVehicle;

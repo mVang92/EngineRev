@@ -184,11 +184,6 @@ export default class App extends Component {
       .then(res => this.loadVehicles());
   };
 
-  handleReset = () => {
-    console.log("Form Reset")
-    document.getElementById("field").reset();
-  };
-
   render() {
     return (
       <React.Fragment>
@@ -203,7 +198,6 @@ export default class App extends Component {
             <LoggedIn
               vehicles={this.state.vehicles}
               handleChange={this.handleChange}
-              handleReset={this.handleReset}
               addVehicle={this.handleAddVehicle.bind(this)}
               deleteVehicle={this.handleDeleteVehicle.bind(this)}
             />
