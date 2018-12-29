@@ -12,11 +12,9 @@ export default {
   addVehicle: function (id, data) {
     return axios.post("/api/vehicles", {
       creator: id,
-      vehicle: [{
-        year: data.year,
-        make: data.make,
-        model: data.model
-      }]
+      year: data.year,
+      make: data.make,
+      model: data.model
     });
   },
   deleteVehicle: function (id) {

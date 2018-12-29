@@ -25,12 +25,13 @@ class AddVehicle extends Component {
         // States pass through LoggedIn component first, then to App.js
         this.props.addVehicle(this.state.newVehicle);
       });
+      document.getElementById("field").reset();
     };
   };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
+      <form id="field" onSubmit={this.handleSubmit.bind(this)}>
         <div className="text-center">
           <p>Hello <span id="userEmail"></span>!</p>
         </div>

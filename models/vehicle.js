@@ -11,11 +11,9 @@ const Schema = mongoose.Schema;
 
 const vehicleSchema = new Schema({
   creator: { type: String },
-  vehicle: [{
-    year: { type: Number },
-    make: { type: String },
-    model: { type: String }
-  }],
+  year: { type: Number },
+  make: { type: String },
+  model: { type: String }
 });
 
 const Vehicle = mongoose.model("Vehicle", vehicleSchema);

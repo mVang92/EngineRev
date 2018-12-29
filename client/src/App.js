@@ -16,7 +16,7 @@ class App extends Component {
         </Switch>
       </Router>
     )
-  }
+  };
 };
 
 export default App;

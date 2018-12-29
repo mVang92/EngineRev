@@ -26,7 +26,7 @@ class AddLog extends Component {
               placeholder="Required"></input>
           </div>
           <div className="col-md-4">
-            <label><span className="required">*</span><strong>Services</strong></label>
+            <label><span className="required">*</span><strong>Service</strong></label>
             <input
               type="text"
               ref="service"
@@ -52,7 +52,10 @@ class AddLog extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-8"></div>
+          <div className="col-md-2">
+            <a href="/"><button type="button" className="resetBtn">Back</button></a>
+          </div>
+          <div className="col-md-6"></div>
           <div className="col-md-2 logResetBtn">
             <button type="reset" className="resetBtn" onClick={this.props.handleReset}>Reset</button>
           </div>
