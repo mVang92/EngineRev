@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 
 class AddLog extends Component {
-  state = {
-
-  };
-  
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>

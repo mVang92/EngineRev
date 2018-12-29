@@ -31,7 +31,7 @@ export default class App extends Component {
   componentWillMount = () => {
     Modal.setAppElement("body");
     this.onAuthStateChanged();
-    this.loadVehicles();
+    // this.loadVehicles();
     this.setState({
       vehicles: []
     });
@@ -164,16 +164,18 @@ export default class App extends Component {
       const bindThis = this;
       firebase.auth.onAuthStateChanged(function (user) {
         if (user) {
-          API.addVehicle(user.uid, {
+          let data = {
             year: bindThis.state.vehicles[element].year,
             make: bindThis.state.vehicles[element].make,
             model: bindThis.state.vehicles[element].model
-          })
+          }
+          console.log(data)
+          API.addVehicle(user.uid, data)
             .then(res => bindThis.loadVehicles())
             .catch(err => console.log(err));
         }
-      })
-    }
+      });
+    };
   };
 
   handleDeleteVehicle = id => {

@@ -1,6 +1,6 @@
 const db = require("../models");
 console.log("controller loaded")
-// Defining methods for the carLogController
+// Defining methods for the controller
 module.exports = {
   findAll: function(req, res) {
     db.Vehicle

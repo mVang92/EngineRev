@@ -5,7 +5,7 @@ import AddLog from "../../components/AddLog";
 
 class Log extends Component {
   state = {
-    vehicle: {},
+    vehicle: [],
     logs: [],
     date: "",
     mileage: "",
@@ -19,6 +19,7 @@ class Log extends Component {
     API.getVehicle(this.props.match.params.id)
       .then(res => this.setState({ vehicle: res.data }))
       .catch(err => console.log(err));
+      console.log(this.state.vehicle)
   };
 
   handleChange = e => {
@@ -29,9 +30,8 @@ class Log extends Component {
     // console.log(name, value);
   };
 
-  handleSubmit = e => {
+  handleSubmitLog = e => {
     e.preventDefault();
-
     if (this.state.date === "" || this.state.mileage === "" || this.state.service === "") {
       alert("Please fill in all of the neccessary fields.");
     } else {
@@ -47,8 +47,9 @@ class Log extends Component {
         mileage: "",
         service: "",
         comment: ""
+      }, function () {
+        console.log(this.state.logs);
       });
-      console.log(this.state.logs)
     };
   };
 
@@ -100,7 +101,7 @@ class Log extends Component {
               comment={this.state.comment}
               handleChange={this.handleChange}
               handleReset={this.handleReset}
-              handleSubmit={this.handleSubmit}
+              handleSubmit={this.handleSubmitLog}
             />
           </div>
         </div>
