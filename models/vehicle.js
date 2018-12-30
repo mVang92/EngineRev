@@ -8,9 +8,9 @@ const vehicleSchema = new Schema({
   make: { type: String, required: true },
   model: { type: String, required: true },
   logs: [{
-    date: { type: Number, required: true },
-    mileage: { type: String, required: true },
-    service: { type: String, required: true },
+    date: { type: String },
+    mileage: { type: String },
+    service: { type: String },
     comment: { type: String }
   }],
   date: { type: Date, default: Date.now }

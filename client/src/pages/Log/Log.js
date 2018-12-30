@@ -49,10 +49,12 @@ class Log extends Component {
       }, function () {
         console.log(this.state.logs);
       });
-      var id = "5c283dab8050b013f4981e97"
+      var id = "5c284f39bc4eca1394e27002"
       API.addLog(id, log)
-      // .then(res => console.log(res))
-      // .catch(err => console.log(err));
+      .then(function(){
+        null
+      })
+      .catch(err => console.log(err));
     };
   };
 

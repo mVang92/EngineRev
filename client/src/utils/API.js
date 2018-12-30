@@ -18,17 +18,10 @@ export default {
     });
   },
   addLog: function (id, logs) {
-    console.log(logs.mileage)
-    return axios.post("/api/vehicles", {
-      creator: id,
-      logs: [{
-        date: logs.date,
-        mileage: logs.mileage,
-        service: logs.service,
-        comment: logs.comment
-      }]
-
-    });
+    console.log(logs)
+    return (
+      axios.put(`/api/vehicles/${id}`, logs)
+    )
   },
   deleteVehicle: function (id) {
     return axios.delete("api/vehicles/" + id)
