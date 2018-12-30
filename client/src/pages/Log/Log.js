@@ -6,6 +6,7 @@ import AddLog from "../../components/AddLog";
 class Log extends Component {
   state = {
     vehicle: [],
+    vehicleId: "",
     logs: [],
     date: "",
     mileage: "",
@@ -17,7 +18,10 @@ class Log extends Component {
   // e.g. localhost:3000/vehicle/599dcb67f0f16317844583fc
   componentDidMount() {
     API.getVehicle(this.props.match.params.id)
-      .then(res => this.setState({ vehicle: res.data }))
+      .then(res => this.setState({ 
+        vehicle: res.data,
+        vehicleId: res.data.creator
+       }))
       .catch(err => console.log(err));
   };
 
@@ -49,7 +53,8 @@ class Log extends Component {
       }, function () {
         console.log(this.state.logs);
       });
-      var id = "5c284f39bc4eca1394e27002"
+      // Unique vehicle ID
+      var id = this.state.vehicleId;
       API.addLog(id, log)
       .then(function(){
         null
