@@ -17,6 +17,19 @@ export default {
       model: data.model
     });
   },
+  addLog: function (id, logs) {
+    console.log(logs.mileage)
+    return axios.post("/api/vehicles", {
+      creator: id,
+      logs: [{
+        date: logs.date,
+        mileage: logs.mileage,
+        service: logs.service,
+        comment: logs.comment
+      }]
+
+    });
+  },
   deleteVehicle: function (id) {
     return axios.delete("api/vehicles/" + id)
   }
