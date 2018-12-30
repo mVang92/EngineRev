@@ -18,7 +18,6 @@ export default {
     });
   },
   addLog: function (id, logs) {
-    console.log(logs)
     return (
       axios.put(`/api/vehicles/${id}`, logs)
     )

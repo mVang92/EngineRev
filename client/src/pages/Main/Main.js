@@ -28,7 +28,7 @@ export default class App extends Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
   };
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     Modal.setAppElement("body");
     this.onAuthStateChanged();
     // this.loadVehicles();
