@@ -25,7 +25,9 @@ module.exports = {
   update: function (req, res) {
     db.Vehicle
       .findOneAndUpdate(
-        { creator: req.params.id }, { $push: { logs: [req.body] } }
+        { creator: req.params.id },
+        { $push: { logs: [req.body] } },
+        console.log(req)
       )
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

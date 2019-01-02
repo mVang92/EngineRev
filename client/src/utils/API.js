@@ -19,7 +19,7 @@ export default {
   },
   addLog: function (id, logs) {
     return (
-      axios.put(`/api/vehicles/${id}`, logs)
+      axios.put("/api/vehicles/" + id, logs)
     )
   },
   deleteVehicle: function (id) {
