@@ -12,8 +12,12 @@ class MyVehicles extends Component {
         {/* Begin ternary */}
         {this.props.vehicles.length === 0 ? (
           <div className="row">
+            <div className="col-md-12">
+              <strong>My Vehicles</strong>
+            </div>
             <div className="col-md-12 text-danger">
-              <strong>No Vehicles on record.</strong>
+              <br></br>
+              <strong>No vehicles on record.</strong>
             </div>
           </div>
         ) : (
@@ -32,7 +36,6 @@ class MyVehicles extends Component {
                         <VehicleItem key={vehicle._id}>
                           <Link to={"/vehicle/" + vehicle._id}>
                             <div className="text-dark">
-                              {/* {console.log(vehicle.make)} */}
                               {vehicle.year} {vehicle.make} {vehicle.model}
                             </div>
                           </Link>

@@ -179,6 +179,7 @@ export default class App extends Component {
   };
 
   handleDeleteVehicle = id => {
+    
     console.log("Deleted: " + id)
     API.deleteVehicle(id)
       .then(res => this.loadVehicles());
@@ -207,14 +208,12 @@ export default class App extends Component {
         </Container>
         <ModalConductor
           currentModal={this.state.currentModal}
-          handleOpenModal={this.handleOpenModal}
           handleCloseModal={this.handleCloseModal}
           showModal={this.state.showModal}
           handleSignIn={this.handleSignIn}
           handleSignOut={this.handleSignOut}
           handleSignUp={this.handleSignUp}
           handleChange={this.handleChange}
-          view={this.state.view}
         />
       </React.Fragment>
     );
