@@ -179,10 +179,14 @@ export default class App extends Component {
   };
 
   handleDeleteVehicle = id => {
-    
-    console.log("Deleted: " + id)
-    API.deleteVehicle(id)
-      .then(res => this.loadVehicles());
+    if (id) {
+      API.deleteVehicle(id)
+        .then(res => this.loadVehicles(),
+          console.log("Deleted: " + id)
+        );
+    } else {
+      alert("Error: Cannot process " + id);
+    }
   };
 
   render() {

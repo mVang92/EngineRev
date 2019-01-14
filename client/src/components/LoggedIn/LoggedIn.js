@@ -8,7 +8,7 @@ const LoggedIn = props => {
       <AddVehicle
         vehicles={props.vehicles}
         handleChange={props.handleChange}
-        // Pass states from AddVehicle component using props to App.js
+        // Pass states from AddVehicle component using props to Main.js
         addVehicle={props.addVehicle}
       />
       <hr />
@@ -16,7 +16,7 @@ const LoggedIn = props => {
         // Because this does not extend Component, this.props.vehicles becomes
         // only props.vehicles. Same with everything else.
         vehicles={props.vehicles}
-        // Pass this deleteVehicle function to App.js
+        // Pass this deleteVehicle function to Main.js
         deleteVehicle={props.deleteVehicle}
       />
     </div>
