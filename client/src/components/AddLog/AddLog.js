@@ -13,7 +13,8 @@ class AddLog extends Component {
               onChange={this.props.handleChange}
               value={this.props.date}
               name="date"
-              placeholder="Required"></input>
+              placeholder="Required">
+            </input>
           </div>
           <div className="col-md-4">
             <label><span className="required">*</span><strong>Mileage</strong></label>
@@ -23,7 +24,8 @@ class AddLog extends Component {
               onChange={this.props.handleChange}
               value={this.props.mileage}
               name="mileage"
-              placeholder="Required"></input>
+              placeholder="Required">
+            </input>
           </div>
           <div className="col-md-4">
             <label><span className="required">*</span><strong>Service</strong></label>
@@ -33,7 +35,8 @@ class AddLog extends Component {
               onChange={this.props.handleChange}
               value={this.props.service}
               name="service"
-              placeholder="Required"></input>
+              placeholder="Required">
+            </input>
           </div>
         </div>
         <br />
@@ -48,7 +51,8 @@ class AddLog extends Component {
               onChange={this.props.handleChange}
               value={this.props.comment}
               name="comment"
-              placeholder="Optional"></textarea>
+              placeholder="Optional">
+            </textarea>
           </div>
         </div>
         <div className="row">

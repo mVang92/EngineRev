@@ -57,9 +57,10 @@ class Log extends Component {
       });
       // Unique vehicle ID
       var id = this.state.vehicleId;
+      // var id = "5c3d46dd7cc33c2c3c8e8724";
       API.addLog(id, log)
         .then(function (res) {
-          // console.log(res.data.logs)
+          console.log(res.data.logs)
         })
         .catch(err => console.log(err));
     };
