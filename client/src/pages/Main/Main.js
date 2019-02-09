@@ -56,6 +56,19 @@ export default class App extends Component {
     });
   };
 
+  createUserData = () => {
+    const bindThis = this;
+    firebase.auth.onAuthStateChanged(function (user) {
+      if (user) {
+        API.createUserData(user.uid)
+        // .then(function (res) {
+        //   console.log(res);
+        //   bindThis.componentDidMount();
+        // });
+      };
+    });
+  };
+
   // Upon page refresh, if the user is logged in, they will stay logged in
   onAuthStateChanged = () => {
     const bindThis = this;
@@ -90,7 +103,7 @@ export default class App extends Component {
           loggedin: true,
           message: ""
         });
-        // Sets the submenu state to three default menus upon creation and adds default menus to each user
+        this.createUserData();
         this.handleCloseModal();
       })
       .catch(error => {
@@ -132,6 +145,9 @@ export default class App extends Component {
           password: ""
         });
       });
+      // Reloads the page upon sign out
+      // Quick fix to prevent multiple user entries into db when signing up
+      window.location.reload(true);
   };
 
   handleChange = e => {

@@ -8,6 +8,14 @@ export default {
   getVehicle: function (id) {
     return axios.get("/api/vehicles/" + id);
   },
+  createUserData: function (id) {
+    return (
+      axios.post("/api/vehicles", {
+        creator: id,
+        vehicles: []
+      })
+    );
+  },
   // Add a new vehicle
   addVehicle: function (id, data) {
     return axios.post("/api/vehicles", {
