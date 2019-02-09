@@ -145,9 +145,9 @@ export default class App extends Component {
           password: ""
         });
       });
-      // Reloads the page upon sign out
-      // Quick fix to prevent multiple user entries into db when signing up
-      window.location.reload(true);
+    // Reloads the page upon sign out
+    // Quick fix to prevent multiple user entries into db when signing up
+    window.location.reload(true);
   };
 
   handleChange = e => {
@@ -164,6 +164,8 @@ export default class App extends Component {
 
   // Receives our states from MyVehicles.js to be used in this main component
   handleAddVehicle = newVehicle => {
+    const id = this.state.uid;
+    const bindThis = this;
     let vehicles = this.state.vehicles;
     vehicles.push(newVehicle);
     this.setState({
@@ -177,20 +179,16 @@ export default class App extends Component {
       // bad user input to populate dropdown menu
       this.loadVehicles();
     } else {
-      const bindThis = this;
-      firebase.auth.onAuthStateChanged(function (user) {
-        if (user) {
-          let data = {
-            year: bindThis.state.vehicles[element].year,
-            make: bindThis.state.vehicles[element].make,
-            model: bindThis.state.vehicles[element].model
-          }
-          console.log(data)
-          API.addVehicle(user.uid, data)
-            .then(res => bindThis.loadVehicles())
-            .catch(err => console.log(err));
-        }
-      });
+      const data = {
+        year: this.state.vehicles[element].year,
+        make: this.state.vehicles[element].make,
+        model: this.state.vehicles[element].model
+      }
+      // console.log(id, data)
+      API.addVehicle(id, data)
+        .then(function (res){
+          bindThis.loadVehicles();
+        })
     };
   };
 

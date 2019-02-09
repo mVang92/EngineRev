@@ -9,20 +9,24 @@ export default {
     return axios.get("/api/vehicles/" + id);
   },
   createUserData: function (id) {
+    console.log(id);
     return (
       axios.post("/api/vehicles", {
         creator: id,
-        vehicles: []
+        vehicleName: [{}]
       })
     );
   },
   // Add a new vehicle
   addVehicle: function (id, data) {
+    // console.log(id, data);
     return axios.post("/api/vehicles", {
       creator: id,
-      year: data.year,
-      make: data.make,
-      model: data.model
+      vehicles: [{
+        year: data.year,
+        make: data.make,
+        model: data.model
+      }]
     });
   },
   addLog: function (id, logs) {
