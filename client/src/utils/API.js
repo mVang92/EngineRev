@@ -18,16 +18,22 @@ export default {
     );
   },
   // Add a new vehicle
+  // addVehicle: function (id, data) {
+  //   // console.log(id, data);
+  //   return axios.post("/api/vehicles", {
+  //     creator: id,
+  //     vehicles: [{
+  //       year: data.year,
+  //       make: data.make,
+  //       model: data.model
+  //     }]
+  //   });
+  // },
   addVehicle: function (id, data) {
-    // console.log(id, data);
-    return axios.post("/api/vehicles", {
-      creator: id,
-      vehicles: [{
-        year: data.year,
-        make: data.make,
-        model: data.model
-      }]
-    });
+    console.log(id, data);
+    return (
+      axios.put("/api/vehicles/" + id, data )
+    )
   },
   addLog: function (id, logs) {
     return (

@@ -165,6 +165,7 @@ export default class App extends Component {
   // Receives our states from MyVehicles.js to be used in this main component
   handleAddVehicle = newVehicle => {
     const id = this.state.uid;
+    // const id = "5c71ad15282f742be03b0f4f";
     const bindThis = this;
     let vehicles = this.state.vehicles;
     vehicles.push(newVehicle);
@@ -187,6 +188,8 @@ export default class App extends Component {
       // console.log(id, data)
       API.addVehicle(id, data)
         .then(function (res){
+          console.log(res.data);
+          bindThis.onAuthStateChanged();
           bindThis.loadVehicles();
         })
     };
