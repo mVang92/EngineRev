@@ -2,21 +2,21 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 const prodConfig = {
-  apiKey: "AIzaSyBIXfaIy3BEqL5SgkJkfcpQCoShPR_jPvo",
-  authDomain: "carlog-70850.firebaseapp.com",
-  databaseURL: "https://carlog-70850.firebaseio.com",
-  projectId: "carlog-70850",
-  storageBucket: "carlog-70850.appspot.com",
-  messagingSenderId: "101715794551"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 };
 
 const devConfig = {
-  apiKey: "AIzaSyBIXfaIy3BEqL5SgkJkfcpQCoShPR_jPvo",
-  authDomain: "carlog-70850.firebaseapp.com",
-  databaseURL: "https://carlog-70850.firebaseio.com",
-  projectId: "carlog-70850",
-  storageBucket: "carlog-70850.appspot.com",
-  messagingSenderId: "101715794551"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 };
 
 const config = process.env.NODE_ENV === "production"
