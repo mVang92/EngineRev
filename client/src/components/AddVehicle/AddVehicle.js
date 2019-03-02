@@ -39,7 +39,7 @@ class AddVehicle extends Component {
         <div>
           <div className="row">
             <div className="col-md-12 text-center">
-              <strong>Add a Vehicle</strong>
+              <label><strong>Add a Vehicle</strong></label>
             </div>
           </div>
           <div className="row innerBox">

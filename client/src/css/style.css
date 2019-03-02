@@ -29,7 +29,6 @@ input {
     background: rgb(200, 200, 200);
     margin: 10px;
     padding: 1em;
-    border-radius: 5px;
 }
 
 .commentsBox {
@@ -80,4 +79,8 @@ input {
 .resetBtn:hover,
 .deleteBtn:hover {
     background: rgb(255, 128, 128);
+}
+
+.nav-link {
+    cursor: pointer;
 }

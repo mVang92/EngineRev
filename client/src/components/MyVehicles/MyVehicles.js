@@ -13,7 +13,7 @@ class MyVehicles extends Component {
         {this.props.vehicles.length === 0 ? (
           <div className="row">
             <div className="col-md-12">
-              <strong>My Vehicles</strong>
+              <label><strong>My Vehicles</strong></label>
             </div>
             <div className="col-md-12 text-danger">
               <br></br>
@@ -24,12 +24,13 @@ class MyVehicles extends Component {
             <React.Fragment>
               <div className="row">
                 <div className="col-md-12">
-                  <strong>My Vehicles</strong>
+                  <label><strong>My Vehicles</strong></label>
                 </div>
               </div>
               <div className="row innerBox">
                 <div className="col-md-2"></div>
                 <div className="col-md-10">
+                {console.log(this.props.vehicles)}
                   {this.props.vehicles[1].vehicles.map(vehicle => (
                     <div key={vehicle._id} className="row">
                       <div className="col-md-10">

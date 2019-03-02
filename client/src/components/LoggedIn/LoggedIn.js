@@ -4,7 +4,7 @@ import AddVehicle from "../AddVehicle";
 
 const LoggedIn = props => {
   return (
-    <div className="box rounded">
+    <div className="box">
       <AddVehicle
         vehicles={props.vehicles}
         handleChange={props.handleChange}
