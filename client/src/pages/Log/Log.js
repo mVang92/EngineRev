@@ -82,6 +82,7 @@ class Log extends Component {
         <div className="box rounded">
           <div className="row">
             <div className="col-md-12 text-center">
+            {console.log(this.state.vehicle)}
               <label>Viewing logs for your {this.state.vehicle.year} {this.state.vehicle.make} {this.state.vehicle.model}</label>
             </div>
           </div>

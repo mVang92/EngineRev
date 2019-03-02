@@ -2,13 +2,13 @@ import axios from "axios";
 
 export default {
   // Get all vehicles
-  getVehicles: function () {
-    return axios.get("/api/vehicles")
+  getVehicles: () => {
+    return axios.get(`/api/vehicles`)
   },
-  getVehicle: function (id) {
-    return axios.get("/api/vehicles/" + id);
+  getVehicle: (id) => {
+    return axios.get(`/api/vehicles/${id}`);
   },
-  createUserData: function (id) {
+  createUserData: (id) => {
     console.log(id);
     return (
       axios.post("/api/vehicles", {
@@ -35,12 +35,12 @@ export default {
       axios.put(`/api/vehicles/${id}`, data)
     )
   },
-  addLog: function (id, logs) {
+  addLog: (id, logs) => {
     return (
-      axios.put("/api/vehicles/" + id, logs)
+      axios.put(`/api/vehicles/logs/${id}`, logs)
     )
   },
-  deleteVehicle: function (id) {
-    return axios.delete("api/vehicles/" + id)
+  deleteVehicle: (id) => {
+    return axios.delete(`api/vehicles/${id}`)
   }
 };

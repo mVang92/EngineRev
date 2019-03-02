@@ -30,7 +30,7 @@ class MyVehicles extends Component {
               <div className="row innerBox">
                 <div className="col-md-2"></div>
                 <div className="col-md-10">
-                  {this.props.vehicles.map(vehicle => (
+                  {this.props.vehicles[1].vehicles.map(vehicle => (
                     <div key={vehicle._id} className="row">
                       <div className="col-md-10">
                         <VehicleItem key={vehicle._id}>

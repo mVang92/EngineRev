@@ -28,7 +28,7 @@ export default class App extends Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
   };
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     Modal.setAppElement("body");
     this.onAuthStateChanged();
     // this.loadVehicles();
@@ -57,7 +57,7 @@ export default class App extends Component {
   };
 
   createUserData = () => {
-    const bindThis = this;
+    // const bindThis = this;
     firebase.auth.onAuthStateChanged(function (user) {
       if (user) {
         API.createUserData(user.uid)
@@ -74,18 +74,15 @@ export default class App extends Component {
     const bindThis = this;
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        // console.log(user.uid);
         bindThis.setState({ loggedin: true });
         let userName = document.createTextNode(user.email);
         document.getElementById("userEmail").innerHTML = "";
         document.getElementById("userEmail").appendChild(userName);
         const id = user.uid;
-        // need to call API.getMenu or something like that or a function that does the same (loadMenus?)
-        // while passing in user.uid as the required param to search the db for
         API.getVehicles(id)
           .then(res =>
-            this.setState({ vehicles: res.data, uid: user.uid })
-          )
+            this.setState({ vehicles: res.data, uid: user.uid }),
+            )
           .catch(err => console.log(err));
       } else {
         console.log("Please sign-in or sign-up.");

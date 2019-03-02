@@ -31,6 +31,9 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  updateOneLog: function () {
+    console.log("got here");
+  },
   remove: function (req, res) {
     db.Vehicle
       .findById({ _id: req.params.id })

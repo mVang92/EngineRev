@@ -14,4 +14,11 @@ router
   .put(controller.update)
   .delete(controller.remove);
 
+// Matches with "/api/vehicles/logs/:id"
+router
+  .route("/logs/:id")
+  .get(controller.findById)
+  .put(controller.updateOneLog)
+  .delete(controller.remove);
+
 module.exports = router;
