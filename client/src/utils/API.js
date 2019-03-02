@@ -29,10 +29,10 @@ export default {
   //     }]
   //   });
   // },
-  addVehicle: function (id, data) {
+  addVehicle: (id, data) => {
     console.log(id, data);
     return (
-      axios.put("/api/vehicles/" + id, data )
+      axios.put(`/api/vehicles/${id}`, data)
     )
   },
   addLog: function (id, logs) {
