@@ -5,11 +5,12 @@ export default {
   getVehicles: () => {
     return axios.get(`/api/vehicles`)
   },
-  getVehicle: (id) => {
+  // Get the vehicle the user wants to view logs for
+  getVehicle: id => {
     return axios.get(`/api/vehicles/${id}`);
   },
-  createUserData: (id) => {
-    console.log(id);
+  // Upon signing up for new account, create this data for the new user
+  createUserData: id => {
     return (
       axios.post("/api/vehicles", {
         creator: id,
@@ -40,7 +41,7 @@ export default {
       axios.put(`/api/vehicles/logs/${id}`, logs)
     )
   },
-  deleteVehicle: (id) => {
+  deleteVehicle: id => {
     return axios.delete(`api/vehicles/${id}`)
   }
 };

@@ -18,12 +18,16 @@ class Log extends Component {
   // When this component mounts, grab the vehicle with the _id of this.props.match.params.id
   // e.g. localhost:3000/vehicle/599dcb67f0f16317844583fc
   componentDidMount = () => {
+    console.log(this.props.match.params.id);
     API.getVehicle(this.props.match.params.id)
-      .then(res => this.setState({
-        vehicle: res.data,
-        vehicleId: res.data.creator,
-        logArray: res.data.logs
-      }))
+      .then(res => {
+        console.log(res)
+      }
+        // this.setState({
+        // vehicle: res.data,
+        // vehicleId: res.data.creator,
+        // logArray: res.data.logs
+      )
       .catch(err => console.log(err));
   };
 
@@ -57,7 +61,6 @@ class Log extends Component {
       });
       // Unique vehicle ID
       var id = this.state.vehicleId;
-      // var id = "5c3d46dd7cc33c2c3c8e8724";
       API.addLog(id, log)
         .then(function (res) {
           console.log(res.data.logs)
@@ -82,7 +85,6 @@ class Log extends Component {
         <div className="box rounded">
           <div className="row">
             <div className="col-md-12 text-center">
-            {console.log(this.state.vehicle)}
               <label>Viewing logs for your {this.state.vehicle.year} {this.state.vehicle.make} {this.state.vehicle.model}</label>
             </div>
           </div>
@@ -90,47 +92,43 @@ class Log extends Component {
           <div className="row innerBox">
             <div className="col-md-3">
               <label><strong>Date</strong></label>
-              {this.state.logArray.map(({ date }) => {
+              {/* {this.state.logArray.map(({ date }) => {
                 return (
                   <div>
-                    {/* {console.log(this.state.logArray)} */}
                     <div>{date}</div>
                   </div>
                 );
-              })}
+              })} */}
             </div>
             <div className="col-md-3">
               <label><strong>Mileage</strong></label>
-              {this.state.logArray.map(({ mileage }) => {
+              {/* {this.state.logArray.map(({ mileage }) => {
                 return (
                   <div>
-                    {/* {console.log(this.state.logArray)} */}
                     <div>{mileage}</div>
                   </div>
                 );
-              })}
+              })} */}
             </div>
             <div className="col-md-3">
               <label><strong>Service</strong></label>
-              {this.state.logArray.map(({ service }) => {
+              {/* {this.state.logArray.map(({ service }) => {
                 return (
                   <div>
-                    {/* {console.log(this.state.logArray)} */}
                     <div>{service}</div>
                   </div>
                 );
-              })}
+              })} */}
             </div>
             <div className="col-md-3">
               <label><strong>Comments</strong></label>
-              {this.state.logArray.map(({ comment }) => {
+              {/* {this.state.logArray.map(({ comment }) => {
                 return (
                   <div>
-                    {/* {console.log(this.state.logArray)} */}
                     <div>{comment}</div>
                   </div>
                 );
-              })}
+              })} */}
             </div>
           </div>
           <hr />
