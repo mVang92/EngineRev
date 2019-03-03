@@ -9,14 +9,14 @@ import LoggedOut from "../../components/LoggedOut";
 import LoggedIn from "../../components/LoggedIn";
 
 export default class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       showModal: false,
       loggedin: false,
       uid: "",
       currentModal: String,
-      vehicles: [],
+      vehicleData: [],
       // User Authentication
       message: "",
       email: "",
@@ -28,11 +28,11 @@ export default class App extends Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
   };
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     Modal.setAppElement("body");
     this.onAuthStateChanged();
     this.setState({
-      vehicles: []
+      vehicleData: []
     });
   };
 
@@ -40,7 +40,8 @@ export default class App extends Component {
     API.getVehicles()
       .then(res =>
         this.setState({
-          vehicles: res.data, year: "",
+          vehicleData: res.data,
+          year: "",
           make: "", model: ""
         })
       )
@@ -63,7 +64,7 @@ export default class App extends Component {
         API.createUserData(user.uid)
           .then(function (res) {
             console.log(res);
-            bindThis.componentDidMount();
+            bindThis.componentWillMount();
           });
       };
     });
@@ -81,7 +82,7 @@ export default class App extends Component {
         const id = user.uid;
         API.getVehicles(id)
           .then(res => this.setState({
-            vehicles: res.data,
+            vehicleData: res.data,
             uid: user.uid
           }))
           .catch(err => console.log(err));
@@ -162,25 +163,27 @@ export default class App extends Component {
 
   // Receives our states from MyVehicles.js to be used in this main component
   handleAddVehicle = newVehicle => {
+    console.log(newVehicle)
     const id = this.state.uid;
     const bindThis = this;
-    let vehicles = this.state.vehicles;
+    let vehicles = this.state.vehicleData;
     vehicles.push(newVehicle);
     this.setState({
-      vehicles: vehicles
+      vehicleData: vehicles
     });
-    let element = this.state.vehicles.length - 1;
+    let element = this.state.vehicleData.length - 1;
+    console.log(this.state.vehicleData[element].year)
     // Check to see if the year is a number.
-    if (isNaN(this.state.vehicles[element].year)) {
+    if (isNaN(this.state.vehicleData[element].year)) {
       alert("Please enter numerical values for year.");
       // Refreshes page, simple way of preventing
       // bad user input to populate dropdown menu
       this.loadVehicles();
     } else {
       const data = {
-        year: this.state.vehicles[element].year,
-        make: this.state.vehicles[element].make,
-        model: this.state.vehicles[element].model
+        year: this.state.vehicleData[element].year,
+        make: this.state.vehicleData[element].make,
+        model: this.state.vehicleData[element].model
       }
       // console.log(id, data)
       API.addVehicle(id, data)
@@ -215,7 +218,7 @@ export default class App extends Component {
           {this.state.loggedin === true ? (
             // Here we pass in vehicles to the LoggedIn component
             <LoggedIn
-              vehicles={this.state.vehicles}
+              vehicles={this.state.vehicleData}
               handleChange={this.handleChange}
               addVehicle={this.handleAddVehicle.bind(this)}
               deleteVehicle={this.handleDeleteVehicle.bind(this)}

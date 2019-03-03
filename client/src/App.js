@@ -4,7 +4,7 @@ import Main from "./pages/Main";
 import Log from "./pages/Log";
 import NoMatch from "./pages/NoMatch";
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <Router>

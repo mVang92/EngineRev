@@ -11,8 +11,8 @@ class MyVehicles extends Component {
         {/* If no vehicles are found in record, display no vehicles found,
         else display the vehicles with a dropdown menu */}
         {/* Begin ternary */}
-        {/* {console.log(this.props.vehicles.vehicles)} */}
-        {this.props.vehicles.length === 0 ? (
+        {console.log(this.props.vehicles.vehicles)}
+        {/* {this.props.vehicles.length === 0 ? (
           <div className="row">
             <div className="col-md-12">
               <label><strong>My Vehicles</strong></label>
@@ -51,7 +51,7 @@ class MyVehicles extends Component {
                 </div>
               </div>
             </React.Fragment>
-          )}
+          )} */}
         {/* End ternary */}
       </div>
     );
