@@ -28,10 +28,9 @@ export default class App extends Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
   };
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     Modal.setAppElement("body");
     this.onAuthStateChanged();
-    // this.loadVehicles();
     this.setState({
       vehicles: []
     });
@@ -40,9 +39,10 @@ export default class App extends Component {
   loadVehicles = () => {
     API.getVehicles()
       .then(res =>
-        this.setState({ vehicles: res.data, year: "", make: "", model: "" },
-          // console.log(res.data[0]._id)
-        )
+        this.setState({
+          vehicles: res.data, year: "",
+          make: "", model: ""
+        })
       )
       .catch(err => console.log(err));
   };
@@ -57,14 +57,14 @@ export default class App extends Component {
   };
 
   createUserData = () => {
-    // const bindThis = this;
+    const bindThis = this;
     firebase.auth.onAuthStateChanged(function (user) {
       if (user) {
         API.createUserData(user.uid)
-        // .then(function (res) {
-        //   console.log(res);
-        //   bindThis.componentDidMount();
-        // });
+          .then(function (res) {
+            console.log(res);
+            bindThis.componentDidMount();
+          });
       };
     });
   };
@@ -80,9 +80,10 @@ export default class App extends Component {
         document.getElementById("userEmail").appendChild(userName);
         const id = user.uid;
         API.getVehicles(id)
-          .then(res =>
-            this.setState({ vehicles: res.data, uid: user.uid }),
-            )
+          .then(res => this.setState({
+            vehicles: res.data,
+            uid: user.uid
+          }))
           .catch(err => console.log(err));
       } else {
         console.log("Please sign-in or sign-up.");
@@ -162,7 +163,6 @@ export default class App extends Component {
   // Receives our states from MyVehicles.js to be used in this main component
   handleAddVehicle = newVehicle => {
     const id = this.state.uid;
-    // const id = "5c71ad15282f742be03b0f4f";
     const bindThis = this;
     let vehicles = this.state.vehicles;
     vehicles.push(newVehicle);
@@ -184,7 +184,7 @@ export default class App extends Component {
       }
       // console.log(id, data)
       API.addVehicle(id, data)
-        .then(function (res){
+        .then(function (res) {
           console.log(res.data);
           bindThis.onAuthStateChanged();
           bindThis.loadVehicles();

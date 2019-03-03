@@ -10,14 +10,14 @@ router
 // Matches with "/api/vehicles/:id"
 router
   .route("/:id")
-  .get(controller.findById)
+  .get(controller.findAllForUser)
   .put(controller.update)
   .delete(controller.remove);
 
 // Matches with "/api/vehicles/logs/:id"
 router
   .route("/logs/:id")
-  .get(controller.findById)
+  .get(controller.findAllForUser)
   .put(controller.updateOneLog)
   .delete(controller.remove);
 

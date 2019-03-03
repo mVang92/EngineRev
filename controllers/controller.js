@@ -9,14 +9,14 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findById: function (req, res) {
+  findAllForUser: function (req, res) {
+    console.log(req.params.id)
     db.Vehicle
-      .findById(req.params.id)
+      .findById({ creator: req.params.id })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
-    // console.log(req.body)
     db.Vehicle
       .create(req.body)
       .then(dbModel => res.json(dbModel))
@@ -32,7 +32,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   updateOneLog: function () {
-    console.log("got here");
+
   },
   remove: function (req, res) {
     db.Vehicle

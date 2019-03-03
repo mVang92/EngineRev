@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 import DeleteBtn from "../DeleteBtn";
 
 class MyVehicles extends Component {
+  
   render() {
     return (
       <div className="text-center">
         {/* If no vehicles are found in record, display no vehicles found,
         else display the vehicles with a dropdown menu */}
         {/* Begin ternary */}
+        {console.log(this.props.vehicles)}
         {this.props.vehicles.length === 0 ? (
           <div className="row">
             <div className="col-md-12">
@@ -17,7 +19,7 @@ class MyVehicles extends Component {
             </div>
             <div className="col-md-12 text-danger">
               <br></br>
-              <strong>No vehicles on record.</strong>
+              <label><strong>No vehicles on record.</strong></label>
             </div>
           </div>
         ) : (
@@ -31,7 +33,7 @@ class MyVehicles extends Component {
                 <div className="col-md-2"></div>
                 <div className="col-md-10">
                 {console.log(this.props.vehicles)}
-                  {this.props.vehicles[1].vehicles.map(vehicle => (
+                  {this.props.vehicles[2].vehicles.map(vehicle => (
                     <div key={vehicle._id} className="row">
                       <div className="col-md-10">
                         <VehicleItem key={vehicle._id}>
