@@ -163,36 +163,39 @@ export default class App extends Component {
 
   // Receives our states from MyVehicles.js to be used in this main component
   handleAddVehicle = newVehicle => {
-    console.log(newVehicle)
     const id = this.state.uid;
     const bindThis = this;
-    let vehicles = this.state.vehicleData;
-    vehicles.push(newVehicle);
+    let vehicleData = this.state.vehicleData;
+    vehicleData.vehicles.push(newVehicle);
     this.setState({
-      vehicleData: vehicles
+      vehicleData: vehicleData
     });
-    let element = this.state.vehicleData.length - 1;
-    console.log(this.state.vehicleData[element].year)
-    // Check to see if the year is a number.
-    if (isNaN(this.state.vehicleData[element].year)) {
-      alert("Please enter numerical values for year.");
-      // Refreshes page, simple way of preventing
-      // bad user input to populate dropdown menu
-      this.loadVehicles();
+    if (this.state.vehicleData.length === 0) {
+      console.log("array is 0")
     } else {
-      const data = {
-        year: this.state.vehicleData[element].year,
-        make: this.state.vehicleData[element].make,
-        model: this.state.vehicleData[element].model
-      }
-      // console.log(id, data)
-      API.addVehicle(id, data)
-        .then(function (res) {
-          console.log(res.data);
-          bindThis.onAuthStateChanged();
-          bindThis.loadVehicles();
-        })
-    };
+      let element = this.state.vehicleData.vehicles.length - 1;
+      console.log(element)
+      // Check to see if the year is a number.
+      if (isNaN(this.state.vehicleData.vehicles[element].year)) {
+        alert("Please enter numerical values for year.");
+        // Refreshes page, simple way of preventing
+        // bad user input to populate dropdown menu
+        this.loadVehicles();
+      } else {
+        const data = {
+          year: this.state.vehicleData.vehicles[element].year,
+          make: this.state.vehicleData.vehicles[element].make,
+          model: this.state.vehicleData.vehicles[element].model
+        }
+        // console.log(id, data)
+        API.addVehicle(id, data)
+          .then(function (res) {
+            console.log(res.data);
+            bindThis.onAuthStateChanged();
+            //bindThis.loadVehicles();
+          })
+      };
+    }
   };
 
   handleDeleteVehicle = id => {
@@ -218,7 +221,7 @@ export default class App extends Component {
           {this.state.loggedin === true ? (
             // Here we pass in vehicles to the LoggedIn component
             <LoggedIn
-              vehicles={this.state.vehicleData}
+              vehicleData={this.state.vehicleData}
               handleChange={this.handleChange}
               addVehicle={this.handleAddVehicle.bind(this)}
               deleteVehicle={this.handleDeleteVehicle.bind(this)}

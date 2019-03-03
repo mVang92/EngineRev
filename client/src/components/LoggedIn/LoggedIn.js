@@ -15,7 +15,7 @@ const LoggedIn = props => {
       <MyVehicles
         // Because this does not extend Component, this.props.vehicles becomes
         // only props.vehicles. Same with everything else.
-        vehicles={props.vehicles}
+        vehicleData={props.vehicleData}
         // Pass this deleteVehicle function to Main.js
         deleteVehicle={props.deleteVehicle}
       />

@@ -4,25 +4,17 @@ import { Link } from "react-router-dom";
 import DeleteBtn from "../DeleteBtn";
 
 class MyVehicles extends Component {
-  
+
   render() {
     return (
       <div className="text-center">
         {/* If no vehicles are found in record, display no vehicles found,
         else display the vehicles with a dropdown menu */}
-        {/* Begin ternary */}
-        {console.log(this.props.vehicles.vehicles)}
-        {/* {this.props.vehicles.length === 0 ? (
-          <div className="row">
-            <div className="col-md-12">
-              <label><strong>My Vehicles</strong></label>
-            </div>
-            <div className="col-md-12 text-danger">
-              <br></br>
-              <label><strong>No vehicles on record.</strong></label>
-            </div>
-          </div>
-        ) : (
+        {/* This prevents the app from crashing as there are no data during initial load */}
+        {/* {console.log(this.props.vehicleData.vehicles)} */}
+        {this.props.vehicleData.vehicles ? (
+          // Begin ternary 
+          this.props.vehicleData.vehicles.length ? (
             <React.Fragment>
               <div className="row">
                 <div className="col-md-12">
@@ -32,7 +24,7 @@ class MyVehicles extends Component {
               <div className="row innerBox">
                 <div className="col-md-2"></div>
                 <div className="col-md-10">
-                  {this.props.vehicles.vehicles.map(vehicle => (
+                  {this.props.vehicleData.vehicles.map(vehicle => (
                     <div key={vehicle._id} className="row">
                       <div className="col-md-10">
                         <VehicleItem key={vehicle._id}>
@@ -51,7 +43,19 @@ class MyVehicles extends Component {
                 </div>
               </div>
             </React.Fragment>
-          )} */}
+          ) : (
+              <div className="row">
+                <div className="col-md-12">
+                  <label><strong>My Vehicles</strong></label>
+                </div>
+                <div className="col-md-12 text-danger">
+                  <br></br>
+                  <label><strong>No vehicles on record.</strong></label>
+                </div>
+              </div>
+            )
+        ) : (
+            <div>Populating...</div>)}
         {/* End ternary */}
       </div>
     );
