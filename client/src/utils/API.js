@@ -3,7 +3,6 @@ import axios from "axios";
 export default {
   // Get all vehicles for the signed in user
   getVehicles: id => {
-    console.log(id);
     return axios.get(`/api/vehicles/${id}`)
   },
   // Get the vehicle the user wants to view logs for

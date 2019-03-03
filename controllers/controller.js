@@ -10,9 +10,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findAllForUser: function (req, res) {
-    console.log(req.params.id)
     db.Vehicle
-      .findById({ creator: req.params.id })
+      .findOne({ creator: req.params.id })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

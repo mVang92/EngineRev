@@ -11,7 +11,7 @@ class MyVehicles extends Component {
         {/* If no vehicles are found in record, display no vehicles found,
         else display the vehicles with a dropdown menu */}
         {/* Begin ternary */}
-        {console.log(this.props.vehicles)}
+        {/* {console.log(this.props.vehicles.vehicles)} */}
         {this.props.vehicles.length === 0 ? (
           <div className="row">
             <div className="col-md-12">
@@ -32,8 +32,7 @@ class MyVehicles extends Component {
               <div className="row innerBox">
                 <div className="col-md-2"></div>
                 <div className="col-md-10">
-                {console.log(this.props.vehicles)}
-                  {this.props.vehicles[2].vehicles.map(vehicle => (
+                  {this.props.vehicles.vehicles.map(vehicle => (
                     <div key={vehicle._id} className="row">
                       <div className="col-md-10">
                         <VehicleItem key={vehicle._id}>
