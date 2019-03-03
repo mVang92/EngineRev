@@ -7,7 +7,7 @@ export default {
   },
   // Get the vehicle the user wants to view logs for
   getVehicle: id => {
-    return axios.get(`/api/vehicles/${id}`);
+    return axios.get(`/api/vehicles/user/${id}`);
   },
   // Upon signing up for new account, create this data for the new user
   createUserData: id => {

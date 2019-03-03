@@ -18,17 +18,16 @@ class Log extends Component {
   // When this component mounts, grab the vehicle with the _id of this.props.match.params.id
   // e.g. localhost:3000/vehicle/599dcb67f0f16317844583fc
   componentDidMount = () => {
-    console.log(this.props.match.params.id);
     API.getVehicle(this.props.match.params.id)
       .then(res => {
-        console.log(res)
-      }
-        // this.setState({
-        // vehicle: res.data,
-        // vehicleId: res.data.creator,
-        // logArray: res.data.logs
-      )
-      .catch(err => console.log(err));
+        console.log(res),
+        this.setState({
+          vehicle: res.data,
+          // vehicleId: res.data.creator,
+          // logArray: res.data.logs
+        })
+          // .catch(err => console.log(err))
+      });
   };
 
   handleChange = e => {
@@ -82,10 +81,10 @@ class Log extends Component {
   render() {
     return (
       <Container>
-        <div className="box rounded">
+        <div className="box">
           <div className="row">
             <div className="col-md-12 text-center">
-              <label>Viewing logs for your {this.state.vehicle.year} {this.state.vehicle.make} {this.state.vehicle.model}</label>
+              {/* <label>Viewing logs for your {this.state.vehicle.year} {this.state.vehicle.make} {this.state.vehicle.model}</label> */}
             </div>
           </div>
           <hr />
