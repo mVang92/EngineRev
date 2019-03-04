@@ -174,7 +174,6 @@ export default class App extends Component {
       console.log("array is 0")
     } else {
       let element = this.state.vehicleData.vehicles.length - 1;
-      console.log(element)
       // Check to see if the year is a number.
       if (isNaN(this.state.vehicleData.vehicles[element].year)) {
         alert("Please enter numerical values for year.");
@@ -190,9 +189,8 @@ export default class App extends Component {
         // console.log(id, data)
         API.addVehicle(id, data)
           .then(function (res) {
-            console.log(res.data);
-            bindThis.onAuthStateChanged();
-            //bindThis.loadVehicles();
+            // console.log(res.data);
+            // bindThis.onAuthStateChanged();
           })
       };
     }

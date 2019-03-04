@@ -21,7 +21,6 @@ router
   .put(controller.updateOneLog)
   .delete(controller.remove);
 
-  
 // Matches with "/api/vehicles/logs/:id"
 router
 .route("/user/:id")

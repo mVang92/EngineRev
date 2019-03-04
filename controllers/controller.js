@@ -16,7 +16,6 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findOneVehicle: function (req, res) {
-    console.log(req.body)
     db.Vehicle
       .findOne({ creator: req.params.id })
       .then(dbModel => res.json(dbModel))
