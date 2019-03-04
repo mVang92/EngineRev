@@ -6,25 +6,25 @@ module.exports = {
     db.Vehicle
       .find(req.query)
       .sort({ date: -1 })
-      .then(dbModel => res.json(dbModel))
+      .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
   findAllForUser: function (req, res) {
     db.Vehicle
       .findOne({ creator: req.params.id })
-      .then(dbModel => res.json(dbModel))
+      .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
   findOneVehicle: function (req, res) {
     db.Vehicle
-      .findOne({ creator: req.params.id })
-      .then(dbModel => res.json(dbModel))
+      .findOne({ creator: req.params.id, vehicles: vehicles})
+      .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
     db.Vehicle
       .create(req.body)
-      .then(dbModel => res.json(dbModel))
+      .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
   update: function (req, res) {
@@ -33,17 +33,22 @@ module.exports = {
         { creator: req.params.id },
         { $push: { vehicles: [req.body] } }
       )
-      .then(dbModel => res.json(dbModel))
+      .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
   updateOneLog: function () {
 
   },
   remove: function (req, res) {
+    console.log(req.params.id)
     db.Vehicle
-      .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
+      // .findOneAndDelete(req.params.id)
+      .update(
+        { _id: ObjectId(req.params.id)},
+        { $pull: {vehicles: { _id: req.params.id }}}, false, true
+      )
+      .then(result => console.log(result))
+      .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   }
 };
