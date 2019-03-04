@@ -164,36 +164,32 @@ export default class App extends Component {
   // Receives our states from MyVehicles.js to be used in this main component
   handleAddVehicle = newVehicle => {
     const id = this.state.uid;
-    const bindThis = this;
+    // const bindThis = this;
     let vehicleData = this.state.vehicleData;
     vehicleData.vehicles.push(newVehicle);
     this.setState({
       vehicleData: vehicleData
     });
-    if (this.state.vehicleData.length === 0) {
-      console.log("array is 0")
+    let element = this.state.vehicleData.vehicles.length - 1;
+    // Check to see if the year is a number.
+    if (isNaN(this.state.vehicleData.vehicles[element].year)) {
+      alert("Please enter numerical values for year.");
+      // Refreshes page, simple way of preventing
+      // bad user input to populate dropdown menu
+      this.componentWillMount();
     } else {
-      let element = this.state.vehicleData.vehicles.length - 1;
-      // Check to see if the year is a number.
-      if (isNaN(this.state.vehicleData.vehicles[element].year)) {
-        alert("Please enter numerical values for year.");
-        // Refreshes page, simple way of preventing
-        // bad user input to populate dropdown menu
-        this.loadVehicles();
-      } else {
-        const data = {
-          year: this.state.vehicleData.vehicles[element].year,
-          make: this.state.vehicleData.vehicles[element].make,
-          model: this.state.vehicleData.vehicles[element].model
-        }
-        // console.log(id, data)
-        API.addVehicle(id, data)
-          .then(function (res) {
-            // console.log(res.data);
-            // bindThis.onAuthStateChanged();
-          })
-      };
-    }
+      const data = {
+        year: this.state.vehicleData.vehicles[element].year,
+        make: this.state.vehicleData.vehicles[element].make,
+        model: this.state.vehicleData.vehicles[element].model
+      }
+      // console.log(id, data)
+      API.addVehicle(id, data)
+        .then(function (res) {
+          // console.log(res.data);
+          // bindThis.onAuthStateChanged();
+        })
+    };
   };
 
   handleDeleteVehicle = id => {

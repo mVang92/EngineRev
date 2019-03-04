@@ -20,7 +20,7 @@ export default {
   },
   // Add a new vehicle
   addVehicle: (id, data) => {
-    console.log(id, data);
+    // console.log(id, data);
     return (
       axios.put(`/api/vehicles/${id}`, data)
     )
