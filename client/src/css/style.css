@@ -121,3 +121,7 @@ input {
 .notLoggedInImages {
     width: 100%;
 }
+
+#notLoggedInCarGif {
+    width: 65%;
+}
