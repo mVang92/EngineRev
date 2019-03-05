@@ -23,7 +23,7 @@ a.underline:active {
 }
 
 body {
-    background: rgb(230, 230, 230);
+    background: rgb(240, 240, 240);
 }
 
 .accountModal {
@@ -113,7 +113,8 @@ input {
     background: rgb(255, 128, 128);
 }
 
-.nav-link {
+.nav-link,
+.backHomeBtn {
     cursor: pointer;
 }
 
