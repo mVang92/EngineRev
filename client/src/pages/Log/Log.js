@@ -20,7 +20,7 @@ class Log extends Component {
   componentDidMount = () => {
     API.getVehicle(this.props.match.params.id)
       .then(res => {
-        console.log(res),
+        console.log(res)
         this.setState({
           vehicle: res.data,
           // vehicleId: res.data.creator,

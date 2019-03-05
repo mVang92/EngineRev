@@ -12,7 +12,7 @@ const SignUp = props => {
             closeTimeoutMS={150}
         >
             <div className="accountModal modal-content">
-                <div className="modal-body">
+                <div className="modal-body modalShadow">
                     <form className="modalBody" onSubmit={props.handleSignUp}>
                         <div className="modal-header">
                             <strong>Sign-Up for a New Account</strong>

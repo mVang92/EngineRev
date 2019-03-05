@@ -87,7 +87,7 @@ export default class App extends Component {
           }))
           .catch(err => console.log(err));
       } else {
-        console.log("Please sign-in or sign-up.");
+        console.log("Welcome, please sign-in / sign-up.");
       };
     });
   };
