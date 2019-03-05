@@ -4,12 +4,11 @@ import recordLogsLogo from "../../images/recordLogs.png"
 import manageDataLogo from "../../images/manageData.png"
 
 const LoggedOut = () =>
-  <div className="box">
-    <div className="row">
+  <React.Fragment>
+    <div className="row mt-4">
       <div className="col-md-6">
-        <label><h2>Easily record service records to your vehicle through CarLog.</h2></label>
-        <br></br><br></br>
-        <div className="row">
+        <label><h2>Easily record service records to multiple vehicles through CarLog.</h2></label>
+        <div className="row mt-3">
           <div className="col-md-2">
             <img class="notLoggedInImages" src={createAccountLogo} alt="Create Account"></img>
           </div>
@@ -17,8 +16,7 @@ const LoggedOut = () =>
             <label><h6><strong>Create an account</strong> to start adding service records.</h6></label>
           </div>
         </div>
-        <br></br>
-        <div className="row">
+        <div className="row mt-3">
           <div className="col-md-2">
             <img class="notLoggedInImages" src={recordLogsLogo} alt="Record Services"></img>
           </div>
@@ -26,8 +24,7 @@ const LoggedOut = () =>
             <label><h6><strong>Record service information</strong> for your vehicles.</h6></label>
           </div>
         </div>
-        <br></br>
-        <div className="row">
+        <div className="row mt-3">
           <div className="col-md-2">
             <img class="notLoggedInImages" src={manageDataLogo} alt="Manage Data"></img>
           </div>
@@ -40,6 +37,6 @@ const LoggedOut = () =>
         null
       </div>
     </div>
-  </div>
+  </React.Fragment>
 
 export default LoggedOut;

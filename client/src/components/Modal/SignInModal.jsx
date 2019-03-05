@@ -10,7 +10,7 @@ const SignIn = props => {
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={150}
         >
-            <div className="modal-content">
+            <div className="accountModal modal-content">
                 <div className="modal-body">
                     <form className="modalBody" onSubmit={props.handleSignIn}>
                         <div className="modal-header">

@@ -23,7 +23,15 @@ a.underline:active {
 }
 
 body {
-    background: rgb(220, 220, 220);
+    background: rgb(230, 230, 230);
+}
+
+.accountModal {
+    margin-top: 25%;
+}
+
+.ReactModal__Overlay {
+    background: rgba(64, 64, 64, 0.80) !important;
 }
 
 input {
