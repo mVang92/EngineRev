@@ -55,8 +55,8 @@ class MyVehicles extends Component {
                 </div>
               )
             // End ternary for vehicle records
-          ) : (<div>Please Wait...</div>)
-        ) : (<div>Please Wait..</div>)}
+          ) : (<label><div>Please Wait...</div></label>)
+        ) : (<label><div>Please Wait..</div></label>)}
       </div>
     );
   };
