@@ -33,7 +33,7 @@ class AddVehicle extends Component {
     return (
       <form id="field" onSubmit={this.handleSubmit.bind(this)}>
         <div className="text-center">
-          <p>Hello <span id="userEmail"></span>!</p>
+          <label><p>Hello <span id="userEmail"></span>!</p></label>
         </div>
         <hr></hr>
         <div>

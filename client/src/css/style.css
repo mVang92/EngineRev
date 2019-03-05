@@ -2,12 +2,36 @@
     border: 1px solid red;
 } */
 
+a.underline:link {
+    color: white;
+    text-decoration: none;
+}
+
+a.underline:visited {
+    color: white;
+    text-decoration: none;
+}
+
+a.underline:hover {
+    color: white;
+    text-decoration: none;
+}
+
+a.underline:active {
+    color: white;
+    text-decoration: none;
+}
+
 body {
-    background: grey;
+    background: rgb(220, 220, 220);
 }
 
 input {
     width: 100%;
+}
+
+.navbar {
+    background: rgba(100, 100, 100, 0.8);
 }
 
 .navbar-nav {
@@ -20,7 +44,7 @@ input {
 }
 
 .box {
-    background: rgb(235, 235, 235);
+    background: rgb(255, 255, 255);
     margin-top: 10px;
     padding: 1em;
 }
@@ -83,4 +107,8 @@ input {
 
 .nav-link {
     cursor: pointer;
+}
+
+.notLoggedInImages {
+    width: 100%;
 }
