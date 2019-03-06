@@ -50,7 +50,7 @@ class MyVehicles extends Component {
                   </div>
                   <div className="col-md-12 text-danger">
                     <br></br>
-                    <label><strong>No vehicles on record.</strong></label>
+                    <label><strong>No vehicles on record</strong></label>
                   </div>
                 </div>
               )

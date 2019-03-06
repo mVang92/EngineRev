@@ -127,6 +127,15 @@ input {
     background: rgb(255, 128, 128);
 }
 
+.nav-link:hover {
+    transition-duration: 0.1s;
+    background: rgb(64, 64, 64);
+}
+
+.nav-link {
+    transition-duration: 0.2s;
+}
+
 .nav-link,
 .backHomeBtn {
     cursor: pointer;
