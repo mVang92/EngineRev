@@ -17,10 +17,10 @@ const SignUp = props => {
                         <div className="modal-header">
                             <strong>Sign-Up for a New Account</strong>
                         </div>
+                        <hr />
                         <div className="modal-body text-center">
                             <input type="text" value={props.email} name="email" onChange={props.handleChange} placeholder="Email"></input>
-                            <br></br>
-                            <br></br>
+                            <br /><br />
                             <input type="password" value={props.password} name="password" onChange={props.handleChange} placeholder="Password"></input>
                             <div className="row">
                                 <div id="error" className="col-12 text-danger"></div>
