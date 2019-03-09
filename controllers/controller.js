@@ -16,8 +16,10 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findOneVehicle: function (req, res) {
+    console.log("findOneVehicle route");
+    console.log(req.query);
     db.Vehicle
-      .findOne({ creator: req.params.id, vehicles: vehicles})
+      .find( req.query )
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
