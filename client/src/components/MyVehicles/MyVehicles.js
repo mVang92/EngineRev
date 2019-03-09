@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { VehicleItem } from "../VehicleItem";
 import { Link } from "react-router-dom";
-import DeleteBtn from "../DeleteBtn";
 
 class MyVehicles extends Component {
 
@@ -27,16 +26,13 @@ class MyVehicles extends Component {
                     {this.props.vehicleData.vehicles.map(vehicle => (
                       <div key={vehicle._id} className="row">
                         <div className="col-md-10">
-                          <VehicleItem key={vehicle._id}>
+                          <VehicleItem>
                             <Link to={"/vehicle/" + vehicle._id}>
                               <div className="text-dark">
                                 {vehicle.year} {vehicle.make} {vehicle.model}
                               </div>
                             </Link>
                           </VehicleItem>
-                        </div>
-                        <div id="deleteBtn" className="col-md-2">
-                          <DeleteBtn onClick={() => this.props.deleteVehicle(vehicle._id)} />
                         </div>
                       </div>
                     ))}
