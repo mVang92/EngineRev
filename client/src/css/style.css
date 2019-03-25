@@ -148,3 +148,8 @@ input {
 #notLoggedInCarGif {
     width: 55%;
 }
+
+#createAccountLogo {
+    width: 5%;
+    margin-right: 5px;
+}

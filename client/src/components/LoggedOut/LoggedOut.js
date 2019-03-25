@@ -8,7 +8,7 @@ const LoggedOut = () =>
   <React.Fragment>
     <div className="row mt-5">
       <div className="col-md-6">
-        <label><h2>Easily record service records for multiple vehicles.</h2></label>
+        <label><h2>Easily record service records for your vehicles.</h2></label>
         <div className="row">
           <div className="col-md-12">
             <img id="notLoggedInCarGif" src={notLoggedInCarGif} alt="Create Account"></img>
@@ -21,7 +21,7 @@ const LoggedOut = () =>
             <img className="notLoggedInImages" src={createAccountLogo} alt="Create Account"></img>
           </div>
           <div className="col-md-10">
-            <label><h6><strong>Create an account</strong> to get started.</h6></label>
+            <label><h6><strong>Create an account</strong> to get your car space started.</h6></label>
           </div>
         </div>
         <div className="row mt-3">

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactModal from "react-modal";
+import createAccountLogo from "../../images/createAccount.png"
 
 const SignUp = props => {
 
@@ -15,7 +16,8 @@ const SignUp = props => {
                 <div className="modal-body modalShadow">
                     <form className="modalBody" onSubmit={props.handleSignUp}>
                         <div className="modal-header">
-                            <strong>Sign-Up for a New Account</strong>
+                            <span><img id="createAccountLogo" src={createAccountLogo} alt="Create Account"></img>
+                            <strong>Sign-Up for a New Account</strong></span>
                         </div>
                         <hr />
                         <div className="modal-body text-center">
