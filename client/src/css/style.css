@@ -2,7 +2,16 @@
     border: 1px solid red;
 } */
 
-html, body {
+html,
+body {
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
+.container {
     height: 100%;
 }
 
@@ -91,7 +100,8 @@ input {
 }
 
 .logResetBtn,
-.logSubmitBtn {
+.logSubmitBtn,
+.logDeleteBtn {
     text-align: center;
 }
 

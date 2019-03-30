@@ -18,7 +18,10 @@ class Log extends Component {
   // When this component mounts, grab the vehicle with the _id of this.props.match.params.id
   // e.g. localhost:3000/vehicle/599dcb67f0f16317844583fc
   componentDidMount = () => {
-    console.log(this.props.match.params.id)
+    this.setState({
+      vehicleId: this.props.match.params.id
+    })
+    
     API.getVehicle(this.props.match.params.id)
       .then(res => {
         //console.log(res.data)
@@ -79,6 +82,10 @@ class Log extends Component {
       comment: ""
     });
   };
+
+  handleDelete = () => {
+    console.log(this.state.vehicleId)
+  }
 
   render() {
     return (
@@ -147,6 +154,7 @@ class Log extends Component {
               handleChange={this.handleChange}
               handleReset={this.handleReset}
               handleSubmit={this.handleSubmitLog}
+              handleDelete={this.handleDelete}
             />
           </div>
         </div>

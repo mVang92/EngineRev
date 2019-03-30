@@ -59,7 +59,10 @@ class AddLog extends Component {
           <div className="col-md-2">
             <a href="/"><button type="button" className="resetBtn">Back</button></a>
           </div>
-          <div className="col-md-6"></div>
+          <div className="col-md-4"></div>
+          <div className="col-md-2 logDeleteBtn">
+            <button type="button" className="deleteBtn" onClick={this.props.handleDelete}>Delete</button>
+          </div>
           <div className="col-md-2 logResetBtn">
             <button type="reset" className="resetBtn" onClick={this.props.handleReset}>Reset</button>
           </div>
