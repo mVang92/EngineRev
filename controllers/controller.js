@@ -19,7 +19,7 @@ module.exports = {
     console.log("findOneVehicle route");
     console.log(req.query);
     db.Vehicle
-      .find( req.query )
+      .find(req.query)
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
@@ -46,8 +46,8 @@ module.exports = {
     db.Vehicle
       // .findOneAndDelete(req.params.id)
       .update(
-        { _id: ObjectId(req.params.id)},
-        { $pull: {vehicles: { _id: req.params.id }}}, false, true
+        { _id: ObjectId(req.params.id) },
+        { $pull: { vehicles: { _id: req.params.id } } }, false, true
       )
       .then(result => console.log(result))
       .then(result => res.json(result))

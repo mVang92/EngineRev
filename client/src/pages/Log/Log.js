@@ -21,7 +21,7 @@ class Log extends Component {
     this.setState({
       vehicleId: this.props.match.params.id
     })
-    
+
     API.getVehicle(this.props.match.params.id)
       .then(res => {
         //console.log(res.data)
@@ -30,7 +30,7 @@ class Log extends Component {
           // vehicleId: res.data.creator,
           // logArray: res.data.logs
         })
-          // .catch(err => console.log(err))
+        // .catch(err => console.log(err))
       });
   };
 
@@ -59,14 +59,14 @@ class Log extends Component {
         mileage: "",
         service: "",
         comment: ""
-      }, function () {
+      }, () => {
         // console.log(this.state.logs);
       });
       // Unique vehicle ID
       var id = this.state.vehicleId;
       console.log(id)
       API.addLog(id, log)
-        .then(function (res) {
+        .then(res => {
           console.log(res.data.logs)
         })
         .catch(err => console.log(err));
@@ -84,7 +84,11 @@ class Log extends Component {
   };
 
   handleDelete = () => {
-    console.log(this.state.vehicleId)
+    API.deleteVehicle(this.state.vehicleId)
+      .then(res => {
+        console.log(res.data.logs)
+      })
+      .catch(err => console.log(err));
   }
 
   render() {

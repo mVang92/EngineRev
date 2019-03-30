@@ -13,7 +13,7 @@ router
   .get(controller.findAllForUser)
   .put(controller.update)
   .delete(controller.remove);
-
+  
 // Matches with "/api/vehicles/logs/:id"
 router
   .route("/logs/:id")

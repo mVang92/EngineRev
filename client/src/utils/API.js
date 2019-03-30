@@ -33,6 +33,9 @@ export default {
   },
   // Delete a vehicle
   deleteVehicle: id => {
-    return axios.delete(`api/vehicles/${id}`)
+    console.log(id)
+    return (
+      axios.delete(`api/vehicles/${id}`)
+    )
   }
 };
