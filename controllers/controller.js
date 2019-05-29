@@ -16,8 +16,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findOneVehicle: (req, res) => {
-    console.log("findOneVehicle route");
-    console.log(req.query);
+    // console.log("findOneVehicle route");
+    // console.log(req.query);
     db.Vehicle
       .find(req.query)
       .then(result => res.json(result))
@@ -38,8 +38,16 @@ module.exports = {
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
-  updateOneLog: () => {
-
+  updateOneLog: (req, res) => {
+    console.log(req.body);
+    console.log(req.params.id)
+    db.Vehicle
+      .findOneAndUpdate(
+        { _id: req.params.id },
+        { $push: { logs: [req.body] } }
+      )
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
   },
   remove: (req, res) => {
     console.log(req.params.id)

@@ -27,6 +27,7 @@ export default {
   },
   // Add a service log for one vehicle
   addLog: (id, logs) => {
+    // console.log(logs);
     return (
       axios.put(`/api/vehicles/logs/${id}`, logs)
     )
