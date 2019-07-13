@@ -16,7 +16,6 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findOneVehicle: (req, res) => {
-    // console.log("findOneVehicle route");
     // console.log(req.query);
     db.Vehicle
       .find(req.query)

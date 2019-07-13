@@ -17,19 +17,17 @@ class Log extends Component {
 
   // When this component mounts, grab the vehicle with the _id of this.props.match.params.id
   // e.g. localhost:3000/vehicle/599dcb67f0f16317844583fc
-  componentDidMount = () => {
+  componentWillMount = () => {
     this.setState({
       vehicleId: this.props.match.params.id
-    })
+    });
 
     API.getVehicle(this.props.match.params.id)
-      .then(res => {
-        //console.log(res.data)
-        this.setState({
+      .then(res => {this.setState({
           vehicle: res.data,
           // vehicleId: res.data.creator,
           // logArray: res.data.logs
-        })
+        },console.log(res.data[0]))
         // .catch(err => console.log(err))
       });
   };
@@ -97,6 +95,7 @@ class Log extends Component {
         <div className="box">
           <div className="row">
             <div className="col-md-12 text-center">
+              {this.state.logArray}
               {/* <label>Viewing logs for your {this.state.vehicle.year} {this.state.vehicle.make} {this.state.vehicle.model}</label> */}
             </div>
           </div>

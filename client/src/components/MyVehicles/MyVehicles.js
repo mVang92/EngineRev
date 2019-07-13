@@ -7,8 +7,7 @@ class MyVehicles extends Component {
   render() {
     return (
       <div className="text-center">
-        {/* If no vehicles are found in record, display no vehicles found,
-        else display the vehicles with a dropdown menu */}
+        {/* If no vehicles are found in record, display no vehicles found, else display the vehicles */}
         {/* This prevents the app from crashing as there are no data during initial load */}
         {this.props.vehicleData ? (
           this.props.vehicleData.vehicles ? (
