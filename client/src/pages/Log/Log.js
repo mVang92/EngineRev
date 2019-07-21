@@ -22,7 +22,7 @@ class Log extends Component {
       vehicleId: this.props.match.params.id
     });
 
-    API.getVehicle(this.props.match.params.id)
+    API.getOneVehicleForUser(this.props.match.params.id)
       .then(res => {this.setState({
           vehicle: res.data,
           // vehicleId: res.data.creator,
@@ -63,7 +63,7 @@ class Log extends Component {
       // Unique vehicle ID
       var id = this.state.vehicleId;
       console.log(id)
-      API.addLog(id, log)
+      API.addOneLogForOneVehicle(id, log)
         .then(res => {
           console.log(res.data.logs)
         })
@@ -71,7 +71,7 @@ class Log extends Component {
     };
   };
 
-  handleReset = () => {
+  handleResetLogVehicleForm = () => {
     console.log("Form Reset")
     this.setState({
       date: "",
@@ -81,8 +81,9 @@ class Log extends Component {
     });
   };
 
-  handleDelete = () => {
-    API.deleteVehicle(this.state.vehicleId)
+  handleDeleteOneVehicle = () => {
+    console.log("Log.js handleDeleteOneVehicle")
+    API.deleteOneVehicle(this.state.vehicleId)
       .then(res => {
         console.log(res.data.logs)
       })
@@ -155,9 +156,9 @@ class Log extends Component {
               service={this.state.service}
               comment={this.state.comment}
               handleChange={this.handleChange}
-              handleReset={this.handleReset}
+              handleResetLogVehicleForm={this.handleResetLogVehicleForm}
               handleSubmit={this.handleSubmitLog}
-              handleDelete={this.handleDelete}
+              handleDeleteOneVehicle={this.handleDeleteOneVehicle}
             />
           </div>
         </div>

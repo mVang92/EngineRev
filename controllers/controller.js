@@ -17,11 +17,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findOneVehicle: (req, res) => {
-<<<<<<< HEAD
     console.log("Hit findOneVehicle");
-=======
-    // console.log(req.query);
->>>>>>> dfbc2876509bdc816c8d54e82e4b7d4c194f0d38
     db.Vehicle
       .find(req.query)
       .then(result => res.json(result))
@@ -50,13 +46,10 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: (req, res) => {
+    console.log("Hit remove")
     console.log(req.params.id)
     db.Vehicle
-      // .findOneAndDelete(req.params.id)
-      .update(
-        { _id: ObjectId(req.params.id) },
-        { $pull: { vehicles: { _id: req.params.id } } }, false, true
-      )
+      .findById({ _id: req.params.id })
       .then(result => console.log(result))
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));

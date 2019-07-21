@@ -37,7 +37,7 @@ export default class App extends Component {
   };
 
   loadVehicles = () => {
-    API.getVehicles()
+    API.getAllVehiclesForUser()
       .then(res =>
         this.setState({
           vehicleData: res.data,
@@ -61,7 +61,7 @@ export default class App extends Component {
     const bindThis = this;
     firebase.auth.onAuthStateChanged(function (user) {
       if (user) {
-        API.createUserData(user.uid)
+        API.createUserSchema(user.uid)
           .then(function (res) {
             console.log(res);
             bindThis.componentWillMount();
@@ -80,7 +80,7 @@ export default class App extends Component {
         document.getElementById("userEmail").innerHTML = "";
         document.getElementById("userEmail").appendChild(userName);
         const id = user.uid;
-        API.getVehicles(id)
+        API.getAllVehiclesForUser(id)
           .then(res => this.setState({
             vehicleData: res.data,
             uid: user.uid
@@ -184,23 +184,12 @@ export default class App extends Component {
         model: this.state.vehicleData.vehicles[element].model
       }
       // console.log(id, data)
-      API.addVehicle(id, data)
+      API.addOneVehicle(id, data)
         .then(function (res) {
           // console.log(res.data);
           // bindThis.onAuthStateChanged();
         })
     };
-  };
-
-  handleDeleteVehicle = id => {
-    if (id) {
-      API.deleteVehicle(id)
-        .then(res => this.loadVehicles(),
-          console.log("Deleted: " + id)
-        );
-    } else {
-      alert("Error: Cannot process " + id);
-    }
   };
 
   render() {
@@ -218,7 +207,6 @@ export default class App extends Component {
               vehicleData={this.state.vehicleData}
               handleChange={this.handleChange}
               addVehicle={this.handleAddVehicle.bind(this)}
-              deleteVehicle={this.handleDeleteVehicle.bind(this)}
             />
           ) : (
               <LoggedOut />

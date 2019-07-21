@@ -61,10 +61,10 @@ class AddLog extends Component {
           </div>
           <div className="col-md-4"></div>
           <div className="col-md-2 logDeleteBtn">
-            <button type="button" className="deleteBtn" onClick={this.props.handleDelete}>Delete Vehicle</button>
+            <button type="button" className="deleteBtn" onClick={this.props.handleDeleteOneVehicle}>Delete Vehicle</button>
           </div>
           <div className="col-md-2 logResetBtn">
-            <button type="reset" className="resetBtn" onClick={this.props.handleReset}>Reset</button>
+            <button type="reset" className="resetBtn" onClick={this.props.handleResetLogVehicleForm}>Reset</button>
           </div>
           <div className="col-md-2 logSubmitBtn">
             <button type="submit" className="addBtn">Submit</button>
