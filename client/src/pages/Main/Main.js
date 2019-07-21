@@ -57,7 +57,7 @@ export default class App extends Component {
     });
   };
 
-  createUserData = () => {
+  createUserSchema = () => {
     const bindThis = this;
     firebase.auth.onAuthStateChanged(function (user) {
       if (user) {
@@ -102,7 +102,7 @@ export default class App extends Component {
           loggedin: true,
           message: ""
         });
-        this.createUserData();
+        this.createUserSchema();
         this.handleCloseModal();
       })
       .catch(error => {
