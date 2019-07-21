@@ -4,21 +4,19 @@ console.log("route api loaded")
 // Matches with "/api/vehicles"
 router
   .route("/")
-  .get(controller.findAll)
-  .post(controller.create);
+  .post(controller.createUserSchema);
 
 // Matches with "/api/vehicles/:id"
 router
   .route("/:id")
-  .get(controller.findAllForUser)
-  .put(controller.update)
+  .get(controller.findAllVehiclesForUser)
+  .put(controller.addOneVehicle)
   .delete(controller.remove);
   
 // Matches with "/api/vehicles/logs/:id"
 router
   .route("/logs/:id")
-  .get(controller.findAllForUser)
-  .put(controller.updateOneLog)
+  .put(controller.updateOneLogForOneVehicle)
   .delete(controller.remove);
 
 // Matches with "/api/vehicles/user/:id"

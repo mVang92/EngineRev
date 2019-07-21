@@ -2,34 +2,29 @@ const db = require("../models");
 console.log("controller loaded")
 // Defining methods for the controller
 module.exports = {
-  findAll: (req, res) => {
+  createUserSchema: (req, res) => {
+    console.log("Hit createUserSchema")
     db.Vehicle
-      .find(req.query)
-      .sort({ date: -1 })
+      .create(req.body)
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
-  findAllForUser: (req, res) => {
+  findAllVehiclesForUser: (req, res) => {
+    console.log("Hit findAllVehiclesForUser");
     db.Vehicle
       .findOne({ creator: req.params.id })
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
   findOneVehicle: (req, res) => {
-    // console.log("findOneVehicle route");
-    // console.log(req.query);
+    console.log("Hit findOneVehicle");
     db.Vehicle
       .find(req.query)
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
-  create: (req, res) => {
-    db.Vehicle
-      .create(req.body)
-      .then(result => res.json(result))
-      .catch(err => res.status(422).json(err));
-  },
-  update: (req, res) => {
+  addOneVehicle: (req, res) => {
+    console.log("Hit addOneVehicle")
     db.Vehicle
       .findOneAndUpdate(
         { creator: req.params.id },
@@ -38,7 +33,8 @@ module.exports = {
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
-  updateOneLog: (req, res) => {
+  updateOneLogForOneVehicle: (req, res) => {
+    console.log("Hit updateOneLogForOneVehicle")
     console.log(req.body);
     console.log(req.params.id)
     db.Vehicle
