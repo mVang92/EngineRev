@@ -21,22 +21,16 @@ export default {
   // Add a new vehicle
   addOneVehicle: (id, data) => {
     // console.log(id, data);
-    return (
-      axios.put(`/api/vehicles/${id}`, data)
-    )
+    return axios.put(`/api/vehicles/${id}`, data);
   },
   // Add a service log for one vehicle
   addOneLogForOneVehicle: (id, logs) => {
     // console.log(logs);
-    return (
-      axios.put(`/api/vehicles/logs/${id}`, logs)
-    )
+    return axios.put(`/api/vehicles/logs/${id}`, logs);
   },
   // Delete a vehicle
   deleteOneVehicle: id => {
     console.log(id)
-    return (
-      axios.delete(`api/vehicles/${id}`)
-    )
+    return axios.delete(`/api/vehicles/${id}`);
   }
 };

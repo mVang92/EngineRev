@@ -85,7 +85,7 @@ class Log extends Component {
     console.log("Log.js handleDeleteOneVehicle")
     API.deleteOneVehicle(this.state.vehicleId)
       .then(res => {
-        console.log(res.data.logs)
+        console.log(res)
       })
       .catch(err => console.log(err));
   }

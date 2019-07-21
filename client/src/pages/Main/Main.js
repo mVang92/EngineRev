@@ -63,7 +63,7 @@ export default class App extends Component {
       if (user) {
         API.createUserSchema(user.uid)
           .then(function (res) {
-            console.log(res);
+            // console.log(res);
             bindThis.componentWillMount();
           });
       };
@@ -97,7 +97,7 @@ export default class App extends Component {
     auth
       .doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
-        console.log("signing up: " + this.state.email);
+        console.log("Hello " + this.state.email + "!");
         this.setState({
           loggedin: true,
           message: ""
@@ -164,6 +164,7 @@ export default class App extends Component {
   // Receives our states from MyVehicles.js to be used in this main component
   handleAddVehicle = newVehicle => {
     const id = this.state.uid;
+    const bindThis = this;
     // const bindThis = this;
     let vehicleData = this.state.vehicleData;
     vehicleData.vehicles.push(newVehicle);
@@ -187,7 +188,9 @@ export default class App extends Component {
       API.addOneVehicle(id, data)
         .then(function (res) {
           // console.log(res.data);
-          // bindThis.onAuthStateChanged();
+          // Reloads the page after adding a vehicle.
+          // Prevents the URL from having undefined route.
+          bindThis.onAuthStateChanged();
         })
     };
   };
