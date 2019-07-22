@@ -1,9 +1,9 @@
 const db = require("../models");
-console.log("controller loaded")
+console.log("controller loaded");
 // Defining methods for the controller
 module.exports = {
   createUserSchema: (req, res) => {
-    console.log("Hit createUserSchema")
+    console.log("Hit createUserSchema");
     db.Vehicle
       .create(req.body)
       .then(result => res.json(result))
@@ -24,7 +24,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   addOneVehicle: (req, res) => {
-    console.log("Hit addOneVehicle")
+    console.log("Hit addOneVehicle");
     db.Vehicle
       .findOneAndUpdate(
         { creator: req.params.id },
@@ -34,9 +34,9 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   updateOneLogForOneVehicle: (req, res) => {
-    console.log("Hit updateOneLogForOneVehicle")
+    console.log("Hit updateOneLogForOneVehicle");
     console.log(req.body);
-    console.log(req.params.id)
+    console.log(req.params.id);
     db.Vehicle
       .findOneAndUpdate(
         { _id: req.params.id },
@@ -45,11 +45,18 @@ module.exports = {
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
-  removeOneUserAccount: (req, res) => {
-    console.log("Hit removeOneUserAccount")
-    console.log(req.params.id)
+  removeOneVehicle: (req, res) => {
+    console.log("Hit removeOneVehicle");
     db.Vehicle
-      .findByIdAndDelete( req.params.id )
+      .findByIdAndDelete(req.params.id)
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+  removeOneUserAccount: (req, res) => {
+    console.log("Hit removeOneUserAccount");
+    console.log(req.params.id);
+    db.Vehicle
+      .findByIdAndDelete(req.params.id)
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   }
