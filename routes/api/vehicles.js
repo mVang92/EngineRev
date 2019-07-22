@@ -11,7 +11,7 @@ router
   .route("/:id")
   .get(controller.findAllVehiclesForUser)
   .put(controller.addOneVehicle)
-  .delete(controller.removeOneVehicle)
+  .delete(controller.removeOneUserAccount)
   
 // Matches with "/api/vehicles/logs/:id"
 router

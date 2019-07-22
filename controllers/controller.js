@@ -45,8 +45,8 @@ module.exports = {
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
-  removeOneVehicle: (req, res) => {
-    console.log("Hit remove")
+  removeOneUserAccount: (req, res) => {
+    console.log("Hit removeOneUserAccount")
     console.log(req.params.id)
     db.Vehicle
       .findByIdAndDelete( req.params.id )
