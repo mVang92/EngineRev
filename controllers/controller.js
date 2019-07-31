@@ -47,8 +47,12 @@ module.exports = {
   },
   removeOneVehicle: (req, res) => {
     console.log("Hit removeOneVehicle");
+    console.log("req.params.id " + req.params.id)
     db.Vehicle
-      .findByIdAndDelete(req.params.id)
+      .findOneAndUpdate(
+        { 'vehicles._id': req.params.id },
+        { $pull: { vehicles: { _id: req.params.id } } }
+      )
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
@@ -64,7 +68,8 @@ module.exports = {
 
 /*
 // The line below deletes a vehicle from the database
-db.vehicles.update({'vehicles._id':ObjectId('5d41bebd73de5e01b4ee30f4')},{$pull:{vehicles:{_id:ObjectId('5d41bebd73de5e01b4ee30f4')}}})
+db.vehicles.update({'vehicles._id':ObjectId('5d41bebd73de5e01b4ee30f4')},
+{$pull:{vehicles:{_id:ObjectId('5d41bebd73de5e01b4ee30f4')}}})
 
 // The line below find a vehicle in the database
 db.vehicles.find({'vehicles._id':ObjectId('5d41bebd73de5e01b4ee30f4')})
