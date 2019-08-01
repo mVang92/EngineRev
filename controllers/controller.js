@@ -33,13 +33,13 @@ module.exports = {
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
-  updateOneLogForOneVehicle: (req, res) => {
-    console.log("Hit updateOneLogForOneVehicle");
+  addOneLogForOneVehicle: (req, res) => {
+    console.log("Hit addOneLogForOneVehicle");
     console.log(req.body);
-    console.log(req.params.id);
+    console.log("req.params.id " + req.params.id)
     db.Vehicle
       .findOneAndUpdate(
-        { _id: req.params.id },
+        { 'vehicles._id[0].logs': req.params.id },
         { $push: { logs: [req.body] } }
       )
       .then(result => res.json(result))
@@ -74,4 +74,17 @@ db.vehicles.update({'vehicles._id':ObjectId('5d41bebd73de5e01b4ee30f4')},
 // The line below find a vehicle in the database
 db.vehicles.find({'vehicles._id':ObjectId('5d41bebd73de5e01b4ee30f4')})
 
+*/
+
+// Add one service log to one vehicle mongo queries, not exactly working
+/*
+db.vehicles.update(
+	{'vehicles._id':ObjectId('5d42570ad3dc0810b445d99f')},
+	{$push:{'logs':{test: 85}}}
+)
+
+db.vehicles.update(
+	{'vehicles._id':ObjectId('5d42570ad3dc0810b445d99f')},
+	{$push:{vehicles.logs:{key: 'value'}}}
+)
 */

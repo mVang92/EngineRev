@@ -15,8 +15,8 @@ router
   
 // Matches with "/api/vehicles/logs/:id"
 router
-  .route("/logs/:id")
-  .put(controller.updateOneLogForOneVehicle)
+  .route("/addOneServiceLog/:id")
+  .put(controller.addOneLogForOneVehicle)
 
 // Matches with "/api/vehicles/user/:id"
 router

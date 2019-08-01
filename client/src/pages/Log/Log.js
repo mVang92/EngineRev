@@ -7,11 +7,10 @@ class Log extends Component {
   state = {
     vehicle: [],
     vehicleId: "",
-    logs: [],
     date: "",
     mileage: "",
     service: "",
-    comment: "",
+    comment: "No Comments",
     logArray: []
   };
 
@@ -23,11 +22,12 @@ class Log extends Component {
     });
 
     API.getOneVehicleForUser(this.props.match.params.id)
-      .then(res => {this.setState({
+      .then(res => {
+        this.setState({
           vehicle: res.data,
           // vehicleId: res.data.creator,
           // logArray: res.data.logs
-        },console.log(res.data[0]))
+        })
         // .catch(err => console.log(err))
       });
   };
@@ -45,13 +45,24 @@ class Log extends Component {
     if (this.state.date === "" || this.state.mileage === "" || this.state.service === "") {
       alert("Please fill in all of the neccessary fields.");
     } else {
+      console.log("date: " + this.state.date)
+      console.log("mileage: " + this.state.mileage)
+      console.log("service: " + this.state.service)
+      console.log("comment: " + this.state.comment)
+      let id = this.state.vehicleId;
       let log = {
         date: this.state.date,
         mileage: this.state.mileage,
         service: this.state.service,
         comment: this.state.comment
       };
-      this.state.logs.push(log);
+      console.log("id: " + id)
+      console.log(log)
+      API.addOneLogForOneVehicle(id, log)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => console.log(err));
       this.setState({
         date: "",
         mileage: "",
@@ -60,14 +71,6 @@ class Log extends Component {
       }, () => {
         // console.log(this.state.logs);
       });
-      // Unique vehicle ID
-      var id = this.state.vehicleId;
-      console.log(id)
-      API.addOneLogForOneVehicle(id, log)
-        .then(res => {
-          console.log(res.data.logs)
-        })
-        .catch(err => console.log(err));
     };
   };
 
