@@ -7,6 +7,8 @@ class Log extends Component {
   state = {
     vehicle: [],
     vehicleId: "",
+    make: "",
+    model: "",
     date: "",
     mileage: "",
     service: "",
@@ -20,9 +22,9 @@ class Log extends Component {
     this.setState({
       vehicleId: this.props.match.params.id
     });
-
     API.getOneVehicleForUser(this.props.match.params.id)
       .then(res => {
+        console.log(res.data)
         this.setState({
           vehicle: res.data,
           // vehicleId: res.data.creator,
@@ -99,7 +101,6 @@ class Log extends Component {
         <div className="box">
           <div className="row">
             <div className="col-md-12 text-center">
-              {this.state.logArray}
               {/* <label>Viewing logs for your {this.state.vehicle.year} {this.state.vehicle.make} {this.state.vehicle.model}</label> */}
             </div>
           </div>
