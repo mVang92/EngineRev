@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import Container from "../../components/Container";
 import AddLog from "../../components/AddLog";
+import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal";
 
 class Log extends Component {
   state = {
@@ -166,6 +167,9 @@ class Log extends Component {
             />
           </div>
         </div>
+        <DeleteOneVehicleModal
+        handleDeleteOneVehicle={this.handleDeleteOneVehicle}
+        />
       </Container>
     );
   };
