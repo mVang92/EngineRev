@@ -14,7 +14,16 @@ class Log extends Component {
     mileage: "",
     service: "",
     comment: "No Comments",
-    logArray: []
+    logArray: [],
+    showDeleteOneVehicleModal: false
+  };
+
+  showDeleteOneVehicleModal = () => {
+    this.setState({ showDeleteOneVehicleModal: true });
+  };
+
+  hideDeleteOneVehicleModal = () => {
+    this.setState({ showDeleteOneVehicleModal: false });
   };
 
   // When this component mounts, grab the vehicle with the _id of this.props.match.params.id
@@ -87,8 +96,14 @@ class Log extends Component {
     });
   };
 
+  handleDeleteOneVehicleModal = () => {
+    console.log("inside handleDeleteOneVehicleModal")
+    this.setState({ showDeleteOneVehicleModal: true })
+    console.log(this.state.showDeleteOneVehicleModal)
+
+  }
+
   handleDeleteOneVehicle = () => {
-    console.log("Log.js handleDeleteOneVehicle")
     API.deleteOneVehicle(this.state.vehicleId)
       .then(res => {
         console.log(res)
@@ -163,12 +178,13 @@ class Log extends Component {
               handleChange={this.handleChange}
               handleResetLogVehicleForm={this.handleResetLogVehicleForm}
               handleSubmit={this.handleSubmitLog}
-              handleDeleteOneVehicle={this.handleDeleteOneVehicle}
+              handleDeleteOneVehicle={this.handleDeleteOneVehicleModal}
             />
           </div>
         </div>
         <DeleteOneVehicleModal
-        handleDeleteOneVehicle={this.handleDeleteOneVehicle}
+          showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
+          hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
         />
       </Container>
     );
