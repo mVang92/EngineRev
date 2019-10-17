@@ -186,9 +186,8 @@ class Log extends Component {
           </div>
         </div>
         <DeleteOneVehicleModal
-          handleChange={this.handleChange}
           handleDeleteOneVehicle={this.handleDeleteOneVehicle}
-          showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
+          showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
           hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
         />
       </Container>
