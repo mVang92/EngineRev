@@ -19,16 +19,19 @@ class Log extends Component {
   };
 
   showDeleteOneVehicleModal = () => {
+    console.log("show modal")
     this.setState({ showDeleteOneVehicleModal: true });
   };
 
   hideDeleteOneVehicleModal = () => {
+    console.log("close modal")
     this.setState({ showDeleteOneVehicleModal: false });
   };
 
   // When this component mounts, grab the vehicle with the _id of this.props.match.params.id
   // e.g. localhost:3000/vehicle/599dcb67f0f16317844583fc
   componentWillMount = () => {
+    console.log(this.state.showDeleteOneVehicleModal)
     this.setState({
       vehicleId: this.props.match.params.id
     });
@@ -178,11 +181,13 @@ class Log extends Component {
               handleChange={this.handleChange}
               handleResetLogVehicleForm={this.handleResetLogVehicleForm}
               handleSubmit={this.handleSubmitLog}
-              handleDeleteOneVehicle={this.handleDeleteOneVehicleModal}
+              showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
             />
           </div>
         </div>
         <DeleteOneVehicleModal
+          handleChange={this.handleChange}
+          handleDeleteOneVehicle={this.handleDeleteOneVehicle}
           showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
           hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
         />
