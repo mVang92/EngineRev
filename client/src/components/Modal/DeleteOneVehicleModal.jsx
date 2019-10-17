@@ -1,5 +1,6 @@
 import React from "react";
 import ReactModal from "react-modal";
+import { Link } from "react-router-dom";
 
 const DeleteOneVehicleModal = props => {
 
@@ -11,18 +12,25 @@ const DeleteOneVehicleModal = props => {
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={150}
         >
+            {console.log(props)}
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <form className="modalBody" onSubmit={props.handleDeleteOneVehicle}>
+                    <div className="modalBody">
                         <div className="modal-header">
-                            Deleting this vehicle will also delete all of its service logs. Are you sure you want to continue?
+                            <strong>Vehicle ID = {props.state.vehicleId}</strong>
+                        </div>
+                        <div className="modal-body text-danger">
+                            Deleting this vehicle will also delete all of its service logs.
+                            Are you sure you want to continue?
                         </div>
                         <hr />
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-light" onClick={props.hideDeleteOneVehicleModal} data-dismiss="modal">Cancel</button>
-                            <button className="btn btn-light" type="submit">Okay</button>
+                            <button type="button" className="cancelBtn" onClick={props.hideDeleteOneVehicleModal} data-dismiss="modal">Cancel</button>
+                            <Link to={"/vehicle/"}>
+                                <button className="deleteBtn" type="button" onClick={props.handleDeleteOneVehicle}>Delete Vehicle</button>
+                            </Link>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </ReactModal>

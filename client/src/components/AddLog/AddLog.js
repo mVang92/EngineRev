@@ -57,7 +57,7 @@ class AddLog extends Component {
         </div>
         <div className="row">
           <div className="col-md-2">
-            <a href="/"><button type="button" className="resetBtn">Back</button></a>
+            <a href="/"><button type="button" className="cancelBtn">Back</button></a>
           </div>
           <div className="col-md-4"></div>
           <div className="col-md-2 logDeleteBtn">
@@ -67,7 +67,7 @@ class AddLog extends Component {
             <button type="reset" className="resetBtn" onClick={this.props.handleResetLogVehicleForm}>Reset Fields</button>
           </div>
           <div className="col-md-2 logSubmitBtn">
-            <button type="submit" className="addBtn">Submit</button>
+            <button type="submit" className="addBtn">Submit Log</button>
           </div>
         </div>
       </form>

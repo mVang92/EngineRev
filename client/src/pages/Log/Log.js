@@ -3,6 +3,7 @@ import API from "../../utils/API";
 import Container from "../../components/Container";
 import AddLog from "../../components/AddLog";
 import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal";
+import Modal from "react-modal";
 
 class Log extends Component {
   state = {
@@ -19,19 +20,17 @@ class Log extends Component {
   };
 
   showDeleteOneVehicleModal = () => {
-    console.log("show modal")
     this.setState({ showDeleteOneVehicleModal: true });
   };
 
   hideDeleteOneVehicleModal = () => {
-    console.log("close modal")
     this.setState({ showDeleteOneVehicleModal: false });
   };
 
   // When this component mounts, grab the vehicle with the _id of this.props.match.params.id
   // e.g. localhost:3000/vehicle/599dcb67f0f16317844583fc
   componentWillMount = () => {
-    console.log(this.state.showDeleteOneVehicleModal)
+    Modal.setAppElement("body");
     this.setState({
       vehicleId: this.props.match.params.id
     });
@@ -90,7 +89,6 @@ class Log extends Component {
   };
 
   handleResetLogVehicleForm = () => {
-    console.log("Form Reset")
     this.setState({
       date: "",
       mileage: "",
@@ -98,13 +96,6 @@ class Log extends Component {
       comment: ""
     });
   };
-
-  handleDeleteOneVehicleModal = () => {
-    console.log("inside handleDeleteOneVehicleModal")
-    this.setState({ showDeleteOneVehicleModal: true })
-    console.log(this.state.showDeleteOneVehicleModal)
-
-  }
 
   handleDeleteOneVehicle = () => {
     API.deleteOneVehicle(this.state.vehicleId)
@@ -189,6 +180,7 @@ class Log extends Component {
           handleDeleteOneVehicle={this.handleDeleteOneVehicle}
           showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
           hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
+          state={this.state}
         />
       </Container>
     );

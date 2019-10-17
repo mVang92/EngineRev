@@ -107,10 +107,15 @@ input {
 
 .addBtn,
 .resetBtn,
+.cancelBtn,
 .deleteBtn {
     border-radius: 5px;
     cursor: pointer;
     transition-duration: 0.5s;
+}
+
+.cancelBtn {
+    background: rgb(200, 200, 200)
 }
 
 .addBtn {
@@ -128,6 +133,7 @@ input {
 
 .addBtn:hover,
 .resetBtn:hover,
+.cancelBtn:hover,
 .deleteBtn:hover {
     transition-duration: 0.2s;
 }
@@ -139,6 +145,10 @@ input {
 .resetBtn:hover,
 .deleteBtn:hover {
     background: rgb(255, 128, 128);
+}
+
+.cancelBtn:hover {
+    background: rgb(255, 255, 255)
 }
 
 .nav-link:hover {
