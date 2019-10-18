@@ -3,6 +3,7 @@ import { firebase, auth } from "../../firebase"
 import Modal from "react-modal";
 import API from "../../utils/API";
 import ModalConductor from "../../components/Modal/ModalConductor";
+import AddVehicleYearNanErrorModal from "../../components/Modal/AddVehicleYearNanErrorModal";
 import Nav from "../../components/Nav";
 import Container from "../../components/Container";
 import LoggedOut from "../../components/LoggedOut";
@@ -13,6 +14,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       showModal: false,
+      showAddVehicleYearNanErrorModal: false,
       loggedin: false,
       uid: "",
       currentModal: String,
@@ -174,7 +176,7 @@ export default class App extends Component {
     let element = this.state.vehicleData.vehicles.length - 1;
     // Check to see if the year is a number.
     if (isNaN(this.state.vehicleData.vehicles[element].year)) {
-      alert("Please enter numerical values for year.");
+      this.showAddVehicleYearNanErrorModal();
       // Refreshes page, simple way of preventing
       // bad user input to populate dropdown menu
       this.componentWillMount();
@@ -193,6 +195,14 @@ export default class App extends Component {
           bindThis.onAuthStateChanged();
         })
     };
+  };
+
+  showAddVehicleYearNanErrorModal = () => {
+    this.setState({ showAddVehicleYearNanErrorModal: true });
+  };
+
+  hideAddVehicleYearNanErrorModal = () => {
+    this.setState({ showAddVehicleYearNanErrorModal: false });
   };
 
   render() {
@@ -223,6 +233,10 @@ export default class App extends Component {
           handleSignOut={this.handleSignOut}
           handleSignUp={this.handleSignUp}
           handleChange={this.handleChange}
+        />
+        <AddVehicleYearNanErrorModal
+          showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
+          hideAddVehicleYearNanErrorModal={this.hideAddVehicleYearNanErrorModal}
         />
       </React.Fragment>
     );

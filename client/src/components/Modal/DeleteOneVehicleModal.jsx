@@ -12,7 +12,6 @@ const DeleteOneVehicleModal = props => {
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={150}
         >
-            {console.log(props)}
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
                     <div className="modalBody">
