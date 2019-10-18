@@ -3,6 +3,7 @@ import API from "../../utils/API";
 import Container from "../../components/Container";
 import AddLog from "../../components/AddLog";
 import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal";
+import AddLogErrorModal from "../../components/Modal/AddLogErrorModal"
 import Modal from "react-modal";
 
 class Log extends Component {
@@ -16,7 +17,8 @@ class Log extends Component {
     service: "",
     comment: "No Comments",
     logArray: [],
-    showDeleteOneVehicleModal: false
+    showDeleteOneVehicleModal: false,
+    showAddLogErrorModal: false
   };
 
   showDeleteOneVehicleModal = () => {
@@ -30,7 +32,6 @@ class Log extends Component {
   // When this component mounts, grab the vehicle with the _id of this.props.match.params.id
   // e.g. localhost:3000/vehicle/599dcb67f0f16317844583fc
   componentWillMount = () => {
-    console.log("mount")
     Modal.setAppElement("body");
     this.setState({
       vehicleId: this.props.match.params.id
@@ -58,7 +59,7 @@ class Log extends Component {
   handleSubmitLog = e => {
     e.preventDefault();
     if (this.state.date === "" || this.state.mileage === "" || this.state.service === "") {
-      alert("Please fill in all of the neccessary fields.");
+      this.showAddLogErrorModal();
     } else {
       console.log("date: " + this.state.date)
       console.log("mileage: " + this.state.mileage)
@@ -104,7 +105,15 @@ class Log extends Component {
         console.log(res)
       })
       .catch(err => console.log(err));
-  }
+  };
+
+  showAddLogErrorModal = () => {
+    this.setState({ showAddLogErrorModal: true });
+  };
+
+  hideAddLogErrorModal = () => {
+    this.setState({ showAddLogErrorModal: false });
+  };
 
   render() {
     return (
@@ -181,6 +190,12 @@ class Log extends Component {
           handleDeleteOneVehicle={this.handleDeleteOneVehicle}
           showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
           hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
+          state={this.state}
+        />
+        <AddLogErrorModal
+          handleDeleteOneVehicle={this.handleDeleteOneVehicle}
+          showAddLogErrorModal={this.state.showAddLogErrorModal}
+          hideAddLogErrorModal={this.hideAddLogErrorModal}
           state={this.state}
         />
       </Container>
