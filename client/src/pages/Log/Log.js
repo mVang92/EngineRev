@@ -30,13 +30,14 @@ class Log extends Component {
   // When this component mounts, grab the vehicle with the _id of this.props.match.params.id
   // e.g. localhost:3000/vehicle/599dcb67f0f16317844583fc
   componentWillMount = () => {
+    console.log("mount")
     Modal.setAppElement("body");
     this.setState({
       vehicleId: this.props.match.params.id
     });
     API.getOneVehicleForUser(this.props.match.params.id)
       .then(res => {
-        console.log(res.data)
+        //console.log(res.data)
         this.setState({
           vehicle: res.data,
           // vehicleId: res.data.creator,

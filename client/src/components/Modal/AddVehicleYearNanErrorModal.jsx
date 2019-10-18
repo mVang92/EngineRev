@@ -1,5 +1,6 @@
 import React from "react";
 import ReactModal from "react-modal";
+import warningImage from "../../images/warning.png";
 
 const AddVehicleYearNanErrorModal = props => {
 
@@ -15,11 +16,13 @@ const AddVehicleYearNanErrorModal = props => {
                 <div className="modal-body modalShadow">
                     <div className="modalBody">
                         <div className="modal-header">
-                            <div>
-                                You have entered an invalid input value for Year.
+                            <div className="col-md-2">
+                                <img className="warningImage" src={warningImage} alt='warning' />
+                            </div>
+                            <div className="col-md-10 userInputErrorMessage">
+                                Please enter a valid input for Year.
                             </div>
                         </div>
-                        <hr />
                         <div className="modal-footer">
                             <button type="button" className="cancelBtn" onClick={props.hideAddVehicleYearNanErrorModal} data-dismiss="modal">Okay</button>
                         </div>

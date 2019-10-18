@@ -1,5 +1,6 @@
 import React from "react";
 import ReactModal from "react-modal";
+import warningImage from "../../images/warning.png";
 
 const AddVehicleErrorModal = props => {
 
@@ -15,9 +16,13 @@ const AddVehicleErrorModal = props => {
                 <div className="modal-body modalShadow">
                     <div className="modalBody">
                         <div className="modal-header">
-                            Please fill in all of the neccessary fields.
+                            <div className="col-md-2">
+                                <img className="warningImage" src={warningImage} alt='warning' />
+                            </div>
+                            <div className="col-md-10 userInputErrorMessage">
+                                Please fill in all of the required input fields.
+                            </div>
                         </div>
-                        <hr />
                         <div className="modal-footer">
                             <button type="button" className="cancelBtn" onClick={props.hideAddVehicleErrorModal} data-dismiss="modal">Okay</button>
                         </div>

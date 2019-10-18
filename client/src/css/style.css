@@ -177,3 +177,11 @@ input {
     width: 5%;
     margin-right: 5px;
 }
+
+.warningImage {
+    width: 50%;
+}
+
+#confirmDeleteVehicleButton {
+    width: 120px;
+}
