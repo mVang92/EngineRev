@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import API from "../../utils/API";
 import ModalConductor from "../../components/Modal/ModalConductor";
 import AddVehicleYearNanErrorModal from "../../components/Modal/AddVehicleYearNanErrorModal";
+import SignOutModal from "../../components/Modal/SignOutModal";
 import Nav from "../../components/Nav";
 import Container from "../../components/Container";
 import LoggedOut from "../../components/LoggedOut";
@@ -14,6 +15,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       showModal: false,
+      showSignOutModal: false,
       showAddVehicleYearNanErrorModal: false,
       loggedin: false,
       uid: "",
@@ -164,10 +166,9 @@ export default class App extends Component {
   };
 
   // Receives our states from MyVehicles.js to be used in this main component
-  handleAddVehicle = newVehicle => {
+  handleAddOneVehicle = newVehicle => {
     const id = this.state.uid;
     const bindThis = this;
-    // const bindThis = this;
     let vehicleData = this.state.vehicleData;
     vehicleData.vehicles.push(newVehicle);
     this.setState({
@@ -197,8 +198,16 @@ export default class App extends Component {
     };
   };
 
+  showSignOutModal = () => {
+    this.setState({ showSignOutModal: true });
+  };
+
   showAddVehicleYearNanErrorModal = () => {
     this.setState({ showAddVehicleYearNanErrorModal: true });
+  };
+
+  hideSignOutModal = () => {
+    this.setState({ showSignOutModal: false });
   };
 
   hideAddVehicleYearNanErrorModal = () => {
@@ -211,7 +220,7 @@ export default class App extends Component {
         <Nav
           loggedin={this.state.loggedin}
           authClick={this.authClick}
-          signOut={this.handleSignOut}
+          signOut={this.showSignOutModal}
         />
         <Container>
           {this.state.loggedin === true ? (
@@ -219,7 +228,7 @@ export default class App extends Component {
             <LoggedIn
               vehicleData={this.state.vehicleData}
               handleChange={this.handleChange}
-              addVehicle={this.handleAddVehicle.bind(this)}
+              addVehicle={this.handleAddOneVehicle.bind(this)}
             />
           ) : (
               <LoggedOut />
@@ -230,13 +239,18 @@ export default class App extends Component {
           handleCloseModal={this.handleCloseModal}
           showModal={this.state.showModal}
           handleSignIn={this.handleSignIn}
-          handleSignOut={this.handleSignOut}
+          handleSignOut={this.showSignOutModal}
           handleSignUp={this.handleSignUp}
           handleChange={this.handleChange}
         />
         <AddVehicleYearNanErrorModal
           showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
           hideAddVehicleYearNanErrorModal={this.hideAddVehicleYearNanErrorModal}
+        />
+        <SignOutModal
+          showSignOutModal={this.state.showSignOutModal}
+          hideSignOutModal={this.hideSignOutModal}
+          handleSignOut={this.handleSignOut}
         />
       </React.Fragment>
     );

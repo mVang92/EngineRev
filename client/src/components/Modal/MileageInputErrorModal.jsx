@@ -2,11 +2,11 @@ import React from "react";
 import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
-const AddVehicleErrorModal = props => {
+const MileageInputErrorModal = props => {
 
     return (
         <ReactModal
-            isOpen={props.showAddVehicleErrorModal}
+            isOpen={props.showMileageInputErrorModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
@@ -20,15 +20,20 @@ const AddVehicleErrorModal = props => {
                                 <img className="warningImage" src={warningImage} alt='warning' />
                             </div>
                             <div className="col-md-10 userInputErrorMessage">
-                                Please fill in all of the required input fields.
+                                <div className="col-md-12">
+                                    <span className="text-danger">{props.state.mileage}</span> is not a valid input for Mileage.
+                                </div>
+                                <div className="col-md-12">
+                                    Please enter a numerical value and exclude special characters.
+                                </div>
                             </div>
                         </div>
                         <div className="modal-footer">
                             <button
-                                title="Okay"
+                                title="Understood"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.hideAddVehicleErrorModal}
+                                onClick={props.hideMileageInputErrorModal}
                                 data-dismiss="modal">
                                 Okay
                             </button>
@@ -40,4 +45,4 @@ const AddVehicleErrorModal = props => {
     );
 };
 
-export default AddVehicleErrorModal;
+export default MileageInputErrorModal;

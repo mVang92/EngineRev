@@ -24,7 +24,14 @@ const AddVehicleYearNanErrorModal = props => {
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="cancelBtn" onClick={props.hideAddVehicleYearNanErrorModal} data-dismiss="modal">Okay</button>
+                            <button
+                                title="Okay"
+                                type="button"
+                                className="cancelBtn"
+                                onClick={props.hideAddVehicleYearNanErrorModal}
+                                data-dismiss="modal">
+                                Okay
+                            </button>
                         </div>
                     </div>
                 </div>

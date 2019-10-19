@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class AddLog extends Component {
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit}>
+      <form onSubmit={this.props.handleSubmitOneServiceLog}>
         <div className="row">
           <div className="col-md-4">
             <label><span className="required">*</span><strong>Date</strong></label>
@@ -24,6 +24,7 @@ class AddLog extends Component {
               onChange={this.props.handleChange}
               value={this.props.mileage}
               name="mileage"
+              maxlength="7"
               placeholder="Required">
             </input>
           </div>
@@ -35,6 +36,7 @@ class AddLog extends Component {
               onChange={this.props.handleChange}
               value={this.props.service}
               name="service"
+              maxlength="50"
               placeholder="Required">
             </input>
           </div>
@@ -51,23 +53,48 @@ class AddLog extends Component {
               onChange={this.props.handleChange}
               value={this.props.comment}
               name="comment"
+              maxlength="250"
               placeholder="Optional">
             </textarea>
           </div>
         </div>
         <div className="row">
           <div className="col-md-2">
-            <a href="/"><button type="button" className="cancelBtn">Back</button></a>
+            <a href="/">
+              <button
+                title="Back"
+                type="button"
+                className="cancelBtn">
+                Back
+              </button>
+            </a>
           </div>
           <div className="col-md-4"></div>
           <div className="col-md-2 logDeleteBtn">
-            <button type="button" className="deleteBtn" onClick={this.props.showDeleteOneVehicleModal}>Delete Vehicle</button>
+            <button
+              title="Delete This Vehicle"
+              type="button"
+              className="deleteBtn"
+              onClick={this.props.showDeleteOneVehicleModal}>
+              Delete Vehicle
+            </button>
           </div>
           <div className="col-md-2 logResetBtn">
-            <button type="reset" className="resetBtn" onClick={this.props.handleResetLogVehicleForm}>Reset Fields</button>
+            <button
+              title="Reset Input Fields"
+              type="reset"
+              className="resetBtn"
+              onClick={this.props.handleResetLogVehicleForm}>
+              Reset Fields
+            </button>
           </div>
           <div className="col-md-2 logSubmitBtn">
-            <button type="submit" className="addBtn">Submit Log</button>
+            <button
+              title="Submit Service Log"
+              type="submit"
+              className="addBtn">
+              Submit Log
+            </button>
           </div>
         </div>
       </form>

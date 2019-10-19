@@ -4,6 +4,7 @@ import Container from "../../components/Container";
 import AddLog from "../../components/AddLog";
 import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal";
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal"
+import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal"
 import Modal from "react-modal";
 
 class Log extends Component {
@@ -15,18 +16,11 @@ class Log extends Component {
     date: "",
     mileage: "",
     service: "",
-    comment: "No Comments",
+    comment: "",
     logArray: [],
     showDeleteOneVehicleModal: false,
-    showAddLogErrorModal: false
-  };
-
-  showDeleteOneVehicleModal = () => {
-    this.setState({ showDeleteOneVehicleModal: true });
-  };
-
-  hideDeleteOneVehicleModal = () => {
-    this.setState({ showDeleteOneVehicleModal: false });
+    showAddLogErrorModal: false,
+    showMileageInputErrorModal: false
   };
 
   // When this component mounts, grab the vehicle with the _id of this.props.match.params.id
@@ -56,37 +50,39 @@ class Log extends Component {
     // console.log(name, value);
   };
 
-  handleSubmitLog = e => {
+  handleSubmitOneServiceLog = e => {
     e.preventDefault();
-    if (this.state.date === "" || this.state.mileage === "" || this.state.service === "") {
-      this.showAddLogErrorModal();
+    if (isNaN(this.state.mileage)) {
+      this.showMileageInputErrorModal();
     } else {
-      console.log("date: " + this.state.date)
-      console.log("mileage: " + this.state.mileage)
-      console.log("service: " + this.state.service)
-      console.log("comment: " + this.state.comment)
-      let id = this.state.vehicleId;
-      let log = {
-        date: this.state.date,
-        mileage: this.state.mileage,
-        service: this.state.service,
-        comment: this.state.comment
+      if (this.state.date === "" || this.state.mileage === "" || this.state.service === "") {
+        this.showAddLogErrorModal();
+      } else {
+        console.log("date: " + this.state.date)
+        console.log("mileage: " + this.state.mileage)
+        console.log("service: " + this.state.service)
+        console.log("comment: " + this.state.comment)
+        let id = this.state.vehicleId;
+        let log = {
+          date: this.state.date,
+          mileage: this.state.mileage,
+          service: this.state.service,
+          comment: this.state.comment
+        };
+        console.log("id: " + id)
+        console.log(log)
+        API.addOneLogForOneVehicle(id, log)
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => console.log(err));
+        this.setState({
+          date: "",
+          mileage: "",
+          service: "",
+          comment: ""
+        });
       };
-      console.log("id: " + id)
-      console.log(log)
-      API.addOneLogForOneVehicle(id, log)
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => console.log(err));
-      this.setState({
-        date: "",
-        mileage: "",
-        service: "",
-        comment: ""
-      }, () => {
-        // console.log(this.state.logs);
-      });
     };
   };
 
@@ -107,12 +103,28 @@ class Log extends Component {
       .catch(err => console.log(err));
   };
 
+  showDeleteOneVehicleModal = () => {
+    this.setState({ showDeleteOneVehicleModal: true });
+  };
+
   showAddLogErrorModal = () => {
     this.setState({ showAddLogErrorModal: true });
   };
 
+  showMileageInputErrorModal = () => {
+    this.setState({ showMileageInputErrorModal: true });
+  };
+
+  hideDeleteOneVehicleModal = () => {
+    this.setState({ showDeleteOneVehicleModal: false });
+  };
+
   hideAddLogErrorModal = () => {
     this.setState({ showAddLogErrorModal: false });
+  };
+
+  hideMileageInputErrorModal = () => {
+    this.setState({ showMileageInputErrorModal: false });
   };
 
   render() {
@@ -181,7 +193,7 @@ class Log extends Component {
               comment={this.state.comment}
               handleChange={this.handleChange}
               handleResetLogVehicleForm={this.handleResetLogVehicleForm}
-              handleSubmit={this.handleSubmitLog}
+              handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
               showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
             />
           </div>
@@ -196,6 +208,11 @@ class Log extends Component {
           handleDeleteOneVehicle={this.handleDeleteOneVehicle}
           showAddLogErrorModal={this.state.showAddLogErrorModal}
           hideAddLogErrorModal={this.hideAddLogErrorModal}
+          state={this.state}
+        />
+        <MileageInputErrorModal
+          showMileageInputErrorModal={this.state.showMileageInputErrorModal}
+          hideMileageInputErrorModal={this.hideMileageInputErrorModal}
           state={this.state}
         />
       </Container>

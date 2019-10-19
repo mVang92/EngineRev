@@ -10,7 +10,7 @@ class AddVehicle extends Component {
     };
   };
 
-  handleSubmit = e => {
+  handleSubmitAddOneVehicle = e => {
     e.preventDefault();
     if (this.refs.year.value === "" || this.refs.make.value === "" || this.refs.model.value === "") {
       this.showAddVehicleErrorModal()
@@ -41,7 +41,7 @@ class AddVehicle extends Component {
   render() {
     return (
       <React.Fragment>
-        <form id="field" onSubmit={this.handleSubmit.bind(this)}>
+        <form id="field" onSubmit={this.handleSubmitAddOneVehicle.bind(this)}>
           <div className="text-center">
             <label><h5>Hello <span id="userEmail"></span>!</h5></label>
           </div>
@@ -64,6 +64,7 @@ class AddVehicle extends Component {
                     onChange={this.props.handleChange}
                     value={this.props.year}
                     name="year"
+                    maxlength="4"
                     placeholder="2010" />
                 </div>
               </div>
@@ -78,6 +79,7 @@ class AddVehicle extends Component {
                     onChange={this.props.handleChange}
                     value={this.props.make}
                     name="make"
+                    maxlength="25"
                     placeholder="Lexus" />
                 </div>
               </div>
@@ -92,16 +94,27 @@ class AddVehicle extends Component {
                     onChange={this.props.handleChange}
                     value={this.props.model}
                     name="model"
+                    maxlength="25"
                     placeholder="RX 350" />
                 </div>
               </div>
               <div className="col-md-3">
                 <div className="col-md-12 text-center">
-                  <button type="submit" className="addBtn">Add Vehicle</button>
+                  <button
+                    title="Add This Vehicle"
+                    type="submit"
+                    className="addBtn">
+                    Add Vehicle
+                    </button>
                 </div>
                 <br />
                 <div className="col-md-12 text-center">
-                  <button type="reset" className="resetBtn">Reset Fields</button>
+                  <button
+                    title="Reset Input Fields"
+                    type="reset"
+                    className="resetBtn">
+                    Reset Fields
+                    </button>
                 </div>
               </div>
             </div>

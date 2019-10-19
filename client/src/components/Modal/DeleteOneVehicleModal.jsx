@@ -31,6 +31,7 @@ const DeleteOneVehicleModal = props => {
                         </div>
                         <div className="modal-footer">
                             <button
+                                title="Cancel"
                                 type="button"
                                 className="cancelBtn"
                                 onClick={props.hideDeleteOneVehicleModal}
@@ -39,11 +40,12 @@ const DeleteOneVehicleModal = props => {
                             </button>
                             <Link to={"/vehicle/"}>
                                 <button
+                                    title="Delete This Vehicle"
                                     id="confirmDeleteVehicleButton"
                                     className="deleteBtn"
                                     type="button"
                                     onClick={props.handleDeleteOneVehicle}>
-                                    Deleve Vehicle
+                                    Delete Vehicle
                                 </button>
                             </Link>
                         </div>
