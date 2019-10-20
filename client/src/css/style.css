@@ -178,10 +178,24 @@ input {
     margin-right: 5px;
 }
 
-.warningImage {
+.warningImage,
+.signOutImage {
     width: 50%;
 }
 
 #confirmDeleteVehicleButton {
     width: 120px;
+}
+
+.vehicleItemList {
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+    margin-bottom: 5px !important;
+    background: rgb(240, 240, 240);
+    transition-duration: 0.2s;
+}
+
+.vehicleItemList:hover {
+    background: rgb(255, 255, 255);
+    transition-duration: 0.2s;
 }

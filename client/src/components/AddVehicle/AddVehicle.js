@@ -64,7 +64,7 @@ class AddVehicle extends Component {
                     onChange={this.props.handleChange}
                     value={this.props.year}
                     name="year"
-                    maxlength="4"
+                    maxLength="4"
                     placeholder="2010" />
                 </div>
               </div>
@@ -79,7 +79,7 @@ class AddVehicle extends Component {
                     onChange={this.props.handleChange}
                     value={this.props.make}
                     name="make"
-                    maxlength="25"
+                    maxLength="25"
                     placeholder="Lexus" />
                 </div>
               </div>
@@ -94,7 +94,7 @@ class AddVehicle extends Component {
                     onChange={this.props.handleChange}
                     value={this.props.model}
                     name="model"
-                    maxlength="25"
+                    maxLength="25"
                     placeholder="RX 350" />
                 </div>
               </div>

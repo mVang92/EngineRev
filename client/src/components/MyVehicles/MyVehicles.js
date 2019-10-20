@@ -20,19 +20,20 @@ class MyVehicles extends Component {
                   </div>
                 </div>
                 <div className="row innerBox">
-                  <div className="col-md-2"></div>
-                  <div className="col-md-10">
+                  <div className="col-md-12">
                     {this.props.vehicleData.vehicles.map(vehicle => (
                       <div key={vehicle._id} className="row">
-                        <div className="col-md-10">
+                        <div className="col-md-2"></div>
+                        <div className="col-md-8">
                           <VehicleItem>
                             <Link to={"/vehicle/" + vehicle._id}>
-                              <div className="text-dark">
+                              <div title="View Service Logs" className="text-dark">
                                 {vehicle.year} {vehicle.make} {vehicle.model}
                               </div>
                             </Link>
                           </VehicleItem>
                         </div>
+                        <div className="col-md-2"></div>
                       </div>
                     ))}
                   </div>
@@ -56,4 +57,5 @@ class MyVehicles extends Component {
     );
   };
 };
+
 export default MyVehicles;

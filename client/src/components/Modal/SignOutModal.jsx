@@ -1,6 +1,6 @@
 import React from "react";
 import ReactModal from "react-modal";
-import warningImage from "../../images/warning.png";
+import signOutImage from "../../images/signOut.png";
 
 const SignOutModal = props => {
 
@@ -16,13 +16,16 @@ const SignOutModal = props => {
                 <div className="modal-body modalShadow">
                     <div className="modalBody">
                         <div className="modal-header">
-                            <div className="col-md-12 text-center">
+                            <div className="col-md-2">
+                                <img className="signOutImage" src={signOutImage} alt='warning' />
+                            </div>
+                            <div className="col-md-10 text-center">
                                 Are you sure you want to sign out?
                             </div>
                         </div>
                         <div className="modal-footer">
                             <button
-                                title="Stay signed in"
+                                title="No"
                                 type="button"
                                 className="cancelBtn"
                                 onClick={props.hideSignOutModal}

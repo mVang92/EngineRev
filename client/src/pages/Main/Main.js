@@ -161,10 +161,6 @@ export default class App extends Component {
     // console.log(name, value);
   };
 
-  handleCloseModal = () => {
-    this.setState({ showModal: false });
-  };
-
   // Receives our states from MyVehicles.js to be used in this main component
   handleAddOneVehicle = newVehicle => {
     const id = this.state.uid;
@@ -212,6 +208,10 @@ export default class App extends Component {
 
   hideAddVehicleYearNanErrorModal = () => {
     this.setState({ showAddVehicleYearNanErrorModal: false });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
