@@ -46,7 +46,8 @@ export default class App extends Component {
         this.setState({
           vehicleData: res.data,
           year: "",
-          make: "", model: ""
+          make: "",
+          model: ""
         })
       )
       .catch(err => console.log(err));
