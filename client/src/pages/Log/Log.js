@@ -5,6 +5,7 @@ import AddLog from "../../components/AddLog";
 import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal";
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal"
 import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal"
+import DeleteOneVehicleNotification, { DeleteOneVehicleNotify } from "../../components/Notifications/DeleteOneVehicleNotification";
 import Modal from "react-modal";
 
 class Log extends Component {
@@ -97,8 +98,8 @@ class Log extends Component {
 
   handleDeleteOneVehicle = () => {
     API.deleteOneVehicle(this.state.vehicleId)
-      .then(res => {
-        console.log(res)
+      .then(() => {
+        DeleteOneVehicleNotify("One Vehicle Successfully Deleted");
       })
       .catch(err => console.log(err));
   };
@@ -215,6 +216,7 @@ class Log extends Component {
           hideMileageInputErrorModal={this.hideMileageInputErrorModal}
           state={this.state}
         />
+        <DeleteOneVehicleNotification />
       </Container>
     );
   };

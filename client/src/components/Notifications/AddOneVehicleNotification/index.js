@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import EventEmitter from "event-emitter";
-import CheckMarkImage from "../../images/checkmark.png";
+import CheckMarkImage from "../../../images/checkmark.png";
 
 const Contianer = styled.div`
     background: rgb(16, 192, 16);
@@ -18,21 +18,12 @@ const Contianer = styled.div`
 
 const emitter = new EventEmitter()
 
-export const notify = (message) => {
+export const AddOneVehicleNotify = (message) => {
+    console.log(message)
     emitter.emit("notification", message);
 };
 
-export const VehicleProps = props => {
-    return (
-        <div>
-            {/* {console.log(props.state.year)}
-            {console.log(props.state.make)}
-            {console.log(props.state.model)} */}
-        </div>
-    );
-};
-
-export default class Notifications extends React.Component {
+export default class AddOneVehicleNotification extends React.Component {
     constructor(props) {
         super(props);
         
@@ -48,6 +39,7 @@ export default class Notifications extends React.Component {
     };
 
     onShow = (message) => {
+        console.log("onShow in Add")
         if (this.timeout) {
             clearTimeout(this.timeout);
             this.setState({ top: -75 }, () => {
@@ -61,6 +53,7 @@ export default class Notifications extends React.Component {
     };
 
     showNotification = (message) => {
+        console.log("showNotification in Add")
         this.setState({
             top: 75,
             message
@@ -76,7 +69,7 @@ export default class Notifications extends React.Component {
     render() {
         return (
             <Contianer top={this.state.top}>
-                Vehicle Added Successfully<img className="checkMarkImage" src={CheckMarkImage}></img>
+                Vehicle Added Successfully<img alt="checkmark" className="checkMarkImage" src={CheckMarkImage}></img>
             </Contianer>
         );
     };
