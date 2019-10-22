@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import EventEmitter from "event-emitter";
+import CheckMarkImage from "../../images/checkmark.png";
 
 const Contianer = styled.div`
-    background: green;
+    background: rgb(16, 192, 16);
+    font-weight: bold;
     color: white;
     padding: 16px;
     top: ${props => props.top}px;
     right: 16px;
     z-index: 99;
+    border-radius: 7px 7px 7px 7px
     position: absolute;
     transition: top 0.5s ease;
-    > i {
-        margin-left: 8px;
-    }
 `;
 
 const emitter = new EventEmitter()
@@ -33,7 +33,6 @@ export const VehicleProps = props => {
 };
 
 export default class Notifications extends React.Component {
-
     constructor(props) {
         super(props);
         
@@ -44,7 +43,7 @@ export default class Notifications extends React.Component {
 
         this.timeout = null;
         emitter.on("notification", (message) => {
-            this.onShow(message)
+            this.onShow(message);
         });
     };
 
@@ -77,7 +76,7 @@ export default class Notifications extends React.Component {
     render() {
         return (
             <Contianer top={this.state.top}>
-                Vehicle Added Successfully<i className="fa fa-bell"></i>
+                Vehicle Added Successfully<img className="checkMarkImage" src={CheckMarkImage}></img>
             </Contianer>
         );
     };

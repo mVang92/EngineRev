@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import warningImage from "../../images/warning.png";
 
 const DeleteOneVehicleModal = props => {
-
     return (
         <ReactModal
             isOpen={props.showDeleteOneVehicleModal}

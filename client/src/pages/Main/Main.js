@@ -87,7 +87,7 @@ export default class App extends Component {
         document.getElementById("userEmail").appendChild(userName);
         const id = user.uid;
         API.getAllVehiclesForUser(id)
-          .then(res => this.setState({
+          .then((res) => this.setState({
             vehicleData: res.data,
             uid: user.uid
           }))
@@ -187,7 +187,7 @@ export default class App extends Component {
       }
       API.addOneVehicle(id, data)
         .then(() => {
-          notify("One Vehicle Successfully Added")
+          notify("One Vehicle Successfully Added");
           // Reloads the page after adding a vehicle.
           // Prevents the URL from having undefined route.
           bindThis.onAuthStateChanged();
@@ -254,7 +254,8 @@ export default class App extends Component {
           handleSignOut={this.handleSignOut}
         />
         <Notifications
-          state={this.state} />
+          state={this.state}
+        />
         <VehicleProps
           state={this.state}
         />

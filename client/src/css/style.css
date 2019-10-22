@@ -187,6 +187,12 @@ input {
     width: 50%;
 }
 
+.checkMarkImage {
+    width: 10%;
+    margin-left: 8px;
+    margin-right: -495px;
+}
+
 #confirmDeleteVehicleButton {
     width: 120px;
 }
