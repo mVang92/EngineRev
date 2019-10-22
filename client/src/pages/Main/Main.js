@@ -9,6 +9,7 @@ import Nav from "../../components/Nav";
 import Container from "../../components/Container";
 import LoggedOut from "../../components/LoggedOut";
 import LoggedIn from "../../components/LoggedIn";
+import Notifications, { notify, VehicleProps } from "../../components/Notifications";
 
 export default class App extends Component {
   constructor(props) {
@@ -184,10 +185,9 @@ export default class App extends Component {
         make: this.state.vehicleData.vehicles[element].make,
         model: this.state.vehicleData.vehicles[element].model
       }
-      // console.log(id, data)
       API.addOneVehicle(id, data)
-        .then(function (res) {
-          // console.log(res.data);
+        .then(() => {
+          notify("One Vehicle Successfully Added")
           // Reloads the page after adding a vehicle.
           // Prevents the URL from having undefined route.
           bindThis.onAuthStateChanged();
@@ -252,6 +252,11 @@ export default class App extends Component {
           showSignOutModal={this.state.showSignOutModal}
           hideSignOutModal={this.hideSignOutModal}
           handleSignOut={this.handleSignOut}
+        />
+        <Notifications
+          state={this.state} />
+        <VehicleProps
+          state={this.state}
         />
       </React.Fragment>
     );

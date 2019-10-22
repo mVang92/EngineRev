@@ -22,11 +22,13 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.17.2",
+    "event-emitter": "^0.3.5",
     "express": "^4.15.4",
     "firebase": "^5.5.9",
     "if-env": "^1.0.4",
     "mongoose": "^5.3.14",
     "react-modal": "^3.6.1",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "styled-components": "^4.4.0"
   }
 }
