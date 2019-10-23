@@ -39,6 +39,9 @@ export default class App extends Component {
     this.setState({
       vehicleData: []
     });
+    if (this.state.vehicleData) {
+      console.log(this.state.vehicleData)
+    }
   };
 
   loadVehicles = () => {

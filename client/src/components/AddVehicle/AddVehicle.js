@@ -39,11 +39,12 @@ class AddVehicle extends Component {
   };
 
   render() {
+    console.log(this.props)
     return (
       <React.Fragment>
         <form id="field" onSubmit={this.handleSubmitAddOneVehicle.bind(this)}>
           <div className="text-center">
-            <label><h5>Hello <span id="userEmail"></span>!</h5></label>
+            <label><h6>Hello <span id="userEmail"></span>!</h6></label>
           </div>
           <hr></hr>
           <div>
