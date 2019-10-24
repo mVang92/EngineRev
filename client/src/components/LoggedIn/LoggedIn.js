@@ -6,8 +6,6 @@ const LoggedIn = props => {
   return (
     <div className="box">
       <AddVehicle
-        vehicles={props.vehicles}
-        vehicleData={props.vehicleData}
         handleChange={props.handleChange}
         // Pass states from AddVehicle component using props to Main.js
         addVehicle={props.addVehicle}

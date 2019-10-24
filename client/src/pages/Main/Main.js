@@ -39,9 +39,6 @@ export default class App extends Component {
     this.setState({
       vehicleData: []
     });
-    if (this.state.vehicleData) {
-      console.log(this.state.vehicleData)
-    }
   };
 
   loadVehicles = () => {
@@ -71,8 +68,7 @@ export default class App extends Component {
     firebase.auth.onAuthStateChanged(function (user) {
       if (user) {
         API.createUserSchema(user.uid)
-          .then(function (res) {
-            // console.log(res);
+          .then(() => {
             bindThis.componentWillMount();
           });
       };
@@ -90,7 +86,7 @@ export default class App extends Component {
         document.getElementById("userEmail").appendChild(userName);
         const id = user.uid;
         API.getAllVehiclesForUser(id)
-          .then((res) => this.setState({
+          .then(res => this.setState({
             vehicleData: res.data,
             uid: user.uid
           }))
