@@ -15,6 +15,7 @@ const LoggedIn = props => {
         // Because this does not extend Component, this.props.vehicles becomes
         // only props.vehicles. Same with everything else.
         vehicleData={props.vehicleData}
+        vehicleCountForUser={props.vehicleCountForUser}
       />
     </div>
   );
