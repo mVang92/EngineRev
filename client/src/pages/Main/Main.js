@@ -22,6 +22,7 @@ export default class App extends Component {
       uid: "",
       currentModal: String,
       vehicleData: [],
+      vehicleCount: 0,
       // User Authentication
       message: "",
       email: "",
@@ -194,6 +195,12 @@ export default class App extends Component {
     };
   };
 
+  handleAddVehicleCountForUser = vehicleCount => {
+    let vehicleCountToDisplay = document.createTextNode(vehicleCount);
+        document.getElementById("vehicleCountForUser").innerHTML = "";
+        document.getElementById("vehicleCountForUser").appendChild(vehicleCountToDisplay);
+  }
+
   showSignOutModal = () => {
     this.setState({ showSignOutModal: true });
   };
@@ -229,6 +236,7 @@ export default class App extends Component {
               vehicleData={this.state.vehicleData}
               handleChange={this.handleChange}
               addVehicle={this.handleAddOneVehicle.bind(this)}
+              vehicleCountForUser={this.handleAddVehicleCountForUser.bind(this)}
             />
           ) : (
               <LoggedOut />

@@ -5,6 +5,7 @@ import CheckMarkImage from "../../../images/checkmark.png";
 
 const Contianer = styled.div`
     background: rgb(16, 192, 16);
+    opacity: 0.7;
     font-weight: bold;
     color: white;
     padding: 16px;

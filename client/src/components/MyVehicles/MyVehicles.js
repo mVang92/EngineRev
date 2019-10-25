@@ -3,7 +3,6 @@ import { VehicleItem } from "../VehicleItem";
 import { Link } from "react-router-dom";
 
 class MyVehicles extends Component {
-
   render() {
     return (
       <div className="text-center">
@@ -13,8 +12,12 @@ class MyVehicles extends Component {
           this.props.vehicleData.vehicles ? (
             // Begin ternary for vehicle records
             this.props.vehicleData.vehicles.length ? (
-              <React.Fragment>
-                <div className="row">
+              < React.Fragment >
+                {this.props.vehicleData.vehicles.length ? (
+                  this.props.vehicleCountForUser(this.props.vehicleData.vehicles.length)
+                ) : (null)
+                }
+                < div className="row">
                   <div className="col-md-12">
                     <label><strong>My Vehicles</strong></label>
                   </div>
@@ -38,7 +41,7 @@ class MyVehicles extends Component {
                     ))}
                   </div>
                 </div>
-              </React.Fragment>
+              </React.Fragment >
             ) : (
                 <div className="row">
                   <div className="col-md-12">
@@ -52,7 +55,8 @@ class MyVehicles extends Component {
               )
             // End ternary for vehicle records
           ) : (<label><div>Please Wait...</div></label>)
-        ) : (<label><div>Please Wait..</div></label>)}
+        ) : (<label><div>Please Wait..</div></label>)
+        }
       </div>
     );
   };
