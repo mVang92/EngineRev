@@ -9,7 +9,6 @@ import Nav from "../../components/Nav";
 import Container from "../../components/Container";
 import LoggedOut from "../../components/LoggedOut";
 import LoggedIn from "../../components/LoggedIn";
-import AddOneVehicleNotification, { AddOneVehicleNotify } from "../../components/Notifications/AddOneVehicleNotification";
 
 export default class App extends Component {
   constructor(props) {
@@ -92,8 +91,6 @@ export default class App extends Component {
             uid: user.uid
           }))
           .catch(err => console.log(err));
-      } else {
-        console.log("Welcome, please sign-in / sign-up.");
       };
     });
   };
@@ -103,7 +100,6 @@ export default class App extends Component {
     auth
       .doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
-        console.log("Hello " + this.state.email + "!");
         this.setState({
           loggedin: true,
           message: ""
@@ -124,7 +120,6 @@ export default class App extends Component {
     auth
       .doSignInWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
-        console.log("signing in: " + this.state.email);
         this.setState({
           loggedin: true,
           message: ""
@@ -187,7 +182,7 @@ export default class App extends Component {
       }
       API.addOneVehicle(id, data)
         .then(() => {
-          AddOneVehicleNotify("One Vehicle Successfully Added");
+          // ADD VEHICLE NOTIFICATION
           // Reloads the page after adding a vehicle.
           // Prevents the URL from having undefined route.
           bindThis.onAuthStateChanged();
@@ -260,7 +255,6 @@ export default class App extends Component {
           hideSignOutModal={this.hideSignOutModal}
           handleSignOut={this.handleSignOut}
         />
-        <AddOneVehicleNotification />
       </React.Fragment>
     );
   };
