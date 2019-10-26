@@ -9,8 +9,8 @@ import Nav from "../../components/Nav";
 import Container from "../../components/Container";
 import LoggedOut from "../../components/LoggedOut";
 import LoggedIn from "../../components/LoggedIn";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default class App extends Component {
   constructor(props) {
@@ -24,7 +24,6 @@ export default class App extends Component {
       currentModal: String,
       vehicleData: [],
       vehicleCount: 0,
-      // User Authentication
       message: "",
       email: "",
       password: ""
@@ -35,6 +34,9 @@ export default class App extends Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
   };
 
+  /**
+   * Logs the user in if they are logged in and set vehicleData state to empty array
+   */
   componentWillMount = () => {
     Modal.setAppElement("body");
     this.onAuthStateChanged();
@@ -43,6 +45,9 @@ export default class App extends Component {
     });
   };
 
+  /**
+   * Load all vehicles on record for the user
+   */
   loadVehicles = () => {
     API.getAllVehiclesForUser()
       .then(res =>
@@ -56,6 +61,9 @@ export default class App extends Component {
       .catch(err => console.log(err));
   };
 
+  /**
+   * Show the proper modal for signing in or signing up
+   */
   authClick = e => {
     const { name } = e.target
     // console.log(name);
@@ -65,6 +73,9 @@ export default class App extends Component {
     });
   };
 
+  /**
+   * Creates a schema for the user  during first time login
+   */
   createUserSchema = () => {
     const bindThis = this;
     firebase.auth.onAuthStateChanged(function (user) {
@@ -77,7 +88,9 @@ export default class App extends Component {
     });
   };
 
-  // Upon page refresh, if the user is logged in, they will stay logged in
+  /**
+   * Upon page refresh, if the user is logged in, they will stay logged in
+   */
   onAuthStateChanged = () => {
     const bindThis = this;
     firebase.auth.onAuthStateChanged(user => {
@@ -97,6 +110,9 @@ export default class App extends Component {
     });
   };
 
+  /**
+   * Handle user authentication when a user signs up
+   */
   handleSignUp = e => {
     e.preventDefault();
     auth
@@ -117,6 +133,9 @@ export default class App extends Component {
       });
   };
 
+  /**
+   * Handle user authentication when a user signs in
+   */
   handleSignIn = e => {
     e.preventDefault();
     auth
@@ -136,6 +155,9 @@ export default class App extends Component {
       });
   };
 
+  /**
+   * Signs the user out of the session
+   */
   handleSignOut = e => {
     e.preventDefault();
     auth
@@ -147,11 +169,12 @@ export default class App extends Component {
           password: ""
         });
       });
-    // Reloads the page upon sign out
-    // Quick fix to prevent multiple user entries into db when signing up
     window.location.reload(true);
   };
 
+  /**
+   * Handle real-time changes
+   */
   handleChange = e => {
     let { name, value } = e.target;
     this.setState({
@@ -160,7 +183,11 @@ export default class App extends Component {
     // console.log(name, value);
   };
 
-  // Receives our states from MyVehicles.js to be used in this main component
+  /**
+   * Add a new vehicle to the vehicle data for the user
+   * 
+   * @param newVehicle the new vehicle to record into data
+   */
   handleAddOneVehicle = newVehicle => {
     const id = this.state.uid;
     const bindThis = this;
@@ -195,40 +222,75 @@ export default class App extends Component {
     };
   };
 
+  /**
+   * Display the number of vehicles in the database the user has
+   * 
+   * @param vehicleCount the number of vehicles in the database
+   */
   handleAddVehicleCountForUser = vehicleCount => {
     let vehicleCountToDisplay = document.createTextNode(vehicleCount);
     document.getElementById("vehicleCountForUser").innerHTML = "";
     document.getElementById("vehicleCountForUser").appendChild(vehicleCountToDisplay);
   };
 
+  /**
+   * Display the success notification when a vehicle is successfully added
+   * 
+   * @param year  the year of the vehicle
+   * @param make  the make of the vehicle
+   * @param model the model of the vehicle
+   */
   addOneVehicleSuccessNotification = (year, make, model) => {
     toast.success(`Added a ${year} ${make} ${model}.`);
   };
 
+  /**
+   * Display the error notification when an error occurs while adding a vehicle
+   * 
+   * @param err the error message to display to the user
+   */
   addOneVehicleFailNotification = err => {
     toast.error(err.toString());
   };
 
+  /**
+   * Display the info notification when the user resets the fields to add a vehicle
+   */
   handleResetAddVehicleFields = () => {
-    toast.success(`Input Fields Reset`);
+    toast.info(`Input Fields Reset`);
   };
 
+  /**
+   * Display the sign out modal
+   */
   showSignOutModal = () => {
     this.setState({ showSignOutModal: true });
   };
 
+  /**
+   * Display the modal to notify the user the vehicle year must be a number
+   */
   showAddVehicleYearNanErrorModal = () => {
     this.setState({ showAddVehicleYearNanErrorModal: true });
   };
 
+  /**
+   * Hide the sign out modal
+   */
   hideSignOutModal = () => {
     this.setState({ showSignOutModal: false });
   };
 
+  /**
+   * Hide the modal to notify the user the vehicle year must be a number
+   */
   hideAddVehicleYearNanErrorModal = () => {
     this.setState({ showAddVehicleYearNanErrorModal: false });
   };
 
+  /**
+   * Hide the sign in and sign up modals
+   */
   handleCloseModal = () => {
     this.setState({ showModal: false });
   };
