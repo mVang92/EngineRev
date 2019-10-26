@@ -6,14 +6,12 @@ const LoggedIn = props => {
   return (
     <div className="box">
       <AddVehicle
+        handleResetAddVehicleFields={props.handleResetAddVehicleFields}
         handleChange={props.handleChange}
-        // Pass states from AddVehicle component using props to Main.js
         addVehicle={props.addVehicle}
       />
       <hr />
       <MyVehicles
-        // Because this does not extend Component, this.props.vehicles becomes
-        // only props.vehicles. Same with everything else.
         vehicleData={props.vehicleData}
         vehicleCountForUser={props.vehicleCountForUser}
       />

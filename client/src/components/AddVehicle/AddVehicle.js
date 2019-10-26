@@ -117,7 +117,8 @@ class AddVehicle extends Component {
                   <button
                     title="Reset Input Fields"
                     type="reset"
-                    className="resetBtn">
+                    className="resetBtn"
+                    onClick={this.props.handleResetAddVehicleFields}>
                     Reset Fields
                     </button>
                 </div>

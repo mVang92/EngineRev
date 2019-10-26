@@ -9,6 +9,8 @@ import Nav from "../../components/Nav";
 import Container from "../../components/Container";
 import LoggedOut from "../../components/LoggedOut";
 import LoggedIn from "../../components/LoggedIn";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class App extends Component {
   constructor(props) {
@@ -179,22 +181,37 @@ export default class App extends Component {
         year: this.state.vehicleData.vehicles[element].year,
         make: this.state.vehicleData.vehicles[element].make,
         model: this.state.vehicleData.vehicles[element].model
-      }
+      };
       API.addOneVehicle(id, data)
         .then(() => {
-          // ADD VEHICLE NOTIFICATION
+          this.addOneVehicleSuccessNotification(data.year, data.make, data.model);
           // Reloads the page after adding a vehicle.
           // Prevents the URL from having undefined route.
           bindThis.onAuthStateChanged();
         })
+        .catch(err =>
+          this.addOneVehicleFailNotification(err)
+        );
     };
   };
 
   handleAddVehicleCountForUser = vehicleCount => {
     let vehicleCountToDisplay = document.createTextNode(vehicleCount);
-        document.getElementById("vehicleCountForUser").innerHTML = "";
-        document.getElementById("vehicleCountForUser").appendChild(vehicleCountToDisplay);
-  }
+    document.getElementById("vehicleCountForUser").innerHTML = "";
+    document.getElementById("vehicleCountForUser").appendChild(vehicleCountToDisplay);
+  };
+
+  addOneVehicleSuccessNotification = (year, make, model) => {
+    toast.success(`Added a ${year} ${make} ${model}.`);
+  };
+
+  addOneVehicleFailNotification = err => {
+    toast.error(err.toString());
+  };
+
+  handleResetAddVehicleFields = () => {
+    toast.success(`Input Fields Reset`);
+  };
 
   showSignOutModal = () => {
     this.setState({ showSignOutModal: true });
@@ -230,6 +247,7 @@ export default class App extends Component {
             <LoggedIn
               vehicleData={this.state.vehicleData}
               handleChange={this.handleChange}
+              handleResetAddVehicleFields={this.handleResetAddVehicleFields}
               addVehicle={this.handleAddOneVehicle.bind(this)}
               vehicleCountForUser={this.handleAddVehicleCountForUser.bind(this)}
             />
@@ -250,6 +268,7 @@ export default class App extends Component {
           showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
           hideAddVehicleYearNanErrorModal={this.hideAddVehicleYearNanErrorModal}
         />
+        <ToastContainer />
         <SignOutModal
           showSignOutModal={this.state.showSignOutModal}
           hideSignOutModal={this.hideSignOutModal}
