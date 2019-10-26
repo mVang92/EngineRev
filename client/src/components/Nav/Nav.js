@@ -17,7 +17,7 @@ const Nav = props => {
               onClick={props.signOut}
             />
           </ul>
-        ) : ( //If not logged in, these buttons will appear
+        ) : (
             <ul className="navbar-nav">
               <Navbtn
                 name="Sign-In"

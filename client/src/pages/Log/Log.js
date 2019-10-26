@@ -6,8 +6,8 @@ import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal"
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal"
 import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal"
 import Modal from "react-modal";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class Log extends Component {
   state = {
@@ -128,7 +128,7 @@ class Log extends Component {
   };
 
   resetFieldsNotification = () => {
-    toast.success(`Input Fields Reset`);
+    toast.info(`Input Fields Reset`);
   };
 
   showDeleteOneVehicleModal = () => {
