@@ -13,10 +13,7 @@ class MyVehicles extends Component {
             // Begin ternary for vehicle records
             this.props.vehicleData.vehicles.length ? (
               < React.Fragment >
-                {this.props.vehicleData.vehicles.length ? (
-                  this.props.vehicleCountForUser(this.props.vehicleData.vehicles.length)
-                ) : (null)
-                }
+                {this.props.vehicleCountForUser(this.props.vehicleData.vehicles.length)}
                 < div className="row">
                   <div className="col-md-12">
                     <label><strong>My Vehicles</strong></label>
