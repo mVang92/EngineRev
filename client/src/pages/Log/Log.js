@@ -6,6 +6,8 @@ import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal"
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal"
 import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal"
 import Modal from "react-modal";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Log extends Component {
   state = {
@@ -23,8 +25,6 @@ class Log extends Component {
     showMileageInputErrorModal: false
   };
 
-  // When this component mounts, grab the vehicle with the _id of this.props.match.params.id
-  // e.g. localhost:3000/vehicle/599dcb67f0f16317844583fc
   componentWillMount = () => {
     Modal.setAppElement("body");
     this.setState({
@@ -73,15 +73,20 @@ class Log extends Component {
         console.log(log)
         API.addOneLogForOneVehicle(id, log)
           .then(res => {
-            console.log(res)
+            console.log(res);
+            this.addOneServiceLogSuccessNotification(this.state.date, this.state.mileage, this.state.service);
           })
-          .catch(err => console.log(err));
-        this.setState({
-          date: "",
-          mileage: "",
-          service: "",
-          comment: ""
-        });
+          .catch(err =>
+            this.addOneServiceLogFailNotification(err)
+          );
+        setTimeout(() => {
+          this.setState({
+            date: "",
+            mileage: "",
+            service: "",
+            comment: ""
+          });
+        }, 500);
       };
     };
   };
@@ -93,14 +98,37 @@ class Log extends Component {
       service: "",
       comment: ""
     });
+    this.resetFieldsNotification();
   };
 
   handleDeleteOneVehicle = () => {
     API.deleteOneVehicle(this.state.vehicleId)
       .then(() => {
-        // DELETE ONE VEHICLE NOTIFICATION
+        this.deleteOneVehicleSuccessNotification();
       })
-      .catch(err => console.log(err));
+      .catch(err =>
+        this.deleteOneVehicleFailNotification(err)
+      );
+  };
+
+  addOneServiceLogSuccessNotification = (date, mileage, service) => {
+    toast.success(`Service Logged: ${service} at ${mileage} miles on ${date}.`);
+  };
+
+  addOneServiceLogFailNotification = err => {
+    toast.error(err.toString());
+  };
+
+  deleteOneVehicleSuccessNotification = () => {
+    toast.success(`Vehicle Deleted Successfully`);
+  };
+
+  deleteOneVehicleFailNotification = err => {
+    toast.error(err.toString());
+  };
+
+  resetFieldsNotification = () => {
+    toast.success(`Input Fields Reset`);
   };
 
   showDeleteOneVehicleModal = () => {
@@ -205,7 +233,6 @@ class Log extends Component {
           state={this.state}
         />
         <AddLogErrorModal
-          handleDeleteOneVehicle={this.handleDeleteOneVehicle}
           showAddLogErrorModal={this.state.showAddLogErrorModal}
           hideAddLogErrorModal={this.hideAddLogErrorModal}
           state={this.state}
@@ -215,6 +242,7 @@ class Log extends Component {
           hideMileageInputErrorModal={this.hideMileageInputErrorModal}
           state={this.state}
         />
+        <ToastContainer />
       </Container>
     );
   };
