@@ -24,6 +24,7 @@ export default class App extends Component {
       currentModal: String,
       vehicleData: [],
       vehicleCount: 0,
+      currentUrl: "",
       message: "",
       email: "",
       password: ""
@@ -41,7 +42,8 @@ export default class App extends Component {
     Modal.setAppElement("body");
     this.onAuthStateChanged();
     this.setState({
-      vehicleData: []
+      vehicleData: [],
+      currentUrl: window.location.href
     });
   };
 
@@ -301,6 +303,7 @@ export default class App extends Component {
           loggedin={this.state.loggedin}
           authClick={this.authClick}
           signOut={this.showSignOutModal}
+          currentUrl={this.state.currentUrl}
         />
         <Container>
           {this.state.loggedin === true ? (
