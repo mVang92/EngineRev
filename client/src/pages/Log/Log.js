@@ -9,7 +9,7 @@ import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-class Log extends Component {
+export default class Log extends Component {
   state = {
     vehicle: [],
     vehicleId: "",
@@ -302,5 +302,3 @@ class Log extends Component {
     );
   };
 };
-
-export default Log;
