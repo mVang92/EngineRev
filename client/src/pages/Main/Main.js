@@ -180,7 +180,6 @@ export default class App extends Component {
     this.setState({
       [name]: value,
     });
-    // console.log(name, value);
   };
 
   /**
