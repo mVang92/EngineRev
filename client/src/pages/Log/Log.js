@@ -25,6 +25,9 @@ class Log extends Component {
     showMileageInputErrorModal: false
   };
 
+  /**
+   * Display the service log information for the selected vehicle
+   */
   componentWillMount = () => {
     Modal.setAppElement("body");
     this.setState({
@@ -42,14 +45,19 @@ class Log extends Component {
       });
   };
 
+  /**
+   * Handle real-time changes
+   */
   handleChange = e => {
     let { name, value } = e.target;
     this.setState({
       [name]: value,
     });
-    // console.log(name, value);
   };
 
+  /**
+   * Records a service log fot the vehicle
+   */
   handleSubmitOneServiceLog = e => {
     e.preventDefault();
     if (isNaN(this.state.mileage)) {
@@ -91,6 +99,9 @@ class Log extends Component {
     };
   };
 
+  /**
+   * Reset the date, mileage, service, and comment input boxes to empty
+   */
   handleResetLogVehicleForm = () => {
     this.setState({
       date: "",
@@ -101,6 +112,9 @@ class Log extends Component {
     this.resetFieldsNotification();
   };
 
+  /**
+   * Deletes one vehicle from record
+   */
   handleDeleteOneVehicle = () => {
     API.deleteOneVehicle(this.state.vehicleId)
       .then(() => {
@@ -111,46 +125,87 @@ class Log extends Component {
       );
   };
 
+  /**
+   * Display the success notification when the user adds a service log
+   * 
+   * @param date    the date when the service is logged
+   * @param mileage the current mileage of the vehicle
+   * @param service the service done to the vehicle
+   */
   addOneServiceLogSuccessNotification = (date, mileage, service) => {
     toast.success(`Service Logged: ${service} at ${mileage} miles on ${date}.`);
   };
 
+  /**
+   * Display the error notification when an error occurs while adding a service log
+   * 
+   * @param err the error message to display to the user
+   */
   addOneServiceLogFailNotification = err => {
     toast.error(err.toString());
   };
 
+  /**
+   * Display the success notification when the user deletes a vehicle
+   */
   deleteOneVehicleSuccessNotification = () => {
     toast.success(`Vehicle Deleted Successfully`);
   };
 
+  /**
+   * Display the error notification when an error occurs while deleting a vehicle
+   * 
+   * @param err the error message to display to the user
+   */
   deleteOneVehicleFailNotification = err => {
     toast.error(err.toString());
   };
 
+  /**
+   * Display the info notification when the user resets the fields to add a service log
+   */
   resetFieldsNotification = () => {
     toast.info(`Input Fields Reset`);
   };
 
+  /**
+   * Display the modal to notify the user the vehicle has been deleted successfully
+   */
   showDeleteOneVehicleModal = () => {
     this.setState({ showDeleteOneVehicleModal: true });
   };
 
+  /**
+   * Display the modal to notify the user about bad input while adding a service log
+   */
   showAddLogErrorModal = () => {
     this.setState({ showAddLogErrorModal: true });
   };
 
+  /**
+   * Display the modal to notify the user about bad input to the mileage input field
+   */
   showMileageInputErrorModal = () => {
     this.setState({ showMileageInputErrorModal: true });
   };
 
+  /**
+   * Hide the successfully deleted one vehicle modal
+   */
   hideDeleteOneVehicleModal = () => {
     this.setState({ showDeleteOneVehicleModal: false });
   };
 
+  /**
+   * Hide the successfully added one service log modal
+   */
   hideAddLogErrorModal = () => {
     this.setState({ showAddLogErrorModal: false });
   };
 
+  /**
+   * Hide the bad mileage input modal
+   */
   hideMileageInputErrorModal = () => {
     this.setState({ showMileageInputErrorModal: false });
   };
