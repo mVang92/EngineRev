@@ -24,8 +24,7 @@ class AddLog extends Component {
               onChange={this.props.handleChange}
               value={this.props.mileage}
               name="mileage"
-              maxLength="7"
-              placeholder="Required">
+              maxLength="7">
             </input>
           </div>
           <div className="col-md-4">
@@ -36,8 +35,7 @@ class AddLog extends Component {
               onChange={this.props.handleChange}
               value={this.props.service}
               name="service"
-              maxLength="50"
-              placeholder="Required">
+              maxLength="50">
             </input>
           </div>
         </div>
@@ -53,8 +51,7 @@ class AddLog extends Component {
               onChange={this.props.handleChange}
               value={this.props.comment}
               name="comment"
-              maxLength="250"
-              placeholder="Optional">
+              maxLength="250">
             </textarea>
           </div>
         </div>

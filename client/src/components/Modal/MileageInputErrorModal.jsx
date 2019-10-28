@@ -24,7 +24,7 @@ const MileageInputErrorModal = props => {
                                     <span className="text-danger">{props.state.mileage}</span> is not a valid input for Mileage.
                                 </div>
                                 <div className="col-md-12">
-                                    Please enter a numerical value and exclude special characters.
+                                    Please enter numerical values. Exclude special characters.
                                 </div>
                             </div>
                         </div>
