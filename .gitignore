@@ -4,3 +4,6 @@
 
 # firebase
 .env
+
+# others
+.yarnclean
