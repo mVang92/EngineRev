@@ -314,7 +314,8 @@ export default class App extends Component {
             />
           ) : (
               <LoggedOut />
-            )}
+            )
+          }
         </Container>
         <ModalConductor
           currentModal={this.state.currentModal}
