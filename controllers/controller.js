@@ -2,6 +2,9 @@ const db = require("../models");
 console.log("controller loaded");
 // Defining methods for the controller
 module.exports = {
+  /**
+   * Create a database schema for the user upon first time login
+   */
   createUserSchema: (req, res) => {
     console.log("Hit createUserSchema");
     db.Vehicle
@@ -9,6 +12,9 @@ module.exports = {
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
+  /**
+   * Find all vehicles belonging to one user
+   */
   findAllVehiclesForUser: (req, res) => {
     console.log("Hit findAllVehiclesForUser");
     db.Vehicle
@@ -16,6 +22,9 @@ module.exports = {
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
+  /**
+   * Find one vehicle belonging to one user
+   */
   findOneVehicle: (req, res) => {
     console.log("Hit findOneVehicle");
     db.Vehicle
@@ -23,6 +32,9 @@ module.exports = {
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
+  /**
+   * Add one vehicle for the current user logged in
+   */
   addOneVehicle: (req, res) => {
     console.log("Hit addOneVehicle");
     db.Vehicle
@@ -33,6 +45,9 @@ module.exports = {
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
+  /**
+   * Add one service log for the selected vehicle
+   */
   addOneLogForOneVehicle: (req, res) => {
     console.log("Hit addOneLogForOneVehicle");
     console.log(req.body);
@@ -45,6 +60,9 @@ module.exports = {
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
+  /**
+   * Remove the selected vehicle from the database
+   */
   removeOneVehicle: (req, res) => {
     console.log("Hit removeOneVehicle");
     console.log("req.params.id " + req.params.id)
@@ -56,6 +74,9 @@ module.exports = {
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
+  /**
+   * Delete the account for the user
+   */
   removeOneUserAccount: (req, res) => {
     console.log("Hit removeOneUserAccount");
     console.log(req.params.id);
