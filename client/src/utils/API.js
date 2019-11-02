@@ -25,7 +25,6 @@ export default {
   },
   // Add a service log for one vehicle
   addOneLogForOneVehicle: (id, log) => {
-    console.log(log);
     return axios.put(`/api/vehicles/addOneServiceLog/${id}`, log);
   },
   // Delete one vehicle

@@ -46,7 +46,6 @@ export default class Log extends Component {
     });
     API.getOneVehicleForUser(this.props.match.params.id)
       .then(res => {
-        // console.log(res)
         this.setState({
           vehicle: res.data
           // vehicleId: res.data.creator,
@@ -78,10 +77,6 @@ export default class Log extends Component {
       if (this.state.date === "" || this.state.mileage === "" || this.state.service === "") {
         this.showAddLogErrorModal();
       } else {
-        console.log("date: " + this.state.date)
-        console.log("mileage: " + this.state.mileage)
-        console.log("service: " + this.state.service)
-        console.log("comment: " + this.state.comment)
         let id = this.state.vehicleId;
         let log = {
           date: this.state.date,
@@ -89,11 +84,8 @@ export default class Log extends Component {
           service: this.state.service,
           comment: this.state.comment
         };
-        console.log("id: " + id)
-        console.log(log)
         API.addOneLogForOneVehicle(id, log)
           .then(res => {
-            console.log(res);
             this.addOneServiceLogSuccessNotification(this.state.date, this.state.mileage, this.state.service);
           })
           .catch(err =>
