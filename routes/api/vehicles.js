@@ -13,10 +13,15 @@ router
   .get(controller.findAllVehiclesForUser)
   .put(controller.addOneVehicle)
   
-// Matches with "/api/vehicles/logs/:id"
+// Matches with "/api/vehicles/addOneServiceLog/:id"
 router
   .route("/addOneServiceLog/:id")
   .put(controller.addOneLogForOneVehicle)
+
+// Matches with "/api/vehicles/getAllServiceLogs/:id"
+router
+.route("/getAllServiceLogs/:id")
+.get(controller.findAllServiceLogsForOneVehicle)
 
 // Matches with "/api/vehicles/user/:id"
 router

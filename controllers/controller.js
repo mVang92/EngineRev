@@ -23,7 +23,7 @@ module.exports = {
     console.log("Hit findAllVehiclesForUser");
     creatorId = req.params.id;
     db.Vehicle
-      .findOne({ creator: req.params.id })
+      .findOne({ creator: creatorId })
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
@@ -58,13 +58,24 @@ module.exports = {
    */
   addOneLogForOneVehicle: (req, res) => {
     console.log("Hit addOneLogForOneVehicle");
-    console.log(req.body.comment);
     db.Vehicle
       .updateOne(
         { creator : creatorId, vehicles: { $elemMatch: { _id: req.params.id } } },
         { $push: { "vehicles.$.logs": { date: req.body.date, mileage: req.body.mileage, service: req.body.service, comment: req.body.comment } } }
       )
       .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Finds all service logs for one vehicle
+   */
+  findAllServiceLogsForOneVehicle: (req, res) => {
+    console.log("Hit findAllServiceLogsForOneVehicle");
+    console.log(req.params.id)
+    db.Vehicle
+      .find({'vehicles.logs': req.params.id})
+      .then(result => console.log(res.json(result)))
       .catch(err => res.status(422).json(err));
   },
 

@@ -45,14 +45,9 @@ export default class Log extends Component {
       vehicleId: this.props.match.params.id
     });
     API.getOneVehicleForUser(this.props.match.params.id)
-      .then(res => {
-        this.setState({
-          vehicle: res.data
-          // vehicleId: res.data.creator,
-          // logArray: res.data.logs
-        })
-        // .catch(err => console.log(err))
-      });
+    .then(() => {
+      API.getAllServiceLogsForOneVehicle(this.props.match.params.id);
+    });
     this.getOriginUrl(currentUrl);
   };
 
