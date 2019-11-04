@@ -126,10 +126,14 @@ export default class App extends Component {
         this.handleCloseModal();
       })
       .catch(error => {
-        this.setState({ message: error.message })
-        const message = document.createTextNode(this.state.message);
-        document.getElementById("error").innerHTML = "";
-        document.getElementById("error").appendChild(message);
+        try {
+          this.setState({ message: error.message })
+          const message = document.createTextNode(this.state.message);
+          document.getElementById("error").innerHTML = "";
+          document.getElementById("error").appendChild(message);
+        } catch (e) {
+          null;
+        };
       });
   };
 
@@ -148,10 +152,14 @@ export default class App extends Component {
         this.handleCloseModal();
       })
       .catch(error => {
-        this.setState({ message: error.message });
-        const message = document.createTextNode(this.state.message);
-        document.getElementById("error").innerHTML = "";
-        document.getElementById("error").appendChild(message);
+        try {
+          this.setState({ message: error.message })
+          const message = document.createTextNode(this.state.message);
+          document.getElementById("error").innerHTML = "";
+          document.getElementById("error").appendChild(message);
+        } catch (e) {
+          null;
+        };
       });
   };
 
