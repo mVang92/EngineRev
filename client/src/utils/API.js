@@ -9,6 +9,10 @@ export default {
   getOneVehicleForUser: id => {
     return axios.get(`/api/vehicles/user/${id}`);
   },
+  // Get the service logs for the selected vehicle
+  getAllServiceLogsForOneVehicle: id => {
+    return axios.get(`/api/vehicles/getAllServiceLogs/${id}`);
+  },
   // Upon signing up for new account, create this data for the new user
   createUserSchema: id => {
     return (
