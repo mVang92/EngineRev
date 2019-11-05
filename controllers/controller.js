@@ -61,7 +61,7 @@ module.exports = {
     db.Vehicle
       .updateOne(
         { creator : creatorId, vehicles: { $elemMatch: { _id: req.params.id } } },
-        { $push: { "vehicles.$.logs": { date: req.body.date, mileage: req.body.mileage, service: req.body.service, comment: req.body.comment } } }
+        { $push: { "vehicles.$.logs": [req.body] } }
       )
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
