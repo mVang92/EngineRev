@@ -40,9 +40,7 @@ export default class App extends Component {
   componentWillMount = () => {
     Modal.setAppElement("body");
     this.onAuthStateChanged();
-    this.setState({
-      vehicleData: []
-    });
+    this.setState({ vehicleData: [] });
   };
 
   /**
@@ -66,7 +64,6 @@ export default class App extends Component {
    */
   authClick = e => {
     const { name } = e.target
-    // console.log(name);
     this.setState({
       currentModal: name,
       showModal: true
@@ -81,9 +78,7 @@ export default class App extends Component {
     firebase.auth.onAuthStateChanged(function (user) {
       if (user) {
         API.createUserSchema(user.uid)
-          .then(() => {
-            bindThis.componentWillMount();
-          });
+          .then(() => bindThis.componentWillMount());
       };
     });
   };
@@ -132,7 +127,7 @@ export default class App extends Component {
           document.getElementById("error").innerHTML = "";
           document.getElementById("error").appendChild(message);
         } catch (e) {
-          null;
+          return null;
         };
       });
   };
@@ -158,7 +153,7 @@ export default class App extends Component {
           document.getElementById("error").innerHTML = "";
           document.getElementById("error").appendChild(message);
         } catch (e) {
-          null;
+          return null;
         };
       });
   };
@@ -185,9 +180,7 @@ export default class App extends Component {
    */
   handleChange = e => {
     let { name, value } = e.target;
-    this.setState({
-      [name]: value,
-    });
+    this.setState({ [name]: value });
   };
 
   /**
@@ -200,15 +193,10 @@ export default class App extends Component {
     const bindThis = this;
     let vehicleData = this.state.vehicleData;
     vehicleData.vehicles.push(newVehicle);
-    this.setState({
-      vehicleData: vehicleData
-    });
+    this.setState({ vehicleData: vehicleData });
     let element = this.state.vehicleData.vehicles.length - 1;
-    // Check to see if the year is a number.
     if (isNaN(this.state.vehicleData.vehicles[element].year)) {
       this.showAddVehicleYearNanErrorModal();
-      // Refreshes page, simple way of preventing
-      // bad user input to populate dropdown menu
       this.componentWillMount();
     } else {
       const data = {
@@ -219,13 +207,9 @@ export default class App extends Component {
       API.addOneVehicle(id, data)
         .then(() => {
           this.addOneVehicleSuccessNotification(data.year, data.make, data.model);
-          // Reloads the page after adding a vehicle.
-          // Prevents the URL from having undefined route.
           bindThis.onAuthStateChanged();
         })
-        .catch(err =>
-          this.addOneVehicleFailNotification(err)
-        );
+        .catch(err => this.addOneVehicleFailNotification(err));
     };
   };
 
@@ -312,7 +296,6 @@ export default class App extends Component {
         />
         <Container>
           {this.state.loggedin === true ? (
-            // Here we pass in vehicles to the LoggedIn component
             <LoggedIn
               vehicleData={this.state.vehicleData}
               handleChange={this.handleChange}

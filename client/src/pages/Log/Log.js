@@ -41,13 +41,9 @@ export default class Log extends Component {
   componentWillMount = () => {
     const currentUrl = window.location.href
     Modal.setAppElement("body");
-    this.setState({
-      vehicleId: this.props.match.params.id
-    });
+    this.setState({ vehicleId: this.props.match.params.id });
     API.getOneVehicleForUser(this.props.match.params.id)
-    .then(() => {
-      API.getAllServiceLogsForOneVehicle(this.props.match.params.id);
-    });
+    .then(() => API.getAllServiceLogsForOneVehicle(this.props.match.params.id));
     this.getOriginUrl(currentUrl);
   };
 
@@ -56,9 +52,7 @@ export default class Log extends Component {
    */
   handleChange = e => {
     let { name, value } = e.target;
-    this.setState({
-      [name]: value,
-    });
+    this.setState({ [name]: value });
   };
 
   /**
@@ -80,12 +74,8 @@ export default class Log extends Component {
           comment: this.state.comment
         };
         API.addOneLogForOneVehicle(id, log)
-          .then(res => {
-            this.addOneServiceLogSuccessNotification(this.state.date, this.state.mileage, this.state.service);
-          })
-          .catch(err =>
-            this.addOneServiceLogFailNotification(err)
-          );
+          .then(res => this.addOneServiceLogSuccessNotification(this.state.date, this.state.mileage, this.state.service))
+          .catch(err => this.addOneServiceLogFailNotification(err));
         setTimeout(() => {
           this.setState({
             date: "",
@@ -116,12 +106,8 @@ export default class Log extends Component {
    */
   handleDeleteOneVehicle = () => {
     API.deleteOneVehicle(this.state.vehicleId)
-      .then(() => {
-        this.deleteOneVehicleSuccessNotification();
-      })
-      .catch(err =>
-        this.deleteOneVehicleFailNotification(err)
-      );
+      .then(() => this.deleteOneVehicleSuccessNotification())
+      .catch(err => this.deleteOneVehicleFailNotification(err));
   };
 
   /**
