@@ -5,10 +5,6 @@ export default {
   getAllVehiclesForUser: id => {
     return axios.get(`/api/vehicles/${id}`)
   },
-  // Get the vehicle the user wants to view logs for
-  getOneVehicleForUser: id => {
-    return axios.get(`/api/vehicles/user/${id}`);
-  },
   // Get the service logs for the selected vehicle
   getAllServiceLogsForOneVehicle: id => {
     return axios.get(`/api/vehicles/getAllServiceLogs/${id}`);
