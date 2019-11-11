@@ -42,8 +42,7 @@ export default class Log extends Component {
     const currentUrl = window.location.href
     Modal.setAppElement("body");
     this.setState({ vehicleId: this.props.match.params.id });
-    API.getOneVehicleForUser(this.props.match.params.id)
-    .then(() => API.getAllServiceLogsForOneVehicle(this.props.match.params.id));
+    API.getAllServiceLogsForOneVehicle(this.props.match.params.id);
     this.getOriginUrl(currentUrl);
   };
 

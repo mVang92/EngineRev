@@ -29,17 +29,6 @@ module.exports = {
   },
 
   /**
-   * Find one vehicle belonging to one user
-   */
-  findOneVehicle: (req, res) => {
-    console.log("Hit findOneVehicle");
-    db.Vehicle
-      .find(req.query)
-      .then(result => res.json(result))
-      .catch(err => res.status(422).json(err));
-  },
-
-  /**
    * Add one vehicle for the current user logged in
    */
   addOneVehicle: (req, res) => {

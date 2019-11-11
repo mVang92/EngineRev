@@ -5,7 +5,6 @@ console.log("route api loaded")
 router
   .route("/")
   .post(controller.createUserSchema)
-  // .delete(controller.removeOneVehicle)
 
 // Matches with "/api/vehicles/:id"
 router
@@ -22,11 +21,6 @@ router
 router
 .route("/getAllServiceLogs/:id")
 .get(controller.findAllServiceLogsForOneVehicle)
-
-// Matches with "/api/vehicles/user/:id"
-router
-  .route("/user/:id")
-  .get(controller.findOneVehicle)
 
 router
   .route("/deleteVehicle/:id")
