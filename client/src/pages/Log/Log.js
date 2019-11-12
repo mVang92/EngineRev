@@ -42,8 +42,19 @@ export default class Log extends Component {
     const currentUrl = window.location.href
     Modal.setAppElement("body");
     this.setState({ vehicleId: this.props.match.params.id });
-    API.getAllServiceLogsForOneVehicle(this.props.match.params.id);
     this.getOriginUrl(currentUrl);
+    this.loadServiceLogs();
+  };
+
+  /**
+   * Load all service logs on record for the vehicle
+   */
+  loadServiceLogs = () => {
+    API.getAllServiceLogsForOneVehicle(this.props.match.params.id)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => this.loadServiceLogsFailNotification(err));
   };
 
   /**
@@ -176,6 +187,15 @@ export default class Log extends Component {
    */
   resetFieldsNotification = () => {
     toast.info(`Input Fields Reset`);
+  };
+
+  /**
+   * Display the error notification when an error occurs while loading service logs
+   * 
+   * @param err the error message to display to the user
+   */
+  loadServiceLogsFailNotification = err => {
+    toast.error(`Loading Service Log ${err.toString()}`);
   };
 
   /**
