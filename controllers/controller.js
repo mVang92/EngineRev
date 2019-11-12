@@ -61,10 +61,9 @@ module.exports = {
    */
   findAllServiceLogsForOneVehicle: (req, res) => {
     console.log("Hit findAllServiceLogsForOneVehicle");
-    console.log(req.params.id)
     db.Vehicle
-      .find({'vehicles.logs': req.params.id})
-      .then(result => console.log(res.json(result)))
+      .find({"vehicles._id": req.params.id})
+      .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
 
@@ -75,7 +74,7 @@ module.exports = {
     console.log("Hit removeOneVehicle");
     db.Vehicle
       .findOneAndUpdate(
-        { 'vehicles._id': req.params.id },
+        { "vehicles._id": req.params.id },
         { $pull: { vehicles: { _id: req.params.id } } }
       )
       .then(result => res.json(result))
