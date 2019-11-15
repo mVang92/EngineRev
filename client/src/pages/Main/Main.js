@@ -289,11 +289,11 @@ export default class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Nav
+        {/* <Nav
           loggedin={this.state.loggedin}
           authClick={this.authClick}
           signOut={this.showSignOutModal}
-        />
+        /> */}
         <Container>
           {this.state.loggedin === true ? (
             <LoggedIn

@@ -259,10 +259,10 @@ export default class Log extends Component {
       <React.Fragment>
         {this.state.loggedin === true ? (
           <div>
-            <Nav
+            {/* <Nav
               loggedin={true}
               signOut={this.showSignOutModal}
-            />
+            /> */}
             <Container>
               <div className="box">
                 <div className="row">
