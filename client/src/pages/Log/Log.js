@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import { auth } from "../../firebase"
-import Nav from "../../components/Nav";
 import NavNotAuthorized from "../../components/Nav/NavNotAuthorized";
 import Container from "../../components/Container";
 import AddLog from "../../components/AddLog";
@@ -9,7 +7,6 @@ import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal"
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal"
 import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal"
 import Modal from "react-modal";
-import SignOutModal from "../../components/Modal/SignOutModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -27,11 +24,9 @@ export default class Log extends Component {
       service: "",
       comment: "",
       logArray: [],
-      originUrl: "",
       showDeleteOneVehicleModal: false,
       showAddLogErrorModal: false,
       showMileageInputErrorModal: false,
-      showSignOutModal: false
     };
   }
 
@@ -39,10 +34,8 @@ export default class Log extends Component {
    * Display the service log information for the selected vehicle
    */
   componentWillMount = () => {
-    const currentUrl = window.location.href
     Modal.setAppElement("body");
     this.setState({ vehicleId: this.props.match.params.id });
-    this.getOriginUrl(currentUrl);
     this.loadServiceLogs();
   };
 
@@ -121,29 +114,11 @@ export default class Log extends Component {
   };
 
   /**
-   * Signs the user out of the session
-   */
-  handleSignOut = e => {
-    e.preventDefault();
-    auth.doSignOut();
-    window.location.assign(this.state.originUrl);
-  };
-
-  /**
-   * Grab the origin URL from the current URL
-   * 
-   * @param currentUrl the URL to the current page
-   */
-  getOriginUrl = currentUrl => {
-    let originUrl = currentUrl.split("/vehicle")[0] + "/vehicle";
-    this.setState({ originUrl: originUrl });
-  };
-
-  /**
    * Return to the home page
    */
   goToHomePage = () => {
-    window.location.assign(this.state.originUrl);
+    const originUrl = window.location.origin;
+    window.location.assign(originUrl);
   };
 
   /**
@@ -240,29 +215,11 @@ export default class Log extends Component {
     this.setState({ showMileageInputErrorModal: false });
   };
 
-  /**
-   * Display the sign out modal
-   */
-  showSignOutModal = () => {
-    this.setState({ showSignOutModal: true });
-  };
-
-  /**
-   * Hide the sign out modal
-   */
-  hideSignOutModal = () => {
-    this.setState({ showSignOutModal: false });
-  };
-
   render() {
     return (
       <React.Fragment>
         {this.state.loggedin === true ? (
           <div>
-            {/* <Nav
-              loggedin={true}
-              signOut={this.showSignOutModal}
-            /> */}
             <Container>
               <div className="box">
                 <div className="row">
@@ -347,11 +304,6 @@ export default class Log extends Component {
                 showMileageInputErrorModal={this.state.showMileageInputErrorModal}
                 hideMileageInputErrorModal={this.hideMileageInputErrorModal}
                 state={this.state}
-              />
-              <SignOutModal
-                showSignOutModal={this.state.showSignOutModal}
-                hideSignOutModal={this.hideSignOutModal}
-                handleSignOut={this.handleSignOut}
               />
               <ToastContainer />
             </Container>

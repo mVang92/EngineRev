@@ -2,21 +2,21 @@ import React from "react";
 import ReactModal from "react-modal";
 import createAccountLogo from "../../images/createAccount.png"
 
-const SignIn = props => {
+const SignUp = props => {
 
     return (
         <ReactModal
-            isOpen={props.showSignInModal}
+            isOpen={props.showSignUpModal}
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={150}
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <form className="modalBody" onSubmit={props.handleSignIn}>
+                    <form className="modalBody" onSubmit={props.handleSignUp}>
                         <div className="modal-header">
                             <span><img id="createAccountLogo" src={createAccountLogo} alt="Create Account"></img>
-                                <strong>Sign-In to Your Account</strong></span>
+                                <strong>Sign-Up for a New Account</strong></span>
                         </div>
                         <hr />
                         <div className="modal-body text-center">
@@ -28,7 +28,7 @@ const SignIn = props => {
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-light" onClick={props.hideSignInModal} data-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-light" onClick={props.hideSignUpModal} data-dismiss="modal">Close</button>
                             <button className="btn btn-light" type="submit">Sign In</button>
                         </div>
                     </form>
@@ -38,4 +38,4 @@ const SignIn = props => {
     );
 };
 
-export default SignIn;
+export default SignUp;
