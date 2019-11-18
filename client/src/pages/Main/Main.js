@@ -35,22 +35,6 @@ export default class App extends Component {
   };
 
   /**
-   * Load all vehicles on record for the user
-   */
-  loadVehicles = () => {
-    API.getAllVehiclesForUser()
-      .then(res =>
-        this.setState({
-          vehicleData: res.data,
-          year: "",
-          make: "",
-          model: ""
-        })
-      )
-      .catch(err => console.log(err));
-  };
-
-  /**
    * Upon page refresh, if the user is logged in, they will stay logged in
    */
   onAuthStateChanged = () => {
@@ -67,7 +51,7 @@ export default class App extends Component {
             vehicleData: res.data,
             uid: user.uid
           }))
-          .catch(err => console.log(err));
+          .catch(err => this.loadVehiclesFailNotification(err));
       };
     });
   };
@@ -108,6 +92,15 @@ export default class App extends Component {
         })
         .catch(err => this.addOneVehicleFailNotification(err));
     };
+  };
+
+    /**
+   * Display the error notification when an error occurs while loading vehicles
+   * 
+   * @param err the error message to display to the user
+   */
+  loadVehiclesFailNotification = err => {
+    toast.error(`Loading Vehicles ${err.toString()}`);
   };
 
   /**
