@@ -94,7 +94,7 @@ export default class App extends Component {
     };
   };
 
-    /**
+  /**
    * Display the error notification when an error occurs while loading vehicles
    * 
    * @param err the error message to display to the user
