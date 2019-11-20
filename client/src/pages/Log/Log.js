@@ -76,17 +76,18 @@ export default class Log extends Component {
           service: this.state.service,
           comment: this.state.comment
         };
+        let dateMemory = this.state.date;
+        let mileageMemory = this.state.mileage;
+        let serviceMemory = this.state.service;
         API.addOneLogForOneVehicle(id, log)
-          .then(res => this.addOneServiceLogSuccessNotification(this.state.date, this.state.mileage, this.state.service))
+          .then(res => this.addOneServiceLogSuccessNotification(dateMemory, mileageMemory, serviceMemory))
           .catch(err => this.addOneServiceLogFailNotification(err));
-        setTimeout(() => {
-          this.setState({
-            date: "",
-            mileage: "",
-            service: "",
-            comment: ""
-          });
-        }, 500);
+        this.setState({
+          date: "",
+          mileage: "",
+          service: "",
+          comment: ""
+        });
       };
     };
   };
