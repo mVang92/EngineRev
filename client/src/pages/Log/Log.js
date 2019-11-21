@@ -80,7 +80,7 @@ export default class Log extends Component {
         let mileageMemory = this.state.mileage;
         let serviceMemory = this.state.service;
         API.addOneLogForOneVehicle(id, log)
-          .then(res => this.addOneServiceLogSuccessNotification(dateMemory, mileageMemory, serviceMemory))
+          .then(() => this.addOneServiceLogSuccessNotification(dateMemory, mileageMemory, serviceMemory))
           .catch(err => this.addOneServiceLogFailNotification(err));
         this.setState({
           date: "",
