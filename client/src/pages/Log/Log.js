@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import NavNotAuthorized from "../../components/Nav/NavNotAuthorized";
 import Container from "../../components/Container";
 import AddLog from "../../components/AddLog";
 import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal";
@@ -311,9 +310,6 @@ export default class Log extends Component {
           </div>
         ) : (
             <div>
-              <NavNotAuthorized
-                goToHomePage={this.goToHomePage}
-              />
               <div className="text-center text-danger">
                 <strong>You are not authorized to view this page.</strong>
               </div>

@@ -20,7 +20,7 @@ const AddLogErrorModal = props => {
                             </div>
                             <div className="col-md-10 userInputErrorMessage">
                                 <div className="col-md-12">
-                                    <strong>Please fill in the missing fields:</strong>
+                                    <label><strong>Please fill in the missing fields:</strong></label>
                                 </div>
                                 <div className="col-md-12">
                                     {props.state.date === "" ? (
