@@ -20,7 +20,7 @@ const AddVehicleErrorModal = props => {
                                 <img className="warningImage" src={warningImage} alt='warning' />
                             </div>
                             <div className="col-md-10 userInputErrorMessage">
-                                Please fill in all of the required input fields.
+                                <label>Please fill in all of the required input fields.</label>
                             </div>
                         </div>
                         <div className="modal-footer">
