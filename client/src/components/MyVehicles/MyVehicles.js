@@ -12,7 +12,7 @@ class MyVehicles extends Component {
           this.props.vehicleData.vehicles ? (
             // Begin ternary for vehicle records
             this.props.vehicleData.vehicles.length ? (
-              < React.Fragment >
+              <React.Fragment>
                 {this.props.vehicleCountForUser(this.props.vehicleData.vehicles.length)}
                 < div className="row">
                   <div className="col-md-12">
@@ -38,7 +38,7 @@ class MyVehicles extends Component {
                     ))}
                   </div>
                 </div>
-              </React.Fragment >
+              </React.Fragment>
             ) : (
                 <div className="row">
                   <div className="col-md-12">

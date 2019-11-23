@@ -114,14 +114,6 @@ export default class Log extends Component {
   };
 
   /**
-   * Return to the home page
-   */
-  goToHomePage = () => {
-    const originUrl = window.location.origin;
-    window.location.assign(originUrl);
-  };
-
-  /**
    * Display the success notification when the user adds a service log
    * 
    * @param date    the date when the service is logged
