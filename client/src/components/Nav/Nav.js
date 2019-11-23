@@ -121,10 +121,10 @@ export class Nav extends Component {
   handleSignOut = e => {
     e.preventDefault();
     const originUrl = window.location.origin;
-    window.location.assign(originUrl);
     auth
       .doSignOut()
       .then(() => {
+        window.location.assign(originUrl);
         this.setState({
           loggedin: false,
           email: "",
