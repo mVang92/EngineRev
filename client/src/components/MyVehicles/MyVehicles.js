@@ -4,16 +4,17 @@ import { Link } from "react-router-dom";
 
 class MyVehicles extends Component {
   render() {
+    const { vehicleData, vehicleCountForUser } = this.props;
     return (
       <div className="text-center">
         {/* If no vehicles are found in record, display no vehicles found, else display the vehicles */}
         {/* This prevents the app from crashing as there are no data during initial load */}
-        {this.props.vehicleData ? (
-          this.props.vehicleData.vehicles ? (
+        {vehicleData ? (
+          vehicleData.vehicles ? (
             // Begin ternary for vehicle records
-            this.props.vehicleData.vehicles.length ? (
+            vehicleData.vehicles.length ? (
               <React.Fragment>
-                {this.props.vehicleCountForUser(this.props.vehicleData.vehicles.length)}
+                {vehicleCountForUser(vehicleData.vehicles.length)}
                 < div className="row">
                   <div className="col-md-12">
                     <label><strong>My Vehicles</strong></label>
@@ -21,7 +22,7 @@ class MyVehicles extends Component {
                 </div>
                 <div className="row innerBox">
                   <div className="col-md-12">
-                    {this.props.vehicleData.vehicles.map(vehicle => (
+                    {vehicleData.vehicles.map(vehicle => (
                       <div key={vehicle._id} className="row">
                         <div className="col-md-2"></div>
                         <div className="col-md-8">
