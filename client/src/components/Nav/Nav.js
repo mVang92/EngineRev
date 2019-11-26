@@ -53,11 +53,10 @@ export class Nav extends Component {
    * Creates a schema for the user  during first time login
    */
   createUserSchema = () => {
-    const bindThis = this;
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         API.createUserSchema(user.uid)
-          .then(() => bindThis.componentWillMount());
+          .then(() => this.componentWillMount());
       };
     });
   };
@@ -70,22 +69,11 @@ export class Nav extends Component {
     auth
       .doSignInWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
-        this.setState({
-          loggedin: true,
-          email: "",
-          password: "",
-          confirmPassword: ""
-        });
+        this.setState({ loggedin: true });
         this.hideSignInModal();
         this.setState({ loggedin: true });
       })
-      .catch(error => {
-        try {
-          this.loginFailNotification(error);
-        } catch (e) {
-          return null;
-        };
-      });
+      .catch(error => this.loginFailNotification(error));
   };
 
   /**
@@ -97,28 +85,12 @@ export class Nav extends Component {
       auth
         .doCreateUserWithEmailAndPassword(this.state.email, this.state.confirmPassword)
         .then(() => {
-          this.setState({
-            loggedin: true,
-            email: "",
-            password: "",
-            confirmPassword: ""
-          });
+          this.setState({ loggedin: true });
           this.createUserSchema();
           this.hideSignUpModal();
         })
-        .catch(error => {
-          try {
-            this.loginFailNotification(error);
-          } catch (e) {
-            return null;
-          };
-        });
+        .catch(error => this.loginFailNotification(error));
     } else {
-      this.setState({
-        email: "",
-        password: "",
-        confirmPassword: ""
-      });
       const error = "Error: Passwords do not match."
       this.loginFailNotification(error);
     };
@@ -175,7 +147,8 @@ export class Nav extends Component {
     this.setState({
       showSignUpModal: false,
       email: "",
-      password: ""
+      password: "",
+      confirmPassword: ""
     });
   };
 
