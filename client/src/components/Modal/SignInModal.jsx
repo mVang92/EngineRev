@@ -1,31 +1,28 @@
 import React from "react";
-import ReactModal from "react-modal";
+import Modal from "react-modal";
 import createAccountLogo from "../../images/createAccount.png"
 
 const SignIn = props => {
-
     return (
-        <ReactModal
+        <Modal
             isOpen={props.showSignInModal}
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
-            closeTimeoutMS={150}
+            closeTimeoutMS={0}
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
                     <form className="modalBody" onSubmit={props.handleSignIn}>
                         <div className="modal-header">
                             <span><img id="createAccountLogo" src={createAccountLogo} alt="Create Account"></img>
-                                <strong>Sign-In to Your Account</strong></span>
+                                <label><strong>Sign-In to Your Account</strong></label>
+                            </span>
                         </div>
                         <hr />
                         <div className="modal-body text-center">
                             <input type="text" value={props.email} name="email" onChange={props.handleChange} placeholder="Email"></input>
                             <br /><br />
                             <input type="password" value={props.password} name="password" onChange={props.handleChange} placeholder="Password"></input>
-                            <div className="row">
-                                <div id="error" className="col-12 text-danger"></div>
-                            </div>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-light" onClick={props.hideSignInModal} data-dismiss="modal">Close</button>
@@ -34,7 +31,7 @@ const SignIn = props => {
                     </form>
                 </div>
             </div>
-        </ReactModal>
+        </Modal>
     );
 };
 

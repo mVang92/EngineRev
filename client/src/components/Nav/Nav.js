@@ -6,6 +6,8 @@ import SignOutModal from "../Modal/SignOutModal";
 import { firebase, auth } from "../../firebase"
 import API from "../../utils/API";
 import "../../css/style.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export class Nav extends Component {
   constructor(props) {
@@ -15,9 +17,9 @@ export class Nav extends Component {
       showSignInModal: false,
       showSignUpModal: false,
       showSignOutModal: false,
-      message: "",
       email: "",
-      password: ""
+      password: "",
+      confirmPassword: ""
     };
   };
 
@@ -64,23 +66,24 @@ export class Nav extends Component {
    * Handle user authentication when a user signs in
    */
   handleSignIn = e => {
+    console.log("password " + this.state.password)
+    console.log("email: " + this.state.email)
     e.preventDefault();
     auth
       .doSignInWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
         this.setState({
           loggedin: true,
-          message: ""
+          email: "",
+          password: "",
+          confirmPassword: ""
         });
         this.hideSignInModal();
         this.setState({ loggedin: true });
       })
       .catch(error => {
         try {
-          this.setState({ message: error.message })
-          const message = document.createTextNode(this.state.message);
-          document.getElementById("error").innerHTML = "";
-          document.getElementById("error").appendChild(message);
+          this.loginFailNotification(error);
         } catch (e) {
           return null;
         };
@@ -92,27 +95,37 @@ export class Nav extends Component {
    */
   handleSignUp = e => {
     e.preventDefault();
-    auth
-      .doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => {
-        this.setState({
-          loggedin: true,
-          message: ""
+    console.log("password " + this.state.password)
+    console.log("email: " + this.state.email)
+    if (this.state.password === this.state.confirmPassword) {
+      auth
+        .doCreateUserWithEmailAndPassword(this.state.email, this.state.confirmPassword)
+        .then(() => {
+          this.setState({
+            loggedin: true,
+            email: "",
+            password: "",
+            confirmPassword: ""
+          });
+          this.createUserSchema();
+          this.hideSignUpModal();
+        })
+        .catch(error => {
+          try {
+            this.loginFailNotification(error);
+          } catch (e) {
+            return null;
+          };
         });
-        this.createUserSchema();
-        this.hideSignUpModal();
-        this.setState({ loggedin: false });
-      })
-      .catch(error => {
-        try {
-          this.setState({ message: error.message })
-          const message = document.createTextNode(this.state.message);
-          document.getElementById("error").innerHTML = "";
-          document.getElementById("error").appendChild(message);
-        } catch (e) {
-          return null;
-        };
+    } else {
+      this.setState({
+        email: "",
+        password: "",
+        confirmPassword: ""
       });
+      const error = "Error: Passwords do not match."
+      this.loginFailNotification(error);
+    };
   };
 
   /**
@@ -128,7 +141,8 @@ export class Nav extends Component {
         this.setState({
           loggedin: false,
           email: "",
-          password: ""
+          password: "",
+          confirmPassword: ""
         });
       });
   };
@@ -144,7 +158,11 @@ export class Nav extends Component {
    * Hide the sign in modal
    */
   hideSignInModal = () => {
-    this.setState({ showSignInModal: false });
+    this.setState({
+      showSignInModal: false,
+      email: "",
+      password: ""
+    });
   };
 
   /**
@@ -158,7 +176,11 @@ export class Nav extends Component {
    * Hide the sign up modal
    */
   hideSignUpModal = () => {
-    this.setState({ showSignUpModal: false });
+    this.setState({
+      showSignUpModal: false,
+      email: "",
+      password: ""
+    });
   };
 
   /**
@@ -173,6 +195,15 @@ export class Nav extends Component {
    */
   hideSignOutModal = () => {
     this.setState({ showSignOutModal: false });
+  };
+
+  /**
+   * Display an error notification when there is an error during login
+   * 
+   * @param err the error message to display to the user
+   */
+  loginFailNotification = err => {
+    toast.error(err.toString());
   };
 
   render() {

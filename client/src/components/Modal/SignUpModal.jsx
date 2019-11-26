@@ -1,40 +1,39 @@
 import React from "react";
-import ReactModal from "react-modal";
+import Modal from "react-modal";
 import createAccountLogo from "../../images/createAccount.png"
 
 const SignUp = props => {
-
     return (
-        <ReactModal
+        <Modal
             isOpen={props.showSignUpModal}
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
-            closeTimeoutMS={150}
+            closeTimeoutMS={0}
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
                     <form className="modalBody" onSubmit={props.handleSignUp}>
                         <div className="modal-header">
                             <span><img id="createAccountLogo" src={createAccountLogo} alt="Create Account"></img>
-                                <strong>Sign-Up for a New Account</strong></span>
+                                <label><strong>Sign-Up for a New Account</strong></label>
+                            </span>
                         </div>
                         <hr />
                         <div className="modal-body text-center">
                             <input type="text" value={props.email} name="email" onChange={props.handleChange} placeholder="Email"></input>
                             <br /><br />
                             <input type="password" value={props.password} name="password" onChange={props.handleChange} placeholder="Password"></input>
-                            <div className="row">
-                                <div id="error" className="col-12 text-danger"></div>
-                            </div>
+                            <br /><br />
+                            <input type="password" value={props.confirmPassword} name="confirmPassword" onChange={props.handleChange} placeholder="Confirm Password"></input>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-light" onClick={props.hideSignUpModal} data-dismiss="modal">Close</button>
-                            <button className="btn btn-light" type="submit">Sign In</button>
+                            <button className="btn btn-light" type="submit">Create Account</button>
                         </div>
                     </form>
                 </div>
             </div>
-        </ReactModal>
+        </Modal>
     );
 };
 
