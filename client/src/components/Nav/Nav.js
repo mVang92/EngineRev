@@ -66,8 +66,6 @@ export class Nav extends Component {
    * Handle user authentication when a user signs in
    */
   handleSignIn = e => {
-    console.log("password " + this.state.password)
-    console.log("email: " + this.state.email)
     e.preventDefault();
     auth
       .doSignInWithEmailAndPassword(this.state.email, this.state.password)
@@ -95,8 +93,6 @@ export class Nav extends Component {
    */
   handleSignUp = e => {
     e.preventDefault();
-    console.log("password " + this.state.password)
-    console.log("email: " + this.state.email)
     if (this.state.password === this.state.confirmPassword) {
       auth
         .doCreateUserWithEmailAndPassword(this.state.email, this.state.confirmPassword)
