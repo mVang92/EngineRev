@@ -5,9 +5,7 @@ import SignUpModal from "../Modal/SignUpModal";
 import SignOutModal from "../Modal/SignOutModal";
 import { firebase, auth } from "../../firebase"
 import API from "../../utils/API";
-import "../../css/style.css";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export class Nav extends Component {
   constructor(props) {
@@ -71,7 +69,6 @@ export class Nav extends Component {
       .then(() => {
         this.setState({ loggedin: true });
         this.hideSignInModal();
-        this.setState({ loggedin: true });
       })
       .catch(error => this.loginFailNotification(error));
   };
@@ -106,20 +103,28 @@ export class Nav extends Component {
       .doSignOut()
       .then(() => {
         window.location.assign(originUrl);
-        this.setState({
-          loggedin: false,
-          email: "",
-          password: "",
-          confirmPassword: ""
-        });
       });
   };
 
   /**
    * Show the sign in modal
    */
-  handleSignInModal = () => {
+  showSignInModal = () => {
     this.setState({ showSignInModal: true });
+  };
+
+  /**
+   * Show the sign up modal
+   */
+  showSignUpModal = () => {
+    this.setState({ showSignUpModal: true });
+  };
+
+  /**
+   * Show the sign out modal
+   */
+  showSignOutModal = () => {
+    this.setState({ showSignOutModal: true });
   };
 
   /**
@@ -134,13 +139,6 @@ export class Nav extends Component {
   };
 
   /**
-   * Show the sign up modal
-   */
-  handleSignUpModal = () => {
-    this.setState({ showSignUpModal: true });
-  };
-
-  /**
    * Hide the sign up modal
    */
   hideSignUpModal = () => {
@@ -150,13 +148,6 @@ export class Nav extends Component {
       password: "",
       confirmPassword: ""
     });
-  };
-
-  /**
-   * Show the sign out modal
-   */
-  handleSignOutModal = () => {
-    this.setState({ showSignOutModal: true });
   };
 
   /**
@@ -185,7 +176,7 @@ export class Nav extends Component {
               <ul className="navbar-nav">
                 <NavLoggedIn
                   state={this.state}
-                  handleSignOutModal={this.handleSignOutModal}
+                  showSignOutModal={this.showSignOutModal}
                 />
               </ul>
             </React.Fragment>
@@ -193,8 +184,8 @@ export class Nav extends Component {
               <ul className="navbar-nav">
                 <NavLoggedOut
                   state={this.state}
-                  handleSignUpModal={this.handleSignUpModal}
-                  handleSignInModal={this.handleSignInModal}
+                  showSignUpModal={this.showSignUpModal}
+                  showSignInModal={this.showSignInModal}
                 />
               </ul>
             )
