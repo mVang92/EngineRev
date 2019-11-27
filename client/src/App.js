@@ -4,6 +4,7 @@ import { Nav } from "./components/Nav";
 import Main from "./pages/Main";
 import Log from "./pages/Log";
 import NoMatch from "./pages/NoMatch";
+import "./css/style.css";
 
 export default class App extends React.Component {
   render() {
