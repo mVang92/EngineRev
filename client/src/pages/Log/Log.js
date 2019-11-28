@@ -57,7 +57,7 @@ export default class Log extends Component {
   };
 
   /**
-   * Records a service log fot the vehicle
+   * Records a service log for the vehicle
    */
   handleSubmitOneServiceLog = e => {
     e.preventDefault();
