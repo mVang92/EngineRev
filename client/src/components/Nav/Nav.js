@@ -72,7 +72,6 @@ export class Nav extends Component {
       .then(() => {
         this.setState({ loggedin: true });
         this.hideSignInModal();
-        window.location.assign(this.state.originUrl);
       })
       .catch(error => this.loginFailNotification(error));
   };
