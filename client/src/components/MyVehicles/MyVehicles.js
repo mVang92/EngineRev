@@ -7,13 +7,11 @@ class MyVehicles extends Component {
     const { vehicleData, vehicleCountForUser } = this.props;
     return (
       <div className="text-center">
-        {/* If no vehicles are found in record, display no vehicles found, else display the vehicles */}
-        {/* This prevents the app from crashing as there are no data during initial load */}
         {vehicleData ? (
           vehicleData.vehicles ? (
-            // Begin ternary for vehicle records
             vehicleData.vehicles.length ? (
               <React.Fragment>
+                {console.log(vehicleData)}
                 {vehicleCountForUser(vehicleData.vehicles.length)}
                 < div className="row">
                   <div className="col-md-12">
@@ -51,10 +49,8 @@ class MyVehicles extends Component {
                   </div>
                 </div>
               )
-            // End ternary for vehicle records
           ) : (<label><div>Please Wait...</div></label>)
-        ) : (<label><div>Please Wait..</div></label>)
-        }
+        ) : (<label><div>Please Wait..</div></label>)}
       </div>
     );
   };
