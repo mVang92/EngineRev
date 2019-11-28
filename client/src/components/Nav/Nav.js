@@ -57,7 +57,7 @@ export class Nav extends Component {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         API.createUserSchema(user.uid)
-          .then(() => this.componentWillMount());
+          .then(() => this.isUserLoggedIn());
       };
     });
   };
@@ -70,7 +70,7 @@ export class Nav extends Component {
     auth
       .doSignInWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
-        this.setState({ loggedin: true });
+        this.isUserLoggedIn();
         this.hideSignInModal();
       })
       .catch(error => this.loginFailNotification(error));
@@ -85,8 +85,10 @@ export class Nav extends Component {
       auth
         .doCreateUserWithEmailAndPassword(this.state.email, this.state.confirmPassword)
         .then(() => {
-          this.hideSignUpModal();
           this.createUserSchema();
+          setTimeout(() => {
+            this.hideSignUpModal();
+          }, 10);
         })
         .catch(error => this.loginFailNotification(error));
     } else {
@@ -111,14 +113,20 @@ export class Nav extends Component {
    * Show the sign in modal
    */
   showSignInModal = () => {
-    this.setState({ showSignInModal: true });
+    this.setState({
+      showSignInModal: true,
+      showSignUpModal: false
+    });
   };
 
   /**
    * Show the sign up modal
    */
   showSignUpModal = () => {
-    this.setState({ showSignUpModal: true });
+    this.setState({
+      showSignUpModal: true,
+      showSignInModal: false,
+    });
   };
 
   /**
