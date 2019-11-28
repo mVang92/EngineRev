@@ -54,7 +54,9 @@ export class Nav extends Component {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         API.createUserSchema(user.uid)
-          .then(() => this.componentWillMount());
+          .then(() => {
+            this.componentWillMount();
+          });
       };
     });
   };
@@ -82,9 +84,8 @@ export class Nav extends Component {
       auth
         .doCreateUserWithEmailAndPassword(this.state.email, this.state.confirmPassword)
         .then(() => {
-          this.setState({ loggedin: true });
-          this.createUserSchema();
           this.hideSignUpModal();
+          this.createUserSchema();
         })
         .catch(error => this.loginFailNotification(error));
     } else {

@@ -38,10 +38,9 @@ export default class App extends Component {
    * Upon page refresh, if the user is logged in, they will stay logged in
    */
   onAuthStateChanged = () => {
-    const bindThis = this;
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        bindThis.setState({ loggedin: true });
+        this.setState({ loggedin: true });
         let userName = document.createTextNode(user.email);
         document.getElementById("userEmail").innerHTML = "";
         document.getElementById("userEmail").appendChild(userName);
@@ -71,26 +70,15 @@ export default class App extends Component {
    */
   handleAddOneVehicle = newVehicle => {
     const id = this.state.uid;
-    const bindThis = this;
-    let vehicleData = this.state.vehicleData;
-    vehicleData.vehicles.push(newVehicle);
-    this.setState({ vehicleData: vehicleData });
-    let element = this.state.vehicleData.vehicles.length - 1;
-    if (isNaN(this.state.vehicleData.vehicles[element].year)) {
+    if (isNaN(newVehicle.year)) {
       this.showAddVehicleYearNanErrorModal();
-      this.componentWillMount();
     } else {
-      const data = {
-        year: this.state.vehicleData.vehicles[element].year,
-        make: this.state.vehicleData.vehicles[element].make,
-        model: this.state.vehicleData.vehicles[element].model
-      };
-      API.addOneVehicle(id, data)
-        .then(() => {
-          this.addOneVehicleSuccessNotification(data.year, data.make, data.model);
-          bindThis.onAuthStateChanged();
-        })
-        .catch(err => this.addOneVehicleFailNotification(err));
+      API.addOneVehicle(id, newVehicle)
+      .then(() => {
+        this.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
+        this.onAuthStateChanged();
+      })
+      .catch(err => this.addOneVehicleFailNotification(err));
     };
   };
 
