@@ -15,6 +15,7 @@ export class Nav extends Component {
       showSignInModal: false,
       showSignUpModal: false,
       showSignOutModal: false,
+      originUrl: "",
       email: "",
       password: "",
       confirmPassword: ""
@@ -25,6 +26,8 @@ export class Nav extends Component {
    * Checks to see if the user is logged in
    */
   componentWillMount = () => {
+    const originUrl = window.location.origin;
+    this.setState({ originUrl: originUrl })
     this.isUserLoggedIn();
   };
 
@@ -69,6 +72,7 @@ export class Nav extends Component {
       .then(() => {
         this.setState({ loggedin: true });
         this.hideSignInModal();
+        window.location.assign(this.state.originUrl);
       })
       .catch(error => this.loginFailNotification(error));
   };
@@ -97,11 +101,10 @@ export class Nav extends Component {
    */
   handleSignOut = e => {
     e.preventDefault();
-    const originUrl = window.location.origin;
     auth
       .doSignOut()
       .then(() => {
-        window.location.assign(originUrl);
+        window.location.assign(this.state.originUrl);
       });
   };
 
