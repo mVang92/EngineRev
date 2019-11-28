@@ -38,19 +38,9 @@ class MyVehicles extends Component {
                   </div>
                 </div>
               </React.Fragment>
-            ) : (
-                <div className="row">
-                  <div className="col-md-12">
-                    <label><strong>My Vehicles</strong></label>
-                  </div>
-                  <div className="col-md-12 text-danger">
-                    <br></br>
-                    <label><h5>No vehicles on record</h5></label>
-                  </div>
-                </div>
-              )
-          ) : (<label><div>Please Wait...</div></label>)
-        ) : (<label><div>Please Wait..</div></label>)}
+            ) : (<label className="text-danger"><strong>No Vehicles on Record</strong></label>)
+          ) : (<label className="text-danger"><strong>No Vehicles on Record</strong></label>)
+        ) : (<label className="text-danger"><strong>No Vehicles on Record</strong></label>)}
       </div>
     );
   };

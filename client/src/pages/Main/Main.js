@@ -45,10 +45,12 @@ export default class App extends Component {
         document.getElementById("userEmail").innerHTML = "";
         document.getElementById("userEmail").appendChild(userEmail);
         API.getAllVehiclesForUser(id)
-          .then(res => this.setState({
-            vehicleData: res.data,
-            uid: user.uid
-          }))
+          .then(res =>
+            this.setState({
+              vehicleData: res.data,
+              uid: user.uid
+            })
+          )
           .catch(err => this.loadVehiclesFailNotification(err));
       };
     });
@@ -73,11 +75,11 @@ export default class App extends Component {
       this.showAddVehicleYearNanErrorModal();
     } else {
       API.addOneVehicle(id, newVehicle)
-      .then(() => {
-        this.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
-        this.onAuthStateChanged();
-      })
-      .catch(err => this.addOneVehicleFailNotification(err));
+        .then(() => {
+          this.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
+          this.onAuthStateChanged();
+        })
+        .catch(err => this.addOneVehicleFailNotification(err));
     };
   };
 

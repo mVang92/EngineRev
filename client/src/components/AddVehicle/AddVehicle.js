@@ -22,8 +22,6 @@ class AddVehicle extends Component {
           model: this.refs.model.value
         }
       }, () => {
-        // IMPORTANT: This allows this component to pass states up to App.js
-        // States pass through LoggedIn component first, then to App.js
         this.props.addVehicle(this.state.newVehicle);
       });
       document.getElementById("field").reset();
