@@ -54,9 +54,7 @@ export class Nav extends Component {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         API.createUserSchema(user.uid)
-          .then(() => {
-            this.componentWillMount();
-          });
+          .then(() => this.componentWillMount());
       };
     });
   };
@@ -210,6 +208,6 @@ export class Nav extends Component {
           handleSignOut={this.handleSignOut}
         />
       </nav>
-    )
-  }
+    );
+  };
 };

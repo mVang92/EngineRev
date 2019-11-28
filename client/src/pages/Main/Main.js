@@ -31,7 +31,6 @@ export default class App extends Component {
   componentWillMount = () => {
     Modal.setAppElement("body");
     this.onAuthStateChanged();
-    this.setState({ vehicleData: [] });
   };
 
   /**
@@ -41,10 +40,10 @@ export default class App extends Component {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({ loggedin: true });
-        let userName = document.createTextNode(user.email);
-        document.getElementById("userEmail").innerHTML = "";
-        document.getElementById("userEmail").appendChild(userName);
         const id = user.uid;
+        const userEmail = document.createTextNode(user.email);
+        document.getElementById("userEmail").innerHTML = "";
+        document.getElementById("userEmail").appendChild(userEmail);
         API.getAllVehiclesForUser(id)
           .then(res => this.setState({
             vehicleData: res.data,
@@ -97,7 +96,7 @@ export default class App extends Component {
    * @param vehicleCount the number of vehicles in the database
    */
   handleAddVehicleCountForUser = vehicleCount => {
-    let vehicleCountToDisplay = document.createTextNode(vehicleCount);
+    const vehicleCountToDisplay = document.createTextNode(vehicleCount);
     document.getElementById("vehicleCountForUser").innerHTML = "";
     document.getElementById("vehicleCountForUser").appendChild(vehicleCountToDisplay);
   };
