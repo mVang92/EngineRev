@@ -35,13 +35,9 @@ a.underline:active {
     text-decoration: none;
 }
 
-/* body {
-    background-image: url("../images/background.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-} */
+body {
+    background: rgb(235, 235, 235);
+}
 
 .accountModal {
     margin-top: 25%;
@@ -210,5 +206,9 @@ input {
 
 .Toastify__toast-container--top-right {
     top: 4em !important;
-    right: 1em !important;
+    right: 1px !important;
+}
+
+#applicationLogo {
+    width: 15%;
 }
