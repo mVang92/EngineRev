@@ -4,8 +4,10 @@ import SignInModal from "../Modal/SignInModal";
 import SignUpModal from "../Modal/SignUpModal";
 import SignOutModal from "../Modal/SignOutModal";
 import { firebase, auth } from "../../firebase"
-import API from "../../utils/API";
 import { toast } from "react-toastify";
+import carSpaceLogo from "../../images/carSpaceLogo.png";
+import API from "../../utils/API";
+
 
 export class Nav extends Component {
   constructor(props) {
@@ -178,7 +180,9 @@ export class Nav extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg sticky-top">
-        <a className="navbar-brand underline" href="/">CarSpace</a>
+        <a className="navbar-brand underline" href="/">
+          <img id="applicationLogo" src={carSpaceLogo}></img>
+        </a>
         <div className="collapse navbar-collapse" id="navbarNav">
           {this.state.loggedin === true ? (
             <React.Fragment>
