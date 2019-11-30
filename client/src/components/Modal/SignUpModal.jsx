@@ -20,15 +20,15 @@ const SignUp = props => {
                         </div>
                         <hr />
                         <div className="modal-body text-center">
-                            <input type="text" value={props.email} name="email" onChange={props.handleChange} placeholder="Email"></input>
+                            <input id="emailInput" type="text" value={props.email} name="email" onChange={props.handleChange} placeholder="Email"></input>
                             <br /><br />
-                            <input type="password" value={props.password} name="password" onChange={props.handleChange} placeholder="Password"></input>
+                            <input id="passwordInput" type="password" value={props.password} name="password" onChange={props.handleChange} placeholder="Password"></input>
                             <br /><br />
-                            <input type="password" value={props.confirmPassword} name="confirmPassword" onChange={props.handleChange} placeholder="Confirm Password"></input>
+                            <input id="confirmPasswordInput" type="password" value={props.confirmPassword} name="confirmPassword" onChange={props.handleChange} placeholder="Confirm Password"></input>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-light" onClick={props.hideSignUpModal} data-dismiss="modal">Close</button>
-                            <button className="btn btn-light" type="submit">Create Account</button>
+                            <button id="closeSignUpModal" type="button" className="btn btn-light" onClick={props.hideSignUpModal} data-dismiss="modal">Close</button>
+                            <button id="signUpButton" className="btn btn-light" type="submit">Create Account</button>
                         </div>
                     </form>
                 </div>

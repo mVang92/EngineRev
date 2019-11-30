@@ -20,13 +20,13 @@ const SignIn = props => {
                         </div>
                         <hr />
                         <div className="modal-body text-center">
-                            <input type="text" value={props.email} name="email" onChange={props.handleChange} placeholder="Email"></input>
+                            <input id="emailInput" type="text" value={props.email} name="email" onChange={props.handleChange} placeholder="Email"></input>
                             <br /><br />
-                            <input type="password" value={props.password} name="password" onChange={props.handleChange} placeholder="Password"></input>
+                            <input id="passwordInput" type="password" value={props.password} name="password" onChange={props.handleChange} placeholder="Password"></input>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-light" onClick={props.hideSignInModal} data-dismiss="modal">Close</button>
-                            <button className="btn btn-light" type="submit">Sign In</button>
+                            <button id="closeSignInModal" type="button" className="btn btn-light" onClick={props.hideSignInModal} data-dismiss="modal">Close</button>
+                            <button id="signInButton" className="btn btn-light" type="submit">Sign In</button>
                         </div>
                     </form>
                 </div>

@@ -25,6 +25,7 @@ const SignOutModal = props => {
                         </div>
                         <div className="modal-footer">
                             <button
+                                id="doNotSignOutButton"
                                 title="No"
                                 type="button"
                                 className="cancelBtn"
@@ -33,6 +34,7 @@ const SignOutModal = props => {
                                 No
                             </button>
                             <button
+                                id="doSignOutButton"
                                 title="Sign Out"
                                 type="button"
                                 className="cancelBtn"

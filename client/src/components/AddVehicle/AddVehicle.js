@@ -62,12 +62,14 @@ class AddVehicle extends Component {
                 </div>
                 <div>
                   <input
+                    id="vehicleYearInput"
                     type="text"
                     ref="year"
                     onChange={this.props.handleChange}
                     value={this.props.year}
                     name="year"
-                    maxLength="4"/>
+                    maxLength="4"
+                  />
                 </div>
               </div>
               <div className="col-md-3">
@@ -76,12 +78,14 @@ class AddVehicle extends Component {
                 </div>
                 <div>
                   <input
+                    id="vehicleMakeInput"
                     type="text"
                     ref="make"
                     onChange={this.props.handleChange}
                     value={this.props.make}
                     name="make"
-                    maxLength="25"/>
+                    maxLength="25"
+                  />
                 </div>
               </div>
               <div className="col-md-3">
@@ -90,17 +94,20 @@ class AddVehicle extends Component {
                 </div>
                 <div>
                   <input
+                    id="vehicleModelInput"
                     type="text"
                     ref="model"
                     onChange={this.props.handleChange}
                     value={this.props.model}
                     name="model"
-                    maxLength="25"/>
+                    maxLength="25"
+                  />
                 </div>
               </div>
               <div className="col-md-3">
                 <div className="col-md-12 text-center">
                   <button
+                    id="addVehicleButton"
                     title="Add This Vehicle"
                     type="submit"
                     className="addBtn">
@@ -110,6 +117,7 @@ class AddVehicle extends Component {
                 <br />
                 <div className="col-md-12 text-center">
                   <button
+                    id="resetVehicleInputFieldsButton"
                     title="Reset Input Fields"
                     type="reset"
                     className="resetBtn"
