@@ -8,6 +8,7 @@ class AddLog extends Component {
           <div className="col-md-4">
             <label><span className="required">*</span><strong>Date</strong></label>
             <input
+              id="serviceLogDateInput"
               type="date"
               ref="date"
               onChange={this.props.handleChange}
@@ -19,6 +20,7 @@ class AddLog extends Component {
           <div className="col-md-4">
             <label><span className="required">*</span><strong>Mileage</strong></label>
             <input
+              id="serviceLogMileageInput"
               type="text"
               ref="mileage"
               onChange={this.props.handleChange}
@@ -30,6 +32,7 @@ class AddLog extends Component {
           <div className="col-md-4">
             <label><span className="required">*</span><strong>Service</strong></label>
             <input
+              id="serviceLogServiceInput"
               type="text"
               ref="service"
               onChange={this.props.handleChange}
@@ -46,6 +49,7 @@ class AddLog extends Component {
           </div>
           <div className="col-md-10">
             <textarea
+              id="serviceLogCommentsInput"
               className="commentsBox"
               ref="comment"
               onChange={this.props.handleChange}
@@ -59,6 +63,7 @@ class AddLog extends Component {
           <div className="col-md-2">
             <a href="/">
               <button
+                id="addLogBackButton"
                 title="Back"
                 type="button"
                 className="cancelBtn">
@@ -69,6 +74,7 @@ class AddLog extends Component {
           <div className="col-md-4"></div>
           <div className="col-md-2 logDeleteBtn">
             <button
+              id="addLogDeleteVehicleButton"
               title="Delete This Vehicle"
               type="button"
               className="deleteBtn"
@@ -78,6 +84,7 @@ class AddLog extends Component {
           </div>
           <div className="col-md-2 logResetBtn">
             <button
+              id="addLogResetInputFieldsButton"
               title="Reset Input Fields"
               type="reset"
               className="resetBtn"
@@ -87,6 +94,7 @@ class AddLog extends Component {
           </div>
           <div className="col-md-2 logSubmitBtn">
             <button
+              id="addServiceLogButton"
               title="Submit Service Log"
               type="submit"
               className="addBtn">
