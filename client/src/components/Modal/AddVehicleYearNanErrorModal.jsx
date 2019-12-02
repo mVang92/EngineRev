@@ -20,7 +20,7 @@ const AddVehicleYearNanErrorModal = props => {
                                 <img className="warningImage" src={warningImage} alt='warning' />
                             </div>
                             <div className="col-md-10 userInputErrorMessage">
-                                Please enter a valid input for Year.
+                                <label>Please enter a valid input for Year.</label>
                             </div>
                         </div>
                         <div className="modal-footer">
