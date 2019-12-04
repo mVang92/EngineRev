@@ -20,13 +20,15 @@ const DeleteOneVehicleModal = props => {
                                 <img className="warningImage" src={warningImage} alt='warning' />
                             </div>
                             <div className="col-md-10">
-                                <strong>Vehicle ID = {props.state.vehicleId}</strong>
+                                <label><strong>Vehicle ID = {props.state.vehicleId}</strong></label>
                             </div>
                         </div>
                         <div className="modal-body text-danger">
-                            You are about to delete this vehicle.
-                            Doing so will also delete all of its service logs.
-                            Are you sure you want to continue?
+                            <label>
+                                You are about to delete this vehicle.
+                                Doing so will also delete all of its service logs.
+                                Are you sure you want to continue?
+                            </label>
                         </div>
                         <div className="modal-footer">
                             <button
