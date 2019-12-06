@@ -117,7 +117,9 @@ export class Nav extends Component {
   showSignInModal = () => {
     this.setState({
       showSignInModal: true,
-      showSignUpModal: false
+      showSignUpModal: false,
+      email: "",
+      password: ""
     });
   };
 
@@ -128,6 +130,9 @@ export class Nav extends Component {
     this.setState({
       showSignUpModal: true,
       showSignInModal: false,
+      email: "",
+      password: "",
+      confirmPassword: ""
     });
   };
 
