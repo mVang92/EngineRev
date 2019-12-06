@@ -147,23 +147,14 @@ export class Nav extends Component {
    * Hide the sign in modal
    */
   hideSignInModal = () => {
-    this.setState({
-      showSignInModal: false,
-      email: "",
-      password: ""
-    });
+    this.setState({ showSignInModal: false });
   };
 
   /**
    * Hide the sign up modal
    */
   hideSignUpModal = () => {
-    this.setState({
-      showSignUpModal: false,
-      email: "",
-      password: "",
-      confirmPassword: ""
-    });
+    this.setState({ showSignUpModal: false });
   };
 
   /**
