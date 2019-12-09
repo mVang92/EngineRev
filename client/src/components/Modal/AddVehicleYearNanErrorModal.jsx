@@ -12,12 +12,12 @@ const AddVehicleYearNanErrorModal = props => {
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={150}
         >
-            <div className="accountModal modal-content">
+            <div id="addVehicleYearNanErrorModal" className="accountModal modal-content">
                 <div className="modal-body modalShadow">
                     <div className="modalBody">
                         <div className="modal-header">
                             <div className="col-md-2">
-                                <img className="warningImage" src={warningImage} alt='warning' />
+                                <img className="warningImage" src={warningImage} alt="warning" />
                             </div>
                             <div className="col-md-10 userInputErrorMessage">
                                 <label>Please enter a valid input for Year.</label>
@@ -25,6 +25,7 @@ const AddVehicleYearNanErrorModal = props => {
                         </div>
                         <div className="modal-footer">
                             <button
+                                id="closeAddVehicleYearNanErrorModal"
                                 title="Okay"
                                 type="button"
                                 className="cancelBtn"
