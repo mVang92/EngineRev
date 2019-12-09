@@ -12,12 +12,12 @@ const AddVehicleErrorModal = props => {
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={150}
         >
-            <div className="accountModal modal-content">
+            <div id="addVehicleErrorModal" className="accountModal modal-content">
                 <div className="modal-body modalShadow">
                     <div className="modalBody">
                         <div className="modal-header">
                             <div className="col-md-2">
-                                <img className="warningImage" src={warningImage} alt='warning' />
+                                <img className="warningImage" src={warningImage} alt="warning" />
                             </div>
                             <div className="col-md-10 userInputErrorMessage">
                                 <label>Please fill in all of the required input fields.</label>
@@ -25,6 +25,7 @@ const AddVehicleErrorModal = props => {
                         </div>
                         <div className="modal-footer">
                             <button
+                                id="closeAddVehicleErrorModal"
                                 title="Okay"
                                 type="button"
                                 className="cancelBtn"
