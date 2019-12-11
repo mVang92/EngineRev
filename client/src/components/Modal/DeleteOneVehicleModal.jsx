@@ -24,11 +24,20 @@ const DeleteOneVehicleModal = props => {
                             </div>
                         </div>
                         <div className="modal-body text-danger">
-                            <label>
-                                You are about to delete this vehicle.
-                                Doing so will also delete all of its service logs.
-                                Are you sure you want to continue?
-                            </label>
+                            {props.state.vehicleServiceLogs.length > 1 ?
+                                (
+                                    <label>
+                                        You are about to delete this vehicle.
+                                        Doing so will also delete all {props.state.vehicleServiceLogs.length} of its service logs.
+                                        Are you sure you want to continue?
+                                    </label>
+                                ) : (
+                                    <label>
+                                        You are about to delete this vehicle and any service logs associated with it.
+                                        Are you sure you want to continue?
+                                    </label>
+                                )
+                            }
                         </div>
                         <div className="modal-footer">
                             <button
