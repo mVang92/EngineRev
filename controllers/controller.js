@@ -36,8 +36,6 @@ module.exports = {
   findOneVehicleForUser: (req, res) => {
     console.log("Hit findOneVehicleForUser");
     vehicleId = req.params.id;
-    console.log("creatorId: " + creatorId);
-    console.log("vehicleId: " + vehicleId);
     db.Vehicle
       .aggregate([
         { $match: { creator: creatorId } },
@@ -82,17 +80,6 @@ module.exports = {
         { creator: creatorId, vehicles: { $elemMatch: { _id: req.params.id } } },
         { $push: { "vehicles.$.logs": [req.body] } }
       )
-      .then(result => res.json(result))
-      .catch(err => res.status(422).json(err));
-  },
-
-  /**
-   * Finds all service logs for one vehicle
-   */
-  findAllServiceLogsForOneVehicle: (req, res) => {
-    console.log("Hit findAllServiceLogsForOneVehicle");
-    db.Vehicle
-      .find({ "vehicles._id": req.params.id })
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },

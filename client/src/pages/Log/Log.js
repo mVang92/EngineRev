@@ -34,7 +34,6 @@ export default class Log extends Component {
   componentWillMount = () => {
     Modal.setAppElement("body");
     this.setState({ vehicleId: this.props.match.params.id });
-    // this.loadServiceLogs();
     this.getOneVehicle();
   };
 
@@ -44,27 +43,12 @@ export default class Log extends Component {
   getOneVehicle = () => {
     API.getOneVehicleForUser(this.props.match.params.id)
       .then(res => {
-        if (res.data[0].vehicles) {
-          // console.log(res.data[0].vehicles[0]);
-          this.setState({
-            year: res.data[0].vehicles[0].year,
-            make: res.data[0].vehicles[0].make,
-            model: res.data[0].vehicles[0].model,
-            vehicleServiceLogs: res.data[0].vehicles[0].logs
-          })
-          console.log(this.state.vehicleServiceLogs)
-        }
-      })
-      .catch(err => this.loadServiceLogsFailNotification(err));
-  };
-
-  /**
-   * Load all service logs on record for the vehicle
-   */
-  loadServiceLogs = () => {
-    API.getAllServiceLogsForOneVehicle(this.props.match.params.id)
-      .then(res => {
-        // console.log(res)
+        this.setState({
+          year: res.data[0].vehicles[0].year,
+          make: res.data[0].vehicles[0].make,
+          model: res.data[0].vehicles[0].model,
+          vehicleServiceLogs: res.data[0].vehicles[0].logs
+        });
       })
       .catch(err => this.loadServiceLogsFailNotification(err));
   };
@@ -99,7 +83,10 @@ export default class Log extends Component {
         let mileageMemory = this.state.mileage;
         let serviceMemory = this.state.service;
         API.addOneLogForOneVehicle(id, log)
-          .then(() => this.addOneServiceLogSuccessNotification(dateMemory, mileageMemory, serviceMemory))
+          .then(() => {
+            this.addOneServiceLogSuccessNotification(dateMemory, mileageMemory, serviceMemory)
+            this.componentWillMount();
+          })
           .catch(err => this.addOneServiceLogFailNotification(err));
         this.setState({
           date: "",
@@ -236,11 +223,6 @@ export default class Log extends Component {
               <div className="box">
                 <div className="row">
                   <div className="col-md-12 text-center">
-                    {/* <label>Viewing logs for your {this.state.vehicle.year} {this.state.vehicle.make} {this.state.vehicle.model}</label> */}
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-12 text-center">
                     <label><strong>{this.state.year} {this.state.make} {this.state.model}</strong></label>
                   </div>
                 </div>
@@ -260,7 +242,6 @@ export default class Log extends Component {
                   {this.state.vehicleServiceLogs.length === 0 ?
                     (<label className="text-danger"><strong>No Service Logs on Record</strong></label>) : (
                       <React.Fragment>
-                        <hr />
                         <div className="col-md-3">
                           <label><strong>Date</strong></label>
                           {this.state.vehicleServiceLogs.map(({ date }) => {
@@ -302,7 +283,8 @@ export default class Log extends Component {
                           })}
                         </div>
                       </React.Fragment>
-                    )}
+                    )
+                  }
                 </div>
               </div>
               <DeleteOneVehicleModal
