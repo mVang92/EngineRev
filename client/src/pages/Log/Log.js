@@ -35,7 +35,18 @@ export default class Log extends Component {
     Modal.setAppElement("body");
     this.setState({ vehicleId: this.props.match.params.id });
     this.loadServiceLogs();
+    this.getOneVehicle();
   };
+
+  getOneVehicle = () => {
+    API.getOneVehicleForUser(this.props.match.params.id)
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
 
   /**
    * Load all service logs on record for the vehicle
@@ -43,7 +54,7 @@ export default class Log extends Component {
   loadServiceLogs = () => {
     API.getAllServiceLogsForOneVehicle(this.props.match.params.id)
       .then(res => {
-        console.log(res)
+        // console.log(res)
       })
       .catch(err => this.loadServiceLogsFailNotification(err));
   };
