@@ -21,7 +21,7 @@ export default class Log extends Component {
       mileage: "",
       service: "",
       comment: "",
-      logArray: [],
+      vehicleServiceLogs: [],
       showDeleteOneVehicleModal: false,
       showAddLogErrorModal: false,
       showMileageInputErrorModal: false,
@@ -45,12 +45,14 @@ export default class Log extends Component {
     API.getOneVehicleForUser(this.props.match.params.id)
       .then(res => {
         if (res.data[0].vehicles) {
-          console.log(res.data[0].vehicles[0]);
+          // console.log(res.data[0].vehicles[0]);
           this.setState({
             year: res.data[0].vehicles[0].year,
             make: res.data[0].vehicles[0].make,
             model: res.data[0].vehicles[0].model,
+            vehicleServiceLogs: res.data[0].vehicles[0].logs
           })
+          console.log(this.state.vehicleServiceLogs)
         }
       })
       .catch(err => this.loadServiceLogsFailNotification(err));
@@ -254,48 +256,53 @@ export default class Log extends Component {
                     showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
                   />
                 </div>
-                <hr />
                 <div className="row innerBox">
-                  <div className="col-md-3">
-                    <label><strong>Date</strong></label>
-                    {/* {this.state.logArray.map(({ date }) => {
-                return (
-                  <div>
-                    <div>{date}</div>
-                  </div>
-                );
-              })} */}
-                  </div>
-                  <div className="col-md-3">
-                    <label><strong>Mileage</strong></label>
-                    {/* {this.state.logArray.map(({ mileage }) => {
-                return (
-                  <div>
-                    <div>{mileage}</div>
-                  </div>
-                );
-              })} */}
-                  </div>
-                  <div className="col-md-3">
-                    <label><strong>Service</strong></label>
-                    {/* {this.state.logArray.map(({ service }) => {
-                return (
-                  <div>
-                    <div>{service}</div>
-                  </div>
-                );
-              })} */}
-                  </div>
-                  <div className="col-md-3">
-                    <label><strong>Comments</strong></label>
-                    {/* {this.state.logArray.map(({ comment }) => {
-                return (
-                  <div>
-                    <div>{comment}</div>
-                  </div>
-                );
-              })} */}
-                  </div>
+                  {this.state.vehicleServiceLogs.length === 0 ?
+                    (<label className="text-danger"><strong>No Service Logs on Record</strong></label>) : (
+                      <React.Fragment>
+                        <hr />
+                        <div className="col-md-3">
+                          <label><strong>Date</strong></label>
+                          {this.state.vehicleServiceLogs.map(({ date }) => {
+                            return (
+                              <div className="scrollable">
+                                <div>{date}</div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div className="col-md-3">
+                          <label><strong>Mileage</strong></label>
+                          {this.state.vehicleServiceLogs.map(({ mileage }) => {
+                            return (
+                              <div className="scrollable">
+                                <div>{mileage} miles</div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div className="col-md-3">
+                          <label><strong>Service</strong></label>
+                          {this.state.vehicleServiceLogs.map(({ service }) => {
+                            return (
+                              <div className="scrollable">
+                                <div>{service}</div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div className="col-md-3">
+                          <label><strong>Comments</strong></label>
+                          {this.state.vehicleServiceLogs.map(({ comment }) => {
+                            return (
+                              <div className="scrollable">
+                                <div>{comment}</div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </React.Fragment>
+                    )}
                 </div>
               </div>
               <DeleteOneVehicleModal

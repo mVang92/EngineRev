@@ -212,3 +212,8 @@ input {
 #applicationLogo {
     width: 15%;
 }
+
+.scrollable {
+    height: 75px;
+    overflow: auto;
+}
