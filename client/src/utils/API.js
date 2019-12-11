@@ -1,6 +1,10 @@
 import axios from "axios";
 
 export default {
+  // Get one vehicle for the signed in user
+  getOneVehicleForUser: id => {
+    return axios.get(`/api/vehicles/findOneVehicleForUser/${id}`)
+  },
   // Get all vehicles for the signed in user
   getAllVehiclesForUser: id => {
     return axios.get(`/api/vehicles/${id}`)

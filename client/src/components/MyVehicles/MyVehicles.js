@@ -11,7 +11,6 @@ class MyVehicles extends Component {
           vehicleData.vehicles ? (
             vehicleData.vehicles.length ? (
               <React.Fragment>
-                {console.log(vehicleData)}
                 {vehicleCountForUser(vehicleData.vehicles.length)}
                 < div className="row">
                   <div className="col-md-12">

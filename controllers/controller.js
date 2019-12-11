@@ -1,7 +1,8 @@
 const db = require("../models");
 console.log("controller loaded");
 
-let creatorId = ""
+let creatorId = "";
+let vehicleId = "";
 
 module.exports = {
 
@@ -29,6 +30,34 @@ module.exports = {
   },
 
   /**
+   * Find one vehicle belonging to one user
+   */
+  findOneVehicleForUser: (req, res) => {
+    console.log("Hit findOneVehicleForUser");
+    vehicleId = req.params.id;
+    console.log("creatorId: " + creatorId);
+    console.log("vehicleId: " + vehicleId);
+    db.Vehicle
+      .aggregate([
+        { $match: { creator: creatorId } },
+        {
+          $project: {
+            vehicles: {
+              $filter: {
+                input: "$vehicles",
+                as: "vehicle",
+                cond: { $eq: ["$$vehicle._id", vehicleId] }
+              }
+            },
+            _id: 0
+          }
+        }
+      ])
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
    * Add one vehicle for the current user logged in
    */
   addOneVehicle: (req, res) => {
@@ -49,7 +78,7 @@ module.exports = {
     console.log("Hit addOneLogForOneVehicle");
     db.Vehicle
       .updateOne(
-        { creator : creatorId, vehicles: { $elemMatch: { _id: req.params.id } } },
+        { creator: creatorId, vehicles: { $elemMatch: { _id: req.params.id } } },
         { $push: { "vehicles.$.logs": [req.body] } }
       )
       .then(result => res.json(result))
@@ -62,7 +91,7 @@ module.exports = {
   findAllServiceLogsForOneVehicle: (req, res) => {
     console.log("Hit findAllServiceLogsForOneVehicle");
     db.Vehicle
-      .find({"vehicles._id": req.params.id})
+      .find({ "vehicles._id": req.params.id })
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
