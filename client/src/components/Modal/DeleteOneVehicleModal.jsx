@@ -20,7 +20,7 @@ const DeleteOneVehicleModal = props => {
                                 <img className="warningImage" src={warningImage} alt='warning' />
                             </div>
                             <div className="col-md-10">
-                                <label><strong>Vehicle ID = {props.state.vehicleId}</strong></label>
+                                <label><strong>Delete your {props.state.year} {props.state.make} {props.state.model}?</strong></label>
                             </div>
                         </div>
                         <div className="modal-body text-danger">

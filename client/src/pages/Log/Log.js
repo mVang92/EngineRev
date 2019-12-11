@@ -34,19 +34,27 @@ export default class Log extends Component {
   componentWillMount = () => {
     Modal.setAppElement("body");
     this.setState({ vehicleId: this.props.match.params.id });
-    this.loadServiceLogs();
+    // this.loadServiceLogs();
     this.getOneVehicle();
   };
 
+  /**
+   * Get the vehicle information for the selected vehicle
+   */
   getOneVehicle = () => {
     API.getOneVehicleForUser(this.props.match.params.id)
       .then(res => {
-        console.log(res.data)
+        if (res.data[0].vehicles) {
+          console.log(res.data[0].vehicles[0]);
+          this.setState({
+            year: res.data[0].vehicles[0].year,
+            make: res.data[0].vehicles[0].make,
+            model: res.data[0].vehicles[0].model,
+          })
+        }
       })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+      .catch(err => this.loadServiceLogsFailNotification(err));
+  };
 
   /**
    * Load all service logs on record for the vehicle
@@ -229,6 +237,23 @@ export default class Log extends Component {
                     {/* <label>Viewing logs for your {this.state.vehicle.year} {this.state.vehicle.make} {this.state.vehicle.model}</label> */}
                   </div>
                 </div>
+                <div className="row">
+                  <div className="col-md-12 text-center">
+                    <label><strong>{this.state.year} {this.state.make} {this.state.model}</strong></label>
+                  </div>
+                </div>
+                <div className="innerBox">
+                  <AddLog
+                    date={this.state.date}
+                    mileage={this.state.mileage}
+                    service={this.state.service}
+                    comment={this.state.comment}
+                    handleChange={this.handleChange}
+                    handleResetLogVehicleForm={this.handleResetLogVehicleForm}
+                    handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
+                    showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
+                  />
+                </div>
                 <hr />
                 <div className="row innerBox">
                   <div className="col-md-3">
@@ -271,24 +296,6 @@ export default class Log extends Component {
                 );
               })} */}
                   </div>
-                </div>
-                <hr />
-                <div className="row">
-                  <div className="col-md-12 text-center">
-                    <label><strong>Enter new service log</strong></label>
-                  </div>
-                </div>
-                <div className="innerBox">
-                  <AddLog
-                    date={this.state.date}
-                    mileage={this.state.mileage}
-                    service={this.state.service}
-                    comment={this.state.comment}
-                    handleChange={this.handleChange}
-                    handleResetLogVehicleForm={this.handleResetLogVehicleForm}
-                    handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
-                    showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
-                  />
                 </div>
               </div>
               <DeleteOneVehicleModal

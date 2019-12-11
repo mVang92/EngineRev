@@ -6,6 +6,7 @@ router
   .route("/")
   .post(controller.createUserSchema)
 
+// Matches with "/api/vehicles/findOneVehicleForUser:id"
 router
   .route("/findOneVehicleForUser/:id")
   .get(controller.findOneVehicleForUser)
