@@ -1,4 +1,5 @@
 const db = require("../models");
+const { ObjectId } = require("mongodb");
 console.log("controller loaded");
 
 let creatorId = "";
@@ -46,7 +47,7 @@ module.exports = {
               $filter: {
                 input: "$vehicles",
                 as: "vehicle",
-                cond: { $eq: ["$$vehicle._id", vehicleId] }
+                cond: { $eq: ["$$vehicle._id", ObjectId(vehicleId)] }
               }
             },
             _id: 0
