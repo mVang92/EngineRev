@@ -6,6 +6,7 @@ import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal"
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal"
 import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal"
 import Modal from "react-modal";
+import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 
 export default class Log extends Component {
@@ -242,45 +243,43 @@ export default class Log extends Component {
                   {this.state.vehicleServiceLogs.length === 0 ?
                     (<label className="text-danger"><strong>No Service Logs on Record</strong></label>) : (
                       <React.Fragment>
-                        <div className="col-md-3">
-                          <label><strong>Date</strong></label>
-                          {this.state.vehicleServiceLogs.map(({ date }) => {
+                        <div className="col-md-12">
+                          <div className="row">
+                            <div className="col-md-3">
+                              <label>
+                                <strong>Date</strong>
+                              </label>
+                            </div>
+                            <div className="col-md-3">
+                              <label>
+                                <strong>Mileage</strong>
+                              </label>
+                            </div>
+                            <div className="col-md-3">
+                              <label>
+                                <strong>Service</strong>
+                              </label>
+                            </div>
+                            <div className="col-md-3">
+                              <label>
+                                <strong>Comments</strong>
+                              </label>
+                            </div>
+                          </div>
+                          {this.state.vehicleServiceLogs.map(({ _id, date, mileage, service, comment }) => {
                             return (
-                              <div className="scrollable">
-                                <div>{date}</div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                        <div className="col-md-3">
-                          <label><strong>Mileage</strong></label>
-                          {this.state.vehicleServiceLogs.map(({ mileage }) => {
-                            return (
-                              <div className="scrollable">
-                                <div>{mileage} miles</div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                        <div className="col-md-3">
-                          <label><strong>Service</strong></label>
-                          {this.state.vehicleServiceLogs.map(({ service }) => {
-                            return (
-                              <div className="scrollable">
-                                <div>{service}</div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                        <div className="col-md-3">
-                          <label><strong>Comments</strong></label>
-                          {this.state.vehicleServiceLogs.map(({ comment }) => {
-                            return (
-                              <div className="scrollable">
-                                <div>{comment}</div>
-                              </div>
-                            );
-                          })}
+                              <React.Fragment key={_id}>
+                                <hr />
+                                <div className="row">
+                                  <div className="col-md-3 scrollable">{date}</div>
+                                  <div className="col-md-3 scrollable">{mileage} miles</div>
+                                  <div className="col-md-3 scrollable">{service}</div>
+                                  <div className="col-md-3 scrollable">{comment}</div>
+                                </div>
+                              </React.Fragment>
+                            )
+                          })
+                          }
                         </div>
                       </React.Fragment>
                     )

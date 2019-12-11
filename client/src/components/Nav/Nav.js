@@ -177,7 +177,7 @@ export class Nav extends Component {
     return (
       <nav className="navbar navbar-expand-lg sticky-top">
         <a className="navbar-brand underline" href="/">
-          <img id="applicationLogo" src={carSpaceLogo}></img>
+          <img id="applicationLogo" src={carSpaceLogo} alt="applicationLogo"></img>
         </a>
         <div className="collapse navbar-collapse" id="navbarNav">
           {this.state.loggedin === true ? (
