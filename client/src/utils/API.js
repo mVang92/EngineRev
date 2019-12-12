@@ -29,13 +29,11 @@ export default {
   },
   // Delete one vehicle
   deleteOneVehicle: id => {
-    console.log("deleteOneVehicle: " + id)
     return axios.delete(`/api/vehicles/deleteVehicle/${id}`);
   },
   // Delete one user account
   // Will have to decide where to put this function in the app
   deleteOneUserAccount: id => {
-    console.log("deleteOneUserAccount: " + id)
     return axios.delete(`/api/vehicles/${id}`);
   }
 };
