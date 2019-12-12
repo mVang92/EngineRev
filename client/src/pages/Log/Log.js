@@ -224,7 +224,7 @@ export default class Log extends Component {
               <div className="box">
                 <div className="row">
                   <div className="col-md-12 text-center">
-                    <label><strong>{this.state.year} {this.state.make} {this.state.model}</strong></label>
+                    <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
                   </div>
                 </div>
                 <div className="innerBox">
