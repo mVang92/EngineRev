@@ -214,6 +214,26 @@ input {
 }
 
 .scrollable {
-    height: 75px;
+    height: 70px;
     overflow: auto;
+}
+
+#serviceLogActionDropdown {
+    border-radius: 5px;
+    margin: auto;
+}
+
+@media print {
+	.hideWhilePrinting {
+        display: none;
+    }
+    
+    .scrollable {
+        overflow: initial;
+        height: 100%;
+    }
+
+    .Toastify__toast-container {
+        display: none;
+    }
 }
