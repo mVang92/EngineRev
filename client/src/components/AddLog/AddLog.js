@@ -71,7 +71,23 @@ class AddLog extends Component {
               </button>
             </a>
           </div>
-          <div className="col-md-4"></div>
+          <div className="col-md-2"></div>
+          <div className="col-md-2 printPageButton">
+            {
+              this.props.vehicleServiceLogs.length > 0 ? (
+                <button
+                  id="printPageButton"
+                  title="Print Service Logs"
+                  type="button"
+                  className="cancelBtn"
+                  onClick={this.props.handlePrintPage}>
+                  Print Logs
+              </button>
+              ) : (
+                  null
+                )
+            }
+          </div>
           <div className="col-md-2 logDeleteBtn">
             <button
               id="addLogDeleteVehicleButton"

@@ -122,6 +122,28 @@ export default class Log extends Component {
   };
 
   /**
+   * Show the print screen for the user to print all service logs
+   */
+  handlePrintPage = () => {
+    window.print();
+  };
+
+  /**
+   * Execute the value from the service log action dropdown
+   */
+  getServiceLogActionValue = () => {
+    const element = document.getElementById("serviceLogActionDropdown");
+    const value = element.options[element.selectedIndex].value;
+    switch (value) {
+      case "edit":
+        console.log("edit!");
+        break;
+      case "delete":
+        console.log("delete!");
+    };
+  };
+
+  /**
    * Display the success notification when the user adds a service log
    * 
    * @param date    the date when the service is logged
@@ -227,13 +249,15 @@ export default class Log extends Component {
                     <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
                   </div>
                 </div>
-                <div className="innerBox">
+                <div className="innerBox hideWhilePrinting">
                   <AddLog
                     date={this.state.date}
                     mileage={this.state.mileage}
                     service={this.state.service}
                     comment={this.state.comment}
+                    vehicleServiceLogs={this.state.vehicleServiceLogs}
                     handleChange={this.handleChange}
+                    handlePrintPage={this.handlePrintPage}
                     handleResetLogVehicleForm={this.handleResetLogVehicleForm}
                     handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
                     showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
@@ -245,12 +269,12 @@ export default class Log extends Component {
                       <React.Fragment>
                         <div className="col-md-12">
                           <div className="row">
-                            <div className="col-md-3">
+                            <div className="col-md-2">
                               <label>
                                 <strong>Date</strong>
                               </label>
                             </div>
-                            <div className="col-md-3">
+                            <div className="col-md-2">
                               <label>
                                 <strong>Mileage</strong>
                               </label>
@@ -265,16 +289,32 @@ export default class Log extends Component {
                                 <strong>Comments</strong>
                               </label>
                             </div>
+                            <div className="col-md-2 hideWhilePrinting">
+                              <label>
+                                <strong>Actions</strong>
+                              </label>
+                            </div>
                           </div>
                           {this.state.vehicleServiceLogs.map(({ _id, date, mileage, service, comment }) => {
                             return (
                               <React.Fragment key={_id}>
                                 <hr />
                                 <div className="row">
-                                  <div className="col-md-3 scrollable">{date}</div>
-                                  <div className="col-md-3 scrollable">{mileage} miles</div>
+                                  <div className="col-md-2 scrollable">{date}</div>
+                                  <div className="col-md-2 scrollable">{mileage} miles</div>
                                   <div className="col-md-3 scrollable">{service}</div>
                                   <div className="col-md-3 scrollable">{comment}</div>
+                                  <div className="col-md-2 scrollable">
+                                    {/* <form className="row hideWhilePrinting" onClick={this.getServiceLogActionValue}>
+                                      <div className="col-md-12">
+                                        <select id="serviceLogActionDropdown">
+                                          <option value="">--Select--</option>
+                                          <option value="edit">Edit</option>
+                                          <option value="delete">Delete</option>
+                                        </select>
+                                      </div>
+                                    </form> */}
+                                  </div>
                                 </div>
                               </React.Fragment>
                             )
