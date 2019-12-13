@@ -27,7 +27,7 @@ export class Nav extends Component {
   /**
    * Checks to see if the user is logged in
    */
-  componentWillMount = () => {
+  componentDidMount = () => {
     const originUrl = window.location.origin;
     this.setState({ originUrl: originUrl })
     this.isUserLoggedIn();
