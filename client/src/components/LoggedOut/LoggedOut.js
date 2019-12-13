@@ -10,7 +10,7 @@ const LoggedOut = () =>
       <div className="col-md-6">
         <label><h2>Easily record service records for your vehicles.</h2></label>
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-12 centerOnMobile">
             <img id="notLoggedInCarGif" src={notLoggedInCarGif} alt="Create Account"></img>
           </div>
         </div>

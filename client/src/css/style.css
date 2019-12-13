@@ -156,6 +156,16 @@ input {
     background: rgb(255, 255, 255)
 }
 
+#signOutNavButton {
+    color: white;
+}
+
+#signOutNavButton:hover {
+    background: rgb(128, 128, 128);
+    color: black;
+    font-weight: bold;
+}
+
 .nav-link:hover {
     transition-duration: 0.1s;
     background: rgb(64, 64, 64);
@@ -168,6 +178,11 @@ input {
 .nav-link,
 .backHomeBtn {
     cursor: pointer;
+}
+
+.navbar-toggler {
+    border-color: rgb(255, 192, 64) !important;
+    background: white;
 }
 
 .notLoggedInImages {
@@ -243,5 +258,110 @@ input {
 
     .Toastify__toast-container {
         display: none;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .actionButtonsMobileDisplay {
+        max-width: 45%;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .navbar-nav {
+        position: initial;
+        right: 0;
+        text-align: center;
+    }
+
+    #addVehicleButton,
+    #resetVehicleInputFieldsButton {
+        width: 7em;
+    }
+
+    .actionButtonsMobileDisplay {
+        max-width: 25%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #userEmail{
+        font-size: 28px;
+    }
+
+    #addVehicleButton {
+        margin-top: 2em;
+    }
+
+    .notLoggedInImages {
+        width: 10%;
+    }
+
+    #notLoggedInCarGif {
+        width: 40%;
+    }
+
+    .centerOnMobile {
+        text-align: center;
+    }
+
+    .signOutImage,
+    .warningImage {
+        width: 5em;
+    }
+
+    .imageMobileDisplay {
+        width: 5em;
+    }
+
+    #addServiceLogButton,
+    #addLogResetInputFieldsButton,
+    #addLogDeleteVehicleButton,
+    #printPageButton {
+        margin-top: 1em;
+        height: 3em;
+    }
+
+    .logResetBtn,
+    .logSubmitBtn,
+    .logDeleteBtn {
+        text-align: initial;
+    }
+
+    .innerBox {
+        padding: initial;
+        margin: initial;
+    }
+}
+    
+@media only screen and (max-width: 575px) {
+    #doNotSignOutButton,
+    #doSignOutButton {
+        width: 7em;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    #addVehicleButton,
+    #resetVehicleInputFieldsButton {
+        width: 10em;
+        height: 3em;
+        font-weight: bold;
+    }
+
+    .Toastify__toast-container--top-right {
+        bottom: 4em;
+        top: 0 !important;
+    }
+
+    .signOutImage,
+    .warningImage {
+        width: 3em;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .navbar-brand {
+        width: 70%;
     }
 }

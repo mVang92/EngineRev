@@ -329,7 +329,7 @@ export default class Log extends Component {
                     showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
                   />
                 </div>
-                <div className="row innerBox">
+                <div className="row innerBox serviceLogMobileDisplay">
                   {this.state.vehicleServiceLogs.length === 0 ?
                     (<label className="text-danger"><strong>No Service Logs on Record</strong></label>) : (
                       <React.Fragment>
