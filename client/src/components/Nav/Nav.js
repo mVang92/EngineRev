@@ -5,7 +5,6 @@ import SignUpModal from "../Modal/SignUpModal";
 import SignOutModal from "../Modal/SignOutModal";
 import { firebase, auth } from "../../firebase"
 import { toast } from "react-toastify";
-import carSpaceLogo from "../../images/carSpaceLogo.png";
 import API from "../../utils/API";
 
 
@@ -175,31 +174,22 @@ export class Nav extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-lg sticky-top">
-        <a className="navbar-brand underline" href="/">
-          <img id="applicationLogo" src={carSpaceLogo} alt="applicationLogo"></img>
-        </a>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          {this.state.loggedin === true ? (
-            <React.Fragment>
-              <ul className="navbar-nav">
-                <NavLoggedIn
-                  state={this.state}
-                  showSignOutModal={this.showSignOutModal}
-                />
-              </ul>
-            </React.Fragment>
-          ) : (
-              <ul className="navbar-nav">
-                <NavLoggedOut
-                  state={this.state}
-                  showSignUpModal={this.showSignUpModal}
-                  showSignInModal={this.showSignInModal}
-                />
-              </ul>
-            )
-          }
-        </div>
+      <React.Fragment>
+        {this.state.loggedin === true ? (
+          <React.Fragment>
+            <NavLoggedIn
+              state={this.state}
+              showSignOutModal={this.showSignOutModal}
+            />
+          </React.Fragment>
+        ) : (
+            <NavLoggedOut
+              state={this.state}
+              showSignUpModal={this.showSignUpModal}
+              showSignInModal={this.showSignInModal}
+            />
+          )
+        }
         <SignInModal
           showSignInModal={this.state.showSignInModal}
           hideSignInModal={this.hideSignInModal}
@@ -217,7 +207,7 @@ export class Nav extends Component {
           hideSignOutModal={this.hideSignOutModal}
           handleSignOut={this.handleSignOut}
         />
-      </nav>
+      </React.Fragment>
     );
   };
 };

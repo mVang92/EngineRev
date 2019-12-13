@@ -19,7 +19,7 @@ const ServiceLog = props => {
         <div className="col-md-3 scrollable">{comment}</div>
         <div className="col-md-2 scrollable">
           <div className="row">
-            <div className="col-md-6 hideWhilePrinting">
+            <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
               <button
                 id="editActionButton"
                 onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, date, mileage, service, comment, editValue)}
@@ -27,7 +27,7 @@ const ServiceLog = props => {
                 Edit
               </button>
             </div>
-            <div className="col-md-6 hideWhilePrinting">
+            <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
               <button
                 id="deleteActionButton"
                 onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, date, mileage, service, comment, deleteValue)}>

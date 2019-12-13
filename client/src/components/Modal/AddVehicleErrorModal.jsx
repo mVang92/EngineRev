@@ -16,7 +16,7 @@ const AddVehicleErrorModal = props => {
                 <div className="modal-body modalShadow">
                     <div className="modalBody">
                         <div className="modal-header">
-                            <div className="col-md-2">
+                            <div className="col-md-2 imageMobileDisplay">
                                 <img className="warningImage" src={warningImage} alt="warning" />
                             </div>
                             <div className="col-md-10 userInputErrorMessage">
