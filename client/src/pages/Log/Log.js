@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import Container from "../../components/Container";
 import AddLog from "../../components/AddLog";
+import ServiceLog from "../../components/ServiceLog";
 import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal";
+import DeleteOneServiceLogModal from "../../components/Modal/DeleteOneServiceLogModal";
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal"
 import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal"
 import Modal from "react-modal";
@@ -22,17 +24,23 @@ export default class Log extends Component {
       mileage: "",
       service: "",
       comment: "",
+      serviceLogId: "",
+      serviceLogDate: "",
+      serviceLogMileage: "",
+      serviceLogService: "",
+      serviceLogComment: "",
       vehicleServiceLogs: [],
       showDeleteOneVehicleModal: false,
       showAddLogErrorModal: false,
       showMileageInputErrorModal: false,
+      showDeleteOneLogModal: false
     };
   }
 
   /**
    * Display the service log information for the selected vehicle
    */
-  componentWillMount = () => {
+  componentDidMount = () => {
     Modal.setAppElement("body");
     this.setState({ vehicleId: this.props.match.params.id });
     this.getOneVehicle();
@@ -86,7 +94,7 @@ export default class Log extends Component {
         API.addOneLogForOneVehicle(id, log)
           .then(() => {
             this.addOneServiceLogSuccessNotification(dateMemory, mileageMemory, serviceMemory)
-            this.componentWillMount();
+            this.componentDidMount();
           })
           .catch(err => this.addOneServiceLogFailNotification(err));
         this.setState({
@@ -122,6 +130,19 @@ export default class Log extends Component {
   };
 
   /**
+   * Deletes one service log from record
+   */
+  handleDeleteOneServiceLog = () => {
+    API.deleteOneServiceLog(this.state.serviceLogId)
+      .then(() => this.deleteOneServiceLogSuccessNotification())
+      .catch(err => this.deleteOneServiceLogFailNotification(err));
+    setTimeout(() => {
+      this.setState({ showDeleteOneLogModal: false });
+    }, 250);
+    this.getOneVehicle();
+  };
+
+  /**
    * Show the print screen for the user to print all service logs
    */
   handlePrintPage = () => {
@@ -131,15 +152,17 @@ export default class Log extends Component {
   /**
    * Execute the value from the service log action dropdown
    */
-  getServiceLogActionValue = () => {
-    const element = document.getElementById("serviceLogActionDropdown");
-    const value = element.options[element.selectedIndex].value;
-    switch (value) {
+  getServiceLogActionValue = (event, serviceLogId, date, mileage, service, comment, actionValue) => {
+    event.preventDefault();
+    switch (actionValue) {
       case "edit":
         console.log("edit!");
         break;
       case "delete":
-        console.log("delete!");
+        this.showDeleteOneServiceLogModal(serviceLogId, date, mileage, service, comment);
+        break;
+      default:
+        null;
     };
   };
 
@@ -171,11 +194,27 @@ export default class Log extends Component {
   };
 
   /**
+   * Display the success notification when the user deletes a service log
+   */
+  deleteOneServiceLogSuccessNotification = () => {
+    toast.success(`Service Log Deleted Successfully`);
+  };
+
+  /**
    * Display the error notification when an error occurs while deleting a vehicle
    * 
    * @param err the error message to display to the user
    */
   deleteOneVehicleFailNotification = err => {
+    toast.error(err.toString());
+  };
+
+  /**
+   * Display the error notification when an error occurs while deleting a service log
+   * 
+   * @param err the error message to display to the user
+   */
+  deleteOneServiceLogFailNotification = err => {
     toast.error(err.toString());
   };
 
@@ -214,6 +253,33 @@ export default class Log extends Component {
    */
   showMileageInputErrorModal = () => {
     this.setState({ showMileageInputErrorModal: true });
+  };
+
+  /**
+   * Display the modal to notify the user about deleting the service log
+   * 
+   * @param serviceLogId the service log id to target
+   * @param date         the service log date
+   * @param mileage      the service log mileage
+   * @param service      the service log service type
+   * @param comment      the service log comment
+   */
+  showDeleteOneServiceLogModal = (serviceLogId, date, mileage, service, comment) => {
+    this.setState({
+      showDeleteOneLogModal: true,
+      serviceLogId: serviceLogId,
+      serviceLogDate: date,
+      serviceLogMileage: mileage,
+      serviceLogService: service,
+      serviceLogComment: comment
+    });
+  };
+
+  /**
+   * Hide the deleted one service log modal
+   */
+  hideDeleteOneServiceLogModal = () => {
+    this.setState({ showDeleteOneLogModal: false });
   };
 
   /**
@@ -289,36 +355,22 @@ export default class Log extends Component {
                                 <strong>Comments</strong>
                               </label>
                             </div>
-                            <div className="col-md-2 hideWhilePrinting">
-                              <label>
-                                <strong>Actions</strong>
-                              </label>
-                            </div>
+                            <div className="col-md-2"></div>
                           </div>
-                          {this.state.vehicleServiceLogs.map(({ _id, date, mileage, service, comment }) => {
-                            return (
-                              <React.Fragment key={_id}>
-                                <hr />
-                                <div className="row">
-                                  <div className="col-md-2 scrollable">{date}</div>
-                                  <div className="col-md-2 scrollable">{mileage} miles</div>
-                                  <div className="col-md-3 scrollable">{service}</div>
-                                  <div className="col-md-3 scrollable">{comment}</div>
-                                  <div className="col-md-2 scrollable">
-                                    {/* <form className="row hideWhilePrinting" onClick={this.getServiceLogActionValue}>
-                                      <div className="col-md-12">
-                                        <select id="serviceLogActionDropdown">
-                                          <option value="">--Select--</option>
-                                          <option value="edit">Edit</option>
-                                          <option value="delete">Delete</option>
-                                        </select>
-                                      </div>
-                                    </form> */}
-                                  </div>
-                                </div>
-                              </React.Fragment>
-                            )
-                          })
+                          {
+                            this.state.vehicleServiceLogs.map(serviceLog => {
+                              return (
+                                <ServiceLog
+                                  key={serviceLog._id}
+                                  _id={serviceLog._id}
+                                  date={serviceLog.date}
+                                  mileage={serviceLog.mileage}
+                                  service={serviceLog.service}
+                                  comment={serviceLog.comment}
+                                  getServiceLogActionValue={this.getServiceLogActionValue}
+                                />
+                              )
+                            })
                           }
                         </div>
                       </React.Fragment>
@@ -330,6 +382,12 @@ export default class Log extends Component {
                 handleDeleteOneVehicle={this.handleDeleteOneVehicle}
                 showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
                 hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
+                state={this.state}
+              />
+              <DeleteOneServiceLogModal
+                handleDeleteOneServiceLog={this.handleDeleteOneServiceLog}
+                showDeleteOneLogModal={this.state.showDeleteOneLogModal}
+                hideDeleteOneServiceLogModal={this.hideDeleteOneServiceLogModal}
                 state={this.state}
               />
               <AddLogErrorModal

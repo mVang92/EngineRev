@@ -99,6 +99,20 @@ module.exports = {
   },
 
   /**
+   * Remove the selected service log from the database
+   */
+  removeOneServiceLog: (req, res) => {
+    console.log("Hit removeOneServiceLog");
+    db.Vehicle
+      .findOneAndUpdate(
+        { "vehicles._id": ObjectId(vehicleId) },
+        { $pull: { "vehicles.$.logs": { _id: req.params.id } } }
+      )
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
    * Delete the account for the user
    */
   removeOneUserAccount: (req, res) => {

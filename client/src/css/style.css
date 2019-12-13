@@ -106,7 +106,9 @@ input {
 .addBtn,
 .resetBtn,
 .cancelBtn,
-.deleteBtn {
+.deleteBtn,
+#editActionButton,
+#deleteActionButton {
     border-radius: 5px;
     cursor: pointer;
     transition-duration: 0.5s;
@@ -121,7 +123,8 @@ input {
 }
 
 .resetBtn,
-.deleteBtn {
+.deleteBtn,
+#deleteActionButton {
     background: rgb(255, 200, 200);
 }
 
@@ -132,7 +135,9 @@ input {
 .addBtn:hover,
 .resetBtn:hover,
 .cancelBtn:hover,
-.deleteBtn:hover {
+.deleteBtn:hover,
+#editActionButton,
+#deleteActionButton {
     transition-duration: 0.2s;
 }
 
@@ -141,11 +146,13 @@ input {
 }
 
 .resetBtn:hover,
-.deleteBtn:hover {
+.deleteBtn:hover,
+#deleteActionButton:hover {
     background: rgb(255, 128, 128);
 }
 
-.cancelBtn:hover {
+.cancelBtn:hover,
+#editActionButton:hover {
     background: rgb(255, 255, 255)
 }
 
@@ -218,9 +225,10 @@ input {
     overflow: auto;
 }
 
-#serviceLogActionDropdown {
+.serviceLogActionDropdown {
     border-radius: 5px;
     margin: auto;
+    width: 100%;
 }
 
 @media print {
