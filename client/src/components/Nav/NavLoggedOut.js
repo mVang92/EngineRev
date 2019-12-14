@@ -3,7 +3,7 @@ import carSpaceLogo from "../../images/carSpaceLogo.png";
 
 export const NavLoggedOut = props => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light">
+        <nav id="navBarLoggedOut" className="navbar navbar-expand-lg navbar-light">
             <a className="navbar-brand underline" href="/">
                 <img id="applicationLogo" src={carSpaceLogo} alt="applicationLogo"></img>
             </a>
@@ -18,7 +18,7 @@ export const NavLoggedOut = props => {
                          </a>
                     </li>
                     <li className="nav-item">
-                        <a id="signUpNavButton" className="text-light nav-link" onClick={(event) => props.showSignUpModal(event)}>
+                        <a id="signUpNavButton" className="nav-link" onClick={(event) => props.showSignUpModal(event)}>
                             Sign Up
                          </a>
                     </li>
