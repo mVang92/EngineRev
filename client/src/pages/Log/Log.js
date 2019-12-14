@@ -134,12 +134,14 @@ export default class Log extends Component {
    */
   handleDeleteOneServiceLog = () => {
     API.deleteOneServiceLog(this.state.serviceLogId)
-      .then(() => this.deleteOneServiceLogSuccessNotification())
+      .then(() => {
+        setTimeout(() => {
+          this.setState({ showDeleteOneLogModal: false });
+        }, 200);
+        this.componentDidMount();
+        this.deleteOneServiceLogSuccessNotification()
+      })
       .catch(err => this.deleteOneServiceLogFailNotification(err));
-    setTimeout(() => {
-      this.setState({ showDeleteOneLogModal: false });
-    }, 250);
-    this.getOneVehicle();
   };
 
   /**
