@@ -33,7 +33,6 @@ export default {
   },
   // Delete one service log
   deleteOneServiceLog: id => {
-    console.log(id)
     return axios.delete(`/api/vehicles/deleteServiceLog/${id}`);
   },
   // Delete one user account
