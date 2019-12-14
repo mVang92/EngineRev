@@ -128,7 +128,7 @@ input {
 }
 
 .cancelBtn {
-    background: rgb(200, 200, 200)
+    background: rgb(225, 225, 225)
 }
 
 .addBtn {
@@ -418,6 +418,7 @@ input {
     .deleteBtn {
         width: 9em;
     }
+
     #editActionButton,
     #deleteActionButton {
         width: 6em;

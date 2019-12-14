@@ -30,6 +30,7 @@ export default class Log extends Component {
       serviceLogService: "",
       serviceLogComment: "",
       vehicleServiceLogs: [],
+      sortVehicleServiceLogsMostRecent: true,
       showDeleteOneVehicleModal: false,
       showAddLogErrorModal: false,
       showMileageInputErrorModal: false,
@@ -167,6 +168,28 @@ export default class Log extends Component {
         break;
       default:
         null;
+    };
+  };
+
+  /**
+   * Sort the vehicle service logs from least recent to most recent by date
+   */
+  sortServiceLogs = () => {
+    if (this.state.sortVehicleServiceLogsMostRecent) {
+      return this.state.vehicleServiceLogs.sort((a, b) => new Date(...b.date.split('/').reverse()) - new Date(...a.date.split('/').reverse()));
+    } else {
+      return this.state.vehicleServiceLogs.sort((a, b) => new Date(...a.date.split('/').reverse()) - new Date(...b.date.split('/').reverse()));
+    };
+  };
+
+  /**
+   * Change the state of the sort from true to false and vice versa
+   */
+  changeSortOrder = () => {
+    if (this.state.sortVehicleServiceLogsMostRecent) {
+      this.setState({ sortVehicleServiceLogsMostRecent: false });
+    } else {
+      this.setState({ sortVehicleServiceLogsMostRecent: true });
     };
   };
 
@@ -330,6 +353,7 @@ export default class Log extends Component {
                     handlePrintPage={this.handlePrintPage}
                     handleResetLogVehicleForm={this.handleResetLogVehicleForm}
                     handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
+                    changeSortOrder={this.changeSortOrder}
                     showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
                   />
                 </div>
@@ -362,19 +386,35 @@ export default class Log extends Component {
                             <div className="col-md-2 logDetailsMobileDisplay"></div>
                           </div>
                           {
-                            this.state.vehicleServiceLogs.sort((a, b) => new Date(...b.date.split('/').reverse()) - new Date(...a.date.split('/').reverse())).map(serviceLog => {
-                              return (
-                                <ServiceLog
-                                  key={serviceLog._id}
-                                  _id={serviceLog._id}
-                                  date={serviceLog.date}
-                                  mileage={serviceLog.mileage}
-                                  service={serviceLog.service}
-                                  comment={serviceLog.comment}
-                                  getServiceLogActionValue={this.getServiceLogActionValue}
-                                />
+                            this.state.sortVehicleServiceLogsMostRecent ? (
+                              this.sortServiceLogs().map(serviceLog => {
+                                return (
+                                  <ServiceLog
+                                    key={serviceLog._id}
+                                    _id={serviceLog._id}
+                                    date={serviceLog.date}
+                                    mileage={serviceLog.mileage}
+                                    service={serviceLog.service}
+                                    comment={serviceLog.comment}
+                                    getServiceLogActionValue={this.getServiceLogActionValue}
+                                  />
+                                )
+                              })
+                            ) : (
+                                this.sortServiceLogs().map(serviceLog => {
+                                  return (
+                                    <ServiceLog
+                                      key={serviceLog._id}
+                                      _id={serviceLog._id}
+                                      date={serviceLog.date}
+                                      mileage={serviceLog.mileage}
+                                      service={serviceLog.service}
+                                      comment={serviceLog.comment}
+                                      getServiceLogActionValue={this.getServiceLogActionValue}
+                                    />
+                                  )
+                                })
                               )
-                            })
                           }
                         </div>
                       </React.Fragment>

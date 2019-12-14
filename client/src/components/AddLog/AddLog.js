@@ -70,7 +70,29 @@ class AddLog extends Component {
               </button>
             </a>
           </div>
-          <div className="col-md-2 logButtonsMobileDisplay"></div>
+          <div className="col-md-2 sortServiceLogsByDateButton logButtonsMobileDisplay">
+            {
+              this.props.vehicleServiceLogs.length > 1 ? (
+                <button
+                  id="addLogDeleteVehicleButton"
+                  title="Delete This Vehicle"
+                  type="button"
+                  className="cancelBtn"
+                  onClick={this.props.changeSortOrder}>
+                  Sort Dates
+                </button>
+              ) : (
+                  <button
+                    id="addLogDeleteVehicleButton"
+                    title="Delete This Vehicle"
+                    type="button"
+                    className="cancelBtn"
+                    disabled>
+                    Sort Dates
+                </button>
+                )
+            }
+          </div>
           <div className="col-md-2 printPageButton logButtonsMobileDisplay">
             {
               this.props.vehicleServiceLogs.length > 0 ? (
@@ -83,7 +105,14 @@ class AddLog extends Component {
                   Print Logs
               </button>
               ) : (
-                  null
+                  <button
+                    id="printPageButton"
+                    title="Print Service Logs"
+                    type="button"
+                    className="cancelBtn"
+                    disabled>
+                    Print Logs
+                  </button>
                 )
             }
           </div>
