@@ -316,7 +316,7 @@ input {
 
 @media only screen and (max-width: 767px) {
     #userEmail{
-        font-size: 28px;
+        font-size: 22px;
     }
 
     .container {
@@ -397,6 +397,17 @@ input {
     .userInputErrorMessage {
         padding-left: initial;
         padding-right: initial;
+    }
+
+    .wrapword {
+        white-space: -moz-pre-wrap !important;
+        white-space: -pre-wrap;
+        white-space: -o-pre-wrap;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        white-space: -webkit-pre-wrap;
+        word-break: break-all;
+        white-space: normal;
     }
 }
     

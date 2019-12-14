@@ -41,11 +41,11 @@ class AddVehicle extends Component {
       <React.Fragment>
         <form id="field" onSubmit={this.handleSubmitAddOneVehicle.bind(this)}>
           <div className="text-center row">
-            <div className="col-md-6">
+            <div className="col-md-6 wrapword">
               <label><strong><span id="userEmail"></span></strong></label>
             </div>
             <div className="col-md-6">
-              <label><strong>Vehicles on record: <span id="vehicleCountForUser">0</span></strong></label>
+              <label><strong>Vehicles on Record: <span id="vehicleCountForUser">0</span></strong></label>
             </div>
           </div>
           <hr></hr>
