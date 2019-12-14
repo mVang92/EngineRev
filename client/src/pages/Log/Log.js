@@ -172,7 +172,7 @@ export default class Log extends Component {
   };
 
   /**
-   * Sort the vehicle service logs from least recent to most recent by date
+   * Check the state of the sort and sort the vehicle logs depending on the state of the sort
    */
   sortServiceLogs = () => {
     if (this.state.sortVehicleServiceLogsMostRecent) {
