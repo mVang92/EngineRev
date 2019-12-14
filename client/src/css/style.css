@@ -225,10 +225,6 @@ input {
     margin-right: -495px;
 }
 
-#confirmDeleteVehicleButton {
-    width: 120px;
-}
-
 .vehicleItemList {
     border-bottom-left-radius: .25rem;
     border-bottom-right-radius: .25rem;
@@ -390,9 +386,17 @@ input {
         margin-top: 1em;;
     }
 
+    .deleteBtn {
+        width: 8em;
+    }
     #editActionButton,
     #deleteActionButton {
         width: 6em;
+    }
+
+    .userInputErrorMessage {
+        padding-left: initial;
+        padding-right: initial;
     }
 }
     
