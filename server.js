@@ -20,7 +20,7 @@ app.use(routes);
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/carSpace");
-mongoose.set("debug", true);
+// mongoose.set("debug", true);
 
 // Ping the server to prevent sleep
 setInterval(function () {

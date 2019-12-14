@@ -313,7 +313,7 @@ export default class Log extends Component {
             <Container>
               <div className="box">
                 <div className="row">
-                  <div className="col-md-12 text-center">
+                  <div id="vehicleLogInformation" className="col-md-12 text-center">
                     <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
                   </div>
                 </div>
