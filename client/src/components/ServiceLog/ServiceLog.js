@@ -1,4 +1,6 @@
 import React from "react";
+import editIcon from "../../images/editIcon.png";
+import deleteIcon from "../../images/deleteIcon.png";
 
 const ServiceLog = props => {
   const date = props.date;
@@ -13,25 +15,34 @@ const ServiceLog = props => {
     <React.Fragment key={serviceLogId}>
       <hr />
       <div className="row">
-        <div className="col-md-2 scrollable">{date}</div>
-        <div className="col-md-2 scrollable">{mileage} miles</div>
-        <div className="col-md-3 scrollable">{service}</div>
-        <div className="col-md-3 scrollable">{comment}</div>
-        <div className="col-md-2 scrollable">
-          <div className="row">
+        <div className="col-md-2 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Date: </strong></span>{date}</div>
+        <div className="col-md-2 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Mileage: </strong></span>{mileage} miles</div>
+        <div className="col-md-3 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Service: </strong></span>{service}</div>
+        {
+          comment ? (
+            <div className="col-md-3 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Comments: </strong></span>{comment}</div>
+          ) : (
+            <div className="col-md-3 logDetailsMobileDisplay"></div>
+          )
+        }
+        
+        <div className="col-md-2">
+          <div className="row centerButtonMobileDisplay">
             <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
               <button
                 id="editActionButton"
                 onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, date, mileage, service, comment, editValue)}
-                disabled>
-                Edit
+                disabled
+              >
+                <img id="editIcon" src={editIcon} alt="edit"></img>
               </button>
             </div>
             <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
               <button
                 id="deleteActionButton"
-                onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, date, mileage, service, comment, deleteValue)}>
-                Delete
+                onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, date, mileage, service, comment, deleteValue)}
+              >
+                <img id="editIcon" src={deleteIcon} alt="edit"></img>
               </button>
             </div>
           </div>
