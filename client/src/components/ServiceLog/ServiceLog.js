@@ -3,14 +3,17 @@ import editIcon from "../../images/editIcon.png";
 import deleteIcon from "../../images/deleteIcon.png";
 
 const ServiceLog = props => {
-  const date = props.date;
+  const dateToFormat = props.date;
   const mileage = props.mileage;
   const service = props.service;
   const comment = props.comment;
   const serviceLogId = props._id;
   const editValue = "edit";
   const deleteValue = "delete";
-
+  const today  = new Date(dateToFormat);
+  today.setDate(today.getDate() + 1);
+  const date = today.toLocaleDateString("en-US");
+  
   return (
     <React.Fragment key={serviceLogId}>
       <hr />
@@ -25,7 +28,6 @@ const ServiceLog = props => {
             <div className="col-md-3 logDetailsMobileDisplay"></div>
           )
         }
-        
         <div className="col-md-2">
           <div className="row centerButtonMobileDisplay">
             <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">

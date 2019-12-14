@@ -88,7 +88,9 @@ export default class Log extends Component {
           service: this.state.service,
           comment: this.state.comment
         };
-        let dateMemory = this.state.date;
+        const today = new Date(this.state.date);
+        today.setDate(today.getDate() + 1);
+        let dateMemory = today.toLocaleDateString("en-US");
         let mileageMemory = this.state.mileage;
         let serviceMemory = this.state.service;
         API.addOneLogForOneVehicle(id, log)
@@ -360,7 +362,7 @@ export default class Log extends Component {
                             <div className="col-md-2 logDetailsMobileDisplay"></div>
                           </div>
                           {
-                            this.state.vehicleServiceLogs.map(serviceLog => {
+                            this.state.vehicleServiceLogs.sort((a, b) => new Date(...b.date.split('/').reverse()) - new Date(...a.date.split('/').reverse())).map(serviceLog => {
                               return (
                                 <ServiceLog
                                   key={serviceLog._id}
