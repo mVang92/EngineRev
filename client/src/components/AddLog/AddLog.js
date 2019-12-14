@@ -13,8 +13,7 @@ class AddLog extends Component {
               ref="date"
               onChange={this.props.handleChange}
               value={this.props.date}
-              name="date"
-              placeholder="Required">
+              name="date">
             </input>
           </div>
           <div className="col-md-4">
@@ -44,7 +43,7 @@ class AddLog extends Component {
         </div>
         <br />
         <div className="row">
-          <div className="col-md-2">
+          <div className="col-md-2 logButtonsMobileDisplay">
             <label><strong>Comments</strong></label>
           </div>
           <div className="col-md-10">
@@ -60,7 +59,7 @@ class AddLog extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-2">
+          <div className="col-md-2 logButtonsMobileDisplay">
             <a href="/">
               <button
                 id="addLogBackButton"
@@ -71,8 +70,8 @@ class AddLog extends Component {
               </button>
             </a>
           </div>
-          <div className="col-md-2"></div>
-          <div className="col-md-2 printPageButton">
+          <div className="col-md-2 logButtonsMobileDisplay"></div>
+          <div className="col-md-2 printPageButton logButtonsMobileDisplay">
             {
               this.props.vehicleServiceLogs.length > 0 ? (
                 <button
@@ -88,7 +87,7 @@ class AddLog extends Component {
                 )
             }
           </div>
-          <div className="col-md-2 logDeleteBtn">
+          <div className="col-md-2 logDeleteBtn logButtonsMobileDisplay">
             <button
               id="addLogDeleteVehicleButton"
               title="Delete This Vehicle"
@@ -98,17 +97,17 @@ class AddLog extends Component {
               Delete Vehicle
             </button>
           </div>
-          <div className="col-md-2 logResetBtn">
+          <div className="col-md-2 logButtonsMobileDisplay">
             <button
               id="addLogResetInputFieldsButton"
               title="Reset Input Fields"
               type="reset"
-              className="resetBtn"
+              className="resetButton"
               onClick={this.props.handleResetLogVehicleForm}>
               Reset Fields
             </button>
           </div>
-          <div className="col-md-2 logSubmitBtn">
+          <div className="col-md-2 logSubmitBtn logButtonsMobileDisplay">
             <button
               id="addServiceLogButton"
               title="Submit Service Log"

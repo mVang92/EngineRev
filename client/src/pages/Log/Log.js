@@ -334,28 +334,28 @@ export default class Log extends Component {
                     (<label className="text-danger"><strong>No Service Logs on Record</strong></label>) : (
                       <React.Fragment>
                         <div className="col-md-12">
-                          <div className="row">
-                            <div className="col-md-2">
+                          <div className="row removeRowMobileDisplay">
+                            <div className="col-md-2 logDetailsMobileDisplay">
                               <label>
                                 <strong>Date</strong>
                               </label>
                             </div>
-                            <div className="col-md-2">
+                            <div className="col-md-2 logDetailsMobileDisplay">
                               <label>
                                 <strong>Mileage</strong>
                               </label>
                             </div>
-                            <div className="col-md-3">
+                            <div className="col-md-3 logDetailsMobileDisplay">
                               <label>
                                 <strong>Service</strong>
                               </label>
                             </div>
-                            <div className="col-md-3">
+                            <div className="col-md-3 logDetailsMobileDisplay">
                               <label>
                                 <strong>Comments</strong>
                               </label>
                             </div>
-                            <div className="col-md-2"></div>
+                            <div className="col-md-2 logDetailsMobileDisplay"></div>
                           </div>
                           {
                             this.state.vehicleServiceLogs.map(serviceLog => {

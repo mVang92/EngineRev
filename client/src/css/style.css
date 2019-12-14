@@ -61,8 +61,9 @@ input {
     width: 100%;
 }
 
-.sticky-top {
-    z-index: 90 !important;
+#editIcon,
+#deleteIcon {
+    width: 2em;
 }
 
 .navbar {
@@ -97,14 +98,14 @@ input {
     color: red;
 }
 
-.logResetBtn,
+.resetButton,
 .logSubmitBtn,
 .logDeleteBtn {
     text-align: center;
 }
 
 .addBtn,
-.resetBtn,
+.resetButton,
 .cancelBtn,
 .deleteBtn,
 #editActionButton,
@@ -122,7 +123,11 @@ input {
     background: rgb(200, 255, 200);
 }
 
-.resetBtn,
+.resetButton {
+    background: rgb(200, 235, 255);
+}
+
+
 .deleteBtn,
 #deleteActionButton {
     background: rgb(255, 200, 200);
@@ -133,7 +138,7 @@ input {
 }
 
 .addBtn:hover,
-.resetBtn:hover,
+.resetButton:hover,
 .cancelBtn:hover,
 .deleteBtn:hover,
 #editActionButton,
@@ -145,7 +150,11 @@ input {
     background: rgb(128, 255, 128);
 }
 
-.resetBtn:hover,
+.resetButton:hover {
+    background: rgb(128, 200, 255);
+}
+
+
 .deleteBtn:hover,
 #deleteActionButton:hover {
     background: rgb(255, 128, 128);
@@ -157,13 +166,20 @@ input {
 }
 
 #signOutNavButton {
-    color: white;
+    color: rgb(200, 200, 200);
 }
 
 #signOutNavButton:hover {
     background: rgb(128, 128, 128);
-    color: black;
-    font-weight: bold;
+    color: white;
+}
+
+#addLogBackButton,
+#addServiceLogButton,
+#addLogResetInputFieldsButton,
+#addLogDeleteVehicleButton,
+#printPageButton {
+    width: 9em;
 }
 
 .nav-link:hover {
@@ -235,25 +251,23 @@ input {
     width: 15%;
 }
 
-.scrollable {
-    height: 70px;
-    overflow: auto;
-}
-
 .serviceLogActionDropdown {
     border-radius: 5px;
     margin: auto;
     width: 100%;
 }
 
+.showUnderMobileDisplay {
+    display: none;
+}
+
+#serviceLogDateInput {
+    height: 2em;
+}
+
 @media print {
 	.hideWhilePrinting {
         display: none;
-    }
-    
-    .scrollable {
-        overflow: initial;
-        height: 100%;
     }
 
     .Toastify__toast-container {
@@ -265,6 +279,18 @@ input {
     .actionButtonsMobileDisplay {
         max-width: 45%;
     }
+
+    #addLogBackButton,
+    #addServiceLogButton,
+    #addLogResetInputFieldsButton,
+    #printPageButton {
+        width: 7em;
+    }
+    
+    #addLogDeleteVehicleButton {
+        width: 8em;
+    }
+
 }
 
 @media only screen and (max-width: 991px) {
@@ -280,13 +306,25 @@ input {
     }
 
     .actionButtonsMobileDisplay {
-        max-width: 25%;
+        max-width: 50%;
+    }
+
+    #addLogBackButton,
+    #addServiceLogButton,
+    #addLogResetInputFieldsButton,
+    #printPageButton,
+    #addLogDeleteVehicleButton {
+        width: 5em;
     }
 }
 
 @media only screen and (max-width: 767px) {
     #userEmail{
         font-size: 28px;
+    }
+
+    .container {
+        max-width: 100%;
     }
 
     #addVehicleButton {
@@ -314,15 +352,16 @@ input {
         width: 5em;
     }
 
+    #addLogBackButton,
     #addServiceLogButton,
     #addLogResetInputFieldsButton,
     #addLogDeleteVehicleButton,
     #printPageButton {
-        margin-top: 1em;
-        height: 3em;
+        margin: 4px;
+        width: 9em;
+        height: 2em;
     }
 
-    .logResetBtn,
     .logSubmitBtn,
     .logDeleteBtn {
         text-align: initial;
@@ -331,6 +370,29 @@ input {
     .innerBox {
         padding: initial;
         margin: initial;
+    }
+
+    .logButtonsMobileDisplay,
+    .logDetailsMobileDisplay {
+        width: initial;
+    }
+
+    .removeRowMobileDisplay {
+        display: none;
+    }
+
+    .showUnderMobileDisplay {
+        display: initial;
+    }
+
+    .centerButtonMobileDisplay {
+        text-align: center;
+        margin-top: 1em;;
+    }
+
+    #editActionButton,
+    #deleteActionButton {
+        width: 6em;
     }
 }
     
