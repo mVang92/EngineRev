@@ -1,26 +1,23 @@
 import React from "react";
-import carSpaceLogo from "../../images/carSpaceLogo.png";
 
 export const NavLoggedIn = props => {
     return (
-        <React.Fragment>
-            <nav className="navbar navbar-expand-lg navbar-light">
-                <a className="navbar-brand underline" href="/">
-                    <img id="applicationLogo" src={carSpaceLogo} alt="applicationLogo"></img>
+        <nav className="navbar navbar-expand-lg navbar-light">
+            <a id="applicationName" className="navbar-brand underline" href="/">
+                CarSpace
                 </a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item active">
-                            <a id="signOutNavButton" className="nav-item nav-link underline" onClick={(event) => props.showSignOutModal(event)}>
-                                Sign Out
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav">
+                    <li className="nav-item active">
+                        <a id="signOutNavButton" className="nav-item nav-link underline" onClick={(event) => props.showSignOutModal(event)}>
+                            Sign Out
                          </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </React.Fragment>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     );
 };

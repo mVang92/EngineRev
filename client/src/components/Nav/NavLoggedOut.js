@@ -1,12 +1,11 @@
 import React from "react";
-import carSpaceLogo from "../../images/carSpaceLogo.png";
 
 export const NavLoggedOut = props => {
     return (
         <nav id="navBarLoggedOut" className="navbar navbar-expand-lg navbar-light">
-            <a className="navbar-brand underline" href="/">
-                <img id="applicationLogo" src={carSpaceLogo} alt="applicationLogo"></img>
-            </a>
+            <a id="applicationName" className="navbar-brand underline" href="/">
+                    CarSpace
+                </a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
