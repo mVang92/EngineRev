@@ -342,6 +342,7 @@ export default class Log extends Component {
                     <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
                   </div>
                 </div>
+                <hr />
                 <div className="innerBox hideWhilePrinting">
                   <AddLog
                     date={this.state.date}

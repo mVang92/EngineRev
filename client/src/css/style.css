@@ -67,7 +67,9 @@ input {
 }
 
 .navbar {
-    background: rgba(32, 32, 32, 0.8);
+    background: rgba(32, 32, 32, 0.9);
+    border-bottom: 1px solid rgb(220, 64, 48);;
+    padding: 2px;
     position: fixed;
     width: 100%;
     z-index: 1;
@@ -178,7 +180,7 @@ input {
 }
 
 #signUpNavButton {
-    color: rgb(255, 192, 64);
+    color: rgb(220, 64, 48);
 }
 
 #signOutNavButton,
@@ -189,11 +191,12 @@ input {
 #signOutNavButton:hover,
 #signInNavButton:hover {
     background: rgb(128, 128, 128);
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 #signUpNavButton:hover {
     background: rgb(128, 128, 128);
+    color: rgb(255, 255, 255);
 }
 
 #addLogBackButton,
@@ -256,17 +259,24 @@ input {
 }
 
 .vehicleItemList:hover {
-    background: rgb(255, 255, 255);
+    background: rgb(240, 240, 240);
     transition-duration: 0.2s;
 }
 
 .Toastify__toast-container--top-right {
-    top: 4em !important;
+    top: 3em !important;
     right: 1px !important;
 }
 
-#applicationLogo {
-    width: 15%;
+#applicationName {
+    color: rgb(200, 200, 200);
+    padding-left: 1%;
+    transition-duration: 0.4s;
+}
+
+#applicationName:hover {
+    color: rgb(255, 255, 255);
+    transition-duration: 0.2s;
 }
 
 .serviceLogActionDropdown {

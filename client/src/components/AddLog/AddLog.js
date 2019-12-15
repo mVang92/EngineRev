@@ -75,7 +75,7 @@ class AddLog extends Component {
               this.props.vehicleServiceLogs.length > 1 ? (
                 <button
                   id="addLogDeleteVehicleButton"
-                  title="Delete This Vehicle"
+                  title="Sort Dates "
                   type="button"
                   className="cancelBtn"
                   onClick={this.props.changeSortOrder}>
@@ -84,12 +84,11 @@ class AddLog extends Component {
               ) : (
                   <button
                     id="addLogDeleteVehicleButton"
-                    title="Delete This Vehicle"
                     type="button"
                     className="cancelBtn"
                     disabled>
                     Sort Dates
-                </button>
+                  </button>
                 )
             }
           </div>
@@ -103,11 +102,10 @@ class AddLog extends Component {
                   className="cancelBtn"
                   onClick={this.props.handlePrintPage}>
                   Print Logs
-              </button>
+                </button>
               ) : (
                   <button
                     id="printPageButton"
-                    title="Print Service Logs"
                     type="button"
                     className="cancelBtn"
                     disabled>
