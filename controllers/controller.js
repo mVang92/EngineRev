@@ -85,6 +85,13 @@ module.exports = {
   },
 
   /**
+   * Update the selected service log in the database
+   */
+  updateOneServiceLog: (req, res) => {
+    console.log("Hit updateOneServiceLog");
+  },
+
+  /**
    * Remove the selected vehicle from the database
    */
   removeOneVehicle: (req, res) => {

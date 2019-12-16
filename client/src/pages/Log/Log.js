@@ -4,6 +4,7 @@ import Container from "../../components/Container";
 import AddLog from "../../components/AddLog";
 import ServiceLog from "../../components/ServiceLog";
 import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal";
+import EditOneServiceLogModal from "../../components/Modal/EditOneServiceLogModal";
 import DeleteOneServiceLogModal from "../../components/Modal/DeleteOneServiceLogModal";
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal"
 import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal"
@@ -31,6 +32,7 @@ export default class Log extends Component {
       serviceLogComment: "",
       vehicleServiceLogs: [],
       sortVehicleServiceLogsMostRecent: true,
+      showEditOneLogModal: false,
       showDeleteOneVehicleModal: false,
       showAddLogErrorModal: false,
       showMileageInputErrorModal: false,
@@ -133,6 +135,57 @@ export default class Log extends Component {
   };
 
   /**
+  * Edits one service log from record
+  */
+  handleEditOneServiceLog = () => {
+    // if (isNaN(this.state.mileage)) {
+    //   this.showMileageInputErrorModal();
+    // } else {
+    //   API.editOneServiceLog(this.state.serviceLogId)
+    //     .then(() => {
+    //       setTimeout(() => {
+    //         this.setState({ showEditOneLogModal: false });
+    //       }, 200);
+    //       this.componentDidMount();
+    //       this.editOneServiceLogSuccessNotification()
+    //     })
+    //     .catch(err => this.editOneServiceLogFailNotification(err));
+    // }
+    if (isNaN(this.state.mileage)) {
+      this.showMileageInputErrorModal();
+    } else {
+      if (this.state.date === "" || this.state.mileage === "" || this.state.service === "") {
+        this.showAddLogErrorModal();
+      } else {
+        let id = this.state.vehicleId;
+        let updatedlog = {
+          date: this.state.date,
+          mileage: this.state.mileage,
+          service: this.state.service,
+          comment: this.state.comment
+        };
+        const today = new Date(this.state.date);
+        today.setDate(today.getDate() + 1);
+        let dateMemory = today.toLocaleDateString("en-US");
+        let mileageMemory = this.state.mileage;
+        let serviceMemory = this.state.service;
+        API.editOneServiceLog(id, updatedlog)
+          .then(() => {
+            this.addOneServiceLogSuccessNotification(dateMemory, mileageMemory, serviceMemory)
+            this.componentDidMount();
+          })
+          .catch(err => this.addOneServiceLogFailNotification(err));
+        this.setState({
+          date: "",
+          mileage: "",
+          service: "",
+          comment: ""
+        });
+      };
+    };
+  };
+
+  /**
    * Deletes one service log from record
    */
   handleDeleteOneServiceLog = () => {
@@ -161,7 +214,7 @@ export default class Log extends Component {
     event.preventDefault();
     switch (actionValue) {
       case "edit":
-        console.log("edit!");
+        this.showEditOneServiceLogModal(serviceLogId, date, mileage, service, comment);
         break;
       case "delete":
         this.showDeleteOneServiceLogModal(serviceLogId, date, mileage, service, comment);
@@ -179,7 +232,7 @@ export default class Log extends Component {
       return this.state.vehicleServiceLogs.sort((a, b) => new Date(...b.date.split('/').reverse()) - new Date(...a.date.split('/').reverse()));
     } else {
       return this.state.vehicleServiceLogs.sort((a, b) => new Date(...a.date.split('/').reverse()) - new Date(...b.date.split('/').reverse()));
-    };
+    }
   };
 
   /**
@@ -217,14 +270,21 @@ export default class Log extends Component {
    * Display the success notification when the user deletes a vehicle
    */
   deleteOneVehicleSuccessNotification = () => {
-    toast.success(`Vehicle Deleted Successfully`);
+    toast.success(`Vehicle Deleted Successfully!`);
+  };
+
+  /**
+   * Display the success notification when the user deletes a service log
+   */
+  editOneServiceLogSuccessNotification = () => {
+    toast.success(`Service Log Updated Successfully!`);
   };
 
   /**
    * Display the success notification when the user deletes a service log
    */
   deleteOneServiceLogSuccessNotification = () => {
-    toast.success(`Service Log Deleted Successfully`);
+    toast.success(`Service Log Deleted Successfully!`);
   };
 
   /**
@@ -233,6 +293,15 @@ export default class Log extends Component {
    * @param err the error message to display to the user
    */
   deleteOneVehicleFailNotification = err => {
+    toast.error(err.toString());
+  };
+
+  /**
+   * Display the error notification when an error occurs while editing a service log
+   * 
+   * @param err the error message to display to the user
+   */
+  editOneServiceLogFailNotification = err => {
     toast.error(err.toString());
   };
 
@@ -249,7 +318,7 @@ export default class Log extends Component {
    * Display the info notification when the user resets the fields to add a service log
    */
   resetFieldsNotification = () => {
-    toast.info(`Input Fields Reset`);
+    toast.info(`Input Fields Reset.`);
   };
 
   /**
@@ -283,6 +352,26 @@ export default class Log extends Component {
   };
 
   /**
+   * Display the modal to notify the user about editing the service log
+   * 
+   * @param serviceLogId the service log id to target
+   * @param date         the service log date
+   * @param mileage      the service log mileage
+   * @param service      the service log service type
+   * @param comment      the service log comment
+   */
+  showEditOneServiceLogModal = (serviceLogId, date, mileage, service, comment) => {
+    this.setState({
+      showEditOneLogModal: true,
+      serviceLogId: serviceLogId,
+      serviceLogDate: date,
+      serviceLogMileage: mileage,
+      serviceLogService: service,
+      serviceLogComment: comment
+    });
+  };
+
+  /**
    * Display the modal to notify the user about deleting the service log
    * 
    * @param serviceLogId the service log id to target
@@ -300,6 +389,13 @@ export default class Log extends Component {
       serviceLogService: service,
       serviceLogComment: comment
     });
+  };
+
+  /**
+   * Hide the edit one service log modal
+   */
+  hideEditOneServiceLogModal = () => {
+    this.setState({ showEditOneLogModal: false });
   };
 
   /**
@@ -361,33 +457,46 @@ export default class Log extends Component {
                 <div className="row innerBox serviceLogMobileDisplay">
                   {this.state.vehicleServiceLogs.length === 0 ?
                     (<label className="text-danger"><strong>No Service Logs on Record</strong></label>) : (
-                      <React.Fragment>
-                        <div className="col-md-12">
-                          <div className="row removeRowMobileDisplay">
-                            <div className="col-md-2 logDetailsMobileDisplay">
-                              <label>
-                                <strong>Date</strong>
-                              </label>
-                            </div>
-                            <div className="col-md-2 logDetailsMobileDisplay">
-                              <label>
-                                <strong>Mileage</strong>
-                              </label>
-                            </div>
-                            <div className="col-md-3 logDetailsMobileDisplay">
-                              <label>
-                                <strong>Service</strong>
-                              </label>
-                            </div>
-                            <div className="col-md-3 logDetailsMobileDisplay">
-                              <label>
-                                <strong>Comments</strong>
-                              </label>
-                            </div>
-                            <div className="col-md-2 logDetailsMobileDisplay"></div>
+                      <div className="col-md-12">
+                        <div className="row removeRowMobileDisplay">
+                          <div className="col-md-2 logDetailsMobileDisplay">
+                            <label>
+                              <strong>Date</strong>
+                            </label>
                           </div>
-                          {
-                            this.state.sortVehicleServiceLogsMostRecent ? (
+                          <div className="col-md-2 logDetailsMobileDisplay">
+                            <label>
+                              <strong>Mileage</strong>
+                            </label>
+                          </div>
+                          <div className="col-md-3 logDetailsMobileDisplay">
+                            <label>
+                              <strong>Service</strong>
+                            </label>
+                          </div>
+                          <div className="col-md-3 logDetailsMobileDisplay">
+                            <label>
+                              <strong>Comments</strong>
+                            </label>
+                          </div>
+                          <div className="col-md-2 logDetailsMobileDisplay"></div>
+                        </div>
+                        {
+                          this.state.sortVehicleServiceLogsMostRecent ? (
+                            this.sortServiceLogs().map(serviceLog => {
+                              return (
+                                <ServiceLog
+                                  key={serviceLog._id}
+                                  _id={serviceLog._id}
+                                  date={serviceLog.date}
+                                  mileage={serviceLog.mileage}
+                                  service={serviceLog.service}
+                                  comment={serviceLog.comment}
+                                  getServiceLogActionValue={this.getServiceLogActionValue}
+                                />
+                              )
+                            })
+                          ) : (
                               this.sortServiceLogs().map(serviceLog => {
                                 return (
                                   <ServiceLog
@@ -401,24 +510,9 @@ export default class Log extends Component {
                                   />
                                 )
                               })
-                            ) : (
-                                this.sortServiceLogs().map(serviceLog => {
-                                  return (
-                                    <ServiceLog
-                                      key={serviceLog._id}
-                                      _id={serviceLog._id}
-                                      date={serviceLog.date}
-                                      mileage={serviceLog.mileage}
-                                      service={serviceLog.service}
-                                      comment={serviceLog.comment}
-                                      getServiceLogActionValue={this.getServiceLogActionValue}
-                                    />
-                                  )
-                                })
-                              )
-                          }
-                        </div>
-                      </React.Fragment>
+                            )
+                        }
+                      </div>
                     )
                   }
                 </div>
@@ -427,6 +521,13 @@ export default class Log extends Component {
                 handleDeleteOneVehicle={this.handleDeleteOneVehicle}
                 showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
                 hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
+                state={this.state}
+              />
+              <EditOneServiceLogModal
+                handleEditOneServiceLog={this.handleEditOneServiceLog}
+                showEditOneLogModal={this.state.showEditOneLogModal}
+                hideEditOneServiceLogModal={this.hideEditOneServiceLogModal}
+                handleChange={this.handleChange}
                 state={this.state}
               />
               <DeleteOneServiceLogModal

@@ -207,6 +207,7 @@ input {
 #addServiceLogButton,
 #addLogResetInputFieldsButton,
 #addLogDeleteVehicleButton,
+#sortServiceLogDatesButton,
 #printPageButton {
     width: 9em;
 }
@@ -322,6 +323,7 @@ input {
 
     #addLogBackButton,
     #addServiceLogButton,
+    #sortServiceLogDatesButton,
     #addLogResetInputFieldsButton,
     #printPageButton {
         width: 7em;
@@ -360,6 +362,7 @@ input {
     #addServiceLogButton,
     #addLogResetInputFieldsButton,
     #printPageButton,
+    #sortServiceLogDatesButton,
     #addLogDeleteVehicleButton {
         width: 5em;
     }
@@ -402,6 +405,7 @@ input {
     #addLogBackButton,
     #addServiceLogButton,
     #addLogResetInputFieldsButton,
+    #sortServiceLogDatesButton,
     #addLogDeleteVehicleButton,
     #printPageButton {
         margin: 4px;

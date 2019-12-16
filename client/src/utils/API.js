@@ -31,6 +31,9 @@ export default {
   deleteOneVehicle: id => {
     return axios.delete(`/api/vehicles/deleteVehicle/${id}`);
   },
+  editOneServiceLog: id => {
+    return axios.put(`/api/vehicles/updateServiceLog/${id}`)
+  },
   // Delete one service log
   deleteOneServiceLog: id => {
     return axios.delete(`/api/vehicles/deleteServiceLog/${id}`);

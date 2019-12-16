@@ -34,7 +34,6 @@ const ServiceLog = props => {
               <button
                 id="editActionButton"
                 onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, date, mileage, service, comment, editValue)}
-                disabled
               >
                 <img id="editIcon" src={editIcon} alt="edit"></img>
               </button>
