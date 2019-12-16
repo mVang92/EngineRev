@@ -122,6 +122,7 @@ input {
 .resetButton,
 .cancelBtn,
 .deleteBtn,
+.backHomeBtn,
 #editActionButton,
 #deleteActionButton {
     border-radius: 5px;
@@ -129,7 +130,8 @@ input {
     transition-duration: 0.5s;
 }
 
-.cancelBtn {
+.cancelBtn,
+.backHomeBtn {
     background: rgb(225, 225, 225)
 }
 
@@ -155,6 +157,7 @@ input {
 .resetButton:hover,
 .cancelBtn:hover,
 .deleteBtn:hover,
+.backHomeBtn:hover,
 #editActionButton,
 #deleteActionButton {
     transition-duration: 0.2s;
@@ -175,6 +178,7 @@ input {
 }
 
 .cancelBtn:hover,
+.backHomeBtn:hover,
 #editActionButton:hover {
     background: rgb(255, 255, 255)
 }
@@ -216,8 +220,7 @@ input {
     transition-duration: 0.2s;
 }
 
-.nav-link,
-.backHomeBtn {
+.nav-link {
     cursor: pointer;
 }
 
@@ -291,6 +294,15 @@ input {
 
 #serviceLogDateInput {
     height: 2em;
+}
+
+#noMatch {
+    padding-top: 4em;
+    margin-top: 0em !important;
+}
+
+#noMatchImage {
+    width: 20em;
 }
 
 @media print {
@@ -437,6 +449,10 @@ input {
     .userInputErrorMessage {
         padding-left: initial;
         padding-right: initial;
+    }
+
+    #noMatchImage {
+        width: 15em;
     }
 
     .wrapword {
