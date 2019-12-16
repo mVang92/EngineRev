@@ -2,7 +2,7 @@ import React from "react";
 import noMatchGif from "../../images/noMatch.gif";
 
 const NoMatch = () => (
-  <div className="text-center text-danger mt-3">
+  <div id="noMatch" className="text-center text-danger mt-3">
     <label><h3>Invalid route or no permission to view content.</h3></label>
     <br />
     <a href="/"><button className="backHomeBtn">← Back Home</button></a>

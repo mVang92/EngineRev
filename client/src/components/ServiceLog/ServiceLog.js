@@ -10,10 +10,10 @@ const ServiceLog = props => {
   const serviceLogId = props._id;
   const editValue = "edit";
   const deleteValue = "delete";
-  const today  = new Date(dateToFormat);
+  const today = new Date(dateToFormat);
   today.setDate(today.getDate() + 1);
   const date = today.toLocaleDateString("en-US");
-  
+
   return (
     <React.Fragment key={serviceLogId}>
       <hr />
@@ -25,16 +25,21 @@ const ServiceLog = props => {
           comment ? (
             <div className="col-md-3 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Comments: </strong></span>{comment}</div>
           ) : (
-            <div className="col-md-3 logDetailsMobileDisplay"></div>
-          )
+              <div className="col-md-3 logDetailsMobileDisplay"></div>
+            )
         }
         <div className="col-md-2">
           <div className="row centerButtonMobileDisplay">
             <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
+              {/* <Link to={"/vehicle/" + props.vehicleId + "/serviceLog/" + serviceLogId}>
+                <button id="editActionButton">
+                  <img id="editIcon" src={editIcon} alt="edit"></img>
+                </button>
+              </Link> */}
               <button
                 id="editActionButton"
                 onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, date, mileage, service, comment, editValue)}
-                disabled
+                // disabled
               >
                 <img id="editIcon" src={editIcon} alt="edit"></img>
               </button>

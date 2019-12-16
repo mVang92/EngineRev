@@ -227,7 +227,7 @@ input {
 }
 
 .notLoggedInImages {
-    width: 100%;
+    width: 20em;
 }
 
 #notLoggedInCarGif {
@@ -291,6 +291,11 @@ input {
 
 #serviceLogDateInput {
     height: 2em;
+}
+
+#noMatch {
+    margin-top: 0em !important;
+    padding-top: 4em;
 }
 
 @media print {
@@ -367,7 +372,7 @@ input {
     }
 
     .notLoggedInImages {
-        width: 10%;
+        width: 10em;
     }
 
     #notLoggedInCarGif {
