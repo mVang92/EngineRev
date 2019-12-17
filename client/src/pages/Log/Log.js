@@ -4,6 +4,7 @@ import Container from "../../components/Container";
 import AddLog from "../../components/AddLog";
 import ServiceLog from "../../components/ServiceLog";
 import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal";
+import EditOneServiceLogModal from "../../components/Modal/EditOneServiceLogModal";
 import DeleteOneServiceLogModal from "../../components/Modal/DeleteOneServiceLogModal";
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal"
 import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal"
@@ -29,6 +30,10 @@ export default class Log extends Component {
       serviceLogMileage: "",
       serviceLogService: "",
       serviceLogComment: "",
+      updatedServiceLogDate: "",
+      updatedServiceLogMileage: "",
+      updatedServiceLogService: "",
+      updatedServiceLogComment: "",
       vehicleServiceLogs: [],
       sortVehicleServiceLogsMostRecent: true,
       showDeleteOneVehicleModal: false,
@@ -133,6 +138,63 @@ export default class Log extends Component {
   };
 
   /**
+  * Edits one service log from record
+  */
+  handleEditOneServiceLog = () => {
+    console.log(this.state.serviceLogDate)
+    console.log(this.state.serviceLogMileage)
+    console.log(this.state.serviceLogService)
+    console.log(this.state.serviceLogComment)
+    this.hideEditOneServiceLogModal();
+    // if (isNaN(this.state.mileage)) {
+    //   this.showMileageInputErrorModal();
+    // } else {
+    //   API.editOneServiceLog(this.state.serviceLogId)
+    //     .then(() => {
+    //       setTimeout(() => {
+    //         this.setState({ showEditOneLogModal: false });
+    //       }, 200);
+    //       this.componentDidMount();
+    //       this.editOneServiceLogSuccessNotification()
+    //     })
+    //     .catch(err => this.editOneServiceLogFailNotification(err));
+    // }
+
+    // if (isNaN(this.state.mileage)) {
+    //   this.showMileageInputErrorModal();
+    // } else {
+    //   if (this.state.date === "" || this.state.mileage === "" || this.state.service === "") {
+    //     this.showAddLogErrorModal();
+    //   } else {
+    //     let id = this.state.vehicleId;
+    //     let updatedlog = {
+    //       date: this.state.date,
+    //       mileage: this.state.mileage,
+    //       service: this.state.service,
+    //       comment: this.state.comment
+    //     };
+    //     const today = new Date(this.state.date);
+    //     today.setDate(today.getDate() + 1);
+    //     let dateMemory = today.toLocaleDateString("en-US");
+    //     let mileageMemory = this.state.mileage;
+    //     let serviceMemory = this.state.service;
+    //     API.editOneServiceLog(id, updatedlog)
+    //       .then(() => {
+    //         this.addOneServiceLogSuccessNotification(dateMemory, mileageMemory, serviceMemory)
+    //         this.componentDidMount();
+    //       })
+    //       .catch(err => this.addOneServiceLogFailNotification(err));
+    //     this.setState({
+    //       date: "",
+    //       mileage: "",
+    //       service: "",
+    //       comment: ""
+    //     });
+    //   };
+    // };
+  };
+
+  /**
    * Deletes one service log from record
    */
   handleDeleteOneServiceLog = () => {
@@ -159,6 +221,7 @@ export default class Log extends Component {
    */
   getServiceLogActionValue = (event, serviceLogId, date, mileage, service, comment, actionValue) => {
     event.preventDefault();
+    console.log(actionValue)
     switch (actionValue) {
       case "edit":
         console.log("edit!");
@@ -333,126 +396,127 @@ export default class Log extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.loggedin === true ? (
-          <div>
-            <Container>
-              <div className="box">
-                <div className="row">
-                  <div id="vehicleLogInformation" className="col-md-12 text-center">
-                    <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
-                  </div>
+        {this.state.loggedin ? (
+          <Container>
+            <div className="box">
+              <div className="row">
+                <div id="vehicleLogInformation" className="col-md-12 text-center">
+                  <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
                 </div>
-                <hr />
-                <div className="innerBox hideWhilePrinting">
-                  <AddLog
-                    date={this.state.date}
-                    mileage={this.state.mileage}
-                    service={this.state.service}
-                    comment={this.state.comment}
-                    vehicleServiceLogs={this.state.vehicleServiceLogs}
-                    handleChange={this.handleChange}
-                    handlePrintPage={this.handlePrintPage}
-                    handleResetLogVehicleForm={this.handleResetLogVehicleForm}
-                    handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
-                    changeSortOrder={this.changeSortOrder}
-                    showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
-                  />
-                </div>
-                <div className="row innerBox serviceLogMobileDisplay">
-                  {this.state.vehicleServiceLogs.length === 0 ?
-                    (<label className="text-danger"><strong>No Service Logs on Record</strong></label>) : (
-                      <React.Fragment>
-                        <div className="col-md-12">
-                          <div className="row removeRowMobileDisplay">
-                            <div className="col-md-2 logDetailsMobileDisplay">
-                              <label>
-                                <strong>Date</strong>
-                              </label>
-                            </div>
-                            <div className="col-md-2 logDetailsMobileDisplay">
-                              <label>
-                                <strong>Mileage</strong>
-                              </label>
-                            </div>
-                            <div className="col-md-3 logDetailsMobileDisplay">
-                              <label>
-                                <strong>Service</strong>
-                              </label>
-                            </div>
-                            <div className="col-md-3 logDetailsMobileDisplay">
-                              <label>
-                                <strong>Comments</strong>
-                              </label>
-                            </div>
-                            <div className="col-md-2 logDetailsMobileDisplay"></div>
-                          </div>
-                          {
-                            this.state.sortVehicleServiceLogsMostRecent ? (
-                              this.sortServiceLogs().map(serviceLog => {
-                                return (
-                                  <ServiceLog
-                                    key={serviceLog._id}
-                                    _id={serviceLog._id}
-                                    date={serviceLog.date}
-                                    mileage={serviceLog.mileage}
-                                    service={serviceLog.service}
-                                    comment={serviceLog.comment}
-                                    getServiceLogActionValue={this.getServiceLogActionValue}
-                                  />
-                                )
-                              })
-                            ) : (
-                                this.sortServiceLogs().map(serviceLog => {
-                                  return (
-                                    <ServiceLog
-                                      key={serviceLog._id}
-                                      _id={serviceLog._id}
-                                      date={serviceLog.date}
-                                      mileage={serviceLog.mileage}
-                                      service={serviceLog.service}
-                                      comment={serviceLog.comment}
-                                      getServiceLogActionValue={this.getServiceLogActionValue}
-                                    />
-                                  )
-                                })
-                              )
-                          }
+              </div>
+              <hr />
+              <div className="innerBox hideWhilePrinting">
+                <AddLog
+                  date={this.state.date}
+                  mileage={this.state.mileage}
+                  service={this.state.service}
+                  comment={this.state.comment}
+                  vehicleServiceLogs={this.state.vehicleServiceLogs}
+                  handleChange={this.handleChange}
+                  handlePrintPage={this.handlePrintPage}
+                  handleResetLogVehicleForm={this.handleResetLogVehicleForm}
+                  handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
+                  changeSortOrder={this.changeSortOrder}
+                  showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
+                />
+              </div>
+              <div className="row innerBox serviceLogMobileDisplay">
+                {this.state.vehicleServiceLogs.length === 0 ?
+                  (<label className="text-danger"><strong>No Service Logs on Record</strong></label>) : (
+                    <div className="col-md-12">
+                      <div className="row removeRowMobileDisplay">
+                        <div className="col-md-2 logDetailsMobileDisplay">
+                          <label>
+                            <strong>Date</strong>
+                          </label>
                         </div>
-                      </React.Fragment>
-                    )
-                  }
-                </div>
+                        <div className="col-md-2 logDetailsMobileDisplay">
+                          <label>
+                            <strong>Mileage</strong>
+                          </label>
+                        </div>
+                        <div className="col-md-3 logDetailsMobileDisplay">
+                          <label>
+                            <strong>Service</strong>
+                          </label>
+                        </div>
+                        <div className="col-md-3 logDetailsMobileDisplay">
+                          <label>
+                            <strong>Comments</strong>
+                          </label>
+                        </div>
+                        <div className="col-md-2 logDetailsMobileDisplay"></div>
+                      </div>
+                      {
+                        this.state.sortVehicleServiceLogsMostRecent ? (
+                          this.sortServiceLogs().map(serviceLog => {
+                            return (
+                              <ServiceLog
+                                key={serviceLog._id}
+                                _id={serviceLog._id}
+                                date={serviceLog.date}
+                                mileage={serviceLog.mileage}
+                                service={serviceLog.service}
+                                comment={serviceLog.comment}
+                                getServiceLogActionValue={this.getServiceLogActionValue}
+                              />
+                            )
+                          })
+                        ) : (
+                            this.sortServiceLogs().map(serviceLog => {
+                              return (
+                                <ServiceLog
+                                  key={serviceLog._id}
+                                  _id={serviceLog._id}
+                                  date={serviceLog.date}
+                                  mileage={serviceLog.mileage}
+                                  service={serviceLog.service}
+                                  comment={serviceLog.comment}
+                                  getServiceLogActionValue={this.getServiceLogActionValue}
+                                />
+                              )
+                            })
+                          )
+                      }
+                    </div>
+                  )
+                }
               </div>
-              <DeleteOneVehicleModal
-                handleDeleteOneVehicle={this.handleDeleteOneVehicle}
-                showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
-                hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
-                state={this.state}
-              />
-              <DeleteOneServiceLogModal
-                handleDeleteOneServiceLog={this.handleDeleteOneServiceLog}
-                showDeleteOneLogModal={this.state.showDeleteOneLogModal}
-                hideDeleteOneServiceLogModal={this.hideDeleteOneServiceLogModal}
-                state={this.state}
-              />
-              <AddLogErrorModal
-                showAddLogErrorModal={this.state.showAddLogErrorModal}
-                hideAddLogErrorModal={this.hideAddLogErrorModal}
-                state={this.state}
-              />
-              <MileageInputErrorModal
-                showMileageInputErrorModal={this.state.showMileageInputErrorModal}
-                hideMileageInputErrorModal={this.hideMileageInputErrorModal}
-                state={this.state}
-              />
-              <ToastContainer />
-            </Container>
-          </div>
+            </div>
+            <DeleteOneVehicleModal
+              handleDeleteOneVehicle={this.handleDeleteOneVehicle}
+              showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
+              hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
+              state={this.state}
+            />
+            <EditOneServiceLogModal
+              handleEditOneServiceLog={this.handleEditOneServiceLog}
+              showEditOneLogModal={this.state.showEditOneLogModal}
+              hideEditOneServiceLogModal={this.hideEditOneServiceLogModal}
+              handleChange={this.handleChange}
+              state={this.state}
+            />
+            <DeleteOneServiceLogModal
+              handleDeleteOneServiceLog={this.handleDeleteOneServiceLog}
+              showDeleteOneLogModal={this.state.showDeleteOneLogModal}
+              hideDeleteOneServiceLogModal={this.hideDeleteOneServiceLogModal}
+              state={this.state}
+            />
+            <AddLogErrorModal
+              showAddLogErrorModal={this.state.showAddLogErrorModal}
+              hideAddLogErrorModal={this.hideAddLogErrorModal}
+              state={this.state}
+            />
+            <MileageInputErrorModal
+              showMileageInputErrorModal={this.state.showMileageInputErrorModal}
+              hideMileageInputErrorModal={this.hideMileageInputErrorModal}
+              state={this.state}
+            />
+            <ToastContainer />
+          </Container>
         ) : (
-            <div>
-              <div className="text-center text-danger">
-                <strong>You are not authorized to view this page.</strong>
-              </div>
+            <div id="notAuthorizedToViewLogs" className="text-center text-danger">
+              <strong>You are not authorized to view this page.</strong>
             </div>
           )
         }

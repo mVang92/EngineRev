@@ -305,6 +305,10 @@ input {
     width: 20em;
 }
 
+#notAuthorizedToViewLogs {
+    padding-top: 6em;
+}
+
 @media print {
 	.hideWhilePrinting {
         display: none;

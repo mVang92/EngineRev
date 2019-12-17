@@ -148,7 +148,7 @@ export default class App extends Component {
     return (
       <React.Fragment>
         <Container>
-          {this.state.loggedin === true ? (
+          {this.state.loggedin ? (
             <LoggedIn
               vehicleData={this.state.vehicleData}
               handleChange={this.handleChange}
