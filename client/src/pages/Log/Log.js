@@ -9,7 +9,6 @@ import DeleteOneServiceLogModal from "../../components/Modal/DeleteOneServiceLog
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal"
 import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal"
 import Modal from "react-modal";
-import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 
 export default class Log extends Component {
