@@ -30,10 +30,6 @@ export default class Log extends Component {
       serviceLogMileage: "",
       serviceLogService: "",
       serviceLogComment: "",
-      updatedServiceLogDate: "",
-      updatedServiceLogMileage: "",
-      updatedServiceLogService: "",
-      updatedServiceLogComment: "",
       vehicleServiceLogs: [],
       sortVehicleServiceLogsMostRecent: true,
       showDeleteOneVehicleModal: false,
@@ -221,7 +217,6 @@ export default class Log extends Component {
    */
   getServiceLogActionValue = (event, serviceLogId, date, mileage, service, comment, actionValue) => {
     event.preventDefault();
-    console.log(actionValue)
     switch (actionValue) {
       case "edit":
         console.log("edit!");
@@ -242,7 +237,7 @@ export default class Log extends Component {
       return this.state.vehicleServiceLogs.sort((a, b) => new Date(...b.date.split('/').reverse()) - new Date(...a.date.split('/').reverse()));
     } else {
       return this.state.vehicleServiceLogs.sort((a, b) => new Date(...a.date.split('/').reverse()) - new Date(...b.date.split('/').reverse()));
-    };
+    }
   };
 
   /**
