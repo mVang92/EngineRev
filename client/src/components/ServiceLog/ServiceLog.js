@@ -46,7 +46,7 @@ const ServiceLog = props => {
                 title="Delete Log"
                 onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, date, mileage, service, comment, deleteValue)}
               >
-                <img id="editIcon" src={deleteIcon} alt="edit"></img>
+                <img id="deleteIcon" src={deleteIcon} alt="edit"></img>
               </button>
             </div>
           </div>
