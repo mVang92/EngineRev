@@ -33,6 +33,7 @@ const ServiceLog = props => {
             <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
               <button
                 id="editActionButton"
+                title="Available Soon"
                 onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, date, mileage, service, comment, editValue)}
                 disabled
               >
@@ -42,6 +43,7 @@ const ServiceLog = props => {
             <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
               <button
                 id="deleteActionButton"
+                title="Delete Log"
                 onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, date, mileage, service, comment, deleteValue)}
               >
                 <img id="editIcon" src={deleteIcon} alt="edit"></img>

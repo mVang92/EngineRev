@@ -74,7 +74,7 @@ class AddLog extends Component {
             {
               this.props.vehicleServiceLogs.length > 1 ? (
                 <button
-                  id="addLogDeleteVehicleButton"
+                  id="addLogSortLogsButton"
                   title="Sort Dates "
                   type="button"
                   className="cancelBtn"
@@ -83,7 +83,7 @@ class AddLog extends Component {
                 </button>
               ) : (
                   <button
-                    id="addLogDeleteVehicleButton"
+                    id="addLogSortLogsButton"
                     type="button"
                     className="cancelBtn"
                     disabled>
