@@ -30,7 +30,6 @@
     "express": "^4.15.4",
     "firebase": "^7.2.2",
     "if-env": "^1.0.4",
-    "moment": "^2.24.0",
     "mongoose": "^5.7.5",
     "react-modal": "^3.11.1",
     "react-router-dom": "^5.1.2",
