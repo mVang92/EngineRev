@@ -31,6 +31,7 @@ export default class Log extends Component {
       serviceLogComment: "",
       vehicleServiceLogs: [],
       sortVehicleServiceLogsMostRecent: true,
+      showEditOneLogModal: false,
       showDeleteOneVehicleModal: false,
       showAddLogErrorModal: false,
       showMileageInputErrorModal: false,
@@ -218,7 +219,7 @@ export default class Log extends Component {
     event.preventDefault();
     switch (actionValue) {
       case "edit":
-        console.log("edit!");
+        this.showEditOneServiceLogModal(serviceLogId, date, mileage, service, comment);
         break;
       case "delete":
         this.showDeleteOneServiceLogModal(serviceLogId, date, mileage, service, comment);
@@ -340,6 +341,26 @@ export default class Log extends Component {
   };
 
   /**
+   * Display the modal to notify the user about editing the service log
+   * 
+   * @param serviceLogId the service log id to target
+   * @param date         the service log date
+   * @param mileage      the service log mileage
+   * @param service      the service log service type
+   * @param comment      the service log comment
+   */
+  showEditOneServiceLogModal = (serviceLogId, date, mileage, service, comment) => {
+    this.setState({
+      showEditOneLogModal: true,
+      serviceLogId: serviceLogId,
+      serviceLogDate: date,
+      serviceLogMileage: mileage,
+      serviceLogService: service,
+      serviceLogComment: comment
+    });
+  };
+
+  /**
    * Display the modal to notify the user about deleting the service log
    * 
    * @param serviceLogId the service log id to target
@@ -357,6 +378,13 @@ export default class Log extends Component {
       serviceLogService: service,
       serviceLogComment: comment
     });
+  };
+
+  /**
+   * Hide the deleted one service log modal
+   */
+  hideEditOneServiceLogModal = () => {
+    this.setState({ showEditOneLogModal: false });
   };
 
   /**
