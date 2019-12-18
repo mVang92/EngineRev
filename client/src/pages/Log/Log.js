@@ -6,6 +6,7 @@ import ServiceLog from "../../components/ServiceLog";
 import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal";
 import EditOneServiceLogModal from "../../components/Modal/EditOneServiceLogModal";
 import DeleteOneServiceLogModal from "../../components/Modal/DeleteOneServiceLogModal";
+import FutureDateConfirmationModal from "../../components/Modal/FutureDateConfirmationModal";
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal"
 import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal"
 import Modal from "react-modal";
@@ -35,7 +36,8 @@ export default class Log extends Component {
       showDeleteOneVehicleModal: false,
       showAddLogErrorModal: false,
       showMileageInputErrorModal: false,
-      showDeleteOneLogModal: false
+      showDeleteOneLogModal: false,
+      showFutureDateConfirmationModal: false
     };
   }
 
@@ -73,42 +75,58 @@ export default class Log extends Component {
   };
 
   /**
-   * Records a service log for the vehicle
+   * Confirm the future date of the service log before submitting it
    */
-  handleSubmitOneServiceLog = e => {
+  confirmFutureDateBeforeSubmittingServieLog = (e) => {
     e.preventDefault();
+    const currentDate = new Date();
+    const loggedServiceDate = new Date(this.state.date);
+    currentDate.setDate(currentDate.getDate());
+    loggedServiceDate.setDate(loggedServiceDate.getDate() + 1);
     if (isNaN(this.state.mileage)) {
       this.showMileageInputErrorModal();
     } else {
       if (this.state.date === "" || this.state.mileage === "" || this.state.service === "") {
         this.showAddLogErrorModal();
       } else {
-        let id = this.state.vehicleId;
-        let log = {
-          date: this.state.date,
-          mileage: this.state.mileage,
-          service: this.state.service,
-          comment: this.state.comment
+        if (currentDate.getTime() < loggedServiceDate.getTime()) {
+          this.showFutureDateConfirmationModal();
+        } else {
+          this.handleSubmitOneServiceLog();
         };
-        const today = new Date(this.state.date);
-        today.setDate(today.getDate() + 1);
-        let dateMemory = today.toLocaleDateString("en-US");
-        let mileageMemory = this.state.mileage;
-        let serviceMemory = this.state.service;
-        API.addOneLogForOneVehicle(id, log)
-          .then(() => {
-            this.addOneServiceLogSuccessNotification(dateMemory, mileageMemory, serviceMemory)
-            this.componentDidMount();
-          })
-          .catch(err => this.addOneServiceLogFailNotification(err));
-        this.setState({
-          date: "",
-          mileage: "",
-          service: "",
-          comment: ""
-        });
       };
     };
+  };
+
+  /**
+   * Records a service log for the vehicle
+   */
+  handleSubmitOneServiceLog = () => {
+    this.hideFutureDateConfirmationModal();
+    let id = this.state.vehicleId;
+    let log = {
+      date: this.state.date,
+      mileage: this.state.mileage,
+      service: this.state.service,
+      comment: this.state.comment
+    };
+    const today = new Date(this.state.date);
+    today.setDate(today.getDate() + 1);
+    let dateMemory = today.toLocaleDateString("en-US");
+    let mileageMemory = this.state.mileage;
+    let serviceMemory = this.state.service;
+    API.addOneLogForOneVehicle(id, log)
+      .then(() => {
+        this.addOneServiceLogSuccessNotification(dateMemory, mileageMemory, serviceMemory)
+        this.componentDidMount();
+      })
+      .catch(err => this.addOneServiceLogFailNotification(err));
+    this.setState({
+      date: "",
+      mileage: "",
+      service: "",
+      comment: ""
+    });
   };
 
   /**
@@ -320,6 +338,13 @@ export default class Log extends Component {
   };
 
   /**
+   * Display the modal to confirm the future date submission of the service log
+   */
+  showFutureDateConfirmationModal = () => {
+    this.setState({ showFutureDateConfirmationModal: true })
+  }
+
+  /**
    * Display the modal to notify the user the vehicle has been deleted successfully
    */
   showDeleteOneVehicleModal = () => {
@@ -381,6 +406,13 @@ export default class Log extends Component {
   };
 
   /**
+   * Hide the future date confirmation modal
+   */
+  hideFutureDateConfirmationModal = () => {
+    this.setState({ showFutureDateConfirmationModal: false });
+  };
+
+  /**
    * Hide the deleted one service log modal
    */
   hideEditOneServiceLogModal = () => {
@@ -437,7 +469,7 @@ export default class Log extends Component {
                   handleChange={this.handleChange}
                   handlePrintPage={this.handlePrintPage}
                   handleResetLogVehicleForm={this.handleResetLogVehicleForm}
-                  handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
+                  confirmFutureDateBeforeSubmittingServieLog={this.confirmFutureDateBeforeSubmittingServieLog}
                   changeSortOrder={this.changeSortOrder}
                   showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
                 />
@@ -505,6 +537,12 @@ export default class Log extends Component {
                 }
               </div>
             </div>
+            <FutureDateConfirmationModal
+              handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
+              showFutureDateConfirmationModal={this.state.showFutureDateConfirmationModal}
+              hideFutureDateConfirmationModal={this.hideFutureDateConfirmationModal}
+              state={this.state.date}
+            />
             <DeleteOneVehicleModal
               handleDeleteOneVehicle={this.handleDeleteOneVehicle}
               showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
