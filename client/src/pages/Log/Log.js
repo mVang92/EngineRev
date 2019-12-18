@@ -77,19 +77,24 @@ export default class Log extends Component {
   /**
    * Confirm the future date of the service log before submitting it
    */
-  confirmFutureDateBeforeSubmittingServieLog = (e) => {
+  confirmFutureDateBeforeSubmittingServieLog = e => {
     e.preventDefault();
     const currentDate = new Date();
     const loggedServiceDate = new Date(this.state.date);
+
+    currentDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
+    loggedServiceDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
+
     currentDate.setDate(currentDate.getDate());
     loggedServiceDate.setDate(loggedServiceDate.getDate() + 1);
+    
     if (isNaN(this.state.mileage)) {
       this.showMileageInputErrorModal();
     } else {
       if (this.state.date === "" || this.state.mileage === "" || this.state.service === "") {
         this.showAddLogErrorModal();
       } else {
-        if (currentDate.getTime() < loggedServiceDate.getTime()) {
+        if (currentDate < loggedServiceDate) {
           this.showFutureDateConfirmationModal();
         } else {
           this.handleSubmitOneServiceLog();
