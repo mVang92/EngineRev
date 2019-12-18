@@ -10,6 +10,9 @@ class AddVehicle extends Component {
     };
   };
 
+  /**
+   * Add a vehicle to the database
+   */
   handleSubmitAddOneVehicle = e => {
     e.preventDefault();
     if (this.refs.year.value === "" || this.refs.make.value === "" || this.refs.model.value === "") {
@@ -28,10 +31,16 @@ class AddVehicle extends Component {
     };
   };
 
+  /**
+   * Show the error modal while adding a vehicle
+   */
   showAddVehicleErrorModal = () => {
     this.setState({ showAddVehicleErrorModal: true });
   };
 
+  /**
+   * Hide the error modal while adding a vehicle
+   */
   hideAddVehicleErrorModal = () => {
     this.setState({ showAddVehicleErrorModal: false });
   };
@@ -112,7 +121,7 @@ class AddVehicle extends Component {
                     type="submit"
                     className="addBtn">
                     Add Vehicle
-                    </button>
+                  </button>
                 </div>
                 <br />
                 <div className="col-md-12 text-center">
@@ -123,7 +132,7 @@ class AddVehicle extends Component {
                     className="resetButton"
                     onClick={this.props.handleResetAddVehicleFields}>
                     Reset Fields
-                    </button>
+                  </button>
                 </div>
               </div>
             </div>

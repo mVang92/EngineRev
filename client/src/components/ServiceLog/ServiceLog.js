@@ -10,13 +10,11 @@ const ServiceLog = props => {
   const serviceLogId = props._id;
   const editValue = "edit";
   const deleteValue = "delete";
-
-  const serviceLogdate = new Date(dateToFormat);
+  const serviceLogDate = new Date(dateToFormat);
   const currentDate = new Date();
-
-  serviceLogdate.setDate(serviceLogdate.getDate() + 1);
+  serviceLogDate.setDate(serviceLogDate.getDate() + 1);
   currentDate.setDate(currentDate.getDate());
-  const serviceLogDateFormatted = serviceLogdate.toLocaleDateString("en-US");
+  const serviceLogDateFormatted = serviceLogDate.toLocaleDateString("en-US");
   const currentDateFormatted = currentDate.toLocaleDateString("en-US");
   let serviceLogFullDetails;
 
@@ -26,7 +24,7 @@ const ServiceLog = props => {
     };
   };
 
-  if (currentDate.getTime() < serviceLogdate.getTime()) {
+  if (currentDate.getTime() < serviceLogDate.getTime()) {
     serviceLogFullDetails = {
       color: "rgb(200, 32, 0)",
       fontWeight: "bold"

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class AddLog extends Component {
   render() {
     return (
-      <form onSubmit={this.props.handleSubmitOneServiceLog}>
+      <form onSubmit={this.props.confirmFutureDateBeforeSubmittingServieLog}>
         <div className="row">
           <div className="col-md-4">
             <label><span className="required">*</span><strong>Date</strong></label>

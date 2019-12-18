@@ -25,29 +25,41 @@ const DeleteOneServiceLogModal = props => {
                         </div>
                         <div className="modal-body">
                             <div className="row">
-                                <div className="col-md-2">
+                                <div className="col-md-3">
                                     <strong>Date:</strong>
                                 </div>
-                                <div className="col-md-10">
+                                <div className="col-md-9">
                                     {props.state.serviceLogDate}
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-md-2">
+                                <div className="col-md-3">
                                     <strong>Mileage:</strong>
                                 </div>
-                                <div className="col-md-10">
+                                <div className="col-md-9">
                                     {props.state.serviceLogMileage}
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-md-2">
+                                <div className="col-md-3">
                                     <strong>Service:</strong>
                                 </div>
-                                <div className="col-md-10">
+                                <div className="col-md-9">
                                     {props.state.serviceLogService}
                                 </div>
                             </div>
+                            {
+                                props.state.serviceLogComment ? (
+                                    <div className="row">
+                                        <div className="col-md-3">
+                                            <strong>Comments:</strong>
+                                        </div>
+                                        <div className="col-md-9">
+                                            {props.state.serviceLogComment}
+                                        </div>
+                                    </div>
+                                ) : (null)
+                            }
                         </div>
                         <div className="modal-footer">
                             <button
