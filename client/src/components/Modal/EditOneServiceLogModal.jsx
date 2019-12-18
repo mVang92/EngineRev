@@ -8,10 +8,13 @@ const EditOneServiceLogModal = props => {
         day = "" + date.getDate(),
         year = date.getFullYear();
 
-    if (month.length < 2)
+    if (month.length < 2) {
         month = "0" + month;
-    if (day.length < 2)
+    }
+        
+    if (day.length < 2) {
         day = "0" + day;
+    }   
 
     let serviceLogDate = [year, month, day].join("-");
 
