@@ -10,10 +10,16 @@ const ServiceLog = props => {
   const serviceLogId = props._id;
   const editValue = "edit";
   const deleteValue = "delete";
+
   const serviceLogDate = new Date(dateToFormat);
   const currentDate = new Date();
+
+  serviceLogDate.setHours(0,0,0,0) > new Date().setHours(0,0,0,0);
+  currentDate.setHours(0,0,0,0) > new Date().setHours(0,0,0,0);
+  
   serviceLogDate.setDate(serviceLogDate.getDate() + 1);
   currentDate.setDate(currentDate.getDate());
+
   const serviceLogDateFormatted = serviceLogDate.toLocaleDateString("en-US");
   const currentDateFormatted = currentDate.toLocaleDateString("en-US");
   let serviceLogFullDetails;
