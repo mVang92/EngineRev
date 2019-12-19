@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 class MyVehicles extends Component {
   render() {
     const { vehicleData, vehicleCountForUser } = this.props;
+    
     return (
       <div className="text-center">
         {vehicleData ? (
@@ -20,9 +21,9 @@ class MyVehicles extends Component {
                 <div className="row innerBox">
                   <div className="col-md-12">
                     {vehicleData.vehicles.map(vehicle => (
-                      <div key={vehicle._id} title="View Service Logs" className="row">
+                      <div key={vehicle._id} className="row">
                         <div className="col-md-2"></div>
-                        <div className="col-md-8">
+                        <div title="View Service Logs" className="col-md-8">
                           <Link to={"/vehicle/" + vehicle._id}>
                             <VehicleItem>
                               <div className="text-dark">

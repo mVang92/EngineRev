@@ -26,7 +26,7 @@ export default class App extends Component {
   };
 
   /**
-   * Logs the user in if they are logged in and set vehicleData state to empty array
+   * Logs the user in if they are logged in
    */
   componentDidMount = () => {
     Modal.setAppElement("body");

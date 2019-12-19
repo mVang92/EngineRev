@@ -87,7 +87,7 @@ export default class Log extends Component {
 
     currentDate.setDate(currentDate.getDate());
     loggedServiceDate.setDate(loggedServiceDate.getDate() + 1);
-    
+
     if (isNaN(this.state.mileage)) {
       this.showMileageInputErrorModal();
     } else {
@@ -481,7 +481,9 @@ export default class Log extends Component {
               </div>
               <div className="row innerBox serviceLogMobileDisplay">
                 {this.state.vehicleServiceLogs.length === 0 ?
-                  (<label className="text-danger"><strong>No Service Logs on Record</strong></label>) : (
+                  (<div className="col-md-12 text-center text-danger">
+                    <label><strong>No Service Logs on Record</strong></label>
+                  </div>) : (
                     <div className="col-md-12">
                       <div className="row removeRowMobileDisplay">
                         <div className="col-md-2 logDetailsMobileDisplay">
