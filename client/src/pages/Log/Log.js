@@ -75,9 +75,9 @@ export default class Log extends Component {
   };
 
   /**
-   * Confirm the future date of the service log before submitting it
+   * Go through a series of conditions to validate the service log being entered
    */
-  confirmFutureDateBeforeSubmittingServieLog = e => {
+  checkUserEnteredServiceLogInput = e => {
     e.preventDefault();
     const currentDate = new Date();
     const loggedServiceDate = new Date(this.state.date);
@@ -108,30 +108,30 @@ export default class Log extends Component {
    */
   handleSubmitOneServiceLog = () => {
     this.hideFutureDateConfirmationModal();
-    let id = this.state.vehicleId;
-    let log = {
+    let vehicleId = this.state.vehicleId;
+    const serviceLogDate = new Date(this.state.date);
+    serviceLogDate.setDate(serviceLogDate.getDate() + 1);
+    let serviceLogToStore = {
       date: this.state.date,
       mileage: this.state.mileage,
       service: this.state.service,
       comment: this.state.comment
     };
-    const today = new Date(this.state.date);
-    today.setDate(today.getDate() + 1);
-    let dateMemory = today.toLocaleDateString("en-US");
-    let mileageMemory = this.state.mileage;
-    let serviceMemory = this.state.service;
-    API.addOneLogForOneVehicle(id, log)
+    let serviceLogDateMemory = serviceLogDate.toLocaleDateString("en-US");
+    let serviceLogmileageMemory = this.state.mileage;
+    let serviceLogserviceMemory = this.state.service;
+    API.addOneLogForOneVehicle(vehicleId, serviceLogToStore)
       .then(() => {
-        this.addOneServiceLogSuccessNotification(dateMemory, mileageMemory, serviceMemory)
+        this.addOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogmileageMemory, serviceLogserviceMemory)
+        this.setState({
+          date: "",
+          mileage: "",
+          service: "",
+          comment: ""
+        });
         this.componentDidMount();
       })
       .catch(err => this.addOneServiceLogFailNotification(err));
-    this.setState({
-      date: "",
-      mileage: "",
-      service: "",
-      comment: ""
-    });
   };
 
   /**
@@ -474,7 +474,7 @@ export default class Log extends Component {
                   handleChange={this.handleChange}
                   handlePrintPage={this.handlePrintPage}
                   handleResetLogVehicleForm={this.handleResetLogVehicleForm}
-                  confirmFutureDateBeforeSubmittingServieLog={this.confirmFutureDateBeforeSubmittingServieLog}
+                  checkUserEnteredServiceLogInput={this.checkUserEnteredServiceLogInput}
                   changeSortOrder={this.changeSortOrder}
                   showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
                 />
@@ -482,6 +482,7 @@ export default class Log extends Component {
               <div className="row innerBox serviceLogMobileDisplay">
                 {this.state.vehicleServiceLogs.length === 0 ?
                   (<div className="col-md-12 text-center text-danger">
+                    <hr />
                     <label><strong>No Service Logs on Record</strong></label>
                   </div>) : (
                     <div className="col-md-12">
