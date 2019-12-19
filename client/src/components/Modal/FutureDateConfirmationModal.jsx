@@ -24,7 +24,7 @@ const FutureDateConfirmationModal = props => {
                             </div>
                             <div className="col-md-10 text-danger">
                                 <label>
-                                    <strong>Confirm future date submission?</strong>
+                                    <strong>You are about to submit a future service log.</strong>
                                 </label>
                             </div>
                         </div>

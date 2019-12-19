@@ -20,16 +20,16 @@ class MyVehicles extends Component {
                 <div className="row innerBox">
                   <div className="col-md-12">
                     {vehicleData.vehicles.map(vehicle => (
-                      <div key={vehicle._id} className="row">
+                      <div key={vehicle._id} title="View Service Logs" className="row">
                         <div className="col-md-2"></div>
                         <div className="col-md-8">
-                          <VehicleItem>
-                            <Link to={"/vehicle/" + vehicle._id}>
-                              <div title="View Service Logs" className="text-dark">
+                          <Link to={"/vehicle/" + vehicle._id}>
+                            <VehicleItem>
+                              <div className="text-dark">
                                 {vehicle.year} {vehicle.make} {vehicle.model}
                               </div>
-                            </Link>
-                          </VehicleItem>
+                            </VehicleItem>
+                          </Link>
                         </div>
                         <div className="col-md-2"></div>
                       </div>
