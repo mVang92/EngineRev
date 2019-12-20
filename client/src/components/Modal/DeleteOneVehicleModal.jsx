@@ -48,7 +48,7 @@ const DeleteOneVehicleModal = props => {
                                 data-dismiss="modal">
                                 Cancel
                             </button>
-                            <Link to={"/vehicle/"}>
+                            <Link to={"/"}>
                                 <button
                                     title="Delete This Vehicle"
                                     id="confirmDeleteVehicleButton"
