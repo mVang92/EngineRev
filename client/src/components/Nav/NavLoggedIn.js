@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 export const NavLoggedIn = props => {
     const userEmailForAccount = props.state.userEmailForAccount;
     const userAccountCreationTime = props.state.userAccountCreationTime;
+    const userDisplayName = props.state.userDisplayName
     const accountPage = {
         pathname: "/account/" + props.state.userId,
         state: [
             userEmailForAccount,
-            userAccountCreationTime
+            userAccountCreationTime,
+            userDisplayName
         ]
     };
 
