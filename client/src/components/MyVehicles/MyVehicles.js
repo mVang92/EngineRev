@@ -23,7 +23,7 @@ class MyVehicles extends Component {
                       <div key={vehicle._id} className="row">
                         <div className="col-md-2"></div>
                         <div title="View Service Logs" className="col-md-8">
-                          <Link to={"/account/" + this.props.vehicleData.creator + "/vehicle/" + vehicle._id}>
+                          <Link to={"/account/" + this.props.vehicleData._id + "/vehicle/" + vehicle._id}>
                             <VehicleItem>
                               <div className="text-dark">
                                 {vehicle.year} {vehicle.make} {vehicle.model}

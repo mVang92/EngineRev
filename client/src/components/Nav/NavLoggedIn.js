@@ -2,6 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const NavLoggedIn = props => {
+    const userEmailForAccount = props.state.userEmailForAccount;
+    const userAccountCreationTime = props.state.userAccountCreationTime;
+    const accountPage = {
+        pathname: "/account/" + props.state.userId,
+        state: [
+            userEmailForAccount,
+            userAccountCreationTime
+        ]
+    };
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
             <a id="applicationName" className="navbar-brand" href="/">
@@ -14,10 +24,7 @@ export const NavLoggedIn = props => {
                 <ul className="navbar-nav">
                     {
                         props.state.loggedin ? (
-                            <Link to={{
-                                pathname: "/account/" + props.state.userId,
-                                state: props.state.userEmailForAccount
-                            }}>
+                            <Link to={accountPage}>
                                 <li className="nav-item active">
                                     <div id="accountNavButton" className="nav-item nav-link" title="My Account">
                                         Account

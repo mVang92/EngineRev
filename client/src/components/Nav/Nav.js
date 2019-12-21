@@ -21,7 +21,8 @@ export class Nav extends Component {
       email: "",
       password: "",
       confirmPassword: "",
-      userEmailForAccount: ""
+      userEmailForAccount: "",
+      userAccountCreationTime: ""
     };
   };
 
@@ -43,7 +44,8 @@ export class Nav extends Component {
         this.setState({
           loggedin: true,
           userId: user.uid,
-          userEmailForAccount: user.email
+          userEmailForAccount: user.email,
+          userAccountCreationTime: user.metadata.creationTime
         });
       };
     });
