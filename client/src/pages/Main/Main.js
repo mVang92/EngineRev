@@ -16,7 +16,6 @@ export default class App extends Component {
       showAddVehicleYearNanErrorModal: false,
       loggedin: false,
       uid: "",
-      currentModal: String,
       vehicleData: [],
       vehicleCount: 0,
       message: "",
@@ -40,11 +39,11 @@ export default class App extends Component {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({ loggedin: true });
-        const id = user.uid;
+        const userUniqueId = user.uid;
         const userEmail = document.createTextNode(user.email);
         document.getElementById("userEmail").innerHTML = "";
         document.getElementById("userEmail").appendChild(userEmail);
-        API.getAllVehiclesForUser(id)
+        API.getAllVehiclesForUser(userUniqueId)
           .then(res =>
             this.setState({
               vehicleData: res.data,
@@ -153,8 +152,8 @@ export default class App extends Component {
               vehicleData={this.state.vehicleData}
               handleChange={this.handleChange}
               handleResetAddVehicleFields={this.handleResetAddVehicleFields}
-              addVehicle={this.handleAddOneVehicle.bind(this)}
-              vehicleCountForUser={this.handleAddVehicleCountForUser.bind(this)}
+              addVehicle={this.handleAddOneVehicle}
+              vehicleCountForUser={this.handleAddVehicleCountForUser}
             />
           ) : (
               <LoggedOut />

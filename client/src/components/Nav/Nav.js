@@ -17,9 +17,11 @@ export class Nav extends Component {
       showSignUpModal: false,
       showSignOutModal: false,
       originUrl: "",
+      userId: "",
       email: "",
       password: "",
-      confirmPassword: ""
+      confirmPassword: "",
+      userEmailForAccount: ""
     };
   };
 
@@ -38,7 +40,11 @@ export class Nav extends Component {
   isUserLoggedIn = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        this.setState({ loggedin: true });
+        this.setState({
+          loggedin: true,
+          userId: user.uid,
+          userEmailForAccount: user.email
+        });
       };
     });
   };
@@ -106,6 +112,7 @@ export class Nav extends Component {
     auth
       .doSignOut()
       .then(() => {
+        this.setState({ userEmailForAccount: "" })
         window.location.assign(this.state.originUrl);
       });
   };
@@ -175,7 +182,7 @@ export class Nav extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.loggedin === true ? (
+        {this.state.loggedin ? (
           <React.Fragment>
             <NavLoggedIn
               state={this.state}
