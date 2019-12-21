@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 class MyVehicles extends Component {
   render() {
     const { vehicleData, vehicleCountForUser } = this.props;
-    
     return (
       <div className="text-center">
         {vehicleData ? (
@@ -13,7 +12,7 @@ class MyVehicles extends Component {
             vehicleData.vehicles.length ? (
               <React.Fragment>
                 {vehicleCountForUser(vehicleData.vehicles.length)}
-                < div className="row">
+                <div className="row">
                   <div className="col-md-12">
                     <label><strong>My Vehicles</strong></label>
                   </div>
@@ -24,7 +23,7 @@ class MyVehicles extends Component {
                       <div key={vehicle._id} className="row">
                         <div className="col-md-2"></div>
                         <div title="View Service Logs" className="col-md-8">
-                          <Link to={"/vehicle/" + vehicle._id}>
+                          <Link to={"/account/" + this.props.vehicleData.creator + "/vehicle/" + vehicle._id}>
                             <VehicleItem>
                               <div className="text-dark">
                                 {vehicle.year} {vehicle.make} {vehicle.model}

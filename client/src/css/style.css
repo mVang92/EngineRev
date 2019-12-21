@@ -171,11 +171,13 @@ input {
     color: rgb(220, 64, 48);
 }
 
+#accountNavButton,
 #signOutNavButton,
 #signInNavButton {
     color: rgb(200, 200, 200);
 }
 
+#accountNavButton:hover,
 #signOutNavButton:hover,
 #signInNavButton:hover {
     background: rgb(128, 128, 128);
@@ -279,6 +281,7 @@ input {
     height: 2em;
 }
 
+#accountPage,
 #noMatch {
     padding-top: 4em;
     margin-top: 0em !important;
@@ -290,6 +293,16 @@ input {
 
 #notAuthorizedToViewLogs {
     padding-top: 6em;
+}
+
+#showUniqueUserId,
+#showMaskUniqueUserId {
+    display: initial;
+}
+
+#hideUniqueUserId,
+#hideMaskUniqueUserId {
+    display: none;
 }
 
 @media print {
@@ -333,6 +346,7 @@ input {
         text-align: center;
     }
 
+    ##accountNavButton,
     #signOutNavButton,
     #signInNavButton,
     #signUpNavButton {
