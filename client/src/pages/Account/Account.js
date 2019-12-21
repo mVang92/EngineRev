@@ -6,7 +6,6 @@ import { ToastContainer, toast } from "react-toastify";
 export default class Account extends Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.state = {
       userEmail: "",
       userId: "",
@@ -36,9 +35,7 @@ export default class Account extends Component {
     if (this.state.userId) {
       API.getAllVehiclesForUser(this.state.userId)
         .then(res =>
-          this.setState({
-            vehicleCount: res.data.vehicles.length
-          }, console.log(res))
+          this.setState({ vehicleCount: res.data.vehicles.length })
         )
         .catch(err =>
           this.setState({ loadingError: err },
@@ -84,7 +81,7 @@ export default class Account extends Component {
     let uniqueUserIdMask = this.state.showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
     return (
       <Container>
-        <div id="accountPage" className="mt-3">
+        <div id="accountPage" className="mt-3 box">
           <div className="row">
             <div className="col-md-12 text-center"><strong>My Account</strong></div>
           </div>
