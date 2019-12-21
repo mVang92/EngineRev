@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import Modal from "react-modal";
 import Container from "../../components/Container";
+import { firebase } from "../../firebase";
 import API from "../../utils/API";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -9,9 +11,12 @@ export default class Account extends Component {
     this.state = {
       userEmail: "",
       userId: "",
+      newPassword: "",
+      confirmNewPassword: "",
       vehicleData: "",
       vehicleCount: "Loading...",
       loadingError: "",
+      userAccountCreationTime: "",
       showUniqueUserId: false,
       showMaskUniqueUserId: true
     };
@@ -21,11 +26,21 @@ export default class Account extends Component {
    * Grab the passed in states and set them to state, then get vehicle data
    */
   componentDidMount = () => {
+    Modal.setAppElement("body");
     this.setState({
-      userEmail: this.props.location.state,
+      userEmail: this.props.location.state[0],
+      userAccountCreationTime: this.props.location.state[1],
       userId: this.props.match.params.id
     });
     this.getVehicleData();
+  };
+
+  /**
+   * Handle real-time changes
+   */
+  handleChange = e => {
+    let { name, value } = e.target;
+    this.setState({ [name]: value });
   };
 
   /**
@@ -47,13 +62,36 @@ export default class Account extends Component {
     );
   };
 
-  /**
-   * Display the error notification when an error occurs while loading vehicles
-   * 
-   * @param err the error message to display to the user
-   */
-  loadVehiclesFailNotification = err => {
-    toast.error(`Loading Vehicles ${err.toString()}`);
+  updatePassword = e => {
+    e.preventDefault();
+    firebase.auth.onAuthStateChanged(user => {
+      if (user) {
+        if (this.state.newPassword === this.state.confirmNewPassword) {
+          user.updatePassword(this.state.confirmNewPassword)
+            .then(() => {
+              this.updatePasswordSuccessNotification();
+              this.setState({
+                newPassword: "",
+                confirmNewPassword: ""
+              })
+            }).catch(error => {
+              this.updatePasswordErrorNotification(error);
+              this.setState({
+                newPassword: "",
+                confirmNewPassword: ""
+              })
+            });
+        } else {
+          this.setState({
+            newPassword: "",
+            confirmNewPassword: ""
+          })
+          this.passwordsDoNotMatchErrorNotification();
+        };
+      } else {
+        this.unauthorizedNotification();
+      }
+    });
   };
 
   /**
@@ -76,6 +114,45 @@ export default class Account extends Component {
     });
   };
 
+  /**
+   * Display the success notification when the password is updated successfully
+   */
+  updatePasswordSuccessNotification = () => {
+    toast.success(`Password Updated Successfully.`);
+  };
+
+  /**
+   * Display the error notification when the new password and confirm passwords do not match
+   */
+  passwordsDoNotMatchErrorNotification = () => {
+    toast.warn(`Passwords do not match. Try again.`);
+  };
+
+  /**
+   * Display the error notification when an error occurs while loading vehicles
+   * 
+   * @param err the error message to display to the user
+   */
+  loadVehiclesFailNotification = err => {
+    toast.error(`Loading Vehicles ${err.toString()}`);
+  };
+
+  /**
+   * Display the error notification when an error occurs while updating password
+   * 
+   * @param err the error message to display to the user
+   */
+  updatePasswordErrorNotification = err => {
+    toast.error(err.toString());
+  };
+
+  /**
+   * Display the error notification when there are no users logged in
+   */
+  unauthorizedNotification = () => {
+    toast.error(`You do not have authorization to perform this action.`);
+  };
+
   render() {
     let uniqueUserId = this.state.showUniqueUserId ? "showUniqueUserId" : "hideUniqueUserId";
     let uniqueUserIdMask = this.state.showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
@@ -95,7 +172,7 @@ export default class Account extends Component {
           <div className="row">
             <div className="col-md-4"><strong>Unique User Id:</strong></div>
             <div className="col-md-4">
-              <span id={uniqueUserIdMask}>XXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
+              <span id={uniqueUserIdMask}>*****************************************</span>
               <span id={uniqueUserId}>{this.state.userId}</span>
             </div>
             <div className="col-md-4">
@@ -138,8 +215,62 @@ export default class Account extends Component {
             </div>
             <div className="col-md-4"></div>
           </div>
+          <br />
+          <div className="row">
+            <div className="col-md-4"><strong>Account Creation Date:</strong></div>
+            <div className="col-md-4">{this.state.userAccountCreationTime}</div>
+            <div className="col-md-4"></div>
+          </div>
+          <br />
+          <form onSubmit={this.updatePassword}>
+            <div className="row">
+              <div className="col-md-4"><strong>Update Password:</strong></div>
+              <div className="col-md-4">
+                <div className="row">
+                  <div className="col-md-12">
+                    <input
+                      type="password"
+                      ref="newPassword"
+                      onChange={this.handleChange}
+                      value={this.state.newPassword}
+                      name="newPassword"
+                      maxLength="50"
+                      placeholder="New Password"
+                    />
+                  </div>
+                  <br /><br />
+                  <div className="col-md-12">
+                    <input
+                      type="password"
+                      ref="confirmNewPassword"
+                      onChange={this.handleChange}
+                      value={this.state.confirmNewPassword}
+                      name="confirmNewPassword"
+                      maxLength="50"
+                      placeholder="Confirm Password"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="row">
+                  <div className="col-md-12"></div>
+                  <br /><br />
+                  <div className="col-md-12">
+                    <button
+                      id="submitNewPasswordButton"
+                      type="submit"
+                      onClick={this.updatePassword}
+                    >
+                      Submit
+                  </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
           <hr />
-          <a href="/"><button className="backHomeBtn">← Back Home</button></a>
+          <a href="/"><button className="backHomeBtn">Back Home</button></a>
           <br />
         </div>
         <ToastContainer />
