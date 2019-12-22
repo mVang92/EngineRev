@@ -3,6 +3,8 @@ import Modal from "react-modal";
 import Container from "../../components/Container";
 import { firebase } from "../../firebase";
 import API from "../../utils/API";
+import AccountDetails from "../../components/AccountDetails";
+import NoAuthorization from "../../components/NoAuthorization";
 import { ToastContainer, toast } from "react-toastify";
 
 export default class Account extends Component {
@@ -131,7 +133,7 @@ export default class Account extends Component {
   /**
    * Set the state of the unique id to true
    */
-  showUniqueUserId = () => {
+  showUniqueUserIdToPage = () => {
     this.setState({
       showUniqueUserId: true,
       showMaskUniqueUserId: false
@@ -141,7 +143,7 @@ export default class Account extends Component {
   /**
    * Set the state of the unique id to false
    */
-  hideUniqueUserId = () => {
+  hideUniqueUserIdToPage = () => {
     this.setState({
       showUniqueUserId: false,
       showMaskUniqueUserId: true
@@ -204,177 +206,36 @@ export default class Account extends Component {
   };
 
   render() {
-    let uniqueUserId = this.state.showUniqueUserId ? "showUniqueUserId" : "hideUniqueUserId";
-    let uniqueUserIdMask = this.state.showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
     return (
-      <Container>
+      <React.Fragment>
         {
           this.state.loggedin ? (
-            <div id="accountPage" className="mt-3 box">
-              <div className="row">
-                <div className="col-md-12 text-center"><label><strong>My Account</strong></label></div>
-              </div>
-              <hr />
-              <div className="row">
-                <div className="col-md-4"><label><strong>Email:</strong></label></div>
-                <div className="col-md-4">{this.state.userEmail}</div>
-                <div className="col-md-4"></div>
-              </div>
-              <br />
-              <div className="row">
-                <div className="col-md-4"><label><strong>Display Name:</strong></label></div>
-                <div className="col-md-4">{this.state.userDisplayName}</div>
-                <div className="col-md-4"></div>
-              </div>
-              <br />
-              <div className="row">
-                <div className="col-md-4"><label><strong>Unique User Id:</strong></label></div>
-                <div className="col-md-4">
-                  <span id={uniqueUserIdMask}>*****************************************</span>
-                  <span id={uniqueUserId}>{this.state.userId}</span>
-                </div>
-                <div className="col-md-4">
-                  {
-                    this.state.showUniqueUserId ? (
-                      <button
-                        id="hideUniqueIdButton"
-                        title="Hide Unique Id"
-                        type="button"
-                        className="cancelBtn"
-                        onClick={this.hideUniqueUserId}
-                      >
-                        Hide
-                  </button>
-                    ) : (
-                        <button
-                          id="showUniqueIdButton"
-                          title="Show Unique Id"
-                          type="button"
-                          className="cancelBtn"
-                          onClick={this.showUniqueUserId}
-                        >
-                          Show
-                    </button>
-                      )
-                  }
-                </div>
-              </div>
-              <br />
-              <div className="row">
-                <div className="col-md-4"><label><strong>Vehicles On Record:</strong></label></div>
-                <div className="col-md-4">
-                  {
-                    this.state.loadingError ? (
-                      <span className="text-danger">Error Loading Vehicle Count</span>
-                    ) : (
-                        <span>{this.state.vehicleCount}</span>
-                      )
-                  }
-                </div>
-                <div className="col-md-4"></div>
-              </div>
-              <br />
-              <div className="row">
-                <div className="col-md-4"><label><strong>Account Creation Date:</strong></label></div>
-                <div className="col-md-4">{this.state.userAccountCreationTime}</div>
-                <div className="col-md-4"></div>
-              </div>
-              <hr />
-              <form onSubmit={this.updateDisplayName}>
-                <div className="row">
-                  <div className="col-md-4"><label><strong>Update Display Name:</strong></label></div>
-                  <div className="col-md-4">
-                    <div className="row">
-                      <div className="col-md-12">
-                        <input
-                          type="text"
-                          ref="newDisplayName"
-                          onChange={this.handleChange}
-                          value={this.state.newDisplayName}
-                          name="newDisplayName"
-                          maxLength="50"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <br /><br />
-                  <div className="col-md-4">
-                    <div className="row">
-                      <div className="col-md-12">
-                        <button
-                          id="submitNewDisplayNameButton"
-                          type="submit"
-                          onClick={this.updateDisplayName}
-                        >
-                          Submit
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-              <br />
-              <form onSubmit={this.updatePassword}>
-                <div className="row">
-                  <div className="col-md-4"><label><strong>Update Password:</strong></label></div>
-                  <div className="col-md-4">
-                    <div className="row">
-                      <div className="col-md-12">
-                        <input
-                          type="password"
-                          ref="newPassword"
-                          onChange={this.handleChange}
-                          value={this.state.newPassword}
-                          name="newPassword"
-                          maxLength="50"
-                          placeholder="New Password"
-                        />
-                      </div>
-                      <br /><br />
-                      <div className="col-md-12">
-                        <input
-                          type="password"
-                          ref="confirmNewPassword"
-                          onChange={this.handleChange}
-                          value={this.state.confirmNewPassword}
-                          name="confirmNewPassword"
-                          maxLength="50"
-                          placeholder="Confirm Password"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-4">
-                    <div className="row">
-                      <div className="col-md-12"></div>
-                      <br /><br />
-                      <div className="col-md-12">
-                        <button
-                          id="submitNewPasswordButton"
-                          type="submit"
-                          onClick={this.updatePassword}
-                        >
-                          Submit
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-              <hr />
-              <a href="/"><button className="backHomeBtn">Back Home</button></a>
-              <br />
-            </div>
+            <Container>
+              <AccountDetails
+                handleChange={this.handleChange}
+                userEmail={this.state.userEmail}
+                userId={this.state.userId}
+                userDisplayName={this.state.userDisplayName}
+                showUniqueUserId={this.state.showUniqueUserId}
+                showUniqueUserIdToPage={this.showUniqueUserIdToPage}
+                showMaskUniqueUserId={this.state.showMaskUniqueUserId}
+                hideUniqueUserIdToPage={this.hideUniqueUserIdToPage}
+                loadingError={this.state.loadingError}
+                vehicleCount={this.state.vehicleCount}
+                userAccountCreationTime={this.state.userAccountCreationTime}
+                updateDisplayName={this.updateDisplayName}
+                newDisplayName={this.state.newDisplayName}
+                updatePassword={this.updatePassword}
+                newPassword={this.state.newPassword}
+                confirmNewPassword={this.state.confirmNewPassword}
+              />
+            </Container>
           ) : (
-              <div className="text-danger text-center">
-                <br /><br />
-                <label><h4>You do not have permission to view this page.</h4></label>
-              </div>
+              <NoAuthorization />
             )
         }
-
         <ToastContainer />
-      </Container>
+      </React.Fragment>
     );
   };
 };
