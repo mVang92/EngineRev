@@ -290,7 +290,8 @@ input {
 }
 
 #accountPage,
-#noMatch {
+#noMatch,
+#noAuthorization {
     padding-top: 4em;
     margin-top: 0em !important;
 }
