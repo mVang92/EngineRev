@@ -24,6 +24,11 @@ body {
     background: rgb(235, 235, 235);
 }
 
+#loggedOut {
+    margin-top: 4em;
+    height: initial !important;
+}
+
 .accountModal {
     margin-top: 30%;
     background: rgba(255, 255, 255, 0.7);
@@ -111,7 +116,8 @@ input {
 #editActionButton,
 #deleteActionButton,
 #submitNewPasswordButton,
-#submitNewDisplayNameButton {
+#submitNewDisplayNameButton,
+#submitNewProfilePictureButton {
     border-radius: 5px;
     cursor: pointer;
     transition-duration: 0.5s;
@@ -120,7 +126,8 @@ input {
 .cancelBtn,
 .backHomeBtn,
 #submitNewPasswordButton,
-#submitNewDisplayNameButton {
+#submitNewDisplayNameButton,
+#submitNewProfilePictureButton {
     background: rgb(225, 225, 225)
 }
 
@@ -149,7 +156,8 @@ input {
 #editActionButton,
 #deleteActionButton,
 #submitNewPasswordButton:hover,
-#submitNewDisplayNameButton:hover {
+#submitNewDisplayNameButton:hover,
+#submitNewProfilePictureButton:hover {
     transition-duration: 0.2s;
 }
 
@@ -171,7 +179,8 @@ input {
 .backHomeBtn:hover,
 #editActionButton:hover,
 #submitNewPasswordButton:hover,
-#submitNewDisplayNameButton:hover {
+#submitNewDisplayNameButton:hover,
+#submitNewProfilePictureButton:hover {
     background: rgb(255, 255, 255)
 }
 
@@ -300,10 +309,6 @@ input {
     width: 20em;
 }
 
-#notAuthorizedToViewLogs {
-    padding-top: 6em;
-}
-
 #showUniqueUserId,
 #showMaskUniqueUserId {
     display: initial;
@@ -312,6 +317,10 @@ input {
 #hideUniqueUserId,
 #hideMaskUniqueUserId {
     display: none;
+}
+
+#profilePicture {
+    width: 100%;
 }
 
 @media print {

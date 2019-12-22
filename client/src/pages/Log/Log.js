@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
+import { firebase, auth } from "../../firebase"
 import Container from "../../components/Container";
 import AddLog from "../../components/AddLog";
 import ServiceLog from "../../components/ServiceLog";
@@ -9,6 +10,7 @@ import DeleteOneServiceLogModal from "../../components/Modal/DeleteOneServiceLog
 import FutureDateConfirmationModal from "../../components/Modal/FutureDateConfirmationModal";
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal"
 import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal"
+import NoAuthorization from "../../components/NoAuthorization";
 import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -16,7 +18,7 @@ export default class Log extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loggedin: true,
+      loggedin: false,
       vehicle: [],
       vehicleId: "",
       make: "",
@@ -46,8 +48,15 @@ export default class Log extends Component {
    */
   componentDidMount = () => {
     Modal.setAppElement("body");
-    this.setState({ vehicleId: this.props.match.params.id });
-    this.getOneVehicle();
+    firebase.auth.onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          vehicleId: this.props.match.params.id,
+          loggedin: true
+        });
+        this.getOneVehicle();
+      };
+    });
   };
 
   /**
@@ -583,9 +592,7 @@ export default class Log extends Component {
             <ToastContainer />
           </Container>
         ) : (
-            <div id="notAuthorizedToViewLogs" className="text-center text-danger">
-              <strong>You are not authorized to view this page.</strong>
-            </div>
+          <NoAuthorization />
           )
         }
       </React.Fragment>

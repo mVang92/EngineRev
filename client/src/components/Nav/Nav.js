@@ -13,6 +13,7 @@ export class Nav extends Component {
     super(props);
     this.state = {
       loggedin: false,
+      defaultProfilePicture: "https://image.flaticon.com/icons/png/512/64/64572.png",
       showSignInModal: false,
       showSignUpModal: false,
       showSignOutModal: false,
@@ -23,7 +24,8 @@ export class Nav extends Component {
       confirmPassword: "",
       userEmailForAccount: "",
       userAccountCreationTime: "",
-      userDisplayName: ""
+      userDisplayName: "",
+      userPhotoUrl: ""
     };
   };
 
@@ -32,7 +34,7 @@ export class Nav extends Component {
    */
   componentDidMount = () => {
     const originUrl = window.location.origin;
-    this.setState({ originUrl: originUrl })
+    this.setState({ originUrl: originUrl });
     this.isUserLoggedIn();
   };
 
@@ -47,8 +49,12 @@ export class Nav extends Component {
           userId: user.uid,
           userEmailForAccount: user.email,
           userAccountCreationTime: user.metadata.creationTime,
-          userDisplayName: user.displayName
+          userDisplayName: user.displayName,
+          userPhotoUrl: user.photoURL
         });
+        if (!user.photoURL) {
+          this.setState({ userPhotoUrl: this.state.defaultProfilePicture })
+        };
       };
     });
   };
@@ -131,6 +137,9 @@ export class Nav extends Component {
       email: "",
       password: ""
     });
+    if (window.location.href !== (this.state.originUrl + "/")) {
+      window.location.assign(this.state.originUrl)
+    };
   };
 
   /**
@@ -144,6 +153,9 @@ export class Nav extends Component {
       password: "",
       confirmPassword: ""
     });
+    if (window.location.href !== (this.state.originUrl + "/")) {
+      window.location.assign(this.state.originUrl)
+    };
   };
 
   /**

@@ -146,8 +146,9 @@ export default class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Container>
-          {this.state.loggedin ? (
+
+        {this.state.loggedin ? (
+          <Container>
             <LoggedIn
               vehicleData={this.state.vehicleData}
               handleChange={this.handleChange}
@@ -155,11 +156,11 @@ export default class App extends Component {
               addVehicle={this.handleAddOneVehicle}
               vehicleCountForUser={this.handleAddVehicleCountForUser}
             />
-          ) : (
-              <LoggedOut />
-            )
-          }
-        </Container>
+          </Container>
+        ) : (
+            <LoggedOut />
+          )
+        }
         <AddVehicleYearNanErrorModal
           showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
           hideAddVehicleYearNanErrorModal={this.hideAddVehicleYearNanErrorModal}
