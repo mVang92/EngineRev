@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import { firebase, auth } from "../../firebase"
+import { firebase } from "../../firebase"
 import Container from "../../components/Container";
 import AddLog from "../../components/AddLog";
 import ServiceLog from "../../components/ServiceLog";

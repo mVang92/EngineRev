@@ -6,6 +6,7 @@ import API from "../../utils/API";
 import AccountDetails from "../../components/AccountDetails";
 import NoAuthorization from "../../components/NoAuthorization";
 import UpdateProfilePictureModal from "../../components/Modal/UpdateProfilePictureModal";
+import UpdateDisplayNameModal from "../../components/Modal/UpdateDisplayNameModal";
 import { ToastContainer, toast } from "react-toastify";
 
 export default class Account extends Component {
@@ -29,7 +30,8 @@ export default class Account extends Component {
       newProfilePicture: "",
       showUniqueUserId: false,
       showMaskUniqueUserId: true,
-      showUpdateProfilePictureModal: false
+      showUpdateProfilePictureModal: false,
+      showUpdateDisplayNameModal: false
     };
   };
 
@@ -88,11 +90,13 @@ export default class Account extends Component {
    */
   updateDisplayName = e => {
     e.preventDefault();
+    this.setState({ showUpdateDisplayNameModal: false });
     const user = this.state.user;
     if (this.state.loggedin) {
       user.updateProfile({
         displayName: this.state.newDisplayName
       }).then(() => {
+        this.setState({ showUpdateDisplayNameModal: false });
         if (this.state.newDisplayName !== "") {
           this.updateDisplayNameWithNameSuccessNotification(this.state.newDisplayName);
         } else {
@@ -164,6 +168,14 @@ export default class Account extends Component {
   };
 
   /**
+   * Display the modal to confirm updating the display name
+   */
+  showUpdateDisplayNameModal = e => {
+    e.preventDefault();
+    this.setState({ showUpdateDisplayNameModal: true })
+  };
+
+  /**
    * Set the state of the unique id to true
    */
   showUniqueUserIdToPage = () => {
@@ -178,6 +190,13 @@ export default class Account extends Component {
    */
   hideUpdateProfilePictureModal = () => {
     this.setState({ showUpdateProfilePictureModal: false });
+  };
+
+  /**
+   * Hide the modal to confirm updating the display name
+   */
+  hideUpdateDisplayNameModal = () => {
+    this.setState({ showUpdateDisplayNameModal: false });
   };
 
   /**
@@ -286,9 +305,10 @@ export default class Account extends Component {
                   newDisplayName={this.state.newDisplayName}
                   updatePassword={this.updatePassword}
                   newPassword={this.state.newPassword}
-                  showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
                   newProfilePicture={this.state.newProfilePicture}
                   confirmNewPassword={this.state.confirmNewPassword}
+                  showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
+                  showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
                 />
               </Container>
               <UpdateProfilePictureModal
@@ -296,6 +316,12 @@ export default class Account extends Component {
                 updateProfilePicture={this.updateProfilePicture}
                 hideUpdateProfilePictureModal={this.hideUpdateProfilePictureModal}
                 newProfilePicture={this.state.newProfilePicture}
+              />
+              <UpdateDisplayNameModal
+                showUpdateDisplayNameModal={this.state.showUpdateDisplayNameModal}
+                updateDisplayName={this.updateDisplayName}
+                hideUpdateDisplayNameModal={this.hideUpdateDisplayNameModal}
+                newDisplayName={this.state.newDisplayName}
               />
             </React.Fragment>
           ) : (
