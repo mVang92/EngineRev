@@ -5,6 +5,7 @@ import { firebase } from "../../firebase";
 import API from "../../utils/API";
 import AccountDetails from "../../components/AccountDetails";
 import NoAuthorization from "../../components/NoAuthorization";
+import UpdateProfilePictureModal from "../../components/Modal/UpdateProfilePictureModal";
 import { ToastContainer, toast } from "react-toastify";
 
 export default class Account extends Component {
@@ -27,7 +28,8 @@ export default class Account extends Component {
       userAccountCreationTime: "",
       newProfilePicture: "",
       showUniqueUserId: false,
-      showMaskUniqueUserId: true
+      showMaskUniqueUserId: true,
+      showUpdateProfilePictureModal: false
     };
   };
 
@@ -104,17 +106,18 @@ export default class Account extends Component {
   };
 
   /**
-   * UYpdate the display name for the user
+   * Update the display name for the user
    */
   updateProfilePicture = e => {
     e.preventDefault();
+    this.setState({ showUpdateProfilePictureModal: false });
     const user = this.state.user;
     if (this.state.loggedin) {
       user.updateProfile({
         photoURL: this.state.newProfilePicture
       }).then(() => {
         this.updateProfilePictureSuccessNotification();
-        this.setState({ newProfilePicture: "" })
+        this.setState({ newProfilePicture: "" });
       }).catch(error => {
         this.updateProfilePictureErrorNotification(error);
       });
@@ -130,7 +133,6 @@ export default class Account extends Component {
       if (this.state.newPassword === this.state.confirmNewPassword) {
         this.state.user.updatePassword(this.state.confirmNewPassword)
           .then(() => {
-            console.log("got here")
             this.updatePasswordSuccessNotification();
             this.setState({
               newPassword: "",
@@ -154,6 +156,14 @@ export default class Account extends Component {
   };
 
   /**
+   * Display the modal to confirm updating the profile picture
+   */
+  showUpdateProfilePictureModal = e => {
+    e.preventDefault();
+    this.setState({ showUpdateProfilePictureModal: true })
+  };
+
+  /**
    * Set the state of the unique id to true
    */
   showUniqueUserIdToPage = () => {
@@ -161,6 +171,13 @@ export default class Account extends Component {
       showUniqueUserId: true,
       showMaskUniqueUserId: false
     });
+  };
+
+  /**
+   * Hide the modal to confirm updating the profile picture
+   */
+  hideUpdateProfilePictureModal = () => {
+    this.setState({ showUpdateProfilePictureModal: false });
   };
 
   /**
@@ -269,11 +286,17 @@ export default class Account extends Component {
                   newDisplayName={this.state.newDisplayName}
                   updatePassword={this.updatePassword}
                   newPassword={this.state.newPassword}
-                  updateProfilePicture={this.updateProfilePicture}
+                  showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
                   newProfilePicture={this.state.newProfilePicture}
                   confirmNewPassword={this.state.confirmNewPassword}
                 />
               </Container>
+              <UpdateProfilePictureModal
+                showUpdateProfilePictureModal={this.state.showUpdateProfilePictureModal}
+                updateProfilePicture={this.updateProfilePicture}
+                hideUpdateProfilePictureModal={this.hideUpdateProfilePictureModal}
+                newProfilePicture={this.state.newProfilePicture}
+              />
             </React.Fragment>
           ) : (
               <NoAuthorization />
