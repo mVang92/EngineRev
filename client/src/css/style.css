@@ -320,7 +320,7 @@ input {
 }
 
 #profilePicture {
-    width: 100%;
+    width: 75%;
 }
 
 @media print {
@@ -481,6 +481,10 @@ input {
 
     #noMatchImage {
         width: 15em;
+    }
+
+    #profilePicture {
+        width: 55%;
     }
 
     .wrapword {

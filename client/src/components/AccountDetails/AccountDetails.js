@@ -13,7 +13,7 @@ class AccountDetails extends Component {
         <hr />
         <div className="row">
           <div className="col-md-4"><label><strong>Profile Picture:</strong></label></div>
-          <div className="col-md-4">
+          <div className="col-md-4 text-center">
             <img
               id="profilePicture"
               src={this.props.userPhotoUrl}
@@ -88,7 +88,7 @@ class AccountDetails extends Component {
           <div className="col-md-4"></div>
         </div>
         <hr />
-        <form onSubmit={this.props.updateProfilePicture}>
+        <form onSubmit={this.props.showUpdateProfilePictureModal}>
           <div className="row">
             <div className="col-md-4"><label><strong>Update Profile Picture:</strong></label></div>
             <div className="col-md-4">
@@ -113,7 +113,7 @@ class AccountDetails extends Component {
                   <button
                     id="submitNewProfilePictureButton"
                     type="submit"
-                    onClick={this.props.updateProfilePicture}
+                    onClick={this.props.showUpdateProfilePictureModal}
                   >
                     Submit
                   </button>
@@ -122,6 +122,7 @@ class AccountDetails extends Component {
             </div>
           </div>
         </form>
+        <br />
         <form onSubmit={this.props.updateDisplayName}>
           <div className="row">
             <div className="col-md-4"><label><strong>Update Display Name:</strong></label></div>
