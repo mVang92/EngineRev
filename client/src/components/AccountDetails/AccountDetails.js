@@ -12,6 +12,18 @@ class AccountDetails extends Component {
         </div>
         <hr />
         <div className="row">
+          <div className="col-md-4"><label><strong>Profile Picture:</strong></label></div>
+          <div className="col-md-4">
+            <img
+              id="profilePicture"
+              src={this.props.userPhotoUrl}
+              alt="Invalid URL or Not Avaliable">
+            </img>
+          </div>
+          <div className="col-md-4"></div>
+        </div>
+        <br />
+        <div className="row">
           <div className="col-md-4"><label><strong>Email:</strong></label></div>
           <div className="col-md-4">{this.props.userEmail}</div>
           <div className="col-md-4"></div>
@@ -76,6 +88,40 @@ class AccountDetails extends Component {
           <div className="col-md-4"></div>
         </div>
         <hr />
+        <form onSubmit={this.props.updateProfilePicture}>
+          <div className="row">
+            <div className="col-md-4"><label><strong>Update Profile Picture:</strong></label></div>
+            <div className="col-md-4">
+              <div className="row">
+                <div className="col-md-12">
+                  <input
+                    type="text"
+                    ref="newProfilePicture"
+                    onChange={this.props.handleChange}
+                    value={this.props.newProfilePicture}
+                    name="newProfilePicture"
+                    maxLength="500"
+                    placeholder="Insert photo URL"
+                  />
+                </div>
+              </div>
+            </div>
+            <br /><br />
+            <div className="col-md-4">
+              <div className="row">
+                <div className="col-md-12">
+                  <button
+                    id="submitNewProfilePictureButton"
+                    type="submit"
+                    onClick={this.props.updateProfilePicture}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
         <form onSubmit={this.props.updateDisplayName}>
           <div className="row">
             <div className="col-md-4"><label><strong>Update Display Name:</strong></label></div>

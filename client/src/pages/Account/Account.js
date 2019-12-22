@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 export default class Account extends Component {
   constructor(props) {
+    // console.log(props)
     super(props)
     this.state = {
       loggedin: false,
@@ -17,12 +18,14 @@ export default class Account extends Component {
       userId: "",
       userDisplayName: "",
       newDisplayName: "",
+      userPhotoUrl: "",
       newPassword: "",
       confirmNewPassword: "",
       vehicleData: "",
       vehicleCount: "Loading...",
       loadingError: "",
       userAccountCreationTime: "",
+      newProfilePicture: "",
       showUniqueUserId: false,
       showMaskUniqueUserId: true
     };
@@ -43,6 +46,7 @@ export default class Account extends Component {
           userEmail: this.props.location.state[0],
           userAccountCreationTime: this.props.location.state[1],
           userDisplayName: this.props.location.state[2],
+          userPhotoUrl: this.props.location.state[3],
           userId: this.props.match.params.id
         });
         this.getVehicleData();
@@ -82,8 +86,9 @@ export default class Account extends Component {
    */
   updateDisplayName = e => {
     e.preventDefault();
+    const user = this.state.user;
     if (this.state.loggedin) {
-      this.state.user.updateProfile({
+      user.updateProfile({
         displayName: this.state.newDisplayName
       }).then(() => {
         if (this.state.newDisplayName !== "") {
@@ -91,10 +96,27 @@ export default class Account extends Component {
         } else {
           this.updateDisplayNameWithNoNameSuccessNotification();
         }
-
         this.setState({ newDisplayName: "" })
       }).catch(error => {
         this.updateDisplayNameErrorNotification(error);
+      });
+    };
+  };
+
+  /**
+   * UYpdate the display name for the user
+   */
+  updateProfilePicture = e => {
+    e.preventDefault();
+    const user = this.state.user;
+    if (this.state.loggedin) {
+      user.updateProfile({
+        photoURL: this.state.newProfilePicture
+      }).then(() => {
+        this.updateProfilePictureSuccessNotification();
+        this.setState({ newProfilePicture: "" })
+      }).catch(error => {
+        this.updateProfilePictureErrorNotification(error);
       });
     };
   };
@@ -108,6 +130,7 @@ export default class Account extends Component {
       if (this.state.newPassword === this.state.confirmNewPassword) {
         this.state.user.updatePassword(this.state.confirmNewPassword)
           .then(() => {
+            console.log("got here")
             this.updatePasswordSuccessNotification();
             this.setState({
               newPassword: "",
@@ -165,6 +188,13 @@ export default class Account extends Component {
   };
 
   /**
+   * Display the success notification when the display name is updated successfully
+   */
+  updateProfilePictureSuccessNotification = () => {
+    toast.success(`Profile picture updated. Please redirect to this page to take effect.`);
+  };
+
+  /**
    * Display the error notification when the new password and confirm passwords do not match
    */
   passwordsDoNotMatchErrorNotification = () => {
@@ -205,36 +235,50 @@ export default class Account extends Component {
     toast.error(err.toString());
   };
 
+  /**
+   * Display the error notification when an error occurs while updating password
+   * 
+   * @param err the error message to display to the user
+   */
+  updateProfilePictureErrorNotification = err => {
+    toast.error(err.toString());
+  };
+
   render() {
     return (
       <React.Fragment>
         {
           this.state.loggedin ? (
-            <Container>
-              <AccountDetails
-                handleChange={this.handleChange}
-                userEmail={this.state.userEmail}
-                userId={this.state.userId}
-                userDisplayName={this.state.userDisplayName}
-                showUniqueUserId={this.state.showUniqueUserId}
-                showUniqueUserIdToPage={this.showUniqueUserIdToPage}
-                showMaskUniqueUserId={this.state.showMaskUniqueUserId}
-                hideUniqueUserIdToPage={this.hideUniqueUserIdToPage}
-                loadingError={this.state.loadingError}
-                vehicleCount={this.state.vehicleCount}
-                userAccountCreationTime={this.state.userAccountCreationTime}
-                updateDisplayName={this.updateDisplayName}
-                newDisplayName={this.state.newDisplayName}
-                updatePassword={this.updatePassword}
-                newPassword={this.state.newPassword}
-                confirmNewPassword={this.state.confirmNewPassword}
-              />
-            </Container>
+            <React.Fragment>
+              <ToastContainer />
+              <Container>
+                <AccountDetails
+                  handleChange={this.handleChange}
+                  userPhotoUrl={this.state.userPhotoUrl}
+                  userEmail={this.state.userEmail}
+                  userId={this.state.userId}
+                  userDisplayName={this.state.userDisplayName}
+                  showUniqueUserId={this.state.showUniqueUserId}
+                  showUniqueUserIdToPage={this.showUniqueUserIdToPage}
+                  showMaskUniqueUserId={this.state.showMaskUniqueUserId}
+                  hideUniqueUserIdToPage={this.hideUniqueUserIdToPage}
+                  loadingError={this.state.loadingError}
+                  vehicleCount={this.state.vehicleCount}
+                  userAccountCreationTime={this.state.userAccountCreationTime}
+                  updateDisplayName={this.updateDisplayName}
+                  newDisplayName={this.state.newDisplayName}
+                  updatePassword={this.updatePassword}
+                  newPassword={this.state.newPassword}
+                  updateProfilePicture={this.updateProfilePicture}
+                  newProfilePicture={this.state.newProfilePicture}
+                  confirmNewPassword={this.state.confirmNewPassword}
+                />
+              </Container>
+            </React.Fragment>
           ) : (
               <NoAuthorization />
             )
         }
-        <ToastContainer />
       </React.Fragment>
     );
   };
