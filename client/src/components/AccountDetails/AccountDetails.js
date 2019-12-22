@@ -147,7 +147,7 @@ class AccountDetails extends Component {
                   <button
                     id="submitNewDisplayNameButton"
                     type="submit"
-                    onClick={this.props.updateDisplayName}
+                    onClick={this.props.showUpdateDisplayNameModal}
                   >
                     Submit
                         </button>

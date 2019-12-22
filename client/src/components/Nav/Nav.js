@@ -14,6 +14,7 @@ export class Nav extends Component {
     this.state = {
       loggedin: false,
       defaultProfilePicture: "https://image.flaticon.com/icons/png/512/64/64572.png",
+      defaultDisplayName: "CarSpace User",
       showSignInModal: false,
       showSignUpModal: false,
       showSignOutModal: false,
@@ -53,7 +54,10 @@ export class Nav extends Component {
           userPhotoUrl: user.photoURL
         });
         if (!user.photoURL) {
-          this.setState({ userPhotoUrl: this.state.defaultProfilePicture })
+          this.setState({ userPhotoUrl: this.state.defaultProfilePicture });
+        };
+        if (!user.displayName) {
+          this.setState({ userDisplayName: this.state.defaultDisplayName });
         };
       };
     });
@@ -122,7 +126,7 @@ export class Nav extends Component {
     auth
       .doSignOut()
       .then(() => {
-        this.setState({ userEmailForAccount: "" })
+        this.setState({ userEmailForAccount: "" });
         window.location.assign(this.state.originUrl);
       });
   };
@@ -154,7 +158,7 @@ export class Nav extends Component {
       confirmPassword: ""
     });
     if (window.location.href !== (this.state.originUrl + "/")) {
-      window.location.assign(this.state.originUrl)
+      window.location.assign(this.state.originUrl);
     };
   };
 
