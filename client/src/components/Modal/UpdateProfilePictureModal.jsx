@@ -22,7 +22,7 @@ const UpdateProfilePictureModal = props => {
                                         </strong>
                                     </div>
                                     <div className="row">
-                                        <div className="col-md-12 text-center">
+                                        <div id="scrollableProfilePicture" className="col-md-12 text-center">
                                             <img
                                                 id="profilePicture"
                                                 src={props.newProfilePicture}
