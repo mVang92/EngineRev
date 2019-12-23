@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 
 class MyVehicles extends Component {
   render() {
-    const { vehicleData, vehicleCountForUser } = this.props;
+    const { vehicleData, vehicleCountForUser, actualEmailFromFirebase } = this.props;
+    const userEmail = actualEmailFromFirebase;
     return (
       <div className="text-center">
         {vehicleData ? (
@@ -23,7 +24,12 @@ class MyVehicles extends Component {
                       <div key={vehicle._id} className="row">
                         <div className="col-md-2"></div>
                         <div title="View Service Logs" className="col-md-8">
-                          <Link to={"/account/" + this.props.vehicleData._id + "/vehicle/" + vehicle._id}>
+                          <Link to={{
+                            pathname: "/account/" + this.props.vehicleData._id + "/vehicle/" + vehicle._id,
+                            state: [
+                              userEmail
+                            ]
+                          }}>
                             <VehicleItem>
                               <div className="text-dark">
                                 {vehicle.year} {vehicle.make} {vehicle.model}

@@ -323,6 +323,11 @@ input {
     width: 75%;
 }
 
+#scrollableProfilePicture {
+    max-height: 17rem;
+    overflow: auto;
+}
+
 @media print {
 	.hideWhilePrinting {
         display: none;

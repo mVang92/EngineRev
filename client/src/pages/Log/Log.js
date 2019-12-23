@@ -41,7 +41,8 @@ export default class Log extends Component {
       showDeleteOneLogModal: false,
       showFutureDateConfirmationModal: false
     };
-  }
+    this.validatePermissionToRedirect(props);
+  };
 
   /**
    * Display the service log information for the selected vehicle
@@ -81,6 +82,18 @@ export default class Log extends Component {
   handleChange = e => {
     let { name, value } = e.target;
     this.setState({ [name]: value });
+  };
+
+  /**
+   * Display the service log page only after clicking on the vehicle from the main page
+   * This prevents other users from redirecting to someone else's page
+   */
+  validatePermissionToRedirect = props => {
+    try {
+      props.location.state[0];
+    } catch (e) {
+      window.location.assign(window.location.origin);
+    };
   };
 
   /**
@@ -592,7 +605,7 @@ export default class Log extends Component {
             <ToastContainer />
           </Container>
         ) : (
-          <NoAuthorization />
+            <NoAuthorization />
           )
         }
       </React.Fragment>

@@ -20,7 +20,8 @@ export default class App extends Component {
       vehicleCount: 0,
       message: "",
       email: "",
-      password: ""
+      password: "",
+      actualEmailFromFirebase: ""
     };
   };
 
@@ -38,7 +39,10 @@ export default class App extends Component {
   onAuthStateChanged = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        this.setState({ loggedin: true });
+        this.setState({
+          loggedin: true,
+          actualEmailFromFirebase: user.email
+        });
         const userUniqueId = user.uid;
         const userEmail = document.createTextNode(user.email);
         document.getElementById("userEmail").innerHTML = "";
@@ -155,6 +159,7 @@ export default class App extends Component {
               handleResetAddVehicleFields={this.handleResetAddVehicleFields}
               addVehicle={this.handleAddOneVehicle}
               vehicleCountForUser={this.handleAddVehicleCountForUser}
+              actualEmailFromFirebase={this.state.actualEmailFromFirebase}
             />
           </Container>
         ) : (
