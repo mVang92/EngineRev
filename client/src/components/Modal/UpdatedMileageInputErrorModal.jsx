@@ -3,7 +3,7 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const UpdatedMileageInputErrorModal = props => {
-    const { mileage, serviceLogMileage } = props.state;
+    const { serviceLogMileage } = props.state;
     return (
         <ReactModal
             isOpen={props.showUpdatedMileageInputErrorModal}

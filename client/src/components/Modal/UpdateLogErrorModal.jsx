@@ -6,7 +6,7 @@ const UpdateLogErrorModal = props => {
     const { serviceLogDate, serviceLogMileage, serviceLogService, serviceLogComment } = props.state;
     return (
         <ReactModal
-            isOpen={props.showUpdateLogErrorModal}
+            isOpen={props.showUpdatedLogErrorModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}

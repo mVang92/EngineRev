@@ -22,6 +22,11 @@ router
   .route("/addOneServiceLog/:id")
   .put(controller.addOneLogForOneVehicle)
 
+// Matches with "/api/vehicles/updateOneServiceLog/:id"
+router
+  .route("/updateOneServiceLog/:id")
+  .put(controller.updateOneLogForOneVehicle)
+
 // Matches with "/api/vehicles/deleteServiceLog/:serviceLogId"
 router
   .route("/deleteServiceLog/:id")

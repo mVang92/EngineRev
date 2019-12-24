@@ -8,6 +8,7 @@ import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal"
 import EditOneServiceLogModal from "../../components/Modal/EditOneServiceLogModal";
 import DeleteOneServiceLogModal from "../../components/Modal/DeleteOneServiceLogModal";
 import FutureDateConfirmationModal from "../../components/Modal/FutureDateConfirmationModal";
+import UpdatedFutureDateConfirmationModal from "../../components/Modal/UpdatedFutureDateConfirmationModal";
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal";
 import UpdateLogErrorModal from "../../components/Modal/UpdateLogErrorModal";
 import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal";
@@ -35,6 +36,7 @@ export default class Log extends Component {
       serviceLogService: "",
       serviceLogComment: "",
       vehicleServiceLogs: [],
+      updatedServiceLogDateToConfirm: "",
       sortVehicleServiceLogsMostRecent: true,
       showEditOneLogModal: false,
       showDeleteOneVehicleModal: false,
@@ -43,7 +45,8 @@ export default class Log extends Component {
       showDeleteOneLogModal: false,
       showFutureDateConfirmationModal: false,
       showUpdatedMileageInputErrorModal: false,
-      showUpdateLogErrorModal: false
+      showUpdatedLogErrorModal: false,
+      showUpdatedFutureDateConfirmationModal: false
     };
     this.validatePermissionToRedirect(props);
   };
@@ -101,19 +104,51 @@ export default class Log extends Component {
   };
 
   /**
+   * Format the date to yyyy-mm-dd
+   */
+  formatDateYyyyMmDd = dateToConvert => {
+    let date = new Date(dateToConvert),
+      month = "" + (date.getMonth() + 1),
+      day = "" + date.getDate(),
+      year = date.getFullYear();
+
+    if (month.length < 2) {
+      month = "0" + month;
+    }
+
+    if (day.length < 2) {
+      day = "0" + day;
+    }
+
+    return [year, month, day].join("-");
+  };
+
+  /**
+   * Convert date to UTC
+   */
+  createDateAsUTC = date => {
+    return new Date(
+      Date.UTC(date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds()
+      )
+    );
+  };
+
+  /**
    * Go through a series of conditions to validate the service log being entered
    */
   checkUserEnteredServiceLogInput = e => {
     e.preventDefault();
     const currentDate = new Date();
     const loggedServiceDate = new Date(this.state.date);
-
     currentDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
     loggedServiceDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
-
     currentDate.setDate(currentDate.getDate());
     loggedServiceDate.setDate(loggedServiceDate.getDate() + 1);
-
     if (isNaN(this.state.mileage)) {
       this.showMileageInputErrorModal();
     } else {
@@ -134,33 +169,30 @@ export default class Log extends Component {
    */
   checkUserEnteredUpdatedServiceLogInput = e => {
     e.preventDefault();
-    const updatedServiceLogDate = this.state.serviceLogDate;
-    const updatedServiceLogMileage = this.state.serviceLogMileage;
-    const updatedServiceLogService = this.state.serviceLogService;
-    const updatedServiceLogComment = this.state.serviceLogComment;
-    console.log(updatedServiceLogDate)
-    console.log(updatedServiceLogMileage)
-    console.log(updatedServiceLogService)
-    console.log(updatedServiceLogComment)
+    const serviceLogDate = this.state.serviceLogDate;
+    const serviceLogMileage = this.state.serviceLogMileage;
+    const serviceLogService = this.state.serviceLogService;
     const currentDate = new Date();
-    const loggedServiceDate = new Date(updatedServiceLogDate);
-
     currentDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
-    loggedServiceDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
-
     currentDate.setDate(currentDate.getDate());
-    loggedServiceDate.setDate(loggedServiceDate.getDate() + 1);
-
-    if (isNaN(updatedServiceLogMileage)) {
+    const loggedServiceDate = new Date(serviceLogDate);
+    const loggedServiceDateToUTC = this.createDateAsUTC(loggedServiceDate);
+    loggedServiceDateToUTC.setDate(loggedServiceDateToUTC.getDate() + 1);
+    const loggedServiceDateToEnUs = loggedServiceDateToUTC.toLocaleDateString("en-US");
+    this.formatDateYyyyMmDd(loggedServiceDateToEnUs);
+    this.setState({ serviceLogDate: serviceLogDate });
+    const updatedServiceLogDate = new Date(loggedServiceDateToEnUs);
+    if (isNaN(serviceLogMileage)) {
       this.showUpdatedMileageInputErrorModal();
     } else {
-      if (updatedServiceLogDate === "" || updatedServiceLogMileage === "" || updatedServiceLogService === "") {
+      if (serviceLogDate === "" || serviceLogMileage === "" || serviceLogService === "") {
         this.showUpdateLogErrorModal();
       } else {
-        if (currentDate < loggedServiceDate) {
-          this.showFutureDateConfirmationModal();
+        if (currentDate < updatedServiceLogDate) {
+          this.setState({ updatedServiceLogDateToConfirm: updatedServiceLogDate })
+          this.showUpdateFutureDateConfirmationModal();
         } else {
-          this.handleEditOneServiceLog();
+          this.handleUpdateOneServiceLog(updatedServiceLogDate);
         };
       };
     };
@@ -181,11 +213,11 @@ export default class Log extends Component {
       comment: this.state.comment
     };
     let serviceLogDateMemory = serviceLogDate.toLocaleDateString("en-US");
-    let serviceLogmileageMemory = this.state.mileage;
-    let serviceLogserviceMemory = this.state.service;
+    let serviceLogMileageMemory = this.state.mileage;
+    let serviceLogServiceMemory = this.state.service;
     API.addOneLogForOneVehicle(vehicleId, serviceLogToStore)
       .then(() => {
-        this.addOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogmileageMemory, serviceLogserviceMemory)
+        this.addOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory)
         this.setState({
           date: "",
           mileage: "",
@@ -222,58 +254,44 @@ export default class Log extends Component {
   /**
   * Edits one service log from record
   */
-  handleEditOneServiceLog = () => {
-    console.log(this.state.serviceLogDate)
-    console.log(this.state.serviceLogMileage)
-    console.log(this.state.serviceLogService)
-    console.log(this.state.serviceLogComment)
-    this.hideEditOneServiceLogModal();
-    // if (isNaN(this.state.mileage)) {
-    //   this.showMileageInputErrorModal();
-    // } else {
-    //   API.editOneServiceLog(this.state.serviceLogId)
-    //     .then(() => {
-    //       setTimeout(() => {
-    //         this.setState({ showEditOneLogModal: false });
-    //       }, 200);
-    //       this.componentDidMount();
-    //       this.editOneServiceLogSuccessNotification()
-    //     })
-    //     .catch(err => this.editOneServiceLogFailNotification(err));
-    // }
+  handleUpdateOneServiceLog = updatedServiceLogDateToConvert => {
+    let vehicleId = this.state.vehicleId;
+    let updatedServiceLogDateToRecord = "";
+    const updatedServiceLogDate = this.formatDateYyyyMmDd(updatedServiceLogDateToConvert);
 
-    // if (isNaN(this.state.mileage)) {
-    //   this.showMileageInputErrorModal();
-    // } else {
-    //   if (this.state.date === "" || this.state.mileage === "" || this.state.service === "") {
-    //     this.showAddLogErrorModal();
-    //   } else {
-    //     let id = this.state.vehicleId;
-    //     let updatedlog = {
-    //       date: this.state.date,
-    //       mileage: this.state.mileage,
-    //       service: this.state.service,
-    //       comment: this.state.comment
-    //     };
-    //     const today = new Date(this.state.date);
-    //     today.setDate(today.getDate() + 1);
-    //     let dateMemory = today.toLocaleDateString("en-US");
-    //     let mileageMemory = this.state.mileage;
-    //     let serviceMemory = this.state.service;
-    //     API.editOneServiceLog(id, updatedlog)
-    //       .then(() => {
-    //         this.addOneServiceLogSuccessNotification(dateMemory, mileageMemory, serviceMemory)
-    //         this.componentDidMount();
-    //       })
-    //       .catch(err => this.addOneServiceLogFailNotification(err));
-    //     this.setState({
-    //       date: "",
-    //       mileage: "",
-    //       service: "",
-    //       comment: ""
-    //     });
-    //   };
-    // };
+    if (updatedServiceLogDate === "NaN-NaN-NaN") {
+      const updatedServiceLogDateToConfirm = this.state.updatedServiceLogDateToConfirm;
+      const updatedServiceLogDateToNewDate = new Date(updatedServiceLogDateToConfirm);
+      const updatedServiceDateToUTC = this.createDateAsUTC(updatedServiceLogDateToNewDate);
+      const updatedServiceLogDate = this.formatDateYyyyMmDd(updatedServiceDateToUTC.setDate(updatedServiceDateToUTC.getDate() + 1));
+      updatedServiceLogDateToRecord = updatedServiceLogDate;
+    } else {
+      updatedServiceLogDateToRecord = updatedServiceLogDate;
+    }
+
+    let serviceLogToUpdate = {
+      date: updatedServiceLogDateToRecord,
+      mileage: this.state.serviceLogMileage,
+      service: this.state.serviceLogService,
+      comment: this.state.serviceLogComment
+    };
+    let serviceLogDateMemory = updatedServiceLogDateToRecord;
+    let serviceLogMileageMemory = this.state.serviceLogMileage;
+    let serviceLogServiceMemory = this.state.serviceLogService;
+    API.updateOneLogForOneVehicle(vehicleId, serviceLogToUpdate)
+      .then(() => {
+        this.hideEditOneServiceLogModal();
+        this.hideUpdatedFutureDateConfirmationModal();
+        this.updateOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory)
+        this.setState({
+          serviceLogDate: "",
+          serviceLogMileage: "",
+          serviceLogService: "",
+          serviceLogComment: ""
+        });
+        this.componentDidMount();
+      })
+      .catch(err => this.updateOneServiceLogFailNotification(err));
   };
 
   /**
@@ -311,7 +329,7 @@ export default class Log extends Component {
         this.showDeleteOneServiceLogModal(serviceLogId, date, mileage, service, comment);
         break;
       default:
-        null;
+        alert("Error Processing Request");
     };
   };
 
@@ -349,11 +367,31 @@ export default class Log extends Component {
   };
 
   /**
+   * Display the success notification when the user updates a service log
+   * 
+   * @param date    the date when the service is logged
+   * @param mileage the current mileage of the vehicle
+   * @param service the service done to the vehicle
+   */
+  updateOneServiceLogSuccessNotification = (date, mileage, service) => {
+    toast.success(`Service Updated: ${service} at ${mileage} miles on ${date}.`);
+  };
+
+  /**
    * Display the error notification when an error occurs while adding a service log
    * 
    * @param err the error message to display to the user
    */
   addOneServiceLogFailNotification = err => {
+    toast.error(err.toString());
+  };
+
+  /**
+   * Display the error notification when an error occurs while updating a service log
+   * 
+   * @param err the error message to display to the user
+   */
+  updateOneServiceLogFailNotification = err => {
     toast.error(err.toString());
   };
 
@@ -409,8 +447,15 @@ export default class Log extends Component {
    * Display the modal to confirm the future date submission of the service log
    */
   showFutureDateConfirmationModal = () => {
-    this.setState({ showFutureDateConfirmationModal: true })
-  }
+    this.setState({ showFutureDateConfirmationModal: true });
+  };
+
+  /**
+   * Display the modal to confirm the updated future date submission of the service log
+   */
+  showUpdateFutureDateConfirmationModal = () => {
+    this.setState({ showUpdatedFutureDateConfirmationModal: true });
+  };
 
   /**
    * Display the modal to notify the user the vehicle has been deleted successfully
@@ -430,7 +475,7 @@ export default class Log extends Component {
    * Display the modal to notify the user about bad input while updating a service log
    */
   showUpdateLogErrorModal = () => {
-    this.setState({ showUpdateLogErrorModal: true });
+    this.setState({ showUpdatedLogErrorModal: true });
   };
 
   /**
@@ -495,6 +540,13 @@ export default class Log extends Component {
   };
 
   /**
+   * Hide the future updated date confirmation modal
+   */
+  hideUpdatedFutureDateConfirmationModal = () => {
+    this.setState({ showUpdatedFutureDateConfirmationModal: false });
+  };
+
+  /**
    * Hide the deleted one service log modal
    */
   hideEditOneServiceLogModal = () => {
@@ -526,7 +578,7 @@ export default class Log extends Component {
    * Hide the successfully updated one service log modal
    */
   hideUpdateLogErrorModal = () => {
-    this.setState({ showUpdateLogErrorModal: false });
+    this.setState({ showUpdatedLogErrorModal: false });
   };
 
   /**
@@ -642,6 +694,12 @@ export default class Log extends Component {
               hideFutureDateConfirmationModal={this.hideFutureDateConfirmationModal}
               state={this.state.date}
             />
+            <UpdatedFutureDateConfirmationModal
+              handleUpdateOneServiceLog={this.handleUpdateOneServiceLog}
+              showUpdatedFutureDateConfirmationModal={this.state.showUpdatedFutureDateConfirmationModal}
+              hideUpdatedFutureDateConfirmationModal={this.hideUpdatedFutureDateConfirmationModal}
+              state={this.state}
+            />
             <DeleteOneVehicleModal
               handleDeleteOneVehicle={this.handleDeleteOneVehicle}
               showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
@@ -649,15 +707,11 @@ export default class Log extends Component {
               state={this.state}
             />
             <EditOneServiceLogModal
-              state={this.state}
-              updatedServiceLogDate={this.state.updatedServiceLogDate}
-              updatedServiceLogMileage={this.state.updatedServiceLogMileage}
-              updatedServiceLogService={this.state.updatedServiceLogService}
-              updatedServiceLogComment={this.state.updatedServiceLogComment}
               checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
               showEditOneLogModal={this.state.showEditOneLogModal}
               hideEditOneServiceLogModal={this.hideEditOneServiceLogModal}
               handleChange={this.handleChange}
+              state={this.state}
             />
             <DeleteOneServiceLogModal
               handleDeleteOneServiceLog={this.handleDeleteOneServiceLog}
@@ -671,7 +725,7 @@ export default class Log extends Component {
               state={this.state}
             />
             <UpdateLogErrorModal
-              showUpdateLogErrorModal={this.state.showUpdateLogErrorModal}
+              showUpdatedLogErrorModal={this.state.showUpdatedLogErrorModal}
               hideUpdateLogErrorModal={this.hideUpdateLogErrorModal}
               state={this.state}
             />

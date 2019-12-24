@@ -60,7 +60,7 @@ input {
 
 .navbar {
     background: rgba(32, 32, 32, 0.9);
-    border-bottom: 1px solid rgb(220, 64, 48);;
+    border-bottom: 1px solid rgb(220, 64, 48);
     padding: 2px;
     position: fixed;
     width: 100%;
@@ -469,7 +469,7 @@ input {
 
     .centerButtonMobileDisplay {
         text-align: center;
-        margin-top: 1em;;
+        margin-top: 1em;
     }
 
     .deleteBtn {
