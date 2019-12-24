@@ -62,7 +62,7 @@ class AccountDetails extends Component {
                     onClick={this.props.showUniqueUserIdToPage}
                   >
                     Show
-                    </button>
+                  </button>
                 )
             }
           </div>
@@ -150,7 +150,7 @@ class AccountDetails extends Component {
                     onClick={this.props.showUpdateDisplayNameModal}
                   >
                     Submit
-                        </button>
+                  </button>
                 </div>
               </div>
             </div>
@@ -198,7 +198,7 @@ class AccountDetails extends Component {
                     onClick={this.props.updatePassword}
                   >
                     Submit
-                        </button>
+                  </button>
                 </div>
               </div>
             </div>
