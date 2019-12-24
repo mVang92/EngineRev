@@ -85,6 +85,21 @@ module.exports = {
   },
 
   /**
+   * Add one service log for the selected vehicle
+   */
+  updateOneLogForOneVehicle: (req, res) => {
+    console.log("Hit updateOneLogForOneVehicle");
+    console.log(req.body)
+    db.Vehicle
+      .updateOne(
+        // { creator: creatorId, vehicles: { $elemMatch: { _id: req.params.id } } },
+        // { $set: { "vehicles.$.logs": [req.body] } }
+      )
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
    * Remove the selected vehicle from the database
    */
   removeOneVehicle: (req, res) => {

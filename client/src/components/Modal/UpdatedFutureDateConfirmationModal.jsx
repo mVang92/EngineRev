@@ -3,45 +3,22 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const UpdatedFutureDateConfirmationModal = props => {
-    console.log(props)
-    let serviceLogDate = "";
-    let futureDate = ""
-    try {
-        serviceLogDate = new Date(props.state);
-        console.log(serviceLogDate)
-        const loggedServiceDateToUTC = new Date(
-            Date.UTC(serviceLogDate.getFullYear(),
-                date.getMonth(),
-                date.getDate(),
-                date.getHours(),
-                date.getMinutes(),
-                date.getSeconds()
-            )
-        );
-        loggedServiceDateToUTC.setDate(loggedServiceDateToUTC.getDate() + 1);
-        const loggedServiceDateToEnUs = loggedServiceDateToUTC.toLocaleDateString("en-US");
+    // console.log(props)
+    let checkThisServiceDate = props.state.updatedServiceLogDateToConfirm;
+    const newDateCheckThisServiceDate = new Date(checkThisServiceDate);
+    const serviceDateToUTC = new Date(
+        Date.UTC(newDateCheckThisServiceDate.getFullYear(),
+            newDateCheckThisServiceDate.getMonth(),
+            newDateCheckThisServiceDate.getDate(),
+            newDateCheckThisServiceDate.getHours(),
+            newDateCheckThisServiceDate.getMinutes(),
+            newDateCheckThisServiceDate.getSeconds()
+        )
+    );
 
-        let date = new Date(loggedServiceDateToEnUs),
-            month = "" + (date.getMonth() + 1),
-            day = "" + date.getDate(),
-            year = date.getFullYear();
+    serviceDateToUTC.setDate(serviceDateToUTC.getDate() + 1);
+    const serviceDateToDisplay = serviceDateToUTC.toLocaleDateString("en-US");
 
-        if (month.length < 2) {
-            month = "0" + month;
-        }
-
-        if (day.length < 2) {
-            day = "0" + day;
-        }
-
-        futureDate = [year, month, day].join("-");
-    } catch (e) {
-        null;
-    }
-
-    // serviceLogDate.setDate(serviceLogDate.getDate() + 1);
-    // const futureDate = serviceLogDate.toLocaleDateString("en-US");
-    console.log(futureDate)
     return (
         <ReactModal
             isOpen={props.showUpdatedFutureDateConfirmationModal}
@@ -67,7 +44,7 @@ const UpdatedFutureDateConfirmationModal = props => {
                             <div className="row">
                                 <div className="col-md-12">
                                     <label>
-                                        {futureDate} is a future date.
+                                        {serviceDateToDisplay} is a future date.
                                         This service log will appear in red text to symbolize a
                                         service has been logged for the future. Are you sure you want to submit this?
                                     </label>

@@ -58,7 +58,7 @@ const ServiceLog = props => {
                 id="editActionButton"
                 title="Coming Soon"
                 onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, editValue)}
-                
+                disabled
               >
                 <img id="editIcon" src={editIcon} alt="edit"></img>
               </button>
