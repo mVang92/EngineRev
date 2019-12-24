@@ -8,6 +8,7 @@ import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal"
 import EditOneServiceLogModal from "../../components/Modal/EditOneServiceLogModal";
 import DeleteOneServiceLogModal from "../../components/Modal/DeleteOneServiceLogModal";
 import FutureDateConfirmationModal from "../../components/Modal/FutureDateConfirmationModal";
+import UpdatedFutureDateConfirmationModal from "../../components/Modal/UpdatedFutureDateConfirmationModal";
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal";
 import UpdateLogErrorModal from "../../components/Modal/UpdateLogErrorModal";
 import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal";
@@ -43,7 +44,8 @@ export default class Log extends Component {
       showDeleteOneLogModal: false,
       showFutureDateConfirmationModal: false,
       showUpdatedMileageInputErrorModal: false,
-      showUpdateLogErrorModal: false
+      showUpdatedLogErrorModal: false,
+      showUpdatedFutureDateConfirmationModal: false
     };
     this.validatePermissionToRedirect(props);
   };
@@ -101,19 +103,51 @@ export default class Log extends Component {
   };
 
   /**
+   * Format the date to yyyy-mm-dd
+   */
+  formatDateYyyyMmDd = dateToConvert => {
+    let date = new Date(dateToConvert),
+      month = "" + (date.getMonth() + 1),
+      day = "" + date.getDate(),
+      year = date.getFullYear();
+
+    if (month.length < 2) {
+      month = "0" + month;
+    }
+
+    if (day.length < 2) {
+      day = "0" + day;
+    }
+
+    return [year, month, day].join("-");
+  }
+
+  /**
+   * Convert date to UTC
+   */
+  createDateAsUTC = date => {
+    return new Date(
+      Date.UTC(date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds()
+      )
+    );
+  };
+
+  /**
    * Go through a series of conditions to validate the service log being entered
    */
   checkUserEnteredServiceLogInput = e => {
     e.preventDefault();
     const currentDate = new Date();
     const loggedServiceDate = new Date(this.state.date);
-
     currentDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
     loggedServiceDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
-
     currentDate.setDate(currentDate.getDate());
     loggedServiceDate.setDate(loggedServiceDate.getDate() + 1);
-
     if (isNaN(this.state.mileage)) {
       this.showMileageInputErrorModal();
     } else {
@@ -138,29 +172,27 @@ export default class Log extends Component {
     const updatedServiceLogMileage = this.state.serviceLogMileage;
     const updatedServiceLogService = this.state.serviceLogService;
     const updatedServiceLogComment = this.state.serviceLogComment;
-    console.log(updatedServiceLogDate)
-    console.log(updatedServiceLogMileage)
-    console.log(updatedServiceLogService)
-    console.log(updatedServiceLogComment)
     const currentDate = new Date();
-    const loggedServiceDate = new Date(updatedServiceLogDate);
-
     currentDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
-    loggedServiceDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
-
     currentDate.setDate(currentDate.getDate());
-    loggedServiceDate.setDate(loggedServiceDate.getDate() + 1);
-
+    const loggedServiceDate = new Date(updatedServiceLogDate);
+    const loggedServiceDateToUTC = this.createDateAsUTC(loggedServiceDate);
+    loggedServiceDateToUTC.setDate(loggedServiceDateToUTC.getDate() + 1);
+    const loggedServiceDateToEnUs = loggedServiceDateToUTC.toLocaleDateString("en-US");
+    this.formatDateYyyyMmDd(loggedServiceDateToEnUs);
+    this.setState({serviceLogDate: updatedServiceLogDate})
+    console.log(currentDate)
+    console.log(new Date(loggedServiceDateToEnUs))
     if (isNaN(updatedServiceLogMileage)) {
       this.showUpdatedMileageInputErrorModal();
     } else {
       if (updatedServiceLogDate === "" || updatedServiceLogMileage === "" || updatedServiceLogService === "") {
         this.showUpdateLogErrorModal();
       } else {
-        if (currentDate < loggedServiceDate) {
-          this.showFutureDateConfirmationModal();
+        if (currentDate < (new Date(loggedServiceDateToEnUs))) {
+          this.showUpdateFutureDateConfirmationModal();
         } else {
-          this.handleEditOneServiceLog();
+          this.handleUpdateOneServiceLog();
         };
       };
     };
@@ -222,12 +254,13 @@ export default class Log extends Component {
   /**
   * Edits one service log from record
   */
-  handleEditOneServiceLog = () => {
+  handleUpdateOneServiceLog = () => {
     console.log(this.state.serviceLogDate)
     console.log(this.state.serviceLogMileage)
     console.log(this.state.serviceLogService)
     console.log(this.state.serviceLogComment)
     this.hideEditOneServiceLogModal();
+    this.hideUpdatedFutureDateConfirmationModal();
     // if (isNaN(this.state.mileage)) {
     //   this.showMileageInputErrorModal();
     // } else {
@@ -409,8 +442,15 @@ export default class Log extends Component {
    * Display the modal to confirm the future date submission of the service log
    */
   showFutureDateConfirmationModal = () => {
-    this.setState({ showFutureDateConfirmationModal: true })
-  }
+    this.setState({ showFutureDateConfirmationModal: true });
+  };
+
+  /**
+   * Display the modal to confirm the updated future date submission of the service log
+   */
+  showUpdateFutureDateConfirmationModal = () => {
+    this.setState({ showUpdatedFutureDateConfirmationModal: true });
+  };
 
   /**
    * Display the modal to notify the user the vehicle has been deleted successfully
@@ -430,7 +470,7 @@ export default class Log extends Component {
    * Display the modal to notify the user about bad input while updating a service log
    */
   showUpdateLogErrorModal = () => {
-    this.setState({ showUpdateLogErrorModal: true });
+    this.setState({ showUpdatedLogErrorModal: true });
   };
 
   /**
@@ -494,6 +534,10 @@ export default class Log extends Component {
     this.setState({ showFutureDateConfirmationModal: false });
   };
 
+  hideUpdatedFutureDateConfirmationModal = () => {
+    this.setState({ showUpdatedFutureDateConfirmationModal: false });
+  }
+
   /**
    * Hide the deleted one service log modal
    */
@@ -526,7 +570,7 @@ export default class Log extends Component {
    * Hide the successfully updated one service log modal
    */
   hideUpdateLogErrorModal = () => {
-    this.setState({ showUpdateLogErrorModal: false });
+    this.setState({ showUpdatedLogErrorModal: false });
   };
 
   /**
@@ -642,6 +686,12 @@ export default class Log extends Component {
               hideFutureDateConfirmationModal={this.hideFutureDateConfirmationModal}
               state={this.state.date}
             />
+            <UpdatedFutureDateConfirmationModal
+              handleUpdateOneServiceLog={this.handleUpdateOneServiceLog}
+              showUpdatedFutureDateConfirmationModal={this.state.showUpdatedFutureDateConfirmationModal}
+              hideUpdatedFutureDateConfirmationModal={this.hideUpdatedFutureDateConfirmationModal}
+              state={this.state.serviceLogDate}
+            />
             <DeleteOneVehicleModal
               handleDeleteOneVehicle={this.handleDeleteOneVehicle}
               showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
@@ -649,15 +699,11 @@ export default class Log extends Component {
               state={this.state}
             />
             <EditOneServiceLogModal
-              state={this.state}
-              updatedServiceLogDate={this.state.updatedServiceLogDate}
-              updatedServiceLogMileage={this.state.updatedServiceLogMileage}
-              updatedServiceLogService={this.state.updatedServiceLogService}
-              updatedServiceLogComment={this.state.updatedServiceLogComment}
               checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
               showEditOneLogModal={this.state.showEditOneLogModal}
               hideEditOneServiceLogModal={this.hideEditOneServiceLogModal}
               handleChange={this.handleChange}
+              state={this.state}
             />
             <DeleteOneServiceLogModal
               handleDeleteOneServiceLog={this.handleDeleteOneServiceLog}
@@ -671,7 +717,7 @@ export default class Log extends Component {
               state={this.state}
             />
             <UpdateLogErrorModal
-              showUpdateLogErrorModal={this.state.showUpdateLogErrorModal}
+              showUpdatedLogErrorModal={this.state.showUpdatedLogErrorModal}
               hideUpdateLogErrorModal={this.hideUpdateLogErrorModal}
               state={this.state}
             />
