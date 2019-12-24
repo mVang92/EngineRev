@@ -2,11 +2,11 @@ import React from "react";
 import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
-const MileageInputErrorModal = props => {
-    const { mileage } = props.state;
+const UpdatedMileageInputErrorModal = props => {
+    const { mileage, serviceLogMileage } = props.state;
     return (
         <ReactModal
-            isOpen={props.showMileageInputErrorModal}
+            isOpen={props.showUpdatedMileageInputErrorModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
@@ -21,7 +21,7 @@ const MileageInputErrorModal = props => {
                             </div>
                             <div className="col-md-10 userInputErrorMessage">
                                 <div className="col-md-12">
-                                    <span className="text-danger">{mileage}</span> is not a valid input for Mileage.
+                                    <span className="text-danger">{serviceLogMileage}</span> is not a valid input for Mileage.
                                 </div>
                                 <div className="col-md-12">
                                     Please enter numerical values. Exclude special characters.
@@ -33,7 +33,7 @@ const MileageInputErrorModal = props => {
                                 title="Understood"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.hideMileageInputErrorModal}
+                                onClick={props.hideUpdatedMileageInputErrorModal}
                                 data-dismiss="modal">
                                 Okay
                             </button>
@@ -45,4 +45,4 @@ const MileageInputErrorModal = props => {
     );
 };
 
-export default MileageInputErrorModal;
+export default UpdatedMileageInputErrorModal;

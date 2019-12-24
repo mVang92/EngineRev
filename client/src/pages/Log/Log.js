@@ -8,8 +8,10 @@ import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal"
 import EditOneServiceLogModal from "../../components/Modal/EditOneServiceLogModal";
 import DeleteOneServiceLogModal from "../../components/Modal/DeleteOneServiceLogModal";
 import FutureDateConfirmationModal from "../../components/Modal/FutureDateConfirmationModal";
-import AddLogErrorModal from "../../components/Modal/AddLogErrorModal"
-import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal"
+import AddLogErrorModal from "../../components/Modal/AddLogErrorModal";
+import UpdateLogErrorModal from "../../components/Modal/UpdateLogErrorModal";
+import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal";
+import UpdatedMileageInputErrorModal from "../../components/Modal/UpdatedMileageInputErrorModal";
 import NoAuthorization from "../../components/NoAuthorization";
 import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
@@ -39,7 +41,9 @@ export default class Log extends Component {
       showAddLogErrorModal: false,
       showMileageInputErrorModal: false,
       showDeleteOneLogModal: false,
-      showFutureDateConfirmationModal: false
+      showFutureDateConfirmationModal: false,
+      showUpdatedMileageInputErrorModal: false,
+      showUpdateLogErrorModal: false
     };
     this.validatePermissionToRedirect(props);
   };
@@ -120,6 +124,43 @@ export default class Log extends Component {
           this.showFutureDateConfirmationModal();
         } else {
           this.handleSubmitOneServiceLog();
+        };
+      };
+    };
+  };
+
+  /**
+   * Go through a series of conditions to validate the service log being entered
+   */
+  checkUserEnteredUpdatedServiceLogInput = e => {
+    e.preventDefault();
+    const updatedServiceLogDate = this.state.serviceLogDate;
+    const updatedServiceLogMileage = this.state.serviceLogMileage;
+    const updatedServiceLogService = this.state.serviceLogService;
+    const updatedServiceLogComment = this.state.serviceLogComment;
+    console.log(updatedServiceLogDate)
+    console.log(updatedServiceLogMileage)
+    console.log(updatedServiceLogService)
+    console.log(updatedServiceLogComment)
+    const currentDate = new Date();
+    const loggedServiceDate = new Date(updatedServiceLogDate);
+
+    currentDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
+    loggedServiceDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
+
+    currentDate.setDate(currentDate.getDate());
+    loggedServiceDate.setDate(loggedServiceDate.getDate() + 1);
+
+    if (isNaN(updatedServiceLogMileage)) {
+      this.showUpdatedMileageInputErrorModal();
+    } else {
+      if (updatedServiceLogDate === "" || updatedServiceLogMileage === "" || updatedServiceLogService === "") {
+        this.showUpdateLogErrorModal();
+      } else {
+        if (currentDate < loggedServiceDate) {
+          this.showFutureDateConfirmationModal();
+        } else {
+          this.handleEditOneServiceLog();
         };
       };
     };
@@ -386,10 +427,24 @@ export default class Log extends Component {
   };
 
   /**
+   * Display the modal to notify the user about bad input while updating a service log
+   */
+  showUpdateLogErrorModal = () => {
+    this.setState({ showUpdateLogErrorModal: true });
+  };
+
+  /**
    * Display the modal to notify the user about bad input to the mileage input field
    */
   showMileageInputErrorModal = () => {
     this.setState({ showMileageInputErrorModal: true });
+  };
+
+  /**
+   * Display the modal to notify the user about bad input to updating the mileage input field
+   */
+  showUpdatedMileageInputErrorModal = () => {
+    this.setState({ showUpdatedMileageInputErrorModal: true });
   };
 
   /**
@@ -468,10 +523,24 @@ export default class Log extends Component {
   };
 
   /**
+   * Hide the successfully updated one service log modal
+   */
+  hideUpdateLogErrorModal = () => {
+    this.setState({ showUpdateLogErrorModal: false });
+  };
+
+  /**
    * Hide the bad mileage input modal
    */
   hideMileageInputErrorModal = () => {
     this.setState({ showMileageInputErrorModal: false });
+  };
+
+  /**
+   * Hide the bad mileage input modal while updating mileage
+   */
+  hideUpdatedMileageInputErrorModal = () => {
+    this.setState({ showUpdatedMileageInputErrorModal: false });
   };
 
   render() {
@@ -580,11 +649,15 @@ export default class Log extends Component {
               state={this.state}
             />
             <EditOneServiceLogModal
-              handleEditOneServiceLog={this.handleEditOneServiceLog}
+              state={this.state}
+              updatedServiceLogDate={this.state.updatedServiceLogDate}
+              updatedServiceLogMileage={this.state.updatedServiceLogMileage}
+              updatedServiceLogService={this.state.updatedServiceLogService}
+              updatedServiceLogComment={this.state.updatedServiceLogComment}
+              checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
               showEditOneLogModal={this.state.showEditOneLogModal}
               hideEditOneServiceLogModal={this.hideEditOneServiceLogModal}
               handleChange={this.handleChange}
-              state={this.state}
             />
             <DeleteOneServiceLogModal
               handleDeleteOneServiceLog={this.handleDeleteOneServiceLog}
@@ -597,9 +670,19 @@ export default class Log extends Component {
               hideAddLogErrorModal={this.hideAddLogErrorModal}
               state={this.state}
             />
+            <UpdateLogErrorModal
+              showUpdateLogErrorModal={this.state.showUpdateLogErrorModal}
+              hideUpdateLogErrorModal={this.hideUpdateLogErrorModal}
+              state={this.state}
+            />
             <MileageInputErrorModal
               showMileageInputErrorModal={this.state.showMileageInputErrorModal}
               hideMileageInputErrorModal={this.hideMileageInputErrorModal}
+              state={this.state}
+            />
+            <UpdatedMileageInputErrorModal
+              showUpdatedMileageInputErrorModal={this.state.showUpdatedMileageInputErrorModal}
+              hideUpdatedMileageInputErrorModal={this.hideUpdatedMileageInputErrorModal}
               state={this.state}
             />
             <ToastContainer />

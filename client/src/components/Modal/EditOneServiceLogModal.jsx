@@ -1,6 +1,5 @@
 import React from "react";
 import ReactModal from "react-modal";
-import warningImage from "../../images/warning.png";
 
 const EditOneServiceLogModal = props => {
     let date = new Date(props.state.serviceLogDate),
@@ -11,10 +10,10 @@ const EditOneServiceLogModal = props => {
     if (month.length < 2) {
         month = "0" + month;
     }
-        
+
     if (day.length < 2) {
         day = "0" + day;
-    }   
+    }
 
     let serviceLogDate = [year, month, day].join("-");
 
@@ -26,92 +25,95 @@ const EditOneServiceLogModal = props => {
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={150}
         >
-            <div className="accountModal modal-content">
-                <div className="modal-body modalShadow">
-                    <div className="modalBody">
-                        <div className="modal-header">
-                            <div className="col-md-2 imageMobileDisplay">
-                                <img className="warningImage" src={warningImage} alt='warning' />
+            <form onSubmit={props.checkUserEnteredUpdatedServiceLogInput}>
+                <div className="accountModal modal-content">
+                    <div className="modal-body modalShadow">
+                        <div className="modalBody">
+                            <div className="modal-header text-danger text-center">
+                                <label><strong>Edit Service Log</strong></label>
                             </div>
-                            <div className="col-md-10 text-danger">
-                                <label><strong>Edit service log</strong></label>
+                            <div className="modal-body">
+                                <div className="row">
+                                    <div className="col-md-3">
+                                        <strong>Date:</strong>
+                                    </div>
+                                    <div className="col-md-9">
+                                        <input
+                                            type="date"
+                                            name="serviceLogDate"
+                                            onChange={props.handleChange}
+                                            defaultValue={serviceLogDate}
+                                        />
+                                    </div>
+                                </div>
+                                <br />
+                                <div className="row">
+                                    <div className="col-md-3">
+                                        <strong>Mileage:</strong>
+                                    </div>
+                                    <div className="col-md-9">
+                                        <input
+                                            type="text"
+                                            name="serviceLogMileage"
+                                            maxLength="7"
+                                            onChange={props.handleChange}
+                                            defaultValue={props.state.serviceLogMileage}
+                                        />
+                                    </div>
+                                </div>
+                                <br />
+                                <div className="row">
+                                    <div className="col-md-3">
+                                        <strong>Service:</strong>
+                                    </div>
+                                    <div className="col-md-9">
+                                        <input
+                                            type="text"
+                                            name="serviceLogService"
+                                            maxLength="50"
+                                            onChange={props.handleChange}
+                                            defaultValue={props.state.serviceLogService}
+                                        />
+                                    </div>
+                                </div>
+                                <br />
+                                <div className="row">
+                                    <div className="col-md-3">
+                                        <strong>Comments:</strong>
+                                    </div>
+                                    <div className="col-md-9">
+                                        <textarea
+                                            className="commentsBox"
+                                            type="text"
+                                            name="serviceLogComment"
+                                            maxLength="250"
+                                            onChange={props.handleChange}
+                                            defaultValue={props.state.serviceLogComment}
+                                        />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="modal-body">
-                            <div className="row">
-                                <div className="col-md-3">
-                                    <strong>Date:</strong>
-                                </div>
-                                <div className="col-md-9">
-                                    <input
-                                        type="date"
-                                        onChange={props.handleChange}
-                                        defaultValue={serviceLogDate}
-                                    />
-                                </div>
+                            <div className="modal-footer">
+                                <button
+                                    title="Cancel"
+                                    type="button"
+                                    className="cancelBtn"
+                                    onClick={props.hideEditOneServiceLogModal}
+                                    data-dismiss="modal">
+                                    Cancel
+                                </button>
+                                <button
+                                    title="Save Service Log"
+                                    id="confirmSaveEditServiceLogButton"
+                                    className="cancelBtn"
+                                    type="submit">
+                                    Save
+                                </button>
                             </div>
-                            <div className="row">
-                                <div className="col-md-3">
-                                    <strong>Mileage:</strong>
-                                </div>
-                                <div className="col-md-9">
-                                    <input
-                                        type="text"
-                                        maxLength="7"
-                                        onChange={props.handleChange}
-                                        defaultValue={props.state.serviceLogMileage}
-                                    />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-3">
-                                    <strong>Service:</strong>
-                                </div>
-                                <div className="col-md-9">
-                                    <input
-                                        type="text"
-                                        maxLength="50"
-                                        onChange={props.handleChange}
-                                        defaultValue={props.state.serviceLogService}
-                                    />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-3">
-                                    <strong>Comments:</strong>
-                                </div>
-                                <div className="col-md-9">
-                                    <textarea
-                                        className="commentsBox"
-                                        type="text"
-                                        maxLength="250"
-                                        onChange={props.handleChange}
-                                        defaultValue={props.state.serviceLogComment}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="modal-footer">
-                            <button
-                                title="Cancel"
-                                type="button"
-                                className="cancelBtn"
-                                onClick={props.hideEditOneServiceLogModal}
-                                data-dismiss="modal">
-                                Cancel
-                            </button>
-                            <button
-                                title="Save Service Log"
-                                id="confirmSaveEditServiceLogButton"
-                                className="cancelBtn"
-                                type="button"
-                                onClick={props.handleEditOneServiceLog}>
-                                Save
-                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </ReactModal>
     );
 };
