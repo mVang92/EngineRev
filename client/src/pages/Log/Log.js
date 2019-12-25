@@ -65,6 +65,16 @@ export default class Log extends Component {
         this.getOneVehicle();
       };
     });
+    this.continuouslyUpdateServiceLogSection();
+  };
+
+  /**
+   * Continue to refresh the service log section every 5 seconds
+   */
+  continuouslyUpdateServiceLogSection = () => {
+    setTimeout(() => {
+      this.componentDidMount();
+    }, 5000);
   };
 
   /**
