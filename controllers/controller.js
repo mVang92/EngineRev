@@ -85,15 +85,22 @@ module.exports = {
   },
 
   /**
-   * Add one service log for the selected vehicle
+   * Update one service log for the selected vehicle
    */
   updateOneLogForOneVehicle: (req, res) => {
     console.log("Hit updateOneLogForOneVehicle");
-    console.log(req.body)
     db.Vehicle
-      .updateOne(
-        // { creator: creatorId, vehicles: { $elemMatch: { _id: req.params.id } } },
-        // { $set: { "vehicles.$.logs": [req.body] } }
+      .update(
+        { "vehicles._id": req.params.vehicleId },
+        {
+          $set: {
+            "vehicles.$[].logs.$[logs].date": req.body.date,
+            "vehicles.$[].logs.$[logs].mileage": req.body.mileage,
+            "vehicles.$[].logs.$[logs].service": req.body.service,
+            "vehicles.$[].logs.$[logs].comment": req.body.comment,
+          }
+        },
+        { arrayFilters: [{ "logs._id": req.params.serviceLogId }] }
       )
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
