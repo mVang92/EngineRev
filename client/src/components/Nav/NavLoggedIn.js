@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export const NavLoggedIn = props => {
     const userEmailForAccount = props.state.userEmailForAccount;
     const userAccountCreationTime = props.state.userAccountCreationTime;
+    const userAccountLastSignIn = props.state.userAccountLastSignIn;
     const userDisplayName = props.state.userDisplayName;
     const userPhotoUrl = props.state.userPhotoUrl;
     const accountPage = {
@@ -12,7 +13,8 @@ export const NavLoggedIn = props => {
             userEmailForAccount,
             userAccountCreationTime,
             userDisplayName,
-            userPhotoUrl
+            userPhotoUrl,
+            userAccountLastSignIn
         ]
     };
 

@@ -11,7 +11,6 @@ import { ToastContainer, toast } from "react-toastify";
 
 export default class Account extends Component {
   constructor(props) {
-    // console.log(props)
     super(props)
     this.state = {
       loggedin: false,
@@ -27,6 +26,7 @@ export default class Account extends Component {
       vehicleCount: "Loading...",
       loadingError: "",
       userAccountCreationTime: "",
+      userAccountLastSignIn: "",
       newProfilePicture: "",
       showUniqueUserId: false,
       showMaskUniqueUserId: true,
@@ -51,6 +51,7 @@ export default class Account extends Component {
           userAccountCreationTime: this.props.location.state[1],
           userDisplayName: this.props.location.state[2],
           userPhotoUrl: this.props.location.state[3],
+          userAccountLastSignIn: this.props.location.state[4],
           userId: this.props.match.params.id
         });
         this.getVehicleData();
@@ -301,6 +302,7 @@ export default class Account extends Component {
                   loadingError={this.state.loadingError}
                   vehicleCount={this.state.vehicleCount}
                   userAccountCreationTime={this.state.userAccountCreationTime}
+                  userAccountLastSignIn={this.state.userAccountLastSignIn}
                   updateDisplayName={this.updateDisplayName}
                   newDisplayName={this.state.newDisplayName}
                   updatePassword={this.updatePassword}

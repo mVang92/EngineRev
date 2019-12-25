@@ -87,6 +87,12 @@ class AccountDetails extends Component {
           <div className="col-md-4">{this.props.userAccountCreationTime}</div>
           <div className="col-md-4"></div>
         </div>
+        <br />
+        <div className="row">
+          <div className="col-md-4"><label><strong>Last SignIn:</strong></label></div>
+          <div className="col-md-4">{this.props.userAccountLastSignIn}</div>
+          <div className="col-md-4"></div>
+        </div>
         <hr />
         <form onSubmit={this.props.showUpdateProfilePictureModal}>
           <div className="row">
