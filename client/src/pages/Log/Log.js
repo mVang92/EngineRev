@@ -256,6 +256,7 @@ export default class Log extends Component {
   */
   handleUpdateOneServiceLog = updatedServiceLogDateToConvert => {
     let vehicleId = this.state.vehicleId;
+    let serviceLogId = this.state.serviceLogId;
     let updatedServiceLogDateToRecord = "";
     const updatedServiceLogDate = this.formatDateYyyyMmDd(updatedServiceLogDateToConvert);
 
@@ -278,7 +279,7 @@ export default class Log extends Component {
     let serviceLogDateMemory = updatedServiceLogDateToRecord;
     let serviceLogMileageMemory = this.state.serviceLogMileage;
     let serviceLogServiceMemory = this.state.serviceLogService;
-    API.updateOneLogForOneVehicle(vehicleId, serviceLogToUpdate)
+    API.updateOneLogForOneVehicle(vehicleId, serviceLogId, serviceLogToUpdate)
       .then(() => {
         this.hideEditOneServiceLogModal();
         this.hideUpdatedFutureDateConfirmationModal();
@@ -688,6 +689,13 @@ export default class Log extends Component {
                 }
               </div>
             </div>
+            <EditOneServiceLogModal
+              checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
+              showEditOneLogModal={this.state.showEditOneLogModal}
+              hideEditOneServiceLogModal={this.hideEditOneServiceLogModal}
+              handleChange={this.handleChange}
+              state={this.state}
+            />
             <FutureDateConfirmationModal
               handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
               showFutureDateConfirmationModal={this.state.showFutureDateConfirmationModal}
@@ -704,13 +712,6 @@ export default class Log extends Component {
               handleDeleteOneVehicle={this.handleDeleteOneVehicle}
               showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
               hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
-              state={this.state}
-            />
-            <EditOneServiceLogModal
-              checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
-              showEditOneLogModal={this.state.showEditOneLogModal}
-              hideEditOneServiceLogModal={this.hideEditOneServiceLogModal}
-              handleChange={this.handleChange}
               state={this.state}
             />
             <DeleteOneServiceLogModal

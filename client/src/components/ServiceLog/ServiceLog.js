@@ -56,9 +56,8 @@ const ServiceLog = props => {
             <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
               <button
                 id="editActionButton"
-                title="Coming Soon"
+                title="Edit Log"
                 onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, editValue)}
-                disabled
               >
                 <img id="editIcon" src={editIcon} alt="edit"></img>
               </button>

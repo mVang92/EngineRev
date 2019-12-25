@@ -28,8 +28,8 @@ export default {
     return axios.put(`/api/vehicles/addOneServiceLog/${id}`, log);
   },
   // Update a service log for one vehicle
-  updateOneLogForOneVehicle: (id, log) => {
-    return axios.put(`/api/vehicles/updateOneServiceLog/${id}`, log);
+  updateOneLogForOneVehicle: (vehicleId, serviceLogId, updatedServiceLog) => {
+    return axios.put(`/api/vehicles/updateOneServiceLog/${vehicleId}/${serviceLogId}`, updatedServiceLog);
   },
   // Delete one vehicle
   deleteOneVehicle: id => {
