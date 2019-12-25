@@ -55,6 +55,7 @@ input {
 
 #editIcon,
 #deleteIcon {
+    padding: 3px;
     width: 2em;
 }
 
@@ -127,6 +128,7 @@ input {
 
 .cancelBtn,
 .backHomeBtn,
+#editActionButton,
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton {
@@ -171,7 +173,6 @@ input {
     background: rgb(128, 200, 255);
 }
 
-
 .deleteBtn:hover,
 #deleteActionButton:hover {
     background: rgb(255, 128, 128);
@@ -183,7 +184,7 @@ input {
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover {
-    background: rgb(255, 255, 255)
+    background: rgb(255, 255, 255);
 }
 
 #signUpNavButton {
@@ -328,6 +329,43 @@ input {
 #scrollableProfilePicture {
     max-height: 17rem;
     overflow: auto;
+}
+
+.underline {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    overflow: hidden;
+}
+  
+.underline:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    background: rgb(220, 64, 48);
+    height: 4px;
+    -webkit-transition-property: left, right;
+    transition-property: left, right;
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+  
+.underline:hover:before,
+.underline:focus:before,
+.underline:active:before {
+    left: 0;
+    right: 0;
 }
 
 @media print {
