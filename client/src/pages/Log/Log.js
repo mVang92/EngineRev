@@ -603,9 +603,11 @@ export default class Log extends Component {
           <Container>
             <div className="box">
               <div className="row">
-                <div id="vehicleLogInformation" className="col-md-12 text-center">
+                <div className="col-md-3"></div>
+                <div id="vehicleLogInformation" className="col-md-6 text-center">
                   <label><h5>{this.state.year} {this.state.make} {this.state.model}</h5></label>
                 </div>
+                <div className="col-md-3"></div>
               </div>
               <hr />
               <div className="innerBox hideWhilePrinting">
@@ -651,7 +653,11 @@ export default class Log extends Component {
                             <strong>Comments</strong>
                           </label>
                         </div>
-                        <div className="col-md-2 logDetailsMobileDisplay"></div>
+                        <div className="col-md-2 logDetailsMobileDisplay hideWhilePrinting">
+                          <label>
+                            <strong>Actions</strong>
+                          </label>
+                        </div>
                       </div>
                       {
                         this.state.sortVehicleServiceLogsMostRecent ? (

@@ -25,6 +25,7 @@ export class Nav extends Component {
       confirmPassword: "",
       userEmailForAccount: "",
       userAccountCreationTime: "",
+      userAccountLastSignIn: "",
       userDisplayName: "",
       userPhotoUrl: ""
     };
@@ -50,6 +51,7 @@ export class Nav extends Component {
           userId: user.uid,
           userEmailForAccount: user.email,
           userAccountCreationTime: user.metadata.creationTime,
+          userAccountLastSignIn: user.metadata.lastSignInTime,
           userDisplayName: user.displayName,
           userPhotoUrl: user.photoURL
         });

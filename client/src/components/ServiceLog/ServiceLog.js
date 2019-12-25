@@ -14,9 +14,9 @@ const ServiceLog = props => {
   const serviceLogDate = new Date(dateToFormat);
   const currentDate = new Date();
 
-  serviceLogDate.setHours(0,0,0,0) > new Date().setHours(0,0,0,0);
-  currentDate.setHours(0,0,0,0) > new Date().setHours(0,0,0,0);
-  
+  serviceLogDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
+  currentDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
+
   serviceLogDate.setDate(serviceLogDate.getDate() + 1);
   currentDate.setDate(currentDate.getDate());
 
@@ -55,20 +55,20 @@ const ServiceLog = props => {
           <div className="row centerButtonMobileDisplay">
             <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
               <button
+                id="deleteActionButton"
+                title="Delete Log"
+                onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, deleteValue)}
+              >
+                <img id="deleteIcon" src={deleteIcon} alt="delete"></img>
+              </button>
+            </div>
+            <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
+              <button
                 id="editActionButton"
                 title="Edit Log"
                 onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, editValue)}
               >
                 <img id="editIcon" src={editIcon} alt="edit"></img>
-              </button>
-            </div>
-            <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
-              <button
-                id="deleteActionButton"
-                title="Delete Log"
-                onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, deleteValue)}
-              >
-                <img id="deleteIcon" src={deleteIcon} alt="edit"></img>
               </button>
             </div>
           </div>

@@ -35,7 +35,7 @@ const EditOneServiceLogModal = props => {
                             <div className="modal-body">
                                 <div className="row">
                                     <div className="col-md-3">
-                                        <strong>Date:</strong>
+                                        <label><span className="required">*</span><strong>Date</strong></label>
                                     </div>
                                     <div className="col-md-9">
                                         <input
@@ -49,7 +49,7 @@ const EditOneServiceLogModal = props => {
                                 <br />
                                 <div className="row">
                                     <div className="col-md-3">
-                                        <strong>Mileage:</strong>
+                                        <label><span className="required">*</span><strong>Mileage</strong></label>
                                     </div>
                                     <div className="col-md-9">
                                         <input
@@ -64,7 +64,7 @@ const EditOneServiceLogModal = props => {
                                 <br />
                                 <div className="row">
                                     <div className="col-md-3">
-                                        <strong>Service:</strong>
+                                        <label><span className="required">*</span><strong>Service</strong></label>
                                     </div>
                                     <div className="col-md-9">
                                         <input
@@ -79,7 +79,7 @@ const EditOneServiceLogModal = props => {
                                 <br />
                                 <div className="row">
                                     <div className="col-md-3">
-                                        <strong>Comments:</strong>
+                                        <label><strong>Comments</strong></label>
                                     </div>
                                     <div className="col-md-9">
                                         <textarea
