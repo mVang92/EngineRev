@@ -63,7 +63,7 @@ module.exports = {
     console.log("Hit addOneVehicle");
     db.Vehicle
       .findOneAndUpdate(
-        { creator: req.params.id },
+        { creator: creatorId },
         { $push: { vehicles: [req.body] } }
       )
       .then(result => res.json(result))
@@ -85,13 +85,33 @@ module.exports = {
   },
 
   /**
+   * Update the vehicle name for the selected vehicle
+   */
+  updateOneVehicleName: (req, res) => {
+    console.log("Hit updateOneVehicleName");
+    db.Vehicle
+      .update(
+        { "vehicles._id": vehicleId },
+        {
+          $set: {
+            "vehicles.$.year": req.body.year,
+            "vehicles.$.make": req.body.make,
+            "vehicles.$.model": req.body.model
+          }
+        }
+      )
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
    * Update one service log for the selected vehicle
    */
   updateOneLogForOneVehicle: (req, res) => {
     console.log("Hit updateOneLogForOneVehicle");
     db.Vehicle
       .update(
-        { "vehicles._id": req.params.vehicleId },
+        { "vehicles._id": vehicleId },
         {
           $set: {
             "vehicles.$[].logs.$[logs].date": req.body.date,

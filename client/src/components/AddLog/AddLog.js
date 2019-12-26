@@ -75,7 +75,7 @@ class AddLog extends Component {
               this.props.vehicleServiceLogs.length > 1 ? (
                 <button
                   id="addLogSortLogsButton"
-                  title="Sort Dates "
+                  title="Sort Dates"
                   type="button"
                   className="cancelBtn"
                   onClick={this.props.changeSortOrder}>
@@ -115,33 +115,71 @@ class AddLog extends Component {
             }
           </div>
           <div className="col-md-2 logDeleteBtn logButtonsMobileDisplay">
-            <button
-              id="addLogDeleteVehicleButton"
-              title="Delete This Vehicle"
-              type="button"
-              className="deleteBtn"
-              onClick={this.props.showDeleteOneVehicleModal}>
-              Delete Vehicle
-            </button>
+            {
+              this.props.year ? (
+                <button
+                  id="addLogDeleteVehicleButton"
+                  title="Delete This Vehicle"
+                  type="button"
+                  className="deleteBtn"
+                  onClick={this.props.showDeleteOneVehicleModal}>
+                  Delete Vehicle
+                </button>
+              ) : (
+                  <button
+                    id="addLogDeleteVehicleButton"
+                    title="Delete This Vehicle"
+                    type="button"
+                    className="deleteBtn"
+                    disabled>
+                    Delete Vehicle
+                  </button>
+                )
+            }
           </div>
           <div className="col-md-2 logButtonsMobileDisplay">
-            <button
-              id="addLogResetInputFieldsButton"
-              title="Reset Input Fields"
-              type="reset"
-              className="resetButton"
-              onClick={this.props.handleResetLogVehicleForm}>
-              Reset Fields
-            </button>
+            {
+              this.props.year ? (
+                <button
+                  id="addLogResetInputFieldsButton"
+                  title="Reset Input Fields"
+                  type="reset"
+                  className="resetButton"
+                  onClick={this.props.handleResetLogVehicleForm}>
+                  Reset Fields
+                </button>
+              ) : (
+                  <button
+                    id="addLogResetInputFieldsButton"
+                    title="Reset Input Fields"
+                    type="reset"
+                    className="resetButton"
+                    disabled>
+                    Reset Fields
+                  </button>
+                )
+            }
           </div>
           <div className="col-md-2 logSubmitBtn logButtonsMobileDisplay">
-            <button
-              id="addServiceLogButton"
-              title="Submit Service Log"
-              type="submit"
-              className="addBtn">
-              Submit Log
-            </button>
+            {
+              this.props.year ? (
+                <button
+                  id="addServiceLogButton"
+                  title="Submit Service Log"
+                  type="submit"
+                  className="addBtn">
+                  Submit Log
+                </button>
+              ) : (
+                  <button
+                    id="addServiceLogButton"
+                    title="Submit Service Log"
+                    className="addBtn"
+                    disabled>
+                    Submit Log
+                  </button>
+                )
+            }
           </div>
         </div>
       </form>

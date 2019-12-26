@@ -9,10 +9,12 @@ import EditOneServiceLogModal from "../../components/Modal/EditOneServiceLogModa
 import DeleteOneServiceLogModal from "../../components/Modal/DeleteOneServiceLogModal";
 import FutureDateConfirmationModal from "../../components/Modal/FutureDateConfirmationModal";
 import UpdatedFutureDateConfirmationModal from "../../components/Modal/UpdatedFutureDateConfirmationModal";
+import EditOneVehicleNameModal from "../../components/Modal/EditOneVehicleNameModal";
 import AddLogErrorModal from "../../components/Modal/AddLogErrorModal";
 import UpdateLogErrorModal from "../../components/Modal/UpdateLogErrorModal";
 import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal";
 import UpdatedMileageInputErrorModal from "../../components/Modal/UpdatedMileageInputErrorModal";
+import UpdatedVehicleYearNanErrorModal from "../../components/Modal/UpdatedVehicleYearNanErrorModal";
 import NoAuthorization from "../../components/NoAuthorization";
 import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
@@ -21,6 +23,7 @@ export default class Log extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      uid: "",
       loggedin: false,
       vehicle: [],
       vehicleId: "",
@@ -35,6 +38,9 @@ export default class Log extends Component {
       serviceLogMileage: "",
       serviceLogService: "",
       serviceLogComment: "",
+      updatedYear: "",
+      updatedMake: "",
+      updatedModel: "",
       vehicleServiceLogs: [],
       updatedServiceLogDateToConfirm: "",
       sortVehicleServiceLogsMostRecent: true,
@@ -46,9 +52,31 @@ export default class Log extends Component {
       showFutureDateConfirmationModal: false,
       showUpdatedMileageInputErrorModal: false,
       showUpdatedLogErrorModal: false,
-      showUpdatedFutureDateConfirmationModal: false
+      showUpdatedFutureDateConfirmationModal: false,
+      showEditOneVehicleNameModal: false,
+      showUpdatedVehicleYearNanErrorModal: false
     };
     this.validatePermissionToRedirect(props);
+  };
+
+  /**
+   * Handle real-time changes
+   */
+  handleChange = e => {
+    let { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  /**
+   * Display the service log page only after clicking on the vehicle from the main page
+   * This prevents other users from redirecting to someone else's page
+   */
+  validatePermissionToRedirect = props => {
+    try {
+      props.location.state[0];
+    } catch (e) {
+      window.location.assign(window.location.origin);
+    };
   };
 
   /**
@@ -60,6 +88,7 @@ export default class Log extends Component {
       if (user) {
         this.setState({
           vehicleId: this.props.match.params.id,
+          uid: user.uid,
           loggedin: true
         });
         this.getOneVehicle();
@@ -81,26 +110,6 @@ export default class Log extends Component {
         });
       })
       .catch(err => this.loadServiceLogsFailNotification(err));
-  };
-
-  /**
-   * Handle real-time changes
-   */
-  handleChange = e => {
-    let { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
-
-  /**
-   * Display the service log page only after clicking on the vehicle from the main page
-   * This prevents other users from redirecting to someone else's page
-   */
-  validatePermissionToRedirect = props => {
-    try {
-      props.location.state[0];
-    } catch (e) {
-      window.location.assign(window.location.origin);
-    };
   };
 
   /**
@@ -139,7 +148,7 @@ export default class Log extends Component {
   };
 
   /**
-   * Go through a series of conditions to validate the service log being entered
+   * Go through a series of conditions to validate the updated service log being entered
    */
   checkUserEnteredServiceLogInput = e => {
     e.preventDefault();
@@ -162,6 +171,43 @@ export default class Log extends Component {
         };
       };
     };
+  };
+
+  /**
+   * Go through a series of conditions to validate the updated vehicle name being entered
+   */
+  checkUserEnteredUpdatedVehicleNameInput = e => {
+    e.preventDefault();
+    let updatedYear = "";
+    let updatedMake = "";
+    let updatedModel = "";
+    if (isNaN(this.state.updatedYear)) {
+      this.showUpdatedVehicleYearNanErrorModal();
+    } else {
+      if (this.state.updatedYear) {
+        updatedYear = this.state.updatedYear;
+      } else {
+        updatedYear = this.state.year;
+      }
+
+      if (this.state.updatedMake) {
+        updatedMake = this.state.updatedMake;
+      } else {
+        updatedMake = this.state.make;
+      }
+
+      if (this.state.updatedModel) {
+        updatedModel = this.state.updatedModel;
+      } else {
+        updatedModel = this.state.model;
+      }
+      let updatedVehicleName = {
+        year: updatedYear,
+        make: updatedMake,
+        model: updatedModel
+      };
+      this.handleUpdateOneVehicleName(updatedVehicleName);
+    }
   };
 
   /**
@@ -189,13 +235,33 @@ export default class Log extends Component {
         this.showUpdateLogErrorModal();
       } else {
         if (currentDate < updatedServiceLogDate) {
-          this.setState({ updatedServiceLogDateToConfirm: updatedServiceLogDate })
+          this.setState({ updatedServiceLogDateToConfirm: updatedServiceLogDate });
           this.showUpdateFutureDateConfirmationModal();
         } else {
           this.handleUpdateOneServiceLog(updatedServiceLogDate);
         };
       };
     };
+  };
+
+  /**
+   * Update one vehicle name from record
+   * 
+   * @param updatedVehicleName  the updated name for the vehicle
+   */
+  handleUpdateOneVehicleName = updatedVehicleName => {
+    API.updateVehicleNameForOneVehicle(this.state.vehicleId, updatedVehicleName)
+      .then(() => {
+        this.updateOneVehicleNameSuccessNotification();
+        this.hideEditOneVehicleNameModal();
+        this.setState({
+          updatedYear: "",
+          updatedMake: "",
+          updatedModel: ""
+        });
+        this.componentDidMount();
+      })
+      .catch(err => this.updateOneVehicleNameFailNotification(err));
   };
 
   /**
@@ -217,7 +283,7 @@ export default class Log extends Component {
     let serviceLogServiceMemory = this.state.service;
     API.addOneLogForOneVehicle(vehicleId, serviceLogToStore)
       .then(() => {
-        this.addOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory)
+        this.addOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory);
         this.setState({
           date: "",
           mileage: "",
@@ -252,7 +318,7 @@ export default class Log extends Component {
   };
 
   /**
-  * Edits one service log from record
+  * Update one service log from record
   */
   handleUpdateOneServiceLog = updatedServiceLogDateToConvert => {
     let vehicleId = this.state.vehicleId;
@@ -283,7 +349,7 @@ export default class Log extends Component {
       .then(() => {
         this.hideEditOneServiceLogModal();
         this.hideUpdatedFutureDateConfirmationModal();
-        this.updateOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory)
+        this.updateOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory);
         this.setState({
           serviceLogDate: "",
           serviceLogMileage: "",
@@ -305,7 +371,7 @@ export default class Log extends Component {
           this.setState({ showDeleteOneLogModal: false });
         }, 200);
         this.componentDidMount();
-        this.deleteOneServiceLogSuccessNotification()
+        this.deleteOneServiceLogSuccessNotification();
       })
       .catch(err => this.deleteOneServiceLogFailNotification(err));
   };
@@ -334,6 +400,10 @@ export default class Log extends Component {
     };
   };
 
+  confirmUpdateVehicleName = () => {
+    console.log("got here")
+  };
+
   /**
    * Check the state of the sort and sort the vehicle logs depending on the state of the sort
    */
@@ -354,6 +424,13 @@ export default class Log extends Component {
     } else {
       this.setState({ sortVehicleServiceLogsMostRecent: true });
     };
+  };
+
+  /**
+   * Display the success notification when the user updates a vehicle name
+   */
+  updateOneVehicleNameSuccessNotification = () => {
+    toast.success(`Vehicle Name Updated Successfully.`);
   };
 
   /**
@@ -400,14 +477,23 @@ export default class Log extends Component {
    * Display the success notification when the user deletes a vehicle
    */
   deleteOneVehicleSuccessNotification = () => {
-    toast.success(`Vehicle Deleted Successfully`);
+    toast.success(`Vehicle Deleted Successfully.`);
   };
 
   /**
    * Display the success notification when the user deletes a service log
    */
   deleteOneServiceLogSuccessNotification = () => {
-    toast.success(`Service Log Deleted Successfully`);
+    toast.success(`Service Log Deleted Successfully.`);
+  };
+
+  /**
+   * Display the error notification when an error occurs while updating a vehicle name
+   * 
+   * @param err the error message to display to the user
+   */
+  updateOneVehicleNameFailNotification = err => {
+    toast.error(err.toString());
   };
 
   /**
@@ -432,7 +518,7 @@ export default class Log extends Component {
    * Display the info notification when the user resets the fields to add a service log
    */
   resetFieldsNotification = () => {
-    toast.info(`Input Fields Reset`);
+    toast.info(`Input Fields Reset.`);
   };
 
   /**
@@ -441,7 +527,21 @@ export default class Log extends Component {
    * @param err the error message to display to the user
    */
   loadServiceLogsFailNotification = err => {
-    toast.error(`Loading Service Log ${err.toString()}`);
+    toast.error(`Loading Service Log ${err.toString()}.`);
+  };
+
+  /**
+   * Display the modal to notify the user the updated vehicle year must be a number
+   */
+  showUpdatedVehicleYearNanErrorModal = () => {
+    this.setState({ showUpdatedVehicleYearNanErrorModal: true });
+  };
+
+  /**
+   * Display the modal to edit the name of the vehicle
+   */
+  showEditOneVehicleNameModal = () => {
+    this.setState({ showEditOneVehicleNameModal: true });
   };
 
   /**
@@ -534,6 +634,20 @@ export default class Log extends Component {
   };
 
   /**
+   * Hide the modal to notify the user the updated vehicle year must be a number
+   */
+  hideUpdatedVehicleYearNanErrorModal = () => {
+    this.setState({ showUpdatedVehicleYearNanErrorModal: false });
+  };
+
+  /**
+   * Hide the edit one vehicle name modal
+   */
+  hideEditOneVehicleNameModal = () => {
+    this.setState({ showEditOneVehicleNameModal: false });
+  };
+
+  /**
    * Hide the future date confirmation modal
    */
   hideFutureDateConfirmationModal = () => {
@@ -602,16 +716,32 @@ export default class Log extends Component {
         {this.state.loggedin ? (
           <Container>
             <div className="box">
-              <div className="row">
+              <div id="vehicleLogInformation" className="row">
                 <div className="col-md-3"></div>
-                <div id="vehicleLogInformation" className="col-md-6 text-center">
+                <div className="col-md-6 text-center">
                   <label><h5>{this.state.year} {this.state.make} {this.state.model}</h5></label>
                 </div>
-                <div className="col-md-3"></div>
+                <div className="col-md-3">
+                  {
+                    this.state.year ? (
+                      <button
+                        id="confirmUpdateVehicleName"
+                        title="Edit Vehicle Name"
+                        type="button"
+                        className="cancelBtn hideWhilePrinting"
+                        onClick={this.showEditOneVehicleNameModal}>
+                        Edit Vehicle Name
+                      </button>
+                    ) : (
+                        null
+                      )
+                  }
+                </div>
               </div>
               <hr />
               <div className="innerBox hideWhilePrinting">
                 <AddLog
+                  year={this.state.year}
                   date={this.state.date}
                   mileage={this.state.mileage}
                   service={this.state.service}
@@ -626,55 +756,43 @@ export default class Log extends Component {
                 />
               </div>
               <div className="row innerBox serviceLogMobileDisplay">
-                {this.state.vehicleServiceLogs.length === 0 ?
-                  (<div className="col-md-12 text-center text-danger">
-                    <hr />
-                    <label><strong>No Service Logs on Record</strong></label>
-                  </div>) : (
-                    <div className="col-md-12">
-                      <div className="row removeRowMobileDisplay">
-                        <div className="col-md-2 logDetailsMobileDisplay">
-                          <label>
-                            <strong>Date</strong>
-                          </label>
+                {
+                  this.state.vehicleServiceLogs.length === 0 ? (
+                    <div className="col-md-12 text-center text-danger">
+                      <hr />
+                      <label><strong>No Service Logs on Record</strong></label>
+                    </div>
+                  ) : (
+                      <div className="col-md-12">
+                        <div className="row removeRowMobileDisplay">
+                          <div className="col-md-2 logDetailsMobileDisplay">
+                            <label>
+                              <strong>Date</strong>
+                            </label>
+                          </div>
+                          <div className="col-md-2 logDetailsMobileDisplay">
+                            <label>
+                              <strong>Mileage</strong>
+                            </label>
+                          </div>
+                          <div className="col-md-3 logDetailsMobileDisplay">
+                            <label>
+                              <strong>Service</strong>
+                            </label>
+                          </div>
+                          <div className="col-md-3 logDetailsMobileDisplay">
+                            <label>
+                              <strong>Comments</strong>
+                            </label>
+                          </div>
+                          <div className="col-md-2 logDetailsMobileDisplay hideWhilePrinting">
+                            <label>
+                              <strong>Actions</strong>
+                            </label>
+                          </div>
                         </div>
-                        <div className="col-md-2 logDetailsMobileDisplay">
-                          <label>
-                            <strong>Mileage</strong>
-                          </label>
-                        </div>
-                        <div className="col-md-3 logDetailsMobileDisplay">
-                          <label>
-                            <strong>Service</strong>
-                          </label>
-                        </div>
-                        <div className="col-md-3 logDetailsMobileDisplay">
-                          <label>
-                            <strong>Comments</strong>
-                          </label>
-                        </div>
-                        <div className="col-md-2 logDetailsMobileDisplay hideWhilePrinting">
-                          <label>
-                            <strong>Actions</strong>
-                          </label>
-                        </div>
-                      </div>
-                      {
-                        this.state.sortVehicleServiceLogsMostRecent ? (
-                          this.sortServiceLogs().map(serviceLog => {
-                            return (
-                              <ServiceLog
-                                key={serviceLog._id}
-                                _id={serviceLog._id}
-                                date={serviceLog.date}
-                                mileage={serviceLog.mileage}
-                                service={serviceLog.service}
-                                comment={serviceLog.comment}
-                                getServiceLogActionValue={this.getServiceLogActionValue}
-                              />
-                            )
-                          })
-                        ) : (
+                        {
+                          this.state.sortVehicleServiceLogsMostRecent ? (
                             this.sortServiceLogs().map(serviceLog => {
                               return (
                                 <ServiceLog
@@ -688,19 +806,44 @@ export default class Log extends Component {
                                 />
                               )
                             })
-                          )
-                      }
-                    </div>
-                  )
+                          ) : (
+                              this.sortServiceLogs().map(serviceLog => {
+                                return (
+                                  <ServiceLog
+                                    key={serviceLog._id}
+                                    _id={serviceLog._id}
+                                    date={serviceLog.date}
+                                    mileage={serviceLog.mileage}
+                                    service={serviceLog.service}
+                                    comment={serviceLog.comment}
+                                    getServiceLogActionValue={this.getServiceLogActionValue}
+                                  />
+                                )
+                              })
+                            )
+                        }
+                      </div>
+                    )
                 }
               </div>
             </div>
+            <EditOneVehicleNameModal
+              showEditOneVehicleNameModal={this.state.showEditOneVehicleNameModal}
+              hideEditOneVehicleNameModal={this.hideEditOneVehicleNameModal}
+              checkUserEnteredUpdatedVehicleNameInput={this.checkUserEnteredUpdatedVehicleNameInput}
+              handleChange={this.handleChange}
+              state={this.state}
+            />
             <EditOneServiceLogModal
               checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
               showEditOneLogModal={this.state.showEditOneLogModal}
               hideEditOneServiceLogModal={this.hideEditOneServiceLogModal}
               handleChange={this.handleChange}
               state={this.state}
+            />
+            <UpdatedVehicleYearNanErrorModal
+              showUpdatedVehicleYearNanErrorModal={this.state.showUpdatedVehicleYearNanErrorModal}
+              hideUpdatedVehicleYearNanErrorModal={this.hideUpdatedVehicleYearNanErrorModal}
             />
             <FutureDateConfirmationModal
               handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}

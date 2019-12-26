@@ -39,6 +39,7 @@ const EditOneServiceLogModal = props => {
                                     </div>
                                     <div className="col-md-9">
                                         <input
+                                            id="updatedServiceLogDate"
                                             type="date"
                                             name="serviceLogDate"
                                             onChange={props.handleChange}
@@ -53,6 +54,7 @@ const EditOneServiceLogModal = props => {
                                     </div>
                                     <div className="col-md-9">
                                         <input
+                                            id="updatedServiceLogMileage"
                                             type="text"
                                             name="serviceLogMileage"
                                             maxLength="7"
@@ -68,6 +70,7 @@ const EditOneServiceLogModal = props => {
                                     </div>
                                     <div className="col-md-9">
                                         <input
+                                            id="updatedServiceLogService"
                                             type="text"
                                             name="serviceLogService"
                                             maxLength="50"
@@ -83,6 +86,7 @@ const EditOneServiceLogModal = props => {
                                     </div>
                                     <div className="col-md-9">
                                         <textarea
+                                            id="updatedServiceLogComments"
                                             className="commentsBox"
                                             type="text"
                                             name="serviceLogComment"
@@ -95,6 +99,7 @@ const EditOneServiceLogModal = props => {
                             </div>
                             <div className="modal-footer">
                                 <button
+                                    id="cancelUpdateServiceLog"
                                     title="Cancel"
                                     type="button"
                                     className="cancelBtn"
@@ -103,8 +108,8 @@ const EditOneServiceLogModal = props => {
                                     Cancel
                                 </button>
                                 <button
-                                    title="Save Service Log"
                                     id="confirmSaveEditServiceLogButton"
+                                    title="Save Service Log"
                                     className="cancelBtn"
                                     type="submit">
                                     Save

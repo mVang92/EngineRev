@@ -150,7 +150,6 @@ export default class App extends Component {
   render() {
     return (
       <React.Fragment>
-
         {this.state.loggedin ? (
           <Container>
             <LoggedIn
