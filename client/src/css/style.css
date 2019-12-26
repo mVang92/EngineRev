@@ -150,7 +150,7 @@ input {
 .deleteBtn,
 #deleteActionButton {
     background: rgb(220, 64, 48);
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 #deleteBtn {
@@ -238,7 +238,7 @@ input {
 
 .navbar-toggler {
     border-color: rgb(255, 64, 48) !important;
-    background: white;
+    background: rgb(255, 255, 255);
 }
 
 .notLoggedInImages {
