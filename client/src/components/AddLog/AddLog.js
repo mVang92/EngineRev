@@ -59,96 +59,23 @@ class AddLog extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-2 logButtonsMobileDisplay">
-            <a href="/">
-              <button
-                id="addLogBackButton"
-                title="Back"
-                type="button"
-                className="cancelBtn">
-                Back
-              </button>
-            </a>
-          </div>
-          <div className="col-md-2 sortServiceLogsByDateButton logButtonsMobileDisplay">
-            {
-              this.props.vehicleServiceLogs.length > 1 ? (
-                <button
-                  id="addLogSortLogsButton"
-                  title="Sort Dates"
-                  type="button"
-                  className="cancelBtn"
-                  onClick={this.props.changeSortOrder}>
-                  Sort Dates
-                </button>
-              ) : (
-                  <button
-                    id="addLogSortLogsButton"
-                    type="button"
-                    className="cancelBtn"
-                    disabled>
-                    Sort Dates
-                  </button>
-                )
-            }
-          </div>
-          <div className="col-md-2 printPageButton logButtonsMobileDisplay">
-            {
-              this.props.vehicleServiceLogs.length > 0 ? (
-                <button
-                  id="printPageButton"
-                  title="Print Service Logs"
-                  type="button"
-                  className="cancelBtn"
-                  onClick={this.props.handlePrintPage}>
-                  Print Logs
-                </button>
-              ) : (
-                  <button
-                    id="printPageButton"
-                    type="button"
-                    className="cancelBtn"
-                    disabled>
-                    Print Logs
-                  </button>
-                )
-            }
-          </div>
-          <div className="col-md-2 logDeleteBtn logButtonsMobileDisplay">
-            {
-              this.props.year ? (
-                <button
-                  id="addLogDeleteVehicleButton"
-                  title="Delete This Vehicle"
-                  type="button"
-                  className="deleteBtn"
-                  onClick={this.props.showDeleteOneVehicleModal}>
-                  Delete Vehicle
-                </button>
-              ) : (
-                  <button
-                    id="addLogDeleteVehicleButton"
-                    title="Delete This Vehicle"
-                    type="button"
-                    className="deleteBtn"
-                    disabled>
-                    Delete Vehicle
-                  </button>
-                )
-            }
-          </div>
+          <div className="col-md-2"></div>
+          <div className="col-md-2"></div>
+          <div className="col-md-2"></div>
+          <div className="col-md-2"></div>
           <div className="col-md-2 logButtonsMobileDisplay">
             {
-              this.props.year ? (
-                <button
-                  id="addLogResetInputFieldsButton"
-                  title="Reset Input Fields"
-                  type="reset"
-                  className="resetButton"
-                  onClick={this.props.handleResetLogVehicleForm}>
-                  Reset Fields
-                </button>
-              ) : (
+              this.props.year ?
+                (
+                  <button
+                    id="addLogResetInputFieldsButton"
+                    title="Reset Input Fields"
+                    type="reset"
+                    className="resetButton"
+                    onClick={this.props.handleResetLogVehicleForm}>
+                    Reset Fields
+                  </button>
+                ) : (
                   <button
                     id="addLogResetInputFieldsButton"
                     title="Reset Input Fields"
@@ -162,15 +89,16 @@ class AddLog extends Component {
           </div>
           <div className="col-md-2 logSubmitBtn logButtonsMobileDisplay">
             {
-              this.props.year ? (
-                <button
-                  id="addServiceLogButton"
-                  title="Submit Service Log"
-                  type="submit"
-                  className="addBtn">
-                  Submit Log
+              this.props.year ?
+                (
+                  <button
+                    id="addServiceLogButton"
+                    title="Submit Service Log"
+                    type="submit"
+                    className="addBtn">
+                    Submit Log
                 </button>
-              ) : (
+                ) : (
                   <button
                     id="addServiceLogButton"
                     title="Submit Service Log"

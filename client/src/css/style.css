@@ -107,8 +107,7 @@ input {
 }
 
 .resetButton,
-.logSubmitBtn,
-.logDeleteBtn {
+.logSubmitBtn {
     text-align: center;
 }
 
@@ -133,7 +132,7 @@ input {
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton {
-    background: rgb(225, 225, 225)
+    background: rgb(225, 225, 225);
 }
 
 .addBtn {
@@ -213,7 +212,6 @@ input {
 #addLogBackButton,
 #addServiceLogButton,
 #addLogResetInputFieldsButton,
-#addLogDeleteVehicleButton,
 #addLogSortLogsButton,
 #printPageButton {
     width: 9em;
@@ -332,6 +330,14 @@ input {
     overflow: auto;
 }
 
+.editVehicleNameMobileDisplay {
+    text-align: center;
+}
+
+.topLogActionButtons {
+    margin: 25px;
+}
+
 .underline {
     display: inline-block;
     vertical-align: middle;
@@ -396,11 +402,6 @@ input {
     #printPageButton {
         width: 7em;
     }
-    
-    #addLogDeleteVehicleButton {
-        width: 8em;
-    }
-
 }
 
 @media only screen and (max-width: 991px) {
@@ -431,7 +432,6 @@ input {
     #addServiceLogButton,
     #addLogResetInputFieldsButton,
     #printPageButton,
-    #addLogDeleteVehicleButton,
     #addLogSortLogsButton {
         width: 5em;
     }
@@ -474,7 +474,6 @@ input {
     #addLogBackButton,
     #addServiceLogButton,
     #addLogResetInputFieldsButton,
-    #addLogDeleteVehicleButton,
     #addLogSortLogsButton,
     #printPageButton {
         margin: 4px;
@@ -511,12 +510,17 @@ input {
         margin-top: 1em;
     }
 
-    .deleteBtn {
-        width: 9em;
-    }
-
     #editActionButton,
     #deleteActionButton {
+        width: 6em;
+    }
+
+    .editVehicleNameMobileDisplay {
+        text-align: left;
+    }
+
+    #editVehicleNameButton,
+    #addLogDeleteVehicleButton {
         width: 6em;
     }
 
@@ -531,6 +535,17 @@ input {
 
     #profilePicture {
         width: 55%;
+    }
+
+    .topLogActionButtons {
+        margin-left: -10px;
+        margin-right: -10px;
+        margin-bottom: 2rem;;
+    }
+
+    .topActionButtonsEditDeleteMobileDisplay {
+        margin-left: -10px;
+        margin-top: 4px;
     }
 
     .wrapword {

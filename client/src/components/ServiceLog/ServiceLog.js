@@ -45,9 +45,15 @@ const ServiceLog = props => {
         <div className="col-md-2 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Mileage: </strong></span>{mileage} miles</div>
         <div className="col-md-3 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Service: </strong></span>{service}</div>
         {
-          comment ? (
-            <div className="col-md-3 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Comments: </strong></span>{comment}</div>
-          ) : (
+          comment ?
+            (
+              <div className="col-md-3 logDetailsMobileDisplay">
+                <span className="showUnderMobileDisplay">
+                  <strong>Comments: </strong>
+                </span>
+                {comment}
+              </div>
+            ) : (
               <div className="col-md-3 logDetailsMobileDisplay"></div>
             )
         }

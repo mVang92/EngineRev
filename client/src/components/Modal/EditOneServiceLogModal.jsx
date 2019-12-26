@@ -47,7 +47,6 @@ const EditOneServiceLogModal = props => {
                                         />
                                     </div>
                                 </div>
-                                <br />
                                 <div className="row">
                                     <div className="col-md-3">
                                         <label><span className="required">*</span><strong>Mileage</strong></label>
@@ -63,7 +62,6 @@ const EditOneServiceLogModal = props => {
                                         />
                                     </div>
                                 </div>
-                                <br />
                                 <div className="row">
                                     <div className="col-md-3">
                                         <label><span className="required">*</span><strong>Service</strong></label>
@@ -79,7 +77,6 @@ const EditOneServiceLogModal = props => {
                                         />
                                     </div>
                                 </div>
-                                <br />
                                 <div className="row">
                                     <div className="col-md-3">
                                         <label><strong>Comments</strong></label>

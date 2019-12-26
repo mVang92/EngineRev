@@ -133,8 +133,8 @@ module.exports = {
     console.log("Hit removeOneVehicle");
     db.Vehicle
       .findOneAndUpdate(
-        { "vehicles._id": req.params.id },
-        { $pull: { vehicles: { _id: req.params.id } } }
+        { "vehicles._id": vehicleId },
+        { $pull: { vehicles: { _id: vehicleId } } }
       )
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
