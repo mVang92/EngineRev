@@ -3,7 +3,7 @@ import React from "react";
 export const NavLoggedOut = props => {
     return (
         <nav id="navBarLoggedOut" className="navbar navbar-expand-lg navbar-light">
-            <a id="applicationName" className="navbar-brand underline" href="/">
+            <a id="applicationName" className="navbar-brand" href="/">
                     CarSpace
                 </a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
