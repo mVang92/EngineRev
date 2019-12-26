@@ -43,17 +43,18 @@ class AccountDetails extends Component {
           </div>
           <div className="col-md-4">
             {
-              this.props.showUniqueUserId ? (
-                <button
-                  id="hideUniqueIdButton"
-                  title="Hide Unique Id"
-                  type="button"
-                  className="cancelBtn"
-                  onClick={this.props.hideUniqueUserIdToPage}
-                >
-                  Hide
+              this.props.showUniqueUserId ?
+                (
+                  <button
+                    id="hideUniqueIdButton"
+                    title="Hide Unique Id"
+                    type="button"
+                    className="cancelBtn"
+                    onClick={this.props.hideUniqueUserIdToPage}
+                  >
+                    Hide
                   </button>
-              ) : (
+                ) : (
                   <button
                     id="showUniqueIdButton"
                     title="Show Unique Id"
@@ -72,9 +73,10 @@ class AccountDetails extends Component {
           <div className="col-md-4"><label><strong>Vehicles On Record:</strong></label></div>
           <div className="col-md-4">
             {
-              this.props.loadingError ? (
-                <span className="text-danger">Error Loading Vehicle Count</span>
-              ) : (
+              this.props.loadingError ?
+                (
+                  <span className="text-danger">Error Loading Vehicle Count</span>
+                ) : (
                   <span>{this.props.vehicleCount}</span>
                 )
             }
@@ -196,7 +198,7 @@ class AccountDetails extends Component {
             <div className="col-md-4">
               <div className="row">
                 <div className="col-md-12"></div>
-                <br /><br />
+                <br />
                 <div className="col-md-12">
                   <button
                     id="submitNewPasswordButton"
