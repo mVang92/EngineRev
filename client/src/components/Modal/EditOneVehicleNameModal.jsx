@@ -14,8 +14,8 @@ const EditOneVehicleNameModal = props => {
                 <div className="accountModal modal-content">
                     <div className="modal-body modalShadow">
                         <div className="modalBody">
-                            <div className="modal-header text-danger text-center">
-                                <label><strong>Edit Vehicle Name</strong></label>
+                            <div className="modal-header text-danger">
+                                <label><strong>Edit Vehicle</strong></label>
                             </div>
                             <div className="modal-body">
                                 <div className="row">
@@ -66,22 +66,36 @@ const EditOneVehicleNameModal = props => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="modal-footer">
-                                <button
-                                    title="Cancel"
-                                    type="button"
-                                    className="cancelBtn"
-                                    onClick={props.hideEditOneVehicleNameModal}
-                                    data-dismiss="modal">
-                                    Cancel
-                                </button>
-                                <button
-                                    title="Save Vehicle Name"
-                                    id="confirmSaveEditVehicleNameButton"
-                                    className="cancelBtn"
-                                    type="submit">
-                                    Save
-                                </button>
+                            <div className="modal-footer noFlex">
+                                <div className="row">
+                                    <div className="col-md-8 bottomMarginMobileDisplay">
+                                        <button
+                                            id="addLogDeleteVehicleButton"
+                                            title="Delete This Vehicle"
+                                            type="button"
+                                            className="deleteBtn"
+                                            onClick={props.showDeleteOneVehicleModal}>
+                                            Delete Vehicle
+                                        </button>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <button
+                                            title="Cancel"
+                                            type="button"
+                                            className="cancelBtn"
+                                            onClick={props.hideEditOneVehicleNameModal}
+                                            data-dismiss="modal">
+                                            Cancel
+                                        </button>
+                                        <button
+                                            title="Save Vehicle Name"
+                                            id="confirmSaveEditVehicleNameButton"
+                                            className="cancelBtn"
+                                            type="submit">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

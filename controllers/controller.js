@@ -147,7 +147,7 @@ module.exports = {
     console.log("Hit removeOneServiceLog");
     db.Vehicle
       .findOneAndUpdate(
-        { "vehicles._id": ObjectId(vehicleId) },
+        { "vehicles._id": vehicleId },
         { $pull: { "vehicles.$.logs": { _id: req.params.id } } }
       )
       .then(result => res.json(result))
