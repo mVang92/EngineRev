@@ -559,7 +559,10 @@ export default class Log extends Component {
    * Display the modal to notify the user the vehicle has been deleted successfully
    */
   showDeleteOneVehicleModal = () => {
-    this.setState({ showDeleteOneVehicleModal: true });
+    this.setState({
+      showEditOneVehicleNameModal: false,
+      showDeleteOneVehicleModal: true
+    });
   };
 
   /**
@@ -819,6 +822,7 @@ export default class Log extends Component {
                   showEditOneVehicleNameModal={this.state.showEditOneVehicleNameModal}
                   hideEditOneVehicleNameModal={this.hideEditOneVehicleNameModal}
                   checkUserEnteredUpdatedVehicleNameInput={this.checkUserEnteredUpdatedVehicleNameInput}
+                  showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
                   handleChange={this.handleChange}
                   state={this.state}
                 />

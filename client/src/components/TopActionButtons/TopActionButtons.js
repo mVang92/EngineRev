@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import editIcon from "../../images/editIcon.png";
-import deleteIcon from "../../images/deleteIcon.png";
 
 class TopActionButtons extends Component {
     render() {
@@ -63,45 +61,25 @@ class TopActionButtons extends Component {
                             )
                     }
                 </div>
-                <div className="col-md-2"></div>
-                <div className="col-md-2"></div>
-                <div className="col-md-2 editVehicleNameMobileDisplay logButtonsMobileDisplay">
-                    <div className="row topActionButtonsEditDeleteMobileDisplay">
-                        {
-                            this.props.year ?
-                                (
-                                    <React.Fragment>
-                                        <div className="col-md-6">
-                                            <button
-                                                id="addLogDeleteVehicleButton"
-                                                title="Delete This Vehicle"
-                                                type="button"
-                                                className="deleteBtn"
-                                                onClick={this.props.showDeleteOneVehicleModal}>
-                                                <img id="deleteIcon" src={deleteIcon} alt="delete"></img>
-                                            </button>
-                                        </div>
-                                        <br /><br />
-                                        <div className="col-md-6">
-                                            <button
-                                                id="editVehicleNameButton"
-                                                title="Edit Vehicle Name"
-                                                type="button"
-                                                className="cancelBtn hideWhilePrinting"
-                                                onClick={this.props.showEditOneVehicleNameModal}>
-                                                <img id="editIcon" src={editIcon} alt="edit"></img>
-                                            </button>
-                                        </div>
-                                    </React.Fragment>
-                                ) : (
-                                    <React.Fragment>
-                                        <div className="col-md-6"></div>
-                                        <div className="col-md-6"></div>
-                                    </React.Fragment>
-                                )
-                        }
-                    </div>
+                <div className="col-md-2">
+                    {
+                        this.props.year ?
+                            (
+                                <button
+                                    id="editVehicleNameButton"
+                                    title="Edit Vehicle"
+                                    type="button"
+                                    className="cancelBtn hideWhilePrinting"
+                                    onClick={this.props.showEditOneVehicleNameModal}>
+                                    Edit Vehicle
+                                </button>
+                            ) : (
+                                null
+                            )
+                    }
                 </div>
+                <div className="col-md-2"></div>
+                <div className="col-md-2"></div>
             </div>
         );
     }

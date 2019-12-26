@@ -111,6 +111,10 @@ input {
     text-align: center;
 }
 
+.cancelBtn {
+    margin-right: 5px;
+}
+
 .addBtn,
 .resetButton,
 .cancelBtn,
@@ -145,7 +149,8 @@ input {
 
 .deleteBtn,
 #deleteActionButton {
-    background: rgb(255, 200, 200);
+    background: rgb(220, 64, 48);
+    color: white;
 }
 
 #deleteBtn {
@@ -213,6 +218,7 @@ input {
 #addServiceLogButton,
 #addLogResetInputFieldsButton,
 #addLogSortLogsButton,
+#editVehicleNameButton,
 #printPageButton {
     width: 9em;
 }
@@ -330,12 +336,12 @@ input {
     overflow: auto;
 }
 
-.editVehicleNameMobileDisplay {
-    text-align: center;
-}
-
 .topLogActionButtons {
     margin: 25px;
+}
+
+.noFlex {
+    display: initial;
 }
 
 .underline {
@@ -399,6 +405,7 @@ input {
     #addServiceLogButton,
     #addLogResetInputFieldsButton,
     #addLogSortLogsButton,
+    #editVehicleNameButton,
     #printPageButton {
         width: 7em;
     }
@@ -432,7 +439,8 @@ input {
     #addServiceLogButton,
     #addLogResetInputFieldsButton,
     #printPageButton,
-    #addLogSortLogsButton {
+    #addLogSortLogsButton,
+    #editVehicleNameButton {
         width: 5em;
     }
 }
@@ -475,6 +483,7 @@ input {
     #addServiceLogButton,
     #addLogResetInputFieldsButton,
     #addLogSortLogsButton,
+    #editVehicleNameButton,
     #printPageButton {
         margin: 4px;
         width: 9em;
@@ -515,13 +524,8 @@ input {
         width: 6em;
     }
 
-    .editVehicleNameMobileDisplay {
-        text-align: left;
-    }
-
-    #editVehicleNameButton,
     #addLogDeleteVehicleButton {
-        width: 6em;
+        width: 9em;
     }
 
     .userInputErrorMessage {
@@ -546,6 +550,10 @@ input {
     .topActionButtonsEditDeleteMobileDisplay {
         margin-left: -10px;
         margin-top: 4px;
+    }
+
+    .bottomMarginMobileDisplay {
+        margin-bottom: 1rem;
     }
 
     .wrapword {
