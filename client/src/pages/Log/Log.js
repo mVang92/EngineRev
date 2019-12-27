@@ -756,29 +756,19 @@ export default class Log extends Component {
                           <div className="col-md-12">
                             <div className="row removeRowMobileDisplay">
                               <div className="col-md-2 logDetailsMobileDisplay">
-                                <label>
-                                  <strong>Date</strong>
-                                </label>
+                                <label><strong>Date</strong></label>
                               </div>
                               <div className="col-md-2 logDetailsMobileDisplay">
-                                <label>
-                                  <strong>Mileage</strong>
-                                </label>
+                                <label><strong>Mileage</strong></label>
                               </div>
                               <div className="col-md-3 logDetailsMobileDisplay">
-                                <label>
-                                  <strong>Service</strong>
-                                </label>
+                                <label><strong>Service</strong></label>
                               </div>
                               <div className="col-md-3 logDetailsMobileDisplay">
-                                <label>
-                                  <strong>Comments</strong>
-                                </label>
+                                <label><strong>Comments</strong></label>
                               </div>
                               <div className="col-md-2 logDetailsMobileDisplay hideWhilePrinting">
-                                <label>
-                                  <strong>Actions</strong>
-                                </label>
+                                <label><strong>Actions</strong></label>
                               </div>
                             </div>
                             {
