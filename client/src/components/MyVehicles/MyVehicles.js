@@ -28,7 +28,7 @@ class MyVehicles extends Component {
                               vehicleData.vehicles.map(vehicle => (
                                 <div key={vehicle._id} className="row">
                                   <div className="col-md-2"></div>
-                                  <div id="vehicleList" title={vehicle.year + " " + vehicle.make + " " + vehicle.model} className="col-md-8">
+                                  <div title={vehicle.year + " " + vehicle.make + " " + vehicle.model} className="col-md-8">
                                     <Link to={{
                                       pathname: "/account/" + this.props.vehicleData._id + "/vehicle/" + vehicle._id,
                                       state: [
