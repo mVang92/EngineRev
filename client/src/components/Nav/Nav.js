@@ -231,7 +231,7 @@ export class Nav extends Component {
    * Display the success notification when the password confirmation email sends
    */
   sendPasswordResetEmailConfirmationSuccessNotification = () => {
-    toast.success(`Confirmation sent. Please check your email.`);
+    toast.success(`Password confirmation sent. Please check your email.`);
   };
 
   /**

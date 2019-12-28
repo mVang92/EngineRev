@@ -750,7 +750,6 @@ export default class Log extends Component {
                       this.state.vehicleServiceLogs.length === 0 ?
                         (
                           <div className="col-md-12 text-center text-danger">
-                            <hr className="hideWhilePrinting" />
                             <label><strong>No Service Logs on Record</strong></label>
                           </div>
                         ) : (

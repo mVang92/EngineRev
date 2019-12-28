@@ -14,20 +14,59 @@ const SignIn = props => {
                 <div className="modal-body modalShadow">
                     <form className="modalBody" onSubmit={props.handleSignIn}>
                         <div className="modal-header">
-                            <span><img id="createAccountLogo" src={createAccountLogo} alt="Create Account"></img>
-                                <label><strong>Sign-In to Your Account</strong></label>
+                            <span>
+                                <img
+                                    id="createAccountLogo"
+                                    src={createAccountLogo}
+                                    alt="account"
+                                />
+                                <label>
+                                    <strong>Sign-In to Your Account</strong>
+                                </label>
                             </span>
                         </div>
                         <div className="modal-body">
-                            <input id="emailInput" type="text" value={props.email} name="email" onChange={props.handleChange} placeholder="Email"></input>
+                            <input
+                                id="emailInput"
+                                type="text"
+                                value={props.email}
+                                name="email"
+                                onChange={props.handleChange}
+                                placeholder="Email"
+                                maxLength="128">
+                            </input>
                             <br /><br />
-                            <input id="passwordInput" type="password" value={props.password} name="password" onChange={props.handleChange} placeholder="Password"></input>
+                            <input
+                                id="passwordInput"
+                                type="password"
+                                value={props.password}
+                                name="password"
+                                onChange={props.handleChange}
+                                placeholder="Password"
+                                maxLength="128">
+                            </input>
                             <br /><br />
-                            <span id="forgotPassword" className="text-danger" onClick={props.showForgotPasswordModal}>Forgot Password?</span>
+                            <span
+                                id="forgotPassword"
+                                onClick={props.showForgotPasswordModal}>
+                                Forgot Password?
+                            </span>
                         </div>
                         <div className="modal-footer">
-                            <button id="closeSignInModal" type="button" className="btn btn-light" onClick={props.hideSignInModal} data-dismiss="modal">Close</button>
-                            <button id="signInButton" className="btn btn-light" type="submit">Sign In</button>
+                            <button
+                                id="closeSignInModal"
+                                type="button"
+                                className="btn btn-light"
+                                onClick={props.hideSignInModal}
+                                data-dismiss="modal">
+                                Close
+                            </button>
+                            <button
+                                id="signInButton"
+                                className="btn btn-light"
+                                type="submit">
+                                Sign In
+                            </button>
                         </div>
                     </form>
                 </div>

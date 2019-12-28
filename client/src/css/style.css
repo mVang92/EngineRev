@@ -360,6 +360,12 @@ input {
 
 #forgotPassword {
     cursor: pointer;
+    color: rgb(255, 0, 0);
+    transition-duration: 0.2s;
+}
+
+#forgotPassword:hover {
+    color: rgb(0, 0, 0);
 }
 
 .underline {
