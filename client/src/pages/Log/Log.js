@@ -723,7 +723,6 @@ export default class Log extends Component {
                       <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
                     </div>
                   </div>
-                  <hr />
                   <TopActionButtons
                     handlePrintPage={this.handlePrintPage}
                     changeSortOrder={this.changeSortOrder}
@@ -732,7 +731,8 @@ export default class Log extends Component {
                     vehicleServiceLogs={this.state.vehicleServiceLogs}
                     year={this.state.year}
                   />
-                  <div className="innerBox hideWhilePrinting">
+                  <hr />
+                  <div className="hideWhilePrinting">
                     <AddLog
                       year={this.state.year}
                       date={this.state.date}
@@ -743,18 +743,19 @@ export default class Log extends Component {
                       handleResetLogVehicleForm={this.handleResetLogVehicleForm}
                       checkUserEnteredServiceLogInput={this.checkUserEnteredServiceLogInput}
                     />
+                    <hr className="removeMobileDisplay"/>
                   </div>
                   <div className="row innerBox serviceLogMobileDisplay">
                     {
                       this.state.vehicleServiceLogs.length === 0 ?
                         (
                           <div className="col-md-12 text-center text-danger">
-                            <hr />
+                            <hr className="hideWhilePrinting" />
                             <label><strong>No Service Logs on Record</strong></label>
                           </div>
                         ) : (
                           <div className="col-md-12">
-                            <div className="row removeRowMobileDisplay">
+                            <div className="row removeMobileDisplay">
                               <div className="col-md-2 logDetailsMobileDisplay">
                                 <label><strong>Date</strong></label>
                               </div>

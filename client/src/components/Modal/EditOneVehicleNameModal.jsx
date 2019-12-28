@@ -14,7 +14,7 @@ const EditOneVehicleNameModal = props => {
                 <div className="accountModal modal-content">
                     <div className="modal-body modalShadow">
                         <div className="modalBody">
-                            <div className="row modal-header text-danger">
+                            <div className="row modal-header">
                                 <div className="col-md-12 text-center">
                                     <label><strong>Edit Vehicle</strong></label>
                                 </div>

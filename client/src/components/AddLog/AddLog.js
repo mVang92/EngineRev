@@ -59,11 +59,9 @@ class AddLog extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-2"></div>
-          <div className="col-md-2"></div>
-          <div className="col-md-2"></div>
-          <div className="col-md-2"></div>
-          <div className="col-md-2 logButtonsMobileDisplay">
+          <div className="col-md-3"></div>
+          <div className="col-md-3"></div>
+          <div className="col-md-3 addLogButtonsMobileDisplay">
             {
               this.props.year ?
                 (
@@ -73,21 +71,21 @@ class AddLog extends Component {
                     type="reset"
                     className="resetButton"
                     onClick={this.props.handleResetLogVehicleForm}>
-                    Reset Fields
+                    Reset
                   </button>
                 ) : (
                   <button
                     id="addLogResetInputFieldsButton"
-                    title="Reset Input Fields"
+                    title="Disabled"
                     type="reset"
                     className="resetButton"
                     disabled>
-                    Reset Fields
+                    Reset
                   </button>
                 )
             }
           </div>
-          <div className="col-md-2 logSubmitBtn logButtonsMobileDisplay">
+          <div className="col-md-3 logSubmitBtn addLogButtonsMobileDisplay">
             {
               this.props.year ?
                 (
@@ -101,7 +99,7 @@ class AddLog extends Component {
                 ) : (
                   <button
                     id="addServiceLogButton"
-                    title="Submit Service Log"
+                    title="Disabled"
                     className="addBtn"
                     disabled>
                     Submit Log

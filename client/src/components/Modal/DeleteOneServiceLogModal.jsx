@@ -20,13 +20,12 @@ const DeleteOneServiceLogModal = props => {
                             </div>
                             <div className="col-md-10 text-danger">
                                 <label><strong>Delete this service log?</strong></label>
-
                             </div>
                         </div>
                         <div className="modal-body">
                             <div className="row">
                                 <div className="col-md-3">
-                                    <strong>Date:</strong>
+                                    <label><strong>Date:</strong></label>
                                 </div>
                                 <div className="col-md-9">
                                     {props.state.serviceLogDate}
@@ -34,7 +33,7 @@ const DeleteOneServiceLogModal = props => {
                             </div>
                             <div className="row">
                                 <div className="col-md-3">
-                                    <strong>Mileage:</strong>
+                                    <label><strong>Mileage:</strong></label>
                                 </div>
                                 <div className="col-md-9">
                                     {props.state.serviceLogMileage}
@@ -42,7 +41,7 @@ const DeleteOneServiceLogModal = props => {
                             </div>
                             <div className="row">
                                 <div className="col-md-3">
-                                    <strong>Service:</strong>
+                                    <label><strong>Service:</strong></label>
                                 </div>
                                 <div className="col-md-9">
                                     {props.state.serviceLogService}
@@ -52,7 +51,7 @@ const DeleteOneServiceLogModal = props => {
                                 props.state.serviceLogComment ? (
                                     <div className="row">
                                         <div className="col-md-3">
-                                            <strong>Comments:</strong>
+                                            <label><strong>Comments:</strong></label>
                                         </div>
                                         <div className="col-md-9">
                                             {props.state.serviceLogComment}
