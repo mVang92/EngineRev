@@ -15,7 +15,6 @@ const ForgotPasswordModal = props => {
                         <div className="modal-header text-center">
                             <label><strong>Enter your email address to send a password reset confirmation.</strong></label>
                         </div>
-                        <hr />
                         <div className="modal-body">
                             <input id="emailInputForPasswordReset" type="text" value={props.email} name="email" onChange={props.handleChange} placeholder="Email"></input>
                             <br /><br />
