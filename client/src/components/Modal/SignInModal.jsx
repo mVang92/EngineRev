@@ -19,10 +19,12 @@ const SignIn = props => {
                             </span>
                         </div>
                         <hr />
-                        <div className="modal-body text-center">
+                        <div className="modal-body">
                             <input id="emailInput" type="text" value={props.email} name="email" onChange={props.handleChange} placeholder="Email"></input>
                             <br /><br />
                             <input id="passwordInput" type="password" value={props.password} name="password" onChange={props.handleChange} placeholder="Password"></input>
+                            <br /><br />
+                            <span id="forgotPassword" className="text-danger" onClick={props.showForgotPasswordModal}>Forgot Password?</span>
                         </div>
                         <div className="modal-footer">
                             <button id="closeSignInModal" type="button" className="btn btn-light" onClick={props.hideSignInModal} data-dismiss="modal">Close</button>

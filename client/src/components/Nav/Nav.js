@@ -3,6 +3,7 @@ import { NavLoggedIn, NavLoggedOut } from "../Nav";
 import SignInModal from "../Modal/SignInModal";
 import SignUpModal from "../Modal/SignUpModal";
 import SignOutModal from "../Modal/SignOutModal";
+import ForgotPasswordModal from "../Modal/ForgotPasswordModal";
 import { firebase, auth } from "../../firebase"
 import { toast } from "react-toastify";
 import API from "../../utils/API";
@@ -18,6 +19,7 @@ export class Nav extends Component {
       showSignInModal: false,
       showSignUpModal: false,
       showSignOutModal: false,
+      showForgotPasswordModal: false,
       originUrl: "",
       userId: "",
       email: "",
@@ -134,6 +136,21 @@ export class Nav extends Component {
   };
 
   /**
+   * Show the forgot password modal and close the sign in modal
+   */
+  handlePasswordReset = e => {
+    e.preventDefault();
+    auth
+      .doPasswordReset(this.state.email)
+      .then(() => {
+        this.sendPasswordResetEmailConfirmationSuccessNotification();
+        this.setState({ showForgotPasswordModal: false });
+      }).catch(error => {
+        this.sendPasswordResetEmailConfirmationFailNotification(error);
+      });
+  };
+
+  /**
    * Show the sign in modal
    */
   showSignInModal = () => {
@@ -165,6 +182,16 @@ export class Nav extends Component {
   };
 
   /**
+   * Show the forgot password modal
+   */
+  showForgotPasswordModal = () => {
+    this.setState({
+      showSignInModal: false,
+      showForgotPasswordModal: true
+    });
+  };
+
+  /**
    * Show the sign out modal
    */
   showSignOutModal = () => {
@@ -193,11 +220,34 @@ export class Nav extends Component {
   };
 
   /**
+   * Hide the forgot password modal
+   */
+  hideForgotPasswordModal = () => {
+    this.setState({ showForgotPasswordModal: false });
+  };
+
+  /**
+   * Display the success notification when the password confirmation email sends
+   */
+  sendPasswordResetEmailConfirmationSuccessNotification = () => {
+    toast.success(`Confirmation sent. Please check your email.`);
+  };
+
+  /**
    * Display an error notification when there is an error during login
    * 
    * @param err the error message to display to the user
    */
   loginFailNotification = err => {
+    toast.error(err.toString());
+  };
+
+  /**
+   * Display an error notification when there is an error sending password confirmation
+   * 
+   * @param err the error message to display to the user
+   */
+  sendPasswordResetEmailConfirmationFailNotification = err => {
     toast.error(err.toString());
   };
 
@@ -223,6 +273,7 @@ export class Nav extends Component {
           showSignInModal={this.state.showSignInModal}
           hideSignInModal={this.hideSignInModal}
           handleSignIn={this.handleSignIn}
+          showForgotPasswordModal={this.showForgotPasswordModal}
           handleChange={this.handleChange}
         />
         <SignUpModal
@@ -235,6 +286,12 @@ export class Nav extends Component {
           showSignOutModal={this.state.showSignOutModal}
           hideSignOutModal={this.hideSignOutModal}
           handleSignOut={this.handleSignOut}
+        />
+        <ForgotPasswordModal
+          showForgotPasswordModal={this.state.showForgotPasswordModal}
+          hideForgotPasswordModal={this.hideForgotPasswordModal}
+          handlePasswordReset={this.handlePasswordReset}
+          handleChange={this.handleChange}
         />
       </React.Fragment>
     );
