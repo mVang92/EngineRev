@@ -187,7 +187,8 @@ export class Nav extends Component {
   showForgotPasswordModal = () => {
     this.setState({
       showSignInModal: false,
-      showForgotPasswordModal: true
+      showForgotPasswordModal: true,
+      email: ""
     });
   };
 

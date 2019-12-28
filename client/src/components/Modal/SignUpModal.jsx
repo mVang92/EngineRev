@@ -18,7 +18,6 @@ const SignUp = props => {
                                 <label><strong>Sign-Up for a New Account</strong></label>
                             </span>
                         </div>
-                        <hr />
                         <div className="modal-body text-center">
                             <input id="emailInput" type="text" value={props.email} name="email" onChange={props.handleChange} placeholder="Email"></input>
                             <br /><br />
