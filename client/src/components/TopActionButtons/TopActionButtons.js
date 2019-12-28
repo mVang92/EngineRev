@@ -4,18 +4,18 @@ class TopActionButtons extends Component {
     render() {
         return (
             <div className="row topLogActionButtons hideWhilePrinting">
-                <div className="col-md-2 logButtonsMobileDisplay">
+                <div className="col-md-3 noWidth">
                     <a href="/">
                         <button
                             id="addLogBackButton"
-                            title="Back"
+                            title="Home"
                             type="button"
                             className="cancelBtn">
                             Back
                         </button>
                     </a>
                 </div>
-                <div className="col-md-2 printPageButton logButtonsMobileDisplay">
+                <div className="col-md-3 noWidth printPageButton">
                     {
                         this.props.vehicleServiceLogs.length > 0 ?
                             (
@@ -30,6 +30,7 @@ class TopActionButtons extends Component {
                             ) : (
                                 <button
                                     id="printPageButton"
+                                    title="Disabled"
                                     type="button"
                                     className="cancelBtn"
                                     disabled>
@@ -38,7 +39,7 @@ class TopActionButtons extends Component {
                             )
                     }
                 </div>
-                <div className="col-md-2">
+                <div className="col-md-3 noWidth">
                     {
                         this.props.vehicleServiceLogs.length > 1 ?
                             (
@@ -53,6 +54,7 @@ class TopActionButtons extends Component {
                             ) : (
                                 <button
                                     id="addLogSortLogsButton"
+                                    title="Disabled"
                                     type="button"
                                     className="cancelBtn"
                                     disabled>
@@ -61,7 +63,7 @@ class TopActionButtons extends Component {
                             )
                     }
                 </div>
-                <div className="col-md-2">
+                <div className="col-md-3 noWidth">
                     {
                         this.props.year ?
                             (
@@ -78,8 +80,6 @@ class TopActionButtons extends Component {
                             )
                     }
                 </div>
-                <div className="col-md-2"></div>
-                <div className="col-md-2"></div>
             </div>
         );
     }

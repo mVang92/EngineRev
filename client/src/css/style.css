@@ -336,12 +336,22 @@ input {
     overflow: auto;
 }
 
+.addLogButtonsMobileDisplay {
+    text-align: center;
+}
+
 .topLogActionButtons {
-    margin: 25px;
+    text-align: center;
+    margin-top: 25px;
 }
 
 .noFlex {
     display: initial;
+}
+
+#addVehicleButton,
+#resetVehicleInputFieldsButton {
+    width: 7em;
 }
 
 .underline {
@@ -426,11 +436,6 @@ input {
         font-weight: bold;
     }
 
-    #addVehicleButton,
-    #resetVehicleInputFieldsButton {
-        width: 7em;
-    }
-
     .actionButtonsMobileDisplay {
         max-width: 50%;
     }
@@ -441,7 +446,7 @@ input {
     #printPageButton,
     #addLogSortLogsButton,
     #editVehicleNameButton {
-        width: 5em;
+        width: 6em;
     }
 }
 
@@ -500,12 +505,11 @@ input {
         margin: initial;
     }
 
-    .logButtonsMobileDisplay,
     .logDetailsMobileDisplay {
         width: initial;
     }
 
-    .removeRowMobileDisplay {
+    .removeMobileDisplay {
         display: none;
     }
 
@@ -541,7 +545,9 @@ input {
         width: 55%;
     }
 
-    .topLogActionButtons {
+    .topLogActionButtons,
+    .addLogButtonsMobileDisplay {
+        text-align: initial;
         margin-left: -10px;
         margin-right: -10px;
         margin-bottom: 2rem;;
@@ -554,6 +560,10 @@ input {
 
     .bottomMarginMobileDisplay {
         margin-bottom: 1rem;
+    }
+
+    .noWidth {
+        width: initial;
     }
 
     .wrapword {

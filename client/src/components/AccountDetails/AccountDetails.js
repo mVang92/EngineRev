@@ -7,8 +7,18 @@ class AccountDetails extends Component {
 
     return (
       <div id="accountPage" className="mt-3 box">
+        <div className="row text-center">
+          <div className="col-md-12">
+            <label><strong>My Account</strong></label>
+          </div>
+        </div>
         <div className="row">
-          <div className="col-md-12 text-center"><label><strong>My Account</strong></label></div>
+          <div className="col-md-4">
+            <a title="Home" href="/"><button className="backHomeBtn">Back Home</button></a>
+            <br />
+          </div>
+          <div className="col-md-4"></div>
+          <div className="col-md-4"></div>
         </div>
         <hr />
         <div className="row">
@@ -213,8 +223,7 @@ class AccountDetails extends Component {
           </div>
         </form>
         <hr />
-        <a href="/"><button className="backHomeBtn">Back Home</button></a>
-        <br />
+        <a title="Home" href="/"><button className="backHomeBtn">Back Home</button></a>
       </div>
     );
   }
