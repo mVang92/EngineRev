@@ -358,6 +358,10 @@ input {
     width: 2rem;
 }
 
+#forgotPassword {
+    cursor: pointer;
+}
+
 .underline {
     display: inline-block;
     vertical-align: middle;
