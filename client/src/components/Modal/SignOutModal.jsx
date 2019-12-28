@@ -17,7 +17,11 @@ const SignOutModal = props => {
                     <div className="modalBody">
                         <div className="modal-header">
                             <div className="col-md-2 imageMobileDisplay">
-                                <img className="signOutImage" src={signOutImage} alt='warning' />
+                                <img
+                                    className="signOutImage"
+                                    src={signOutImage}
+                                    alt="warning"
+                                />
                             </div>
                             <div className="col-md-10 text-center">
                                 Are you sure you want to sign out?
