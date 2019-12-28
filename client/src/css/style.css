@@ -354,6 +354,10 @@ input {
     width: 7em;
 }
 
+.imageMobileDisplay {
+    width: 2rem;
+}
+
 .underline {
     display: inline-block;
     vertical-align: middle;
@@ -475,8 +479,7 @@ input {
         text-align: center;
     }
 
-    .signOutImage,
-    .warningImage {
+    .signOutImage {
         width: 5em;
     }
 
@@ -598,8 +601,7 @@ input {
         top: 0 !important;
     }
 
-    .signOutImage,
-    .warningImage {
+    .signOutImage {
         width: 3em;
     }
 }

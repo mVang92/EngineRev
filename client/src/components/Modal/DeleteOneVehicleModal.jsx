@@ -15,13 +15,14 @@ const DeleteOneVehicleModal = props => {
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
                     <div className="modalBody">
-                        <div className="modal-header">
-                            <div className="col-md-2 imageMobileDisplay">
-                                <img className="warningImage" src={warningImage} alt='warning' />
+                        <div className="row modal-header">
+                            <div className="col-md-2">
+                                <img className="removeMobileDisplay imageMobileDisplay" src={warningImage} alt='warning' />
                             </div>
-                            <div className="col-md-10 text-danger">
+                            <div className="col-md-8 text-danger text-center">
                                 <label><strong>Delete your {props.state.year} {props.state.make} {props.state.model}?</strong></label>
                             </div>
+                            <div className="col-md-2"></div>
                         </div>
                         <div className="modal-body text-danger">
                             {props.state.vehicleServiceLogs.length > 1 ?
