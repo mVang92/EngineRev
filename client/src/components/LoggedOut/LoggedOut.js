@@ -4,8 +4,8 @@ import recordLogsLogo from "../../images/recordLogs.png"
 import manageDataLogo from "../../images/manageData.png"
 import notLoggedInCarGif from "../../images/notLoggedInCarGif.gif"
 
-const LoggedOut = () =>
-  <React.Fragment>
+const LoggedOut = () => {
+  return (
     <div id="loggedOut" className="container">
       <div className="row">
         <div className="col-md-6">
@@ -44,7 +44,7 @@ const LoggedOut = () =>
         </div>
       </div>
     </div>
-
-  </React.Fragment>
+  );
+};
 
 export default LoggedOut;
