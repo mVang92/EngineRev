@@ -368,6 +368,22 @@ input {
     color: rgb(0, 0, 0);
 }
 
+.Toastify__toast--error {
+    background: rgba(255, 0, 0, 0.9);
+}
+
+.Toastify__toast--info {
+    background: rgba(32, 150, 255, 0.9);
+}
+
+.Toastify__toast--success {
+    background: rgba(32, 225, 64, 0.9);
+}
+
+.Toastify__toast--warning {
+    background: rgba(235, 200, 48, 0.9);
+}
+
 .underline {
     display: inline-block;
     vertical-align: middle;
