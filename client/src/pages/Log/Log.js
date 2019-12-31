@@ -343,7 +343,9 @@ export default class Log extends Component {
       service: this.state.serviceLogService,
       comment: this.state.serviceLogComment
     };
-    let serviceLogDateMemory = updatedServiceLogDateToRecord;
+    const serviceLogDateMemoryToNewDate = new Date(updatedServiceLogDateToRecord);
+    serviceLogDateMemoryToNewDate.setDate(serviceLogDateMemoryToNewDate.getDate() + 1);
+    let serviceLogDateMemory = serviceLogDateMemoryToNewDate.toLocaleDateString("en-US");
     let serviceLogMileageMemory = this.state.serviceLogMileage;
     let serviceLogServiceMemory = this.state.serviceLogService;
     API.updateOneLogForOneVehicle(vehicleId, serviceLogId, serviceLogToUpdate)
