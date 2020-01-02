@@ -87,7 +87,7 @@ export default class Account extends Component {
   };
 
   /**
-   * UYpdate the display name for the user
+   * Update the display name for the user
    */
   updateDisplayName = e => {
     e.preventDefault();
@@ -103,7 +103,7 @@ export default class Account extends Component {
         } else {
           this.updateDisplayNameWithNoNameSuccessNotification();
         }
-        this.setState({ newDisplayName: "" })
+        this.setState({ newDisplayName: "" });
       }).catch(error => {
         this.updateDisplayNameErrorNotification(error);
       });
@@ -165,7 +165,7 @@ export default class Account extends Component {
    */
   showUpdateProfilePictureModal = e => {
     e.preventDefault();
-    this.setState({ showUpdateProfilePictureModal: true })
+    this.setState({ showUpdateProfilePictureModal: true });
   };
 
   /**
@@ -173,7 +173,7 @@ export default class Account extends Component {
    */
   showUpdateDisplayNameModal = e => {
     e.preventDefault();
-    this.setState({ showUpdateDisplayNameModal: true })
+    this.setState({ showUpdateDisplayNameModal: true });
   };
 
   /**
