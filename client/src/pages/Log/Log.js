@@ -186,7 +186,11 @@ export default class Log extends Component {
       this.showUpdatedVehicleYearNanErrorModal();
     } else {
       if (this.state.updatedYear) {
-        updatedYear = this.state.updatedYear;
+        if (this.state.updatedYear < 1) {
+          updatedYear = this.state.year;
+        } else {
+          updatedYear = this.state.updatedYear;
+        }
       } else {
         updatedYear = this.state.year;
       }
@@ -745,7 +749,7 @@ export default class Log extends Component {
                       handleResetLogVehicleForm={this.handleResetLogVehicleForm}
                       checkUserEnteredServiceLogInput={this.checkUserEnteredServiceLogInput}
                     />
-                    <hr className="removeMobileDisplay"/>
+                    <hr className="removeMobileDisplay" />
                   </div>
                   <div className="row innerBox serviceLogMobileDisplay">
                     {

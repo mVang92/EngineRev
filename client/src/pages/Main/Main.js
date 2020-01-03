@@ -74,7 +74,7 @@ export default class App extends Component {
    */
   handleAddOneVehicle = newVehicle => {
     const id = this.state.uid;
-    if (isNaN(newVehicle.year)) {
+    if (isNaN(newVehicle.year) || (newVehicle.year < 1)) {
       this.showAddVehicleYearNanErrorModal();
     } else {
       API.addOneVehicle(id, newVehicle)
