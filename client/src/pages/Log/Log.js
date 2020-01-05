@@ -61,26 +61,6 @@ export default class Log extends Component {
   };
 
   /**
-   * Handle real-time changes
-   */
-  handleChange = e => {
-    let { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
-
-  /**
-   * Display the service log page only after clicking on the vehicle from the main page
-   * This prevents other users from redirecting to someone else's page
-   */
-  validatePermissionToRedirect = props => {
-    try {
-      props.location.state[0];
-    } catch (e) {
-      window.location.assign(window.location.origin);
-    };
-  };
-
-  /**
    * Display the service log information for the selected vehicle
    */
   componentDidMount = () => {
@@ -98,19 +78,23 @@ export default class Log extends Component {
   };
 
   /**
-   * Get the vehicle information for the selected vehicle
+   * Handle real-time changes
    */
-  getOneVehicle = () => {
-    API.getOneVehicleForUser(this.props.match.params.id)
-      .then(res => {
-        this.setState({
-          year: res.data[0].vehicles[0].year,
-          make: res.data[0].vehicles[0].make,
-          model: res.data[0].vehicles[0].model,
-          vehicleServiceLogs: res.data[0].vehicles[0].logs
-        });
-      })
-      .catch(err => this.loadServiceLogsFailNotification(err));
+  handleChange = e => {
+    let { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  /**
+   * Display the service log page only after clicking on the vehicle from the main page
+   * This prevents other users from redirecting to someone else's page
+   */
+  validatePermissionToRedirect = props => {
+    try {
+      props.location.state[0];
+    } catch (e) {
+      window.location.assign(window.location.origin);
+    };
   };
 
   /**
@@ -149,16 +133,48 @@ export default class Log extends Component {
   };
 
   /**
+   * Format the current date for comparison with service log date
+   */
+  setHoursAndSetDateForCurrentDate = () => {
+    const date = new Date();
+    date.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
+    date.setDate(date.getDate());
+    return date;
+  };
+
+  /**
+   * Format the service log date for comparison with the current date
+   */
+  setHoursAndSetDateForServiceLogDate = serviceLogDate => {
+    const date = new Date(serviceLogDate);
+    date.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
+    date.setDate(date.getDate() + 1);
+    return date;
+  };
+
+  /**
+   * Get the vehicle information for the selected vehicle
+   */
+  getOneVehicle = () => {
+    API.getOneVehicleForUser(this.props.match.params.id)
+      .then(res => {
+        this.setState({
+          year: res.data[0].vehicles[0].year,
+          make: res.data[0].vehicles[0].make,
+          model: res.data[0].vehicles[0].model,
+          vehicleServiceLogs: res.data[0].vehicles[0].logs
+        });
+      })
+      .catch(err => this.loadServiceLogsFailNotification(err));
+  };
+
+  /**
    * Go through a series of conditions to validate the updated service log being entered
    */
   checkUserEnteredServiceLogInput = e => {
     e.preventDefault();
-    const currentDate = new Date();
-    const loggedServiceDate = new Date(this.state.date);
-    currentDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
-    loggedServiceDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
-    currentDate.setDate(currentDate.getDate());
-    loggedServiceDate.setDate(loggedServiceDate.getDate() + 1);
+    const currentDate = this.setHoursAndSetDateForCurrentDate();
+    const loggedServiceDate = this.setHoursAndSetDateForServiceLogDate(this.state.date);
     if (isNaN(this.state.mileage)) {
       this.showMileageInputErrorModal();
     } else {
@@ -186,7 +202,7 @@ export default class Log extends Component {
       this.showUpdatedVehicleYearNanErrorModal();
     } else {
       if (this.state.updatedYear) {
-        if (this.state.updatedYear < 1) {
+        if (this.state.updatedYear < 1885) {
           updatedYear = this.state.year;
         } else {
           updatedYear = this.state.updatedYear;
@@ -206,6 +222,7 @@ export default class Log extends Component {
       } else {
         updatedModel = this.state.model;
       }
+
       let updatedVehicleName = {
         year: updatedYear,
         make: updatedMake,
@@ -223,9 +240,7 @@ export default class Log extends Component {
     const serviceLogDate = this.state.serviceLogDate;
     const serviceLogMileage = this.state.serviceLogMileage;
     const serviceLogService = this.state.serviceLogService;
-    const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0) > new Date().setHours(0, 0, 0, 0);
-    currentDate.setDate(currentDate.getDate());
+    const currentDate = this.setHoursAndSetDateForCurrentDate();
     const loggedServiceDate = new Date(serviceLogDate);
     const loggedServiceDateToUTC = this.createDateAsUTC(loggedServiceDate);
     loggedServiceDateToUTC.setDate(loggedServiceDateToUTC.getDate() + 1);
