@@ -25,7 +25,7 @@ class MyVehicles extends Component {
                         <div className="row innerBox">
                           <div className="col-md-12">
                             {
-                              vehicleData.vehicles.map(vehicle => (
+                              vehicleData.vehicles.sort((a, b) => { return a.year - b.year }).map(vehicle => (
                                 <div key={vehicle._id} className="row">
                                   <div className="col-md-2"></div>
                                   <div title={vehicle.year + " " + vehicle.make + " " + vehicle.model} className="col-md-8">
