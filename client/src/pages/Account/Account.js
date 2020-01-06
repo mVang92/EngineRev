@@ -135,27 +135,36 @@ export default class Account extends Component {
   updatePassword = e => {
     e.preventDefault();
     if (this.state.loggedin) {
-      if (this.state.newPassword === this.state.confirmNewPassword) {
-        this.state.user.updatePassword(this.state.confirmNewPassword)
-          .then(() => {
-            this.updatePasswordSuccessNotification();
-            this.setState({
-              newPassword: "",
-              confirmNewPassword: ""
-            })
-          }).catch(error => {
-            this.updatePasswordErrorNotification(error);
-            this.setState({
-              newPassword: "",
-              confirmNewPassword: ""
-            });
-          });
-      } else {
+      let isDomainCarspace = (this.state.userEmail).includes("carspace.com");
+      if (isDomainCarspace) {
+        this.unableToUpdatePasswordProductionTestUsers();
         this.setState({
           newPassword: "",
           confirmNewPassword: ""
         });
-        this.passwordsDoNotMatchErrorNotification();
+      } else {
+        if (this.state.newPassword === this.state.confirmNewPassword) {
+          this.state.user.updatePassword(this.state.confirmNewPassword)
+            .then(() => {
+              this.updatePasswordSuccessNotification();
+              this.setState({
+                newPassword: "",
+                confirmNewPassword: ""
+              })
+            }).catch(error => {
+              this.updatePasswordErrorNotification(error);
+              this.setState({
+                newPassword: "",
+                confirmNewPassword: ""
+              });
+            });
+        } else {
+          this.setState({
+            newPassword: "",
+            confirmNewPassword: ""
+          });
+          this.passwordsDoNotMatchErrorNotification();
+        };
       };
     };
   };
@@ -279,6 +288,13 @@ export default class Account extends Component {
    */
   updateProfilePictureErrorNotification = err => {
     toast.error(err.toString());
+  };
+
+  /**
+   * Display the error notification when updating the password to a production test user
+   */
+  unableToUpdatePasswordProductionTestUsers = () => {
+    toast.error(`You are not authorized to perform this action.`);
   };
 
   render() {
