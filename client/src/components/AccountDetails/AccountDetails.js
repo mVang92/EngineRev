@@ -130,6 +130,7 @@ class AccountDetails extends Component {
                 <div className="col-md-12">
                   <button
                     id="submitNewProfilePictureButton"
+                    title="Update Picture"
                     type="submit"
                     onClick={this.props.showUpdateProfilePictureModal}
                   >
@@ -164,6 +165,7 @@ class AccountDetails extends Component {
                 <div className="col-md-12">
                   <button
                     id="submitNewDisplayNameButton"
+                    title="Update Name"
                     type="submit"
                     onClick={this.props.showUpdateDisplayNameModal}
                   >
@@ -212,6 +214,7 @@ class AccountDetails extends Component {
                 <div className="col-md-12">
                   <button
                     id="submitNewPasswordButton"
+                    title="Update Password"
                     type="submit"
                     onClick={this.props.updatePassword}
                   >

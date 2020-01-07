@@ -74,14 +74,7 @@ class AddLog extends Component {
                     Reset
                   </button>
                 ) : (
-                  <button
-                    id="addLogResetInputFieldsButton"
-                    title="Disabled"
-                    type="reset"
-                    className="resetButton"
-                    disabled>
-                    Reset
-                  </button>
+                  null
                 )
             }
           </div>
@@ -95,15 +88,9 @@ class AddLog extends Component {
                     type="submit"
                     className="addBtn">
                     Submit Log
-                </button>
-                ) : (
-                  <button
-                    id="addServiceLogButton"
-                    title="Disabled"
-                    className="addBtn"
-                    disabled>
-                    Submit Log
                   </button>
+                ) : (
+                  null
                 )
             }
           </div>
