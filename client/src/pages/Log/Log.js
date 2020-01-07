@@ -57,7 +57,6 @@ export default class Log extends Component {
       showEditOneVehicleNameModal: false,
       showUpdatedVehicleYearNanErrorModal: false
     };
-    this.validatePermissionToRedirect(props);
   };
 
   /**
@@ -83,18 +82,6 @@ export default class Log extends Component {
   handleChange = e => {
     let { name, value } = e.target;
     this.setState({ [name]: value });
-  };
-
-  /**
-   * Display the service log page only after clicking on the vehicle from the main page
-   * This prevents other users from redirecting to someone else's page
-   */
-  validatePermissionToRedirect = props => {
-    try {
-      props.location.state[0];
-    } catch (e) {
-      window.location.assign(window.location.origin);
-    };
   };
 
   /**
@@ -740,9 +727,18 @@ export default class Log extends Component {
               <Container>
                 <div className="box">
                   <div id="vehicleLogInformation" className="row">
-                    <div className="col-md-12 text-center">
-                      <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
-                    </div>
+                    {
+                      this.state.year ?
+                        (
+                          <div className="col-md-12 text-center">
+                            <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
+                          </div>
+                        ) : (
+                          <div className="col-md-12 text-center text-danger">
+                            <label><h3>You do not have permission to view this content.</h3></label>
+                          </div>
+                        )
+                    }
                   </div>
                   <TopActionButtons
                     handlePrintPage={this.handlePrintPage}

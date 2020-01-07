@@ -45,7 +45,7 @@ export default class Account extends Component {
         this.setState({
           user: user,
           loggedin: true
-        })
+        });
         this.setState({
           userEmail: this.props.location.state[0],
           userAccountCreationTime: this.props.location.state[1],

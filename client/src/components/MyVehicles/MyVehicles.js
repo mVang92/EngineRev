@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 class MyVehicles extends Component {
   render() {
     const { vehicleData, vehicleCountForUser, actualEmailFromFirebase } = this.props;
-    const userEmail = actualEmailFromFirebase;
     return (
       <div className="text-center">
         {
@@ -30,10 +29,7 @@ class MyVehicles extends Component {
                                   <div className="col-md-2"></div>
                                   <div title={vehicle.year + " " + vehicle.make + " " + vehicle.model} className="col-md-8">
                                     <Link to={{
-                                      pathname: "/account/" + this.props.vehicleData._id + "/vehicle/" + vehicle._id,
-                                      state: [
-                                        userEmail
-                                      ]
+                                      pathname: "/account/" + this.props.vehicleData._id + "/vehicle/" + vehicle._id
                                     }}>
                                       <VehicleItem>
                                         <div className="text-dark">
