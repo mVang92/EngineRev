@@ -55,7 +55,8 @@ const DeleteOneVehicleModal = props => {
                                     id="confirmDeleteVehicleButton"
                                     className="deleteBtn"
                                     type="button"
-                                    onClick={props.handleDeleteOneVehicle}>
+                                    onClick={props.handleDeleteOneVehicle}
+                                    disabled={props.state.disableDeleteOneVehicleButton}>
                                     Delete Vehicle
                                 </button>
                             </Link>

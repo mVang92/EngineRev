@@ -55,7 +55,9 @@ export default class Log extends Component {
       showUpdatedLogErrorModal: false,
       showUpdatedFutureDateConfirmationModal: false,
       showEditOneVehicleNameModal: false,
-      showUpdatedVehicleYearNanErrorModal: false
+      showUpdatedVehicleYearNanErrorModal: false,
+      disableDeleteOneVehicleButton: true,
+      disableDeleteVehicleButtonTimer: ""
     };
   };
 
@@ -567,10 +569,17 @@ export default class Log extends Component {
    * Display the modal to notify the user the vehicle has been deleted successfully
    */
   showDeleteOneVehicleModal = () => {
+    clearInterval(this.state.disableDeleteVehicleButtonTimer);
     this.setState({
       showEditOneVehicleNameModal: false,
-      showDeleteOneVehicleModal: true
+      showDeleteOneVehicleModal: true,
+      disableDeleteOneVehicleButton: true
     });
+    this.setState({
+      disableDeleteVehicleButtonTimer: setTimeout(() => {
+        this.setState({ disableDeleteOneVehicleButton: false });
+      }, 5000)
+    })
   };
 
   /**
@@ -687,7 +696,11 @@ export default class Log extends Component {
    * Hide the successfully deleted one vehicle modal
    */
   hideDeleteOneVehicleModal = () => {
-    this.setState({ showDeleteOneVehicleModal: false });
+    this.setState({
+      showDeleteOneVehicleModal: false,
+      disableDeleteOneVehicleButton: true
+    });
+    clearInterval(this.state.disableDeleteVehicleButtonTimer);
   };
 
   /**
