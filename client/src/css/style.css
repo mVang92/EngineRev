@@ -421,6 +421,10 @@ input {
     right: 0;
 }
 
+#confirmDeleteVehicleButton:disabled {
+    background: gray;
+}
+
 @media print {
 	.hideWhilePrinting {
         display: none;
