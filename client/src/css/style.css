@@ -421,8 +421,13 @@ input {
     right: 0;
 }
 
+#confirmDeleteVehicleButton {
+    width: 125px;
+}
+
 #confirmDeleteVehicleButton:disabled {
-    background: gray;
+    background: rgb(128, 128, 128);
+    color: rgb(192, 192, 192);
 }
 
 @media print {
