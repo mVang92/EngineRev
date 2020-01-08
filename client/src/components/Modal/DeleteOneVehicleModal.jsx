@@ -57,7 +57,7 @@ const DeleteOneVehicleModal = props => {
                                     type="button"
                                     onClick={props.handleDeleteOneVehicle}
                                     disabled={props.state.disableDeleteOneVehicleButton}>
-                                    Delete Vehicle
+                                    {props.state.confirmDeleteVehicleButtonText}
                                 </button>
                             </Link>
                         </div>
