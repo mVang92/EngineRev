@@ -429,6 +429,25 @@ input {
 #confirmDeleteVehicleButton:disabled {
     background: rgb(128, 128, 128);
     color: rgb(192, 192, 192);
+    cursor: default;
+}
+
+#mainPageProfilePicture {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    border-radius: 7px;
+}
+
+.wrapword {
+    white-space: -moz-pre-wrap !important;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    white-space: -webkit-pre-wrap;
+    word-break: break-all;
+    white-space: normal;
 }
 
 @media print {
@@ -601,15 +620,10 @@ input {
         width: initial;
     }
 
-    .wrapword {
-        white-space: -moz-pre-wrap !important;
-        white-space: -pre-wrap;
-        white-space: -o-pre-wrap;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        white-space: -webkit-pre-wrap;
-        word-break: break-all;
-        white-space: normal;
+    #mainPageProfilePicture {
+        width: 4rem;
+        height: 4rem;
+        margin-bottom: 2rem;
     }
 }
     

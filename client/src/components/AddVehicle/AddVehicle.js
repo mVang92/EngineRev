@@ -6,7 +6,8 @@ class AddVehicle extends Component {
     super();
     this.state = {
       newVehicle: {},
-      showAddVehicleErrorModal: false
+      showAddVehicleErrorModal: false,
+      defaultProfilePicture: "https://image.flaticon.com/icons/png/512/64/64572.png"
     };
   };
 
@@ -50,7 +51,20 @@ class AddVehicle extends Component {
       <React.Fragment>
         <form id="field" onSubmit={this.handleSubmitAddOneVehicle.bind(this)}>
           <div className="text-center row">
-            <div className="col-md-6 wrapword">
+            {
+              this.props.userProfilePicture ?
+                (
+                  <div className="col-md-1 noWidth">
+                    <img id="mainPageProfilePicture" src={this.props.userProfilePicture}></img>
+                  </div>
+                ) : (
+                  <div className="col-md-1 noWidth">
+                    <img id="mainPageProfilePicture" src={this.state.defaultProfilePicture}></img>
+                  </div>
+                )
+            }
+
+            <div className="col-md-5 noWidth wrapword">
               <label><strong><span id="userEmail"></span></strong></label>
             </div>
             <div className="col-md-6">

@@ -21,7 +21,8 @@ export default class App extends Component {
       message: "",
       email: "",
       password: "",
-      actualEmailFromFirebase: ""
+      actualEmailFromFirebase: "",
+      userProfilePicture: ""
     };
   };
 
@@ -41,7 +42,8 @@ export default class App extends Component {
       if (user) {
         this.setState({
           loggedin: true,
-          actualEmailFromFirebase: user.email
+          actualEmailFromFirebase: user.email,
+          userProfilePicture: user.photoURL
         });
         const userUniqueId = user.uid;
         const userEmail = document.createTextNode(user.email);
@@ -159,6 +161,7 @@ export default class App extends Component {
               addVehicle={this.handleAddOneVehicle}
               vehicleCountForUser={this.handleAddVehicleCountForUser}
               actualEmailFromFirebase={this.state.actualEmailFromFirebase}
+              userProfilePicture={this.state.userProfilePicture}
             />
           </Container>
         ) : (
