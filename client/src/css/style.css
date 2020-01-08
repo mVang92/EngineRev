@@ -422,7 +422,7 @@ input {
 }
 
 #confirmDeleteVehicleButton {
-    width: 125px;
+    width: 130px;
 }
 
 #confirmDeleteVehicleButton:disabled {
