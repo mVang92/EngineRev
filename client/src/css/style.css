@@ -421,8 +421,9 @@ input {
     right: 0;
 }
 
-#confirmDeleteVehicleButton {
-    width: 9em;
+#confirmDeleteVehicleButton,
+#addLogDeleteVehicleButton {
+    width: 8em;
 }
 
 #confirmDeleteVehicleButton:disabled {
@@ -564,10 +565,6 @@ input {
     #editActionButton,
     #deleteActionButton {
         width: 6em;
-    }
-
-    #addLogDeleteVehicleButton {
-        width: 9em;
     }
 
     .userInputErrorMessage {
