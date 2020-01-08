@@ -9,6 +9,7 @@ const LoggedIn = props => {
         handleResetAddVehicleFields={props.handleResetAddVehicleFields}
         handleChange={props.handleChange}
         addVehicle={props.addVehicle}
+        userProfilePicture={props.userProfilePicture}
       />
       <hr />
       <MyVehicles
