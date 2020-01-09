@@ -269,13 +269,6 @@ export default class Account extends Component {
   };
 
   /**
-   * Display the success notification when the display name is updated successfully
-   */
-  updateDisplayNameWithNameSuccessNotification = updateDisplayName => {
-    toast.success(`Display name updated to ${updateDisplayName}. Please redirect to this page to take effect.`);
-  };
-
-  /**
    * Display the error notification when the new password and confirm passwords do not match
    */
   passwordsDoNotMatchErrorNotification = () => {

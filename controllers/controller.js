@@ -90,7 +90,7 @@ module.exports = {
   updateOneVehicleName: (req, res) => {
     console.log("Hit updateOneVehicleName");
     db.Vehicle
-      .update(
+      .updateOne(
         { "vehicles._id": vehicleId },
         {
           $set: {
@@ -110,7 +110,7 @@ module.exports = {
   updateOneLogForOneVehicle: (req, res) => {
     console.log("Hit updateOneLogForOneVehicle");
     db.Vehicle
-      .update(
+      .updateOne(
         { "vehicles._id": vehicleId },
         {
           $set: {
