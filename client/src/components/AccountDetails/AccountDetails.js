@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class AccountDetails extends Component {
   render() {
@@ -14,7 +15,9 @@ class AccountDetails extends Component {
         </div>
         <div className="row">
           <div className="col-md-4">
-            <a title="Home" href="/"><button className="backHomeBtn">Back Home</button></a>
+            <Link to={{ pathname: "/" }}>
+              <button className="backHomeBtn">Back Home</button>
+            </Link>
             <br />
           </div>
           <div className="col-md-4"></div>
@@ -226,7 +229,9 @@ class AccountDetails extends Component {
           </div>
         </form>
         <hr />
-        <a title="Home" href="/"><button className="backHomeBtn">Back Home</button></a>
+        <Link to={{ pathname: "/" }}>
+          <button className="backHomeBtn">Back Home</button>
+        </Link>
       </div>
     );
   }

@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
 import Container from "../../components/Container";
+import Loading from "../../components/Loading";
 import { firebase } from "../../firebase";
 import API from "../../utils/API";
 import AccountDetails from "../../components/AccountDetails";
-import NoAuthorization from "../../components/NoAuthorization";
 import UpdateProfilePictureModal from "../../components/Modal/UpdateProfilePictureModal";
 import UpdateDisplayNameModal from "../../components/Modal/UpdateDisplayNameModal";
+import UpdateProfilePictureSuccessModal from "../../components/Modal/UpdateProfilePictureSuccessModal";
+import UpdateDisplayNameSuccessModal from "../../components/Modal/UpdateDisplayNameSuccessModal";
 import { ToastContainer, toast } from "react-toastify";
 
 export default class Account extends Component {
@@ -14,6 +16,7 @@ export default class Account extends Component {
     super(props)
     this.state = {
       loggedin: false,
+      originUrl: window.location.origin,
       user: "",
       userEmail: "",
       userId: "",
@@ -31,15 +34,24 @@ export default class Account extends Component {
       showUniqueUserId: false,
       showMaskUniqueUserId: true,
       showUpdateProfilePictureModal: false,
-      showUpdateDisplayNameModal: false
+      showUpdateDisplayNameModal: false,
+      showUpdateProfilePictureSuccessModal: false,
+      showUpdateDisplayNameSuccessModal: false
     };
   };
 
   /**
-   * Grab the passed in states and set them to state, then get vehicle data
+   * Firebase onAuthStateChanged
    */
-  componentDidMount = () => {
+  componentWillMount = () => {
     Modal.setAppElement("body");
+    this.onAuthStateChanged();
+  };
+
+  /**
+   * Firebase onAuthStateChanged
+   */
+  onAuthStateChanged = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({
@@ -56,7 +68,7 @@ export default class Account extends Component {
         });
         this.getVehicleData();
       };
-    })
+    });
   };
 
   /**
@@ -97,13 +109,11 @@ export default class Account extends Component {
       user.updateProfile({
         displayName: this.state.newDisplayName
       }).then(() => {
-        this.setState({ showUpdateDisplayNameModal: false });
-        if (this.state.newDisplayName !== "") {
-          this.updateDisplayNameWithNameSuccessNotification(this.state.newDisplayName);
-        } else {
-          this.updateDisplayNameWithNoNameSuccessNotification();
-        }
-        this.setState({ newDisplayName: "" });
+        this.setState({
+          showUpdateDisplayNameModal: false,
+          newDisplayName: ""
+        });
+        this.showUpdateDisplayNameSuccessModal();
       }).catch(error => {
         this.updateDisplayNameErrorNotification(error);
       });
@@ -121,8 +131,7 @@ export default class Account extends Component {
       user.updateProfile({
         photoURL: this.state.newProfilePicture
       }).then(() => {
-        this.updateProfilePictureSuccessNotification();
-        this.setState({ newProfilePicture: "" });
+        this.showUpdateProfilePictureSuccessModal();
       }).catch(error => {
         this.updateProfilePictureErrorNotification(error);
       });
@@ -220,6 +229,39 @@ export default class Account extends Component {
   };
 
   /**
+   * Display the success modal after updating profile picture
+   */
+  showUpdateProfilePictureSuccessModal = () => {
+    this.setState({
+      showUpdateProfilePictureSuccessModal: true,
+      newProfilePicture: ""
+    });
+  };
+
+  /**
+   * Display the success modal after updating display name
+   */
+  showUpdateDisplayNameSuccessModal = () => {
+    this.setState({ showUpdateDisplayNameSuccessModal: true });
+  };
+
+  /**
+   * Hide the update profile picture success modal
+   */
+  hideUpdateProfilePictureSuccessModal = () => {
+    this.setState({ showUpdateProfilePictureSuccessModal: false });
+    window.location.assign(this.state.originUrl);
+  };
+
+  /**
+   * Hide the update display name success modal
+   */
+  hideUpdateDisplayNameSuccessModal = () => {
+    this.setState({ showUpdateDisplayNameSuccessModal: false });
+    window.location.assign(this.state.originUrl);
+  };
+
+  /**
    * Display the success notification when the password is updated successfully
    */
   updatePasswordSuccessNotification = () => {
@@ -231,13 +273,6 @@ export default class Account extends Component {
    */
   updateDisplayNameWithNameSuccessNotification = updateDisplayName => {
     toast.success(`Display name updated to ${updateDisplayName}. Please redirect to this page to take effect.`);
-  };
-
-  /**
-   * Display the success notification when the display name is updated successfully
-   */
-  updateProfilePictureSuccessNotification = () => {
-    toast.success(`Profile picture updated. Please redirect to this page to take effect.`);
   };
 
   /**
@@ -263,13 +298,6 @@ export default class Account extends Component {
    */
   updatePasswordErrorNotification = err => {
     toast.error(err.toString());
-  };
-
-  /**
-   * Display the success notification when the display name is updated successfully to no value
-   */
-  updateDisplayNameWithNoNameSuccessNotification = () => {
-    toast.success(`Display name updated. Please redirect to this page to take effect.`);
   };
 
   /**
@@ -341,9 +369,17 @@ export default class Account extends Component {
                 hideUpdateDisplayNameModal={this.hideUpdateDisplayNameModal}
                 newDisplayName={this.state.newDisplayName}
               />
+              <UpdateProfilePictureSuccessModal
+                showUpdateProfilePictureSuccessModal={this.state.showUpdateProfilePictureSuccessModal}
+                hideUpdateProfilePictureSuccessModal={this.hideUpdateProfilePictureSuccessModal}
+              />
+              <UpdateDisplayNameSuccessModal
+                showUpdateDisplayNameSuccessModal={this.state.showUpdateDisplayNameSuccessModal}
+                hideUpdateDisplayNameSuccessModal={this.hideUpdateDisplayNameSuccessModal}
+              />
             </React.Fragment>
           ) : (
-              <NoAuthorization />
+              <Loading />
             )
         }
       </React.Fragment>

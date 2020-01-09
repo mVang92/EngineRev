@@ -20,9 +20,11 @@ export const NavLoggedIn = props => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
-            <a id="applicationName" className="navbar-brand" href="/">
-                CarSpace
-            </a>
+            <Link to={{ pathname: "/" }}>
+                <span id="applicationName" className="navbar-brand">
+                    CarSpace
+                </span>
+            </Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>

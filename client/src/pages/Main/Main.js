@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import API from "../../utils/API";
 import AddVehicleYearNanErrorModal from "../../components/Modal/AddVehicleYearNanErrorModal";
 import Container from "../../components/Container";
+import Loading from "../../components/Loading";
 import LoggedOut from "../../components/LoggedOut";
 import LoggedIn from "../../components/LoggedIn";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,6 +16,7 @@ export default class App extends Component {
     this.state = {
       showAddVehicleYearNanErrorModal: false,
       loggedin: false,
+      pageLoaded: false,
       uid: "",
       vehicleData: [],
       vehicleCount: 0,
@@ -42,6 +44,7 @@ export default class App extends Component {
       if (user) {
         this.setState({
           loggedin: true,
+          pageLoaded: true,
           actualEmailFromFirebase: user.email,
           userProfilePicture: user.photoURL
         });
@@ -98,17 +101,6 @@ export default class App extends Component {
   };
 
   /**
-   * Display the number of vehicles in the database the user has
-   * 
-   * @param vehicleCount the number of vehicles in the database
-   */
-  handleAddVehicleCountForUser = vehicleCount => {
-    const vehicleCountToDisplay = document.createTextNode(vehicleCount);
-    document.getElementById("vehicleCountForUser").innerHTML = "";
-    document.getElementById("vehicleCountForUser").appendChild(vehicleCountToDisplay);
-  };
-
-  /**
    * Display the success notification when a vehicle is successfully added
    * 
    * @param year  the year of the vehicle
@@ -152,21 +144,27 @@ export default class App extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.loggedin ? (
-          <Container>
-            <LoggedIn
-              vehicleData={this.state.vehicleData}
-              handleChange={this.handleChange}
-              handleResetAddVehicleFields={this.handleResetAddVehicleFields}
-              addVehicle={this.handleAddOneVehicle}
-              vehicleCountForUser={this.handleAddVehicleCountForUser}
-              actualEmailFromFirebase={this.state.actualEmailFromFirebase}
-              userProfilePicture={this.state.userProfilePicture}
-            />
-          </Container>
-        ) : (
-            <LoggedOut />
-          )
+        {
+          this.state.loggedin ?
+            (
+              this.state.pageLoaded ?
+                (
+                  <Container>
+                    <LoggedIn
+                      vehicleData={this.state.vehicleData}
+                      handleChange={this.handleChange}
+                      handleResetAddVehicleFields={this.handleResetAddVehicleFields}
+                      addVehicle={this.handleAddOneVehicle}
+                      actualEmailFromFirebase={this.state.actualEmailFromFirebase}
+                      userProfilePicture={this.state.userProfilePicture}
+                    />
+                  </Container>
+                ) : (
+                  <Loading />
+                )
+            ) : (
+              <LoggedOut />
+            )
         }
         <AddVehicleYearNanErrorModal
           showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
