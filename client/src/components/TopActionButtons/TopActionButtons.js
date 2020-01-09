@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class TopActionButtons extends Component {
     render() {
         return (
             <div className="row topLogActionButtons hideWhilePrinting">
                 <div className="col-md-3 noWidth">
-                    <a href="/">
+                    <Link to={{ pathname: "/" }}>
                         <button
                             id="addLogBackButton"
                             title="Home"
@@ -13,7 +14,7 @@ class TopActionButtons extends Component {
                             className="cancelBtn">
                             Back
                         </button>
-                    </a>
+                    </Link>
                 </div>
                 <div className="col-md-3 noWidth printPageButton">
                     {

@@ -283,7 +283,7 @@ input {
 
 #applicationName {
     color: rgb(200, 200, 200);
-    padding-left: 1%;
+    padding-left: 1rem;
     transition-duration: 0.4s;
 }
 
@@ -433,10 +433,15 @@ input {
 }
 
 #mainPageProfilePicture {
-    width: 2rem;
-    height: 2rem;
+    border-radius: 50px;
+    width: 3rem;
+    height: 3rem;
     object-fit: cover;
-    border-radius: 7px;
+    margin-right: 5px;
+}
+
+#loadingScreen {
+    padding-top: 5rem;
 }
 
 .wrapword {
@@ -623,7 +628,6 @@ input {
     #mainPageProfilePicture {
         width: 4rem;
         height: 4rem;
-        margin-bottom: 2rem;
     }
 }
     

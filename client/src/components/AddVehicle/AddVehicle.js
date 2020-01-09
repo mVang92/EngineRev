@@ -54,22 +54,18 @@ class AddVehicle extends Component {
             {
               this.props.userProfilePicture ?
                 (
-                  <div className="col-md-1 noWidth">
-                    <img id="mainPageProfilePicture" src={this.props.userProfilePicture}></img>
+                  <div className="col-md-6 wrapword">
+                    <img id="mainPageProfilePicture" src={this.props.userProfilePicture} alt="You"></img>
+                    <label><strong><span id="userEmail"></span></strong></label>
                   </div>
                 ) : (
-                  <div className="col-md-1 noWidth">
-                    <img id="mainPageProfilePicture" src={this.state.defaultProfilePicture}></img>
+                  <div className="col-md-6 wrapword">
+                    <img id="mainPageProfilePicture" src={this.state.defaultProfilePicture} alt="You"></img>
+                    <label><strong><span id="userEmail"></span></strong></label>
                   </div>
                 )
             }
-
-            <div className="col-md-5 noWidth wrapword">
-              <label><strong><span id="userEmail"></span></strong></label>
-            </div>
-            <div className="col-md-6">
-              <label><strong>Vehicles on Record: <span id="vehicleCountForUser">0</span></strong></label>
-            </div>
+            <div className="col-md-6"></div>
           </div>
           <hr></hr>
           <div>

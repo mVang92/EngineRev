@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 class MyVehicles extends Component {
   render() {
-    const { vehicleData, vehicleCountForUser, actualEmailFromFirebase } = this.props;
+    const { vehicleData } = this.props;
     return (
       <div className="text-center">
         {
@@ -15,11 +15,19 @@ class MyVehicles extends Component {
                   vehicleData.vehicles.length ?
                     (
                       <React.Fragment>
-                        {vehicleCountForUser(vehicleData.vehicles.length)}
                         <div className="row">
-                          <div className="col-md-12">
-                            <label><strong>My Vehicles</strong></label>
-                          </div>
+                          {
+                            vehicleData.vehicles.length ?
+                              (
+                                <div className="col-md-12">
+                                  <label><strong>Vehicles on Record: {vehicleData.vehicles.length}</strong></label>
+                                </div>
+                              ) : (
+                                <div className="col-md-12">
+                                  <label><strong>Vehicles on Record:</strong></label>
+                                </div>
+                              )
+                          }
                         </div>
                         <div className="row innerBox">
                           <div className="col-md-12">

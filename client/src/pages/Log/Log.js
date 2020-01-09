@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { firebase } from "../../firebase"
 import Container from "../../components/Container";
+import Loading from "../../components/Loading";
 import AddLog from "../../components/AddLog";
 import TopActionButtons from "../../components/TopActionButtons";
 import ServiceLog from "../../components/ServiceLog";
@@ -26,6 +27,7 @@ export default class Log extends Component {
     this.state = {
       uid: "",
       loggedin: false,
+      pageLoaded: false,
       vehicle: [],
       vehicleId: "",
       make: "",
@@ -144,11 +146,13 @@ export default class Log extends Component {
 
   /**
    * Get the vehicle information for the selected vehicle
+   * then show the page after loading
    */
   getOneVehicle = () => {
     API.getOneVehicleForUser(this.props.match.params.id)
       .then(res => {
         this.setState({
+          pageLoaded: true,
           year: res.data[0].vehicles[0].year,
           make: res.data[0].vehicles[0].make,
           model: res.data[0].vehicles[0].model,
@@ -739,172 +743,177 @@ export default class Log extends Component {
         {
           this.state.loggedin ?
             (
-              <Container>
-                <div className="box">
-                  <div id="vehicleLogInformation" className="row">
-                    {
-                      this.state.year ?
-                        (
-                          <div className="col-md-12 text-center">
-                            <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
-                          </div>
-                        ) : (
-                          <div className="col-md-12 text-center text-danger">
-                            <label><h3>You do not have permission to view this content.</h3></label>
-                          </div>
-                        )
-                    }
-                  </div>
-                  <TopActionButtons
-                    handlePrintPage={this.handlePrintPage}
-                    changeSortOrder={this.changeSortOrder}
-                    showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
-                    showEditOneVehicleNameModal={this.showEditOneVehicleNameModal}
-                    vehicleServiceLogs={this.state.vehicleServiceLogs}
-                    year={this.state.year}
-                  />
-                  <hr />
-                  <div className="hideWhilePrinting">
-                    <AddLog
-                      year={this.state.year}
-                      date={this.state.date}
-                      mileage={this.state.mileage}
-                      service={this.state.service}
-                      comment={this.state.comment}
+              this.state.pageLoaded ?
+                (
+                  <Container>
+                    <div className="box">
+                      <div id="vehicleLogInformation" className="row">
+                        {
+                          this.state.year ?
+                            (
+                              <div className="col-md-12 text-center">
+                                <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
+                              </div>
+                            ) : (
+                              <div className="col-md-12 text-center text-danger">
+                                <label><h3>You do not have permission to view this content.</h3></label>
+                              </div>
+                            )
+                        }
+                      </div>
+                      <TopActionButtons
+                        handlePrintPage={this.handlePrintPage}
+                        changeSortOrder={this.changeSortOrder}
+                        showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
+                        showEditOneVehicleNameModal={this.showEditOneVehicleNameModal}
+                        vehicleServiceLogs={this.state.vehicleServiceLogs}
+                        year={this.state.year}
+                      />
+                      <hr />
+                      <div className="hideWhilePrinting">
+                        <AddLog
+                          year={this.state.year}
+                          date={this.state.date}
+                          mileage={this.state.mileage}
+                          service={this.state.service}
+                          comment={this.state.comment}
+                          handleChange={this.handleChange}
+                          handleResetLogVehicleForm={this.handleResetLogVehicleForm}
+                          checkUserEnteredServiceLogInput={this.checkUserEnteredServiceLogInput}
+                        />
+                        <hr className="removeMobileDisplay" />
+                      </div>
+                      <div className="row innerBox serviceLogMobileDisplay">
+                        {
+                          this.state.vehicleServiceLogs.length === 0 ?
+                            (
+                              <div className="col-md-12 text-center text-danger">
+                                <label><strong>No Service Logs on Record</strong></label>
+                              </div>
+                            ) : (
+                              <div className="col-md-12">
+                                <div className="row removeMobileDisplay">
+                                  <div className="col-md-2 logDetailsMobileDisplay">
+                                    <label><strong>Date</strong></label>
+                                  </div>
+                                  <div className="col-md-2 logDetailsMobileDisplay">
+                                    <label><strong>Mileage</strong></label>
+                                  </div>
+                                  <div className="col-md-3 logDetailsMobileDisplay">
+                                    <label><strong>Service</strong></label>
+                                  </div>
+                                  <div className="col-md-3 logDetailsMobileDisplay">
+                                    <label><strong>Comments</strong></label>
+                                  </div>
+                                  <div className="col-md-2 logDetailsMobileDisplay hideWhilePrinting">
+                                    <label><strong>Actions</strong></label>
+                                  </div>
+                                </div>
+                                {
+                                  this.state.sortVehicleServiceLogsMostRecent ?
+                                    (
+                                      this.sortServiceLogs().map(serviceLog => {
+                                        return (
+                                          <ServiceLog
+                                            key={serviceLog._id}
+                                            _id={serviceLog._id}
+                                            date={serviceLog.date}
+                                            mileage={serviceLog.mileage}
+                                            service={serviceLog.service}
+                                            comment={serviceLog.comment}
+                                            getServiceLogActionValue={this.getServiceLogActionValue}
+                                          />
+                                        )
+                                      })
+                                    ) : (
+                                      this.sortServiceLogs().map(serviceLog => {
+                                        return (
+                                          <ServiceLog
+                                            key={serviceLog._id}
+                                            _id={serviceLog._id}
+                                            date={serviceLog.date}
+                                            mileage={serviceLog.mileage}
+                                            service={serviceLog.service}
+                                            comment={serviceLog.comment}
+                                            getServiceLogActionValue={this.getServiceLogActionValue}
+                                          />
+                                        )
+                                      })
+                                    )
+                                }
+                              </div>
+                            )
+                        }
+                      </div>
+                    </div>
+                    <EditOneVehicleNameModal
+                      showEditOneVehicleNameModal={this.state.showEditOneVehicleNameModal}
+                      hideEditOneVehicleNameModal={this.hideEditOneVehicleNameModal}
+                      checkUserEnteredUpdatedVehicleNameInput={this.checkUserEnteredUpdatedVehicleNameInput}
+                      showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
                       handleChange={this.handleChange}
-                      handleResetLogVehicleForm={this.handleResetLogVehicleForm}
-                      checkUserEnteredServiceLogInput={this.checkUserEnteredServiceLogInput}
+                      state={this.state}
                     />
-                    <hr className="removeMobileDisplay" />
-                  </div>
-                  <div className="row innerBox serviceLogMobileDisplay">
-                    {
-                      this.state.vehicleServiceLogs.length === 0 ?
-                        (
-                          <div className="col-md-12 text-center text-danger">
-                            <label><strong>No Service Logs on Record</strong></label>
-                          </div>
-                        ) : (
-                          <div className="col-md-12">
-                            <div className="row removeMobileDisplay">
-                              <div className="col-md-2 logDetailsMobileDisplay">
-                                <label><strong>Date</strong></label>
-                              </div>
-                              <div className="col-md-2 logDetailsMobileDisplay">
-                                <label><strong>Mileage</strong></label>
-                              </div>
-                              <div className="col-md-3 logDetailsMobileDisplay">
-                                <label><strong>Service</strong></label>
-                              </div>
-                              <div className="col-md-3 logDetailsMobileDisplay">
-                                <label><strong>Comments</strong></label>
-                              </div>
-                              <div className="col-md-2 logDetailsMobileDisplay hideWhilePrinting">
-                                <label><strong>Actions</strong></label>
-                              </div>
-                            </div>
-                            {
-                              this.state.sortVehicleServiceLogsMostRecent ?
-                                (
-                                  this.sortServiceLogs().map(serviceLog => {
-                                    return (
-                                      <ServiceLog
-                                        key={serviceLog._id}
-                                        _id={serviceLog._id}
-                                        date={serviceLog.date}
-                                        mileage={serviceLog.mileage}
-                                        service={serviceLog.service}
-                                        comment={serviceLog.comment}
-                                        getServiceLogActionValue={this.getServiceLogActionValue}
-                                      />
-                                    )
-                                  })
-                                ) : (
-                                  this.sortServiceLogs().map(serviceLog => {
-                                    return (
-                                      <ServiceLog
-                                        key={serviceLog._id}
-                                        _id={serviceLog._id}
-                                        date={serviceLog.date}
-                                        mileage={serviceLog.mileage}
-                                        service={serviceLog.service}
-                                        comment={serviceLog.comment}
-                                        getServiceLogActionValue={this.getServiceLogActionValue}
-                                      />
-                                    )
-                                  })
-                                )
-                            }
-                          </div>
-                        )
-                    }
-                  </div>
-                </div>
-                <EditOneVehicleNameModal
-                  showEditOneVehicleNameModal={this.state.showEditOneVehicleNameModal}
-                  hideEditOneVehicleNameModal={this.hideEditOneVehicleNameModal}
-                  checkUserEnteredUpdatedVehicleNameInput={this.checkUserEnteredUpdatedVehicleNameInput}
-                  showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
-                  handleChange={this.handleChange}
-                  state={this.state}
-                />
-                <EditOneServiceLogModal
-                  checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
-                  showEditOneLogModal={this.state.showEditOneLogModal}
-                  hideEditOneServiceLogModal={this.hideEditOneServiceLogModal}
-                  handleChange={this.handleChange}
-                  state={this.state}
-                />
-                <UpdatedVehicleYearNanErrorModal
-                  showUpdatedVehicleYearNanErrorModal={this.state.showUpdatedVehicleYearNanErrorModal}
-                  hideUpdatedVehicleYearNanErrorModal={this.hideUpdatedVehicleYearNanErrorModal}
-                />
-                <FutureDateConfirmationModal
-                  handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
-                  showFutureDateConfirmationModal={this.state.showFutureDateConfirmationModal}
-                  hideFutureDateConfirmationModal={this.hideFutureDateConfirmationModal}
-                  state={this.state.date}
-                />
-                <UpdatedFutureDateConfirmationModal
-                  handleUpdateOneServiceLog={this.handleUpdateOneServiceLog}
-                  showUpdatedFutureDateConfirmationModal={this.state.showUpdatedFutureDateConfirmationModal}
-                  hideUpdatedFutureDateConfirmationModal={this.hideUpdatedFutureDateConfirmationModal}
-                  state={this.state}
-                />
-                <DeleteOneVehicleModal
-                  handleDeleteOneVehicle={this.handleDeleteOneVehicle}
-                  showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
-                  hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
-                  state={this.state}
-                />
-                <DeleteOneServiceLogModal
-                  handleDeleteOneServiceLog={this.handleDeleteOneServiceLog}
-                  showDeleteOneLogModal={this.state.showDeleteOneLogModal}
-                  hideDeleteOneServiceLogModal={this.hideDeleteOneServiceLogModal}
-                  state={this.state}
-                />
-                <AddLogErrorModal
-                  showAddLogErrorModal={this.state.showAddLogErrorModal}
-                  hideAddLogErrorModal={this.hideAddLogErrorModal}
-                  state={this.state}
-                />
-                <UpdateLogErrorModal
-                  showUpdatedLogErrorModal={this.state.showUpdatedLogErrorModal}
-                  hideUpdateLogErrorModal={this.hideUpdateLogErrorModal}
-                  state={this.state}
-                />
-                <MileageInputErrorModal
-                  showMileageInputErrorModal={this.state.showMileageInputErrorModal}
-                  hideMileageInputErrorModal={this.hideMileageInputErrorModal}
-                  state={this.state}
-                />
-                <UpdatedMileageInputErrorModal
-                  showUpdatedMileageInputErrorModal={this.state.showUpdatedMileageInputErrorModal}
-                  hideUpdatedMileageInputErrorModal={this.hideUpdatedMileageInputErrorModal}
-                  state={this.state}
-                />
-                <ToastContainer />
-              </Container>
+                    <EditOneServiceLogModal
+                      checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
+                      showEditOneLogModal={this.state.showEditOneLogModal}
+                      hideEditOneServiceLogModal={this.hideEditOneServiceLogModal}
+                      handleChange={this.handleChange}
+                      state={this.state}
+                    />
+                    <UpdatedVehicleYearNanErrorModal
+                      showUpdatedVehicleYearNanErrorModal={this.state.showUpdatedVehicleYearNanErrorModal}
+                      hideUpdatedVehicleYearNanErrorModal={this.hideUpdatedVehicleYearNanErrorModal}
+                    />
+                    <FutureDateConfirmationModal
+                      handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
+                      showFutureDateConfirmationModal={this.state.showFutureDateConfirmationModal}
+                      hideFutureDateConfirmationModal={this.hideFutureDateConfirmationModal}
+                      state={this.state.date}
+                    />
+                    <UpdatedFutureDateConfirmationModal
+                      handleUpdateOneServiceLog={this.handleUpdateOneServiceLog}
+                      showUpdatedFutureDateConfirmationModal={this.state.showUpdatedFutureDateConfirmationModal}
+                      hideUpdatedFutureDateConfirmationModal={this.hideUpdatedFutureDateConfirmationModal}
+                      state={this.state}
+                    />
+                    <DeleteOneVehicleModal
+                      handleDeleteOneVehicle={this.handleDeleteOneVehicle}
+                      showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
+                      hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
+                      state={this.state}
+                    />
+                    <DeleteOneServiceLogModal
+                      handleDeleteOneServiceLog={this.handleDeleteOneServiceLog}
+                      showDeleteOneLogModal={this.state.showDeleteOneLogModal}
+                      hideDeleteOneServiceLogModal={this.hideDeleteOneServiceLogModal}
+                      state={this.state}
+                    />
+                    <AddLogErrorModal
+                      showAddLogErrorModal={this.state.showAddLogErrorModal}
+                      hideAddLogErrorModal={this.hideAddLogErrorModal}
+                      state={this.state}
+                    />
+                    <UpdateLogErrorModal
+                      showUpdatedLogErrorModal={this.state.showUpdatedLogErrorModal}
+                      hideUpdateLogErrorModal={this.hideUpdateLogErrorModal}
+                      state={this.state}
+                    />
+                    <MileageInputErrorModal
+                      showMileageInputErrorModal={this.state.showMileageInputErrorModal}
+                      hideMileageInputErrorModal={this.hideMileageInputErrorModal}
+                      state={this.state}
+                    />
+                    <UpdatedMileageInputErrorModal
+                      showUpdatedMileageInputErrorModal={this.state.showUpdatedMileageInputErrorModal}
+                      hideUpdatedMileageInputErrorModal={this.hideUpdatedMileageInputErrorModal}
+                      state={this.state}
+                    />
+                    <ToastContainer />
+                  </Container>
+                ) : (
+                  <Loading />
+                )
             ) : (
               <NoAuthorization />
             )
