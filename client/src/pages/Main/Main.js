@@ -23,7 +23,6 @@ export default class App extends Component {
       message: "",
       email: "",
       password: "",
-      actualEmailFromFirebase: "",
       userProfilePicture: ""
     };
   };
@@ -45,7 +44,6 @@ export default class App extends Component {
         this.setState({
           loggedin: true,
           pageLoaded: true,
-          actualEmailFromFirebase: user.email,
           userProfilePicture: user.photoURL
         });
         const userUniqueId = user.uid;
@@ -155,7 +153,6 @@ export default class App extends Component {
                       handleChange={this.handleChange}
                       handleResetAddVehicleFields={this.handleResetAddVehicleFields}
                       addVehicle={this.handleAddOneVehicle}
-                      actualEmailFromFirebase={this.state.actualEmailFromFirebase}
                       userProfilePicture={this.state.userProfilePicture}
                     />
                   </Container>

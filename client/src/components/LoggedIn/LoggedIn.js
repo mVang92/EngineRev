@@ -15,7 +15,6 @@ const LoggedIn = props => {
       <MyVehicles
         vehicleData={props.vehicleData}
         vehicleCountForUser={props.vehicleCountForUser}
-        actualEmailFromFirebase={props.actualEmailFromFirebase}
       />
     </div>
   );
