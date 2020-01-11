@@ -23,7 +23,8 @@ export default class App extends Component {
       message: "",
       email: "",
       password: "",
-      userProfilePicture: ""
+      userProfilePicture: "",
+      defaultDisplayName: "CarSpace User"
     };
   };
 
@@ -33,6 +34,15 @@ export default class App extends Component {
   componentDidMount = () => {
     Modal.setAppElement("body");
     this.onAuthStateChanged();
+  };
+
+  /**
+   * Show the display name to the main page
+   */
+  showDisplayName = displayName => {
+    let displayNameToShow = document.createTextNode(displayName);
+    document.getElementById("displayName").innerHTML = "";
+    document.getElementById("displayName").appendChild(displayNameToShow);
   };
 
   /**
@@ -46,10 +56,13 @@ export default class App extends Component {
           pageLoaded: true,
           userProfilePicture: user.photoURL
         });
+        let displayName = user.displayName;
+        if (displayName) {
+          this.showDisplayName(displayName);
+        } else {
+          this.showDisplayName(this.state.defaultDisplayName);
+        }
         const userUniqueId = user.uid;
-        const userEmail = document.createTextNode(user.email);
-        document.getElementById("userEmail").innerHTML = "";
-        document.getElementById("userEmail").appendChild(userEmail);
         API.getAllVehiclesForUser(userUniqueId)
           .then(res =>
             this.setState({

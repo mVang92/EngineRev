@@ -25,7 +25,7 @@ class AccountDetails extends Component {
         </div>
         <hr />
         <div className="row">
-          <div className="col-md-4"><label><strong>Profile Picture:</strong></label></div>
+          <div className="col-md-4"></div>
           <div className="col-md-4 text-center">
             <img
               id="profilePicture"
@@ -37,14 +37,14 @@ class AccountDetails extends Component {
         </div>
         <br />
         <div className="row">
-          <div className="col-md-4"><label><strong>Email:</strong></label></div>
-          <div className="col-md-4">{this.props.userEmail}</div>
+          <div className="col-md-4"><label><strong>Display Name:</strong></label></div>
+          <div className="col-md-4">{this.props.userDisplayName}</div>
           <div className="col-md-4"></div>
         </div>
         <br />
         <div className="row">
-          <div className="col-md-4"><label><strong>Display Name:</strong></label></div>
-          <div className="col-md-4">{this.props.userDisplayName}</div>
+          <div className="col-md-4"><label><strong>Email:</strong></label></div>
+          <div className="col-md-4">{this.props.userEmail}</div>
           <div className="col-md-4"></div>
         </div>
         <br />

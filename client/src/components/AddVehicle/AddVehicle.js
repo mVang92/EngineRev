@@ -56,12 +56,12 @@ class AddVehicle extends Component {
                 (
                   <div className="col-md-6 wrapword">
                     <img id="mainPageProfilePicture" src={this.props.userProfilePicture} alt="You"></img>
-                    <label><strong><span id="userEmail"></span></strong></label>
+                    <label><strong><span id="displayName"></span></strong></label>
                   </div>
                 ) : (
                   <div className="col-md-6 wrapword">
                     <img id="mainPageProfilePicture" src={this.state.defaultProfilePicture} alt="You"></img>
-                    <label><strong><span id="userEmail"></span></strong></label>
+                    <label><strong><span id="displayName"></span></strong></label>
                   </div>
                 )
             }
