@@ -38,13 +38,13 @@ class AccountDetails extends Component {
         <br />
         <div className="row">
           <div className="col-md-4"><label><strong>Display Name:</strong></label></div>
-          <div className="col-md-4">{this.props.userDisplayName}</div>
+          <div className="col-md-4 wrapword">{this.props.userDisplayName}</div>
           <div className="col-md-4"></div>
         </div>
         <br />
         <div className="row">
           <div className="col-md-4"><label><strong>Email:</strong></label></div>
-          <div className="col-md-4">{this.props.userEmail}</div>
+          <div className="col-md-4 wrapword">{this.props.userEmail}</div>
           <div className="col-md-4"></div>
         </div>
         <br />
