@@ -322,56 +322,57 @@ export default class Account extends Component {
     return (
       <React.Fragment>
         {
-          this.state.loggedin ? (
-            <React.Fragment>
-              <ToastContainer />
-              <Container>
-                <AccountDetails
-                  handleChange={this.handleChange}
-                  userPhotoUrl={this.state.userPhotoUrl}
-                  userEmail={this.state.userEmail}
-                  userId={this.state.userId}
-                  userDisplayName={this.state.userDisplayName}
-                  showUniqueUserId={this.state.showUniqueUserId}
-                  showUniqueUserIdToPage={this.showUniqueUserIdToPage}
-                  showMaskUniqueUserId={this.state.showMaskUniqueUserId}
-                  hideUniqueUserIdToPage={this.hideUniqueUserIdToPage}
-                  loadingError={this.state.loadingError}
-                  vehicleCount={this.state.vehicleCount}
-                  userAccountCreationTime={this.state.userAccountCreationTime}
-                  userAccountLastSignIn={this.state.userAccountLastSignIn}
-                  updateDisplayName={this.updateDisplayName}
-                  newDisplayName={this.state.newDisplayName}
-                  updatePassword={this.updatePassword}
-                  newPassword={this.state.newPassword}
+          this.state.loggedin ?
+            (
+              <React.Fragment>
+                <ToastContainer />
+                <Container>
+                  <AccountDetails
+                    handleChange={this.handleChange}
+                    userPhotoUrl={this.state.userPhotoUrl}
+                    userEmail={this.state.userEmail}
+                    userId={this.state.userId}
+                    userDisplayName={this.state.userDisplayName}
+                    showUniqueUserId={this.state.showUniqueUserId}
+                    showUniqueUserIdToPage={this.showUniqueUserIdToPage}
+                    showMaskUniqueUserId={this.state.showMaskUniqueUserId}
+                    hideUniqueUserIdToPage={this.hideUniqueUserIdToPage}
+                    loadingError={this.state.loadingError}
+                    vehicleCount={this.state.vehicleCount}
+                    userAccountCreationTime={this.state.userAccountCreationTime}
+                    userAccountLastSignIn={this.state.userAccountLastSignIn}
+                    updateDisplayName={this.updateDisplayName}
+                    newDisplayName={this.state.newDisplayName}
+                    updatePassword={this.updatePassword}
+                    newPassword={this.state.newPassword}
+                    newProfilePicture={this.state.newProfilePicture}
+                    confirmNewPassword={this.state.confirmNewPassword}
+                    showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
+                    showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
+                  />
+                </Container>
+                <UpdateProfilePictureModal
+                  showUpdateProfilePictureModal={this.state.showUpdateProfilePictureModal}
+                  updateProfilePicture={this.updateProfilePicture}
+                  hideUpdateProfilePictureModal={this.hideUpdateProfilePictureModal}
                   newProfilePicture={this.state.newProfilePicture}
-                  confirmNewPassword={this.state.confirmNewPassword}
-                  showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
-                  showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
                 />
-              </Container>
-              <UpdateProfilePictureModal
-                showUpdateProfilePictureModal={this.state.showUpdateProfilePictureModal}
-                updateProfilePicture={this.updateProfilePicture}
-                hideUpdateProfilePictureModal={this.hideUpdateProfilePictureModal}
-                newProfilePicture={this.state.newProfilePicture}
-              />
-              <UpdateDisplayNameModal
-                showUpdateDisplayNameModal={this.state.showUpdateDisplayNameModal}
-                updateDisplayName={this.updateDisplayName}
-                hideUpdateDisplayNameModal={this.hideUpdateDisplayNameModal}
-                newDisplayName={this.state.newDisplayName}
-              />
-              <UpdateProfilePictureSuccessModal
-                showUpdateProfilePictureSuccessModal={this.state.showUpdateProfilePictureSuccessModal}
-                hideUpdateProfilePictureSuccessModal={this.hideUpdateProfilePictureSuccessModal}
-              />
-              <UpdateDisplayNameSuccessModal
-                showUpdateDisplayNameSuccessModal={this.state.showUpdateDisplayNameSuccessModal}
-                hideUpdateDisplayNameSuccessModal={this.hideUpdateDisplayNameSuccessModal}
-              />
-            </React.Fragment>
-          ) : (
+                <UpdateDisplayNameModal
+                  showUpdateDisplayNameModal={this.state.showUpdateDisplayNameModal}
+                  updateDisplayName={this.updateDisplayName}
+                  hideUpdateDisplayNameModal={this.hideUpdateDisplayNameModal}
+                  newDisplayName={this.state.newDisplayName}
+                />
+                <UpdateProfilePictureSuccessModal
+                  showUpdateProfilePictureSuccessModal={this.state.showUpdateProfilePictureSuccessModal}
+                  hideUpdateProfilePictureSuccessModal={this.hideUpdateProfilePictureSuccessModal}
+                />
+                <UpdateDisplayNameSuccessModal
+                  showUpdateDisplayNameSuccessModal={this.state.showUpdateDisplayNameSuccessModal}
+                  hideUpdateDisplayNameSuccessModal={this.hideUpdateDisplayNameSuccessModal}
+                />
+              </React.Fragment>
+            ) : (
               <Loading />
             )
         }
