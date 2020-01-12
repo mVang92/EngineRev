@@ -45,8 +45,9 @@ const UpdatedFutureDateConfirmationModal = props => {
                                 <div className="col-md-12">
                                     <label>
                                         {serviceDateToDisplay} is a future date.
-                                        This service log will appear in red text to symbolize a
-                                        service has been logged for the future. Are you sure you want to submit this?
+                                        This service log will appear in red to symbolize a
+                                        service has been logged for the future.
+                                        Are you sure you want to submit this?
                                     </label>
                                 </div>
                             </div>
