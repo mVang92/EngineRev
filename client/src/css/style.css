@@ -22,6 +22,8 @@ a {
 
 body {
     background: rgb(235, 235, 235);
+    background-image: linear-gradient(rgb(200, 200, 200), rgb(235, 235, 235));
+    background-repeat: no-repeat;
 }
 
 #loggedOut {
@@ -89,6 +91,7 @@ input {
 
 .box {
     background: rgb(245, 245, 245);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
     padding: 1em;
 }
 
@@ -360,12 +363,13 @@ input {
 
 #forgotPassword {
     cursor: pointer;
-    color: rgb(255, 0, 0);
+    color: rgb(200, 0, 0);
     transition-duration: 0.2s;
 }
 
 #forgotPassword:hover {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 0, 0);
+    transition-duration: 0.2s;
 }
 
 .Toastify__toast--error {
@@ -444,6 +448,14 @@ input {
     padding-top: 5rem;
 }
 
+.serviceLogFullDetails {
+    background: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
 .wrapword {
     white-space: -moz-pre-wrap !important;
     white-space: -pre-wrap;
@@ -466,7 +478,8 @@ input {
 
     .serviceLogFullDetails {
         font-weight: initial !important;
-        color: black !important;
+        padding: initial !important;
+        border-radius: initial !important;
     }
 }
 

@@ -26,20 +26,18 @@ const ServiceLog = props => {
 
   if (currentDateFormatted === serviceLogDateFormatted) {
     serviceLogFullDetails = {
-      color: "rgb(0, 150, 0)"
+      background: "rgb(200, 235, 255)"
     };
   };
 
   if (currentDate.getTime() < serviceLogDate.getTime()) {
     serviceLogFullDetails = {
-      color: "rgb(200, 32, 0)",
-      fontWeight: "bold"
+      background: "rgb(255, 200, 200)"
     };
   };
 
   return (
     <React.Fragment key={serviceLogId}>
-      <hr />
       <div className="row serviceLogFullDetails" style={serviceLogFullDetails}>
         <div className="col-md-2 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Date: </strong></span>{serviceLogDateFormatted}</div>
         <div className="col-md-2 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Mileage: </strong></span>{mileage} miles</div>
