@@ -16,7 +16,7 @@ class AccountDetails extends Component {
         <div className="row">
           <div className="col-md-4">
             <Link to={{ pathname: "/" }}>
-              <button className="backHomeBtn">Back Home</button>
+              <button className="backHomeBtn">Back</button>
             </Link>
             <br />
           </div>
@@ -26,11 +26,13 @@ class AccountDetails extends Component {
         <hr />
         <div className="row">
           <div id="scrollableProfilePictureAccountDetails" className="col-md-4 text-center">
-            <img
-              id="profilePicture"
-              src={this.props.userPhotoUrl}
-              alt="Invalid URL or Not Avaliable">
-            </img>
+            <a href={this.props.userPhotoUrl} target="_blank">
+              <img
+                id="profilePicture"
+                src={this.props.userPhotoUrl}
+                alt="Invalid URL or Not Avaliable">
+              </img>
+            </a>
           </div>
           <div className="col-md-8">
             <div className="row">
@@ -226,7 +228,7 @@ class AccountDetails extends Component {
         </form>
         <hr />
         <Link to={{ pathname: "/" }}>
-          <button className="backHomeBtn">Back Home</button>
+          <button className="backHomeBtn">Back</button>
         </Link>
       </div>
     );
