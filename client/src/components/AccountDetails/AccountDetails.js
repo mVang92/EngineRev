@@ -10,7 +10,7 @@ class AccountDetails extends Component {
       <div id="accountPage" className="mt-3 box">
         <div className="row text-center">
           <div className="col-md-12">
-            <label><strong>My Account</strong></label>
+            <label><h4>Account</h4></label>
           </div>
         </div>
         <div className="row">
@@ -25,29 +25,40 @@ class AccountDetails extends Component {
         </div>
         <hr />
         <div className="row">
-          <div className="col-md-4"></div>
-          <div className="col-md-4 text-center">
+          <div id="scrollableProfilePictureAccountDetails" className="col-md-4 text-center">
             <img
               id="profilePicture"
               src={this.props.userPhotoUrl}
               alt="Invalid URL or Not Avaliable">
             </img>
           </div>
-          <div className="col-md-4"></div>
+          <div className="col-md-8">
+            <div className="row">
+              <div className="col-md-5"><label><strong>Display Name:</strong></label></div>
+              <div className="col-md-7 wrapword">{this.props.userDisplayName}</div>
+            </div>
+            <br />
+            <div className="row">
+              <div className="col-md-5"><label><strong>Email:</strong></label></div>
+              <div className="col-md-7 wrapword">{this.props.userEmail}</div>
+            </div>
+            <br />
+            <div className="row">
+              <div className="col-md-5"><label><strong>Total Vehicles:</strong></label></div>
+              <div className="col-md-7">
+                {
+                  this.props.loadingError ?
+                    (
+                      <span className="text-danger">Error Loading Vehicle Count</span>
+                    ) : (
+                      <span>{this.props.vehicleCount}</span>
+                    )
+                }
+              </div>
+            </div>
+          </div>
         </div>
-        <br />
-        <div className="row">
-          <div className="col-md-4"><label><strong>Display Name:</strong></label></div>
-          <div className="col-md-4 wrapword">{this.props.userDisplayName}</div>
-          <div className="col-md-4"></div>
-        </div>
-        <br />
-        <div className="row">
-          <div className="col-md-4"><label><strong>Email:</strong></label></div>
-          <div className="col-md-4 wrapword">{this.props.userEmail}</div>
-          <div className="col-md-4"></div>
-        </div>
-        <br />
+        <hr />
         <div className="row">
           <div className="col-md-4"><label><strong>Unique User Id:</strong></label></div>
           <div className="col-md-4">
@@ -80,21 +91,6 @@ class AccountDetails extends Component {
                 )
             }
           </div>
-        </div>
-        <br />
-        <div className="row">
-          <div className="col-md-4"><label><strong>Vehicles On Record:</strong></label></div>
-          <div className="col-md-4">
-            {
-              this.props.loadingError ?
-                (
-                  <span className="text-danger">Error Loading Vehicle Count</span>
-                ) : (
-                  <span>{this.props.vehicleCount}</span>
-                )
-            }
-          </div>
-          <div className="col-md-4"></div>
         </div>
         <br />
         <div className="row">

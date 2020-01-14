@@ -106,7 +106,7 @@ input {
 }
 
 .required {
-    color: red;
+    color: rgb(255, 0, 0);
 }
 
 .resetButton,
@@ -331,7 +331,12 @@ input {
 }
 
 #profilePicture {
-    width: 75%;
+    width: 70%;
+}
+
+#scrollableProfilePictureAccountDetails {
+    max-height: 30rem;
+    overflow: auto;
 }
 
 #scrollableProfilePicture {
@@ -641,6 +646,10 @@ input {
     #mainPageProfilePicture {
         width: 4rem;
         height: 4rem;
+    }
+
+    #scrollableProfilePictureAccountDetails {
+        margin-bottom: 2rem;
     }
 }
     
