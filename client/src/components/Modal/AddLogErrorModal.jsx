@@ -23,27 +23,33 @@ const AddLogErrorModal = props => {
                                     <label><strong>Please fill in the missing fields:</strong></label>
                                 </div>
                                 <div className="col-md-12">
-                                    {props.state.date === "" ? (
-                                        <div className="text-danger"><strong>Date:</strong></div>
-                                    ) : (
-                                            <div>Date: <span className="text-success">{props.state.date}</span></div>
-                                        )
+                                    {
+                                        props.state.date === "" ?
+                                            (
+                                                <div className="text-danger"><strong>Date:</strong></div>
+                                            ) : (
+                                                <div>Date: <span className="text-success">{props.state.date}</span></div>
+                                            )
                                     }
                                 </div>
                                 <div className="col-md-12">
-                                    {props.state.mileage === "" ? (
-                                        <div className="text-danger"><strong>Mileage:</strong></div>
-                                    ) : (
-                                            <div>Mileage: <span className="text-success">{props.state.mileage}</span></div>
-                                        )
+                                    {
+                                        props.state.mileage === "" ?
+                                            (
+                                                <div className="text-danger"><strong>Mileage:</strong></div>
+                                            ) : (
+                                                <div>Mileage: <span className="text-success">{props.state.mileage}</span></div>
+                                            )
                                     }
                                 </div>
                                 <div className="col-md-12">
-                                    {props.state.service === "" ? (
-                                        <div className="text-danger"><strong>Service:</strong></div>
-                                    ) : (
-                                            <div>Service: <span className="text-success">{props.state.service}</span></div>
-                                        )
+                                    {
+                                        props.state.service === "" ?
+                                            (
+                                                <div className="text-danger"><strong>Service:</strong></div>
+                                            ) : (
+                                                <div>Service: <span className="text-success">{props.state.service}</span></div>
+                                            )
                                     }
                                 </div>
                                 <div className="col-md-12">
