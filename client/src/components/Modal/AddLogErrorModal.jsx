@@ -3,6 +3,12 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const AddLogErrorModal = props => {
+    let dateToShowFormatted = "";
+    if (props.state.date) {
+        const dateToShow = new Date(props.state.date);
+        dateToShow.setDate(dateToShow.getDate() + 1);
+        dateToShowFormatted = dateToShow.toLocaleDateString("en-US");
+    }
     return (
         <ReactModal
             isOpen={props.showAddLogErrorModal}
@@ -28,7 +34,7 @@ const AddLogErrorModal = props => {
                                             (
                                                 <div className="text-danger"><strong>Date:</strong></div>
                                             ) : (
-                                                <div>Date: <span className="text-success">{props.state.date}</span></div>
+                                                <div>Date: <span className="text-success">{dateToShowFormatted}</span></div>
                                             )
                                     }
                                 </div>

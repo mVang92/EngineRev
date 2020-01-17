@@ -25,27 +25,30 @@ const UpdateLogErrorModal = props => {
                                 </div>
                                 <div className="col-md-12">
                                     {
-                                        serviceLogDate === "" ? (
-                                            <div className="text-danger"><strong>Date:</strong></div>
-                                        ) : (
+                                        serviceLogDate === "" ?
+                                            (
+                                                <div className="text-danger"><strong>Date:</strong></div>
+                                            ) : (
                                                 <div>Date: <span className="text-success">{serviceLogDate}</span></div>
                                             )
                                     }
                                 </div>
                                 <div className="col-md-12">
                                     {
-                                        serviceLogMileage === "" ? (
-                                            <div className="text-danger"><strong>Mileage:</strong></div>
-                                        ) : (
+                                        serviceLogMileage === "" ?
+                                            (
+                                                <div className="text-danger"><strong>Mileage:</strong></div>
+                                            ) : (
                                                 <div>Mileage: <span className="text-success">{serviceLogMileage}</span></div>
                                             )
                                     }
                                 </div>
                                 <div className="col-md-12">
                                     {
-                                        serviceLogService === "" ? (
-                                            <div className="text-danger"><strong>Service:</strong></div>
-                                        ) : (
+                                        serviceLogService === "" ?
+                                            (
+                                                <div className="text-danger"><strong>Service:</strong></div>
+                                            ) : (
                                                 <div>Service: <span className="text-success">{serviceLogService}</span></div>
                                             )
                                     }
