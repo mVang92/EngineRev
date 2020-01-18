@@ -135,7 +135,7 @@ export default class App extends Component {
    * Display the info notification when the user resets the fields to add a vehicle
    */
   handleResetAddVehicleFields = () => {
-    toast.info(`Input Fields Reset`);
+    toast.info(`Input Fields Reset.`);
   };
 
   /**
