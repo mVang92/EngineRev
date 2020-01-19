@@ -751,7 +751,7 @@ export default class Log extends Component {
                         {
                           this.state.year ?
                             (
-                              <div className="col-md-12 text-center">
+                              <div className="col-md-12 text-center wrapword">
                                 <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
                               </div>
                             ) : (

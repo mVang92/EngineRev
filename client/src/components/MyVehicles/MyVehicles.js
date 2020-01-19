@@ -40,7 +40,7 @@ class MyVehicles extends Component {
                                       pathname: "/account/" + this.props.vehicleData._id + "/vehicle/" + vehicle._id
                                     }}>
                                       <VehicleItem>
-                                        <div className="text-dark">
+                                        <div className="text-dark wrapword">
                                           {vehicle.year} {vehicle.make} {vehicle.model}
                                         </div>
                                       </VehicleItem>

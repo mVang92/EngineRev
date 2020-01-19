@@ -22,7 +22,7 @@ a {
 
 body {
     background: rgb(235, 235, 235);
-    background-image: linear-gradient(rgb(200, 200, 200), rgb(235, 235, 235));
+    background-image: linear-gradient(rgb(192, 192, 192), rgb(235, 235, 235));
     background-repeat: no-repeat;
 }
 
@@ -64,7 +64,6 @@ input {
 
 .navbar {
     background: rgba(32, 32, 32, 0.9);
-    border-bottom: 1px solid rgb(220, 64, 48);
     padding: 2px;
     position: fixed;
     width: 100%;
@@ -91,7 +90,6 @@ input {
 
 .box {
     background: rgb(245, 245, 245);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
     padding: 1em;
 }
 
@@ -269,14 +267,15 @@ input {
 }
 
 .vehicleItemList {
+    background: rgb(235, 235, 235);
+    padding: 1rem;
     margin-bottom: 5px !important;
-    background: rgb(240, 240, 240);
-    transition-duration: 0.2s;
+    transition-duration: 0.1s;
 }
 
 .vehicleItemList:hover {
-    background: rgb(245, 245, 245);
-    transition-duration: 0.2s;
+    background: rgb(240, 240, 240);
+    transition-duration: 0.1s;
 }
 
 .Toastify__toast-container--top-right {
@@ -285,13 +284,13 @@ input {
 }
 
 #applicationName {
-    color: rgb(200, 200, 200);
+    color: rgb(220, 64, 48);
     padding-left: 1rem;
     transition-duration: 0.4s;
 }
 
 #applicationName:hover {
-    color: rgb(255, 255, 255);
+    color: rgb(255, 32, 32);
     transition-duration: 0.2s;
 }
 
@@ -442,7 +441,7 @@ input {
 }
 
 #mainPageProfilePicture {
-    border-radius: 50px;
+    border-radius: 50%;
     width: 3rem;
     height: 3rem;
     object-fit: cover;

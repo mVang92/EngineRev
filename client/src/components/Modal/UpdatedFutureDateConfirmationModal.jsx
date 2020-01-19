@@ -3,7 +3,6 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const UpdatedFutureDateConfirmationModal = props => {
-    // console.log(props)
     let checkThisServiceDate = props.state.updatedServiceLogDateToConfirm;
     const newDateCheckThisServiceDate = new Date(checkThisServiceDate);
     const serviceDateToUTC = new Date(
