@@ -1,7 +1,7 @@
 import React from "react";
 
 export const VehicleItem = props => (
-    <li className="list-group-item vehicleItemList">
+    <div className="vehicleItemList">
       {props.children}
-    </li>
+    </div>
 );
