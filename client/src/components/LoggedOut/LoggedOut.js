@@ -2,17 +2,17 @@ import React from "react";
 import createAccountLogo from "../../images/createAccount.png"
 import recordLogsLogo from "../../images/recordLogs.png"
 import manageDataLogo from "../../images/manageData.png"
-import notLoggedInCarGif from "../../images/notLoggedInCarGif.gif"
+import notLoggedInGif from "../../images/notLoggedInGif.gif"
 
 const LoggedOut = () => {
   return (
     <div id="loggedOut" className="container">
       <div className="row">
-        <div className="col-md-6">
+        <div id="heading" className="col-md-6">
           <label><h2>Easily record service records for your vehicles.</h2></label>
           <div className="row">
-            <div className="col-md-12 centerOnMobile">
-              <img id="notLoggedInCarGif" src={notLoggedInCarGif} alt="Create Account"></img>
+            <div className="col-md-12 text-center">
+              <img id="notLoggedInCarGif" src={notLoggedInGif} alt="Create Account"></img>
             </div>
           </div>
         </div>

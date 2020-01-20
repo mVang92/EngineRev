@@ -22,12 +22,19 @@ a {
 
 body {
     background: rgb(235, 235, 235);
-    background-image: linear-gradient(rgb(192, 192, 192), rgb(235, 235, 235));
+    background-image: linear-gradient(rgb(215, 215, 215), rgb(235, 235, 235));
     background-repeat: no-repeat;
 }
 
+#heading {
+    font-family: 'Chivo', sans-serif;
+}
+
 #loggedOut {
-    margin-top: 4em;
+    background: rgba(245, 245, 245, 0.8);
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin-top: 4rem;
     height: initial !important;
 }
 
@@ -94,8 +101,7 @@ input {
 }
 
 .innerBox {
-    margin: 10px;
-    padding: 1em;
+    padding: 1rem;
 }
 
 .commentsBox {
@@ -197,8 +203,11 @@ input {
     color: rgb(220, 64, 48);
 }
 
+#signOutNavButton {
+    color: rgb(128, 128, 128);
+}
+
 #accountNavButton,
-#signOutNavButton,
 #signInNavButton {
     color: rgb(200, 200, 200);
 }
@@ -220,7 +229,8 @@ input {
 #addLogResetInputFieldsButton,
 #addLogSortLogsButton,
 #editVehicleNameButton,
-#printPageButton {
+#printPageButton,
+#printPageViaDeleteButton {
     width: 9em;
 }
 
@@ -247,7 +257,7 @@ input {
 }
 
 #notLoggedInCarGif {
-    width: 55%;
+    width: 35%;
 }
 
 #createAccountLogo {
@@ -284,13 +294,13 @@ input {
 }
 
 #applicationName {
-    color: rgb(220, 64, 48);
+    color: rgb(220, 220, 220);
     padding-left: 1rem;
-    transition-duration: 0.4s;
+    transition-duration: 0.2s;
 }
 
 #applicationName:hover {
-    color: rgb(255, 32, 32);
+    color: rgb(255, 255, 255);
     transition-duration: 0.2s;
 }
 
@@ -497,7 +507,8 @@ input {
     #addLogResetInputFieldsButton,
     #addLogSortLogsButton,
     #editVehicleNameButton,
-    #printPageButton {
+    #printPageButton,
+    #printPageViaDeleteButton {
         width: 7em;
     }
 }
@@ -526,7 +537,8 @@ input {
     #addLogResetInputFieldsButton,
     #printPageButton,
     #addLogSortLogsButton,
-    #editVehicleNameButton {
+    #editVehicleNameButton,
+    #printPageViaDeleteButton {
         width: 6em;
     }
 }
@@ -548,10 +560,6 @@ input {
         width: 10%;
     }
 
-    #notLoggedInCarGif {
-        width: 40%;
-    }
-
     .centerOnMobile {
         text-align: center;
     }
@@ -569,7 +577,8 @@ input {
     #addLogResetInputFieldsButton,
     #addLogSortLogsButton,
     #editVehicleNameButton,
-    #printPageButton {
+    #printPageButton,
+    #printPageViaDeleteButton {
         margin: 4px;
         width: 9em;
         height: 2em;
@@ -649,6 +658,10 @@ input {
 
     #scrollableProfilePictureAccountDetails {
         margin-bottom: 2rem;
+    }
+
+    #loggedOut {
+        background: initial;
     }
 }
     

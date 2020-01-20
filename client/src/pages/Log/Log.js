@@ -396,7 +396,14 @@ export default class Log extends Component {
    * Show the print screen for the user to print all service logs
    */
   handlePrintPage = () => {
-    window.print();
+    if (this.state.showDeleteOneVehicleModal) {
+      this.setState({ showDeleteOneVehicleModal: false });
+      setTimeout(() => {
+        window.print();
+      }, 250);
+    } else {
+      window.print();
+    }
   };
 
   /**
@@ -584,7 +591,7 @@ export default class Log extends Component {
           disableDeleteOneVehicleButton: false,
           confirmDeleteVehicleButtonText: "Delete Vehicle"
         });
-      }, 3000)
+      }, 4000)
     });
   };
 
@@ -881,6 +888,7 @@ export default class Log extends Component {
                       handleDeleteOneVehicle={this.handleDeleteOneVehicle}
                       showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
                       hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
+                      handlePrintPage={this.handlePrintPage}
                       state={this.state}
                     />
                     <DeleteOneServiceLogModal

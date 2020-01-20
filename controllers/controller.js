@@ -112,14 +112,7 @@ module.exports = {
     db.Vehicle
       .updateOne(
         { "vehicles._id": vehicleId },
-        {
-          $set: {
-            "vehicles.$[].logs.$[logs].date": req.body.date,
-            "vehicles.$[].logs.$[logs].mileage": req.body.mileage,
-            "vehicles.$[].logs.$[logs].service": req.body.service,
-            "vehicles.$[].logs.$[logs].comment": req.body.comment,
-          }
-        },
+        { $set: { "vehicles.$[].logs.$[logs]": req.body } },
         { arrayFilters: [{ "logs._id": req.params.serviceLogId }] }
       )
       .then(result => res.json(result))
