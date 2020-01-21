@@ -398,6 +398,7 @@ export default class Log extends Component {
   handlePrintPage = () => {
     if (this.state.showDeleteOneVehicleModal) {
       this.setState({ showDeleteOneVehicleModal: false });
+      clearInterval(this.state.disableDeleteVehicleButtonTimer);
       setTimeout(() => {
         window.print();
       }, 250);
