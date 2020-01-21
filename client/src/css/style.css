@@ -577,11 +577,15 @@ input {
     #addLogResetInputFieldsButton,
     #addLogSortLogsButton,
     #editVehicleNameButton,
-    #printPageButton,
-    #printPageViaDeleteButton {
+    #printPageButton {
         margin: 4px;
         width: 9em;
         height: 2em;
+    }
+
+    #printPageViaDeleteButton {
+        margin: 4px;
+        width: 9em;
     }
 
     .logSubmitBtn,
