@@ -192,11 +192,13 @@ export default class Log extends Component {
     let updatedYear = "";
     let updatedMake = "";
     let updatedModel = "";
+    const date = new Date();
+    const futureYear = date.getFullYear() + 2;
     if (isNaN(this.state.updatedYear)) {
       this.showUpdatedVehicleYearNanErrorModal();
     } else {
       if (this.state.updatedYear) {
-        if (this.state.updatedYear < 1885) {
+        if ((this.state.updatedYear < 1885) || (this.state.updatedYear > futureYear)) {
           updatedYear = this.state.year;
         } else {
           updatedYear = this.state.updatedYear;
