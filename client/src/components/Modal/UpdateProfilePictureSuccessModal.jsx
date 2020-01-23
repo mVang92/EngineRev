@@ -20,6 +20,7 @@ const UpdateProfilePictureSuccessModal = props => {
                         </div>
                         <div className="modal-footer">
                             <button
+                                id="closeUpdateProfilePictureSuccessModalButton"
                                 title="Okay"
                                 type="button"
                                 className="cancelBtn"
