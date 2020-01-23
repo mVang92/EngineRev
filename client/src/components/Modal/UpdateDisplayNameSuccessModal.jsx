@@ -20,6 +20,7 @@ const UpdateDisplayNameSuccessModal = props => {
                         </div>
                         <div className="modal-footer">
                             <button
+                                id="closeUpdateDisplayNameSuccessModalButton"
                                 title="Okay"
                                 type="button"
                                 className="cancelBtn"

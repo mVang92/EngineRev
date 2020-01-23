@@ -30,7 +30,7 @@ const UpdateDisplayNameModal = props => {
                         }
                         <div className="modal-footer">
                             <button
-                                id="closeMyAccountModalButton"
+                                id="closeUpdateDisplayNameModalButton"
                                 title="No"
                                 type="button"
                                 className="cancelBtn"
@@ -39,7 +39,7 @@ const UpdateDisplayNameModal = props => {
                                 No
                             </button>
                             <button
-                                id="closeMyAccountModalButton"
+                                id="confirmUpdateDisplayNameButton"
                                 title="Yes"
                                 type="button"
                                 className="cancelBtn"

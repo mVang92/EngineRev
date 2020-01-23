@@ -37,12 +37,12 @@ class AccountDetails extends Component {
           <div className="col-md-8">
             <div className="row">
               <div className="col-md-5"><label><strong>Display Name:</strong></label></div>
-              <div className="col-md-7 wrapword">{this.props.userDisplayName}</div>
+              <div id="accountPageUserDisplayName" className="col-md-7 wrapword">{this.props.userDisplayName}</div>
             </div>
             <br />
             <div className="row">
               <div className="col-md-5"><label><strong>Email:</strong></label></div>
-              <div className="col-md-7 wrapword">{this.props.userEmail}</div>
+              <div id="accountPageUserEmail" className="col-md-7 wrapword">{this.props.userEmail}</div>
             </div>
             <br />
             <div className="row">
@@ -51,9 +51,9 @@ class AccountDetails extends Component {
                 {
                   this.props.loadingError ?
                     (
-                      <span className="text-danger">Error Loading Vehicle Count</span>
+                      <span id="accountPageVehicleCount" className="text-danger">Error Loading Vehicle Count</span>
                     ) : (
-                      <span>{this.props.vehicleCount}</span>
+                      <span id="accountPageVehicleCount">{this.props.vehicleCount}</span>
                     )
                 }
               </div>
@@ -114,6 +114,7 @@ class AccountDetails extends Component {
               <div className="row">
                 <div className="col-md-12">
                   <input
+                    id="newProfilePictureInput"
                     type="text"
                     ref="newProfilePicture"
                     onChange={this.props.handleChange}
@@ -150,6 +151,7 @@ class AccountDetails extends Component {
               <div className="row">
                 <div className="col-md-12">
                   <input
+                    id="newDisplayNameInput"
                     type="text"
                     ref="newDisplayName"
                     onChange={this.props.handleChange}
@@ -185,6 +187,7 @@ class AccountDetails extends Component {
               <div className="row">
                 <div className="col-md-12">
                   <input
+                    id="newPasswordInput"
                     type="password"
                     ref="newPassword"
                     onChange={this.props.handleChange}
@@ -197,6 +200,7 @@ class AccountDetails extends Component {
                 <br /><br />
                 <div className="col-md-12">
                   <input
+                    id="confirmNewPasswordInput"
                     type="password"
                     ref="confirmNewPassword"
                     onChange={this.props.handleChange}

@@ -41,7 +41,7 @@ const UpdateProfilePictureModal = props => {
                         }
                         <div className="modal-footer">
                             <button
-                                id="closeMyAccountModalButton"
+                                id="closeUpdatePictureModalButton"
                                 title="No"
                                 type="button"
                                 className="cancelBtn"
@@ -50,7 +50,7 @@ const UpdateProfilePictureModal = props => {
                                 No
                             </button>
                             <button
-                                id="closeMyAccountModalButton"
+                                id="confirmUpdatePictureButton"
                                 title="Yes"
                                 type="button"
                                 className="cancelBtn"
