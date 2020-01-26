@@ -8,4 +8,6 @@ git checkout mv/features &&
 git merge master &&
 git checkout mv/optimizeForTesting &&
 git merge master &&
+git checkout mv/cleanup &&
+git merge master &&
 git checkout master
