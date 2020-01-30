@@ -24,7 +24,7 @@ const UpdatedFutureDateConfirmationModal = props => {
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
-            closeTimeoutMS={150}
+            closeTimeoutMS={0}
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
