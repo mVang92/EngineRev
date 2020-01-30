@@ -8,10 +8,6 @@ body {
     font-family: "Lato", sans-serif;
 }
 
-#root {
-    height: 100%;
-}
-
 .container {
     height: 100%;
 }
@@ -24,6 +20,11 @@ body {
     background: rgb(235, 235, 235);
     background-image: linear-gradient(rgb(96, 96, 96), rgb(235, 235, 235));
     background-repeat: no-repeat;
+}
+
+#carSpaceLogo {
+    max-width: 10rem;
+    border-radius: 10%;
 }
 
 #heading {
@@ -82,7 +83,7 @@ input {
 
 #vehicleLogInformation,
 #field {
-    margin-top: 4em;
+    margin-top: 3em;
 }
 
 .navbar-nav {
@@ -90,13 +91,16 @@ input {
     right: 0;
 }
 
-.jumbotron {
-    margin-top: 10px;
+#aboutCarspaceContainer {
+    background: rgb(245, 245, 245);
+    padding: 1em;
+    margin-bottom: 1rem;
 }
 
 .box {
     background: rgb(245, 245, 245);
     padding: 1em;
+    margin-bottom: 4rem;
 }
 
 .innerBox {
@@ -473,6 +477,35 @@ input {
     margin-right: 0px;
 }
 
+#footer {
+    background: rgba(48, 48, 48, 0.9);
+    padding: 0.5rem;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+#footerAboutLink {
+    font-size: 14px;
+    text-align: center;
+}
+
+.footerAboutLink {
+    color: rgb(220, 64, 48);
+}
+
+#footerUpdatesLink,
+#footerSuggestionsLink,
+#footerHelpLink {
+    color: rgb(200, 200, 200);
+    font-size: 14px;
+    text-align: center;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
 .wrapword {
     white-space: -moz-pre-wrap !important;
     white-space: -pre-wrap;
@@ -556,6 +589,10 @@ input {
 
     .container {
         max-width: 100%;
+    }
+
+    .box {
+        margin-bottom: 7rem;
     }
 
     #addVehicleButton {
@@ -651,6 +688,10 @@ input {
 
     .bottomMarginMobileDisplay {
         margin-bottom: 1rem;
+    }
+
+    .largeBottomMarginMobileDisplay {
+        margin-bottom: 8rem;
     }
 
     .noWidth {

@@ -160,7 +160,7 @@ export default class Log extends Component {
             vehicleServiceLogs: res.data[0].vehicles[0].logs
           });
         } catch (e) {
-          this.setState({ pageLoaded: true })
+          this.setState({ pageLoaded: true });
         };
       })
       .catch(err => this.loadServiceLogsFailNotification(err));
@@ -407,7 +407,7 @@ export default class Log extends Component {
       clearInterval(this.state.disableDeleteVehicleButtonTimer);
       setTimeout(() => {
         window.print();
-      }, 250);
+      }, 10);
     } else {
       window.print();
     }

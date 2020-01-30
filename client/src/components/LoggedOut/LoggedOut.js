@@ -6,14 +6,14 @@ import notLoggedIn from "../../images/notLoggedIn.png"
 
 const LoggedOut = () => {
   return (
-    <div>
+    <React.Fragment>
       <div className="row section noMarginDesktopDisplay">
         <div id="heading" className="col-md-12 text-center">
           <div><label><h3>Easily record service records for your vehicles</h3></label></div>
           <div><img id="notLoggedInMainImage" src={notLoggedIn} alt="Create Account"></img></div>
         </div>
       </div>
-      <div className="row section noMarginDesktopDisplay">
+      <div className="row section noMarginDesktopDisplay largeBottomMarginMobileDisplay">
         <div className="col-md-12">
           <div className="mt-3">
             <div className="row">
@@ -51,7 +51,7 @@ const LoggedOut = () => {
           </div>
         </div>
       </div>
-    </div >
+    </React.Fragment>
   );
 };
 

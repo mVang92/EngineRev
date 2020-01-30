@@ -8,7 +8,7 @@ const EditOneVehicleNameModal = props => {
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
-            closeTimeoutMS={150}
+            closeTimeoutMS={0}
         >
             <form onSubmit={props.checkUserEnteredUpdatedVehicleNameInput}>
                 <div className="accountModal modal-content">

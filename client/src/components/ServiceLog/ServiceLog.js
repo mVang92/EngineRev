@@ -26,7 +26,7 @@ const ServiceLog = props => {
 
   if (currentDateFormatted === serviceLogDateFormatted) {
     serviceLogFullDetails = {
-      background: "rgb(200, 235, 255)"
+      background: "rgb(200, 255, 200)"
     };
   };
 
