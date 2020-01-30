@@ -149,15 +149,19 @@ export default class Log extends Component {
    * then show the page after loading
    */
   getOneVehicle = () => {
-    API.getOneVehicleForUser(this.props.match.params.id)
+    API.getOneVehicleForUser(this.state.vehicleId)
       .then(res => {
-        this.setState({
-          pageLoaded: true,
-          year: res.data[0].vehicles[0].year,
-          make: res.data[0].vehicles[0].make,
-          model: res.data[0].vehicles[0].model,
-          vehicleServiceLogs: res.data[0].vehicles[0].logs
-        });
+        try {
+          this.setState({
+            pageLoaded: true,
+            year: res.data[0].vehicles[0].year,
+            make: res.data[0].vehicles[0].make,
+            model: res.data[0].vehicles[0].model,
+            vehicleServiceLogs: res.data[0].vehicles[0].logs
+          });
+        } catch (e) {
+          this.setState({ pageLoaded: true })
+        };
       })
       .catch(err => this.loadServiceLogsFailNotification(err));
   };

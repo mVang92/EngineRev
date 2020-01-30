@@ -464,10 +464,8 @@ input {
 
 .serviceLogFullDetails {
     background: rgb(255, 255, 255);
-    border-radius: 5px;
     padding: 1rem;
     margin-top: 1rem;
-    margin-bottom: 1rem;
 }
 
 .noMarginDesktopDisplay {
@@ -498,7 +496,6 @@ input {
     .serviceLogFullDetails {
         font-weight: initial !important;
         padding: initial !important;
-        border-radius: initial !important;
     }
 }
 

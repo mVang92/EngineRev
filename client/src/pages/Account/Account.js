@@ -56,9 +56,7 @@ export default class Account extends Component {
       if (user) {
         this.setState({
           user: user,
-          loggedin: true
-        });
-        this.setState({
+          loggedin: true,
           userEmail: this.props.location.state[0],
           userAccountCreationTime: this.props.location.state[1],
           userDisplayName: this.props.location.state[2],
