@@ -16,6 +16,7 @@ export default class Account extends Component {
     super(props)
     this.state = {
       loggedin: false,
+      admin: false,
       originUrl: window.location.origin,
       user: "",
       userEmail: "",
@@ -84,7 +85,10 @@ export default class Account extends Component {
     if (this.state.userId) {
       API.getAllVehiclesForUser(this.state.userId)
         .then(res =>
-          this.setState({ vehicleCount: res.data.vehicles.length })
+          this.setState({
+            vehicleCount: res.data.vehicles.length,
+            admin: res.data.admin
+          })
         )
         .catch(err =>
           this.setState({ loadingError: err },
@@ -347,6 +351,7 @@ export default class Account extends Component {
                     confirmNewPassword={this.state.confirmNewPassword}
                     showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
                     showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
+                    admin={this.state.admin}
                   />
                 </Container>
                 <UpdateProfilePictureModal

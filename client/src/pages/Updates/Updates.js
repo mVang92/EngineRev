@@ -5,6 +5,7 @@ import updateApi from "../../utils/updateApi";
 import vehicleApi from "../../utils/API";
 import OneUpdate from "../../components/OneUpdate";
 import AddUpdates from "../../components/AddUpdates";
+import { ToastContainer, toast } from "react-toastify";
 
 export default class Updates extends Component {
   constructor(props) {
@@ -45,6 +46,7 @@ export default class Updates extends Component {
     }
     updateApi.addOneUpdate(updateData)
       .then(() => {
+        this.addOneUpdateSuccessNotification();
         this.componentDidMount();
         this.setState({
           updateChanges: "",
@@ -59,11 +61,9 @@ export default class Updates extends Component {
   getAllUpdates = () => {
     updateApi.getAllUpdates()
       .then(res => {
-        this.setState({ allUpdates: res.data })
+        this.setState({ allUpdates: res.data });
       })
-      .catch(err => {
-        console.log(err)
-      });
+      .catch(err => this.errorNotification(err));
   };
 
   /**
@@ -78,9 +78,25 @@ export default class Updates extends Component {
               admin: res.data.admin
             })
           )
-          .catch(err => console.log(err));
+          .catch(err => this.errorNotification(err));
       };
     });
+  };
+
+  /**
+   * Display the success notification when the admin user submits an update
+   */
+  addOneUpdateSuccessNotification = () => {
+    toast.success(`Update Added Successfully.`);
+  };
+
+  /**
+   * Display the error notification when an error occurs while loading data from the database
+   * 
+   * @param err the error message to display to the user
+   */
+  errorNotification = err => {
+    toast.error(err.toString());
   };
 
   render() {
@@ -88,6 +104,8 @@ export default class Updates extends Component {
       <div className="container largeBottomMarginMobileDisplay">
         <div id="recentUpdatesContainer">
           <div id="field"></div>
+          <h4 className="text-center"><label>Release Notes and Updates</label></h4>
+          <hr />
           {
             this.state.admin ?
               (
@@ -101,25 +119,24 @@ export default class Updates extends Component {
                 null
               )
           }
-          <div id="displayUpdates">
-            {
-              this.state.allUpdates.map(update => {
-                return (
-                  <OneUpdate
-                    key={update._id}
-                    _id={update._id}
-                    date={update.date}
-                    updateChanges={update.updateChanges}
-                    knownIssues={update.knownIssues}
-                  />
-                )
-              })
-            }
-          </div>
+          {
+            this.state.allUpdates.map(update => {
+              return (
+                <OneUpdate
+                  key={update._id}
+                  _id={update._id}
+                  date={update.date}
+                  updateChanges={update.updateChanges}
+                  knownIssues={update.knownIssues}
+                />
+              )
+            })
+          }
           <br />
           <Link to={{ pathname: "/" }}>
             <button className="backHomeBtn">Back</button>
           </Link>
+          <ToastContainer />
         </div>
       </div>
     );

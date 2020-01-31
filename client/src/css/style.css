@@ -348,7 +348,7 @@ input {
 }
 
 #scrollableProfilePictureAccountDetails {
-    max-height: 30rem;
+    max-height: 35rem;
     overflow: auto;
 }
 
@@ -467,7 +467,8 @@ input {
     height: 25%;
 }
 
-.serviceLogFullDetails {
+.serviceLogFullDetails,
+.releaseNote {
     background: rgb(255, 255, 255);
     padding: 1rem;
     margin-top: 1rem;
