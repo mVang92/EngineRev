@@ -6,19 +6,21 @@ const OneUpdate = props => {
 
   return (
     <React.Fragment key={props._id}>
-      <div className="row">
-        <div className="col-md-3"><label><strong>Date:</strong></label></div>
-        <div className="col-md-9">{formattedDate}</div>
+      <div className="releaseNote">
+        <div className="row">
+          <div className="col-md-3"><label><strong>Date:</strong></label></div>
+          <div className="col-md-7"><label>{formattedDate}</label></div>
+          <div className="col-md-2"></div>
+        </div>
+        <div className="row">
+          <div className="col-md-3"><label><strong>Updates:</strong></label></div>
+          <div className="col-md-9"><label>{props.updateChanges}</label></div>
+        </div>
+        <div className="row">
+          <div className="col-md-3"><label><strong>Known Issues:</strong></label></div>
+          <div className="col-md-9"><label>{props.knownIssues}</label></div>
+        </div>
       </div>
-      <div className="row">
-        <div className="col-md-3"><label><strong>Updates:</strong></label></div>
-        <div className="col-md-9">{props.updateChanges}</div>
-      </div>
-      <div className="row">
-        <div className="col-md-3"><label><strong>Known Issues:</strong></label></div>
-        <div className="col-md-9">{props.knownIssues}</div>
-      </div>
-      <hr />
     </React.Fragment>
   )
 };

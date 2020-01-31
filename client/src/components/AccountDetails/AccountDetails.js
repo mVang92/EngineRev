@@ -46,7 +46,7 @@ class AccountDetails extends Component {
             </div>
             <br />
             <div className="row">
-              <div className="col-md-5"><label><strong>Total Vehicles:</strong></label></div>
+              <div className="col-md-5"><label><strong>Vehicles:</strong></label></div>
               <div className="col-md-7">
                 {
                   this.props.loadingError ?
@@ -54,6 +54,20 @@ class AccountDetails extends Component {
                       <span id="accountPageVehicleCount" className="text-danger">Error Loading Vehicle Count</span>
                     ) : (
                       <span id="accountPageVehicleCount">{this.props.vehicleCount}</span>
+                    )
+                }
+              </div>
+            </div>
+            <br />
+            <div className="row">
+              <div className="col-md-5"><label><strong>Role:</strong></label></div>
+              <div className="col-md-7">
+                {
+                  this.props.admin ?
+                    (
+                      <span id="userRole">Administrator</span>
+                    ) : (
+                      <span id="userRole">User</span>
                     )
                 }
               </div>
