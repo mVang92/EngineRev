@@ -7,9 +7,9 @@ router
   .route("/")
   .post(controller.createUserSchema)
 
-// Matches with "/api/vehicles/findOneVehicleForUser:id"
+// Matches with "/api/vehicles/findOneVehicleForUser/:creatorId/:vehicleId"
 router
-  .route("/findOneVehicleForUser/:id")
+  .route("/findOneVehicleForUser/:creatorId/:vehicleId")
   .get(controller.findOneVehicleForUser)
 
 // Matches with "/api/vehicles/:id"
@@ -18,12 +18,12 @@ router
   .get(controller.findAllVehiclesForUser)
   .put(controller.addOneVehicle)
 
-// Matches with "/api/vehicles/addOneServiceLog/:id"
+// Matches with "/api/vehicles/addOneServiceLog/:creatorId/:vehicleId"
 router
-  .route("/addOneServiceLog/:id")
+  .route("/addOneServiceLog/:creatorId/:vehicleId")
   .put(controller.addOneLogForOneVehicle)
 
-// Matches with "/api/vehicles/updateOneServiceLog/:id"
+// Matches with "/api/vehicles/updateOneVehicleName/:vehicleId"
 router
   .route("/updateOneVehicleName/:vehicleId")
   .put(controller.updateOneVehicleName)
@@ -35,12 +35,12 @@ router
 
 // Matches with "/api/vehicles/deleteServiceLog/:serviceLogId"
 router
-  .route("/deleteServiceLog/:id")
+  .route("/deleteServiceLog/:vehicleId/:serviceLogId")
   .delete(controller.removeOneServiceLog)
 
-// Matches with "/api/deleteVehicle/:id"
+// Matches with "/api/deleteVehicle/:vehicleId"
 router
-  .route("/deleteVehicle/:id")
+  .route("/deleteVehicle/:vehicleId")
   .delete(controller.removeOneVehicle)
 
 module.exports = router;

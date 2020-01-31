@@ -2,8 +2,8 @@ import axios from "axios";
 
 export default {
   // Get one vehicle for the signed in user
-  getOneVehicleForUser: id => {
-    return axios.get(`/api/vehicles/findOneVehicleForUser/${id}`)
+  getOneVehicleForUser: (creatorId, vehicleId) => {
+    return axios.get(`/api/vehicles/findOneVehicleForUser/${creatorId}/${vehicleId}`)
   },
   // Get all vehicles for the signed in user
   getAllVehiclesForUser: id => {
@@ -24,8 +24,8 @@ export default {
     return axios.put(`/api/vehicles/${id}`, data);
   },
   // Add a service log for one vehicle
-  addOneLogForOneVehicle: (id, log) => {
-    return axios.put(`/api/vehicles/addOneServiceLog/${id}`, log);
+  addOneLogForOneVehicle: (creatorId, vehicleId, log) => {
+    return axios.put(`/api/vehicles/addOneServiceLog/${creatorId}/${vehicleId}`, log);
   },
   // Update a the name for one vehicle
   updateVehicleNameForOneVehicle: (vehicleId, updatedVehicleName) => {
@@ -36,12 +36,12 @@ export default {
     return axios.put(`/api/vehicles/updateOneServiceLog/${vehicleId}/${serviceLogId}`, updatedServiceLog);
   },
   // Delete one vehicle
-  deleteOneVehicle: id => {
-    return axios.delete(`/api/vehicles/deleteVehicle/${id}`);
+  deleteOneVehicle: vehicleId => {
+    return axios.delete(`/api/vehicles/deleteVehicle/${vehicleId}`);
   },
   // Delete one service log
-  deleteOneServiceLog: id => {
-    return axios.delete(`/api/vehicles/deleteServiceLog/${id}`);
+  deleteOneServiceLog: (vehicleId, serviceLogId) => {
+    return axios.delete(`/api/vehicles/deleteServiceLog/${vehicleId}/${serviceLogId}`);
   },
   // Delete one user account
   // Will have to decide where to put this function in the app
