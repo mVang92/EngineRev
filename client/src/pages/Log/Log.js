@@ -770,7 +770,7 @@ export default class Log extends Component {
                               </div>
                             ) : (
                               <div className="col-md-12 text-center text-danger">
-                                <label><h3>You do not have permission to view this content.</h3></label>
+                                <label><h3>You do not have permission to view this content</h3></label>
                               </div>
                             )
                         }
@@ -795,7 +795,14 @@ export default class Log extends Component {
                           handleResetLogVehicleForm={this.handleResetLogVehicleForm}
                           checkUserEnteredServiceLogInput={this.checkUserEnteredServiceLogInput}
                         />
-                        <hr className="removeMobileDisplay" />
+                        {
+                          this.state.year ?
+                            (
+                              <hr className="removeMobileDisplay" />
+                            ) : (
+                              null
+                            )
+                        }
                       </div>
                       <div className="row innerBox serviceLogMobileDisplay">
                         {

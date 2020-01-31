@@ -6,6 +6,7 @@ import Main from "./pages/Main";
 import Log from "./pages/Log";
 import Account from "./pages/Account";
 import About from "./pages/About";
+import Updates from "./pages/Updates";
 import NoMatch from "./pages/NoMatch";
 import "./css/style.css";
 
@@ -20,6 +21,7 @@ export default class App extends React.Component {
             <Route exact path="/account/:id/vehicle/:id" component={Log} />
             <Route exact path="/account/:id" component={Account} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/updates" component={Updates} />
             <Route component={NoMatch} />
           </Switch>
           <Footer />

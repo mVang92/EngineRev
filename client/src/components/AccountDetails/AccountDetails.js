@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 class AccountDetails extends Component {
   render() {
-    console.log(this.props.userEmail);
     let uniqueUserId = this.props.showUniqueUserId ? "showUniqueUserId" : "hideUniqueUserId";
     let uniqueUserIdMask = this.props.showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
 

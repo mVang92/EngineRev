@@ -20,7 +20,6 @@ export default {
   },
   // Add a new vehicle
   addOneVehicle: (id, data) => {
-    // console.log(id, data);
     return axios.put(`/api/vehicles/${id}`, data);
   },
   // Add a service log for one vehicle
@@ -47,5 +46,13 @@ export default {
   // Will have to decide where to put this function in the app
   deleteOneUserAccount: id => {
     return axios.delete(`/api/vehicles/${id}`);
+  },
+  // Insert a new update
+  addOneUpdate: () => {
+    console.log("add")
+  },
+  // Get all recent updates
+  getAllUpdates: () => {
+    console.log("get")
   }
 };
