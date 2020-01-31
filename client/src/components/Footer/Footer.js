@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer id="footer">
+    <footer id="footer" className="hideWhilePrinting">
       <div className="row">
         <div className="col-md-2"></div>
         <div id="footerAboutLink" className="col-md-2">
