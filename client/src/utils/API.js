@@ -14,6 +14,7 @@ export default {
     return (
       axios.post("/api/vehicles", {
         creator: id,
+        admin: false,
         vehicleName: [{}]
       })
     );
@@ -46,13 +47,5 @@ export default {
   // Will have to decide where to put this function in the app
   deleteOneUserAccount: id => {
     return axios.delete(`/api/vehicles/${id}`);
-  },
-  // Insert a new update
-  addOneUpdate: () => {
-    console.log("add")
-  },
-  // Get all recent updates
-  getAllUpdates: () => {
-    console.log("get")
   }
 };

@@ -91,14 +91,14 @@ input {
     right: 0;
 }
 
-#aboutCarspaceContainer,
-#recentUpdatesContainer {
+#aboutCarspaceContainer {
     background: rgb(245, 245, 245);
     padding: 1em;
     margin-bottom: 1rem;
 }
 
-.box {
+.box,
+#recentUpdatesContainer {
     background: rgb(245, 245, 245);
     padding: 1em;
     margin-bottom: 4rem;
