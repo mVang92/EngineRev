@@ -149,7 +149,7 @@ export default class Log extends Component {
    * then show the page after loading
    */
   getOneVehicle = () => {
-    API.getOneVehicleForUser(this.state.vehicleId)
+    API.getOneVehicleForUser(this.state.uid, this.state.vehicleId)
       .then(res => {
         try {
           this.setState({
@@ -290,6 +290,7 @@ export default class Log extends Component {
   handleSubmitOneServiceLog = () => {
     this.hideFutureDateConfirmationModal();
     let vehicleId = this.state.vehicleId;
+    let creatorId = this.state.uid;
     const serviceLogDate = new Date(this.state.date);
     serviceLogDate.setDate(serviceLogDate.getDate() + 1);
     let serviceLogToStore = {
@@ -301,7 +302,7 @@ export default class Log extends Component {
     let serviceLogDateMemory = serviceLogDate.toLocaleDateString("en-US");
     let serviceLogMileageMemory = this.state.mileage;
     let serviceLogServiceMemory = this.state.service;
-    API.addOneLogForOneVehicle(vehicleId, serviceLogToStore)
+    API.addOneLogForOneVehicle(creatorId, vehicleId, serviceLogToStore)
       .then(() => {
         this.addOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory);
         this.setState({
@@ -387,7 +388,7 @@ export default class Log extends Component {
    * Deletes one service log from record
    */
   handleDeleteOneServiceLog = () => {
-    API.deleteOneServiceLog(this.state.serviceLogId)
+    API.deleteOneServiceLog(this.state.vehicleId, this.state.serviceLogId)
       .then(() => {
         setTimeout(() => {
           this.setState({ showDeleteOneLogModal: false });

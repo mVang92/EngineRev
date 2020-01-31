@@ -2,9 +2,6 @@ const db = require("../models");
 const { ObjectId } = require("mongodb");
 console.log("vehicle controller loaded");
 
-let creatorId = "";
-let vehicleId = "";
-
 module.exports = {
 
   /**
@@ -23,9 +20,8 @@ module.exports = {
    */
   findAllVehiclesForUser: (req, res) => {
     console.log("Hit findAllVehiclesForUser");
-    creatorId = req.params.id;
     db.Vehicle
-      .findOne({ creator: creatorId })
+      .findOne({ creator: req.params.id })
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
@@ -35,17 +31,16 @@ module.exports = {
    */
   findOneVehicleForUser: (req, res) => {
     console.log("Hit findOneVehicleForUser");
-    vehicleId = req.params.id;
     db.Vehicle
       .aggregate([
-        { $match: { creator: creatorId } },
+        { $match: { creator: req.params.creatorId } },
         {
           $project: {
             vehicles: {
               $filter: {
                 input: "$vehicles",
                 as: "vehicle",
-                cond: { $eq: ["$$vehicle._id", ObjectId(vehicleId)] }
+                cond: { $eq: ["$$vehicle._id", ObjectId(req.params.vehicleId)] }
               }
             },
             _id: 0
@@ -63,7 +58,7 @@ module.exports = {
     console.log("Hit addOneVehicle");
     db.Vehicle
       .findOneAndUpdate(
-        { creator: creatorId },
+        { creator: req.params.id },
         { $push: { vehicles: [req.body] } }
       )
       .then(result => res.json(result))
@@ -77,7 +72,7 @@ module.exports = {
     console.log("Hit addOneLogForOneVehicle");
     db.Vehicle
       .updateOne(
-        { creator: creatorId, vehicles: { $elemMatch: { _id: req.params.id } } },
+        { creator: req.params.creatorId, vehicles: { $elemMatch: { _id: req.params.vehicleId } } },
         { $push: { "vehicles.$.logs": [req.body] } }
       )
       .then(result => res.json(result))
@@ -91,7 +86,7 @@ module.exports = {
     console.log("Hit updateOneVehicleName");
     db.Vehicle
       .updateOne(
-        { "vehicles._id": vehicleId },
+        { "vehicles._id": req.params.vehicleId },
         {
           $set: {
             "vehicles.$.year": req.body.year,
@@ -111,7 +106,7 @@ module.exports = {
     console.log("Hit updateOneLogForOneVehicle");
     db.Vehicle
       .updateOne(
-        { "vehicles._id": vehicleId },
+        { "vehicles._id": req.params.vehicleId },
         { $set: { "vehicles.$[].logs.$[logs]": req.body } },
         { arrayFilters: [{ "logs._id": req.params.serviceLogId }] }
       )
@@ -126,8 +121,8 @@ module.exports = {
     console.log("Hit removeOneVehicle");
     db.Vehicle
       .findOneAndUpdate(
-        { "vehicles._id": vehicleId },
-        { $pull: { vehicles: { _id: vehicleId } } }
+        { "vehicles._id": req.params.vehicleId },
+        { $pull: { vehicles: { _id: req.params.vehicleId } } }
       )
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
@@ -140,8 +135,8 @@ module.exports = {
     console.log("Hit removeOneServiceLog");
     db.Vehicle
       .findOneAndUpdate(
-        { "vehicles._id": vehicleId },
-        { $pull: { "vehicles.$.logs": { _id: req.params.id } } }
+        { "vehicles._id": req.params.vehicleId },
+        { $pull: { "vehicles.$.logs": { _id: req.params.serviceLogId } } }
       )
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
