@@ -28,12 +28,12 @@ router
   .route("/updateOneVehicleName/:vehicleId")
   .put(controller.updateOneVehicleName)
 
-// Matches with "/api/vehicles/updateOneServiceLog/:id"
+// Matches with "/api/vehicles/updateOneServiceLog/:vehicleId/:serviceLogId"
 router
   .route("/updateOneServiceLog/:vehicleId/:serviceLogId")
   .put(controller.updateOneLogForOneVehicle)
 
-// Matches with "/api/vehicles/deleteServiceLog/:serviceLogId"
+// Matches with "/api/vehicles/deleteServiceLog/:vehicleId/:serviceLogId"
 router
   .route("/deleteServiceLog/:vehicleId/:serviceLogId")
   .delete(controller.removeOneServiceLog)
