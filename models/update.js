@@ -3,9 +3,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const updateSchema = new Schema({
-    date: { type: String, required: true },
     updateChanges: { type: String, required: true },
-    knownIssues: { type: String, required: true },
+    knownIssues: { type: String },
     date: { type: Date, default: Date.now }
 });
 

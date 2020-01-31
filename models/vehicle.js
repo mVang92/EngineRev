@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const vehicleSchema = new Schema({
   creator: { type: String },
+  admin: { type: Boolean },
   vehicles: [{
     year: { type: Number, required: true },
     make: { type: String, required: true },

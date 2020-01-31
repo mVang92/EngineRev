@@ -7,7 +7,6 @@ export default {
     },
     // Get all recent updates
     getAllUpdates: () => {
-        console.log("get")
         return axios.get("/api/updates");
     }
 };
