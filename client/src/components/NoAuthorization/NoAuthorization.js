@@ -6,7 +6,7 @@ class NoAuthorization extends Component {
     return (
       <React.Fragment>
         <div id="noAuthorization" className="text-center text-danger mt-3 section">
-          <label><h3>You do not have permission to view this content.</h3></label>
+          <label><h3>You do not have permission to view this content</h3></label>
           <hr />
           <a href="/" title="Get me out of here!"><button className="backHomeBtn">← Back Home</button></a>
           <br />

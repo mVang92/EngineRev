@@ -1,4 +1,5 @@
 console.log("model index loaded")
 module.exports = {
-  Vehicle: require("./vehicle")
+  Vehicle: require("./vehicle"),
+  Update: require("./update")
 };

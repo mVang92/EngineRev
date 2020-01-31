@@ -1,6 +1,6 @@
 const db = require("../models");
 const { ObjectId } = require("mongodb");
-console.log("controller loaded");
+console.log("vehicle controller loaded");
 
 let creatorId = "";
 let vehicleId = "";

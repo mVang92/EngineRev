@@ -11,11 +11,13 @@ const Footer = () => {
             <span className="pointer footerAboutLink">About</span>
           </Link>
         </div>
+        <div id="footerUpdatesLink" className="col-md-2">
+          {/* <Link to={{ pathname: "/updates" }}>
+            <span className="pointer footerUpdatesLink">Recent Updates</span>
+          </Link> */}
+        </div>
         <div id="footerSuggestionsLink" className="col-md-2">
           {/* <span className="pointer">Submit Suggestions</span> */}
-        </div>
-        <div id="footerUpdatesLink" className="col-md-2">
-          {/* <span className="pointer">Updates</span> */}
         </div>
         <div id="footerHelpLink" className="col-md-2">
           {/* <span className="pointer">Help</span> */}

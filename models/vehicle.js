@@ -1,4 +1,4 @@
-console.log("models loaded")
+console.log("vehicle model loaded")
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
