@@ -80,7 +80,8 @@ class AddLog extends Component {
                       id="addServiceLogButton"
                       title="Submit Service Log"
                       type="submit"
-                      className="addBtn">
+                      className="addBtn"
+                      disabled={this.props.disableAddServiceLogButton}>
                       Submit Log
                     </button>
                   </div>

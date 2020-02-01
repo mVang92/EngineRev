@@ -10,6 +10,7 @@ const LoggedIn = props => {
         handleChange={props.handleChange}
         addVehicle={props.addVehicle}
         userProfilePicture={props.userProfilePicture}
+        disableAddVehicleButton={props.disableAddVehicleButton}
       />
       <hr />
       <MyVehicles
