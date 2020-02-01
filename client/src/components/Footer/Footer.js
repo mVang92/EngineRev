@@ -8,12 +8,12 @@ const Footer = () => {
         <div className="col-md-2"></div>
         <div id="footerAboutLink" className="col-md-2">
           <Link to={{ pathname: "/about" }}>
-            <span className="pointer footerAboutLink">About</span>
+            <span className="footerAboutLink pointer underline">About</span>
           </Link>
         </div>
         <div id="footerUpdatesLink" className="col-md-2">
           <Link to={{ pathname: "/updates" }}>
-            <span className="pointer footerUpdatesLink">Release Notes</span>
+            <span className="footerUpdatesLink pointer underline">Release Notes</span>
           </Link>
         </div>
         <div id="footerSuggestionsLink" className="col-md-2">

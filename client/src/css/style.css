@@ -33,7 +33,7 @@ body {
 
 .section {
     background: rgba(245, 245, 245, 0.8);
-    margin-top: 2rem;
+    margin-bottom: 2rem;
     height: initial !important;
     padding: 1.5rem;
 }
@@ -78,7 +78,7 @@ input {
 }
 
 #navBarLoggedOut {
-    position: initial;
+    position: fixed;
 }
 
 #vehicleLogInformation,
@@ -281,15 +281,16 @@ input {
 }
 
 .vehicleItemList {
-    background: rgb(235, 235, 235);
+    background: rgb(255, 255, 255);
+    box-shadow: -1px 0px 3px rgb(168, 168, 168);
     padding: 1rem;
-    margin-bottom: 5px !important;
-    transition-duration: 0.1s;
+    margin-bottom: 0.5rem !important;
+    transition-duration: 0.3s;
 }
 
 .vehicleItemList:hover {
-    background: rgb(240, 240, 240);
-    transition-duration: 0.1s;
+    box-shadow: -1px 0px 3px rgb(168, 32, 32);
+    transition-duration: 0.07s;
 }
 
 .Toastify__toast-container--top-right {
@@ -470,6 +471,7 @@ input {
 .serviceLogFullDetails,
 .releaseNote {
     background: rgb(255, 255, 255);
+    box-shadow: -1px 0px 3px rgb(168, 168, 168);
     padding: 1rem;
     margin-top: 1rem;
 }
@@ -487,23 +489,15 @@ input {
     bottom: 0;
 }
 
-#footerAboutLink {
-    font-size: 14px;
-    text-align: center;
-}
-
-.footerAboutLink {
-    color: rgb(220, 64, 48);
-}
-
+.footerAboutLink,
 .footerUpdatesLink {
     color: rgb(200, 200, 200);
 }
 
+#footerAboutLink,
 #footerUpdatesLink,
 #footerSuggestionsLink,
 #footerHelpLink {
-    color: rgb(200, 200, 200);
     font-size: 14px;
     text-align: center;
 }

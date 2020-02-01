@@ -14,8 +14,7 @@ export default class About extends Component {
     return (
       <div className="container">
         <div id="aboutCarspaceContainer" className="text-center ">
-          <div id="field"></div>
-          <br />
+          <br /><br />
           <img id="carSpaceLogo" src={carSpaceLogo}></img>
         </div>
         <div className="box">
@@ -26,8 +25,7 @@ export default class About extends Component {
           </div>
           <label>
             <p>CarSpace allows you to keep track of your vehicle maintenance history.
-            Keep your vehicle running smoothly by adding your own vehicles and recording their service logs.
-            Organize records and keep track of your services with CarSpace.</p>
+            Keep your vehicle running smoothly by tracking your own vehicles by recording their service logs.</p>
           </label>
           <hr />
           <div className="row">
