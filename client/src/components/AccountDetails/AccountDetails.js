@@ -121,6 +121,42 @@ class AccountDetails extends Component {
           <div className="col-md-4"></div>
         </div>
         <hr />
+        <div className="row">
+          <div className="col-md-4"><label><strong>Themes</strong></label></div>
+          <div className="col-md-4">
+            <div className="row">
+              <div className="col-md-4">
+                <button
+                  id="carSpaceThemeToggleButton"
+                  title="CarSpace Theme"
+                  type="button"
+                  onClick={(event) => this.props.handleThemeSelection(event, "carSpace")}>
+                  CarSpace
+                  </button>
+              </div>
+              <div className="col-md-4">
+                <button
+                  id="lightThemeToggleButton"
+                  title="CarSpace Theme"
+                  type="button"
+                  onClick={(event) => this.props.handleThemeSelection(event, "light")}>
+                  Light
+                  </button>
+              </div>
+              <div className="col-md-4">
+                <button
+                  id="darkThemeToggleButton"
+                  title="CarSpace Theme"
+                  type="button"
+                  onClick={(event) => this.props.handleThemeSelection(event, "dark")}>
+                  Dark
+                  </button>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4"></div>
+        </div>
+        <br />
         <form onSubmit={this.props.showUpdateProfilePictureModal}>
           <div className="row">
             <div className="col-md-4"><label><strong>Update Profile Picture:</strong></label></div>
@@ -148,8 +184,7 @@ class AccountDetails extends Component {
                     id="submitNewProfilePictureButton"
                     title="Update Picture"
                     type="submit"
-                    onClick={this.props.showUpdateProfilePictureModal}
-                  >
+                    onClick={this.props.showUpdateProfilePictureModal}>
                     Submit
                   </button>
                 </div>
@@ -184,8 +219,7 @@ class AccountDetails extends Component {
                     id="submitNewDisplayNameButton"
                     title="Update Name"
                     type="submit"
-                    onClick={this.props.showUpdateDisplayNameModal}
-                  >
+                    onClick={this.props.showUpdateDisplayNameModal}>
                     Submit
                   </button>
                 </div>
@@ -235,8 +269,7 @@ class AccountDetails extends Component {
                     id="submitNewPasswordButton"
                     title="Update Password"
                     type="submit"
-                    onClick={this.props.updatePassword}
-                  >
+                    onClick={this.props.updatePassword}>
                     Submit
                   </button>
                 </div>

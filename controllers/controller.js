@@ -151,5 +151,19 @@ module.exports = {
       .findByIdAndDelete(req.params.id)
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Render a theme for the user
+   */
+  renderTheme: (req, res) => {
+    console.log("Hit renderTheme");
+    db.Vehicle
+      .update(
+        { "creator": req.params.creatorId },
+        { $set: { theme: req.params.themeType } }
+      )
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
   }
 };

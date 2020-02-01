@@ -506,6 +506,14 @@ input {
     cursor: pointer;
 }
 
+#carSpaceThemeToggleButton,
+#lightThemeToggleButton,
+#darkThemeToggleButton {
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .wrapword {
     white-space: -moz-pre-wrap !important;
     white-space: -pre-wrap;

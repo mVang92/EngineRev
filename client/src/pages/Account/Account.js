@@ -26,6 +26,7 @@ export default class Account extends Component {
       userPhotoUrl: "",
       newPassword: "",
       confirmNewPassword: "",
+      theme: "",
       vehicleData: "",
       vehicleCount: "Loading...",
       loadingError: "",
@@ -79,6 +80,68 @@ export default class Account extends Component {
   };
 
   /**
+   * Handle theme selection
+   */
+  handleThemeSelection = (event, themeType) => {
+    event.preventDefault();
+    switch (themeType) {
+      case "carSpace":
+        this.useCarSpaceTheme(themeType);
+        break;
+      case "light":
+        this.useLightTheme(themeType);
+        break;
+      case "dark":
+        this.useDarkTheme(themeType);
+    }
+  };
+
+  /**
+   * Render CarSpace theme
+   * 
+   * @param themeType the theme to pass to the API
+   */
+  useCarSpaceTheme = themeType => {
+    API.renderTheme(this.state.userId, themeType)
+      .then(() => {
+        console.log("useCarSpaceTheme")
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  };
+
+  /**
+   * Render Light theme
+   * 
+   * @param themeType the theme to pass to the API
+   */
+  useLightTheme = themeType => {
+    API.renderTheme(this.state.userId, themeType)
+      .then(() => {
+        console.log("useLightTheme")
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  };
+
+  /**
+   * Render Dark theme
+   * 
+   * @param themeType the theme to pass to the API
+   */
+  useDarkTheme = themeType => {
+    API.renderTheme(this.state.userId, themeType)
+      .then(() => {
+        console.log("useDarkTheme")
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  };
+
+  /**
    * Get the vehicle data from the API
    */
   getVehicleData = () => {
@@ -87,7 +150,8 @@ export default class Account extends Component {
         .then(res =>
           this.setState({
             vehicleCount: res.data.vehicles.length,
-            admin: res.data.admin
+            admin: res.data.admin,
+            theme: res.data.theme
           })
         )
         .catch(err =>
@@ -323,6 +387,7 @@ export default class Account extends Component {
   render() {
     return (
       <React.Fragment>
+        {console.log(this.state.theme)}
         {
           this.state.loggedin ?
             (
@@ -351,7 +416,9 @@ export default class Account extends Component {
                     confirmNewPassword={this.state.confirmNewPassword}
                     showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
                     showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
+                    handleThemeSelection={this.handleThemeSelection}
                     admin={this.state.admin}
+                    theme={this.state.theme}
                   />
                 </Container>
                 <UpdateProfilePictureModal
