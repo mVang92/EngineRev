@@ -43,4 +43,9 @@ router
   .route("/deleteVehicle/:vehicleId")
   .delete(controller.removeOneVehicle)
 
+// Matches with "/api/vehicles/themes/:themeType"
+router
+.route("/themes/:creatorId/:themeType")
+.put(controller.renderTheme)
+
 module.exports = router;

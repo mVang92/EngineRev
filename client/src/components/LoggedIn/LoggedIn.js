@@ -3,19 +3,22 @@ import MyVehicles from "../MyVehicles";
 import AddVehicle from "../AddVehicle";
 
 const LoggedIn = props => {
+
   return (
-    <div className="box">
+    <div className={`box ${props.currentTheme.background}`}>
       <AddVehicle
         handleResetAddVehicleFields={props.handleResetAddVehicleFields}
         handleChange={props.handleChange}
         addVehicle={props.addVehicle}
         userProfilePicture={props.userProfilePicture}
         disableAddVehicleButton={props.disableAddVehicleButton}
+        currentTheme={props.currentTheme}
       />
-      <hr />
+      <hr className={props.currentTheme.hr}/>
       <MyVehicles
         vehicleData={props.vehicleData}
         vehicleCountForUser={props.vehicleCountForUser}
+        currentTheme={props.currentTheme}
       />
     </div>
   );

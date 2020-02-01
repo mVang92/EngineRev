@@ -15,6 +15,7 @@ export default {
       axios.post("/api/vehicles", {
         creator: id,
         admin: false,
+        theme: "carSpace",
         vehicleName: [{}]
       })
     );
@@ -47,5 +48,8 @@ export default {
   // Will have to decide where to put this function in the app
   deleteOneUserAccount: id => {
     return axios.delete(`/api/vehicles/${id}`);
+  },
+  renderTheme: (creatorId, themeType) => {
+    return axios.put(`/api/vehicles/themes/${creatorId}/${themeType}`);
   }
 };

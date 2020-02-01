@@ -38,7 +38,7 @@ const ServiceLog = props => {
 
   return (
     <React.Fragment key={serviceLogId}>
-      <div className="row serviceLogFullDetails" style={serviceLogFullDetails}>
+      <div className={`row serviceLogFullDetails ${props.currentTheme.serviceLogs}`} style={serviceLogFullDetails}>
         <div className="col-md-2 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Date: </strong></span>{serviceLogDateFormatted}</div>
         <div className="col-md-2 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Mileage: </strong></span>{mileage} miles</div>
         <div className="col-md-3 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Service: </strong></span>{service}</div>
@@ -61,8 +61,7 @@ const ServiceLog = props => {
               <button
                 id="deleteActionButton"
                 title="Delete Log"
-                onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, deleteValue)}
-              >
+                onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, deleteValue)}>
                 <img id="deleteIcon" src={deleteIcon} alt="delete"></img>
               </button>
             </div>
@@ -70,8 +69,7 @@ const ServiceLog = props => {
               <button
                 id="editActionButton"
                 title="Edit Log"
-                onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, editValue)}
-              >
+                onClick={(event) => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, editValue)}>
                 <img id="editIcon" src={editIcon} alt="edit"></img>
               </button>
             </div>

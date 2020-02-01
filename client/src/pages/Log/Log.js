@@ -28,6 +28,7 @@ export default class Log extends Component {
       uid: "",
       loggedin: false,
       pageLoaded: false,
+      currentTheme: "",
       vehicle: [],
       vehicleId: "",
       make: "",
@@ -77,7 +78,8 @@ export default class Log extends Component {
         this.setState({
           vehicleId: this.props.match.params.id,
           uid: user.uid,
-          loggedin: true
+          loggedin: true,
+          currentTheme: this.props.location.state[0]
         });
         this.getOneVehicle();
       };
@@ -777,7 +779,7 @@ export default class Log extends Component {
               this.state.pageLoaded ?
                 (
                   <Container>
-                    <div className="box">
+                    <div className={`box ${this.state.currentTheme.background}`}>
                       <div id="vehicleLogInformation" className="row">
                         {
                           this.state.year ?
@@ -800,7 +802,7 @@ export default class Log extends Component {
                         vehicleServiceLogs={this.state.vehicleServiceLogs}
                         year={this.state.year}
                       />
-                      <hr />
+                      <hr className={this.state.currentTheme.hr}/>
                       <div className="hideWhilePrinting">
                         <AddLog
                           year={this.state.year}
@@ -816,7 +818,7 @@ export default class Log extends Component {
                         {
                           this.state.year ?
                             (
-                              <hr className="removeMobileDisplay" />
+                              <hr className={this.state.currentTheme.hr}/>
                             ) : (
                               null
                             )
@@ -861,6 +863,7 @@ export default class Log extends Component {
                                             service={serviceLog.service}
                                             comment={serviceLog.comment}
                                             getServiceLogActionValue={this.getServiceLogActionValue}
+                                            currentTheme={this.state.currentTheme}
                                           />
                                         )
                                       })
@@ -875,6 +878,7 @@ export default class Log extends Component {
                                             service={serviceLog.service}
                                             comment={serviceLog.comment}
                                             getServiceLogActionValue={this.getServiceLogActionValue}
+                                            currentTheme={this.state.currentTheme}
                                           />
                                         )
                                       })
