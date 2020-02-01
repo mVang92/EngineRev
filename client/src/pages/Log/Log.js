@@ -327,7 +327,7 @@ export default class Log extends Component {
       })
       .catch(err => {
         this.addOneServiceLogFailNotification(err);
-        this.setState({ disableAddServiceLogButton: false });      
+        this.setState({ disableAddServiceLogButton: false });
       });
   };
 
@@ -802,7 +802,7 @@ export default class Log extends Component {
                         vehicleServiceLogs={this.state.vehicleServiceLogs}
                         year={this.state.year}
                       />
-                      <hr className={this.state.currentTheme.hr}/>
+                      <hr className={this.state.currentTheme.hr} />
                       <div className="hideWhilePrinting">
                         <AddLog
                           year={this.state.year}
@@ -818,7 +818,7 @@ export default class Log extends Component {
                         {
                           this.state.year ?
                             (
-                              <hr className={this.state.currentTheme.hr}/>
+                              <hr className={this.state.currentTheme.hr} />
                             ) : (
                               null
                             )
@@ -907,12 +907,14 @@ export default class Log extends Component {
                     <UpdatedVehicleYearNanErrorModal
                       showUpdatedVehicleYearNanErrorModal={this.state.showUpdatedVehicleYearNanErrorModal}
                       hideUpdatedVehicleYearNanErrorModal={this.hideUpdatedVehicleYearNanErrorModal}
+                      currentTheme={this.state.currentTheme}
                     />
                     <FutureDateConfirmationModal
                       handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
                       showFutureDateConfirmationModal={this.state.showFutureDateConfirmationModal}
                       hideFutureDateConfirmationModal={this.hideFutureDateConfirmationModal}
                       state={this.state.date}
+                      currentTheme={this.state.currentTheme}
                     />
                     <UpdatedFutureDateConfirmationModal
                       handleUpdateOneServiceLog={this.handleUpdateOneServiceLog}

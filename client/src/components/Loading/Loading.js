@@ -1,9 +1,10 @@
 import React from "react";
+import loadingGif from "../../images/loading.gif";
 
 const Loading = () => {
   return (
-    <h3 id="loadingScreen" className="text-center text-danger box container">
-      <label>Loading...</label>
+    <h3 id="loadingScreen" className="text-center container">
+      <img id="loadingGif" src={loadingGif} alt="Loading..."></img>
     </h3>
   );
 };

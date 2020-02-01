@@ -151,6 +151,7 @@ class AddVehicle extends Component {
         <AddVehicleErrorModal
           showAddVehicleErrorModal={this.state.showAddVehicleErrorModal}
           hideAddVehicleErrorModal={this.hideAddVehicleErrorModal}
+          currentTheme={this.props.currentTheme}
         />
       </React.Fragment>
     );

@@ -28,12 +28,12 @@ const UpdatedFutureDateConfirmationModal = props => {
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <div className="modalBody">
+                    <div className={`modalBody ${props.state.currentTheme.background}`}>
                         <div className="modal-header">
                             <div className="col-md-2 imageMobileDisplay">
                                 <img className="warningImage" src={warningImage} alt='warning' />
                             </div>
-                            <div className="col-md-10 text-danger">
+                            <div className="col-md-10 redText">
                                 <label>
                                     <strong>You are about to submit a future service log.</strong>
                                 </label>

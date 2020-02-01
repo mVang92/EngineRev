@@ -14,7 +14,7 @@ const DeleteOneVehicleModal = props => {
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <div className="modalBody">
+                    <div className={`modalBody ${props.state.currentTheme.background}`}>
                         <div className="row modal-header">
                             <div className="col-md-2">
                                 <img className="removeMobileDisplay imageMobileDisplay" src={warningImage} alt='warning' />
@@ -24,7 +24,7 @@ const DeleteOneVehicleModal = props => {
                             </div>
                             <div className="col-md-2"></div>
                         </div>
-                        <div className="modal-body text-danger">
+                        <div className={`modal-body text-danger ${props.state.currentTheme.redText}`}>
                             {
                                 props.state.vehicleServiceLogs.length > 1 ?
                                     (

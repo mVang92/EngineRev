@@ -168,18 +168,20 @@ export default class Account extends Component {
    * Get user theme and render it
    */
   getThemeAndRender = () => {
-    switch (this.state.theme) {
-      case "carSpace":
-        this.setState({ currentTheme: themes.carSpace });
-        break;
-      case "light":
-        this.setState({ currentTheme: themes.light });
-        break;
-      case "dark":
-        this.setState({ currentTheme: themes.dark });
-        break;
-      default:
-        alert("Theme error. Try reloading the page.");
+    if (this.state.theme) {
+      switch (this.state.theme) {
+        case "carSpace":
+          this.setState({ currentTheme: themes.carSpace });
+          break;
+        case "light":
+          this.setState({ currentTheme: themes.light });
+          break;
+        case "dark":
+          this.setState({ currentTheme: themes.dark });
+          break;
+        default:
+          alert("Theme error. Try reloading the page.");
+      }
     }
   };
 
@@ -447,20 +449,24 @@ export default class Account extends Component {
                       updateProfilePicture={this.updateProfilePicture}
                       hideUpdateProfilePictureModal={this.hideUpdateProfilePictureModal}
                       newProfilePicture={this.state.newProfilePicture}
+                      currentTheme={this.state.currentTheme}
                     />
                     <UpdateDisplayNameModal
                       showUpdateDisplayNameModal={this.state.showUpdateDisplayNameModal}
                       updateDisplayName={this.updateDisplayName}
                       hideUpdateDisplayNameModal={this.hideUpdateDisplayNameModal}
                       newDisplayName={this.state.newDisplayName}
+                      currentTheme={this.state.currentTheme}
                     />
                     <UpdateProfilePictureSuccessModal
                       showUpdateProfilePictureSuccessModal={this.state.showUpdateProfilePictureSuccessModal}
                       hideUpdateProfilePictureSuccessModal={this.hideUpdateProfilePictureSuccessModal}
+                      currentTheme={this.state.currentTheme}
                     />
                     <UpdateDisplayNameSuccessModal
                       showUpdateDisplayNameSuccessModal={this.state.showUpdateDisplayNameSuccessModal}
                       hideUpdateDisplayNameSuccessModal={this.hideUpdateDisplayNameSuccessModal}
+                      currentTheme={this.state.currentTheme}
                     />
                   </React.Fragment>
                 ) : (
