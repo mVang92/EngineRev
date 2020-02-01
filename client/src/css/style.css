@@ -108,6 +108,11 @@ body {
     color: rgb(0, 0, 0);
 }
 
+.darkThemeRedText {
+    color: red !important;
+    font-weight: bold;
+}
+
 #carSpaceLogo {
     max-width: 10rem;
     border-radius: 10%;
@@ -551,7 +556,10 @@ input {
 
 #loadingScreen {
     padding-top: 5rem;
-    height: 25%;
+}
+
+#loadingGif {
+    width: 5rem;
 }
 
 .serviceLogFullDetails,
@@ -608,6 +616,10 @@ input {
 #darkThemeToggleButton:hover {
     background: rgb(255, 255, 255);
     transition-duration: 0.1s;
+}
+
+.modal-footer {
+    border-top: initial;
 }
 
 .wrapword {

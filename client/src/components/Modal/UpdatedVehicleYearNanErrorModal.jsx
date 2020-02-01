@@ -13,7 +13,7 @@ const UpdatedVehicleYearNanErrorModal = props => {
         >
             <div id="addVehicleYearNanErrorModal" className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <div className="modalBody">
+                    <div className={`modalBody ${props.currentTheme.background}`}>
                         <div className="modal-header">
                             <div className="col-md-2 imageMobileDisplay">
                                 <img className="warningImage" src={warningImage} alt="warning" />

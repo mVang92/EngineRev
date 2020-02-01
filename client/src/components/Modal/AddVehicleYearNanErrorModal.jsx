@@ -3,6 +3,7 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const AddVehicleYearNanErrorModal = props => {
+    
     return (
         <ReactModal
             isOpen={props.showAddVehicleYearNanErrorModal}
@@ -13,7 +14,7 @@ const AddVehicleYearNanErrorModal = props => {
         >
             <div id="addVehicleYearNanErrorModal" className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <div className="modalBody">
+                    <div className={`modalBody ${props.currentTheme.background}`}>
                         <div className="modal-header">
                             <div className="col-md-2 imageMobileDisplay">
                                 <img className="warningImage" src={warningImage} alt="warning" />

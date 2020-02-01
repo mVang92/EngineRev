@@ -12,7 +12,7 @@ const UpdateProfilePictureModal = props => {
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <div className="modalBody">
+                    <div className={`modalBody ${props.currentTheme.background}`}>
                         {
                             props.newProfilePicture ? (
                                 <React.Fragment>
