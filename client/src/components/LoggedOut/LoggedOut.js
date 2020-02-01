@@ -9,7 +9,8 @@ const LoggedOut = () => {
     <React.Fragment>
       <div className="row section noMarginDesktopDisplay">
         <div id="heading" className="col-md-12 text-center">
-          <div><label><h3>Easily record service records for your vehicles</h3></label></div>
+          <br /><br />
+          <div><label><h3>Easily record service logs for your vehicles</h3></label></div>
           <div><img id="notLoggedInMainImage" src={notLoggedIn} alt="Create Account"></img></div>
         </div>
       </div>
