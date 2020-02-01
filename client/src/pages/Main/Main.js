@@ -41,6 +41,20 @@ export default class App extends Component {
   };
 
   /**
+   * Check if user display name exists
+   * 
+   * @param user The current user information
+   */
+  checkUserDisplayName = user => {
+    let displayName = user.displayName;
+    if (displayName) {
+      this.showDisplayName(displayName);
+    } else {
+      this.showDisplayName(this.state.defaultDisplayName);
+    }
+  };
+
+  /**
    * Show the display name to the main page
    */
   showDisplayName = displayName => {
@@ -57,24 +71,19 @@ export default class App extends Component {
       if (user) {
         this.setState({
           loggedin: true,
-          pageLoaded: true,
           userProfilePicture: user.photoURL
         });
-        let displayName = user.displayName;
-        if (displayName) {
-          this.showDisplayName(displayName);
-        } else {
-          this.showDisplayName(this.state.defaultDisplayName);
-        }
         const userUniqueId = user.uid;
         API.getAllVehiclesForUser(userUniqueId)
           .then(res =>
             this.setState({
               vehicleData: res.data,
+              pageLoaded: true,
               uid: user.uid,
               theme: res.data.theme
             }, () => {
               this.getThemeAndRender();
+              this.checkUserDisplayName(user);
             })
           )
           .catch(err => this.loadVehiclesFailNotification(err));
@@ -118,8 +127,8 @@ export default class App extends Component {
     };
   };
 
-    /**
-   * Get user theme and render it
+  /**
+   * Get the user theme and render it
    */
   getThemeAndRender = () => {
     switch (this.state.theme) {
@@ -131,6 +140,9 @@ export default class App extends Component {
         break;
       case "dark":
         this.setState({ currentTheme: themes.dark });
+        break;
+      default:
+        alert("Theme error. Try reloading the page.");
     }
   };
 

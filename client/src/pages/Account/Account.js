@@ -4,6 +4,7 @@ import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 import { firebase } from "../../firebase";
 import { themes } from "../../themes/Themes";
+import NoAuthorization from "../../components/NoAuthorization";
 import API from "../../utils/API";
 import AccountDetails from "../../components/AccountDetails";
 import UpdateProfilePictureModal from "../../components/Modal/UpdateProfilePictureModal";
@@ -17,6 +18,7 @@ export default class Account extends Component {
     super(props)
     this.state = {
       loggedin: false,
+      pageLoaded: false,
       admin: false,
       originUrl: window.location.origin,
       user: "",
@@ -98,6 +100,9 @@ export default class Account extends Component {
       case "dark":
         this.useDarkTheme(themeType);
         this.getVehicleData();
+        break;
+      default:
+        alert("Theme error. Try reloading the page.");
     }
   };
 
@@ -108,7 +113,7 @@ export default class Account extends Component {
    */
   useCarSpaceTheme = themeType => {
     API.renderTheme(this.state.userId, themeType)
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
   };
 
   /**
@@ -118,7 +123,7 @@ export default class Account extends Component {
    */
   useLightTheme = themeType => {
     API.renderTheme(this.state.userId, themeType)
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
   };
 
   /**
@@ -141,7 +146,8 @@ export default class Account extends Component {
           this.setState({
             vehicleCount: res.data.vehicles.length,
             admin: res.data.admin,
-            theme: res.data.theme
+            theme: res.data.theme,
+            pageLoaded: true
           }, () => {
             this.getThemeAndRender();
           })
@@ -171,6 +177,9 @@ export default class Account extends Component {
         break;
       case "dark":
         this.setState({ currentTheme: themes.dark });
+        break;
+      default:
+        alert("Theme error. Try reloading the page.");
     }
   };
 
@@ -400,60 +409,65 @@ export default class Account extends Component {
         {
           this.state.loggedin ?
             (
-              <React.Fragment>
-                <ToastContainer />
-                <Container>
-                  <AccountDetails
-                    handleChange={this.handleChange}
-                    userPhotoUrl={this.state.userPhotoUrl}
-                    userEmail={this.state.userEmail}
-                    userId={this.state.userId}
-                    userDisplayName={this.state.userDisplayName}
-                    showUniqueUserId={this.state.showUniqueUserId}
-                    showUniqueUserIdToPage={this.showUniqueUserIdToPage}
-                    showMaskUniqueUserId={this.state.showMaskUniqueUserId}
-                    hideUniqueUserIdToPage={this.hideUniqueUserIdToPage}
-                    loadingError={this.state.loadingError}
-                    vehicleCount={this.state.vehicleCount}
-                    userAccountCreationTime={this.state.userAccountCreationTime}
-                    userAccountLastSignIn={this.state.userAccountLastSignIn}
-                    updateDisplayName={this.updateDisplayName}
-                    newDisplayName={this.state.newDisplayName}
-                    updatePassword={this.updatePassword}
-                    newPassword={this.state.newPassword}
-                    newProfilePicture={this.state.newProfilePicture}
-                    confirmNewPassword={this.state.confirmNewPassword}
-                    showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
-                    showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
-                    handleThemeSelection={this.handleThemeSelection}
-                    admin={this.state.admin}
-                    theme={this.state.theme}
-                    currentTheme={this.state.currentTheme}
-                  />
-                </Container>
-                <UpdateProfilePictureModal
-                  showUpdateProfilePictureModal={this.state.showUpdateProfilePictureModal}
-                  updateProfilePicture={this.updateProfilePicture}
-                  hideUpdateProfilePictureModal={this.hideUpdateProfilePictureModal}
-                  newProfilePicture={this.state.newProfilePicture}
-                />
-                <UpdateDisplayNameModal
-                  showUpdateDisplayNameModal={this.state.showUpdateDisplayNameModal}
-                  updateDisplayName={this.updateDisplayName}
-                  hideUpdateDisplayNameModal={this.hideUpdateDisplayNameModal}
-                  newDisplayName={this.state.newDisplayName}
-                />
-                <UpdateProfilePictureSuccessModal
-                  showUpdateProfilePictureSuccessModal={this.state.showUpdateProfilePictureSuccessModal}
-                  hideUpdateProfilePictureSuccessModal={this.hideUpdateProfilePictureSuccessModal}
-                />
-                <UpdateDisplayNameSuccessModal
-                  showUpdateDisplayNameSuccessModal={this.state.showUpdateDisplayNameSuccessModal}
-                  hideUpdateDisplayNameSuccessModal={this.hideUpdateDisplayNameSuccessModal}
-                />
-              </React.Fragment>
+              this.state.pageLoaded ?
+                (
+                  <React.Fragment>
+                    <ToastContainer />
+                    <Container>
+                      <AccountDetails
+                        handleChange={this.handleChange}
+                        userPhotoUrl={this.state.userPhotoUrl}
+                        userEmail={this.state.userEmail}
+                        userId={this.state.userId}
+                        userDisplayName={this.state.userDisplayName}
+                        showUniqueUserId={this.state.showUniqueUserId}
+                        showUniqueUserIdToPage={this.showUniqueUserIdToPage}
+                        showMaskUniqueUserId={this.state.showMaskUniqueUserId}
+                        hideUniqueUserIdToPage={this.hideUniqueUserIdToPage}
+                        loadingError={this.state.loadingError}
+                        vehicleCount={this.state.vehicleCount}
+                        userAccountCreationTime={this.state.userAccountCreationTime}
+                        userAccountLastSignIn={this.state.userAccountLastSignIn}
+                        updateDisplayName={this.updateDisplayName}
+                        newDisplayName={this.state.newDisplayName}
+                        updatePassword={this.updatePassword}
+                        newPassword={this.state.newPassword}
+                        newProfilePicture={this.state.newProfilePicture}
+                        confirmNewPassword={this.state.confirmNewPassword}
+                        showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
+                        showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
+                        handleThemeSelection={this.handleThemeSelection}
+                        admin={this.state.admin}
+                        theme={this.state.theme}
+                        currentTheme={this.state.currentTheme}
+                      />
+                    </Container>
+                    <UpdateProfilePictureModal
+                      showUpdateProfilePictureModal={this.state.showUpdateProfilePictureModal}
+                      updateProfilePicture={this.updateProfilePicture}
+                      hideUpdateProfilePictureModal={this.hideUpdateProfilePictureModal}
+                      newProfilePicture={this.state.newProfilePicture}
+                    />
+                    <UpdateDisplayNameModal
+                      showUpdateDisplayNameModal={this.state.showUpdateDisplayNameModal}
+                      updateDisplayName={this.updateDisplayName}
+                      hideUpdateDisplayNameModal={this.hideUpdateDisplayNameModal}
+                      newDisplayName={this.state.newDisplayName}
+                    />
+                    <UpdateProfilePictureSuccessModal
+                      showUpdateProfilePictureSuccessModal={this.state.showUpdateProfilePictureSuccessModal}
+                      hideUpdateProfilePictureSuccessModal={this.hideUpdateProfilePictureSuccessModal}
+                    />
+                    <UpdateDisplayNameSuccessModal
+                      showUpdateDisplayNameSuccessModal={this.state.showUpdateDisplayNameSuccessModal}
+                      hideUpdateDisplayNameSuccessModal={this.hideUpdateDisplayNameSuccessModal}
+                    />
+                  </React.Fragment>
+                ) : (
+                  <Loading />
+                )
             ) : (
-              <Loading />
+              <NoAuthorization />
             )
         }
       </React.Fragment>

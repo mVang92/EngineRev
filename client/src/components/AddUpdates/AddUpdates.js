@@ -47,7 +47,7 @@ class AddUpdates extends Component {
             </div>
           </div>
         </form>
-        <hr />
+        <hr className={this.props.currentTheme.hr}/>
       </React.Fragment>
     );
   }

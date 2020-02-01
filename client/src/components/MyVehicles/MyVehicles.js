@@ -40,7 +40,7 @@ class MyVehicles extends Component {
                                       state: [this.props.currentTheme]
                                     }}>
                                       <div className={`vehicleItemList ${this.props.currentTheme.vehicleItemList}`}>
-                                        <div className={`}text-dark wrapword ${this.props.currentTheme.vehicleItemListFont}`}>
+                                        <div className={`text-dark wrapword ${this.props.currentTheme.vehicleItemListFont}`}>
                                           {vehicle.year} {vehicle.make} {vehicle.model}
                                         </div>
                                       </div>

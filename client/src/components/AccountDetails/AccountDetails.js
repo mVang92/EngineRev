@@ -138,7 +138,7 @@ class AccountDetails extends Component {
               <div className="col-md-12">
                 <button
                   id="lightThemeToggleButton"
-                  title="CarSpace Theme"
+                  title="Light Theme"
                   type="button"
                   onClick={(event) => this.props.handleThemeSelection(event, "light")}>
                   Light
@@ -149,7 +149,7 @@ class AccountDetails extends Component {
               <div className="col-md-12">
                 <button
                   id="darkThemeToggleButton"
-                  title="CarSpace Theme"
+                  title="Dark Theme"
                   type="button"
                   onClick={(event) => this.props.handleThemeSelection(event, "dark")}>
                   Dark
