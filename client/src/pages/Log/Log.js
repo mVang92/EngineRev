@@ -59,7 +59,10 @@ export default class Log extends Component {
       showUpdatedFutureDateConfirmationModal: false,
       showEditOneVehicleNameModal: false,
       showUpdatedVehicleYearNanErrorModal: false,
+      disableAddServiceLogButton: false,
       disableDeleteOneVehicleButton: true,
+      disableConfirmSaveEditServiceLogButton: false,
+      disableConfirmSaveEditVehicleNameButton: false,
       disableDeleteVehicleButtonTimer: ""
     };
   };
@@ -267,21 +270,26 @@ export default class Log extends Component {
   /**
    * Update one vehicle name from record
    * 
-   * @param updatedVehicleName  the updated name for the vehicle
+   * @param updatedVehicleName the updated name for the vehicle
    */
   handleUpdateOneVehicleName = updatedVehicleName => {
+    this.setState({ disableConfirmSaveEditVehicleNameButton: true });
     API.updateVehicleNameForOneVehicle(this.state.vehicleId, updatedVehicleName)
       .then(() => {
         this.updateOneVehicleNameSuccessNotification();
         this.hideEditOneVehicleNameModal();
+        this.componentDidMount();
         this.setState({
           updatedYear: "",
           updatedMake: "",
-          updatedModel: ""
+          updatedModel: "",
+          disableConfirmSaveEditVehicleNameButton: false
         });
-        this.componentDidMount();
       })
-      .catch(err => this.updateOneVehicleNameFailNotification(err));
+      .catch(err => {
+        this.updateOneVehicleNameFailNotification(err);
+        this.setState({ disableConfirmSaveEditVehicleNameButton: false });
+      });
   };
 
   /**
@@ -302,6 +310,7 @@ export default class Log extends Component {
     let serviceLogDateMemory = serviceLogDate.toLocaleDateString("en-US");
     let serviceLogMileageMemory = this.state.mileage;
     let serviceLogServiceMemory = this.state.service;
+    this.setState({ disableAddServiceLogButton: true });
     API.addOneLogForOneVehicle(creatorId, vehicleId, serviceLogToStore)
       .then(() => {
         this.addOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory);
@@ -309,11 +318,15 @@ export default class Log extends Component {
           date: "",
           mileage: "",
           service: "",
-          comment: ""
+          comment: "",
+          disableAddServiceLogButton: false
         });
         this.componentDidMount();
       })
-      .catch(err => this.addOneServiceLogFailNotification(err));
+      .catch(err => {
+        this.addOneServiceLogFailNotification(err);
+        this.setState({ disableAddServiceLogButton: false });      
+      });
   };
 
   /**
@@ -368,20 +381,25 @@ export default class Log extends Component {
     let serviceLogDateMemory = serviceLogDateMemoryToNewDate.toLocaleDateString("en-US");
     let serviceLogMileageMemory = this.state.serviceLogMileage;
     let serviceLogServiceMemory = this.state.serviceLogService;
+    this.setState({ disableConfirmSaveEditServiceLogButton: true });
     API.updateOneLogForOneVehicle(vehicleId, serviceLogId, serviceLogToUpdate)
       .then(() => {
         this.hideEditOneServiceLogModal();
         this.hideUpdatedFutureDateConfirmationModal();
         this.updateOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory);
+        this.componentDidMount();
         this.setState({
           serviceLogDate: "",
           serviceLogMileage: "",
           serviceLogService: "",
-          serviceLogComment: ""
+          serviceLogComment: "",
+          disableConfirmSaveEditServiceLogButton: false
         });
-        this.componentDidMount();
       })
-      .catch(err => this.updateOneServiceLogFailNotification(err));
+      .catch(err => {
+        this.updateOneServiceLogFailNotification(err);
+        this.setState({ disableConfirmSaveEditServiceLogButton: false });
+      });
   };
 
   /**
@@ -390,9 +408,7 @@ export default class Log extends Component {
   handleDeleteOneServiceLog = () => {
     API.deleteOneServiceLog(this.state.vehicleId, this.state.serviceLogId)
       .then(() => {
-        setTimeout(() => {
-          this.setState({ showDeleteOneLogModal: false });
-        }, 200);
+        this.setState({ showDeleteOneLogModal: false });
         this.componentDidMount();
         this.deleteOneServiceLogSuccessNotification();
       })
@@ -795,6 +811,7 @@ export default class Log extends Component {
                           handleChange={this.handleChange}
                           handleResetLogVehicleForm={this.handleResetLogVehicleForm}
                           checkUserEnteredServiceLogInput={this.checkUserEnteredServiceLogInput}
+                          disableAddServiceLogButton={this.state.disableAddServiceLogButton}
                         />
                         {
                           this.state.year ?

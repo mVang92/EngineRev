@@ -15,6 +15,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       showAddVehicleYearNanErrorModal: false,
+      disableAddVehicleButton: false,
       loggedin: false,
       pageLoaded: false,
       uid: "",
@@ -92,15 +93,22 @@ export default class App extends Component {
     const id = this.state.uid;
     const date = new Date();
     const futureYear = date.getFullYear() + 2;
+    this.setState({ disableAddVehicleButton: true });
     if (isNaN(newVehicle.year) || (newVehicle.year < 1885) || (newVehicle.year > futureYear)) {
       this.showAddVehicleYearNanErrorModal();
+      this.setState({ disableAddVehicleButton: false });
     } else {
       API.addOneVehicle(id, newVehicle)
         .then(() => {
           this.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
           this.onAuthStateChanged();
+          this.setState({ disableAddVehicleButton: false });
+          document.getElementById("field").reset();
         })
-        .catch(err => this.addOneVehicleFailNotification(err));
+        .catch(err => {
+          this.addOneVehicleFailNotification(err);
+          this.setState({ disableAddVehicleButton: false });
+        });
     };
   };
 
@@ -169,6 +177,7 @@ export default class App extends Component {
                       handleResetAddVehicleFields={this.handleResetAddVehicleFields}
                       addVehicle={this.handleAddOneVehicle}
                       userProfilePicture={this.state.userProfilePicture}
+                      disableAddVehicleButton={this.state.disableAddVehicleButton}
                     />
                   </Container>
                 ) : (

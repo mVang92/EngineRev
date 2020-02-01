@@ -28,7 +28,6 @@ class AddVehicle extends Component {
       }, () => {
         this.props.addVehicle(this.state.newVehicle);
       });
-      document.getElementById("field").reset();
     };
   };
 
@@ -129,7 +128,8 @@ class AddVehicle extends Component {
                     id="addVehicleButton"
                     title="Add This Vehicle"
                     type="submit"
-                    className="addBtn">
+                    className="addBtn"
+                    disabled={this.props.disableAddVehicleButton}>
                     Add Vehicle
                   </button>
                 </div>

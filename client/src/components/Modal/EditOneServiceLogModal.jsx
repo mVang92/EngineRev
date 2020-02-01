@@ -110,7 +110,8 @@ const EditOneServiceLogModal = props => {
                                     id="confirmSaveEditServiceLogButton"
                                     title="Save Service Log"
                                     className="cancelBtn"
-                                    type="submit">
+                                    type="submit"
+                                    disabled={props.state.disableConfirmSaveEditServiceLogButton}>
                                     Save
                                 </button>
                             </div>
