@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { firebase } from "../../firebase"
+import { themes } from "../../themes/Themes";
 import updateApi from "../../utils/updateApi";
 import vehicleApi from "../../utils/API";
 import OneUpdate from "../../components/OneUpdate";
 import AddUpdates from "../../components/AddUpdates";
+import Loading from "../../components/Loading";
 import { ToastContainer, toast } from "react-toastify";
 
 export default class Updates extends Component {
@@ -13,8 +15,10 @@ export default class Updates extends Component {
     this.state = {
       allUpdates: [],
       admin: false,
+      pageLoaded: false,
       updateChanges: "",
-      knownIssues: ""
+      knownIssues: "",
+      currentTheme: ""
     };
   };
 
@@ -75,12 +79,37 @@ export default class Updates extends Component {
         vehicleApi.getAllVehiclesForUser(user.uid)
           .then(res =>
             this.setState({
-              admin: res.data.admin
+              admin: res.data.admin,
+              theme: res.data.theme,
+              pageLoaded: true,
+            }, () => {
+              this.getThemeAndRender();
             })
           )
           .catch(err => this.errorNotification(err));
-      };
+      } else {
+        this.setState({ pageLoaded: true });
+      }
     });
+  };
+
+  /**
+   * Get the user theme and render it
+   */
+  getThemeAndRender = () => {
+    switch (this.state.theme) {
+      case "carSpace":
+        this.setState({ currentTheme: themes.carSpace });
+        break;
+      case "light":
+        this.setState({ currentTheme: themes.light });
+        break;
+      case "dark":
+        this.setState({ currentTheme: themes.dark });
+        break;
+      default:
+        alert("Theme error. Try reloading the page.");
+    }
   };
 
   /**
@@ -101,44 +130,56 @@ export default class Updates extends Component {
 
   render() {
     return (
-      <div className="container largeBottomMarginMobileDisplay">
-        <div id="recentUpdatesContainer">
-          <div id="field"></div>
-          <h4 className="text-center"><label>Release Notes and Updates</label></h4>
-          <hr />
-          {
-            this.state.admin ?
-              (
-                <AddUpdates
-                  handleChange={this.handleChange}
-                  addOneUpdate={this.addOneUpdate}
-                  updateChanges={this.state.updateChanges}
-                  knownIssues={this.state.knownIssues}
-                />
-              ) : (
-                null
-              )
-          }
-          {
-            this.state.allUpdates.map(update => {
-              return (
-                <OneUpdate
-                  key={update._id}
-                  _id={update._id}
-                  date={update.date}
-                  updateChanges={update.updateChanges}
-                  knownIssues={update.knownIssues}
-                />
-              )
-            })
-          }
-          <br />
-          <Link to={{ pathname: "/" }}>
-            <button className="backHomeBtn">Back</button>
-          </Link>
-          <ToastContainer />
-        </div>
-      </div>
+      <React.Fragment>
+        {
+          this.state.pageLoaded ?
+            (
+              <div className="container largeBottomMarginMobileDisplay">
+                <div id="recentUpdatesContainer" className={this.state.currentTheme.background}>
+                  <div id="field"></div>
+                  <h4 className="text-center"><label>Release Notes and Updates</label></h4>
+                  <hr className={this.state.currentTheme.hr} />
+                  {
+                    this.state.admin ?
+                      (
+                        <AddUpdates
+                          handleChange={this.handleChange}
+                          addOneUpdate={this.addOneUpdate}
+                          updateChanges={this.state.updateChanges}
+                          knownIssues={this.state.knownIssues}
+                          currentTheme={this.state.currentTheme}
+                        />
+                      ) : (
+                        null
+                      )
+                  }
+                  {
+                    this.state.allUpdates.map(update => {
+                      return (
+                        <OneUpdate
+                          key={update._id}
+                          _id={update._id}
+                          date={update.date}
+                          updateChanges={update.updateChanges}
+                          knownIssues={update.knownIssues}
+                          currentTheme={this.state.currentTheme}
+                        />
+                      )
+                    })
+                  }
+                  <br />
+                  <Link to={{ pathname: "/" }}>
+                    <button className="backHomeBtn">Back</button>
+                  </Link>
+                  <ToastContainer />
+                </div>
+              </div>
+            ) : (
+              <Loading />
+            )
+        }
+      </React.Fragment>
+
     );
   };
 };

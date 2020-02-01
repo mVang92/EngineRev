@@ -15,7 +15,7 @@ export default class About extends Component {
       <div className="container">
         <div id="aboutCarspaceContainer" className="text-center ">
           <br /><br />
-          <img id="carSpaceLogo" src={carSpaceLogo}></img>
+          <img id="carSpaceLogo" src={carSpaceLogo} alt="CarSpace Logo"></img>
         </div>
         <div className="box">
           <div className="row">

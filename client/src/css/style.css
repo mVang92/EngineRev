@@ -23,7 +23,7 @@ body {
 }
 
 .carSpaceThemeBackground {
-    transition-duration: 0.1s;
+    transition-duration: 0.5s;
     background: none;
 }
 
@@ -45,7 +45,7 @@ body {
 }
 
 .lightThemeBackground {
-    transition-duration: 0.1s;
+    transition-duration: 0.5s;
     background: rgb(255, 255, 255) !important;
 }
 
@@ -71,8 +71,12 @@ body {
     color: rgb(0, 0, 0) !important;
 }
 
+.lightThemeOneUpdate {
+    color: rgb(0, 0, 0);
+}
+
 .darkThemeBackground {
-    transition-duration: 0.1s;
+    transition-duration: 0.5s;
     background: rgb(80, 80, 80) !important;
     color: white !important;
 }
@@ -97,6 +101,11 @@ body {
 
 .darkThemeVehicleItemListFont {
     color: rgb(255, 255, 255) !important;
+}
+
+.darkThemeOneUpdate {
+    background: rgb(200, 200, 200) !important;
+    color: rgb(0, 0, 0);
 }
 
 #carSpaceLogo {
@@ -586,10 +595,19 @@ input {
 #carSpaceThemeToggleButton,
 #lightThemeToggleButton,
 #darkThemeToggleButton {
+    background: rgb(225, 225, 225);
+    transition-duration: 0.2s;
     width: 60%;
     margin-bottom: 1rem;
     border-radius: 5px;
     cursor: pointer;
+}
+
+#carSpaceThemeToggleButton:hover,
+#lightThemeToggleButton:hover,
+#darkThemeToggleButton:hover {
+    background: rgb(255, 255, 255);
+    transition-duration: 0.1s;
 }
 
 .wrapword {
