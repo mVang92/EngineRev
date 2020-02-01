@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 import { firebase } from "../../firebase";
+import { themes } from "../../themes/Themes";
 import API from "../../utils/API";
 import AccountDetails from "../../components/AccountDetails";
 import UpdateProfilePictureModal from "../../components/Modal/UpdateProfilePictureModal";
@@ -27,6 +28,7 @@ export default class Account extends Component {
       newPassword: "",
       confirmNewPassword: "",
       theme: "",
+      currentTheme: "",
       vehicleData: "",
       vehicleCount: "Loading...",
       loadingError: "",
@@ -66,7 +68,7 @@ export default class Account extends Component {
           userAccountLastSignIn: this.props.location.state[4],
           userId: this.props.match.params.id
         });
-        this.getVehicleData();
+        this.getVehicleData()
       };
     });
   };
@@ -87,12 +89,15 @@ export default class Account extends Component {
     switch (themeType) {
       case "carSpace":
         this.useCarSpaceTheme(themeType);
+        this.getVehicleData();
         break;
       case "light":
         this.useLightTheme(themeType);
+        this.getVehicleData();
         break;
       case "dark":
         this.useDarkTheme(themeType);
+        this.getVehicleData();
     }
   };
 
@@ -103,12 +108,7 @@ export default class Account extends Component {
    */
   useCarSpaceTheme = themeType => {
     API.renderTheme(this.state.userId, themeType)
-      .then(() => {
-        console.log("useCarSpaceTheme")
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    .catch(err => console.log(err));
   };
 
   /**
@@ -118,12 +118,7 @@ export default class Account extends Component {
    */
   useLightTheme = themeType => {
     API.renderTheme(this.state.userId, themeType)
-      .then(() => {
-        console.log("useLightTheme")
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    .catch(err => console.log(err));
   };
 
   /**
@@ -133,12 +128,7 @@ export default class Account extends Component {
    */
   useDarkTheme = themeType => {
     API.renderTheme(this.state.userId, themeType)
-      .then(() => {
-        console.log("useDarkTheme")
-      })
-      .catch(err => {
-        console.log(err)
-      })
+      .catch(err => console.log(err));
   };
 
   /**
@@ -152,16 +142,36 @@ export default class Account extends Component {
             vehicleCount: res.data.vehicles.length,
             admin: res.data.admin,
             theme: res.data.theme
+          }, () => {
+            this.getThemeAndRender();
           })
         )
         .catch(err =>
           this.setState({ loadingError: err },
-            this.loadVehiclesFailNotification(err)));
+            this.loadVehiclesFailNotification(err)
+          )
+        );
     } else (
       setTimeout(() => {
         this.getVehicleData();
       }, 10)
     );
+  };
+
+  /**
+   * Get user theme and render it
+   */
+  getThemeAndRender = () => {
+    switch (this.state.theme) {
+      case "carSpace":
+        this.setState({ currentTheme: themes.carSpace });
+        break;
+      case "light":
+        this.setState({ currentTheme: themes.light });
+        break;
+      case "dark":
+        this.setState({ currentTheme: themes.dark });
+    }
   };
 
   /**
@@ -387,7 +397,6 @@ export default class Account extends Component {
   render() {
     return (
       <React.Fragment>
-        {console.log(this.state.theme)}
         {
           this.state.loggedin ?
             (
@@ -419,6 +428,7 @@ export default class Account extends Component {
                     handleThemeSelection={this.handleThemeSelection}
                     admin={this.state.admin}
                     theme={this.state.theme}
+                    currentTheme={this.state.currentTheme}
                   />
                 </Container>
                 <UpdateProfilePictureModal

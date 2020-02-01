@@ -1,11 +1,23 @@
 export const themes = {
   carSpace: {
-    background: "rgb(255, 0, 0)"
+    background: "carSpaceThemeBackground",
+    hr: "carSpaceThemeHr",
+    serviceLogs: "carSpaceThemeServiceLogs",
+    vehicleItemList: "carSpaceThemeVehicleItemList",
+    vehicleItemListFont: "carSpaceThemeVehicleItemListFont"
   },
   light: {
-    background: "rgb(245, 245, 245)"
+    background: "lightThemeBackground",
+    hr: "lightThemeHr",
+    serviceLogs: "lightThemeServiceLogs",
+    vehicleItemList: "lightThemeVehicleItemList",
+    vehicleItemListFont: "lightThemeVehicleItemListFont"
   },
   dark: {
-    background: "rgb(32, 32, 32)"
+    background: "darkThemeBackground",
+    hr: "darkThemeHr",
+    serviceLogs: "darkThemeServiceLogs",
+    vehicleItemList: "darkThemeVehicleItemList",
+    vehicleItemListFont: "darkThemeVehicleItemListFont"
   },
 };

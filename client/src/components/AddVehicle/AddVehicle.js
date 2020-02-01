@@ -66,7 +66,7 @@ class AddVehicle extends Component {
             }
             <div className="col-md-6"></div>
           </div>
-          <hr></hr>
+          <hr className={this.props.currentTheme.hr}></hr>
           <div>
             <div className="row">
               <div className="col-md-12 text-center">

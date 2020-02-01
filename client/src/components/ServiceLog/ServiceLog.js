@@ -38,7 +38,7 @@ const ServiceLog = props => {
 
   return (
     <React.Fragment key={serviceLogId}>
-      <div className="row serviceLogFullDetails" style={serviceLogFullDetails}>
+      <div className={`row serviceLogFullDetails ${props.currentTheme.serviceLogs}`} style={serviceLogFullDetails}>
         <div className="col-md-2 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Date: </strong></span>{serviceLogDateFormatted}</div>
         <div className="col-md-2 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Mileage: </strong></span>{mileage} miles</div>
         <div className="col-md-3 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Service: </strong></span>{service}</div>

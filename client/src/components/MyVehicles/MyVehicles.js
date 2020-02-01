@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { VehicleItem } from "../VehicleItem";
 import { Link } from "react-router-dom";
 
 class MyVehicles extends Component {
@@ -24,7 +23,7 @@ class MyVehicles extends Component {
                                 </div>
                               ) : (
                                 <div className="col-md-12">
-                                  <label><strong>Vehicles on Record:</strong></label>
+                                  <label>Vehicles on Record:</label>
                                 </div>
                               )
                           }
@@ -37,13 +36,14 @@ class MyVehicles extends Component {
                                   <div className="col-md-2"></div>
                                   <div title={vehicle.year + " " + vehicle.make + " " + vehicle.model} className="col-md-8">
                                     <Link to={{
-                                      pathname: "/account/" + this.props.vehicleData._id + "/vehicle/" + vehicle._id
+                                      pathname: "/account/" + this.props.vehicleData._id + "/vehicle/" + vehicle._id,
+                                      state: [this.props.currentTheme]
                                     }}>
-                                      <VehicleItem>
-                                        <div className="text-dark wrapword">
+                                      <div className={`vehicleItemList ${this.props.currentTheme.vehicleItemList}`}>
+                                        <div className={`}text-dark wrapword ${this.props.currentTheme.vehicleItemListFont}`}>
                                           {vehicle.year} {vehicle.make} {vehicle.model}
                                         </div>
-                                      </VehicleItem>
+                                      </div>
                                     </Link>
                                   </div>
                                   <div className="col-md-2"></div>

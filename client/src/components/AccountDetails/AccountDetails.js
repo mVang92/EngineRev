@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 
 class AccountDetails extends Component {
   render() {
+    const { currentTheme } = this.props;
     let uniqueUserId = this.props.showUniqueUserId ? "showUniqueUserId" : "hideUniqueUserId";
     let uniqueUserIdMask = this.props.showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
 
     return (
-      <div id="accountPage" className="mt-3 box">
+      <div id="accountPage" className={`mt-3 box ${currentTheme.background}`}>
         <div className="row text-center">
           <div className="col-md-12">
             <label><h4>Account</h4></label>
@@ -23,7 +24,7 @@ class AccountDetails extends Component {
           <div className="col-md-4"></div>
           <div className="col-md-4"></div>
         </div>
-        <hr />
+        <hr className={currentTheme.hr} />
         <div className="row">
           <div id="scrollableProfilePictureAccountDetails" className="col-md-4 text-center">
             <a href={this.props.userPhotoUrl} target="_blank">
@@ -74,7 +75,7 @@ class AccountDetails extends Component {
             </div>
           </div>
         </div>
-        <hr />
+        <hr className={currentTheme.hr} />
         <div className="row">
           <div className="col-md-4"><label><strong>Unique User Id:</strong></label></div>
           <div className="col-md-4">
@@ -90,8 +91,7 @@ class AccountDetails extends Component {
                     title="Hide Unique Id"
                     type="button"
                     className="cancelBtn"
-                    onClick={this.props.hideUniqueUserIdToPage}
-                  >
+                    onClick={this.props.hideUniqueUserIdToPage}>
                     Hide
                   </button>
                 ) : (
@@ -100,8 +100,7 @@ class AccountDetails extends Component {
                     title="Show Unique Id"
                     type="button"
                     className="cancelBtn"
-                    onClick={this.props.showUniqueUserIdToPage}
-                  >
+                    onClick={this.props.showUniqueUserIdToPage}>
                     Show
                   </button>
                 )
@@ -120,43 +119,47 @@ class AccountDetails extends Component {
           <div className="col-md-4">{this.props.userAccountLastSignIn}</div>
           <div className="col-md-4"></div>
         </div>
-        <hr />
+        <hr className={currentTheme.hr} />
         <div className="row">
           <div className="col-md-4"><label><strong>Themes</strong></label></div>
-          <div className="col-md-4">
+          <div className="col-md-4 text-center">
             <div className="row">
-              <div className="col-md-4">
+              <div className="col-md-12">
                 <button
                   id="carSpaceThemeToggleButton"
                   title="CarSpace Theme"
                   type="button"
                   onClick={(event) => this.props.handleThemeSelection(event, "carSpace")}>
                   CarSpace
-                  </button>
+                </button>
               </div>
-              <div className="col-md-4">
+            </div>
+            <div className="row">
+              <div className="col-md-12">
                 <button
                   id="lightThemeToggleButton"
                   title="CarSpace Theme"
                   type="button"
                   onClick={(event) => this.props.handleThemeSelection(event, "light")}>
                   Light
-                  </button>
+                </button>
               </div>
-              <div className="col-md-4">
+            </div>
+            <div className="row">
+              <div className="col-md-12">
                 <button
                   id="darkThemeToggleButton"
                   title="CarSpace Theme"
                   type="button"
                   onClick={(event) => this.props.handleThemeSelection(event, "dark")}>
                   Dark
-                  </button>
+                </button>
               </div>
             </div>
           </div>
           <div className="col-md-4"></div>
         </div>
-        <br />
+        <hr className={currentTheme.hr} />
         <form onSubmit={this.props.showUpdateProfilePictureModal}>
           <div className="row">
             <div className="col-md-4"><label><strong>Update Profile Picture:</strong></label></div>
@@ -277,7 +280,7 @@ class AccountDetails extends Component {
             </div>
           </div>
         </form>
-        <hr />
+        <hr className={currentTheme.hr} />
         <Link to={{ pathname: "/" }}>
           <button className="backHomeBtn">Back</button>
         </Link>

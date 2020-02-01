@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { firebase } from "../../firebase"
+import { firebase } from "../../firebase";
+import { themes } from "../../themes/Themes";
 import Modal from "react-modal";
 import API from "../../utils/API";
 import AddVehicleYearNanErrorModal from "../../components/Modal/AddVehicleYearNanErrorModal";
@@ -19,6 +20,8 @@ export default class App extends Component {
       loggedin: false,
       pageLoaded: false,
       uid: "",
+      theme: "",
+      currentTheme: "",
       vehicleData: [],
       vehicleCount: 0,
       message: "",
@@ -68,7 +71,10 @@ export default class App extends Component {
           .then(res =>
             this.setState({
               vehicleData: res.data,
-              uid: user.uid
+              uid: user.uid,
+              theme: res.data.theme
+            }, () => {
+              this.getThemeAndRender();
             })
           )
           .catch(err => this.loadVehiclesFailNotification(err));
@@ -110,6 +116,22 @@ export default class App extends Component {
           this.setState({ disableAddVehicleButton: false });
         });
     };
+  };
+
+    /**
+   * Get user theme and render it
+   */
+  getThemeAndRender = () => {
+    switch (this.state.theme) {
+      case "carSpace":
+        this.setState({ currentTheme: themes.carSpace });
+        break;
+      case "light":
+        this.setState({ currentTheme: themes.light });
+        break;
+      case "dark":
+        this.setState({ currentTheme: themes.dark });
+    }
   };
 
   /**
@@ -178,6 +200,7 @@ export default class App extends Component {
                       addVehicle={this.handleAddOneVehicle}
                       userProfilePicture={this.state.userProfilePicture}
                       disableAddVehicleButton={this.state.disableAddVehicleButton}
+                      currentTheme={this.state.currentTheme}
                     />
                   </Container>
                 ) : (
