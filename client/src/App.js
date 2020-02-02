@@ -8,7 +8,8 @@ import Account from "./pages/Account";
 import About from "./pages/About";
 import Updates from "./pages/Updates";
 import NoMatch from "./pages/NoMatch";
-import "./css/style.css";
+import "./css/mainStyle.css";
+import "./css/themesStyle.css";
 
 export default class App extends React.Component {
   render() {
