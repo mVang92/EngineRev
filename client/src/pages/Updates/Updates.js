@@ -18,6 +18,7 @@ export default class Updates extends Component {
       pageLoaded: false,
       updateChanges: "",
       knownIssues: "",
+      theme: "",
       currentTheme: ""
     };
   };
@@ -76,7 +77,7 @@ export default class Updates extends Component {
   checkIfUserIsAdmin = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        vehicleApi.getAllVehiclesForUser(user.uid)
+        vehicleApi.findUserInformationForOneUser(user.uid)
           .then(res =>
             this.setState({
               admin: res.data.admin,
@@ -97,18 +98,25 @@ export default class Updates extends Component {
    * Get the user theme and render it
    */
   getThemeAndRender = () => {
-    switch (this.state.theme) {
-      case "carSpace":
-        this.setState({ currentTheme: themes.carSpace });
-        break;
-      case "light":
-        this.setState({ currentTheme: themes.light });
-        break;
-      case "dark":
-        this.setState({ currentTheme: themes.dark });
-        break;
-      default:
-        alert("Theme error. Try reloading the page.");
+    if (this.state.theme) {
+      switch (this.state.theme) {
+        case "carSpace":
+          this.setState({ currentTheme: themes.carSpace });
+          break;
+        case "light":
+          this.setState({ currentTheme: themes.light });
+          break;
+        case "grey":
+          this.setState({ currentTheme: themes.grey });
+          document.body.style.backgroundColor = "rgb(128, 128, 128)";
+          break;
+        case "dark":
+          this.setState({ currentTheme: themes.dark });
+          document.body.style.backgroundColor = "rgb(32, 32, 32)";
+          break;
+        default:
+          alert("Error: Unable to process theme selection.");
+      }
     }
   };
 

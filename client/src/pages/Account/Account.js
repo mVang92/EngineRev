@@ -90,49 +90,33 @@ export default class Account extends Component {
     event.preventDefault();
     switch (themeType) {
       case "carSpace":
-        this.useCarSpaceTheme(themeType);
+        this.saveThemeForUser(themeType);
         this.getVehicleData();
         break;
       case "light":
-        this.useLightTheme(themeType);
+        this.saveThemeForUser(themeType);
+        this.getVehicleData();
+        break;
+      case "grey":
+        this.saveThemeForUser(themeType);
         this.getVehicleData();
         break;
       case "dark":
-        this.useDarkTheme(themeType);
+        this.saveThemeForUser(themeType);
         this.getVehicleData();
         break;
       default:
-        alert("Theme error. Try reloading the page.");
+        alert("Error: Unable to save theme selection.");
     }
   };
 
   /**
-   * Render CarSpace theme
+   * Save the selected theme to the database for the targeted user
    * 
    * @param themeType the theme to pass to the API
    */
-  useCarSpaceTheme = themeType => {
-    API.renderTheme(this.state.userId, themeType)
-      .catch(err => console.log(err));
-  };
-
-  /**
-   * Render Light theme
-   * 
-   * @param themeType the theme to pass to the API
-   */
-  useLightTheme = themeType => {
-    API.renderTheme(this.state.userId, themeType)
-      .catch(err => console.log(err));
-  };
-
-  /**
-   * Render Dark theme
-   * 
-   * @param themeType the theme to pass to the API
-   */
-  useDarkTheme = themeType => {
-    API.renderTheme(this.state.userId, themeType)
+  saveThemeForUser = themeType => {
+    API.saveThemeForUser(this.state.userId, themeType)
       .catch(err => console.log(err));
   };
 
@@ -141,7 +125,7 @@ export default class Account extends Component {
    */
   getVehicleData = () => {
     if (this.state.userId) {
-      API.getAllVehiclesForUser(this.state.userId)
+      API.findUserInformationForOneUser(this.state.userId)
         .then(res =>
           this.setState({
             vehicleCount: res.data.vehicles.length,
@@ -165,22 +149,29 @@ export default class Account extends Component {
   };
 
   /**
-   * Get user theme and render it
+   * Get the user theme and render it
    */
   getThemeAndRender = () => {
     if (this.state.theme) {
       switch (this.state.theme) {
         case "carSpace":
           this.setState({ currentTheme: themes.carSpace });
+          document.body.style.backgroundColor = "rgb(220, 220, 220)";
           break;
         case "light":
           this.setState({ currentTheme: themes.light });
+          document.body.style.backgroundColor = "rgb(235, 235, 235)";
+          break;
+        case "grey":
+          this.setState({ currentTheme: themes.grey });
+          document.body.style.backgroundColor = "rgb(128, 128, 128)";
           break;
         case "dark":
           this.setState({ currentTheme: themes.dark });
+          document.body.style.backgroundColor = "rgb(32, 32, 32)";
           break;
         default:
-          alert("Theme error. Try reloading the page.");
+          alert("Error: Unable to process theme selection.");
       }
     }
   };

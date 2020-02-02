@@ -29,6 +29,7 @@ export default class Log extends Component {
       loggedin: false,
       pageLoaded: false,
       currentTheme: "",
+      backgroundColor: "",
       vehicle: [],
       vehicleId: "",
       make: "",
@@ -79,7 +80,10 @@ export default class Log extends Component {
           vehicleId: this.props.match.params.id,
           uid: user.uid,
           loggedin: true,
-          currentTheme: this.props.location.state[0]
+          currentTheme: this.props.location.state[0],
+          backgroundColor: this.props.location.state[1]
+        }, () => {
+          document.body.style.backgroundColor = this.state.backgroundColor;
         });
         this.getOneVehicle();
       };

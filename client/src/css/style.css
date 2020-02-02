@@ -17,9 +17,7 @@ a {
 }
 
 body {
-    background: rgb(235, 235, 235);
-    background-image: linear-gradient(rgb(96, 96, 96), rgb(235, 235, 235));
-    background-repeat: no-repeat;
+    background: rgb(220, 220, 220);
 }
 
 .carSpaceThemeBackground {
@@ -50,7 +48,7 @@ body {
 }
 
 .lightThemeHr {
-    border-top: 1px solid rgb(255, 0, 0) !important;
+    border-top: 1px solid rgb(240, 240, 240) !important;
 }
 
 .lightThemeServiceLogs {
@@ -58,12 +56,12 @@ body {
 }
 
 .lightThemeVehicleItemList {
-    background: rgb(240, 240, 240) !important;
+    background: rgb(250, 250, 250) !important;
     box-shadow: -1px 0px 3px rgb(0, 0, 0) !important;
 }
 
 .lightThemeVehicleItemList:hover {
-    background: rgb(250, 250, 250) !important;
+    background: rgb(240, 240, 240) !important;
     box-shadow: -1px 0px 3px rgb(255, 0, 0) !important;
 }
 
@@ -75,14 +73,48 @@ body {
     color: rgb(0, 0, 0);
 }
 
+.greyThemeBackground {
+    transition-duration: 0.5s;
+    background: rgb(192, 192, 192) !important;
+    color: rgb(0, 0, 0) !important;
+}
+
+.greyThemeHr {
+    border-top: 1px solid rgb(32, 32, 32) !important;
+}
+
+.greyThemeServiceLogs {
+    color: rgb(0, 0, 0);
+}
+
+.greyThemeVehicleItemList {
+    background: rgb(215, 215, 215) !important;
+    box-shadow: -1px 0px 3px rgb(0, 0, 0) !important;
+}
+
+.greyThemeVehicleItemList:hover {
+    background: rgb(230, 230, 230) !important;
+    box-shadow: -1px 0px 3px rgb(92, 92, 92) !important;
+}
+
+.greyThemeVehicleItemListFont {
+    color: rgb(0, 0, 0) !important;
+}
+
+.greyThemeOneUpdate {
+    background: rgb(225, 225, 225) !important;
+    color: rgb(0, 0, 0);
+    box-shadow: -1px 0px 3px rgb(0, 0, 0) !Important;
+}
+
 .darkThemeBackground {
     transition-duration: 0.5s;
     background: rgb(80, 80, 80) !important;
-    color: white !important;
+    color: rgb(255, 255, 255) !important;
 }
 
 .darkThemeHr {
-    border-top: 1px solid rgb(200, 64, 64) !important;
+    border-top: 1px solid rgb(200, 200, 200) !important;
 }
 
 .darkThemeServiceLogs {
@@ -108,8 +140,9 @@ body {
     color: rgb(0, 0, 0);
 }
 
+.greyThemeRedText,
 .darkThemeRedText {
-    color: red !important;
+    color: rgb(220, 0, 0) !important;
     font-weight: bold;
 }
 
@@ -190,7 +223,7 @@ input {
 
 .box,
 #recentUpdatesContainer {
-    background: rgb(240, 240, 240);
+    background: rgb(235, 235, 235);
     padding: 1em;
     margin-bottom: 4rem;
 }
@@ -602,10 +635,11 @@ input {
 
 #carSpaceThemeToggleButton,
 #lightThemeToggleButton,
+#greyThemeToggleButton,
 #darkThemeToggleButton {
     background: rgb(225, 225, 225);
     transition-duration: 0.2s;
-    width: 60%;
+    width: 7rem;
     margin-bottom: 1rem;
     border-radius: 5px;
     cursor: pointer;
@@ -613,6 +647,7 @@ input {
 
 #carSpaceThemeToggleButton:hover,
 #lightThemeToggleButton:hover,
+#greyThemeToggleButton:hover,
 #darkThemeToggleButton:hover {
     background: rgb(255, 255, 255);
     transition-duration: 0.1s;
@@ -691,6 +726,13 @@ input {
     #editVehicleNameButton,
     #printPageViaDeleteButton {
         width: 6em;
+    }
+
+    #carSpaceThemeToggleButton,
+    #lightThemeToggleButton,
+    #greyThemeToggleButton,
+    #darkThemeToggleButton {
+        width: 6rem;
     }
 }
 

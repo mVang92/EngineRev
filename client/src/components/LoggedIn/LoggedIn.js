@@ -20,6 +20,7 @@ const LoggedIn = props => {
         vehicleCountForUser={props.vehicleCountForUser}
         currentTheme={props.currentTheme}
         errorMessage={props.errorMessage}
+        backgroundColor={props.backgroundColor}
       />
     </div>
   );
