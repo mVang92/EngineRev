@@ -20,132 +20,6 @@ body {
     background: rgb(220, 220, 220);
 }
 
-.carSpaceThemeBackground {
-    transition-duration: 0.5s;
-    background: none;
-}
-
-.carSpaceThemeHr {
-    border-top: 1px solid rgb(200, 200, 200) !important;
-}
-
-.carSpaceThemeServiceLogs {
-    color: none;
-}
-
-.carSpaceThemeVehicleItemList {
-    background: none;
-    box-shadow: none;
-}
-
-.carSpaceThemeVehicleItemListFont {
-    color: rgb(0, 0, 0);
-}
-
-.lightThemeBackground {
-    transition-duration: 0.5s;
-    background: rgb(255, 255, 255) !important;
-}
-
-.lightThemeHr {
-    border-top: 1px solid rgb(240, 240, 240) !important;
-}
-
-.lightThemeServiceLogs {
-    color: rgb(0, 0, 0);
-}
-
-.lightThemeVehicleItemList {
-    background: rgb(250, 250, 250) !important;
-    box-shadow: -1px 0px 3px rgb(0, 0, 0) !important;
-}
-
-.lightThemeVehicleItemList:hover {
-    background: rgb(240, 240, 240) !important;
-    box-shadow: -1px 0px 3px rgb(255, 0, 0) !important;
-}
-
-.lightThemeVehicleItemListFont {
-    color: rgb(0, 0, 0) !important;
-}
-
-.lightThemeOneUpdate {
-    color: rgb(0, 0, 0);
-}
-
-.greyThemeBackground {
-    transition-duration: 0.5s;
-    background: rgb(192, 192, 192) !important;
-    color: rgb(0, 0, 0) !important;
-}
-
-.greyThemeHr {
-    border-top: 1px solid rgb(32, 32, 32) !important;
-}
-
-.greyThemeServiceLogs {
-    color: rgb(0, 0, 0);
-}
-
-.greyThemeVehicleItemList {
-    background: rgb(215, 215, 215) !important;
-    box-shadow: -1px 0px 3px rgb(0, 0, 0) !important;
-}
-
-.greyThemeVehicleItemList:hover {
-    background: rgb(230, 230, 230) !important;
-    box-shadow: -1px 0px 3px rgb(92, 92, 92) !important;
-}
-
-.greyThemeVehicleItemListFont {
-    color: rgb(0, 0, 0) !important;
-}
-
-.greyThemeOneUpdate {
-    background: rgb(225, 225, 225) !important;
-    color: rgb(0, 0, 0);
-    box-shadow: -1px 0px 3px rgb(0, 0, 0) !Important;
-}
-
-.darkThemeBackground {
-    transition-duration: 0.5s;
-    background: rgb(80, 80, 80) !important;
-    color: rgb(255, 255, 255) !important;
-}
-
-.darkThemeHr {
-    border-top: 1px solid rgb(200, 200, 200) !important;
-}
-
-.darkThemeServiceLogs {
-    color: rgb(0, 0, 0);
-}
-
-.darkThemeVehicleItemList {
-    background: rgb(128, 128, 128) !important;
-    box-shadow: -1px 0px 3px rgb(0, 0, 0) !important;
-}
-
-.darkThemeVehicleItemList:hover {
-    background: rgb(168, 168, 168) !important;
-    box-shadow: -1px 0px 3px rgb(255, 0, 0) !important;
-}
-
-.darkThemeVehicleItemListFont {
-    color: rgb(255, 255, 255) !important;
-}
-
-.darkThemeOneUpdate {
-    background: rgb(200, 200, 200) !important;
-    color: rgb(0, 0, 0);
-}
-
-.greyThemeRedText,
-.darkThemeRedText {
-    color: rgb(220, 0, 0) !important;
-    font-weight: bold;
-}
-
 #carSpaceLogo {
     max-width: 10rem;
     border-radius: 10%;
@@ -633,26 +507,6 @@ input {
     cursor: pointer;
 }
 
-#carSpaceThemeToggleButton,
-#lightThemeToggleButton,
-#greyThemeToggleButton,
-#darkThemeToggleButton {
-    background: rgb(225, 225, 225);
-    transition-duration: 0.2s;
-    width: 7rem;
-    margin-bottom: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#carSpaceThemeToggleButton:hover,
-#lightThemeToggleButton:hover,
-#greyThemeToggleButton:hover,
-#darkThemeToggleButton:hover {
-    background: rgb(255, 255, 255);
-    transition-duration: 0.1s;
-}
-
 .modal-footer {
     border-top: initial;
 }
@@ -727,20 +581,9 @@ input {
     #printPageViaDeleteButton {
         width: 6em;
     }
-
-    #carSpaceThemeToggleButton,
-    #lightThemeToggleButton,
-    #greyThemeToggleButton,
-    #darkThemeToggleButton {
-        width: 6rem;
-    }
 }
 
 @media only screen and (max-width: 767px) {
-    #heading {
-        color: rgb(255, 255, 255);
-    }
-
     #userEmail{
         font-size: 22px;
     }

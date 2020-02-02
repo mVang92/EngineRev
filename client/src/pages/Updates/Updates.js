@@ -102,9 +102,11 @@ export default class Updates extends Component {
       switch (this.state.theme) {
         case "carSpace":
           this.setState({ currentTheme: themes.carSpace });
+          document.body.style.backgroundColor = "rgb(220, 220, 220)";
           break;
         case "light":
           this.setState({ currentTheme: themes.light });
+          document.body.style.backgroundColor = "rgb(235, 235, 235)";
           break;
         case "grey":
           this.setState({ currentTheme: themes.grey });
