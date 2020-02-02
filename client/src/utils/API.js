@@ -1,14 +1,6 @@
 import axios from "axios";
 
 export default {
-  // Get one vehicle for the signed in user
-  getOneVehicleForUser: (creatorId, vehicleId) => {
-    return axios.get(`/api/vehicles/findOneVehicleForUser/${creatorId}/${vehicleId}`)
-  },
-  // Get all vehicles for the signed in user
-  getAllVehiclesForUser: id => {
-    return axios.get(`/api/vehicles/${id}`)
-  },
   // Upon signing up for new account, create this data for the new user
   createUserSchema: id => {
     return (
@@ -19,6 +11,14 @@ export default {
         vehicleName: [{}]
       })
     );
+  },
+  // Get one vehicle for the signed in user
+  getOneVehicleForUser: (creatorId, vehicleId) => {
+    return axios.get(`/api/vehicles/findOneVehicleForUser/${creatorId}/${vehicleId}`)
+  },
+  // Retrieve all information for the targeted user
+  findUserInformationForOneUser: id => {
+    return axios.get(`/api/vehicles/${id}`)
   },
   // Add a new vehicle
   addOneVehicle: (id, data) => {
@@ -49,7 +49,7 @@ export default {
   deleteOneUserAccount: id => {
     return axios.delete(`/api/vehicles/${id}`);
   },
-  renderTheme: (creatorId, themeType) => {
+  saveThemeForUser: (creatorId, themeType) => {
     return axios.put(`/api/vehicles/themes/${creatorId}/${themeType}`);
   }
 };

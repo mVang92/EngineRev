@@ -18,8 +18,8 @@ module.exports = {
   /**
    * Find all vehicles belonging to one user
    */
-  findAllVehiclesForUser: (req, res) => {
-    console.log("Hit findAllVehiclesForUser");
+  findUserInformationForOneUser: (req, res) => {
+    console.log("Hit findUserInformationForOneUser");
     db.Vehicle
       .findOne({ creator: req.params.id })
       .then(result => res.json(result))
@@ -156,8 +156,8 @@ module.exports = {
   /**
    * Render a theme for the user
    */
-  renderTheme: (req, res) => {
-    console.log("Hit renderTheme");
+  saveThemeForUser: (req, res) => {
+    console.log("Hit saveThemeForUser");
     db.Vehicle
       .update(
         { "creator": req.params.creatorId },

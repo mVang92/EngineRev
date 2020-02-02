@@ -124,7 +124,7 @@ class AccountDetails extends Component {
           <div className="col-md-4"><label><strong>Themes</strong></label></div>
           <div className="col-md-4 text-center">
             <div className="row">
-              <div className="col-md-12">
+              <div className="col-md-6">
                 <button
                   id="carSpaceThemeToggleButton"
                   title="CarSpace Theme"
@@ -133,9 +133,7 @@ class AccountDetails extends Component {
                   CarSpace
                 </button>
               </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12">
+              <div className="col-md-6">
                 <button
                   id="lightThemeToggleButton"
                   title="Light Theme"
@@ -146,7 +144,16 @@ class AccountDetails extends Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-12">
+              <div className="col-md-6">
+                <button
+                  id="greyThemeToggleButton"
+                  title="Grey Theme"
+                  type="button"
+                  onClick={(event) => this.props.handleThemeSelection(event, "grey")}>
+                  Grey
+                </button>
+              </div>
+              <div className="col-md-6">
                 <button
                   id="darkThemeToggleButton"
                   title="Dark Theme"

@@ -15,7 +15,7 @@ router
 // Matches with "/api/vehicles/:id"
 router
   .route("/:id")
-  .get(controller.findAllVehiclesForUser)
+  .get(controller.findUserInformationForOneUser)
   .put(controller.addOneVehicle)
 
 // Matches with "/api/vehicles/addOneServiceLog/:creatorId/:vehicleId"
@@ -46,6 +46,6 @@ router
 // Matches with "/api/vehicles/themes/:themeType"
 router
 .route("/themes/:creatorId/:themeType")
-.put(controller.renderTheme)
+.put(controller.saveThemeForUser)
 
 module.exports = router;

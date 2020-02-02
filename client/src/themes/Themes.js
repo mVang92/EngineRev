@@ -17,6 +17,15 @@ export const themes = {
     oneUpdate: "lightThemeOneUpdate",
     redText: ""
   },
+  grey: {
+    background: "greyThemeBackground",
+    hr: "greyThemeHr",
+    serviceLogs: "greyThemeServiceLogs",
+    vehicleItemList: "greyThemeVehicleItemList",
+    vehicleItemListFont: "greyThemeVehicleItemListFont",
+    oneUpdate: "greyThemeOneUpdate",
+    redText: "greyThemeRedText"
+  },
   dark: {
     background: "darkThemeBackground",
     hr: "darkThemeHr",

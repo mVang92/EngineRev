@@ -28,7 +28,8 @@ export default class App extends Component {
       password: "",
       userProfilePicture: "",
       defaultDisplayName: "CarSpace User",
-      errorMessage: ""
+      errorMessage: "",
+      backgroundColor: ""
     };
   };
 
@@ -74,7 +75,7 @@ export default class App extends Component {
           userProfilePicture: user.photoURL
         });
         const userUniqueId = user.uid;
-        API.getAllVehiclesForUser(userUniqueId)
+        API.findUserInformationForOneUser(userUniqueId)
           .then(res =>
             this.setState({
               vehicleData: res.data,
@@ -146,11 +147,20 @@ export default class App extends Component {
         case "light":
           this.setState({ currentTheme: themes.light });
           break;
+        case "grey":
+          this.setState({
+            currentTheme: themes.grey,
+            backgroundColor: document.body.style.backgroundColor = "rgb(128, 128, 128)"
+          });
+          break;
         case "dark":
-          this.setState({ currentTheme: themes.dark });
+          this.setState({
+            currentTheme: themes.dark,
+            backgroundColor: document.body.style.backgroundColor = "rgb(32, 32, 32)"
+          });
           break;
         default:
-          alert("Theme error. Try reloading the page.");
+          alert("Error: Unable to process theme selection.");
       }
     }
   };
@@ -223,6 +233,7 @@ export default class App extends Component {
                       disableAddVehicleButton={this.state.disableAddVehicleButton}
                       currentTheme={this.state.currentTheme}
                       errorMessage={this.state.errorMessage}
+                      backgroundColor={this.state.backgroundColor}
                     />
                   </Container>
                 ) : (

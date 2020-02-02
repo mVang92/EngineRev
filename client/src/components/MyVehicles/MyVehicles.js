@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 class MyVehicles extends Component {
   render() {
-    const { vehicleData, errorMessage } = this.props;
+    const { vehicleData, errorMessage, currentTheme, backgroundColor } = this.props;
 
     return (
       <div className="text-center">
@@ -48,10 +48,10 @@ class MyVehicles extends Component {
                                           <div title={vehicle.year + " " + vehicle.make + " " + vehicle.model} className="col-md-8">
                                             <Link to={{
                                               pathname: "/account/" + this.props.vehicleData._id + "/vehicle/" + vehicle._id,
-                                              state: [this.props.currentTheme]
+                                              state: [currentTheme, backgroundColor]
                                             }}>
-                                              <div className={`vehicleItemList ${this.props.currentTheme.vehicleItemList}`}>
-                                                <div className={`text-dark wrapword ${this.props.currentTheme.vehicleItemListFont}`}>
+                                              <div className={`vehicleItemList ${currentTheme.vehicleItemList}`}>
+                                                <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
                                                   {vehicle.year} {vehicle.make} {vehicle.model}
                                                 </div>
                                               </div>
@@ -66,7 +66,7 @@ class MyVehicles extends Component {
                               </React.Fragment>
                             ) : (
                               <label className="text-danger">
-                                <strong className={this.props.currentTheme.redText}>No Vehicles on Record</strong>
+                                <strong className={currentTheme.redText}>No Vehicles on Record</strong>
                               </label>
                             )
                         ) : (
