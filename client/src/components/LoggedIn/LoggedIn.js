@@ -19,6 +19,7 @@ const LoggedIn = props => {
         vehicleData={props.vehicleData}
         vehicleCountForUser={props.vehicleCountForUser}
         currentTheme={props.currentTheme}
+        errorMessage={props.errorMessage}
       />
     </div>
   );
