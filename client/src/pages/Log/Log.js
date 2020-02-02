@@ -32,6 +32,7 @@ export default class Log extends Component {
       backgroundColor: "",
       vehicle: [],
       vehicleId: "",
+      year: "",
       make: "",
       model: "",
       date: "",
@@ -43,6 +44,7 @@ export default class Log extends Component {
       serviceLogMileage: "",
       serviceLogService: "",
       serviceLogComment: "",
+      vehicleName: "",
       updatedYear: "",
       updatedMake: "",
       updatedModel: "",
@@ -163,6 +165,7 @@ export default class Log extends Component {
         try {
           this.setState({
             pageLoaded: true,
+            vehicleName: res.data[0].vehicles[0].vehicleName,
             year: res.data[0].vehicles[0].year,
             make: res.data[0].vehicles[0].make,
             model: res.data[0].vehicles[0].model,
@@ -202,6 +205,7 @@ export default class Log extends Component {
    */
   checkUserEnteredUpdatedVehicleNameInput = e => {
     e.preventDefault();
+    let updatedVehicleName = this.state.updateVehicleName;
     let updatedYear = "";
     let updatedMake = "";
     let updatedModel = "";
@@ -232,12 +236,13 @@ export default class Log extends Component {
         updatedModel = this.state.model;
       }
 
-      let updatedVehicleName = {
+      let updatedVehicleInformation = {
+        vehicleName: updatedVehicleName,
         year: updatedYear,
         make: updatedMake,
         model: updatedModel
       };
-      this.handleUpdateOneVehicleName(updatedVehicleName);
+      this.handleUpdateOneVehicleName(updatedVehicleInformation);
     }
   };
 
@@ -286,6 +291,7 @@ export default class Log extends Component {
         this.hideEditOneVehicleNameModal();
         this.componentDidMount();
         this.setState({
+          vehicleName: "",
           updatedYear: "",
           updatedMake: "",
           updatedModel: "",
@@ -784,20 +790,42 @@ export default class Log extends Component {
                 (
                   <Container>
                     <div className={`box ${this.state.currentTheme.background}`}>
-                      <div id="vehicleLogInformation" className="row">
-                        {
-                          this.state.year ?
-                            (
-                              <div className="col-md-12 text-center wrapword">
-                                <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
-                              </div>
-                            ) : (
-                              <div className="col-md-12 text-center text-danger">
-                                <label><h3>You do not have permission to view this content</h3></label>
-                              </div>
-                            )
-                        }
-                      </div>
+                      {
+                        this.state.year ?
+                          (
+                            <React.Fragment>
+                              {
+                                this.state.vehicleName ?
+                                  (
+                                    <div id="vehicleLogInformation">
+                                      <div className="row">
+                                        <div className="col-md-12 text-center wrapword">
+                                          <label><h4>{this.state.vehicleName}</h4></label>
+                                        </div>
+                                      </div>
+                                      <div className="row">
+                                        <div className="col-md-12 text-center wrapword">
+                                          <label><h5>{this.state.year} {this.state.make} {this.state.model}</h5></label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    <div id="vehicleLogInformation">
+                                      <div className="row">
+                                        <div className="col-md-12 text-center wrapword">
+                                          <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )
+                              }
+                            </React.Fragment>
+                          ) : (
+                            <div className="col-md-12 text-center text-danger">
+                              <label><h3>You do not have permission to view this content</h3></label>
+                            </div>
+                          )
+                      }
                       <TopActionButtons
                         handlePrintPage={this.handlePrintPage}
                         changeSortOrder={this.changeSortOrder}

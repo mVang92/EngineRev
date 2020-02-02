@@ -22,6 +22,21 @@ const EditOneVehicleNameModal = props => {
                             <div className="modal-body">
                                 <div className="row">
                                     <div className="col-md-3">
+                                        <label><strong>Name</strong></label>
+                                    </div>
+                                    <div className="col-md-9">
+                                        <input
+                                            id="vehicleNameInput"
+                                            type="text"
+                                            onChange={props.handleChange}
+                                            defaultValue={props.state.vehicleName}
+                                            name="updateVehicleName"
+                                            maxLength="50"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-3">
                                         <label><span className="required">*</span><strong>Year</strong></label>
                                     </div>
                                     <div className="col-md-9">
@@ -35,7 +50,6 @@ const EditOneVehicleNameModal = props => {
                                         />
                                     </div>
                                 </div>
-                                <br />
                                 <div className="row">
                                     <div className="col-md-3">
                                         <label><span className="required">*</span><strong>Make</strong></label>
@@ -51,7 +65,6 @@ const EditOneVehicleNameModal = props => {
                                         />
                                     </div>
                                 </div>
-                                <br />
                                 <div className="row">
                                     <div className="col-md-3">
                                         <label><span className="required">*</span><strong>Model</strong></label>
