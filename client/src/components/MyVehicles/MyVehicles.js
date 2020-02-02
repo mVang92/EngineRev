@@ -51,9 +51,18 @@ class MyVehicles extends Component {
                                               state: [currentTheme, backgroundColor]
                                             }}>
                                               <div className={`vehicleItemList ${currentTheme.vehicleItemList}`}>
-                                                <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
-                                                  {vehicle.year} {vehicle.make} {vehicle.model}
-                                                </div>
+                                                {
+                                                  vehicle.vehicleName ?
+                                                    (
+                                                      <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
+                                                        {vehicle.vehicleName}
+                                                      </div>
+                                                    ) : (
+                                                      <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
+                                                        {vehicle.year} {vehicle.make} {vehicle.model}
+                                                      </div>
+                                                    )
+                                                }
                                               </div>
                                             </Link>
                                           </div>

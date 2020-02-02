@@ -7,6 +7,7 @@ const vehicleSchema = new Schema({
   admin: { type: Boolean },
   theme: { type: String },
   vehicles: [{
+    vehicleName: { type: String },
     year: { type: Number, required: true },
     make: { type: String, required: true },
     model: { type: String, required: true },

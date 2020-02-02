@@ -84,11 +84,13 @@ module.exports = {
    */
   updateOneVehicleName: (req, res) => {
     console.log("Hit updateOneVehicleName");
+    console.log(req.body)
     db.Vehicle
       .updateOne(
         { "vehicles._id": req.params.vehicleId },
         {
           $set: {
+            "vehicles.$.vehicleName": req.body.vehicleName,
             "vehicles.$.year": req.body.year,
             "vehicles.$.make": req.body.make,
             "vehicles.$.model": req.body.model
