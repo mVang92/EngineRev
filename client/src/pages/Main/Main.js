@@ -29,7 +29,8 @@ export default class App extends Component {
       userProfilePicture: "",
       defaultDisplayName: "CarSpace User",
       errorMessage: "",
-      backgroundColor: ""
+      backgroundColor: "",
+      onAuthStateChangedCounter: 0
     };
   };
 
@@ -79,21 +80,34 @@ export default class App extends Component {
           .then(res =>
             this.setState({
               vehicleData: res.data,
-              pageLoaded: true,
+              theme: res.data.theme,
               uid: user.uid,
-              theme: res.data.theme
+              pageLoaded: true
             }, () => {
               this.getThemeAndRender();
               this.checkUserDisplayName(user);
             })
           )
           .catch(err => {
-            this.loadVehiclesFailNotification(err);
-            this.setState({
-              pageLoaded: true,
-              disableAddVehicleButton: true,
-              errorMessage: err.toString()
-            });
+            if (this.state.theme === "") {
+              this.setState({ onAuthStateChangedCounter: this.state.onAuthStateChangedCounter + 1 });
+              if (this.state.onAuthStateChangedCounter <= 5) {
+                this.onAuthStateChanged();
+              } else {
+                this.setState({
+                  pageLoaded: true,
+                  disableAddVehicleButton: true,
+                  errorMessage: "This user does not have a database."
+                });
+              }
+            } else {
+              this.loadVehiclesFailNotification(err);
+              this.setState({
+                pageLoaded: true,
+                disableAddVehicleButton: true,
+                errorMessage: err.toString()
+              });
+            }
           });
       };
     });
