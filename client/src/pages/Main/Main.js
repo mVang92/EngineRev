@@ -24,11 +24,11 @@ export default class App extends Component {
       currentTheme: "",
       vehicleData: [],
       vehicleCount: 0,
-      message: "",
       email: "",
       password: "",
       userProfilePicture: "",
-      defaultDisplayName: "CarSpace User"
+      defaultDisplayName: "CarSpace User",
+      errorMessage: ""
     };
   };
 
@@ -86,7 +86,14 @@ export default class App extends Component {
               this.checkUserDisplayName(user);
             })
           )
-          .catch(err => this.loadVehiclesFailNotification(err));
+          .catch(err => {
+            this.loadVehiclesFailNotification(err);
+            this.setState({
+              pageLoaded: true,
+              disableAddVehicleButton: true,
+              errorMessage: err.toString()
+            });
+          });
       };
     });
   };
@@ -215,6 +222,7 @@ export default class App extends Component {
                       userProfilePicture={this.state.userProfilePicture}
                       disableAddVehicleButton={this.state.disableAddVehicleButton}
                       currentTheme={this.state.currentTheme}
+                      errorMessage={this.state.errorMessage}
                     />
                   </Container>
                 ) : (
