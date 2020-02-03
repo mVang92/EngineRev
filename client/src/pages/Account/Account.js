@@ -91,19 +91,15 @@ export default class Account extends Component {
     switch (themeType) {
       case "carSpace":
         this.saveThemeForUser(themeType);
-        this.getVehicleData();
         break;
       case "light":
         this.saveThemeForUser(themeType);
-        this.getVehicleData();
         break;
       case "grey":
         this.saveThemeForUser(themeType);
-        this.getVehicleData();
         break;
       case "dark":
         this.saveThemeForUser(themeType);
-        this.getVehicleData();
         break;
       default:
         alert("Error: Unable to save theme selection.");
@@ -117,7 +113,10 @@ export default class Account extends Component {
    */
   saveThemeForUser = themeType => {
     API.saveThemeForUser(this.state.userId, themeType)
-      .catch(err => console.log(err));
+      .then(() => {
+        this.getVehicleData()
+      })
+      .catch(err => this.errorNotification(err));
   };
 
   /**
@@ -193,7 +192,7 @@ export default class Account extends Component {
         });
         this.showUpdateDisplayNameSuccessModal();
       }).catch(error => {
-        this.updateDisplayNameErrorNotification(error);
+        this.errorNotification(error);
       });
     };
   };
@@ -211,7 +210,7 @@ export default class Account extends Component {
       }).then(() => {
         this.showUpdateProfilePictureSuccessModal();
       }).catch(error => {
-        this.updateProfilePictureErrorNotification(error);
+        this.errorNotification(error);
       });
     };
   };
@@ -363,29 +362,11 @@ export default class Account extends Component {
   };
 
   /**
-   * Display the error notification when an error occurs while updating password
+   * Display the error notification when an error occurs
    * 
    * @param err the error message to display to the user
    */
-  updatePasswordErrorNotification = err => {
-    toast.error(err.toString());
-  };
-
-  /**
-   * Display the error notification when an error occurs while updating password
-   * 
-   * @param err the error message to display to the user
-   */
-  updateDisplayNameErrorNotification = err => {
-    toast.error(err.toString());
-  };
-
-  /**
-   * Display the error notification when an error occurs while updating password
-   * 
-   * @param err the error message to display to the user
-   */
-  updateProfilePictureErrorNotification = err => {
+  errorNotification = err => {
     toast.error(err.toString());
   };
 

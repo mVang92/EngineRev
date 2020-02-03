@@ -21,6 +21,7 @@ const LoggedIn = props => {
         currentTheme={props.currentTheme}
         errorMessage={props.errorMessage}
         backgroundColor={props.backgroundColor}
+        reloadPage={props.reloadPage}
       />
     </div>
   );

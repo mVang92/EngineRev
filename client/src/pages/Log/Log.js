@@ -299,7 +299,7 @@ export default class Log extends Component {
         });
       })
       .catch(err => {
-        this.updateOneVehicleNameFailNotification(err);
+        this.errorNotification(err);
         this.setState({ disableConfirmSaveEditVehicleNameButton: false });
       });
   };
@@ -336,7 +336,7 @@ export default class Log extends Component {
         this.componentDidMount();
       })
       .catch(err => {
-        this.addOneServiceLogFailNotification(err);
+        this.errorNotification(err);
         this.setState({ disableAddServiceLogButton: false });
       });
   };
@@ -360,7 +360,7 @@ export default class Log extends Component {
   handleDeleteOneVehicle = () => {
     API.deleteOneVehicle(this.state.vehicleId)
       .then(() => this.deleteOneVehicleSuccessNotification())
-      .catch(err => this.deleteOneVehicleFailNotification(err));
+      .catch(err => this.errorNotification(err));
   };
 
   /**
@@ -409,7 +409,7 @@ export default class Log extends Component {
         });
       })
       .catch(err => {
-        this.updateOneServiceLogFailNotification(err);
+        this.errorNotification(err);
         this.setState({ disableConfirmSaveEditServiceLogButton: false });
       });
   };
@@ -424,7 +424,7 @@ export default class Log extends Component {
         this.componentDidMount();
         this.deleteOneServiceLogSuccessNotification();
       })
-      .catch(err => this.deleteOneServiceLogFailNotification(err));
+      .catch(err => this.errorNotification(err));
   };
 
   /**
@@ -511,24 +511,6 @@ export default class Log extends Component {
   };
 
   /**
-   * Display the error notification when an error occurs while adding a service log
-   * 
-   * @param err the error message to display to the user
-   */
-  addOneServiceLogFailNotification = err => {
-    toast.error(err.toString());
-  };
-
-  /**
-   * Display the error notification when an error occurs while updating a service log
-   * 
-   * @param err the error message to display to the user
-   */
-  updateOneServiceLogFailNotification = err => {
-    toast.error(err.toString());
-  };
-
-  /**
    * Display the success notification when the user deletes a vehicle
    */
   deleteOneVehicleSuccessNotification = () => {
@@ -543,37 +525,19 @@ export default class Log extends Component {
   };
 
   /**
-   * Display the error notification when an error occurs while updating a vehicle name
-   * 
-   * @param err the error message to display to the user
-   */
-  updateOneVehicleNameFailNotification = err => {
-    toast.error(err.toString());
-  };
-
-  /**
-   * Display the error notification when an error occurs while deleting a vehicle
-   * 
-   * @param err the error message to display to the user
-   */
-  deleteOneVehicleFailNotification = err => {
-    toast.error(err.toString());
-  };
-
-  /**
-   * Display the error notification when an error occurs while deleting a service log
-   * 
-   * @param err the error message to display to the user
-   */
-  deleteOneServiceLogFailNotification = err => {
-    toast.error(err.toString());
-  };
-
-  /**
    * Display the info notification when the user resets the fields to add a service log
    */
   resetFieldsNotification = () => {
     toast.info(`Input Fields Reset.`);
+  };
+
+  /**
+   * Display the error notification when an error occurs while executing a database query
+   * 
+   * @param err the error message to display to the user
+   */
+  errorNotification = err => {
+    toast.error(err.toString());
   };
 
   /**
