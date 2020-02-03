@@ -33,7 +33,7 @@ const DeleteOneUpdateModal = props => {
                                     {props.state.updateChangesToShowInModal}
                                 </div>
                             </div>
-                            <hr className={props.state.currentTheme.hr}/>
+                            <hr className={props.state.currentTheme.hr} />
                             <div className="row">
                                 <div className="col-md-3">
                                     <label><strong>Known Issues:</strong></label>
@@ -45,6 +45,7 @@ const DeleteOneUpdateModal = props => {
                         </div>
                         <div className="modal-footer">
                             <button
+                                id="cancelDeleteReleaseNote"
                                 title="Cancel"
                                 type="button"
                                 className="cancelBtn"
@@ -53,8 +54,8 @@ const DeleteOneUpdateModal = props => {
                                 Cancel
                             </button>
                             <button
-                                title="Delete Service Log"
-                                id="confirmDeleteServiceLogButton"
+                                title="Delete Release Note"
+                                id="confirmDeleteReleaseNoteButton"
                                 className="deleteBtn"
                                 type="button"
                                 onClick={props.handleDeleteOneReleaseNote}

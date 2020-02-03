@@ -24,16 +24,16 @@ const OneUpdate = props => {
                   <div className="row centerButtonMobileDisplay">
                     <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
                       <button
-                        id="deleteActionButton"
-                        title="Delete Log"
+                        id="deleteReleaseNoteActionButton"
+                        title="Delete Release Note"
                         onClick={(event) => props.getActionValue(event, updateId, updateChanges, knownIssues, deleteValue)}>
                         <img id="deleteIcon" src={deleteIcon} alt="delete"></img>
                       </button>
                     </div>
                     <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
                       <button
-                        id="editActionButton"
-                        title="Edit Log"
+                        id="editReleaseNoteActionButton"
+                        title="Edit Release Note"
                         onClick={(event) => props.getActionValue(event, updateId, updateChanges, knownIssues, editValue)}>
                         <img id="editIcon" src={editIcon} alt="edit"></img>
                       </button>

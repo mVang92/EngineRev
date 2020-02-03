@@ -63,7 +63,7 @@ const EditOneUpdateModal = props => {
                                 </button>
                                 <button
                                     id="confirmSaveEditReleaseNoteButton"
-                                    title="Save Service Log"
+                                    title="Save Release Note"
                                     className="cancelBtn"
                                     type="submit"
                                     disabled={props.state.disableConfirmSaveEditReleaseNoteButton}>
