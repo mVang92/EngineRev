@@ -28,7 +28,7 @@ const DeleteOneUpdateModal = props => {
                                 <div className="col-md-3">
                                     <label><strong>Updates:</strong></label>
                                 </div>
-                                <div className="col-md-9 updateChangesDeletePreview wrapword">
+                                <div className="col-md-9 updateChangesDeletePreview">
                                     {props.state.updateChangesToShowInModal}
                                 </div>
                             </div>
@@ -37,7 +37,7 @@ const DeleteOneUpdateModal = props => {
                                 <div className="col-md-3">
                                     <label><strong>Known Issues:</strong></label>
                                 </div>
-                                <div className="col-md-9 knownIssuesDeletePreview wrapword">
+                                <div className="col-md-9 knownIssuesDeletePreview">
                                     {props.state.knownIssuesToShowInModal}
                                 </div>
                             </div>
