@@ -12,6 +12,10 @@
     box-shadow: -1px 0px 3px rgb(168, 168, 168);
 }
 
+.carSpaceThemeAccountDetails {
+    background: rgb(245, 245, 245);
+}
+
 .lightThemeBackground {
     transition-duration: 0.5s;
     background: rgb(255, 255, 255) !important;
@@ -35,23 +39,29 @@
     color: rgb(0, 0, 0);
 }
 
+.lightThemeAccountDetails {
+    background: rgb(240, 240, 240) !important;
+    color: rgb(0, 0, 0);
+}
+
 .greyThemeBackground {
     transition-duration: 0.5s;
-    background: rgb(192, 192, 192) !important;
+    background: rgb(184, 184, 184) !important;
     color: rgb(0, 0, 0) !important;
 }
 
 .greyThemeHr {
-    border-top: 1px solid rgb(32, 32, 32) !important;
+    border-top: 1px solid rgb(220, 220, 220) !important;
+    box-shadow: 0px 0px 5px rgb(128, 128, 128);
 }
 
 .greyThemeVehicleItemList {
-    background: rgb(215, 215, 215) !important;
+    background: rgb(235, 235, 235) !important;
     box-shadow: -1px 0px 3px rgb(0, 0, 0) !important;
 }
 
 .greyThemeVehicleItemList:hover {
-    background: rgb(230, 230, 230) !important;
+    background: rgb(245, 245, 245) !important;
     box-shadow: -1px 0px 3px rgb(92, 92, 92) !important;
 }
 
@@ -59,6 +69,11 @@
     background: rgb(225, 225, 225) !important;
     color: rgb(0, 0, 0);
     box-shadow: -1px 0px 3px rgb(0, 0, 0) !Important;
+}
+
+.greyThemeAccountDetails {
+    background: rgb(225, 225, 225) !important;
+    color: rgb(0, 0, 0);
 }
 
 .darkThemeBackground {
@@ -85,7 +100,8 @@
     color: rgb(255, 255, 255) !important;
 }
 
-.darkThemeOneUpdate {
+.darkThemeOneUpdate,
+.darkThemeAccountDetails {
     background: rgb(200, 200, 200) !important;
     color: rgb(0, 0, 0);
 }
@@ -117,8 +133,10 @@
     transition-duration: 0.2s;
     width: 7rem;
     margin-bottom: 1rem;
-    border-radius: 5px;
     cursor: pointer;
+    border: 1px solid rgb(255, 255, 255);
+    box-shadow: 0 2px 2px 0 rgb(92, 92, 92);
+    width: 6.8rem;
 }
 
 #carSpaceThemeToggleButton:hover,

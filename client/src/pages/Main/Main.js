@@ -170,7 +170,7 @@ export default class App extends Component {
         case "grey":
           this.setState({
             currentTheme: themes.grey,
-            backgroundColor: document.body.style.backgroundColor = "rgb(128, 128, 128)"
+            backgroundColor: document.body.style.backgroundColor = "rgb(112, 112, 112)"
           });
           break;
         case "dark":

@@ -8,7 +8,7 @@ class NoAuthorization extends Component {
         <div id="noAuthorization" className="text-center text-danger mt-3 section">
           <label><h3>You do not have permission to view this content</h3></label>
           <hr />
-          <a href="/" title="Get me out of here!"><button className="backHomeBtn">← Back Home</button></a>
+          <a href="/" title="Get me out of here!"><button className="backHomeBtn">← Home</button></a>
           <br />
           <div className="row">
             <div className="col-md-4"></div>

@@ -8,5 +8,9 @@ export default {
     // Get all recent updates
     getAllUpdates: () => {
         return axios.get("/api/updates");
+    },
+    // Update one update / release note
+    updateOneReleaseNote: (updateId, payload) => {
+        return axios.put(`/api/updates/updateOneReleaseNote/${updateId}`, payload);
     }
 };

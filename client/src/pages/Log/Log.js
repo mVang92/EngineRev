@@ -826,6 +826,7 @@ export default class Log extends Component {
                             </div>
                           )
                       }
+                      <hr className={`hideWhilePrinting ${this.state.currentTheme.hr}`} />
                       <TopActionButtons
                         handlePrintPage={this.handlePrintPage}
                         changeSortOrder={this.changeSortOrder}
