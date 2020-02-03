@@ -83,7 +83,7 @@ const EditOneVehicleNameModal = props => {
                             </div>
                             <div className="modal-footer noFlex">
                                 <div className="row">
-                                    <div className="col-md-8 bottomMarginMobileDisplay">
+                                    <div className="col-md-4 bottomMarginMobileDisplay">
                                         <button
                                             id="addLogDeleteVehicleButton"
                                             title="Delete This Vehicle"
@@ -93,7 +93,7 @@ const EditOneVehicleNameModal = props => {
                                             Delete Vehicle
                                         </button>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="col-md-8 alignRightButtonsDesktopDisplay">
                                         <button
                                             title="Cancel"
                                             type="button"

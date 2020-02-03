@@ -25,7 +25,7 @@ class AccountDetails extends Component {
           <div className="col-md-4"></div>
         </div>
         <hr className={currentTheme.hr} />
-        <div className="row">
+        <div className={`row paddingDesktopDisplay ${currentTheme.accountDetails}`}>
           <div id="scrollableProfilePictureAccountDetails" className="col-md-4 text-center">
             <a href={this.props.userPhotoUrl} target="_blank">
               <img

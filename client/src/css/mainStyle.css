@@ -129,18 +129,28 @@ input {
 .cancelBtn,
 .deleteBtn,
 .backHomeBtn,
-#editActionButton,
-#deleteActionButton,
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton {
-    border-radius: 5px;
+    border: none;
     cursor: pointer;
     transition-duration: 0.5s;
+    border: 1px solid rgb(255, 255, 255);
+    box-shadow: 0 2px 2px 0 rgb(92, 92, 92);
+    width: 6.8rem;
+}
+
+#editActionButton {
+    border: 1px solid rgb(255, 255, 255);
+    box-shadow: 0 2px 2px 0 rgb(92, 92, 92);
+}
+
+#editActionButton,
+#deleteActionButton {
+    width: initial;
 }
 
 .cancelBtn,
-.backHomeBtn,
 #editActionButton,
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
@@ -157,9 +167,12 @@ input {
 }
 
 .deleteBtn,
-#deleteActionButton {
+#deleteActionButton,
+.backHomeBtn {
     background: rgb(220, 64, 48);
     color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+    box-shadow: 0 2px 5px 0 rgb(92, 92, 92);
 }
 
 #deleteBtn {
@@ -188,12 +201,12 @@ input {
 }
 
 .deleteBtn:hover,
-#deleteActionButton:hover {
+#deleteActionButton:hover,
+.backHomeBtn:hover {
     background: rgb(255, 128, 128);
 }
 
 .cancelBtn:hover,
-.backHomeBtn:hover,
 #editActionButton:hover,
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
@@ -281,7 +294,7 @@ input {
 .vehicleItemList {
     background: rgb(255, 255, 255);
     box-shadow: -1px 0px 3px rgb(168, 168, 168);
-    padding: 1rem;
+    padding: 0.5rem;
     margin-bottom: 0.5rem !important;
     transition-duration: 0.3s;
 }
@@ -340,10 +353,6 @@ input {
 #hideUniqueUserId,
 #hideMaskUniqueUserId {
     display: none;
-}
-
-#profilePicture {
-    width: 70%;
 }
 
 #scrollableProfilePictureAccountDetails {
@@ -461,6 +470,15 @@ input {
     margin-right: 5px;
 }
 
+#mainPageProfilePicture,
+#profilePicture {
+    box-shadow: 0px 2px 5px rgb(32, 32, 32);
+}
+
+#profilePicture {
+    width: 70%;
+}
+
 #loadingScreen {
     padding-top: 5rem;
 }
@@ -509,6 +527,17 @@ input {
 
 .modal-footer {
     border-top: initial;
+}
+
+.alignRightButtonsDesktopDisplay {
+    text-align: right;
+}
+
+.paddingDesktopDisplay {
+    background: rgb(245, 245, 245);
+    padding: 0.5rem;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .wrapword {
@@ -715,6 +744,19 @@ input {
     .centerOnMobileDisplay {
         text-align: center;
     }
+
+    .alignRightButtonsDesktopDisplay {
+        text-align: initial;
+    }
+
+    .paddingDesktopDisplay {
+        padding-right: initial;
+        padding-left: initial;
+        margin-left: initial;
+        margin-right: initial;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
 }
     
 @media only screen and (max-width: 575px) {
@@ -727,9 +769,7 @@ input {
 @media only screen and (max-width: 414px) {
     #addVehicleButton,
     #resetVehicleInputFieldsButton {
-        width: 10em;
-        height: 3em;
-        font-weight: bold;
+        height: 2rem;
     }
 
     .Toastify__toast-container--top-right {

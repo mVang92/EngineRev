@@ -164,7 +164,7 @@ export default class Account extends Component {
           break;
         case "grey":
           this.setState({ currentTheme: themes.grey });
-          document.body.style.backgroundColor = "rgb(128, 128, 128)";
+          document.body.style.backgroundColor = "rgb(112, 112, 112)";
           break;
         case "dark":
           this.setState({ currentTheme: themes.dark });

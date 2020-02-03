@@ -42,7 +42,7 @@ class AddUpdates extends Component {
                 type="submit"
                 className="addBtn"
                 disabled={!(this.props.updateChanges && this.props.knownIssues)}>
-                Submit Updates
+                Submit
               </button>
             </div>
           </div>

@@ -6,7 +6,8 @@ export const themes = {
     vehicleItemList: "carSpaceThemeVehicleItemList",
     vehicleItemListFont: "carSpaceThemeVehicleItemListFont",
     oneUpdate: "carSpaceThemeOneUpdate",
-    redText: ""
+    redText: "",
+    accountDetails: "carSpaceThemeAccountDetails",
   },
   light: {
     background: "lightThemeBackground",
@@ -15,7 +16,8 @@ export const themes = {
     vehicleItemList: "lightThemeVehicleItemList",
     vehicleItemListFont: "lightThemeVehicleItemListFont",
     oneUpdate: "lightThemeOneUpdate",
-    redText: ""
+    redText: "",
+    accountDetails: "lightThemeAccountDetails",
   },
   grey: {
     background: "greyThemeBackground",
@@ -24,7 +26,8 @@ export const themes = {
     vehicleItemList: "greyThemeVehicleItemList",
     vehicleItemListFont: "greyThemeVehicleItemListFont",
     oneUpdate: "greyThemeOneUpdate",
-    redText: "greyThemeRedText"
+    redText: "greyThemeRedText",
+    accountDetails: "greyThemeAccountDetails",
   },
   dark: {
     background: "darkThemeBackground",
@@ -33,6 +36,7 @@ export const themes = {
     vehicleItemList: "darkThemeVehicleItemList",
     vehicleItemListFont: "darkThemeVehicleItemListFont",
     oneUpdate: "darkThemeOneUpdate",
-    redText: "darkThemeRedText"
+    redText: "darkThemeRedText",
+    accountDetails: "darkThemeAccountDetails",
   },
 };
