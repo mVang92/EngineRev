@@ -10,7 +10,12 @@ router
 
 // Matches with "/api/updates/updateOneReleaseNote/:updateId"
 router
-.route("/updateOneReleaseNote/:updateId")
-.put(updatesController.updateOneReleaseNote)
+    .route("/updateOneReleaseNote/:updateId")
+    .put(updatesController.updateOneReleaseNote)
+
+// Matches with "/api/updates/updateOneReleaseNote/:updateId"
+router
+    .route("/deleteOneReleaseNote/:updateId")
+    .delete(updatesController.deleteOneReleaseNote)
 
 module.exports = router;

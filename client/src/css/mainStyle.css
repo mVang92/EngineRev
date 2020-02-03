@@ -540,6 +540,18 @@ input {
     margin-right: 5px;
 }
 
+#updatedReleaseNotesTextArea,
+#updatedKnownIssuesTextArea {
+    width: 100%;
+    height: 11rem;
+}
+
+.updateChangesDeletePreview,
+.knownIssuesDeletePreview {
+    height: 11rem;
+    overflow: auto;
+}
+
 .wrapword {
     white-space: -moz-pre-wrap !important;
     white-space: -pre-wrap;
@@ -785,5 +797,16 @@ input {
 @media only screen and (max-width: 360px) {
     .navbar-brand {
         width: 70%;
+    }
+
+    #updatedReleaseNotesTextArea,
+    #updatedKnownIssuesTextArea {
+        height: 6rem;
+    }
+
+    .updateChangesDeletePreview,
+    .knownIssuesDeletePreview {
+        height: 6rem;
+        overflow: auto;
     }
 }

@@ -26,12 +26,12 @@ const EditOneUpdateModal = props => {
                                     </div>
                                     <div className="col-md-9">
                                         <textarea
-                                            id="updatedReleaseNotes"
+                                            id="updatedReleaseNotesTextArea"
                                             type="text"
                                             name="releaseNotesToUpdate"
                                             maxLength="500"
                                             onChange={props.handleChange}
-                                            defaultValue={props.state.updatedChangesForEditing}
+                                            defaultValue={props.state.updateChangesToShowInModal}
                                         />
                                     </div>
                                 </div>
@@ -41,12 +41,12 @@ const EditOneUpdateModal = props => {
                                     </div>
                                     <div className="col-md-9">
                                         <textarea
-                                            id="updatedKnownIddues"
+                                            id="updatedKnownIssuesTextArea"
                                             type="text"
                                             name="knownIssuesToUpdate"
                                             maxLength="500"
                                             onChange={props.handleChange}
-                                            defaultValue={props.state.knownIssuesForEditing}
+                                            defaultValue={props.state.knownIssuesToShowInModal}
                                         />
                                     </div>
                                 </div>

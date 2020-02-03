@@ -9,6 +9,7 @@ import OneUpdate from "../../components/OneUpdate";
 import AddUpdates from "../../components/AddUpdates";
 import Loading from "../../components/Loading";
 import EditOneUpdateModal from "../../components/Modal/EditOneUpdateModal";
+import DeleteOneUpdateModal from "../../components/Modal/DeleteOneUpdateModal";
 import { ToastContainer, toast } from "react-toastify";
 
 export default class Updates extends Component {
@@ -20,14 +21,15 @@ export default class Updates extends Component {
       pageLoaded: false,
       updateChanges: "",
       knownIssues: "",
-      updatedChangesForEditing: "",
-      knownIssuesForEditing: "",
+      updateChangesToShowInModal: "",
+      knownIssuesToShowInModal: "",
       theme: "",
       currentTheme: "",
       updateId: "",
       showEditOneUpdateModal: false,
       showDeleteOneUpdateModal: false,
-      disableConfirmSaveEditReleaseNoteButton: false
+      disableConfirmSaveEditReleaseNoteButton: false,
+      disableConfirmDeleteReleaseNoteButton: false
     };
   };
 
@@ -161,8 +163,8 @@ export default class Updates extends Component {
     this.setState({
       showEditOneUpdateModal: true,
       updateId: updateId,
-      updatedChangesForEditing: updateChanges,
-      knownIssuesForEditing: knownIssues
+      updateChangesToShowInModal: updateChanges,
+      knownIssuesToShowInModal: knownIssues
     });
   };
 
@@ -177,8 +179,8 @@ export default class Updates extends Component {
     this.setState({
       showDeleteOneUpdateModal: true,
       updateId: updateId,
-      updatedChangesForEditing: updateChanges,
-      knownIssuesForEditing: knownIssues
+      updateChangesToShowInModal: updateChanges,
+      knownIssuesToShowInModal: knownIssues
     });
   };
 
@@ -187,8 +189,8 @@ export default class Updates extends Component {
    */
   checkUserEnteredUpdatedReleaseNoteInput = e => {
     e.preventDefault();
-    let untouchedReleaseNote = this.state.updatedChangesForEditing;
-    let untouchedKnownIssues = this.state.knownIssuesForEditing;
+    let untouchedReleaseNote = this.state.updateChangesToShowInModal;
+    let untouchedKnownIssues = this.state.knownIssuesToShowInModal;
     let releaseNotesToUpdate = this.state.releaseNotesToUpdate;
     let knownIssuesToUpdate = this.state.knownIssuesToUpdate;
     let newReleaseNotes = "";
@@ -227,17 +229,36 @@ export default class Updates extends Component {
     };
     this.setState({ disableConfirmSaveEditReleaseNoteButton: true });
     updateApi.updateOneReleaseNote(this.state.updateId, payload)
+      .then(() => {
+        this.getAllUpdates();
+        this.updateOneUpdateSuccessNotification();
+        this.setState({
+          showEditOneUpdateModal: false,
+          disableConfirmSaveEditReleaseNoteButton: false
+        });
+      })
+      .catch(err => {
+        this.errorNotification(err);
+        this.setState({ disableConfirmSaveEditReleaseNoteButton: false });
+      });
+  };
+
+  /**
+   * Delete the release note from record
+   */
+  handleDeleteOneReleaseNote = () => {
+    this.setState({ disableConfirmDeleteReleaseNoteButton: true });
+    updateApi.deleteOneReleaseNote(this.state.updateId)
     .then(() => {
       this.getAllUpdates();
-      this.updateOneUpdateSuccessNotification();
       this.setState({
-        showEditOneUpdateModal: false,
-        disableConfirmSaveEditReleaseNoteButton: false
+        showDeleteOneUpdateModal: false,
+        disableConfirmDeleteReleaseNoteButton: false
       });
     })
     .catch(err => {
-      this.errorNotification(err);
-      this.setState({ disableConfirmSaveEditReleaseNoteButton: false });
+      this.setState({ disableConfirmDeleteReleaseNoteButton: false });
+      console.log(err)
     });
   };
 
@@ -342,6 +363,13 @@ export default class Updates extends Component {
                           checkUserEnteredUpdatedReleaseNoteInput={this.checkUserEnteredUpdatedReleaseNoteInput}
                           showEditOneUpdateModal={this.state.showEditOneUpdateModal}
                           hideEditOneUpdateModal={this.hideEditOneUpdateModal}
+                          handleChange={this.handleChange}
+                          state={this.state}
+                        />
+                        <DeleteOneUpdateModal
+                          handleDeleteOneReleaseNote={this.handleDeleteOneReleaseNote}
+                          showDeleteOneUpdateModal={this.state.showDeleteOneUpdateModal}
+                          hideDeleteOneUpdateModal={this.hideDeleteOneUpdateModal}
                           handleChange={this.handleChange}
                           state={this.state}
                         />

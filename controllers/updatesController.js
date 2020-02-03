@@ -48,15 +48,12 @@ module.exports = {
     /**
     * Delete a release note / update on record
     */
-    removeOneVehicle: (req, res) => {
-        console.log("Hit removeOneReleaseNote");
-        console.log(req.params)
+    deleteOneReleaseNote: (req, res) => {
+        console.log("Hit deleteOneReleaseNote");
         db.Update
-            .findOneAndUpdate(
-                { "_id": req.params.updateId },
-                { $pull: { "_id": req.params.updateId } }
-            )
+            .findById({ _id: req.params.updateId })
+            .then(result => result.remove())
             .then(result => res.json(result))
             .catch(err => res.status(422).json(err));
-    },
+    }
 };
