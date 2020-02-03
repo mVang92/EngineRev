@@ -3,7 +3,6 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const DeleteOneUpdateModal = props => {
-    console.log(props.state)
     return (
         <ReactModal
             isOpen={props.showDeleteOneUpdateModal}
