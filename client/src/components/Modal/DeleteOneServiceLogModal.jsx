@@ -79,7 +79,7 @@ const DeleteOneServiceLogModal = props => {
                                 className="deleteBtn"
                                 type="button"
                                 onClick={props.handleDeleteOneServiceLog}>
-                                Delete Log
+                                Delete
                             </button>
                         </div>
                     </div>

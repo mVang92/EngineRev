@@ -140,18 +140,22 @@ input {
     width: 6.8rem;
 }
 
-#editActionButton {
+#editActionButton,
+#editReleaseNoteActionButton {
     border: 1px solid rgb(255, 255, 255);
     box-shadow: 0 2px 2px 0 rgb(92, 92, 92);
 }
 
 #editActionButton,
-#deleteActionButton {
+#deleteActionButton,
+#editReleaseNoteActionButton,
+#deleteReleaseNoteActionButton {
     width: initial;
 }
 
 .cancelBtn,
 #editActionButton,
+#editReleaseNoteActionButton,
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton {
@@ -168,6 +172,7 @@ input {
 
 .deleteBtn,
 #deleteActionButton,
+#deleteReleaseNoteActionButton,
 .backHomeBtn {
     background: rgb(220, 64, 48);
     color: rgb(255, 255, 255);
@@ -186,6 +191,8 @@ input {
 .backHomeBtn:hover,
 #editActionButton,
 #deleteActionButton,
+#deleteReleaseNoteActionButton,
+#editReleaseNoteActionButton,
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover {
@@ -202,12 +209,14 @@ input {
 
 .deleteBtn:hover,
 #deleteActionButton:hover,
+#deleteReleaseNoteActionButton:hover,
 .backHomeBtn:hover {
     background: rgb(255, 128, 128);
 }
 
 .cancelBtn:hover,
 #editActionButton:hover,
+#editReleaseNoteActionButton:hover,
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover {
@@ -548,7 +557,7 @@ input {
 
 .updateChangesDeletePreview,
 .knownIssuesDeletePreview {
-    height: 11rem;
+    max-height: 11rem;
     overflow: auto;
 }
 
@@ -698,7 +707,9 @@ input {
     }
 
     #editActionButton,
-    #deleteActionButton {
+    #deleteActionButton,
+    #editReleaseNoteActionButton,
+    #deleteReleaseNoteActionButton {
         width: 6em;
     }
 
@@ -806,7 +817,7 @@ input {
 
     .updateChangesDeletePreview,
     .knownIssuesDeletePreview {
-        height: 6rem;
+        max-height: 6rem;
         overflow: auto;
     }
 }
