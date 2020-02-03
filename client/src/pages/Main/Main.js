@@ -43,6 +43,13 @@ export default class App extends Component {
   };
 
   /**
+   * Reload the page
+   */
+  reloadPage = () => {
+    window.location.reload();
+  };
+
+  /**
    * Check if user display name exists
    * 
    * @param user The current user information
@@ -97,7 +104,7 @@ export default class App extends Component {
                 this.setState({
                   pageLoaded: true,
                   disableAddVehicleButton: true,
-                  errorMessage: "This user does not have a database."
+                  errorMessage: "Error: Cannot find database for this user."
                 });
               }
             } else {
@@ -254,6 +261,7 @@ export default class App extends Component {
                       currentTheme={this.state.currentTheme}
                       errorMessage={this.state.errorMessage}
                       backgroundColor={this.state.backgroundColor}
+                      reloadPage={this.reloadPage}
                     />
                   </Container>
                 ) : (

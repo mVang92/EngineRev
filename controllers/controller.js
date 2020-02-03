@@ -84,7 +84,6 @@ module.exports = {
    */
   updateOneVehicleName: (req, res) => {
     console.log("Hit updateOneVehicleName");
-    console.log(req.body)
     db.Vehicle
       .updateOne(
         { "vehicles._id": req.params.vehicleId },

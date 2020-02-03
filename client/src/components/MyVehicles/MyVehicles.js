@@ -13,6 +13,15 @@ class MyVehicles extends Component {
               <div className="row">
                 <div className={`col-md-12 text-danger`}>
                   <label><strong>{errorMessage}</strong></label>
+                  <br />
+                  <button
+                    id="reloadPage"
+                    title="Reload"
+                    type="button"
+                    className="cancelBtn"
+                    onClick={this.props.reloadPage}>
+                    Reload Page
+                  </button>
                 </div>
               </div>
             ) : (
