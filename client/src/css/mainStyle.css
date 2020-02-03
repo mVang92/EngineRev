@@ -555,10 +555,16 @@ input {
     height: 11rem;
 }
 
+.updateChangesMainPreview,
+.knownIssuesMainPreview {
+    word-wrap: break-word;
+}
+
 .updateChangesDeletePreview,
 .knownIssuesDeletePreview {
     max-height: 11rem;
     overflow: auto;
+    word-wrap: break-word;
 }
 
 .wrapword {

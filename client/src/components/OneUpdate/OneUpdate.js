@@ -47,11 +47,11 @@ const OneUpdate = props => {
         </div>
         <div className="row">
           <div className="col-md-3"><label><strong>Updates:</strong></label></div>
-          <div className="col-md-9 wrapword"><label>{props.updateChanges}</label></div>
+          <div className="col-md-9 updateChangesMainPreview">{props.updateChanges}</div>
         </div>
         <div className="row">
           <div className="col-md-3"><label><strong>Known Issues:</strong></label></div>
-          <div className="col-md-9 wrapword"><label>{props.knownIssues}</label></div>
+          <div className="col-md-9 knownIssuesMainPreview">{props.knownIssues}</div>
         </div>
       </div>
     </React.Fragment>
