@@ -26,6 +26,8 @@ export default class Updates extends Component {
       theme: "",
       currentTheme: "",
       updateId: "",
+      releaseNotesToUpdate: "",
+      knownIssuesToUpdate: "",
       showEditOneUpdateModal: false,
       showDeleteOneUpdateModal: false,
       disableConfirmSaveEditReleaseNoteButton: false,
@@ -49,8 +51,6 @@ export default class Updates extends Component {
   handleChange = e => {
     let { name, value } = e.target;
     this.setState({ [name]: value });
-    // console.log(name)
-    // console.log(value)
   };
 
   /**
@@ -60,7 +60,9 @@ export default class Updates extends Component {
     e.preventDefault();
     const updateData = {
       updateChanges: this.state.updateChanges,
-      knownIssues: this.state.knownIssues
+      knownIssues: this.state.knownIssues,
+      releaseNotesToUpdate: "",
+      knownIssuesToUpdate: ""
     }
     updateApi.addOneUpdate(updateData)
       .then(() => {
@@ -70,7 +72,8 @@ export default class Updates extends Component {
           updateChanges: "",
           knownIssues: ""
         });
-      });
+      })
+      .catch(err => this.errorNotification(err));
   };
 
   /**
@@ -164,7 +167,9 @@ export default class Updates extends Component {
       showEditOneUpdateModal: true,
       updateId: updateId,
       updateChangesToShowInModal: updateChanges,
-      knownIssuesToShowInModal: knownIssues
+      knownIssuesToShowInModal: knownIssues,
+      releaseNotesToUpdate: "",
+      knownIssuesToUpdate: ""
     });
   };
 
@@ -251,14 +256,15 @@ export default class Updates extends Component {
     updateApi.deleteOneReleaseNote(this.state.updateId)
     .then(() => {
       this.getAllUpdates();
+      this.deleteOneUpdateSuccessNotification();
       this.setState({
         showDeleteOneUpdateModal: false,
         disableConfirmDeleteReleaseNoteButton: false
       });
     })
     .catch(err => {
+      this.errorNotification(err);
       this.setState({ disableConfirmDeleteReleaseNoteButton: false });
-      console.log(err)
     });
   };
 
@@ -267,9 +273,7 @@ export default class Updates extends Component {
    */
   hideEditOneUpdateModal = () => {
     this.setState({
-      showEditOneUpdateModal: false,
-      releaseNotesToUpdate: "",
-      knownIssuesToUpdate: ""
+      showEditOneUpdateModal: false
     });
   };
 
@@ -295,7 +299,14 @@ export default class Updates extends Component {
   };
 
   /**
-   * Display the error notification when an error occurs while loading data from the database
+   * Display the success notification when the admin user deletes a release note
+   */
+  deleteOneUpdateSuccessNotification = () => {
+    toast.success(`Release note deleted successfully.`);
+  };
+
+  /**
+   * Display the error notification when an error occurs while executing a database query
    * 
    * @param err the error message to display to the user
    */
