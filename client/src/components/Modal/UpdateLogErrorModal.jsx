@@ -43,7 +43,7 @@ const UpdateLogErrorModal = props => {
                                             )
                                     }
                                 </div>
-                                <div className="col-md-12">
+                                <div className="col-md-12 breakWord">
                                     {
                                         serviceLogService === "" ?
                                             (
@@ -53,7 +53,7 @@ const UpdateLogErrorModal = props => {
                                             )
                                     }
                                 </div>
-                                <div className="col-md-12">
+                                <div className="col-md-12 breakWord">
                                     <div>Comments: <span className="text-success">{serviceLogComment}</span></div>
                                 </div>
                             </div>

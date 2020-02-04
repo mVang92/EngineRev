@@ -6,6 +6,7 @@ html,
 body {
     height: 100%;
     font-family: "Lato", sans-serif;
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -108,6 +109,7 @@ input {
 
 .commentsBox {
     width: 100%;
+    height: 5rem;
     margin: auto;
 }
 
@@ -129,6 +131,7 @@ input {
 .cancelBtn,
 .deleteBtn,
 .backHomeBtn,
+.backToTopButton,
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton {
@@ -166,8 +169,14 @@ input {
     background: rgb(200, 255, 200);
 }
 
-.resetButton {
+.resetButton,
+.backToTopButton {
     background: rgb(200, 235, 255);
+}
+
+.resetButton:hover,
+.backToTopButton:hover {
+    background: rgb(128, 200, 255);
 }
 
 .deleteBtn,
@@ -189,6 +198,7 @@ input {
 .cancelBtn:hover,
 .deleteBtn:hover,
 .backHomeBtn:hover,
+.backToTopButton:hover,
 #editActionButton,
 #deleteActionButton,
 #deleteReleaseNoteActionButton,
@@ -201,10 +211,6 @@ input {
 
 .addBtn:hover {
     background: rgb(128, 255, 128);
-}
-
-.resetButton:hover {
-    background: rgb(128, 200, 255);
 }
 
 .deleteBtn:hover,
@@ -555,8 +561,7 @@ input {
     height: 11rem;
 }
 
-.updateChangesMainPreview,
-.knownIssuesMainPreview {
+.breakWord {
     word-wrap: break-word;
 }
 
@@ -789,6 +794,10 @@ input {
         margin-right: initial;
         padding-top: 1rem;
         padding-bottom: 1rem;
+    }
+
+    .smallNegativeTopMargin {
+        margin-top: -1rem;
     }
 }
     
