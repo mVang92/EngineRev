@@ -26,37 +26,39 @@ const OneUpdate = props => {
           <div className="col-md-3"><label><strong>Known Issues:</strong></label></div>
           <div className="col-md-9 breakWord">{props.knownIssues}</div>
         </div>
-        <hr />
-        <div className="row">
-          <div className="col-md-9"></div>
-          <div className="col-md-3 smallNegativeTopMargin">
-            {
-              props.admin ?
-                (
-                  <div className="row centerButtonMobileDisplay">
-                    <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
-                      <button
-                        id="deleteReleaseNoteActionButton"
-                        title="Delete Release Note"
-                        onClick={(event) => props.getActionValue(event, updateId, updateChanges, knownIssues, deleteValue)}>
-                        <img id="deleteIcon" src={deleteIcon} alt="delete"></img>
-                      </button>
-                    </div>
-                    <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
-                      <button
-                        id="editReleaseNoteActionButton"
-                        title="Edit Release Note"
-                        onClick={(event) => props.getActionValue(event, updateId, updateChanges, knownIssues, editValue)}>
-                        <img id="editIcon" src={editIcon} alt="edit"></img>
-                      </button>
+        {
+          props.admin ?
+            (
+              <React.Fragment>
+                <hr />
+                <div className="row">
+                  <div className="col-md-9"></div>
+                  <div className="col-md-3 smallNegativeTopMargin">
+                    <div className="row centerButtonMobileDisplay">
+                      <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
+                        <button
+                          id="deleteReleaseNoteActionButton"
+                          title="Delete Release Note"
+                          onClick={(event) => props.getActionValue(event, updateId, updateChanges, knownIssues, deleteValue)}>
+                          <img id="deleteIcon" src={deleteIcon} alt="delete"></img>
+                        </button>
+                      </div>
+                      <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
+                        <button
+                          id="editReleaseNoteActionButton"
+                          title="Edit Release Note"
+                          onClick={(event) => props.getActionValue(event, updateId, updateChanges, knownIssues, editValue)}>
+                          <img id="editIcon" src={editIcon} alt="edit"></img>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                ) : (
-                  null
-                )
-            }
-          </div>
-        </div>
+                </div>
+              </React.Fragment>
+            ) : (
+              null
+            )
+        }
       </div>
     </React.Fragment>
   )
