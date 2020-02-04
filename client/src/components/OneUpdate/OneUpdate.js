@@ -17,7 +17,7 @@ const OneUpdate = props => {
         <div className="row">
           <div className="col-md-3"><label><strong>Date:</strong></label></div>
           <div className="col-md-7"><label>{formattedDate}</label></div>
-          <div className="col-md-2 bottomMarginMobileDisplay">
+          <div className="col-md-2 smallBottomMargin">
             {
               props.admin ?
                 (
