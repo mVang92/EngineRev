@@ -16,8 +16,20 @@ const OneUpdate = props => {
       <div className={`releaseNote ${props.currentTheme.oneUpdate}`}>
         <div className="row">
           <div className="col-md-3"><label><strong>Date:</strong></label></div>
-          <div className="col-md-7"><label>{formattedDate}</label></div>
-          <div className="col-md-2 smallBottomMargin">
+          <div className="col-md-9"><label>{formattedDate}</label></div>
+        </div>
+        <div className="row">
+          <div className="col-md-3"><label><strong>Updates:</strong></label></div>
+          <div className="col-md-9 breakWord">{props.updateChanges}</div>
+        </div>
+        <div className="row">
+          <div className="col-md-3"><label><strong>Known Issues:</strong></label></div>
+          <div className="col-md-9 breakWord">{props.knownIssues}</div>
+        </div>
+        <hr />
+        <div className="row">
+          <div className="col-md-9"></div>
+          <div className="col-md-3 smallNegativeTopMargin">
             {
               props.admin ?
                 (
@@ -44,14 +56,6 @@ const OneUpdate = props => {
                 )
             }
           </div>
-        </div>
-        <div className="row">
-          <div className="col-md-3"><label><strong>Updates:</strong></label></div>
-          <div className="col-md-9 updateChangesMainPreview">{props.updateChanges}</div>
-        </div>
-        <div className="row">
-          <div className="col-md-3"><label><strong>Known Issues:</strong></label></div>
-          <div className="col-md-9 knownIssuesMainPreview">{props.knownIssues}</div>
         </div>
       </div>
     </React.Fragment>

@@ -49,7 +49,7 @@ export default class Account extends Component {
   /**
    * Firebase onAuthStateChanged
    */
-  componentWillMount = () => {
+  componentDidMount = () => {
     Modal.setAppElement("body");
     this.onAuthStateChanged();
   };

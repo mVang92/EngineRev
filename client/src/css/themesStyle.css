@@ -146,12 +146,3 @@
     background: rgb(255, 255, 255);
     transition-duration: 0.1s;
 }
-
-@media only screen and (max-width: 991px) {
-    #carSpaceThemeToggleButton,
-    #lightThemeToggleButton,
-    #greyThemeToggleButton,
-    #darkThemeToggleButton {
-        width: 6rem;
-    }
-}

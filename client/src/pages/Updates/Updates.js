@@ -54,6 +54,14 @@ export default class Updates extends Component {
   };
 
   /**
+   * Scroll to the top of the page
+   */
+  backToTopOfPage = () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  };
+
+  /**
    * Adds an update to the database
    */
   addOneUpdate = e => {
@@ -254,18 +262,18 @@ export default class Updates extends Component {
   handleDeleteOneReleaseNote = () => {
     this.setState({ disableConfirmDeleteReleaseNoteButton: true });
     updateApi.deleteOneReleaseNote(this.state.updateId)
-    .then(() => {
-      this.getAllUpdates();
-      this.deleteOneUpdateSuccessNotification();
-      this.setState({
-        showDeleteOneUpdateModal: false,
-        disableConfirmDeleteReleaseNoteButton: false
+      .then(() => {
+        this.getAllUpdates();
+        this.deleteOneUpdateSuccessNotification();
+        this.setState({
+          showDeleteOneUpdateModal: false,
+          disableConfirmDeleteReleaseNoteButton: false
+        });
+      })
+      .catch(err => {
+        this.errorNotification(err);
+        this.setState({ disableConfirmDeleteReleaseNoteButton: false });
       });
-    })
-    .catch(err => {
-      this.errorNotification(err);
-      this.setState({ disableConfirmDeleteReleaseNoteButton: false });
-    });
   };
 
   /**
@@ -334,6 +342,9 @@ export default class Updates extends Component {
                       <div id="recentUpdatesContainer" className={this.state.currentTheme.background}>
                         <div id="field"></div>
                         <h4 className="text-center"><label>Release Notes and Updates</label></h4>
+                        <Link to={{ pathname: "/" }}>
+                          <button className="backHomeBtn">Back</button>
+                        </Link>
                         <hr className={this.state.currentTheme.hr} />
                         {
                           this.state.admin ?
@@ -366,9 +377,16 @@ export default class Updates extends Component {
                           })
                         }
                         <br />
-                        <Link to={{ pathname: "/" }}>
-                          <button className="backHomeBtn">Back</button>
-                        </Link>
+                        <div className="row">
+                          <div className="col-md-6 text-left noWidth">
+                            <Link to={{ pathname: "/" }}>
+                              <button className="backHomeBtn ">Back</button>
+                            </Link>
+                          </div>
+                          <div className="col-md-6 text-right noWidth">
+                            <button className="backToTopButton" onClick={this.backToTopOfPage}>Top</button>
+                          </div>
+                        </div>
                         <ToastContainer />
                         <EditOneUpdateModal
                           checkUserEnteredUpdatedReleaseNoteInput={this.checkUserEnteredUpdatedReleaseNoteInput}
