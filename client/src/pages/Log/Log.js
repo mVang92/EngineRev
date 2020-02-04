@@ -93,6 +93,13 @@ export default class Log extends Component {
   };
 
   /**
+   * Cleanup DOM elements to prevent memory leak 
+   */
+  componentWillUnmount = () => {
+    clearInterval(this.state.disableDeleteVehicleButtonTimer);
+  };
+
+  /**
    * Handle real-time changes
    */
   handleChange = e => {
