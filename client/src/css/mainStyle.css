@@ -136,14 +136,14 @@ input {
     cursor: pointer;
     transition-duration: 0.5s;
     border: 1px solid rgb(255, 255, 255);
-    box-shadow: 0 2px 2px 0 rgb(92, 92, 92);
+    box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
     width: 6.8rem;
 }
 
 #editActionButton,
 #editReleaseNoteActionButton {
     border: 1px solid rgb(255, 255, 255);
-    box-shadow: 0 2px 2px 0 rgb(92, 92, 92);
+    box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
 }
 
 #editActionButton,
@@ -177,7 +177,7 @@ input {
     background: rgb(220, 64, 48);
     color: rgb(255, 255, 255);
     border: 1px solid rgb(255, 255, 255);
-    box-shadow: 0 2px 5px 0 rgb(92, 92, 92);
+    box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
 }
 
 #deleteBtn {
@@ -565,6 +565,10 @@ input {
     max-height: 11rem;
     overflow: auto;
     word-wrap: break-word;
+}
+
+.smallBottomMargin {
+    margin-bottom: 1rem;
 }
 
 .wrapword {
