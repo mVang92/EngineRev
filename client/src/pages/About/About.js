@@ -32,14 +32,18 @@ export default class About extends Component {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         vehicleApi.findUserInformationForOneUser(user.uid)
-          .then(res =>
-            this.setState({
-              theme: res.data.theme,
-              pageLoaded: true
-            }, () => {
-              this.getThemeAndRender();
-            })
-          )
+          .then(res => {
+            try {
+              this.setState({
+                theme: res.data.theme,
+                pageLoaded: true
+              }, () => {
+                this.getThemeAndRender();
+              });
+            } catch (err) {
+              this.setState({ pageLoaded: true });
+            }
+          })
           .catch(err => {
             this.errorNotification(err);
             this.setState({ pageLoaded: true });

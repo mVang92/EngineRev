@@ -161,7 +161,7 @@ export class Nav extends Component {
       password: ""
     });
     if (window.location.href !== (this.state.originUrl + "/")) {
-      window.location.assign(this.state.originUrl)
+      window.location.assign(this.state.originUrl);
     };
   };
 
