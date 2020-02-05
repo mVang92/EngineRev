@@ -146,8 +146,7 @@ export default class Account extends Component {
         })
         .catch(err =>
           this.setState({ loadingError: err },
-            this.loadVehiclesFailNotification(err),
-            console.log(err)
+            this.loadVehiclesFailNotification(err)
           )
         );
     } else (
@@ -248,7 +247,7 @@ export default class Account extends Component {
                 confirmNewPassword: ""
               })
             }).catch(error => {
-              this.updatePasswordErrorNotification(error);
+              this.errorNotification(error);
               this.setState({
                 newPassword: "",
                 confirmNewPassword: ""
