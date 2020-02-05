@@ -42,7 +42,8 @@ export default class Account extends Component {
       showUpdateProfilePictureModal: false,
       showUpdateDisplayNameModal: false,
       showUpdateProfilePictureSuccessModal: false,
-      showUpdateDisplayNameSuccessModal: false
+      showUpdateDisplayNameSuccessModal: false,
+      unableToLoadDatabase: false
     };
   };
 
@@ -125,19 +126,28 @@ export default class Account extends Component {
   getVehicleData = () => {
     if (this.state.userId) {
       API.findUserInformationForOneUser(this.state.userId)
-        .then(res =>
-          this.setState({
-            vehicleCount: res.data.vehicles.length,
-            admin: res.data.admin,
-            theme: res.data.theme,
-            pageLoaded: true
-          }, () => {
-            this.getThemeAndRender();
-          })
-        )
+        .then(res => {
+          try {
+            this.setState({
+              vehicleCount: res.data.vehicles.length,
+              admin: res.data.admin,
+              theme: res.data.theme,
+              pageLoaded: true
+            }, () => {
+              this.getThemeAndRender();
+            })
+          } catch (err) {
+            this.setState({
+              vehicleCount: <div className="text-danger">{err.toString()}</div>,
+              pageLoaded: true,
+              unableToLoadDatabase: true
+            });
+          }
+        })
         .catch(err =>
           this.setState({ loadingError: err },
-            this.loadVehiclesFailNotification(err)
+            this.loadVehiclesFailNotification(err),
+            console.log(err)
           )
         );
     } else (
@@ -414,6 +424,7 @@ export default class Account extends Component {
                         admin={this.state.admin}
                         theme={this.state.theme}
                         currentTheme={this.state.currentTheme}
+                        unableToLoadDatabase={this.state.unableToLoadDatabase}
                       />
                     </Container>
                     <UpdateProfilePictureModal

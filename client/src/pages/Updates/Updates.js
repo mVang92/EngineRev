@@ -102,15 +102,19 @@ export default class Updates extends Component {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         vehicleApi.findUserInformationForOneUser(user.uid)
-          .then(res =>
-            this.setState({
-              admin: res.data.admin,
-              theme: res.data.theme,
-              pageLoaded: true,
-            }, () => {
-              this.getThemeAndRender();
-            })
-          )
+          .then(res => {
+            try {
+              this.setState({
+                admin: res.data.admin,
+                theme: res.data.theme,
+                pageLoaded: true,
+              }, () => {
+                this.getThemeAndRender();
+              });
+            } catch (err) {
+              this.setState({ pageLoaded: true })
+            }
+          })
           .catch(err => this.errorNotification(err));
       } else {
         this.setState({ pageLoaded: true });

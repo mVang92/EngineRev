@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 class AccountDetails extends Component {
   render() {
-    const { currentTheme } = this.props;
+    const { currentTheme, unableToLoadDatabase } = this.props;
     let uniqueUserId = this.props.showUniqueUserId ? "showUniqueUserId" : "hideUniqueUserId";
     let uniqueUserIdMask = this.props.showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
 
@@ -119,53 +119,62 @@ class AccountDetails extends Component {
           <div className="col-md-4">{this.props.userAccountLastSignIn}</div>
           <div className="col-md-4"></div>
         </div>
-        <hr className={currentTheme.hr} />
-        <div className="row">
-          <div className="col-md-4"><label><strong>Themes</strong></label></div>
-          <div className="col-md-4 text-center">
-            <div className="row">
-              <div className="col-md-6">
-                <button
-                  id="carSpaceThemeToggleButton"
-                  title="CarSpace Theme"
-                  type="button"
-                  onClick={(event) => this.props.handleThemeSelection(event, "carSpace")}>
-                  CarSpace
-                </button>
-              </div>
-              <div className="col-md-6">
-                <button
-                  id="lightThemeToggleButton"
-                  title="Light Theme"
-                  type="button"
-                  onClick={(event) => this.props.handleThemeSelection(event, "light")}>
-                  Light
-                </button>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <button
-                  id="greyThemeToggleButton"
-                  title="Grey Theme"
-                  type="button"
-                  onClick={(event) => this.props.handleThemeSelection(event, "grey")}>
-                  Grey
-                </button>
-              </div>
-              <div className="col-md-6">
-                <button
-                  id="darkThemeToggleButton"
-                  title="Dark Theme"
-                  type="button"
-                  onClick={(event) => this.props.handleThemeSelection(event, "dark")}>
-                  Dark
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4"></div>
-        </div>
+        {
+          unableToLoadDatabase ?
+            (
+              null
+            ) : (
+              <React.Fragment>
+                <hr className={currentTheme.hr} />
+                <div className="row">
+                  <div className="col-md-4"><label><strong>Themes</strong></label></div>
+                  <div className="col-md-4 text-center">
+                    <div className="row">
+                      <div className="col-md-6">
+                        <button
+                          id="carSpaceThemeToggleButton"
+                          title="CarSpace Theme"
+                          type="button"
+                          onClick={(event) => this.props.handleThemeSelection(event, "carSpace")}>
+                          CarSpace
+                        </button>
+                      </div>
+                      <div className="col-md-6">
+                        <button
+                          id="lightThemeToggleButton"
+                          title="Light Theme"
+                          type="button"
+                          onClick={(event) => this.props.handleThemeSelection(event, "light")}>
+                          Light
+                        </button>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <button
+                          id="greyThemeToggleButton"
+                          title="Grey Theme"
+                          type="button"
+                          onClick={(event) => this.props.handleThemeSelection(event, "grey")}>
+                          Grey
+                        </button>
+                      </div>
+                      <div className="col-md-6">
+                        <button
+                          id="darkThemeToggleButton"
+                          title="Dark Theme"
+                          type="button"
+                          onClick={(event) => this.props.handleThemeSelection(event, "dark")}>
+                          Dark
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-4"></div>
+                </div>
+              </React.Fragment>
+            )
+        }
         <hr className={currentTheme.hr} />
         <form onSubmit={this.props.showUpdateProfilePictureModal}>
           <div className="row">
