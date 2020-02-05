@@ -62,8 +62,8 @@ input {
     width: 100%;
 }
 
-#editIcon,
-#deleteIcon {
+.editIcon,
+.deleteIcon {
     padding: 3px;
     width: 2em;
 }
@@ -143,22 +143,22 @@ input {
     width: 6.8rem;
 }
 
-#editActionButton,
-#editReleaseNoteActionButton {
+.editActionButton,
+.editReleaseNoteActionButton {
     border: 1px solid rgb(255, 255, 255);
     box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
 }
 
-#editActionButton,
-#deleteActionButton,
-#editReleaseNoteActionButton,
-#deleteReleaseNoteActionButton {
+.editActionButton,
+.deleteActionButton,
+.editReleaseNoteActionButton,
+.deleteReleaseNoteActionButton {
     width: initial;
 }
 
 .cancelBtn,
-#editActionButton,
-#editReleaseNoteActionButton,
+.editActionButton,
+.editReleaseNoteActionButton,
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton {
@@ -180,8 +180,8 @@ input {
 }
 
 .deleteBtn,
-#deleteActionButton,
-#deleteReleaseNoteActionButton,
+.deleteActionButton,
+.deleteReleaseNoteActionButton,
 .backHomeBtn {
     background: rgb(220, 64, 48);
     color: rgb(255, 255, 255);
@@ -199,10 +199,10 @@ input {
 .deleteBtn:hover,
 .backHomeBtn:hover,
 .backToTopButton:hover,
-#editActionButton,
-#deleteActionButton,
-#deleteReleaseNoteActionButton,
-#editReleaseNoteActionButton,
+.editActionButton,
+.deleteActionButton,
+.deleteReleaseNoteActionButton,
+.editReleaseNoteActionButton,
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover {
@@ -214,15 +214,15 @@ input {
 }
 
 .deleteBtn:hover,
-#deleteActionButton:hover,
-#deleteReleaseNoteActionButton:hover,
+.deleteActionButton:hover,
+.deleteReleaseNoteActionButton:hover,
 .backHomeBtn:hover {
     background: rgb(255, 128, 128);
 }
 
 .cancelBtn:hover,
-#editActionButton:hover,
-#editReleaseNoteActionButton:hover,
+.editActionButton:hover,
+.editReleaseNoteActionButton:hover,
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover {
@@ -721,10 +721,10 @@ input {
         margin-top: 1em;
     }
 
-    #editActionButton,
-    #deleteActionButton,
-    #editReleaseNoteActionButton,
-    #deleteReleaseNoteActionButton {
+    .editActionButton,
+    .deleteActionButton,
+    .editReleaseNoteActionButton,
+    .deleteReleaseNoteActionButton {
         width: 6em;
     }
 
