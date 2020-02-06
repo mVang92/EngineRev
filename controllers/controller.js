@@ -82,8 +82,8 @@ module.exports = {
   /**
    * Update the vehicle name for the selected vehicle
    */
-  updateOneVehicleName: (req, res) => {
-    console.log("Hit updateOneVehicleName");
+  updateOneVehicleInformation: (req, res) => {
+    console.log("Hit updateOneVehicleInformation");
     db.Vehicle
       .updateOne(
         { "vehicles._id": req.params.vehicleId },
@@ -138,6 +138,24 @@ module.exports = {
       .findOneAndUpdate(
         { "vehicles._id": req.params.vehicleId },
         { $pull: { "vehicles.$.logs": { _id: req.params.serviceLogId } } }
+      )
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Delete the account for the user
+   */
+  removeOneVehicleName: (req, res) => {
+    console.log("Hit removeOneVehicleName");
+    db.Vehicle
+      .updateOne(
+        { "vehicles._id": req.params.vehicleId },
+        {
+          $set: {
+            "vehicles.$.vehicleName": req.body.emptyVehicleName
+          }
+        }
       )
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));

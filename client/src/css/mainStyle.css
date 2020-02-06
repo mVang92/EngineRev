@@ -189,6 +189,19 @@ input {
     box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
 }
 
+#removeVehicleNameButton {
+    transition-duration: 0.5s;
+    border: 2px solid rgb(220, 64, 48);
+    background: rgb(220, 64, 48);
+    color: rgb(255, 255, 255);
+}
+
+#removeVehicleNameButton:hover {
+    transition-duration: 0.1s;
+    background: rgb(255, 128, 128);
+    border: 2px solid rgb(255, 128, 128);
+}
+
 #deleteBtn {
     margin: auto;
 }
@@ -576,6 +589,18 @@ input {
     margin-bottom: 1rem;
 }
 
+#removeVehicleNameButton {
+    width: 100%;
+}
+
+.noPaddingLeftDesktopDisplay {
+    padding-left: initial;
+}
+
+.noPaddingRightDesktopDisplay {
+    padding-right: initial;
+}
+
 .wrapword {
     white-space: -moz-pre-wrap !important;
     white-space: -pre-wrap;
@@ -798,6 +823,14 @@ input {
 
     .smallNegativeTopMargin {
         margin-top: -1rem;
+    }
+
+    .noPaddingLeftDesktopDisplay {
+        padding-left: 15px;
+    }
+    
+    .noPaddingRightDesktopDisplay {
+        padding-right: 15px;
     }
 }
     

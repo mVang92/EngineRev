@@ -48,6 +48,7 @@ export default class Log extends Component {
       updatedYear: "",
       updatedMake: "",
       updatedModel: "",
+      updatedVehicleName: "",
       vehicleServiceLogs: [],
       updatedServiceLogDateToConfirm: "",
       confirmDeleteVehicleButtonText: "",
@@ -163,6 +164,13 @@ export default class Log extends Component {
   };
 
   /**
+   * Check if the user input value is blank
+   */
+  checkIfStringIsBlank = string => {
+    return (!string || /^\s*$/.test(string));
+  };
+
+  /**
    * Get the vehicle information for the selected vehicle
    * then show the page after loading
    */
@@ -183,6 +191,24 @@ export default class Log extends Component {
         };
       })
       .catch(err => this.loadServiceLogsFailNotification(err));
+  };
+
+  /**
+   * Delete the vehicle name to one vehicle
+   */
+  deleteVehicleName = () => {
+    API.deleteVehicleName(this.state.vehicleId, null)
+    .then(() => {
+      this.setState({
+        showEditOneVehicleNameModal: false
+      }, () => {
+        this.updateOneVehicleNameSuccessNotification();
+        this.getOneVehicle();
+      });
+    })
+    .catch(err => {
+      this.errorNotification(err);
+    });
   };
 
   /**
@@ -212,7 +238,7 @@ export default class Log extends Component {
    */
   checkUserEnteredUpdatedVehicleNameInput = e => {
     e.preventDefault();
-    let updatedVehicleName = this.state.updateVehicleName;
+    let updatedVehicleName = "";
     let updatedYear = "";
     let updatedMake = "";
     let updatedModel = "";
@@ -243,13 +269,23 @@ export default class Log extends Component {
         updatedModel = this.state.model;
       }
 
+      if (this.state.updatedVehicleName) {
+        updatedVehicleName = this.state.updatedVehicleName;
+      } else {
+        updatedVehicleName = this.state.vehicleName;
+      }
+
+      if (this.checkIfStringIsBlank(updatedVehicleName)) {
+        updatedVehicleName = "";
+      }
+
       let updatedVehicleInformation = {
         vehicleName: updatedVehicleName,
         year: updatedYear,
         make: updatedMake,
         model: updatedModel
       };
-      this.handleUpdateOneVehicleName(updatedVehicleInformation);
+      this.handleUpdateVehicleInformation(updatedVehicleInformation);
     }
   };
 
@@ -290,9 +326,9 @@ export default class Log extends Component {
    * 
    * @param updatedVehicleName the updated name for the vehicle
    */
-  handleUpdateOneVehicleName = updatedVehicleName => {
+  handleUpdateVehicleInformation = updatedVehicleName => {
     this.setState({ disableConfirmSaveEditVehicleNameButton: true });
-    API.updateVehicleNameForOneVehicle(this.state.vehicleId, updatedVehicleName)
+    API.updateVehicleInformationForOneVehicle(this.state.vehicleId, updatedVehicleName)
       .then(() => {
         this.updateOneVehicleNameSuccessNotification();
         this.hideEditOneVehicleNameModal();
@@ -567,7 +603,10 @@ export default class Log extends Component {
    * Display the modal to edit the name of the vehicle
    */
   showEditOneVehicleNameModal = () => {
-    this.setState({ showEditOneVehicleNameModal: true });
+    this.setState({
+      showEditOneVehicleNameModal: true,
+      updatedVehicleName: null
+    });
   };
 
   /**
@@ -899,6 +938,7 @@ export default class Log extends Component {
                       checkUserEnteredUpdatedVehicleNameInput={this.checkUserEnteredUpdatedVehicleNameInput}
                       showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
                       handleChange={this.handleChange}
+                      deleteVehicleName={this.deleteVehicleName}
                       state={this.state}
                     />
                     <EditOneServiceLogModal

@@ -222,7 +222,7 @@ export default class Updates extends Component {
     } else {
       newKnownIssues = untouchedKnownIssues;
     }
-    if (this.checkIfStringIsEmpty(newReleaseNotes) || this.checkIfStringIsEmpty(newKnownIssues)) {
+    if (this.checkIfStringIsBlank(newReleaseNotes) || this.checkIfStringIsBlank(newKnownIssues)) {
       this.releaseNoteInvalidInputErrorNotification();
     } else {
       this.handleUpdateOneReleaseNote(newReleaseNotes, newKnownIssues);
@@ -230,9 +230,9 @@ export default class Updates extends Component {
   };
 
   /**
-   * Check if the user input value is empty
+   * Check if the user input value is blank
    */
-  checkIfStringIsEmpty = string => {
+  checkIfStringIsBlank = string => {
     return (!string || /^\s*$/.test(string));
   };
 

@@ -21,6 +21,7 @@ class AddVehicle extends Component {
     } else {
       this.setState({
         newVehicle: {
+          vehicleName: null,
           year: this.refs.year.value,
           make: this.refs.make.value,
           model: this.refs.model.value
