@@ -23,10 +23,10 @@ router
   .route("/addOneServiceLog/:creatorId/:vehicleId")
   .put(controller.addOneLogForOneVehicle)
 
-// Matches with "/api/vehicles/updateOneVehicleName/:vehicleId"
+// Matches with "/api/vehicles/updateOneVehicleInformation/:vehicleId"
 router
-  .route("/updateOneVehicleName/:vehicleId")
-  .put(controller.updateOneVehicleName)
+  .route("/updateOneVehicleInformation/:vehicleId")
+  .put(controller.updateOneVehicleInformation)
 
 // Matches with "/api/vehicles/updateOneServiceLog/:vehicleId/:serviceLogId"
 router
@@ -43,9 +43,14 @@ router
   .route("/deleteVehicle/:vehicleId")
   .delete(controller.removeOneVehicle)
 
+// Matches with "/api/deleteVehicle/:vehicleId"
+router
+  .route("/deleteVehicleName/:vehicleId")
+  .delete(controller.removeOneVehicleName)
+
 // Matches with "/api/vehicles/themes/:themeType"
 router
-.route("/themes/:creatorId/:themeType")
-.put(controller.saveThemeForUser)
+  .route("/themes/:creatorId/:themeType")
+  .put(controller.saveThemeForUser)
 
 module.exports = router;

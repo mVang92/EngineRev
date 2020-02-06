@@ -28,9 +28,9 @@ export default {
   addOneLogForOneVehicle: (creatorId, vehicleId, log) => {
     return axios.put(`/api/vehicles/addOneServiceLog/${creatorId}/${vehicleId}`, log);
   },
-  // Update a the name for one vehicle
-  updateVehicleNameForOneVehicle: (vehicleId, updatedVehicleName) => {
-    return axios.put(`/api/vehicles/updateOneVehicleName/${vehicleId}`, updatedVehicleName);
+  // Update the vehicle information for one vehicle
+  updateVehicleInformationForOneVehicle: (vehicleId, updatedVehicleInformation) => {
+    return axios.put(`/api/vehicles/updateOneVehicleInformation/${vehicleId}`, updatedVehicleInformation);
   },
   // Update a service log for one vehicle
   updateOneLogForOneVehicle: (vehicleId, serviceLogId, updatedServiceLog) => {
@@ -43,6 +43,10 @@ export default {
   // Delete one service log
   deleteOneServiceLog: (vehicleId, serviceLogId) => {
     return axios.delete(`/api/vehicles/deleteServiceLog/${vehicleId}/${serviceLogId}`);
+  },
+  // Delete the vehicle name for one vehicle
+  deleteVehicleName: (vehicleId, nullVehicleName) => {
+    return axios.delete(`/api/vehicles/deleteVehicleName/${vehicleId}`, nullVehicleName);
   },
   // Delete one user account
   // Will have to decide where to put this function in the app
