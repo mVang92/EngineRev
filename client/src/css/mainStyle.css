@@ -191,7 +191,8 @@ input {
 
 #removeVehicleNameButton {
     transition-duration: 0.5s;
-    border: 2px solid rgb(220, 64, 48);
+    border: 1px solid rgb(255, 255, 255);
+    box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
     background: rgb(220, 64, 48);
     color: rgb(255, 255, 255);
 }
@@ -199,7 +200,6 @@ input {
 #removeVehicleNameButton:hover {
     transition-duration: 0.1s;
     background: rgb(255, 128, 128);
-    border: 2px solid rgb(255, 128, 128);
 }
 
 #deleteBtn {
@@ -831,6 +831,15 @@ input {
     
     .noPaddingRightDesktopDisplay {
         padding-right: 15px;
+    }
+
+    #removeVehicleNameButton {
+        margin-top: 0.4rem;
+        width: 9rem;
+    }
+
+    .textLeftMobileDisplay {
+        text-align: left !important;
     }
 }
     

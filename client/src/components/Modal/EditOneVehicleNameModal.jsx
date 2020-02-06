@@ -24,23 +24,23 @@ const EditOneVehicleNameModal = props => {
                                     <div className="col-md-3">
                                         <label><strong>Name</strong></label>
                                     </div>
-                                    <div className="col-md-7 noPaddingRightDesktopDisplay">
+                                    <div className="col-md-5 noPaddingRightDesktopDisplay">
                                         <input
                                             id="vehicleNameInput"
                                             type="text"
                                             onChange={props.handleChange}
                                             defaultValue={props.state.vehicleName}
                                             name="updatedVehicleName"
-                                            maxLength="50"
+                                            maxLength="25"
                                         />
                                     </div>
-                                    <div className="col-md-2 noPaddingLeftDesktopDisplay">
+                                    <div className="col-md-4 text-right textLeftMobileDisplay">
                                         <button
                                             id="removeVehicleNameButton"
                                             title="Remove Vehicle Name"
                                             type="button"
                                             onClick={props.deleteVehicleName}>
-                                            X
+                                            Delete Name
                                         </button>
                                     </div>
                                 </div>
