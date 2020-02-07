@@ -408,7 +408,7 @@ input {
 
 #addVehicleButton,
 #resetVehicleInputFieldsButton {
-    width: 7em;
+    width: 8rem;
 }
 
 .imageMobileDisplay {
@@ -687,7 +687,7 @@ input {
     }
 
     #addVehicleButton {
-        margin-top: 2em;
+        margin-top: 2rem;
     }
 
     .centerOnMobile {

@@ -76,13 +76,14 @@ export class Nav extends Component {
   };
 
   /**
-   * Creates a schema for the user  during first time login
+   * Creates a schema for the user during first time login
    */
   createUserSchema = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        API.createUserSchema(user.uid)
-          .then(() => this.isUserLoggedIn());
+        API.createUserSchema(user.uid, user.email)
+          .then(() => this.isUserLoggedIn())
+          .catch(error => this.errorNotification(error));
       };
     });
   };
@@ -98,7 +99,7 @@ export class Nav extends Component {
         this.isUserLoggedIn();
         this.hideSignInModal();
       })
-      .catch(error => this.loginFailNotification(error));
+      .catch(error => this.errorNotification(error));
   };
 
   /**
@@ -115,10 +116,10 @@ export class Nav extends Component {
             this.hideSignUpModal();
           }, 10);
         })
-        .catch(error => this.loginFailNotification(error));
+        .catch(error => this.errorNotification(error));
     } else {
       const error = "Error: Passwords do not match."
-      this.loginFailNotification(error);
+      this.errorNotification(error);
     };
   };
 
@@ -146,7 +147,7 @@ export class Nav extends Component {
         this.sendPasswordResetEmailConfirmationSuccessNotification();
         this.setState({ showForgotPasswordModal: false });
       }).catch(error => {
-        this.sendPasswordResetEmailConfirmationFailNotification(error);
+        this.errorNotification(error);
       });
   };
 
@@ -235,20 +236,11 @@ export class Nav extends Component {
   };
 
   /**
-   * Display an error notification when there is an error during login
+   * Display an error notification when an error occurs
    * 
    * @param err the error message to display to the user
    */
-  loginFailNotification = err => {
-    toast.error(err.toString());
-  };
-
-  /**
-   * Display an error notification when there is an error sending password confirmation
-   * 
-   * @param err the error message to display to the user
-   */
-  sendPasswordResetEmailConfirmationFailNotification = err => {
+  errorNotification = err => {
     toast.error(err.toString());
   };
 
