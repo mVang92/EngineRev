@@ -48,7 +48,7 @@ router
   .route("/deleteVehicleName/:vehicleId")
   .delete(controller.removeOneVehicleName)
 
-// Matches with "/api/vehicles/themes/:themeType"
+// Matches with "/api/vehicles/themes/:creatorId/:themeType"
 router
   .route("/themes/:creatorId/:themeType")
   .put(controller.saveThemeForUser)

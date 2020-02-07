@@ -2,10 +2,11 @@ import axios from "axios";
 
 export default {
   // Upon signing up for new account, create this data for the new user
-  createUserSchema: id => {
+  createUserSchema: (creatorId, userEmail) => {
     return (
       axios.post("/api/vehicles", {
-        creator: id,
+        creator: creatorId,
+        email: userEmail,
         admin: false,
         theme: "carSpace",
         vehicleName: [{}]

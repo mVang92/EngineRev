@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const vehicleSchema = new Schema({
   creator: { type: String },
+  email: { type: String },
   admin: { type: Boolean },
   theme: { type: String },
   vehicles: [{
