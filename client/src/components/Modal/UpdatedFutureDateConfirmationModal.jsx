@@ -3,7 +3,14 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const UpdatedFutureDateConfirmationModal = props => {
-    let checkThisServiceDate = props.state.updatedServiceLogDateToConfirm;
+    const {
+        updatedServiceLogDateToConfirm,
+        showUpdatedFutureDateConfirmationModal,
+        currentTheme,
+        hideUpdatedFutureDateConfirmationModal,
+        handleUpdateOneServiceLog
+    } = props;
+    let checkThisServiceDate = updatedServiceLogDateToConfirm;
     const newDateCheckThisServiceDate = new Date(checkThisServiceDate);
     const serviceDateToUTC = new Date(
         Date.UTC(newDateCheckThisServiceDate.getFullYear(),
@@ -20,7 +27,7 @@ const UpdatedFutureDateConfirmationModal = props => {
 
     return (
         <ReactModal
-            isOpen={props.showUpdatedFutureDateConfirmationModal}
+            isOpen={showUpdatedFutureDateConfirmationModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
@@ -28,7 +35,7 @@ const UpdatedFutureDateConfirmationModal = props => {
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <div className={`modalBody ${props.state.currentTheme.background}`}>
+                    <div className={`modalBody ${currentTheme.background}`}>
                         <div className="modal-header">
                             <div className="col-md-2 imageMobileDisplay">
                                 <img className="warningImage" src={warningImage} alt='warning' />
@@ -56,7 +63,7 @@ const UpdatedFutureDateConfirmationModal = props => {
                                 title="No"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.hideUpdatedFutureDateConfirmationModal}
+                                onClick={hideUpdatedFutureDateConfirmationModal}
                                 data-dismiss="modal">
                                 No
                             </button>
@@ -65,7 +72,7 @@ const UpdatedFutureDateConfirmationModal = props => {
                                 id="confirmSubmitFutureDateButton"
                                 className="addBtn"
                                 type="button"
-                                onClick={props.handleUpdateOneServiceLog}>
+                                onClick={handleUpdateOneServiceLog}>
                                 Yes
                             </button>
                         </div>

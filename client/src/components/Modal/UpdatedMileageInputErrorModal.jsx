@@ -3,10 +3,15 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const UpdatedMileageInputErrorModal = props => {
-    const { serviceLogMileage } = props.state;
+    const {
+        showUpdatedMileageInputErrorModal,
+        serviceLogMileage,
+        currentTheme,
+        hideUpdatedMileageInputErrorModal
+    } = props;
     return (
         <ReactModal
-            isOpen={props.showUpdatedMileageInputErrorModal}
+            isOpen={showUpdatedMileageInputErrorModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
@@ -14,7 +19,7 @@ const UpdatedMileageInputErrorModal = props => {
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <div className={`modalBody ${props.state.currentTheme.background}`}>
+                    <div className={`modalBody ${currentTheme.background}`}>
                         <div className="modal-header">
                             <div className="col-md-2 imageMobileDisplay">
                                 <img className="warningImage" src={warningImage} alt='warning' />
@@ -33,7 +38,7 @@ const UpdatedMileageInputErrorModal = props => {
                                 title="Understood"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.hideUpdatedMileageInputErrorModal}
+                                onClick={hideUpdatedMileageInputErrorModal}
                                 data-dismiss="modal">
                                 Okay
                             </button>

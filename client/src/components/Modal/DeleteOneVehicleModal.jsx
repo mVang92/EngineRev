@@ -4,9 +4,22 @@ import { Link } from "react-router-dom";
 import warningImage from "../../images/warning.png";
 
 const DeleteOneVehicleModal = props => {
+    const {
+        showDeleteOneVehicleModal,
+        currentTheme,
+        year,
+        make,
+        model,
+        vehicleServiceLogs,
+        hideDeleteOneVehicleModal,
+        handleDeleteOneVehicle,
+        disableDeleteOneVehicleButton,
+        confirmDeleteVehicleButtonText,
+        handlePrintPage
+    } = props;
     return (
         <ReactModal
-            isOpen={props.showDeleteOneVehicleModal}
+            isOpen={showDeleteOneVehicleModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
@@ -14,22 +27,22 @@ const DeleteOneVehicleModal = props => {
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <div className={`modalBody ${props.state.currentTheme.background}`}>
+                    <div className={`modalBody ${currentTheme.background}`}>
                         <div className="row modal-header">
                             <div className="col-md-2">
                                 <img className="removeMobileDisplay imageMobileDisplay" src={warningImage} alt='warning' />
                             </div>
                             <div className="col-md-8 text-center">
-                                <label><strong>Delete your {props.state.year} {props.state.make} {props.state.model}?</strong></label>
+                                <label><strong>Delete your {year} {make} {model}?</strong></label>
                             </div>
                             <div className="col-md-2"></div>
                         </div>
-                        <div className={`modal-body text-danger ${props.state.currentTheme.redText}`}>
+                        <div className={`modal-body text-danger ${currentTheme.redText}`}>
                             {
-                                props.state.vehicleServiceLogs.length > 1 ?
+                                vehicleServiceLogs.length > 1 ?
                                     (
                                         <label>
-                                            Deleting this vehicle will delete all {props.state.vehicleServiceLogs.length} of its service logs.
+                                            Deleting this vehicle will delete all {vehicleServiceLogs.length} of its service logs.
                                             Are you sure you want to continue? Consider printing your service logs.
                                     </label>
                                     ) : (
@@ -45,19 +58,19 @@ const DeleteOneVehicleModal = props => {
                                 title="Cancel"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.hideDeleteOneVehicleModal}
+                                onClick={hideDeleteOneVehicleModal}
                                 data-dismiss="modal">
                                 Cancel
                             </button>
                             {
-                                props.state.vehicleServiceLogs.length > 1 ?
+                                vehicleServiceLogs.length > 1 ?
                                     (
                                         <button
                                             id="printPageViaDeleteButton"
                                             title="Print Service Logs"
                                             type="button"
                                             className="addBtn"
-                                            onClick={props.handlePrintPage}
+                                            onClick={handlePrintPage}
                                             data-dismiss="modal">
                                             Print Logs
                                         </button>
@@ -71,9 +84,9 @@ const DeleteOneVehicleModal = props => {
                                     id="confirmDeleteVehicleButton"
                                     className="deleteBtn"
                                     type="button"
-                                    onClick={props.handleDeleteOneVehicle}
-                                    disabled={props.state.disableDeleteOneVehicleButton}>
-                                    {props.state.confirmDeleteVehicleButtonText}
+                                    onClick={handleDeleteOneVehicle}
+                                    disabled={disableDeleteOneVehicleButton}>
+                                    {confirmDeleteVehicleButtonText}
                                 </button>
                             </Link>
                         </div>

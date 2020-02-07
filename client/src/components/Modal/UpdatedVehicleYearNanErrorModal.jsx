@@ -3,9 +3,14 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const UpdatedVehicleYearNanErrorModal = props => {
+    const {
+        showUpdatedVehicleYearNanErrorModal,
+        currentTheme,
+        hideUpdatedVehicleYearNanErrorModal
+    } = props;
     return (
         <ReactModal
-            isOpen={props.showUpdatedVehicleYearNanErrorModal}
+            isOpen={showUpdatedVehicleYearNanErrorModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
@@ -13,7 +18,7 @@ const UpdatedVehicleYearNanErrorModal = props => {
         >
             <div id="addVehicleYearNanErrorModal" className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <div className={`modalBody ${props.currentTheme.background}`}>
+                    <div className={`modalBody ${currentTheme.background}`}>
                         <div className="modal-header">
                             <div className="col-md-2 imageMobileDisplay">
                                 <img className="warningImage" src={warningImage} alt="warning" />
@@ -28,7 +33,7 @@ const UpdatedVehicleYearNanErrorModal = props => {
                                 title="Okay"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.hideUpdatedVehicleYearNanErrorModal}
+                                onClick={hideUpdatedVehicleYearNanErrorModal}
                                 data-dismiss="modal">
                                 Okay
                             </button>

@@ -173,7 +173,7 @@ module.exports = {
   },
 
   /**
-   * Render a theme for the user
+   * Save a theme for the user
    */
   saveThemeForUser: (req, res) => {
     console.log("Hit saveThemeForUser");
