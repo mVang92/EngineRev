@@ -3,13 +3,20 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const FutureDateConfirmationModal = props => {
-    const serviceLogDate = new Date(props.state);
+    const {
+        date,
+        showFutureDateConfirmationModal,
+        currentTheme,
+        hideFutureDateConfirmationModal,
+        handleSubmitOneServiceLog
+    } = props;
+    const serviceLogDate = new Date(date);
     serviceLogDate.setDate(serviceLogDate.getDate() + 1);
     const futureDate = serviceLogDate.toLocaleDateString("en-US");
 
     return (
         <ReactModal
-            isOpen={props.showFutureDateConfirmationModal}
+            isOpen={showFutureDateConfirmationModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
@@ -17,7 +24,7 @@ const FutureDateConfirmationModal = props => {
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <div className={`modalBody ${props.currentTheme.background}`}>
+                    <div className={`modalBody ${currentTheme.background}`}>
                         <div className="modal-header">
                             <div className="col-md-2 imageMobileDisplay">
                                 <img className="warningImage" src={warningImage} alt='warning' />
@@ -45,7 +52,7 @@ const FutureDateConfirmationModal = props => {
                                 title="No"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.hideFutureDateConfirmationModal}
+                                onClick={hideFutureDateConfirmationModal}
                                 data-dismiss="modal">
                                 No
                             </button>
@@ -54,7 +61,7 @@ const FutureDateConfirmationModal = props => {
                                 id="confirmSubmitFutureDateButton"
                                 className="addBtn"
                                 type="button"
-                                onClick={props.handleSubmitOneServiceLog}>
+                                onClick={handleSubmitOneServiceLog}>
                                 Yes
                             </button>
                         </div>

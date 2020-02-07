@@ -2,7 +2,19 @@ import React from "react";
 import ReactModal from "react-modal";
 
 const EditOneServiceLogModal = props => {
-    let date = new Date(props.state.serviceLogDate),
+    const {
+        serviceLogDate,
+        showEditOneLogModal,
+        checkUserEnteredUpdatedServiceLogInput,
+        currentTheme,
+        handleChange,
+        serviceLogMileage,
+        serviceLogService,
+        serviceLogComment,
+        hideEditOneServiceLogModal,
+        disableConfirmSaveEditServiceLogButton
+    } = props;
+    let date = new Date(serviceLogDate),
         month = "" + (date.getMonth() + 1),
         day = "" + date.getDate(),
         year = date.getFullYear();
@@ -15,20 +27,20 @@ const EditOneServiceLogModal = props => {
         day = "0" + day;
     }
 
-    let serviceLogDate = [year, month, day].join("-");
+    let serviceLogDateToDisplay = [year, month, day].join("-");
 
     return (
         <ReactModal
-            isOpen={props.showEditOneLogModal}
+            isOpen={showEditOneLogModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
         >
-            <form onSubmit={props.checkUserEnteredUpdatedServiceLogInput}>
+            <form onSubmit={checkUserEnteredUpdatedServiceLogInput}>
                 <div className="accountModal modal-content">
                     <div className="modal-body modalShadow">
-                        <div className={`modalBody ${props.state.currentTheme.background}`}>
+                        <div className={`modalBody ${currentTheme.background}`}>
                             <div className="row modal-header">
                                 <div className="col-md-12 text-center">
                                     <label><strong>Edit Service Log</strong></label>
@@ -44,8 +56,8 @@ const EditOneServiceLogModal = props => {
                                             id="updatedServiceLogDate"
                                             type="date"
                                             name="serviceLogDate"
-                                            onChange={props.handleChange}
-                                            defaultValue={serviceLogDate}
+                                            onChange={handleChange}
+                                            defaultValue={serviceLogDateToDisplay}
                                         />
                                     </div>
                                 </div>
@@ -59,8 +71,8 @@ const EditOneServiceLogModal = props => {
                                             type="text"
                                             name="serviceLogMileage"
                                             maxLength="7"
-                                            onChange={props.handleChange}
-                                            defaultValue={props.state.serviceLogMileage}
+                                            onChange={handleChange}
+                                            defaultValue={serviceLogMileage}
                                         />
                                     </div>
                                 </div>
@@ -74,8 +86,8 @@ const EditOneServiceLogModal = props => {
                                             type="text"
                                             name="serviceLogService"
                                             maxLength="50"
-                                            onChange={props.handleChange}
-                                            defaultValue={props.state.serviceLogService}
+                                            onChange={handleChange}
+                                            defaultValue={serviceLogService}
                                         />
                                     </div>
                                 </div>
@@ -90,8 +102,8 @@ const EditOneServiceLogModal = props => {
                                             type="text"
                                             name="serviceLogComment"
                                             maxLength="250"
-                                            onChange={props.handleChange}
-                                            defaultValue={props.state.serviceLogComment}
+                                            onChange={handleChange}
+                                            defaultValue={serviceLogComment}
                                         />
                                     </div>
                                 </div>
@@ -102,7 +114,7 @@ const EditOneServiceLogModal = props => {
                                     title="Cancel"
                                     type="button"
                                     className="cancelBtn"
-                                    onClick={props.hideEditOneServiceLogModal}
+                                    onClick={hideEditOneServiceLogModal}
                                     data-dismiss="modal">
                                     Cancel
                                 </button>
@@ -111,7 +123,7 @@ const EditOneServiceLogModal = props => {
                                     title="Save Service Log"
                                     className="cancelBtn"
                                     type="submit"
-                                    disabled={props.state.disableConfirmSaveEditServiceLogButton}>
+                                    disabled={disableConfirmSaveEditServiceLogButton}>
                                     Save
                                 </button>
                             </div>

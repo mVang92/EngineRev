@@ -3,10 +3,18 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const UpdateLogErrorModal = props => {
-    const { serviceLogDate, serviceLogMileage, serviceLogService, serviceLogComment } = props.state;
+    const {
+        showUpdatedLogErrorModal,
+        currentTheme,
+        serviceLogDate,
+        serviceLogMileage,
+        serviceLogService,
+        serviceLogComment,
+        hideUpdateLogErrorModal
+    } = props;
     return (
         <ReactModal
-            isOpen={props.showUpdatedLogErrorModal}
+            isOpen={showUpdatedLogErrorModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
@@ -14,7 +22,7 @@ const UpdateLogErrorModal = props => {
         >
             <div id="addLogErrorModal" className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <div className={`modalBody ${props.state.currentTheme.background}`}>
+                    <div className={`modalBody ${currentTheme.background}`}>
                         <div className="modal-header">
                             <div className="col-md-2 imageMobileDisplay">
                                 <img className="warningImage" src={warningImage} alt="warning" />
@@ -64,7 +72,7 @@ const UpdateLogErrorModal = props => {
                                 title="Okay"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.hideUpdateLogErrorModal}
+                                onClick={hideUpdateLogErrorModal}
                                 data-dismiss="modal">
                                 Okay
                             </button>

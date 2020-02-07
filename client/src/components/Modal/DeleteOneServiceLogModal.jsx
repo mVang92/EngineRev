@@ -3,9 +3,19 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const DeleteOneServiceLogModal = props => {
+    const {
+        showDeleteOneLogModal,
+        currentTheme,
+        serviceLogDate,
+        serviceLogMileage,
+        serviceLogService,
+        serviceLogComment,
+        hideDeleteOneServiceLogModal,
+        handleDeleteOneServiceLog
+    } = props;
     return (
         <ReactModal
-            isOpen={props.showDeleteOneLogModal}
+            isOpen={showDeleteOneLogModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
@@ -13,13 +23,13 @@ const DeleteOneServiceLogModal = props => {
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <div className={`modalBody ${props.state.currentTheme.background}`}>
+                    <div className={`modalBody ${currentTheme.background}`}>
                         <div className="row modal-header">
                             <div className="col-md-2">
                                 <img className="removeMobileDisplay imageMobileDisplay" src={warningImage} alt='warning' />
                             </div>
                             <div className="col-md-8 text-danger text-center">
-                                <label><strong className={props.state.currentTheme.redText}>Delete this service log?</strong></label>
+                                <label><strong className={currentTheme.redText}>Delete this service log?</strong></label>
                             </div>
                             <div className="col-md-2"></div>
                         </div>
@@ -29,7 +39,7 @@ const DeleteOneServiceLogModal = props => {
                                     <label><strong>Date:</strong></label>
                                 </div>
                                 <div className="col-md-9">
-                                    {props.state.serviceLogDate}
+                                    {serviceLogDate}
                                 </div>
                             </div>
                             <div className="row">
@@ -37,7 +47,7 @@ const DeleteOneServiceLogModal = props => {
                                     <label><strong>Mileage:</strong></label>
                                 </div>
                                 <div className="col-md-9">
-                                    {props.state.serviceLogMileage}
+                                    {serviceLogMileage}
                                 </div>
                             </div>
                             <div className="row">
@@ -45,18 +55,18 @@ const DeleteOneServiceLogModal = props => {
                                     <label><strong>Service:</strong></label>
                                 </div>
                                 <div className="col-md-9">
-                                    {props.state.serviceLogService}
+                                    {serviceLogService}
                                 </div>
                             </div>
                             {
-                                props.state.serviceLogComment ?
+                                serviceLogComment ?
                                     (
                                         <div className="row">
                                             <div className="col-md-3">
                                                 <label><strong>Comments:</strong></label>
                                             </div>
                                             <div className="col-md-9">
-                                                {props.state.serviceLogComment}
+                                                {serviceLogComment}
                                             </div>
                                         </div>
                                     ) : (
@@ -69,7 +79,7 @@ const DeleteOneServiceLogModal = props => {
                                 title="Cancel"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.hideDeleteOneServiceLogModal}
+                                onClick={hideDeleteOneServiceLogModal}
                                 data-dismiss="modal">
                                 Cancel
                             </button>
@@ -78,7 +88,7 @@ const DeleteOneServiceLogModal = props => {
                                 id="confirmDeleteServiceLogButton"
                                 className="deleteBtn"
                                 type="button"
-                                onClick={props.handleDeleteOneServiceLog}>
+                                onClick={handleDeleteOneServiceLog}>
                                 Delete
                             </button>
                         </div>

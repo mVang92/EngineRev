@@ -3,15 +3,24 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const AddLogErrorModal = props => {
+    const {
+        date,
+        showAddLogErrorModal,
+        currentTheme,
+        mileage,
+        service,
+        comment,
+        hideAddLogErrorModal
+    } = props;
     let dateToShowFormatted = "";
-    if (props.state.date) {
-        const dateToShow = new Date(props.state.date);
+    if (date) {
+        const dateToShow = new Date(date);
         dateToShow.setDate(dateToShow.getDate() + 1);
         dateToShowFormatted = dateToShow.toLocaleDateString("en-US");
     }
     return (
         <ReactModal
-            isOpen={props.showAddLogErrorModal}
+            isOpen={showAddLogErrorModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
@@ -19,7 +28,7 @@ const AddLogErrorModal = props => {
         >
             <div id="addLogErrorModal" className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <div className={`modalBody ${props.state.currentTheme.background}`}>
+                    <div className={`modalBody ${currentTheme.background}`}>
                         <div className="modal-header">
                             <div className="col-md-2 imageMobileDisplay">
                                 <img className="warningImage" src={warningImage} alt="warning" />
@@ -30,7 +39,7 @@ const AddLogErrorModal = props => {
                                 </div>
                                 <div className="col-md-12">
                                     {
-                                        props.state.date === "" ?
+                                        date === "" ?
                                             (
                                                 <div className="text-danger"><strong>Date:</strong></div>
                                             ) : (
@@ -40,26 +49,26 @@ const AddLogErrorModal = props => {
                                 </div>
                                 <div className="col-md-12">
                                     {
-                                        props.state.mileage === "" ?
+                                        mileage === "" ?
                                             (
                                                 <div className="text-danger"><strong>Mileage:</strong></div>
                                             ) : (
-                                                <div>Mileage: <span className="text-success">{props.state.mileage}</span></div>
+                                                <div>Mileage: <span className="text-success">{mileage}</span></div>
                                             )
                                     }
                                 </div>
                                 <div className="col-md-12 breakWord">
                                     {
-                                        props.state.service === "" ?
+                                        service === "" ?
                                             (
                                                 <div className="text-danger"><strong>Service:</strong></div>
                                             ) : (
-                                                <div>Service: <span className="text-success">{props.state.service}</span></div>
+                                                <div>Service: <span className="text-success">{service}</span></div>
                                             )
                                     }
                                 </div>
                                 <div className="col-md-12 breakWord">
-                                    <div>Comments: <span className="text-success">{props.state.comment}</span></div>
+                                    <div>Comments: <span className="text-success">{comment}</span></div>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +78,7 @@ const AddLogErrorModal = props => {
                                 title="Okay"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.hideAddLogErrorModal}
+                                onClick={hideAddLogErrorModal}
                                 data-dismiss="modal">
                                 Okay
                             </button>

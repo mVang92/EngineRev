@@ -2,18 +2,32 @@ import React from "react";
 import ReactModal from "react-modal";
 
 const EditOneVehicleNameModal = props => {
+    const {
+        showEditOneVehicleNameModal,
+        checkUserEnteredUpdatedVehicleNameInput,
+        currentTheme,
+        handleChange,
+        vehicleName,
+        deleteVehicleName,
+        year,
+        make, 
+        model,
+        showDeleteOneVehicleModal,
+        hideEditOneVehicleNameModal,
+        disableConfirmSaveEditVehicleNameButton
+    } = props;
     return (
         <ReactModal
-            isOpen={props.showEditOneVehicleNameModal}
+            isOpen={showEditOneVehicleNameModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
         >
-            <form onSubmit={props.checkUserEnteredUpdatedVehicleNameInput}>
+            <form onSubmit={checkUserEnteredUpdatedVehicleNameInput}>
                 <div className="accountModal modal-content">
                     <div className="modal-body modalShadow">
-                        <div className={`modalBody ${props.state.currentTheme.background}`}>
+                        <div className={`modalBody ${currentTheme.background}`}>
                             <div className="row modal-header">
                                 <div className="col-md-12 text-center">
                                     <label><strong>Edit Vehicle</strong></label>
@@ -28,8 +42,8 @@ const EditOneVehicleNameModal = props => {
                                         <input
                                             id="vehicleNameInput"
                                             type="text"
-                                            onChange={props.handleChange}
-                                            defaultValue={props.state.vehicleName}
+                                            onChange={handleChange}
+                                            defaultValue={vehicleName}
                                             name="updatedVehicleName"
                                             maxLength="25"
                                         />
@@ -39,7 +53,7 @@ const EditOneVehicleNameModal = props => {
                                             id="removeVehicleNameButton"
                                             title="Remove Vehicle Name"
                                             type="button"
-                                            onClick={props.deleteVehicleName}>
+                                            onClick={deleteVehicleName}>
                                             Delete Name
                                         </button>
                                     </div>
@@ -52,8 +66,8 @@ const EditOneVehicleNameModal = props => {
                                         <input
                                             id="vehicleYearInput"
                                             type="text"
-                                            onChange={props.handleChange}
-                                            defaultValue={props.state.year}
+                                            onChange={handleChange}
+                                            defaultValue={year}
                                             name="updatedYear"
                                             maxLength="4"
                                         />
@@ -67,8 +81,8 @@ const EditOneVehicleNameModal = props => {
                                         <input
                                             id="vehicleMakeInput"
                                             type="text"
-                                            onChange={props.handleChange}
-                                            defaultValue={props.state.make}
+                                            onChange={handleChange}
+                                            defaultValue={make}
                                             name="updatedMake"
                                             maxLength="25"
                                         />
@@ -82,8 +96,8 @@ const EditOneVehicleNameModal = props => {
                                         <input
                                             id="vehicleModelInput"
                                             type="text"
-                                            onChange={props.handleChange}
-                                            defaultValue={props.state.model}
+                                            onChange={handleChange}
+                                            defaultValue={model}
                                             name="updatedModel"
                                             maxLength="25"
                                         />
@@ -98,7 +112,7 @@ const EditOneVehicleNameModal = props => {
                                             title="Delete This Vehicle"
                                             type="button"
                                             className="deleteBtn"
-                                            onClick={props.showDeleteOneVehicleModal}>
+                                            onClick={showDeleteOneVehicleModal}>
                                             Delete Vehicle
                                         </button>
                                     </div>
@@ -107,7 +121,7 @@ const EditOneVehicleNameModal = props => {
                                             title="Cancel"
                                             type="button"
                                             className="cancelBtn"
-                                            onClick={props.hideEditOneVehicleNameModal}
+                                            onClick={hideEditOneVehicleNameModal}
                                             data-dismiss="modal">
                                             Cancel
                                         </button>
@@ -116,7 +130,7 @@ const EditOneVehicleNameModal = props => {
                                             id="confirmSaveEditVehicleNameButton"
                                             className="cancelBtn"
                                             type="submit"
-                                            disabled={props.state.disableConfirmSaveEditVehicleNameButton}>
+                                            disabled={disableConfirmSaveEditVehicleNameButton}>
                                             Save
                                         </button>
                                     </div>

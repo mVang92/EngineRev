@@ -198,17 +198,17 @@ export default class Log extends Component {
    */
   deleteVehicleName = () => {
     API.deleteVehicleName(this.state.vehicleId, null)
-    .then(() => {
-      this.setState({
-        showEditOneVehicleNameModal: false
-      }, () => {
-        this.updateOneVehicleNameSuccessNotification();
-        this.getOneVehicle();
+      .then(() => {
+        this.setState({
+          showEditOneVehicleNameModal: false
+        }, () => {
+          this.updateOneVehicleNameSuccessNotification();
+          this.getOneVehicle();
+        });
+      })
+      .catch(err => {
+        this.errorNotification(err);
       });
-    })
-    .catch(err => {
-      this.errorNotification(err);
-    });
   };
 
   /**
@@ -933,20 +933,30 @@ export default class Log extends Component {
                       </div>
                     </div>
                     <EditOneVehicleNameModal
+                      disableConfirmSaveEditVehicleNameButton={this.state.disableConfirmSaveEditVehicleNameButton}
                       showEditOneVehicleNameModal={this.state.showEditOneVehicleNameModal}
                       hideEditOneVehicleNameModal={this.hideEditOneVehicleNameModal}
                       checkUserEnteredUpdatedVehicleNameInput={this.checkUserEnteredUpdatedVehicleNameInput}
                       showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
                       handleChange={this.handleChange}
                       deleteVehicleName={this.deleteVehicleName}
-                      state={this.state}
+                      currentTheme={this.state.currentTheme}
+                      vehicleName={this.state.vehicleName}
+                      year={this.state.year}
+                      make={this.state.make}
+                      model={this.state.model}
                     />
                     <EditOneServiceLogModal
+                      disableConfirmSaveEditServiceLogButton={this.state.disableConfirmSaveEditServiceLogButton}
                       checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
                       showEditOneLogModal={this.state.showEditOneLogModal}
                       hideEditOneServiceLogModal={this.hideEditOneServiceLogModal}
                       handleChange={this.handleChange}
-                      state={this.state}
+                      currentTheme={this.state.currentTheme}
+                      serviceLogDate={this.state.serviceLogDate}
+                      serviceLogMileage={this.state.serviceLogMileage}
+                      serviceLogService={this.state.serviceLogService}
+                      serviceLogComment={this.state.serviceLogComment}
                     />
                     <UpdatedVehicleYearNanErrorModal
                       showUpdatedVehicleYearNanErrorModal={this.state.showUpdatedVehicleYearNanErrorModal}
@@ -957,47 +967,68 @@ export default class Log extends Component {
                       handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
                       showFutureDateConfirmationModal={this.state.showFutureDateConfirmationModal}
                       hideFutureDateConfirmationModal={this.hideFutureDateConfirmationModal}
-                      state={this.state.date}
+                      date={this.state.date}
                       currentTheme={this.state.currentTheme}
                     />
                     <UpdatedFutureDateConfirmationModal
                       handleUpdateOneServiceLog={this.handleUpdateOneServiceLog}
                       showUpdatedFutureDateConfirmationModal={this.state.showUpdatedFutureDateConfirmationModal}
                       hideUpdatedFutureDateConfirmationModal={this.hideUpdatedFutureDateConfirmationModal}
-                      state={this.state}
+                      updatedServiceLogDateToConfirm={this.state.updatedServiceLogDateToConfirm}
+                      currentTheme={this.state.currentTheme}
                     />
                     <DeleteOneVehicleModal
                       handleDeleteOneVehicle={this.handleDeleteOneVehicle}
                       showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
                       hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
                       handlePrintPage={this.handlePrintPage}
-                      state={this.state}
+                      currentTheme={this.state.currentTheme}
+                      year={this.state.year}
+                      make={this.state.make}
+                      model={this.state.model}
+                      vehicleServiceLogs={this.state.vehicleServiceLogs}
+                      disableDeleteOneVehicleButton={this.state.disableDeleteOneVehicleButton}
+                      confirmDeleteVehicleButtonText={this.state.confirmDeleteVehicleButtonText}
                     />
                     <DeleteOneServiceLogModal
                       handleDeleteOneServiceLog={this.handleDeleteOneServiceLog}
                       showDeleteOneLogModal={this.state.showDeleteOneLogModal}
                       hideDeleteOneServiceLogModal={this.hideDeleteOneServiceLogModal}
-                      state={this.state}
+                      currentTheme={this.state.currentTheme}
+                      serviceLogDate={this.state.serviceLogDate}
+                      serviceLogMileage={this.state.serviceLogMileage}
+                      serviceLogService={this.state.serviceLogService}
+                      serviceLogComment={this.state.serviceLogComment}
                     />
                     <AddLogErrorModal
                       showAddLogErrorModal={this.state.showAddLogErrorModal}
                       hideAddLogErrorModal={this.hideAddLogErrorModal}
-                      state={this.state}
+                      date={this.state.date}
+                      currentTheme={this.state.currentTheme}
+                      mileage={this.state.mileage}
+                      service={this.state.service}
+                      comment={this.state.comment}
                     />
                     <UpdateLogErrorModal
                       showUpdatedLogErrorModal={this.state.showUpdatedLogErrorModal}
                       hideUpdateLogErrorModal={this.hideUpdateLogErrorModal}
-                      state={this.state}
+                      currentTheme={this.state.currentTheme}
+                      serviceLogDate={this.state.serviceLogDate}
+                      serviceLogMileage={this.state.serviceLogMileage}
+                      serviceLogService={this.state.serviceLogService}
+                      serviceLogComment={this.state.serviceLogComment}
                     />
                     <MileageInputErrorModal
                       showMileageInputErrorModal={this.state.showMileageInputErrorModal}
                       hideMileageInputErrorModal={this.hideMileageInputErrorModal}
-                      state={this.state}
+                      currentTheme={this.state.currentTheme}
+                      mileage={this.state.mileage}
                     />
                     <UpdatedMileageInputErrorModal
                       showUpdatedMileageInputErrorModal={this.state.showUpdatedMileageInputErrorModal}
                       hideUpdatedMileageInputErrorModal={this.hideUpdatedMileageInputErrorModal}
-                      state={this.state}
+                      currentTheme={this.state.currentTheme}
+                      serviceLogMileage={this.state.serviceLogMileage}
                     />
                     <ToastContainer />
                   </Container>
