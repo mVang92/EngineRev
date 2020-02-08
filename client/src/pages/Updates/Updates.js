@@ -397,14 +397,26 @@ export default class Updates extends Component {
                           showEditOneUpdateModal={this.state.showEditOneUpdateModal}
                           hideEditOneUpdateModal={this.hideEditOneUpdateModal}
                           handleChange={this.handleChange}
-                          state={this.state}
+                          showEditOneUpdateModal={this.state.showEditOneUpdateModal}
+                          checkUserEnteredUpdatedReleaseNoteInput={this.checkUserEnteredUpdatedReleaseNoteInput}
+                          currentTheme={this.state.currentTheme}
+                          updateChangesToShowInModal={this.state.updateChangesToShowInModal}
+                          knownIssuesToShowInModal={this.state.knownIssuesToShowInModal}
+                          hideEditOneUpdateModal={this.hideEditOneUpdateModal}
+                          disableConfirmSaveEditReleaseNoteButton={this.state.disableConfirmSaveEditReleaseNoteButton}
                         />
                         <DeleteOneUpdateModal
                           handleDeleteOneReleaseNote={this.handleDeleteOneReleaseNote}
                           showDeleteOneUpdateModal={this.state.showDeleteOneUpdateModal}
                           hideDeleteOneUpdateModal={this.hideDeleteOneUpdateModal}
                           handleChange={this.handleChange}
-                          state={this.state}
+                          showDeleteOneUpdateModal={this.state.showDeleteOneUpdateModal}
+                          currentTheme={this.state.currentTheme}
+                          updateChangesToShowInModal={this.state.updateChangesToShowInModal}
+                          knownIssuesToShowInModal={this.state.knownIssuesToShowInModal}
+                          hideDeleteOneUpdateModal={this.hideDeleteOneUpdateModal}
+                          handleDeleteOneReleaseNote={this.handleDeleteOneReleaseNote}
+                          disableConfirmDeleteReleaseNoteButton={this.state.disableConfirmDeleteReleaseNoteButton}
                         />
                       </div>
                     </div>

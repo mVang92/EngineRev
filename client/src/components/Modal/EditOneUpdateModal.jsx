@@ -2,18 +2,28 @@ import React from "react";
 import ReactModal from "react-modal";
 
 const EditOneUpdateModal = props => {
+    const {
+        showEditOneUpdateModal,
+        checkUserEnteredUpdatedReleaseNoteInput,
+        currentTheme,
+        handleChange,
+        updateChangesToShowInModal,
+        knownIssuesToShowInModal,
+        hideEditOneUpdateModal,
+        disableConfirmSaveEditReleaseNoteButton
+    } = props;
     return (
         <ReactModal
-            isOpen={props.showEditOneUpdateModal}
+            isOpen={showEditOneUpdateModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
         >
-            <form onSubmit={props.checkUserEnteredUpdatedReleaseNoteInput}>
+            <form onSubmit={checkUserEnteredUpdatedReleaseNoteInput}>
                 <div className="accountModal modal-content">
                     <div className="modal-body modalShadow">
-                        <div className={`modalBody ${props.state.currentTheme.background}`}>
+                        <div className={`modalBody ${currentTheme.background}`}>
                             <div className="row modal-header">
                                 <div className="col-md-12 text-center">
                                     <label><strong>Edit Release Note</strong></label>
@@ -30,8 +40,8 @@ const EditOneUpdateModal = props => {
                                             type="text"
                                             name="releaseNotesToUpdate"
                                             maxLength="500"
-                                            onChange={props.handleChange}
-                                            defaultValue={props.state.updateChangesToShowInModal}
+                                            onChange={handleChange}
+                                            defaultValue={updateChangesToShowInModal}
                                         />
                                     </div>
                                 </div>
@@ -45,8 +55,8 @@ const EditOneUpdateModal = props => {
                                             type="text"
                                             name="knownIssuesToUpdate"
                                             maxLength="500"
-                                            onChange={props.handleChange}
-                                            defaultValue={props.state.knownIssuesToShowInModal}
+                                            onChange={handleChange}
+                                            defaultValue={knownIssuesToShowInModal}
                                         />
                                     </div>
                                 </div>
@@ -57,7 +67,7 @@ const EditOneUpdateModal = props => {
                                     title="Cancel"
                                     type="button"
                                     className="cancelBtn"
-                                    onClick={props.hideEditOneUpdateModal}
+                                    onClick={hideEditOneUpdateModal}
                                     data-dismiss="modal">
                                     Cancel
                                 </button>
@@ -66,7 +76,7 @@ const EditOneUpdateModal = props => {
                                     title="Save Release Note"
                                     className="cancelBtn"
                                     type="submit"
-                                    disabled={props.state.disableConfirmSaveEditReleaseNoteButton}>
+                                    disabled={disableConfirmSaveEditReleaseNoteButton}>
                                     Save
                                 </button>
                             </div>

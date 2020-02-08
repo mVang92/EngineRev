@@ -3,9 +3,18 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const DeleteOneUpdateModal = props => {
+    const {
+        showDeleteOneUpdateModal,
+        currentTheme,
+        updateChangesToShowInModal,
+        knownIssuesToShowInModal,
+        hideDeleteOneUpdateModal,
+        handleDeleteOneReleaseNote,
+        disableConfirmDeleteReleaseNoteButton
+    } = props;
     return (
         <ReactModal
-            isOpen={props.showDeleteOneUpdateModal}
+            isOpen={showDeleteOneUpdateModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
@@ -13,13 +22,13 @@ const DeleteOneUpdateModal = props => {
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
-                    <div className={`modalBody ${props.state.currentTheme.background}`}>
+                    <div className={`modalBody ${currentTheme.background}`}>
                         <div className="row modal-header">
                             <div className="col-md-2">
                                 <img className="removeMobileDisplay imageMobileDisplay" src={warningImage} alt='warning' />
                             </div>
                             <div className="col-md-8 text-danger text-center">
-                                <label><strong className={props.state.currentTheme.redText}>Delete this release note?</strong></label>
+                                <label><strong className={currentTheme.redText}>Delete this release note?</strong></label>
                             </div>
                             <div className="col-md-2"></div>
                         </div>
@@ -29,16 +38,16 @@ const DeleteOneUpdateModal = props => {
                                     <label><strong>Updates:</strong></label>
                                 </div>
                                 <div className="col-md-9 updateChangesDeletePreview">
-                                    {props.state.updateChangesToShowInModal}
+                                    {updateChangesToShowInModal}
                                 </div>
                             </div>
-                            <hr className={props.state.currentTheme.hr} />
+                            <hr className={currentTheme.hr} />
                             <div className="row">
                                 <div className="col-md-3">
                                     <label><strong>Known Issues:</strong></label>
                                 </div>
                                 <div className="col-md-9 knownIssuesDeletePreview">
-                                    {props.state.knownIssuesToShowInModal}
+                                    {knownIssuesToShowInModal}
                                 </div>
                             </div>
                         </div>
@@ -48,7 +57,7 @@ const DeleteOneUpdateModal = props => {
                                 title="Cancel"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.hideDeleteOneUpdateModal}
+                                onClick={hideDeleteOneUpdateModal}
                                 data-dismiss="modal">
                                 Cancel
                             </button>
@@ -57,8 +66,8 @@ const DeleteOneUpdateModal = props => {
                                 id="confirmDeleteReleaseNoteButton"
                                 className="deleteBtn"
                                 type="button"
-                                onClick={props.handleDeleteOneReleaseNote}
-                                disabled={props.state.disableConfirmDeleteReleaseNoteButton}>
+                                onClick={handleDeleteOneReleaseNote}
+                                disabled={disableConfirmDeleteReleaseNoteButton}>
                                 Delete
                             </button>
                         </div>
