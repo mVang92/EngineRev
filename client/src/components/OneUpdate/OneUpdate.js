@@ -3,34 +3,39 @@ import editIcon from "../../images/editIcon.png";
 import deleteIcon from "../../images/deleteIcon.png";
 
 const OneUpdate = props => {
-  const updateId = props._id;
-  const defaultDate = props.date;
-  const updateChanges = props.updateChanges;
-  const knownIssues = props.knownIssues;
+  const {
+    _id,
+    date,
+    currentTheme,
+    updateChanges,
+    knownIssues
+  } = props;
   const editValue = "edit";
   const deleteValue = "delete";
-  const formattedDate = defaultDate.substring(0, 10);
+  const formattedDate = date.substring(0, 10);
 
   return (
-    <React.Fragment key={updateId}>
-      <div className={`releaseNote ${props.currentTheme.oneUpdate}`}>
+    <React.Fragment key={_id}>
+      <div className={`releaseNote ${currentTheme.oneUpdate}`}>
         <div className="row">
           <div className="col-md-3"><label><strong>Date:</strong></label></div>
           <div className="col-md-9"><label>{formattedDate}</label></div>
         </div>
+        <hr className="oneUpdateHr" />
         <div className="row">
           <div className="col-md-3"><label><strong>Updates:</strong></label></div>
-          <div className="col-md-9 breakWord">{props.updateChanges}</div>
+          <div className="col-md-9 breakWord">{updateChanges}</div>
         </div>
+        <hr className="oneUpdateHr" />
         <div className="row">
           <div className="col-md-3"><label><strong>Known Issues:</strong></label></div>
-          <div className="col-md-9 breakWord">{props.knownIssues}</div>
+          <div className="col-md-9 breakWord">{knownIssues}</div>
         </div>
         {
           props.admin ?
             (
               <React.Fragment>
-                <hr />
+                <hr className="oneUpdateHr" />
                 <div className="row">
                   <div className="col-md-9"></div>
                   <div className="col-md-3 smallNegativeTopMargin">
@@ -39,7 +44,7 @@ const OneUpdate = props => {
                         <button
                           className="deleteReleaseNoteActionButton"
                           title="Delete Release Note"
-                          onClick={(event) => props.getActionValue(event, updateId, updateChanges, knownIssues, deleteValue)}>
+                          onClick={(event) => props.getActionValue(event, _id, updateChanges, knownIssues, deleteValue)}>
                           <img className="deleteIcon" src={deleteIcon} alt="delete"></img>
                         </button>
                       </div>
@@ -47,7 +52,7 @@ const OneUpdate = props => {
                         <button
                           className="editReleaseNoteActionButton"
                           title="Edit Release Note"
-                          onClick={(event) => props.getActionValue(event, updateId, updateChanges, knownIssues, editValue)}>
+                          onClick={(event) => props.getActionValue(event, _id, updateChanges, knownIssues, editValue)}>
                           <img className="editIcon" src={editIcon} alt="edit"></img>
                         </button>
                       </div>

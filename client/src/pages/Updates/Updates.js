@@ -42,7 +42,7 @@ export default class Updates extends Component {
   componentDidMount = () => {
     Modal.setAppElement("body");
     this.getAllUpdates();
-    this.checkIfUserIsAdmin();
+    this.findUserInformationForOneUser();
   };
 
   /**
@@ -96,9 +96,9 @@ export default class Updates extends Component {
   };
 
   /**
-   * Checks to see if the viewer is an admin
+   * Get user information for the user logged in
    */
-  checkIfUserIsAdmin = () => {
+  findUserInformationForOneUser = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         vehicleApi.findUserInformationForOneUser(user.uid)
@@ -112,7 +112,7 @@ export default class Updates extends Component {
                 this.getThemeAndRender();
               });
             } catch (err) {
-              this.setState({ pageLoaded: true })
+              this.setState({ pageLoaded: true });
             }
           })
           .catch(err => this.errorNotification(err));
@@ -397,12 +397,9 @@ export default class Updates extends Component {
                           showEditOneUpdateModal={this.state.showEditOneUpdateModal}
                           hideEditOneUpdateModal={this.hideEditOneUpdateModal}
                           handleChange={this.handleChange}
-                          showEditOneUpdateModal={this.state.showEditOneUpdateModal}
-                          checkUserEnteredUpdatedReleaseNoteInput={this.checkUserEnteredUpdatedReleaseNoteInput}
                           currentTheme={this.state.currentTheme}
                           updateChangesToShowInModal={this.state.updateChangesToShowInModal}
                           knownIssuesToShowInModal={this.state.knownIssuesToShowInModal}
-                          hideEditOneUpdateModal={this.hideEditOneUpdateModal}
                           disableConfirmSaveEditReleaseNoteButton={this.state.disableConfirmSaveEditReleaseNoteButton}
                         />
                         <DeleteOneUpdateModal
@@ -410,12 +407,9 @@ export default class Updates extends Component {
                           showDeleteOneUpdateModal={this.state.showDeleteOneUpdateModal}
                           hideDeleteOneUpdateModal={this.hideDeleteOneUpdateModal}
                           handleChange={this.handleChange}
-                          showDeleteOneUpdateModal={this.state.showDeleteOneUpdateModal}
                           currentTheme={this.state.currentTheme}
                           updateChangesToShowInModal={this.state.updateChangesToShowInModal}
                           knownIssuesToShowInModal={this.state.knownIssuesToShowInModal}
-                          hideDeleteOneUpdateModal={this.hideDeleteOneUpdateModal}
-                          handleDeleteOneReleaseNote={this.handleDeleteOneReleaseNote}
                           disableConfirmDeleteReleaseNoteButton={this.state.disableConfirmDeleteReleaseNoteButton}
                         />
                       </div>
