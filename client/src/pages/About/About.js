@@ -11,7 +11,6 @@ export default class About extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      props: props,
       theme: "",
       currentTheme: "",
       pageLoaded: false
