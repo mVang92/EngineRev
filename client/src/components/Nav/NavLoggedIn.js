@@ -2,13 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const NavLoggedIn = props => {
-    const userEmailForAccount = props.state.userEmailForAccount;
-    const userAccountCreationTime = props.state.userAccountCreationTime;
-    const userAccountLastSignIn = props.state.userAccountLastSignIn;
-    const userDisplayName = props.state.userDisplayName;
-    const userPhotoUrl = props.state.userPhotoUrl;
+    const {
+        userEmailForAccount,
+        userAccountCreationTime,
+        userAccountLastSignIn,
+        userDisplayName,
+        userPhotoUrl,
+        userId,
+        loggedin
+    } = props;
     const accountPage = {
-        pathname: "/account/" + props.state.userId,
+        pathname: "/account/" + userId,
         state: [
             userEmailForAccount,
             userAccountCreationTime,
@@ -35,7 +39,7 @@ export const NavLoggedIn = props => {
                     </button>
                     <div className="dropdown-menu dropdown-menu-right">
                         {
-                            props.state.loggedin ? (
+                            loggedin ? (
                                 <Link to={accountPage}>
                                     <button id="accountNavButton" className="dropdown-item" type="button">
                                         <div className="nav-item" title="My Account">
@@ -66,11 +70,9 @@ export const NavLoggedIn = props => {
                             </button>
                         </Link>
                         <button id="signOutNavButton" className="dropdown-item" type="button" onClick={(event) => props.showSignOutModal(event)}>
-                            <li className="nav-item">
-                                <div className="nav-item" title="Sign Out" >
-                                    Sign Out
-                                </div>
-                            </li>
+                            <div className="nav-item" title="Sign Out" >
+                                Sign Out
+                            </div>
                         </button>
                     </div>
                 </div>

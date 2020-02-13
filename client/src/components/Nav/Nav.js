@@ -251,12 +251,17 @@ export class Nav extends Component {
           this.state.loggedin ?
             (
               <NavLoggedIn
-                state={this.state}
                 showSignOutModal={this.showSignOutModal}
+                userEmailForAccount={this.state.userEmailForAccount}
+                userAccountCreationTime={this.state.userAccountCreationTime}
+                userAccountLastSignIn={this.state.userAccountLastSignIn}
+                userDisplayName={this.state.userDisplayName}
+                userPhotoUrl={this.state.userPhotoUrl}
+                userId={this.state.userId}
+                loggedin={this.state.loggedin}
               />
             ) : (
               <NavLoggedOut
-                state={this.state}
                 showSignUpModal={this.showSignUpModal}
                 showSignInModal={this.showSignInModal}
               />

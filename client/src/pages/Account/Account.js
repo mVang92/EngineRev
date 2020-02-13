@@ -61,17 +61,23 @@ export default class Account extends Component {
   onAuthStateChanged = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        this.setState({
-          user: user,
-          loggedin: true,
-          userEmail: this.props.location.state[0],
-          userAccountCreationTime: this.props.location.state[1],
-          userDisplayName: this.props.location.state[2],
-          userPhotoUrl: this.props.location.state[3],
-          userAccountLastSignIn: this.props.location.state[4],
-          userId: this.props.match.params.id
-        });
-        this.getVehicleData()
+        try {
+          this.setState({
+            user: user,
+            loggedin: true,
+            userEmail: this.props.location.state[0],
+            userAccountCreationTime: this.props.location.state[1],
+            userDisplayName: this.props.location.state[2],
+            userPhotoUrl: this.props.location.state[3],
+            userAccountLastSignIn: this.props.location.state[4],
+            userId: this.props.match.params.id
+          });
+          this.getVehicleData();
+        } catch (err) {
+          this.setState({
+            loggedin: false
+          });
+        }
       };
     });
   };

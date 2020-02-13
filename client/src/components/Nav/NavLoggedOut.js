@@ -4,8 +4,8 @@ export const NavLoggedOut = props => {
     return (
         <nav id="navBarLoggedOut" className="navbar navbar-expand-lg navbar-light">
             <a id="applicationName" className="navbar-brand" href="/">
-                    CarSpace
-                </a>
+                CarSpace
+            </a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
@@ -14,12 +14,12 @@ export const NavLoggedOut = props => {
                     <li className="nav-item active">
                         <a id="signInNavButton" className="text-light nav-link" onClick={(event) => props.showSignInModal(event)}>
                             Sign In
-                         </a>
+                        </a>
                     </li>
                     <li className="nav-item">
                         <a id="signUpNavButton" className="nav-link" onClick={(event) => props.showSignUpModal(event)}>
                             Sign Up
-                         </a>
+                        </a>
                     </li>
                 </ul>
             </div>
