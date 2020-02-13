@@ -15,7 +15,7 @@ const LoggedOut = () => {
           <div><img id="notLoggedInMainImage" src={notLoggedIn} alt="Create Account"></img></div>
         </div>
       </div>
-      <div className="section noMarginDesktopDisplay">
+      <div className="row section noMarginDesktopDisplay">
         <div className="col-md-12">
           <div className="mt-3">
             <div className="row">
@@ -53,7 +53,7 @@ const LoggedOut = () => {
           </div>
         </div>
       </div>
-      <br /><br /><br /><br /><br />
+      <br /><br /><br />
       <Footer />
     </React.Fragment>
   );
