@@ -14,6 +14,7 @@ body {
 }
 
 a {
+    color: rgb(16, 16, 16);
     text-decoration: none !important;
 }
 
@@ -28,6 +29,21 @@ body {
 
 #heading {
     font-family: "Chivo", sans-serif;
+}
+
+#menuDropdownButton {
+    border-radius: 0;
+    color: rgb(212, 212, 212);
+}
+
+#menuDropdownContainer {
+    width: 100%;
+}
+
+.dropdown-menu {
+    background: rgb(48, 48, 48);
+    min-width: 5rem;
+    border-radius: 0;
 }
 
 .section {
@@ -74,6 +90,7 @@ input {
     position: fixed;
     width: 100%;
     z-index: 1;
+    margin-left: initial;
 }
 
 #navBarLoggedOut {
@@ -252,13 +269,20 @@ input {
 }
 
 #accountNavButton,
+#accountAboutButton,
+#accountReleaseNotesButton,
 #signInNavButton {
-    color: rgb(200, 200, 200);
+    transition-duration: 0.2s;
+    color: rgb(212, 212, 212);
 }
 
 #accountNavButton:hover,
+#accountAboutButton:hover,
+#accountReleaseNotesButton:hover,
 #signOutNavButton:hover,
-#signInNavButton:hover {
+#signInNavButton:hover,
+#menuDropdownButton:hover {
+    transition-duration: 0.1s;
     background: rgb(128, 128, 128);
     color: rgb(255, 255, 255);
 }
@@ -336,6 +360,10 @@ input {
 .vehicleItemList:hover {
     box-shadow: -1px 0px 3px rgb(168, 32, 32);
     transition-duration: 0.07s;
+}
+
+.Toastify__toast-container {
+    z-index: 9;
 }
 
 .Toastify__toast-container--top-right {
@@ -539,31 +567,6 @@ input {
     margin-bottom: 0.5rem;
 }
 
-#footer {
-    background: rgba(48, 48, 48, 0.9);
-    padding: 0.5rem;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-}
-
-.footerAboutLink,
-.footerUpdatesLink {
-    color: rgb(200, 200, 200);
-}
-
-#footerAboutLink,
-#footerUpdatesLink,
-#footerSuggestionsLink,
-#footerHelpLink {
-    font-size: 14px;
-    text-align: center;
-}
-
-.pointer {
-    cursor: pointer;
-}
-
 .modal-footer {
     border-top: initial;
 }
@@ -610,6 +613,32 @@ input {
 
 .noPaddingRightDesktopDisplay {
     padding-right: initial;
+}
+
+#noPermissionToViewVehicleLogs {
+    margin-top: 4rem;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(48, 48, 48);
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.footerAboutLink,
+.footerUpdatesLink {
+    transition-duration: 0.2s;
+    color: rgb(212, 212, 212);
+}
+
+.footerAboutLink:hover,
+.footerUpdatesLink:hover {
+    transition-duration: 0.1s;
+    color: rgb(255, 255, 255);
 }
 
 .wrapword {
@@ -662,11 +691,12 @@ input {
     }
 
     #accountNavButton,
+    #accountAboutButton,
+    #accountReleaseNotesButton,
     #signOutNavButton,
     #signInNavButton,
     #signUpNavButton {
-        font-size: 20px;
-        font-weight: bold;
+        font-size: 18px;
     }
 
     .actionButtonsMobileDisplay {
@@ -739,7 +769,8 @@ input {
         margin: initial;
     }
 
-    .logDetailsMobileDisplay {
+    .logDetailsMobileDisplay,
+    .noWidthMobileDisplay {
         width: initial;
     }
 
@@ -796,10 +827,6 @@ input {
 
     .largeBottomMarginMobileDisplay {
         margin-bottom: 8rem;
-    }
-
-    .noWidth {
-        width: initial;
     }
 
     #mainPageProfilePicture {

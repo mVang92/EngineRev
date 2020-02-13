@@ -247,21 +247,20 @@ export class Nav extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.loggedin ?
-          (
-            <React.Fragment>
+        {
+          this.state.loggedin ?
+            (
               <NavLoggedIn
                 state={this.state}
                 showSignOutModal={this.showSignOutModal}
               />
-            </React.Fragment>
-          ) : (
-            <NavLoggedOut
-              state={this.state}
-              showSignUpModal={this.showSignUpModal}
-              showSignInModal={this.showSignInModal}
-            />
-          )
+            ) : (
+              <NavLoggedOut
+                state={this.state}
+                showSignUpModal={this.showSignUpModal}
+                showSignInModal={this.showSignInModal}
+              />
+            )
         }
         <SignInModal
           showSignInModal={this.state.showSignInModal}
