@@ -3,26 +3,26 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer id="footer" className="hideWhilePrinting">
+    <footer className="hideWhilePrinting">
       <div className="row">
-        <div className="col-md-2"></div>
-        <div id="footerAboutLink" className="col-md-2">
+        {/* <div className="col-md-2"></div> */}
+        <div className="col-md-6">
           <Link to={{ pathname: "/about" }}>
-            <span className="footerAboutLink pointer underline">About</span>
+            <span className="footerAboutLink underline">About</span>
           </Link>
         </div>
-        <div id="footerUpdatesLink" className="col-md-2">
+        <div className="col-md-6">
           <Link to={{ pathname: "/updates" }}>
-            <span className="footerUpdatesLink pointer underline">Release Notes</span>
+            <span className="footerUpdatesLink underline">Release Notes</span>
           </Link>
         </div>
-        <div id="footerSuggestionsLink" className="col-md-2">
-          {/* <span className="pointer">Submit Suggestions</span> */}
+        {/* <div id="footerSuggestionsLink" className="col-md-2">
+          <span className="pointer">Submit Suggestions</span>
         </div>
         <div id="footerHelpLink" className="col-md-2">
-          {/* <span className="pointer">Help</span> */}
+          <span className="pointer">Help</span>
         </div>
-        <div className="col-md-2"></div>
+        <div className="col-md-2"></div> */}
       </div>
     </footer>
   );

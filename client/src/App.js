@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Nav } from "./components/Nav";
-import Footer from "./components/Footer";
 import Main from "./pages/Main";
 import Log from "./pages/Log";
 import Account from "./pages/Account";
@@ -25,7 +24,6 @@ export default class App extends React.Component {
             <Route exact path="/updates" component={Updates} />
             <Route component={NoMatch} />
           </Switch>
-          <Footer />
         </React.Fragment>
       </Router>
     )

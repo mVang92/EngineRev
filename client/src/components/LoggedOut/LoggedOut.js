@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../Footer";
 import createAccountLogo from "../../images/createAccount.png"
 import recordLogsLogo from "../../images/recordLogs.png"
 import manageDataLogo from "../../images/manageData.png"
@@ -14,7 +15,7 @@ const LoggedOut = () => {
           <div><img id="notLoggedInMainImage" src={notLoggedIn} alt="Create Account"></img></div>
         </div>
       </div>
-      <div className="row section noMarginDesktopDisplay largeBottomMarginMobileDisplay">
+      <div className="section noMarginDesktopDisplay largeBottomMarginMobileDisplay">
         <div className="col-md-12">
           <div className="mt-3">
             <div className="row">
@@ -52,6 +53,7 @@ const LoggedOut = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </React.Fragment>
   );
 };

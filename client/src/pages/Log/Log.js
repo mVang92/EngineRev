@@ -79,16 +79,25 @@ export default class Log extends Component {
     Modal.setAppElement("body");
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        this.setState({
-          vehicleId: this.props.match.params.id,
-          uid: user.uid,
-          loggedin: true,
-          currentTheme: this.props.location.state[0],
-          backgroundColor: this.props.location.state[1]
-        }, () => {
-          document.body.style.backgroundColor = this.state.backgroundColor;
-        });
-        this.getOneVehicle();
+        try {
+          this.setState({
+            vehicleId: this.props.match.params.id,
+            uid: user.uid,
+            loggedin: true,
+            currentTheme: this.props.location.state[0],
+            backgroundColor: this.props.location.state[1]
+          }, () => {
+            document.body.style.backgroundColor = this.state.backgroundColor;
+          });
+          this.getOneVehicle();
+        } catch (err) {
+          this.setState({
+            vehicleId: this.props.match.params.id,
+            uid: user.uid,
+            loggedin: true
+          });
+          this.getOneVehicle();
+        }
       };
     });
   };
@@ -831,7 +840,7 @@ export default class Log extends Component {
                               }
                             </React.Fragment>
                           ) : (
-                            <div className="col-md-12 text-center text-danger">
+                            <div id="noPermissionToViewVehicleLogs" className="col-md-12 text-center text-danger">
                               <label><h3>You do not have permission to view this content</h3></label>
                             </div>
                           )
