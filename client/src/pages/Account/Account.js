@@ -91,37 +91,15 @@ export default class Account extends Component {
   };
 
   /**
-   * Handle theme selection
-   */
-  handleThemeSelection = (event, themeType) => {
-    event.preventDefault();
-    switch (themeType) {
-      case "carSpace":
-        this.saveThemeForUser(themeType);
-        break;
-      case "light":
-        this.saveThemeForUser(themeType);
-        break;
-      case "grey":
-        this.saveThemeForUser(themeType);
-        break;
-      case "dark":
-        this.saveThemeForUser(themeType);
-        break;
-      default:
-        alert("Error: Unable to save theme selection.");
-    }
-  };
-
-  /**
    * Save the selected theme to the database for the targeted user
    * 
    * @param themeType the theme to pass to the API
    */
-  saveThemeForUser = themeType => {
+  saveThemeForUser = (event, themeType) => {
+    event.preventDefault();
     API.saveThemeForUser(this.state.userId, themeType)
       .then(() => {
-        this.getVehicleData()
+        this.getVehicleData();
       })
       .catch(err => this.errorNotification(err));
   };
@@ -425,7 +403,7 @@ export default class Account extends Component {
                         confirmNewPassword={this.state.confirmNewPassword}
                         showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
                         showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
-                        handleThemeSelection={this.handleThemeSelection}
+                        saveThemeForUser={this.saveThemeForUser}
                         admin={this.state.admin}
                         theme={this.state.theme}
                         currentTheme={this.state.currentTheme}
