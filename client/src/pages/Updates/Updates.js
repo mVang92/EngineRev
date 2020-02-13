@@ -71,7 +71,7 @@ export default class Updates extends Component {
       knownIssues: this.state.knownIssues,
       releaseNotesToUpdate: "",
       knownIssuesToUpdate: ""
-    }
+    };
     updateApi.addOneUpdate(updateData)
       .then(() => {
         this.addOneUpdateSuccessNotification();
@@ -89,9 +89,7 @@ export default class Updates extends Component {
    */
   getAllUpdates = () => {
     updateApi.getAllUpdates()
-      .then(res => {
-        this.setState({ allUpdates: res.data });
-      })
+      .then(res => this.setState({ allUpdates: res.data }))
       .catch(err => this.errorNotification(err));
   };
 
@@ -284,9 +282,7 @@ export default class Updates extends Component {
    * Hide the edit one update modal
    */
   hideEditOneUpdateModal = () => {
-    this.setState({
-      showEditOneUpdateModal: false
-    });
+    this.setState({ showEditOneUpdateModal: false });
   };
 
   /**

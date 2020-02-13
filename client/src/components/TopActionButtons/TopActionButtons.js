@@ -5,7 +5,7 @@ class TopActionButtons extends Component {
     render() {
         return (
             <div className="row topLogActionButtons hideWhilePrinting">
-                <div className="col-md-3 noWidth">
+                <div className="col-md-3 noWidthMobileDisplay">
                     <Link to={{ pathname: "/" }}>
                         <button
                             id="addLogBackButton"
@@ -16,7 +16,7 @@ class TopActionButtons extends Component {
                         </button>
                     </Link>
                 </div>
-                <div className="col-md-3 noWidth printPageButton">
+                <div className="col-md-3 noWidthMobileDisplay printPageButton">
                     {
                         this.props.vehicleServiceLogs.length > 0 ?
                             (
@@ -40,7 +40,7 @@ class TopActionButtons extends Component {
                             )
                     }
                 </div>
-                <div className="col-md-3 noWidth">
+                <div className="col-md-3 noWidthMobileDisplay">
                     {
                         this.props.vehicleServiceLogs.length > 1 ?
                             (
@@ -64,7 +64,7 @@ class TopActionButtons extends Component {
                             )
                     }
                 </div>
-                <div className="col-md-3 noWidth">
+                <div className="col-md-3 noWidthMobileDisplay">
                     {
                         this.props.year ?
                             (

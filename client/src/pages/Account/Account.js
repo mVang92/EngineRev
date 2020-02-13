@@ -74,9 +74,7 @@ export default class Account extends Component {
           });
           this.getVehicleData();
         } catch (err) {
-          this.setState({
-            loggedin: false
-          });
+          this.setState({ loggedin: false });
         }
       };
     });
@@ -98,9 +96,7 @@ export default class Account extends Component {
   saveThemeForUser = (event, themeType) => {
     event.preventDefault();
     API.saveThemeForUser(this.state.userId, themeType)
-      .then(() => {
-        this.getVehicleData();
-      })
+      .then(() => this.getVehicleData())
       .catch(err => this.errorNotification(err));
   };
 
@@ -176,17 +172,15 @@ export default class Account extends Component {
     this.setState({ showUpdateDisplayNameModal: false });
     const user = this.state.user;
     if (this.state.loggedin) {
-      user.updateProfile({
-        displayName: this.state.newDisplayName
-      }).then(() => {
-        this.setState({
-          showUpdateDisplayNameModal: false,
-          newDisplayName: ""
-        });
-        this.showUpdateDisplayNameSuccessModal();
-      }).catch(error => {
-        this.errorNotification(error);
-      });
+      user.updateProfile({ displayName: this.state.newDisplayName })
+        .then(() => {
+          this.setState({
+            showUpdateDisplayNameModal: false,
+            newDisplayName: ""
+          });
+          this.showUpdateDisplayNameSuccessModal();
+        })
+        .catch(error => this.errorNotification(error));
     };
   };
 
@@ -198,13 +192,9 @@ export default class Account extends Component {
     this.setState({ showUpdateProfilePictureModal: false });
     const user = this.state.user;
     if (this.state.loggedin) {
-      user.updateProfile({
-        photoURL: this.state.newProfilePicture
-      }).then(() => {
-        this.showUpdateProfilePictureSuccessModal();
-      }).catch(error => {
-        this.errorNotification(error);
-      });
+      user.updateProfile({ photoURL: this.state.newProfilePicture })
+        .then(() => this.showUpdateProfilePictureSuccessModal())
+        .catch(error => this.errorNotification(error));
     };
   };
 
