@@ -382,12 +382,12 @@ export default class Updates extends Component {
                         }
                         <br />
                         <div className="row">
-                          <div className="col-md-6 text-left noWidth">
+                          <div className="col-md-6 text-left noWidthMobileDisplay">
                             <Link to={{ pathname: "/" }}>
                               <button className="backHomeBtn ">Back</button>
                             </Link>
                           </div>
-                          <div className="col-md-6 text-right noWidth">
+                          <div className="col-md-6 text-right noWidthMobileDisplay">
                             <button className="backToTopButton" onClick={this.backToTopOfPage}>Top</button>
                           </div>
                         </div>
