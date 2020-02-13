@@ -55,15 +55,17 @@ export class Nav extends Component {
           userAccountCreationTime: user.metadata.creationTime,
           userAccountLastSignIn: user.metadata.lastSignInTime,
           userDisplayName: user.displayName,
-          userPhotoUrl: user.photoURL
+          userPhotoUrl: user.photoURL,
+          showSignInModal: false,
+          showSignUpModal: false
         });
         if (!user.photoURL) {
           this.setState({ userPhotoUrl: this.state.defaultProfilePicture });
-        };
+        }
         if (!user.displayName) {
           this.setState({ userDisplayName: this.state.defaultDisplayName });
-        };
-      };
+        }
+      }
     });
   };
 
@@ -84,7 +86,7 @@ export class Nav extends Component {
         API.createUserSchema(user.uid, user.email)
           .then(() => this.isUserLoggedIn())
           .catch(error => this.errorNotification(error));
-      };
+      }
     });
   };
 
@@ -120,7 +122,7 @@ export class Nav extends Component {
     } else {
       const error = "Error: Passwords do not match."
       this.errorNotification(error);
-    };
+    }
   };
 
   /**
@@ -161,9 +163,9 @@ export class Nav extends Component {
       email: "",
       password: ""
     });
-    if (window.location.href !== (this.state.originUrl + "/")) {
+    if (window.location.href.indexOf("account") > -1) {
       window.location.assign(this.state.originUrl);
-    };
+    }
   };
 
   /**
@@ -177,9 +179,9 @@ export class Nav extends Component {
       password: "",
       confirmPassword: ""
     });
-    if (window.location.href !== (this.state.originUrl + "/")) {
+    if (window.location.href.indexOf("account") > -1) {
       window.location.assign(this.state.originUrl);
-    };
+    }
   };
 
   /**
