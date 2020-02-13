@@ -39,15 +39,16 @@ export const NavLoggedIn = props => {
                     </button>
                     <div className="dropdown-menu dropdown-menu-right">
                         {
-                            loggedin ? (
-                                <Link to={accountPage}>
-                                    <button id="accountNavButton" className="dropdown-item" type="button">
-                                        <div className="nav-item" title="My Account">
-                                            Account
-                                        </div>
-                                    </button>
-                                </Link>
-                            ) : (
+                            loggedin ?
+                                (
+                                    <Link to={accountPage}>
+                                        <button id="accountNavButton" className="dropdown-item" type="button">
+                                            <div className="nav-item" title="My Account">
+                                                Account
+                                            </div>
+                                        </button>
+                                    </Link>
+                                ) : (
                                     <button id="accountNavButton" className="dropdown-item" type="button" disabled>
                                         <div className="nav-item" title="My Account">
                                             Account
