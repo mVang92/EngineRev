@@ -5,7 +5,7 @@ const NoMatch = () => (
   <div id="noMatch" className="text-center text-danger mt-3">
     <label><h3>Invalid route or no permission to view content.</h3></label>
     <hr />
-    <a href="/" title="Get me out of here!"><button className="backHomeBtn">← Back Home</button></a>
+    <a href="/" title="Get me out of here!"><button className="backHomeBtn">← Home</button></a>
     <br />
     <div className="row">
       <div className="col-md-4"></div>

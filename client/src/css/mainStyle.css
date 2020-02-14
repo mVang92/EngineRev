@@ -722,10 +722,6 @@ footer {
         max-width: 100%;
     }
 
-    .box {
-        margin-bottom: 7rem;
-    }
-
     #addVehicleButton {
         margin-top: 2rem;
     }
@@ -810,9 +806,6 @@ footer {
     .topLogActionButtons,
     .addLogButtonsMobileDisplay {
         text-align: initial;
-        margin-left: -10px;
-        margin-right: -10px;
-        margin-bottom: 2rem;;
     }
 
     .topActionButtonsEditDeleteMobileDisplay {
@@ -876,6 +869,15 @@ footer {
     }
 
     .textLeftMobileDisplay {
+        text-align: left !important;
+    }
+
+    #serviceLogBottomButtons {
+        margin-top: 1rem;
+    }
+
+    #logBackToTopButton {
+        margin-top: 1rem;
         text-align: left !important;
     }
 }

@@ -65,7 +65,7 @@ class AddLog extends Component {
                 <div className="row">
                   <div className="col-md-3"></div>
                   <div className="col-md-3"></div>
-                  <div className="col-md-3 addLogButtonsMobileDisplay">
+                  <div className="col-md-3 text-center addLogButtonsMobileDisplay" >
                     <button
                       id="addLogResetInputFieldsButton"
                       title="Reset Input Fields"
@@ -75,7 +75,7 @@ class AddLog extends Component {
                       Reset
                     </button>
                   </div>
-                  <div className="col-md-3 logSubmitBtn addLogButtonsMobileDisplay">
+                  <div className="col-md-3 logSubmitBtn text-center addLogButtonsMobileDisplay">
                     <button
                       id="addServiceLogButton"
                       title="Submit Service Log"
