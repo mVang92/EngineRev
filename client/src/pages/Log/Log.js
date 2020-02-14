@@ -4,7 +4,9 @@ import { firebase } from "../../firebase"
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 import AddLog from "../../components/AddLog";
+import Categories from "../../components/Categories";
 import TopActionButtons from "../../components/TopActionButtons";
+import ServiceLogBottomButtons from "../../components/ServiceLogBottomButtons";
 import ServiceLog from "../../components/ServiceLog";
 import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal";
 import EditOneServiceLogModal from "../../components/Modal/EditOneServiceLogModal";
@@ -115,6 +117,14 @@ export default class Log extends Component {
   handleChange = e => {
     let { name, value } = e.target;
     this.setState({ [name]: value });
+  };
+
+  /**
+   * Scroll to the top of the page
+   */
+  backToTopOfPage = () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   };
 
   /**
@@ -885,23 +895,7 @@ export default class Log extends Component {
                               </div>
                             ) : (
                               <div className="col-md-12">
-                                <div className="row removeMobileDisplay">
-                                  <div className="col-md-2 logDetailsMobileDisplay">
-                                    <label><strong>Date</strong></label>
-                                  </div>
-                                  <div className="col-md-2 logDetailsMobileDisplay">
-                                    <label><strong>Mileage</strong></label>
-                                  </div>
-                                  <div className="col-md-3 logDetailsMobileDisplay">
-                                    <label><strong>Service</strong></label>
-                                  </div>
-                                  <div className="col-md-3 logDetailsMobileDisplay">
-                                    <label><strong>Comments</strong></label>
-                                  </div>
-                                  <div className="col-md-2 logDetailsMobileDisplay hideWhilePrinting">
-                                    <label><strong>Actions</strong></label>
-                                  </div>
-                                </div>
+                                <Categories />
                                 {
                                   this.state.sortVehicleServiceLogsMostRecent ?
                                     (
@@ -940,6 +934,11 @@ export default class Log extends Component {
                             )
                         }
                       </div>
+                      <ServiceLogBottomButtons
+                        vehicleServiceLogs={this.state.vehicleServiceLogs}
+                        backToTopOfPage={this.backToTopOfPage}
+                        currentTheme={this.state.currentTheme}
+                      />
                     </div>
                     <EditOneVehicleNameModal
                       disableConfirmSaveEditVehicleNameButton={this.state.disableConfirmSaveEditVehicleNameButton}
