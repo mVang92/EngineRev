@@ -13,8 +13,8 @@ const ServiceLogBottomButtons = props => {
                 vehicleServiceLogs.length > 3 ?
                     (
                         <React.Fragment>
-                            <hr className={currentTheme.hr}/>
-                            <div id="serviceLogBottomButtons" className="row">
+                            <hr className={`hideWhilePrinting ${currentTheme.hr}`}/>
+                            <div id="serviceLogBottomButtons" className="row hideWhilePrinting">
                                 <div className="col-md-3 text-left">
                                     <Link to={{ pathname: "/" }}>
                                         <button className="backHomeBtn">Back</button>

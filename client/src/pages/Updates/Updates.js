@@ -42,7 +42,6 @@ export default class Updates extends Component {
   componentDidMount = () => {
     Modal.setAppElement("body");
     this.getAllUpdates();
-    this.findUserInformationForOneUser();
   };
 
   /**
@@ -86,11 +85,20 @@ export default class Updates extends Component {
 
   /**
    * Gets all of the updates and release notes from the database
+   * If successful or if there is an error, then find the user information
    */
   getAllUpdates = () => {
     updateApi.getAllUpdates()
-      .then(res => this.setState({ allUpdates: res.data }))
-      .catch(err => this.errorNotification(err));
+      .then(res => {
+        this.setState({ allUpdates: res.data },
+          () => {
+            this.findUserInformationForOneUser()
+          });
+      })
+      .catch(err => {
+        this.errorNotification(err);
+        this.findUserInformationForOneUser();
+      });
   };
 
   /**
