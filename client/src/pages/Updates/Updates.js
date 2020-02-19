@@ -16,6 +16,7 @@ export default class Updates extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      userId: "",
       allUpdates: [],
       admin: false,
       pageLoaded: false,
@@ -65,22 +66,32 @@ export default class Updates extends Component {
    */
   addOneUpdate = e => {
     e.preventDefault();
-    const updateData = {
-      updateChanges: this.state.updateChanges,
-      knownIssues: this.state.knownIssues,
-      releaseNotesToUpdate: "",
-      knownIssuesToUpdate: ""
-    };
-    updateApi.addOneUpdate(updateData)
-      .then(() => {
-        this.addOneUpdateSuccessNotification();
-        this.componentDidMount();
-        this.setState({
-          updateChanges: "",
-          knownIssues: ""
-        });
+    vehicleApi.findUserInformationForOneUser(this.state.userId)
+      .then(res => {
+        if (res.data.admin) {
+          const updateData = {
+            updateChanges: this.state.updateChanges,
+            knownIssues: this.state.knownIssues,
+            releaseNotesToUpdate: "",
+            knownIssuesToUpdate: ""
+          };
+          updateApi.addOneUpdate(updateData)
+            .then(() => {
+              this.getAllUpdates();
+              this.addOneUpdateSuccessNotification();
+              this.setState({
+                updateChanges: "",
+                knownIssues: ""
+              });
+            })
+            .catch(err => this.errorNotification(err));
+        } else {
+          window.location.assign(window.location.origin);
+        }
       })
-      .catch(err => this.errorNotification(err));
+      .catch(err => {
+        this.errorNotification(err);
+      });
   };
 
   /**
@@ -92,7 +103,7 @@ export default class Updates extends Component {
       .then(res => {
         this.setState({ allUpdates: res.data },
           () => {
-            this.findUserInformationForOneUser()
+            this.findUserInformationForOneUser();
           });
       })
       .catch(err => {
@@ -111,6 +122,7 @@ export default class Updates extends Component {
           .then(res => {
             try {
               this.setState({
+                userId: user.uid,
                 admin: res.data.admin,
                 theme: res.data.theme,
                 pageLoaded: true,
@@ -170,7 +182,7 @@ export default class Updates extends Component {
         break;
       default:
         alert("Error Processing Request");
-    };
+    }
   };
 
   /**
@@ -246,23 +258,33 @@ export default class Updates extends Component {
    * Update the release note
    */
   handleUpdateOneReleaseNote = (newReleaseNotes, newKnownIssues) => {
-    let payload = {
-      newReleaseNotes,
-      newKnownIssues
-    };
-    this.setState({ disableConfirmSaveEditReleaseNoteButton: true });
-    updateApi.updateOneReleaseNote(this.state.updateId, payload)
-      .then(() => {
-        this.getAllUpdates();
-        this.updateOneUpdateSuccessNotification();
-        this.setState({
-          showEditOneUpdateModal: false,
-          disableConfirmSaveEditReleaseNoteButton: false
-        });
+    vehicleApi.findUserInformationForOneUser(this.state.userId)
+      .then(res => {
+        if (res.data.admin) {
+          let payload = {
+            newReleaseNotes,
+            newKnownIssues
+          };
+          this.setState({ disableConfirmSaveEditReleaseNoteButton: true });
+          updateApi.updateOneReleaseNote(this.state.updateId, payload)
+            .then(() => {
+              this.getAllUpdates();
+              this.updateOneUpdateSuccessNotification();
+              this.setState({
+                showEditOneUpdateModal: false,
+                disableConfirmSaveEditReleaseNoteButton: false
+              });
+            })
+            .catch(err => {
+              this.errorNotification(err);
+              this.setState({ disableConfirmSaveEditReleaseNoteButton: false });
+            });
+        } else {
+          window.location.assign(window.location.origin);
+        }
       })
       .catch(err => {
         this.errorNotification(err);
-        this.setState({ disableConfirmSaveEditReleaseNoteButton: false });
       });
   };
 
@@ -270,19 +292,29 @@ export default class Updates extends Component {
    * Delete the release note from record
    */
   handleDeleteOneReleaseNote = () => {
-    this.setState({ disableConfirmDeleteReleaseNoteButton: true });
-    updateApi.deleteOneReleaseNote(this.state.updateId)
-      .then(() => {
-        this.getAllUpdates();
-        this.deleteOneUpdateSuccessNotification();
-        this.setState({
-          showDeleteOneUpdateModal: false,
-          disableConfirmDeleteReleaseNoteButton: false
-        });
+    vehicleApi.findUserInformationForOneUser(this.state.userId)
+      .then(res => {
+        if (res.data.admin) {
+          this.setState({ disableConfirmDeleteReleaseNoteButton: true });
+          updateApi.deleteOneReleaseNote(this.state.updateId)
+            .then(() => {
+              this.getAllUpdates();
+              this.deleteOneUpdateSuccessNotification();
+              this.setState({
+                showDeleteOneUpdateModal: false,
+                disableConfirmDeleteReleaseNoteButton: false
+              });
+            })
+            .catch(err => {
+              this.errorNotification(err);
+              this.setState({ disableConfirmDeleteReleaseNoteButton: false });
+            });
+        } else {
+          window.location.assign(window.location.origin);
+        }
       })
       .catch(err => {
         this.errorNotification(err);
-        this.setState({ disableConfirmDeleteReleaseNoteButton: false });
       });
   };
 

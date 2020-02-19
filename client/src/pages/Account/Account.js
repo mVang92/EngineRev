@@ -31,7 +31,6 @@ export default class Account extends Component {
       confirmNewPassword: "",
       theme: "",
       currentTheme: "",
-      vehicleData: "",
       vehicleCount: "Loading...",
       loadingError: "",
       userAccountCreationTime: "",
