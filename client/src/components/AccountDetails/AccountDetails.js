@@ -135,7 +135,7 @@ class AccountDetails extends Component {
                           id="carSpaceThemeToggleButton"
                           title="CarSpace Theme"
                           type="button"
-                          onClick={(event) => this.props.saveThemeForUser(event, "carSpace")}>
+                          onClick={event => this.props.saveThemeForUser(event, "carSpace")}>
                           CarSpace
                         </button>
                       </div>
@@ -144,7 +144,7 @@ class AccountDetails extends Component {
                           id="lightThemeToggleButton"
                           title="Light Theme"
                           type="button"
-                          onClick={(event) => this.props.saveThemeForUser(event, "light")}>
+                          onClick={event => this.props.saveThemeForUser(event, "light")}>
                           Light
                         </button>
                       </div>
@@ -155,7 +155,7 @@ class AccountDetails extends Component {
                           id="greyThemeToggleButton"
                           title="Grey Theme"
                           type="button"
-                          onClick={(event) => this.props.saveThemeForUser(event, "grey")}>
+                          onClick={event => this.props.saveThemeForUser(event, "grey")}>
                           Grey
                         </button>
                       </div>
@@ -164,7 +164,7 @@ class AccountDetails extends Component {
                           id="darkThemeToggleButton"
                           title="Dark Theme"
                           type="button"
-                          onClick={(event) => this.props.saveThemeForUser(event, "dark")}>
+                          onClick={event => this.props.saveThemeForUser(event, "dark")}>
                           Dark
                         </button>
                       </div>
