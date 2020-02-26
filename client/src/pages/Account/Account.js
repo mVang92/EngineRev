@@ -158,7 +158,7 @@ export default class Account extends Component {
           document.body.style.backgroundColor = "rgb(32, 32, 32)";
           break;
         default:
-          alert("Error: Unable to process theme selection.");
+          this.errorNotification("Error: Unable to process theme selection.");
       }
     }
   };

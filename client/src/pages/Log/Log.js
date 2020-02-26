@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import { firebase } from "../../firebase"
+import { themes } from "../../themes/Themes";
+import LogPageErrorHeader from "../../components/LogPageErrorHeader";
+import LogPageVehicleNameDisplay from "../../components/LogPageVehicleNameDisplay";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 import AddLog from "../../components/AddLog";
-import Categories from "../../components/Categories";
 import TopActionButtons from "../../components/TopActionButtons";
 import ServiceLogBottomButtons from "../../components/ServiceLogBottomButtons";
-import ServiceLog from "../../components/ServiceLog";
+import ServiceLogDisplay from "../../components/ServiceLogDisplay";
 import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal";
 import EditOneServiceLogModal from "../../components/Modal/EditOneServiceLogModal";
 import DeleteOneServiceLogModal from "../../components/Modal/DeleteOneServiceLogModal";
@@ -54,6 +56,7 @@ export default class Log extends Component {
       vehicleServiceLogs: [],
       updatedServiceLogDateToConfirm: "",
       confirmDeleteVehicleButtonText: "",
+      errorMessage: "",
       sortVehicleServiceLogsMostRecent: true,
       showEditOneLogModal: false,
       showDeleteOneVehicleModal: false,
@@ -81,25 +84,26 @@ export default class Log extends Component {
     Modal.setAppElement("body");
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        try {
-          this.setState({
-            vehicleId: this.props.match.params.id,
-            uid: user.uid,
-            loggedin: true,
-            currentTheme: this.props.location.state[0],
-            backgroundColor: this.props.location.state[1]
-          }, () => {
-            document.body.style.backgroundColor = this.state.backgroundColor;
+        this.setState({
+          vehicleId: this.props.match.params.id,
+          uid: user.uid,
+          loggedin: true
+        });
+        API.findUserInformationForOneUser(user.uid)
+          .then(res => {
+            this.setState({
+              theme: res.data.theme
+            }, () => {
+              this.getThemeAndRender();
+              this.getOneVehicle();
+            });
+          })
+          .catch(err => {
+            this.setState({
+              pageLoaded: true,
+              errorMessage: err
+            });
           });
-          this.getOneVehicle();
-        } catch (err) {
-          this.setState({
-            vehicleId: this.props.match.params.id,
-            uid: user.uid,
-            loggedin: true
-          });
-          this.getOneVehicle();
-        }
       };
     });
   };
@@ -455,10 +459,10 @@ export default class Log extends Component {
     this.setState({ disableConfirmSaveEditServiceLogButton: true });
     API.updateOneLogForOneVehicle(vehicleId, serviceLogId, serviceLogToUpdate)
       .then(() => {
+        this.componentDidMount();
         this.hideEditOneServiceLogModal();
         this.hideUpdatedFutureDateConfirmationModal();
         this.updateOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory);
-        this.componentDidMount();
         this.setState({
           serviceLogDate: "",
           serviceLogMileage: "",
@@ -538,6 +542,42 @@ export default class Log extends Component {
     } else {
       this.setState({ sortVehicleServiceLogsMostRecent: true });
     };
+  };
+
+  /**
+   * Get the user theme and render it
+   */
+  getThemeAndRender = () => {
+    if (this.state.theme) {
+      switch (this.state.theme) {
+        case "carSpace":
+          this.setState({
+            currentTheme: themes.carSpace,
+            backgroundColor: document.body.style.backgroundColor = "rgb(220, 220, 220)"
+          });
+          break;
+        case "light":
+          this.setState({
+            currentTheme: themes.light,
+            backgroundColor: document.body.style.backgroundColor = "rgb(235, 235, 235)"
+          });
+          break;
+        case "grey":
+          this.setState({
+            currentTheme: themes.grey,
+            backgroundColor: document.body.style.backgroundColor = "rgb(112, 112, 112)"
+          });
+          break;
+        case "dark":
+          this.setState({
+            currentTheme: themes.dark,
+            backgroundColor: document.body.style.backgroundColor = "rgb(32, 32, 32)"
+          });
+          break;
+        default:
+          this.errorNotification("Error: Unable to process theme selection.");
+      }
+    }
   };
 
   /**
@@ -819,37 +859,16 @@ export default class Log extends Component {
                       {
                         this.state.year ?
                           (
-                            <React.Fragment>
-                              {
-                                this.state.vehicleName ?
-                                  (
-                                    <div id="vehicleLogInformation">
-                                      <div className="row">
-                                        <div className="col-md-12 text-center wrapword">
-                                          <label><h4>{this.state.vehicleName}</h4></label>
-                                        </div>
-                                      </div>
-                                      <div className="row">
-                                        <div className="col-md-12 text-center wrapword">
-                                          <label><h5>{this.state.year} {this.state.make} {this.state.model}</h5></label>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  ) : (
-                                    <div id="vehicleLogInformation">
-                                      <div className="row">
-                                        <div className="col-md-12 text-center wrapword">
-                                          <label><h4>{this.state.year} {this.state.make} {this.state.model}</h4></label>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  )
-                              }
-                            </React.Fragment>
+                            <LogPageVehicleNameDisplay
+                              vehicleName={this.state.vehicleName}
+                              year={this.state.year}
+                              make={this.state.make}
+                              model={this.state.model}
+                            />
                           ) : (
-                            <div id="noPermissionToViewVehicleLogs" className="col-md-12 text-center text-danger">
-                              <label><h3>You do not have permission to view this content</h3></label>
-                            </div>
+                            <LogPageErrorHeader
+                              errorMessage={this.state.errorMessage}
+                            />
                           )
                       }
                       <hr className={`hideWhilePrinting ${this.state.currentTheme.hr}`} />
@@ -891,43 +910,12 @@ export default class Log extends Component {
                                 <label><strong>No Service Logs on Record</strong></label>
                               </div>
                             ) : (
-                              <div className="col-md-12">
-                                <Categories />
-                                {
-                                  this.state.sortVehicleServiceLogsMostRecent ?
-                                    (
-                                      this.sortServiceLogs().map(serviceLog => {
-                                        return (
-                                          <ServiceLog
-                                            key={serviceLog._id}
-                                            _id={serviceLog._id}
-                                            date={serviceLog.date}
-                                            mileage={serviceLog.mileage}
-                                            service={serviceLog.service}
-                                            comment={serviceLog.comment}
-                                            getServiceLogActionValue={this.getServiceLogActionValue}
-                                            currentTheme={this.state.currentTheme}
-                                          />
-                                        )
-                                      })
-                                    ) : (
-                                      this.sortServiceLogs().map(serviceLog => {
-                                        return (
-                                          <ServiceLog
-                                            key={serviceLog._id}
-                                            _id={serviceLog._id}
-                                            date={serviceLog.date}
-                                            mileage={serviceLog.mileage}
-                                            service={serviceLog.service}
-                                            comment={serviceLog.comment}
-                                            getServiceLogActionValue={this.getServiceLogActionValue}
-                                            currentTheme={this.state.currentTheme}
-                                          />
-                                        )
-                                      })
-                                    )
-                                }
-                              </div>
+                              <ServiceLogDisplay
+                                sortVehicleServiceLogsMostRecent={this.state.sortVehicleServiceLogsMostRecent}
+                                currentTheme={this.state.currentTheme}
+                                sortServiceLogs={this.sortServiceLogs}
+                                getServiceLogActionValue={this.getServiceLogActionValue}
+                              />
                             )
                         }
                       </div>
