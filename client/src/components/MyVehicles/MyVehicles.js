@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 class MyVehicles extends Component {
   render() {
-    const { vehicleData, errorMessage, currentTheme, backgroundColor } = this.props;
+    const { vehicleData, errorMessage, currentTheme } = this.props;
 
     return (
       <div className="text-center">
@@ -56,8 +56,7 @@ class MyVehicles extends Component {
                                           <div className="col-md-2"></div>
                                           <div title={vehicle.year + " " + vehicle.make + " " + vehicle.model} className="col-md-8">
                                             <Link to={{
-                                              pathname: "/account/" + this.props.vehicleData._id + "/vehicle/" + vehicle._id,
-                                              state: [currentTheme, backgroundColor]
+                                              pathname: "/account/" + this.props.vehicleData._id + "/vehicle/" + vehicle._id
                                             }}>
                                               <div className={`vehicleItemList ${currentTheme.vehicleItemList}`}>
                                                 {

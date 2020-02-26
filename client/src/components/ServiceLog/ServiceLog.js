@@ -8,8 +8,6 @@ const ServiceLog = props => {
   const service = props.service;
   const comment = props.comment;
   const serviceLogId = props._id;
-  const editValue = "edit";
-  const deleteValue = "delete";
 
   const serviceLogDate = new Date(dateToFormat);
   const currentDate = new Date();
@@ -61,7 +59,7 @@ const ServiceLog = props => {
               <button
                 className="deleteActionButton"
                 title="Delete Log"
-                onClick={event => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, deleteValue)}>
+                onClick={event => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, "delete")}>
                 <img className="deleteIcon" src={deleteIcon} alt="delete"></img>
               </button>
             </div>
@@ -69,7 +67,7 @@ const ServiceLog = props => {
               <button
                 className="editActionButton"
                 title="Edit Log"
-                onClick={event => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, editValue)}>
+                onClick={event => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, "edit")}>
                 <img className="editIcon" src={editIcon} alt="edit"></img>
               </button>
             </div>

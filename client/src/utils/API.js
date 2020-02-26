@@ -15,11 +15,11 @@ export default {
   },
   // Get one vehicle for the signed in user
   getOneVehicleForUser: (creatorId, vehicleId) => {
-    return axios.get(`/api/vehicles/findOneVehicleForUser/${creatorId}/${vehicleId}`)
+    return axios.get(`/api/vehicles/findOneVehicleForUser/${creatorId}/${vehicleId}`);
   },
   // Retrieve all information for the targeted user
   findUserInformationForOneUser: id => {
-    return axios.get(`/api/vehicles/${id}`)
+    return axios.get(`/api/vehicles/${id}`);
   },
   // Add a new vehicle
   addOneVehicle: (id, data) => {

@@ -82,8 +82,7 @@ export default class App extends Component {
           loggedin: true,
           userProfilePicture: user.photoURL
         });
-        const userUniqueId = user.uid;
-        API.findUserInformationForOneUser(userUniqueId)
+        API.findUserInformationForOneUser(user.uid)
           .then(res =>
             this.setState({
               vehicleData: res.data,
@@ -150,7 +149,7 @@ export default class App extends Component {
           document.getElementById("field").reset();
         })
         .catch(err => {
-          this.addOneVehicleFailNotification(err);
+          this.errorNotification(err);
           this.setState({ disableAddVehicleButton: false });
         });
     };
@@ -187,7 +186,7 @@ export default class App extends Component {
           });
           break;
         default:
-          alert("Error: Unable to process theme selection.");
+          this.errorNotification("Error: Unable to process theme selection.");
       }
     }
   };
@@ -213,11 +212,11 @@ export default class App extends Component {
   };
 
   /**
-   * Display the error notification when an error occurs while adding a vehicle
+   * Display the error notification when an error occurs while executing a database query
    * 
    * @param err the error message to display to the user
    */
-  addOneVehicleFailNotification = err => {
+  errorNotification = err => {
     toast.error(err.toString());
   };
 
