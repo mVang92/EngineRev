@@ -651,6 +651,11 @@ footer {
     white-space: normal;
 }
 
+#categories {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
 #loadingAnimation {
     color: official;
     display: inline-block;

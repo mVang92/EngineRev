@@ -2,7 +2,7 @@ import React from "react";
 
 const Categories = () => {
     return (
-        <div className="row removeMobileDisplay">
+        <div id="categories" className="row removeMobileDisplay">
             <div className="col-md-2 logDetailsMobileDisplay">
                 <label><strong>Date</strong></label>
             </div>
