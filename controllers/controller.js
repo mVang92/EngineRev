@@ -178,7 +178,7 @@ module.exports = {
   saveThemeForUser: (req, res) => {
     console.log("Hit saveThemeForUser");
     db.Vehicle
-      .update(
+      .updateOne(
         { "creator": req.params.creatorId },
         { $set: { theme: req.params.themeType } }
       )
