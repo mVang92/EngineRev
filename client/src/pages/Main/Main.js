@@ -103,7 +103,7 @@ export default class App extends Component {
                 this.setState({
                   pageLoaded: true,
                   disableAddVehicleButton: true,
-                  errorMessage: "Error: Cannot find database for this user."
+                  errorMessage: err.toString()
                 });
               }
             } else {
