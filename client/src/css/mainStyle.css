@@ -392,7 +392,9 @@ input {
     display: none;
 }
 
-#serviceLogDateInput {
+#serviceLogDateInput,
+#serviceLogMileageInput,
+#serviceLogServiceInput {
     height: 2em;
 }
 
