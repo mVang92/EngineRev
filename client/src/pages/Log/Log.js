@@ -77,8 +77,10 @@ export default class Log extends Component {
     };
   };
 
+  findUserInformationTimeout;
+
   /**
-   * Display the service log information for the selected vehicle
+   * Check if the user is logged in
    */
   componentDidMount = () => {
     Modal.setAppElement("body");
@@ -89,30 +91,38 @@ export default class Log extends Component {
           uid: user.uid,
           loggedin: true
         });
-        API.findUserInformationForOneUser(user.uid)
-          .then(res => {
-            this.setState({
-              theme: res.data.theme
-            }, () => {
-              this.getThemeAndRender();
-              this.getOneVehicle();
-            });
-          })
-          .catch(err => {
-            this.setState({
-              pageLoaded: true,
-              errorMessage: err
-            });
-          });
+        this.findUserInformationForOneUser(user.uid);
       };
     });
   };
 
   /**
-   * Cleanup DOM elements to prevent memory leak 
-   */
+    * Cleanup DOM elements to prevent memory leak 
+    */
   componentWillUnmount = () => {
-    clearInterval(this.state.disableDeleteVehicleButtonTimer);
+    clearTimeout(this.state.disableDeleteVehicleButtonTimer);
+    clearTimeout(this.findUserInformationTimeout);
+  };
+
+  /**
+   * Make an API call to find the user information
+   * 
+   * @param userUniqueId the unique id from Firebase console
+   */
+  findUserInformationForOneUser = userUniqueId => {
+    API.findUserInformationForOneUser(userUniqueId)
+      .then(res => {
+        this.setState({ theme: res.data.theme }, () => {
+          this.getThemeAndRender();
+          this.getOneVehicle();
+        });
+      })
+      .catch(err => {
+        this.setState({
+          pageLoaded: true,
+          errorMessage: err
+        });
+      });
   };
 
   /**
@@ -195,6 +205,7 @@ export default class Log extends Component {
    * then show the page after loading
    */
   getOneVehicle = () => {
+    clearTimeout(this.findUserInformationTimeout);
     API.getOneVehicleForUser(this.state.uid, this.state.vehicleId)
       .then(res => {
         try {
@@ -205,7 +216,7 @@ export default class Log extends Component {
             make: res.data[0].vehicles[0].make,
             model: res.data[0].vehicles[0].model,
             vehicleServiceLogs: res.data[0].vehicles[0].logs
-          });
+          }, () => this.findUserInformationTimeout = setTimeout(this.getOneVehicle.bind(this), 5000));
         } catch (e) {
           this.setState({ pageLoaded: true });
         };
@@ -350,15 +361,16 @@ export default class Log extends Component {
     this.setState({ disableConfirmSaveEditVehicleNameButton: true });
     API.updateVehicleInformationForOneVehicle(this.state.vehicleId, updatedVehicleName)
       .then(() => {
-        this.updateOneVehicleNameSuccessNotification();
-        this.hideEditOneVehicleNameModal();
-        this.componentDidMount();
         this.setState({
           vehicleName: "",
           updatedYear: "",
           updatedMake: "",
           updatedModel: "",
           disableConfirmSaveEditVehicleNameButton: false
+        }, () => {
+          this.updateOneVehicleNameSuccessNotification();
+          this.hideEditOneVehicleNameModal();
+          this.getOneVehicle();
         });
       })
       .catch(err => {
@@ -388,15 +400,16 @@ export default class Log extends Component {
     this.setState({ disableAddServiceLogButton: true });
     API.addOneLogForOneVehicle(creatorId, vehicleId, serviceLogToStore)
       .then(() => {
-        this.addOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory);
         this.setState({
           date: "",
           mileage: "",
           service: "",
           comment: "",
           disableAddServiceLogButton: false
+        }, () => {
+          this.addOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory);
+          this.getOneVehicle();
         });
-        this.componentDidMount();
       })
       .catch(err => {
         this.errorNotification(err);
@@ -413,8 +426,7 @@ export default class Log extends Component {
       mileage: "",
       service: "",
       comment: ""
-    });
-    this.resetFieldsNotification();
+    }, () => this.resetFieldsNotification());
   };
 
   /**
@@ -434,7 +446,6 @@ export default class Log extends Component {
     let serviceLogId = this.state.serviceLogId;
     let updatedServiceLogDateToRecord = "";
     const updatedServiceLogDate = this.formatDateYyyyMmDd(updatedServiceLogDateToConvert);
-
     if (updatedServiceLogDate === "NaN-NaN-NaN") {
       const updatedServiceLogDateToConfirm = this.state.updatedServiceLogDateToConfirm;
       const updatedServiceLogDateToNewDate = new Date(updatedServiceLogDateToConfirm);
@@ -444,7 +455,6 @@ export default class Log extends Component {
     } else {
       updatedServiceLogDateToRecord = updatedServiceLogDate;
     }
-
     let serviceLogToUpdate = {
       date: updatedServiceLogDateToRecord,
       mileage: this.state.serviceLogMileage,
@@ -459,16 +469,17 @@ export default class Log extends Component {
     this.setState({ disableConfirmSaveEditServiceLogButton: true });
     API.updateOneLogForOneVehicle(vehicleId, serviceLogId, serviceLogToUpdate)
       .then(() => {
-        this.componentDidMount();
-        this.hideEditOneServiceLogModal();
-        this.hideUpdatedFutureDateConfirmationModal();
-        this.updateOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory);
         this.setState({
           serviceLogDate: "",
           serviceLogMileage: "",
           serviceLogService: "",
           serviceLogComment: "",
           disableConfirmSaveEditServiceLogButton: false
+        }, () => {
+          this.hideEditOneServiceLogModal();
+          this.hideUpdatedFutureDateConfirmationModal();
+          this.updateOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory);
+          this.getOneVehicle();
         });
       })
       .catch(err => {
@@ -483,9 +494,10 @@ export default class Log extends Component {
   handleDeleteOneServiceLog = () => {
     API.deleteOneServiceLog(this.state.vehicleId, this.state.serviceLogId)
       .then(() => {
-        this.setState({ showDeleteOneLogModal: false });
-        this.componentDidMount();
-        this.deleteOneServiceLogSuccessNotification();
+        this.setState({ showDeleteOneLogModal: false }, () => {
+          this.getOneVehicle();
+          this.deleteOneServiceLogSuccessNotification();
+        });
       })
       .catch(err => this.errorNotification(err));
   };
@@ -496,7 +508,7 @@ export default class Log extends Component {
   handlePrintPage = () => {
     if (this.state.showDeleteOneVehicleModal) {
       this.setState({ showDeleteOneVehicleModal: false });
-      clearInterval(this.state.disableDeleteVehicleButtonTimer);
+      clearTimeout(this.state.disableDeleteVehicleButtonTimer);
       setTimeout(() => {
         window.print();
       }, 10);
@@ -815,7 +827,7 @@ export default class Log extends Component {
       showDeleteOneVehicleModal: false,
       disableDeleteOneVehicleButton: true
     });
-    clearInterval(this.state.disableDeleteVehicleButtonTimer);
+    clearTimeout(this.state.disableDeleteVehicleButtonTimer);
   };
 
   /**
