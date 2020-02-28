@@ -530,7 +530,7 @@ export default class Log extends Component {
         this.showDeleteOneServiceLogModal(serviceLogId, date, mileage, service, comment);
         break;
       default:
-        alert("Error Processing Request");
+        this.errorNotification("Error Processing Request");
     };
   };
 
