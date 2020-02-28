@@ -237,9 +237,7 @@ export default class Log extends Component {
           this.getOneVehicle();
         });
       })
-      .catch(err => {
-        this.errorNotification(err);
-      });
+      .catch(err => this.errorNotification(err));
   };
 
   /**
