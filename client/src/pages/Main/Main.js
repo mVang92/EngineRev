@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import { firebase } from "../../firebase";
 import { themes } from "../../themes/Themes";
-import Modal from "react-modal";
 import API from "../../utils/API";
-import AddVehicleYearNanErrorModal from "../../components/Modal/AddVehicleYearNanErrorModal";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 import LoggedOut from "../../components/LoggedOut";
@@ -15,144 +12,62 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showAddVehicleYearNanErrorModal: false,
-      disableAddVehicleButton: false,
-      loggedin: false,
+      props: props,
       pageLoaded: false,
-      uid: "",
-      theme: "",
-      currentTheme: "",
       vehicleData: [],
-      vehicleCount: 0,
-      email: "",
-      password: "",
-      userProfilePicture: "",
-      defaultDisplayName: "CarSpace User",
-      errorMessage: "",
+      theme: "",
+      uid: "",
+      currentTheme: "",
       backgroundColor: "",
-      onAuthStateChangedCounter: 0
+      onAuthStateChangedCounter: 0,
+      disableAddVehicleButton: false,
+      showAddVehicleYearNanErrorModal: false,
     };
   };
 
   /**
-   * Logs the user in if they are logged in
+   * Find the user information  when the page loads
    */
-  componentDidMount = () => {
-    Modal.setAppElement("body");
-    this.onAuthStateChanged();
+  componentDidMount() {
+    this.findUserInformationForOneUser(this.state.props.user.uid);
   };
 
-  /**
-   * Reload the page
-   */
-  reloadPage = () => {
-    window.location.reload();
-  };
-
-  /**
-   * Check if user display name exists
-   * 
-   * @param user The current user information
-   */
-  checkUserDisplayName = user => {
-    let displayName = user.displayName;
-    if (displayName) {
-      this.showDisplayName(displayName);
-    } else {
-      this.showDisplayName(this.state.defaultDisplayName);
-    }
-  };
-
-  /**
-   * Show the display name to the main page
-   */
-  showDisplayName = displayName => {
-    let displayNameToShow = document.createTextNode(displayName);
-    document.getElementById("displayName").innerHTML = "";
-    document.getElementById("displayName").appendChild(displayNameToShow);
-  };
-
-  /**
-   * Upon page refresh, if the user is logged in, they will stay logged in
-   */
-  onAuthStateChanged = () => {
-    firebase.auth.onAuthStateChanged(user => {
-      if (user) {
-        this.setState({
-          loggedin: true,
-          userProfilePicture: user.photoURL
-        });
-        API.findUserInformationForOneUser(user.uid)
-          .then(res =>
-            this.setState({
-              vehicleData: res.data,
-              theme: res.data.theme,
-              uid: user.uid,
-              pageLoaded: true
-            }, () => {
-              this.getThemeAndRender();
-              this.checkUserDisplayName(user);
-            })
-          )
-          .catch(err => {
-            if (this.state.theme === "") {
-              this.setState({ onAuthStateChangedCounter: this.state.onAuthStateChangedCounter + 1 });
-              if (this.state.onAuthStateChangedCounter <= 5) {
-                this.onAuthStateChanged();
-              } else {
-                this.setState({
-                  pageLoaded: true,
-                  disableAddVehicleButton: true,
-                  errorMessage: err.toString()
-                });
-              }
+  findUserInformationForOneUser = userId => {
+    if (userId) {
+      API.findUserInformationForOneUser(userId)
+        .then(res =>
+          this.setState({
+            vehicleData: res.data,
+            theme: res.data.theme,
+            uid: userId,
+            pageLoaded: true,
+          }, () => {
+            this.getThemeAndRender();
+            this.state.props.checkUserDisplayName(this.state.props.user);
+          })
+        )
+        .catch(err => {
+          if (this.state.theme === "") {
+            this.setState({ onAuthStateChangedCounter: this.state.onAuthStateChangedCounter + 1 });
+            if (this.state.onAuthStateChangedCounter <= 5) {
+              this.state.props.onAuthStateChanged();
             } else {
-              this.loadVehiclesFailNotification(err);
               this.setState({
                 pageLoaded: true,
                 disableAddVehicleButton: true,
                 errorMessage: err.toString()
               });
             }
-          });
-      };
-    });
-  };
-
-  /**
-   * Handle real-time changes
-   */
-  handleChange = e => {
-    let { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
-
-  /**
-   * Add a new vehicle to the vehicle data for the user
-   * 
-   * @param newVehicle the new vehicle to record into data
-   */
-  handleAddOneVehicle = newVehicle => {
-    const id = this.state.uid;
-    const date = new Date();
-    const futureYear = date.getFullYear() + 2;
-    this.setState({ disableAddVehicleButton: true });
-    if (isNaN(newVehicle.year) || (newVehicle.year < 1885) || (newVehicle.year > futureYear)) {
-      this.showAddVehicleYearNanErrorModal();
-      this.setState({ disableAddVehicleButton: false });
-    } else {
-      API.addOneVehicle(id, newVehicle)
-        .then(() => {
-          this.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
-          this.onAuthStateChanged();
-          this.setState({ disableAddVehicleButton: false });
-          document.getElementById("field").reset();
-        })
-        .catch(err => {
-          this.errorNotification(err);
-          this.setState({ disableAddVehicleButton: false });
+          } else {
+            this.loadVehiclesFailNotification(err);
+            this.setState({
+              pageLoaded: true,
+              disableAddVehicleButton: true,
+              errorMessage: err.toString()
+            });
+          }
         });
-    };
+    }
   };
 
   /**
@@ -189,6 +104,41 @@ export default class App extends Component {
           this.errorNotification("Error: Unable to process theme selection.");
       }
     }
+  };
+
+  /**
+   * Reload the page
+   */
+  reloadPage = () => {
+    window.location.reload();
+  };
+
+  /**
+   * Add a new vehicle to the vehicle data for the user
+   * 
+   * @param newVehicle the new vehicle to record into data
+   */
+  handleAddOneVehicle = newVehicle => {
+    const id = this.state.uid;
+    const date = new Date();
+    const futureYear = date.getFullYear() + 2;
+    this.setState({ disableAddVehicleButton: true });
+    if (isNaN(newVehicle.year) || (newVehicle.year < 1885) || (newVehicle.year > futureYear)) {
+      this.showAddVehicleYearNanErrorModal();
+      this.setState({ disableAddVehicleButton: false });
+    } else {
+      API.addOneVehicle(id, newVehicle)
+        .then(() => {
+          this.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
+          this.findUserInformationForOneUser(this.state.uid);
+          this.setState({ disableAddVehicleButton: false });
+          document.getElementById("field").reset();
+        })
+        .catch(err => {
+          this.errorNotification(err);
+          this.setState({ disableAddVehicleButton: false });
+        });
+    };
   };
 
   /**
@@ -245,22 +195,23 @@ export default class App extends Component {
     return (
       <React.Fragment>
         {
-          this.state.loggedin ?
+          this.state.props.loggedin ?
             (
               this.state.pageLoaded ?
                 (
                   <Container>
                     <LoggedIn
                       vehicleData={this.state.vehicleData}
-                      handleChange={this.handleChange}
                       handleResetAddVehicleFields={this.handleResetAddVehicleFields}
                       addVehicle={this.handleAddOneVehicle}
-                      userProfilePicture={this.state.userProfilePicture}
+                      userProfilePicture={this.state.props.userProfilePicture}
                       disableAddVehicleButton={this.state.disableAddVehicleButton}
                       currentTheme={this.state.currentTheme}
-                      errorMessage={this.state.errorMessage}
+                      errorMessage={this.state.props.errorMessage}
                       backgroundColor={this.state.backgroundColor}
                       reloadPage={this.reloadPage}
+                      showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
+                      hideAddVehicleYearNanErrorModal={this.hideAddVehicleYearNanErrorModal}
                     />
                   </Container>
                 ) : (
@@ -270,11 +221,6 @@ export default class App extends Component {
               <LoggedOut />
             )
         }
-        <AddVehicleYearNanErrorModal
-          showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
-          hideAddVehicleYearNanErrorModal={this.hideAddVehicleYearNanErrorModal}
-          currentTheme={this.state.currentTheme}
-        />
         <ToastContainer />
       </React.Fragment>
     );
