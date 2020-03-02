@@ -3,7 +3,6 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const AddVehicleYearNanErrorModal = props => {
-    
     return (
         <ReactModal
             isOpen={props.showAddVehicleYearNanErrorModal}

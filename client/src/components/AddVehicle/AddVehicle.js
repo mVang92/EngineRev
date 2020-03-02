@@ -5,7 +5,6 @@ class AddVehicle extends Component {
   constructor() {
     super();
     this.state = {
-      newVehicle: {},
       showAddVehicleErrorModal: false,
       defaultProfilePicture: "https://image.flaticon.com/icons/png/512/64/64572.png"
     };
@@ -19,16 +18,13 @@ class AddVehicle extends Component {
     if (this.refs.year.value === "" || this.refs.make.value === "" || this.refs.model.value === "") {
       this.showAddVehicleErrorModal()
     } else {
-      this.setState({
-        newVehicle: {
-          vehicleName: null,
-          year: this.refs.year.value,
-          make: this.refs.make.value,
-          model: this.refs.model.value
-        }
-      }, () => {
-        this.props.addVehicle(this.state.newVehicle);
-      });
+      const newVehiclePayload = {
+        vehicleName: null,
+        year: this.refs.year.value,
+        make: this.refs.make.value,
+        model: this.refs.model.value
+      }
+      this.props.addVehicle(newVehiclePayload);
     };
   };
 
@@ -84,7 +80,6 @@ class AddVehicle extends Component {
                     id="vehicleYearInput"
                     type="text"
                     ref="year"
-                    onChange={this.props.handleChange}
                     value={this.props.year}
                     name="year"
                     maxLength="4"
@@ -100,7 +95,6 @@ class AddVehicle extends Component {
                     id="vehicleMakeInput"
                     type="text"
                     ref="make"
-                    onChange={this.props.handleChange}
                     value={this.props.make}
                     name="make"
                     maxLength="25"
@@ -116,7 +110,6 @@ class AddVehicle extends Component {
                     id="vehicleModelInput"
                     type="text"
                     ref="model"
-                    onChange={this.props.handleChange}
                     value={this.props.model}
                     name="model"
                     maxLength="25"
