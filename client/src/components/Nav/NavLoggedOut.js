@@ -12,12 +12,12 @@ export const NavLoggedOut = props => {
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item active">
-                        <a id="signInNavButton" className="text-light nav-link" onClick={() => props.showSignInModal()}>
+                        <a id="signInNavButton" className="text-light nav-link" onClick={() => props.requestShowSignInModal()}>
                             Sign In
                         </a>
                     </li>
                     <li className="nav-item">
-                        <a id="signUpNavButton" className="nav-link" onClick={() => props.showSignUpModal()}>
+                        <a id="signUpNavButton" className="nav-link" onClick={() => props.requestShowSignUpModal()}>
                             Sign Up
                         </a>
                     </li>

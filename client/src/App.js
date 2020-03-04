@@ -117,17 +117,6 @@ export default class App extends Component {
   };
 
   /**
-   * Show the forgot password modal
-   */
-  showForgotPasswordModal = () => {
-    this.setState({
-      showSignInModal: false,
-      showForgotPasswordModal: true,
-      email: ""
-    });
-  };
-
-  /**
    * Handle user authentication when a user signs in
    */
   handleSignIn = e => {
@@ -200,31 +189,33 @@ export default class App extends Component {
   /**
    * Show the sign in modal
    */
-  showSignInModal = () => {
-    this.setState({
-      showSignInModal: true,
-      showSignUpModal: false,
-      email: "",
-      password: ""
-    });
+  requestShowSignInModal = () => {
     if (window.location.href.indexOf("account") > -1) {
       window.location = "/";
+    } else {
+      this.setState({
+        showSignInModal: true,
+        showSignUpModal: false,
+        email: "",
+        password: ""
+      });
     }
   };
 
   /**
    * Show the sign up modal
    */
-  showSignUpModal = () => {
-    this.setState({
-      showSignUpModal: true,
-      showSignInModal: false,
-      email: "",
-      password: "",
-      confirmPassword: ""
-    });
+  requestShowSignUpModal = () => {
     if (window.location.href.indexOf("account") > -1) {
-      window.location.assign(this.state.originUrl);
+      window.location = "/";
+    } else {
+      this.setState({
+        showSignInModal: false,
+        showSignUpModal: true,
+        email: "",
+        password: "",
+        confirmPassword: ""
+      });
     }
   };
 
@@ -233,6 +224,17 @@ export default class App extends Component {
    */
   requestShowSignOutModal = () => {
     this.setState({ showSignOutModal: true });
+  };
+
+  /**
+   * Show the forgot password modal
+   */
+  requestShowForgotPasswordModal = () => {
+    this.setState({
+      showSignInModal: false,
+      showForgotPasswordModal: true,
+      email: ""
+    });
   };
 
   /**
@@ -328,8 +330,8 @@ export default class App extends Component {
                 />
               ) : (
                 <NavLoggedOut
-                  showSignInModal={this.showSignInModal}
-                  showSignUpModal={this.showSignUpModal}
+                  requestShowSignInModal={this.requestShowSignInModal}
+                  requestShowSignUpModal={this.requestShowSignUpModal}
                 />
               )
           }
@@ -361,7 +363,7 @@ export default class App extends Component {
             showSignInModal={this.state.showSignInModal}
             requestHideSignInModal={this.requestHideSignInModal}
             handleSignIn={this.handleSignIn}
-            showForgotPasswordModal={this.showForgotPasswordModal}
+            requestShowForgotPasswordModal={this.requestShowForgotPasswordModal}
             disableSignInButton={this.state.disableSignInButton}
             handleChange={this.handleChange}
           />
