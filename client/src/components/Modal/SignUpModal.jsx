@@ -61,14 +61,15 @@ const SignUp = props => {
                                 id="closeSignUpModal"
                                 type="button"
                                 className="btn btn-light"
-                                onClick={props.hideSignUpModal}
+                                onClick={props.requestHideSignUpModal}
                                 data-dismiss="modal">
                                 Close
                             </button>
                             <button
                                 id="signUpButton"
                                 className="btn btn-light"
-                                type="submit">
+                                type="submit"
+                                disabled={props.disableSignUpButton}>
                                 Create Account
                             </button>
                         </div>

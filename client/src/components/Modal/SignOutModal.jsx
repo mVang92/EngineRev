@@ -33,7 +33,7 @@ const SignOutModal = props => {
                                 title="No"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.hideSignOutModal}
+                                onClick={props.requestHideSignOutModal}
                                 data-dismiss="modal">
                                 No
                             </button>

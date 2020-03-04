@@ -5,7 +5,7 @@ import Loading from "../../components/Loading";
 import { firebase } from "../../firebase"
 import { Link } from "react-router-dom";
 import { themes } from "../../themes/Themes";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default class About extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ export default class About extends Component {
   };
 
   /**
-   * Checks to see if the viewer is an admin
+   * Retrieve the theme for the user then load the page
    */
   getUserTheme = () => {
     firebase.auth.onAuthStateChanged(user => {
@@ -40,6 +40,7 @@ export default class About extends Component {
                 this.getThemeAndRender();
               });
             } catch (err) {
+              this.errorNotification(err);
               this.setState({ pageLoaded: true });
             }
           })
@@ -148,7 +149,6 @@ export default class About extends Component {
               <Loading />
             )
         }
-        <ToastContainer />
       </React.Fragment>
     );
   };

@@ -11,7 +11,7 @@ import UpdateProfilePictureModal from "../../components/Modal/UpdateProfilePictu
 import UpdateDisplayNameModal from "../../components/Modal/UpdateDisplayNameModal";
 import UpdateProfilePictureSuccessModal from "../../components/Modal/UpdateProfilePictureSuccessModal";
 import UpdateDisplayNameSuccessModal from "../../components/Modal/UpdateDisplayNameSuccessModal";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default class Account extends Component {
   constructor(props) {
@@ -42,7 +42,9 @@ export default class Account extends Component {
       showUpdateDisplayNameModal: false,
       showUpdateProfilePictureSuccessModal: false,
       showUpdateDisplayNameSuccessModal: false,
-      unableToLoadDatabase: false
+      unableToLoadDatabase: false,
+      defaultProfilePicture: "https://image.flaticon.com/icons/png/512/64/64572.png",
+      defaultDisplayName: "CarSpace User"
     };
   };
 
@@ -70,8 +72,15 @@ export default class Account extends Component {
             userPhotoUrl: this.props.location.state[3],
             userAccountLastSignIn: this.props.location.state[4],
             userId: this.props.match.params.id
+          }, () => {
+            if (!user.photoURL) {
+              this.setState({ userPhotoUrl: this.state.defaultProfilePicture });
+            }
+            if (!user.displayName) {
+              this.setState({ userDisplayName: this.state.defaultDisplayName });
+            }
+            this.getVehicleData();
           });
-          this.getVehicleData();
         } catch (err) {
           this.setState({ loggedin: false });
         }
@@ -368,7 +377,6 @@ export default class Account extends Component {
               this.state.pageLoaded ?
                 (
                   <React.Fragment>
-                    <ToastContainer />
                     <Container>
                       <AccountDetails
                         handleChange={this.handleChange}

@@ -36,14 +36,15 @@ const ForgotPasswordModal = props => {
                                 id="closeForgotPasswordModal"
                                 type="button"
                                 className="btn btn-light"
-                                onClick={props.hideForgotPasswordModal}
+                                onClick={props.requestHideForgotPasswordModal}
                                 data-dismiss="modal">
                                 Close
                             </button>
                             <button
                                 id="forgotPasswordSubmitButton"
                                 className="btn btn-light"
-                                type="submit">
+                                type="submit"
+                                disabled={props.disableForgotPasswordSubmitButton}>
                                 Send Confirmation
                             </button>
                         </div>
