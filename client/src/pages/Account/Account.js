@@ -137,11 +137,9 @@ export default class Account extends Component {
             this.loadVehiclesFailNotification(err)
           )
         );
-    } else (
-      setTimeout(() => {
-        this.getVehicleData();
-      }, 10)
-    );
+    } else {
+      this.getVehicleData();
+    }
   };
 
   /**

@@ -18,7 +18,8 @@ export default class App extends Component {
       uid: "",
       currentTheme: "",
       backgroundColor: "",
-      onAuthStateChangedCounter: 0,
+      errorMessage: "",
+      refreshCounter: 0,
       disableAddVehicleButton: false,
       showAddVehicleYearNanErrorModal: false,
     };
@@ -31,6 +32,9 @@ export default class App extends Component {
     this.findUserInformationForOneUser(this.state.props.user.uid);
   };
 
+  /**
+   * Find user information and set them to state
+   */
   findUserInformationForOneUser = userId => {
     if (userId) {
       API.findUserInformationForOneUser(userId)
@@ -47,9 +51,9 @@ export default class App extends Component {
         )
         .catch(err => {
           if (this.state.theme === "") {
-            this.setState({ onAuthStateChangedCounter: this.state.onAuthStateChangedCounter + 1 });
-            if (this.state.onAuthStateChangedCounter <= 5) {
-              this.state.props.onAuthStateChanged();
+            this.setState({ refreshCounter: this.state.refreshCounter + 1 });
+            if (this.state.refreshCounter <= 3) {
+              this.findUserInformationForOneUser(userId)
             } else {
               this.setState({
                 pageLoaded: true,
@@ -170,7 +174,7 @@ export default class App extends Component {
                       userProfilePicture={this.state.props.userProfilePicture}
                       disableAddVehicleButton={this.state.disableAddVehicleButton}
                       currentTheme={this.state.currentTheme}
-                      errorMessage={this.state.props.errorMessage}
+                      errorMessage={this.state.errorMessage}
                       backgroundColor={this.state.backgroundColor}
                       reloadPage={this.reloadPage}
                       showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
