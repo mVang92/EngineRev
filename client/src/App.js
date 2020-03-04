@@ -27,7 +27,6 @@ export default class App extends Component {
       password: "",
       confirmPassword: "",
       userProfilePicture: "",
-      errorMessage: "",
       userEmailForAccount: "",
       userAccountCreationTime: "",
       userAccountLastSignIn: "",
@@ -343,7 +342,6 @@ export default class App extends Component {
                   user={this.state.user}
                   loggedin={this.state.loggedin}
                   userProfilePicture={this.state.userProfilePicture}
-                  errorMessage={this.state.errorMessage}
                   checkUserDisplayName={this.checkUserDisplayName}
                   onAuthStateChanged={this.onAuthStateChanged}
                   handleResetAddVehicleFields={this.handleResetAddVehicleFields}

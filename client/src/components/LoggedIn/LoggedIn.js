@@ -16,7 +16,6 @@ const LoggedIn = props => {
       <hr className={props.currentTheme.hr} />
       <MyVehicles
         vehicleData={props.vehicleData}
-        vehicleCountForUser={props.vehicleCountForUser}
         currentTheme={props.currentTheme}
         errorMessage={props.errorMessage}
         backgroundColor={props.backgroundColor}
