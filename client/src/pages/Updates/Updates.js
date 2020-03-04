@@ -10,7 +10,7 @@ import AddUpdates from "../../components/AddUpdates";
 import Loading from "../../components/Loading";
 import EditOneUpdateModal from "../../components/Modal/EditOneUpdateModal";
 import DeleteOneUpdateModal from "../../components/Modal/DeleteOneUpdateModal";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default class Updates extends Component {
   constructor(props) {
@@ -427,7 +427,6 @@ export default class Updates extends Component {
                             <button className="backToTopButton" onClick={this.backToTopOfPage}>Top</button>
                           </div>
                         </div>
-                        <ToastContainer />
                         <EditOneUpdateModal
                           checkUserEnteredUpdatedReleaseNoteInput={this.checkUserEnteredUpdatedReleaseNoteInput}
                           showEditOneUpdateModal={this.state.showEditOneUpdateModal}

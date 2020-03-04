@@ -5,7 +5,6 @@ import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 import LoggedOut from "../../components/LoggedOut";
 import LoggedIn from "../../components/LoggedIn";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default class App extends Component {
@@ -59,7 +58,7 @@ export default class App extends Component {
               });
             }
           } else {
-            this.loadVehiclesFailNotification(err);
+            this.state.props.loadVehiclesFailNotification(err);
             this.setState({
               pageLoaded: true,
               disableAddVehicleButton: true,
@@ -101,7 +100,7 @@ export default class App extends Component {
           });
           break;
         default:
-          this.errorNotification("Error: Unable to process theme selection.");
+          this.state.props.errorNotification("Error: Unable to process theme selection.");
       }
     }
   };
@@ -129,52 +128,16 @@ export default class App extends Component {
     } else {
       API.addOneVehicle(id, newVehicle)
         .then(() => {
-          this.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
+          this.state.props.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
           this.findUserInformationForOneUser(this.state.uid);
           this.setState({ disableAddVehicleButton: false });
           document.getElementById("field").reset();
         })
         .catch(err => {
-          this.errorNotification(err);
+          this.state.props.errorNotification(err);
           this.setState({ disableAddVehicleButton: false });
         });
     };
-  };
-
-  /**
-   * Display the error notification when an error occurs while loading vehicles
-   * 
-   * @param err the error message to display to the user
-   */
-  loadVehiclesFailNotification = err => {
-    toast.error(`Loading Vehicles ${err.toString()}`);
-  };
-
-  /**
-   * Display the success notification when a vehicle is successfully added
-   * 
-   * @param year  the year of the vehicle
-   * @param make  the make of the vehicle
-   * @param model the model of the vehicle
-   */
-  addOneVehicleSuccessNotification = (year, make, model) => {
-    toast.success(`Added a ${year} ${make} ${model}.`);
-  };
-
-  /**
-   * Display the error notification when an error occurs while executing a database query
-   * 
-   * @param err the error message to display to the user
-   */
-  errorNotification = err => {
-    toast.error(err.toString());
-  };
-
-  /**
-   * Display the info notification when the user resets the fields to add a vehicle
-   */
-  handleResetAddVehicleFields = () => {
-    toast.info(`Input Fields Reset.`);
   };
 
   /**
@@ -202,7 +165,7 @@ export default class App extends Component {
                   <Container>
                     <LoggedIn
                       vehicleData={this.state.vehicleData}
-                      handleResetAddVehicleFields={this.handleResetAddVehicleFields}
+                      handleResetAddVehicleFields={this.state.props.handleResetAddVehicleFields}
                       addVehicle={this.handleAddOneVehicle}
                       userProfilePicture={this.state.props.userProfilePicture}
                       disableAddVehicleButton={this.state.disableAddVehicleButton}
@@ -221,7 +184,6 @@ export default class App extends Component {
               <LoggedOut />
             )
         }
-        <ToastContainer />
       </React.Fragment>
     );
   };

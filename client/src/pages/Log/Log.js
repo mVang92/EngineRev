@@ -23,7 +23,7 @@ import UpdatedMileageInputErrorModal from "../../components/Modal/UpdatedMileage
 import UpdatedVehicleYearNanErrorModal from "../../components/Modal/UpdatedVehicleYearNanErrorModal";
 import NoAuthorization from "../../components/NoAuthorization";
 import Modal from "react-modal";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default class Log extends Component {
   constructor(props) {
@@ -1033,7 +1033,6 @@ export default class Log extends Component {
                       currentTheme={this.state.currentTheme}
                       serviceLogMileage={this.state.serviceLogMileage}
                     />
-                    <ToastContainer />
                   </Container>
                 ) : (
                   <Loading />
