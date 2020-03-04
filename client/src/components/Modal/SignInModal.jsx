@@ -48,7 +48,7 @@ const SignIn = props => {
                             <br /><br />
                             <span
                                 id="forgotPassword"
-                                onClick={props.showForgotPasswordModal}>
+                                onClick={props.requestShowForgotPasswordModal}>
                                 Forgot Password?
                             </span>
                         </div>
