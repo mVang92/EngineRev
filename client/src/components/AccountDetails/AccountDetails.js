@@ -79,7 +79,7 @@ class AccountDetails extends Component {
         <div className="row">
           <div className="col-md-4"><label><strong>Unique User Id:</strong></label></div>
           <div className="col-md-4">
-            <span id={uniqueUserIdMask}>*****************************************</span>
+            <label><span id={uniqueUserIdMask}>*****************************************</span></label>
             <span id={uniqueUserId}>{this.props.userId}</span>
           </div>
           <div className="col-md-4">
