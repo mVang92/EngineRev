@@ -345,9 +345,9 @@ export default class Log extends Component {
           this.showUpdateFutureDateConfirmationModal();
         } else {
           this.handleUpdateOneServiceLog(updatedServiceLogDate);
-        };
-      };
-    };
+        }
+      }
+    }
   };
 
   /**

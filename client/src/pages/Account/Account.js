@@ -20,7 +20,6 @@ export default class Account extends Component {
       loggedin: false,
       pageLoaded: false,
       admin: false,
-      originUrl: window.location.origin,
       user: "",
       userEmail: "",
       userId: "",
@@ -316,7 +315,7 @@ export default class Account extends Component {
    */
   hideUpdateProfilePictureSuccessModal = () => {
     this.setState({ showUpdateProfilePictureSuccessModal: false });
-    window.location.assign(this.state.originUrl);
+    window.location = "/";
   };
 
   /**
@@ -324,7 +323,7 @@ export default class Account extends Component {
    */
   hideUpdateDisplayNameSuccessModal = () => {
     this.setState({ showUpdateDisplayNameSuccessModal: false });
-    window.location.assign(this.state.originUrl);
+    window.location = "/";
   };
 
   /**
