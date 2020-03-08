@@ -86,7 +86,8 @@ export default class Updates extends Component {
             })
             .catch(err => this.errorNotification(err));
         } else {
-          window.location.assign(window.location.origin);
+          alert("You are not authorized to perform this action.");
+          window.location = "/";
         }
       })
       .catch(err => {
@@ -280,7 +281,8 @@ export default class Updates extends Component {
               this.setState({ disableConfirmSaveEditReleaseNoteButton: false });
             });
         } else {
-          window.location.assign(window.location.origin);
+          alert("You are not authorized to perform this action.");
+          window.location = "/";
         }
       })
       .catch(err => {
@@ -310,7 +312,8 @@ export default class Updates extends Component {
               this.setState({ disableConfirmDeleteReleaseNoteButton: false });
             });
         } else {
-          window.location.assign(window.location.origin);
+          alert("You are not authorized to perform this action.");
+          window.location = "/";
         }
       })
       .catch(err => {
