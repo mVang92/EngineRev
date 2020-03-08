@@ -18,7 +18,7 @@ export default class About extends Component {
   };
 
   /**
-   * Fetch all updates and release notes
+   * Get the theme for the user
    */
   componentDidMount = () => {
     this.getUserTheme();

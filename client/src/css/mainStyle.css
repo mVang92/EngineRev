@@ -110,7 +110,7 @@ input {
 #aboutCarspaceContainer {
     background: rgb(245, 245, 245);
     padding: 1em;
-    margin-bottom: 1rem;
+    margin-bottom: 0.1rem;
 }
 
 .box,

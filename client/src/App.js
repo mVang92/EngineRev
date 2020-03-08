@@ -74,7 +74,8 @@ export default class App extends Component {
           userDisplayName: user.displayName,
           userProfilePicture: user.photoURL,
           showSignInModal: false,
-          showSignUpModal: false
+          showSignUpModal: false,
+          showForgotPasswordModal: false
         });
       }
     });
