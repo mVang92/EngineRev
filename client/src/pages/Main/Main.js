@@ -95,7 +95,7 @@ export default class App extends Component {
           document.body.style.backgroundColor = themes.dark.backgroundColor;
           break;
         default:
-          this.errorNotification("Error: Unable to process theme selection.");
+          this.state.props.errorNotification("Error: Unable to process theme selection.");
       }
     }
   };
