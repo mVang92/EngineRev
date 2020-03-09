@@ -8,6 +8,7 @@ export const themes = {
     oneUpdate: "carSpaceThemeOneUpdate",
     redText: "",
     accountDetails: "carSpaceThemeAccountDetails",
+    backgroundColor: "rgb(220, 220, 220)"
   },
   light: {
     background: "lightThemeBackground",
@@ -18,6 +19,7 @@ export const themes = {
     oneUpdate: "lightThemeOneUpdate",
     redText: "",
     accountDetails: "lightThemeAccountDetails",
+    backgroundColor: "rgb(235, 235, 235)"
   },
   grey: {
     background: "greyThemeBackground",
@@ -28,6 +30,7 @@ export const themes = {
     oneUpdate: "greyThemeOneUpdate",
     redText: "greyThemeRedText",
     accountDetails: "greyThemeAccountDetails",
+    backgroundColor: "rgb(112, 112, 112)"
   },
   dark: {
     background: "darkThemeBackground",
@@ -38,5 +41,6 @@ export const themes = {
     oneUpdate: "darkThemeOneUpdate",
     redText: "darkThemeRedText",
     accountDetails: "darkThemeAccountDetails",
-  },
+    backgroundColor: "rgb(32, 32, 32)"
+  }
 };

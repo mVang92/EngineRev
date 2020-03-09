@@ -17,7 +17,6 @@ export default class App extends Component {
       theme: "",
       uid: "",
       currentTheme: "",
-      backgroundColor: "",
       errorMessage: "",
       refreshCounter: 0,
       disableAddVehicleButton: false,
@@ -80,28 +79,20 @@ export default class App extends Component {
     if (this.state.theme) {
       switch (this.state.theme) {
         case "carSpace":
-          this.setState({
-            currentTheme: themes.carSpace,
-            backgroundColor: document.body.style.backgroundColor = "rgb(220, 220, 220)"
-          });
+          this.setState({ currentTheme: themes.carSpace });
+          document.body.style.backgroundColor = themes.carSpace.backgroundColor;
           break;
         case "light":
-          this.setState({
-            currentTheme: themes.light,
-            backgroundColor: document.body.style.backgroundColor = "rgb(235, 235, 235)"
-          });
+          this.setState({ currentTheme: themes.light });
+          document.body.style.backgroundColor = themes.light.backgroundColor;
           break;
         case "grey":
-          this.setState({
-            currentTheme: themes.grey,
-            backgroundColor: document.body.style.backgroundColor = "rgb(112, 112, 112)"
-          });
+          this.setState({ currentTheme: themes.grey });
+          document.body.style.backgroundColor = themes.grey.backgroundColor;
           break;
         case "dark":
-          this.setState({
-            currentTheme: themes.dark,
-            backgroundColor: document.body.style.backgroundColor = "rgb(32, 32, 32)"
-          });
+          this.setState({ currentTheme: themes.dark });
+          document.body.style.backgroundColor = themes.dark.backgroundColor;
           break;
         default:
           this.state.props.errorNotification("Error: Unable to process theme selection.");
@@ -175,7 +166,6 @@ export default class App extends Component {
                       disableAddVehicleButton={this.state.disableAddVehicleButton}
                       currentTheme={this.state.currentTheme}
                       errorMessage={this.state.errorMessage}
-                      backgroundColor={this.state.backgroundColor}
                       reloadPage={this.reloadPage}
                       showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
                       hideAddVehicleYearNanErrorModal={this.hideAddVehicleYearNanErrorModal}

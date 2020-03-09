@@ -149,19 +149,19 @@ export default class Account extends Component {
       switch (this.state.theme) {
         case "carSpace":
           this.setState({ currentTheme: themes.carSpace });
-          document.body.style.backgroundColor = "rgb(220, 220, 220)";
+          document.body.style.backgroundColor = themes.carSpace.backgroundColor;
           break;
         case "light":
           this.setState({ currentTheme: themes.light });
-          document.body.style.backgroundColor = "rgb(235, 235, 235)";
+          document.body.style.backgroundColor = themes.light.backgroundColor;
           break;
         case "grey":
           this.setState({ currentTheme: themes.grey });
-          document.body.style.backgroundColor = "rgb(112, 112, 112)";
+          document.body.style.backgroundColor = themes.grey.backgroundColor;
           break;
         case "dark":
           this.setState({ currentTheme: themes.dark });
-          document.body.style.backgroundColor = "rgb(32, 32, 32)";
+          document.body.style.backgroundColor = themes.dark.backgroundColor;
           break;
         default:
           this.errorNotification("Error: Unable to process theme selection.");

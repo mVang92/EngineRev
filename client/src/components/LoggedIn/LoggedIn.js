@@ -18,7 +18,6 @@ const LoggedIn = props => {
         vehicleData={props.vehicleData}
         currentTheme={props.currentTheme}
         errorMessage={props.errorMessage}
-        backgroundColor={props.backgroundColor}
         reloadPage={props.reloadPage}
       />
       <AddVehicleYearNanErrorModal
