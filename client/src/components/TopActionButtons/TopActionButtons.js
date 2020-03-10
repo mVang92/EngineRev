@@ -83,7 +83,7 @@ class TopActionButtons extends Component {
                 </div>
             </div>
         );
-    }
+    };
 };
 
 export default TopActionButtons;
