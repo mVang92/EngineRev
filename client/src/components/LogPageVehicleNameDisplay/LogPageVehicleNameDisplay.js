@@ -12,11 +12,6 @@ const LogPageVehicleNameDisplay = props => {
                   <label><h4>{props.vehicleName}</h4></label>
                 </div>
               </div>
-              <div className="row">
-                <div className="col-md-12 text-center wrapword">
-                  <label><h5>{props.year} {props.make} {props.model}</h5></label>
-                </div>
-              </div>
             </div>
           ) : (
             <div id="vehicleLogInformation">
