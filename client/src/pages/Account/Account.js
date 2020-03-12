@@ -238,9 +238,9 @@ export default class Account extends Component {
             confirmNewPassword: ""
           });
           this.passwordsDoNotMatchErrorNotification();
-        };
-      };
-    };
+        }
+      }
+    }
   };
 
   /**
