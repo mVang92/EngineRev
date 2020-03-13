@@ -9,6 +9,7 @@ export default {
         email: userEmail,
         admin: false,
         theme: "carSpace",
+        backgroundPicture: "",
         vehicleName: [{}]
       })
     );
@@ -36,6 +37,10 @@ export default {
   // Update a service log for one vehicle
   updateOneLogForOneVehicle: (vehicleId, serviceLogId, updatedServiceLog) => {
     return axios.put(`/api/vehicles/updateOneServiceLog/${vehicleId}/${serviceLogId}`, updatedServiceLog);
+  },
+  // Update the background picture for the user
+  updateUserBackgroundPicture: (creatorId, backgroundPicture) => {
+    return axios.put(`/api/vehicles/updateUserBackgroundPicture/${creatorId}`, backgroundPicture)
   },
   // Delete one vehicle
   deleteOneVehicle: vehicleId => {

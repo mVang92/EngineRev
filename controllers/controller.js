@@ -116,6 +116,25 @@ module.exports = {
   },
 
   /**
+   * Update background picture for one user
+   */
+  updateUserBackgroundPicture: (req, res) => {
+    console.log("Hit updateUserBackgroundPicture");
+    let backgroundPicture = "";
+    for (var url in req.body) {
+      backgroundPicture = url;
+      break;
+    }
+    db.Vehicle
+      .updateOne(
+        { creator: req.params.creatorId },
+        { $set: { backgroundPicture: backgroundPicture } }
+      )
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
    * Remove the selected vehicle from the database
    */
   removeOneVehicle: (req, res) => {

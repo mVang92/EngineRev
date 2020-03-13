@@ -172,6 +172,39 @@ class AccountDetails extends Component {
                   </div>
                   <div className="col-md-4"></div>
                 </div>
+                <hr className={currentTheme.hr} />
+                <div className="row">
+                  <div className="col-md-4"><label><strong>Background Picture:</strong></label></div>
+                  <div className="col-md-4">
+                    <div className="row">
+                      <div className="col-md-12">
+                        <input
+                          id="newBackgroundPicture"
+                          type="text"
+                          ref="newBackgroundPicture"
+                          onChange={this.props.handleChange}
+                          value={this.props.newBackgroundPicture}
+                          name="newBackgroundPicture"
+                          maxLength="500"
+                          placeholder="Insert photo URL"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="row">
+                      <div className="col-md-12">
+                        <button
+                          id="submitNewBackgroundPictureButton"
+                          title="Update Background Picture"
+                          type="submit"
+                          onClick={this.props.showUpdateBackgroundPictureModal}>
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </React.Fragment>
             )
         }
@@ -201,7 +234,7 @@ class AccountDetails extends Component {
                 <div className="col-md-12">
                   <button
                     id="submitNewProfilePictureButton"
-                    title="Update Picture"
+                    title="Update Profile Picture"
                     type="submit"
                     onClick={this.props.showUpdateProfilePictureModal}>
                     Submit

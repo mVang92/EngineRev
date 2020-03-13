@@ -9,6 +9,13 @@ body {
     scroll-behavior: smooth;
 }
 
+body {
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+}
+
 .container {
     height: 100%;
 }
@@ -151,7 +158,8 @@ input {
 .backToTopButton,
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
-#submitNewProfilePictureButton {
+#submitNewProfilePictureButton,
+#submitNewBackgroundPictureButton {
     border: none;
     cursor: pointer;
     transition-duration: 0.5s;
@@ -178,7 +186,8 @@ input {
 .editReleaseNoteActionButton,
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
-#submitNewProfilePictureButton {
+#submitNewProfilePictureButton,
+#submitNewBackgroundPictureButton {
     background: rgb(225, 225, 225);
 }
 
@@ -235,7 +244,8 @@ input {
 .editReleaseNoteActionButton,
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
-#submitNewProfilePictureButton:hover {
+#submitNewProfilePictureButton:hover,
+#submitNewBackgroundPictureButton:hover {
     transition-duration: 0.2s;
 }
 
@@ -256,7 +266,8 @@ input {
 .editReleaseNoteActionButton:hover,
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
-#submitNewProfilePictureButton:hover {
+#submitNewProfilePictureButton:hover,
+#submitNewBackgroundPictureButton:hover {
     background: rgb(255, 255, 255);
 }
 
@@ -424,7 +435,8 @@ input {
     overflow: auto;
 }
 
-#scrollableProfilePicture {
+#scrollableProfilePicture,
+#scrollableBackgroundPicture {
     max-height: 17rem;
     overflow: auto;
 }
@@ -537,7 +549,8 @@ input {
     box-shadow: 0px 2px 5px rgb(32, 32, 32);
 }
 
-#profilePicture {
+#profilePicture,
+#backgroundPicture {
     width: 70%;
 }
 
@@ -900,7 +913,8 @@ footer {
         width: 15em;
     }
 
-    #profilePicture {
+    #profilePicture,
+    #backgroundPicture {
         width: 55%;
     }
 

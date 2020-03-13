@@ -26,6 +26,7 @@ export default class Updates extends Component {
       knownIssuesToShowInModal: "",
       theme: "",
       currentTheme: "",
+      backgroundPicture: "",
       updateId: "",
       releaseNotesToUpdate: "",
       knownIssuesToUpdate: "",
@@ -126,9 +127,10 @@ export default class Updates extends Component {
                 userId: user.uid,
                 admin: res.data.admin,
                 theme: res.data.theme,
+                backgroundPicture: res.data.backgroundPicture,
                 pageLoaded: true,
               }, () => {
-                this.getThemeAndRender();
+                this.determineTheme();
               });
             } catch (err) {
               this.setState({ pageLoaded: true });
@@ -142,30 +144,38 @@ export default class Updates extends Component {
   };
 
   /**
-   * Get the user theme and render it
+   * Determine what the current theme is
    */
-  getThemeAndRender = () => {
+  determineTheme = () => {
     if (this.state.theme) {
       switch (this.state.theme) {
         case "carSpace":
-          this.setState({ currentTheme: themes.carSpace });
-          document.body.style.backgroundColor = themes.carSpace.backgroundColor;
+          this.renderTheme(themes.carSpace)
           break;
         case "light":
-          this.setState({ currentTheme: themes.light });
-          document.body.style.backgroundColor = themes.light.backgroundColor;
+          this.renderTheme(themes.light)
           break;
         case "grey":
-          this.setState({ currentTheme: themes.grey });
-          document.body.style.backgroundColor = themes.grey.backgroundColor;
+          this.renderTheme(themes.grey)
           break;
         case "dark":
-          this.setState({ currentTheme: themes.dark });
-          document.body.style.backgroundColor = themes.dark.backgroundColor;
+          this.renderTheme(themes.dark)
           break;
         default:
           this.errorNotification("Error: Unable to process theme selection.");
       }
+    }
+  };
+
+  /**
+   * Render the background picture
+   */
+  renderTheme = theme => {
+    this.setState({ currentTheme: theme });
+    if (this.state.backgroundPicture) {
+      document.body.style.backgroundImage = "url(" + this.state.backgroundPicture + ")";
+    } else {
+      document.body.style.backgroundColor = theme.backgroundColor;
     }
   };
 

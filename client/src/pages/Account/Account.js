@@ -7,6 +7,7 @@ import { themes } from "../../themes/Themes";
 import NoAuthorization from "../../components/NoAuthorization";
 import API from "../../utils/API";
 import AccountDetails from "../../components/AccountDetails";
+import UpdateBackgroundPictureModal from "../../components/Modal/UpdateBackgroundPictureModal";
 import UpdateProfilePictureModal from "../../components/Modal/UpdateProfilePictureModal";
 import UpdateDisplayNameModal from "../../components/Modal/UpdateDisplayNameModal";
 import UpdateProfilePictureSuccessModal from "../../components/Modal/UpdateProfilePictureSuccessModal";
@@ -21,6 +22,7 @@ export default class Account extends Component {
       pageLoaded: false,
       admin: false,
       user: "",
+      backgroundPicture: "",
       userEmail: "",
       userId: "",
       userDisplayName: "",
@@ -34,9 +36,11 @@ export default class Account extends Component {
       loadingError: "",
       userAccountCreationTime: "",
       userAccountLastSignIn: "",
+      newBackgroundPicture: "",
       newProfilePicture: "",
       showUniqueUserId: false,
       showMaskUniqueUserId: true,
+      showUpdateBackgroundPictureModal: false,
       showUpdateProfilePictureModal: false,
       showUpdateDisplayNameModal: false,
       showUpdateProfilePictureSuccessModal: false,
@@ -117,11 +121,12 @@ export default class Account extends Component {
           try {
             this.setState({
               vehicleCount: res.data.vehicles.length,
+              backgroundPicture: res.data.backgroundPicture,
               admin: res.data.admin,
               theme: res.data.theme,
               pageLoaded: true
             }, () => {
-              this.getThemeAndRender();
+              this.determineTheme();
             })
           } catch (err) {
             this.setState({
@@ -142,26 +147,22 @@ export default class Account extends Component {
   };
 
   /**
-   * Get the user theme and render it
+   * Determine what the current theme is
    */
-  getThemeAndRender = () => {
+  determineTheme = () => {
     if (this.state.theme) {
       switch (this.state.theme) {
         case "carSpace":
-          this.setState({ currentTheme: themes.carSpace });
-          document.body.style.backgroundColor = themes.carSpace.backgroundColor;
+          this.renderTheme(themes.carSpace);
           break;
         case "light":
-          this.setState({ currentTheme: themes.light });
-          document.body.style.backgroundColor = themes.light.backgroundColor;
+          this.renderTheme(themes.light);
           break;
         case "grey":
-          this.setState({ currentTheme: themes.grey });
-          document.body.style.backgroundColor = themes.grey.backgroundColor;
+          this.renderTheme(themes.grey);
           break;
         case "dark":
-          this.setState({ currentTheme: themes.dark });
-          document.body.style.backgroundColor = themes.dark.backgroundColor;
+          this.renderTheme(themes.dark);
           break;
         default:
           this.errorNotification("Error: Unable to process theme selection.");
@@ -170,11 +171,23 @@ export default class Account extends Component {
   };
 
   /**
+   * Render the background picture
+   */
+  renderTheme = theme => {
+    this.setState({ currentTheme: theme });
+    if (this.state.backgroundPicture) {
+      document.body.style.backgroundImage = "url(" + this.state.backgroundPicture + ")";
+    } else {
+      document.body.style.backgroundImage = "";
+      document.body.style.backgroundColor = theme.backgroundColor;
+    }
+  };
+
+  /**
    * Update the display name for the user
    */
   updateDisplayName = e => {
     e.preventDefault();
-    this.setState({ showUpdateDisplayNameModal: false });
     const user = this.state.user;
     if (this.state.loggedin) {
       user.updateProfile({ displayName: this.state.newDisplayName })
@@ -185,22 +198,48 @@ export default class Account extends Component {
           });
           this.showUpdateDisplayNameSuccessModal();
         })
-        .catch(error => this.errorNotification(error));
+        .catch(error => {
+          this.setState({ showUpdateDisplayNameModal: false });
+          this.errorNotification(error);
+        });
     };
   };
 
   /**
-   * Update the display name for the user
+   * Update the background picture for the user
+   */
+  updateBackgroundPicture = () => {
+    API.updateUserBackgroundPicture(this.state.userId, this.state.newBackgroundPicture)
+      .then(() => {
+        this.getVehicleData();
+        this.setState({
+          showUpdateBackgroundPictureModal: false,
+          newBackgroundPicture: ""
+        });
+      })
+      .catch(error => {
+        this.setState({ showUpdateBackgroundPictureModal: false });
+        this.errorNotification(error);
+      });
+  };
+
+  /**
+   * Update the profile picture for the user
    */
   updateProfilePicture = e => {
     e.preventDefault();
-    this.setState({ showUpdateProfilePictureModal: false });
     const user = this.state.user;
     if (this.state.loggedin) {
       user.updateProfile({ photoURL: this.state.newProfilePicture })
-        .then(() => this.showUpdateProfilePictureSuccessModal())
-        .catch(error => this.errorNotification(error));
-    };
+        .then(() => {
+          this.setState({ showUpdateProfilePictureModal: false });
+          this.showUpdateProfilePictureSuccessModal();
+        })
+        .catch(error => {
+          this.setState({ showUpdateProfilePictureModal: false });
+          this.errorNotification(error);
+        });
+    }
   };
 
   /**
@@ -246,6 +285,14 @@ export default class Account extends Component {
   /**
    * Display the modal to confirm updating the profile picture
    */
+  showUpdateBackgroundPictureModal = e => {
+    e.preventDefault();
+    this.setState({ showUpdateBackgroundPictureModal: true });
+  };
+
+  /**
+   * Display the modal to confirm updating the profile picture
+   */
   showUpdateProfilePictureModal = e => {
     e.preventDefault();
     this.setState({ showUpdateProfilePictureModal: true });
@@ -267,6 +314,13 @@ export default class Account extends Component {
       showUniqueUserId: true,
       showMaskUniqueUserId: false
     });
+  };
+
+  /**
+   * Hide the modal to confirm updating the background picture
+   */
+  hideUpdateBackgroundPictureModal = () => {
+    this.setState({ showUpdateBackgroundPictureModal: false });
   };
 
   /**
@@ -393,8 +447,10 @@ export default class Account extends Component {
                         newDisplayName={this.state.newDisplayName}
                         updatePassword={this.updatePassword}
                         newPassword={this.state.newPassword}
+                        newBackgroundPicture={this.state.newBackgroundPicture}
                         newProfilePicture={this.state.newProfilePicture}
                         confirmNewPassword={this.state.confirmNewPassword}
+                        showUpdateBackgroundPictureModal={this.showUpdateBackgroundPictureModal}
                         showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
                         showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
                         saveThemeForUser={this.saveThemeForUser}
@@ -404,6 +460,13 @@ export default class Account extends Component {
                         unableToLoadDatabase={this.state.unableToLoadDatabase}
                       />
                     </Container>
+                    <UpdateBackgroundPictureModal
+                      showUpdateBackgroundPictureModal={this.state.showUpdateBackgroundPictureModal}
+                      updateBackgroundPicture={this.updateBackgroundPicture}
+                      hideUpdateBackgroundPictureModal={this.hideUpdateBackgroundPictureModal}
+                      newBackgroundPicture={this.state.newBackgroundPicture}
+                      currentTheme={this.state.currentTheme}
+                    />
                     <UpdateProfilePictureModal
                       showUpdateProfilePictureModal={this.state.showUpdateProfilePictureModal}
                       updateProfilePicture={this.updateProfilePicture}

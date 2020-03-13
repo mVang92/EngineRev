@@ -33,6 +33,11 @@ router
   .route("/updateOneServiceLog/:vehicleId/:serviceLogId")
   .put(controller.updateOneLogForOneVehicle)
 
+// Matches with "/api/vehicles/updateUserBackgroundPicture/:creatorId/:backgroundPicture"
+router
+  .route("/updateUserBackgroundPicture/:creatorId")
+  .put(controller.updateUserBackgroundPicture)
+
 // Matches with "/api/vehicles/deleteServiceLog/:vehicleId/:serviceLogId"
 router
   .route("/deleteServiceLog/:vehicleId/:serviceLogId")
