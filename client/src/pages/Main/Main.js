@@ -93,7 +93,7 @@ export default class App extends Component {
           this.renderTheme(themes.dark)
           break;
         default:
-          this.errorNotification("Error: Unable to process theme selection.");
+          this.state.props.errorNotification("Error: Unable to process theme selection.");
       }
     }
   };
