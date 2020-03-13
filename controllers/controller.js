@@ -121,7 +121,7 @@ module.exports = {
   updateUserBackgroundPicture: (req, res) => {
     console.log("Hit updateUserBackgroundPicture");
     let backgroundPicture = "";
-    for (var url in req.body) {
+    for (let url in req.body) {
       backgroundPicture = url;
       break;
     }
@@ -198,7 +198,7 @@ module.exports = {
     console.log("Hit saveThemeForUser");
     db.Vehicle
       .updateOne(
-        { "creator": req.params.creatorId },
+        { creator: req.params.creatorId },
         { $set: { theme: req.params.themeType } }
       )
       .then(result => res.json(result))
