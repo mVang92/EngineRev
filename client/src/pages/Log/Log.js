@@ -582,7 +582,7 @@ export default class Log extends Component {
   };
 
   /**
-   * Render the background picture
+   * Render the theme and background picture
    */
   renderTheme = theme => {
     this.setState({ currentTheme: theme });

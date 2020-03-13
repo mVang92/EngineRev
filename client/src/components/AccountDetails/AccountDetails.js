@@ -127,7 +127,7 @@ class AccountDetails extends Component {
               <React.Fragment>
                 <hr className={currentTheme.hr} />
                 <div className="row">
-                  <div className="col-md-4"><label><strong>Themes</strong></label></div>
+                  <div className="col-md-4"><label><strong>Themes:</strong></label></div>
                   <div className="col-md-4 text-center">
                     <div className="row">
                       <div className="col-md-6">
@@ -174,7 +174,7 @@ class AccountDetails extends Component {
                 </div>
                 <hr className={currentTheme.hr} />
                 <div className="row">
-                  <div className="col-md-4"><label><strong>Background Picture:</strong></label></div>
+                  <div className="col-md-4"><label><strong>Update Background Picture:</strong></label></div>
                   <div className="col-md-4">
                     <div className="row">
                       <div className="col-md-12">
