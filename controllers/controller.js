@@ -170,11 +170,7 @@ module.exports = {
     db.Vehicle
       .updateOne(
         { "vehicles._id": req.params.vehicleId },
-        {
-          $set: {
-            "vehicles.$.vehicleName": req.body.emptyVehicleName
-          }
-        }
+        { $set: { "vehicles.$.vehicleName": req.body.emptyVehicleName } }
       )
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
