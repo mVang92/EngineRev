@@ -18,7 +18,8 @@
 
 .lightThemeBackground {
     transition-duration: 0.5s;
-    background: rgb(255, 255, 255) !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(4px);
 }
 
 .lightThemeHr {
@@ -46,8 +47,9 @@
 
 .greyThemeBackground {
     transition-duration: 0.5s;
-    background: rgb(184, 184, 184) !important;
+    background: rgba(168, 168, 168, 0.5) !important;
     color: rgb(0, 0, 0) !important;
+    backdrop-filter: blur(4px);
 }
 
 .greyThemeHr {
@@ -78,8 +80,9 @@
 
 .darkThemeBackground {
     transition-duration: 0.5s;
-    background: rgb(80, 80, 80) !important;
+    background: rgba(64, 64, 64, 0.5) !important;
     color: rgb(255, 255, 255) !important;
+    backdrop-filter: blur(4px);
 }
 
 .darkThemeHr {
