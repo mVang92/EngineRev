@@ -18,7 +18,7 @@ const showUpdateBackgroundPictureModal = props => {
                                 <React.Fragment>
                                     <div className="row modal-header">
                                         <strong className="col-md-12 text-center">
-                                            Use this image as your background picture?
+                                            <label>Use this image as your background picture?</label>
                                         </strong>
                                     </div>
                                     <div className="row">
@@ -34,7 +34,7 @@ const showUpdateBackgroundPictureModal = props => {
                             ) : (
                                     <div className="row modal-header">
                                         <strong className="col-md-12 text-center">
-                                            Reset your background picture to default?
+                                            <label>Reset your background picture to default?</label>
                                         </strong>
                                     </div>
                                 )
