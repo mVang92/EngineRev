@@ -17,13 +17,13 @@ const UpdateDisplayNameModal = props => {
                             props.newDisplayName ? (
                                 <div className="row modal-header">
                                     <strong className="col-md-12 text-center">
-                                        Use "{props.newDisplayName}" as your name?
-                                        </strong>
+                                        <label>Use "{props.newDisplayName}" as your name?</label>
+                                    </strong>
                                 </div>
                             ) : (
                                     <div className="row modal-header">
                                         <strong className="col-md-12 text-center">
-                                            Reset your name to default?
+                                            <label>Reset your name to default?</label>
                                         </strong>
                                     </div>
                                 )

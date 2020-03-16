@@ -18,7 +18,7 @@ const UpdateProfilePictureModal = props => {
                                 <React.Fragment>
                                     <div className="row modal-header">
                                         <strong className="col-md-12 text-center">
-                                            Use this image as your profile picture?
+                                            <label>Use this image as your profile picture?</label>
                                         </strong>
                                     </div>
                                     <div className="row">
@@ -34,7 +34,7 @@ const UpdateProfilePictureModal = props => {
                             ) : (
                                     <div className="row modal-header">
                                         <strong className="col-md-12 text-center">
-                                            Reset your profile picture to default?
+                                            <label>Reset your profile picture to default?</label>
                                         </strong>
                                     </div>
                                 )
