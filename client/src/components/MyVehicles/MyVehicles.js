@@ -58,19 +58,21 @@ class MyVehicles extends Component {
                                             <Link to={{
                                               pathname: "/account/" + this.props.vehicleData._id + "/vehicle/" + vehicle._id
                                             }}>
-                                              <div className={`vehicleItemList ${currentTheme.vehicleItemList}`}>
-                                                {
-                                                  vehicle.vehicleName ?
-                                                    (
-                                                      <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
-                                                        {vehicle.vehicleName}
-                                                      </div>
-                                                    ) : (
-                                                      <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
-                                                        {vehicle.year} {vehicle.make} {vehicle.model}
-                                                      </div>
-                                                    )
-                                                }
+                                              <div className="vehicleOnRecord">
+                                                <div className={`vehicleItemList ${currentTheme.vehicleItemList}`}>
+                                                  {
+                                                    vehicle.vehicleName ?
+                                                      (
+                                                        <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
+                                                          {vehicle.vehicleName}
+                                                        </div>
+                                                      ) : (
+                                                        <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
+                                                          {vehicle.year} {vehicle.make} {vehicle.model}
+                                                        </div>
+                                                      )
+                                                  }
+                                                </div>
                                               </div>
                                             </Link>
                                           </div>
