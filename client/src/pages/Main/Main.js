@@ -81,16 +81,16 @@ export default class App extends Component {
     if (this.state.theme) {
       switch (this.state.theme) {
         case "carSpace":
-          this.renderTheme(themes.carSpace)
+          this.renderTheme(themes.carSpace);
           break;
         case "light":
-          this.renderTheme(themes.light)
+          this.renderTheme(themes.light);
           break;
         case "grey":
-          this.renderTheme(themes.grey)
+          this.renderTheme(themes.grey);
           break;
         case "dark":
-          this.renderTheme(themes.dark)
+          this.renderTheme(themes.dark);
           break;
         default:
           this.state.props.errorNotification("Error: Unable to process theme selection.");
