@@ -32,7 +32,7 @@ export default class Account extends Component {
       confirmNewPassword: "",
       theme: "",
       currentTheme: "",
-      vehicleCount: "Loading...",
+      vehicleCount: "",
       loadingError: "",
       userAccountCreationTime: "",
       userAccountLastSignIn: "",

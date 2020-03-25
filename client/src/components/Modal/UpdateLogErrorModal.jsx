@@ -37,7 +37,7 @@ const UpdateLogErrorModal = props => {
                                             (
                                                 <div className="text-danger"><strong>Date:</strong></div>
                                             ) : (
-                                                <div>Date: <span className="text-success">{serviceLogDate}</span></div>
+                                                <div>Date: <span>{serviceLogDate}</span></div>
                                             )
                                     }
                                 </div>
@@ -47,7 +47,7 @@ const UpdateLogErrorModal = props => {
                                             (
                                                 <div className="text-danger"><strong>Mileage:</strong></div>
                                             ) : (
-                                                <div>Mileage: <span className="text-success">{serviceLogMileage}</span></div>
+                                                <div>Mileage: <span>{serviceLogMileage}</span></div>
                                             )
                                     }
                                 </div>
@@ -57,12 +57,12 @@ const UpdateLogErrorModal = props => {
                                             (
                                                 <div className="text-danger"><strong>Service:</strong></div>
                                             ) : (
-                                                <div>Service: <span className="text-success">{serviceLogService}</span></div>
+                                                <div>Service: <span>{serviceLogService}</span></div>
                                             )
                                     }
                                 </div>
                                 <div className="col-md-12 breakWord">
-                                    <div>Comments: <span className="text-success">{serviceLogComment}</span></div>
+                                    <div>Comments: <span>{serviceLogComment}</span></div>
                                 </div>
                             </div>
                         </div>

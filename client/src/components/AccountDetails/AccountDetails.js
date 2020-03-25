@@ -119,13 +119,13 @@ class AccountDetails extends Component {
           <div className="col-md-4">{this.props.userAccountLastSignIn}</div>
           <div className="col-md-4"></div>
         </div>
+        <hr className={currentTheme.hr} />
         {
           unableToLoadDatabase ?
             (
               null
             ) : (
               <React.Fragment>
-                <hr className={currentTheme.hr} />
                 <div className="row">
                   <div className="col-md-4"><label><strong>Themes:</strong></label></div>
                   <div className="col-md-4 text-center">
@@ -209,7 +209,7 @@ class AccountDetails extends Component {
               </React.Fragment>
             )
         }
-        <hr className={currentTheme.hr} />
+        <br />
         <form onSubmit={this.props.showUpdateProfilePictureModal}>
           <div className="row">
             <div className="col-md-4"><label><strong>Update Profile Picture:</strong></label></div>
