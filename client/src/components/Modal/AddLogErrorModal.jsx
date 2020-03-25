@@ -43,7 +43,7 @@ const AddLogErrorModal = props => {
                                             (
                                                 <div className="text-danger"><strong>Date:</strong></div>
                                             ) : (
-                                                <div>Date: <span className="text-success">{dateToShowFormatted}</span></div>
+                                                <div>Date: <span>{dateToShowFormatted}</span></div>
                                             )
                                     }
                                 </div>
@@ -53,7 +53,7 @@ const AddLogErrorModal = props => {
                                             (
                                                 <div className="text-danger"><strong>Mileage:</strong></div>
                                             ) : (
-                                                <div>Mileage: <span className="text-success">{mileage}</span></div>
+                                                <div>Mileage: <span>{mileage}</span></div>
                                             )
                                     }
                                 </div>
@@ -63,12 +63,12 @@ const AddLogErrorModal = props => {
                                             (
                                                 <div className="text-danger"><strong>Service:</strong></div>
                                             ) : (
-                                                <div>Service: <span className="text-success">{service}</span></div>
+                                                <div>Service: <span>{service}</span></div>
                                             )
                                     }
                                 </div>
                                 <div className="col-md-12 breakWord">
-                                    <div>Comments: <span className="text-success">{comment}</span></div>
+                                    <div>Comments: <span>{comment}</span></div>
                                 </div>
                             </div>
                         </div>
