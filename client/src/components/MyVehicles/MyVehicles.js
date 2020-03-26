@@ -39,7 +39,7 @@ class MyVehicles extends Component {
                                     vehicleData.vehicles.length ?
                                       (
                                         <div className="col-md-12">
-                                          <label><strong>Vehicles on Record: {vehicleData.vehicles.length}</strong></label>
+                                          <label><strong>Vehicles on Record: <span id="vehicleCountForUser">{vehicleData.vehicles.length}</span></strong></label>
                                         </div>
                                       ) : (
                                         <div className="col-md-12">
