@@ -9,7 +9,7 @@ const LogPageVehicleNameDisplay = props => {
             <div id="vehicleLogInformation">
               <div className="row">
                 <div className="col-md-12 text-center wrapword">
-                  <label><h4>{props.vehicleName}</h4></label>
+                  <label><h4 id="vehicleNameHeader">{props.vehicleName}</h4></label>
                 </div>
               </div>
             </div>
@@ -17,7 +17,7 @@ const LogPageVehicleNameDisplay = props => {
             <div id="vehicleLogInformation">
               <div className="row">
                 <div className="col-md-12 text-center wrapword">
-                  <label><h4>{props.year} {props.make} {props.model}</h4></label>
+                  <label><h4 id="vehicleNameHeader">{props.year} {props.make} {props.model}</h4></label>
                 </div>
               </div>
             </div>
