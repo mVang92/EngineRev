@@ -7,7 +7,6 @@ module.exports = {
      * Get all updates on record
      */
     getAllUpdates: (req, res) => {
-        console.log("Hit getAllUpdates");
         db.Update
             .find(req.query)
             .sort({ date: -1 })
@@ -19,7 +18,6 @@ module.exports = {
      * Add an update on record
      */
     addOneUpdate: (req, res) => {
-        console.log("Hit addOneUpdate");
         db.Update
             .create(req.body)
             .then(dbModel => res.json(dbModel))
@@ -30,7 +28,6 @@ module.exports = {
      * Edit a release note / update on record
      */
     updateOneReleaseNote: (req, res) => {
-        console.log("Hit updateOneReleaseNote");
         db.Update
             .updateOne(
                 { "_id": req.params.updateId },
@@ -49,7 +46,6 @@ module.exports = {
     * Delete a release note / update on record
     */
     deleteOneReleaseNote: (req, res) => {
-        console.log("Hit deleteOneReleaseNote");
         db.Update
             .findById({ _id: req.params.updateId })
             .then(result => result.remove())

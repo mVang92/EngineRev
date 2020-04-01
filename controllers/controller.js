@@ -8,7 +8,6 @@ module.exports = {
    * Create a database schema for the user upon first time login
    */
   createUserSchema: (req, res) => {
-    console.log("Hit createUserSchema");
     db.Vehicle
       .create(req.body)
       .then(result => res.json(result))
@@ -19,7 +18,6 @@ module.exports = {
    * Find all vehicles belonging to one user
    */
   findUserInformationForOneUser: (req, res) => {
-    console.log("Hit findUserInformationForOneUser");
     db.Vehicle
       .findOne({ creator: req.params.id })
       .then(result => res.json(result))
@@ -30,7 +28,6 @@ module.exports = {
    * Find one vehicle belonging to one user
    */
   findOneVehicleForUser: (req, res) => {
-    console.log("Hit findOneVehicleForUser");
     db.Vehicle
       .aggregate([
         { $match: { creator: req.params.creatorId } },
@@ -55,7 +52,6 @@ module.exports = {
    * Add one vehicle for the current user logged in
    */
   addOneVehicle: (req, res) => {
-    console.log("Hit addOneVehicle");
     db.Vehicle
       .findOneAndUpdate(
         { creator: req.params.id },
@@ -69,7 +65,6 @@ module.exports = {
    * Add one service log for the selected vehicle
    */
   addOneLogForOneVehicle: (req, res) => {
-    console.log("Hit addOneLogForOneVehicle");
     db.Vehicle
       .updateOne(
         { creator: req.params.creatorId, vehicles: { $elemMatch: { _id: req.params.vehicleId } } },
@@ -83,7 +78,6 @@ module.exports = {
    * Update the vehicle name for the selected vehicle
    */
   updateOneVehicleInformation: (req, res) => {
-    console.log("Hit updateOneVehicleInformation");
     db.Vehicle
       .updateOne(
         { "vehicles._id": req.params.vehicleId },
@@ -104,7 +98,6 @@ module.exports = {
    * Update one service log for the selected vehicle
    */
   updateOneLogForOneVehicle: (req, res) => {
-    console.log("Hit updateOneLogForOneVehicle");
     db.Vehicle
       .updateOne(
         { "vehicles._id": req.params.vehicleId },
@@ -119,7 +112,6 @@ module.exports = {
    * Update background picture for one user
    */
   updateUserBackgroundPicture: (req, res) => {
-    console.log("Hit updateUserBackgroundPicture");
     let backgroundPicture = "";
     for (let url in req.body) {
       backgroundPicture = url;
@@ -138,7 +130,6 @@ module.exports = {
    * Remove the selected vehicle from the database
    */
   removeOneVehicle: (req, res) => {
-    console.log("Hit removeOneVehicle");
     db.Vehicle
       .findOneAndUpdate(
         { "vehicles._id": req.params.vehicleId },
@@ -152,7 +143,6 @@ module.exports = {
    * Remove the selected service log from the database
    */
   removeOneServiceLog: (req, res) => {
-    console.log("Hit removeOneServiceLog");
     db.Vehicle
       .findOneAndUpdate(
         { "vehicles._id": req.params.vehicleId },
@@ -166,7 +156,6 @@ module.exports = {
    * Delete the account for the user
    */
   removeOneVehicleName: (req, res) => {
-    console.log("Hit removeOneVehicleName");
     db.Vehicle
       .updateOne(
         { "vehicles._id": req.params.vehicleId },
@@ -180,7 +169,6 @@ module.exports = {
    * Delete the account for the user
    */
   removeOneUserAccount: (req, res) => {
-    console.log("Hit removeOneUserAccount");
     db.Vehicle
       .findByIdAndDelete(req.params.id)
       .then(result => res.json(result))
@@ -191,7 +179,6 @@ module.exports = {
    * Save a theme for the user
    */
   saveThemeForUser: (req, res) => {
-    console.log("Hit saveThemeForUser");
     db.Vehicle
       .updateOne(
         { creator: req.params.creatorId },
