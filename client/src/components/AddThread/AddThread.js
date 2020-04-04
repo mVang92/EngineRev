@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { defaults } from "../../assets/Defaults";
 
 class AddThread extends Component {
 
@@ -9,7 +10,7 @@ class AddThread extends Component {
           <div className="row">
             <div className="col-md-12">
               <div className="text-center">
-                <label><strong>Start a New Thread</strong></label>
+                <label><strong>{defaults.startANewThread}</strong></label>
               </div>
               <input
                 id="newThreadTitleInput"
@@ -18,7 +19,8 @@ class AddThread extends Component {
                 onChange={this.props.handleChange}
                 value={this.props.threadTitle}
                 name="threadTitle"
-                maxLength="200">
+                maxLength="200"
+                placeholder="Add a Title">
               </input>
               <br /><br />
               <textarea
@@ -29,7 +31,8 @@ class AddThread extends Component {
                 onChange={this.props.handleChange}
                 value={this.props.threadDescription}
                 name="threadDescription"
-                maxLength="1000">
+                maxLength="1250"
+                placeholder="Add a Description">
               </textarea>
             </div>
           </div>
@@ -37,8 +40,8 @@ class AddThread extends Component {
           <div className="row">
             <div className="col-md-12 text-right">
               <button
-                id="submitReleaseNoteUpdatesButton"
-                title="Submit Updates"
+                id="submitNewThreadButton"
+                title="Submit Thread"
                 type="submit"
                 className="addBtn"
                 disabled={!(this.props.threadTitle && this.props.threadDescription)}>

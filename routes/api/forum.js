@@ -8,14 +8,14 @@ router
     .post(forumController.addOneThread)
     .get(forumController.getAllThreads);
 
-// Matches with "/api/forum/forumController/:updateId"
-// router
-//     .route("/updateOneReleaseNote/:updateId")
-//     .put(forumController.updateOneReleaseNote)
+// Matches with "/api/forum/addOneCommentToOneThread/:threadId"
+router
+    .route("/addOneCommentToOneThread/:threadId")
+    .put(forumController.addOneCommentToOneThread)
 
-// Matches with "/api/forum/forumController/:updateId"
-// router
-//     .route("/deleteOneReleaseNote/:updateId")
-//     .delete(forumController.deleteOneReleaseNote)
+// Matches with "/api/forum/getAllThreadComments/:threadId"
+router
+    .route("/getAllThreadComments/:threadId")
+    .get(forumController.getAllThreadComments)
 
 module.exports = router;

@@ -9,8 +9,10 @@ const forumSchema = new Schema({
   threadDescription: { type: String },
   date: { type: Date, default: Date.now },
   comments: [{
+    creator: { type: String },
     email: { type: String },
     comment: { type: String },
+    votes: { type: Number },
     date: { type: Date, default: Date.now }
   }]
 });

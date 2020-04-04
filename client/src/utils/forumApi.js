@@ -5,16 +5,16 @@ export default {
     addOneThread: payload => {
         return axios.post(`/api/forum/`, payload);
     },
-    // Get all recent updates
+    // Get all threads
     getAllThreads: () => {
         return axios.get("/api/forum");
     },
-    // // Update one update / release note
-    // updateOneReleaseNote: (updateId, payload) => {
-    //     return axios.put(`/api/updates/updateOneReleaseNote/${updateId}`, payload);
-    // },
-    // // Delete one update / release note
-    // deleteOneReleaseNote: updateId => {
-    //     return axios.delete(`/api/updates/deleteOneReleaseNote/${updateId}`);
-    // }
+    // Get all comments for one thread
+    getAllThreadComments: threadId => {
+        return axios.get(`/api/forum/getAllThreadComments/${threadId}`);
+    },
+    // Add one comment to one thread
+    addOneCommentToOneThread: (threadId, payload) => {
+        return axios.put(`/api/forum/addOneCommentToOneThread/${threadId}`, payload);
+    }
 };

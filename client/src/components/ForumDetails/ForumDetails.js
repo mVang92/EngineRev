@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
 import BottomActionButtons from "../../components/BottomActionButtons";
+import { defaults } from "../../assets/Defaults";
 import AddThread from "../../components/AddThread";
 import OneThread from "../../components/OneThread";
 
@@ -38,7 +39,7 @@ class ForumDetails extends Component {
               />
             ) : (
               <div className="text-center">
-                <label><strong>Please sign in or create an account to start a thread.</strong></label>
+                <label><strong>{defaults.loggedOutStartThread}</strong></label>
               </div>
             )
         }

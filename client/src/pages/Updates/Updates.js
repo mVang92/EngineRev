@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
-import { Link } from "react-router-dom";
 import { firebase } from "../../firebase"
 import { themes } from "../../themes/Themes";
 import updateApi from "../../utils/updateApi";

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const OneThread = props => {
   const {
@@ -15,7 +16,7 @@ const OneThread = props => {
 
   return (
     <React.Fragment key={_id}>
-      <div className={`releaseNote ${currentTheme.oneThread}`}>
+      <div className={`threadDetails ${currentTheme.oneThread}`}>
         <div className="row">
           <h4 className="col-md-12 breakWord">{threadTitle}</h4>
         </div>
@@ -25,8 +26,22 @@ const OneThread = props => {
         </div>
         <hr className="oneThreadHr" />
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-10">
             <label>{formattedEmail} posted on {formattedDate}.</label>
+          </div>
+          <div className="col-md-2 text-right">
+            <Link to={{
+              pathname: "/thread/" + _id,
+              state: [
+                _id,
+                threadTitle,
+                threadDescription,
+                formattedEmail,
+                formattedDate
+              ]
+            }}>
+              <strong>View Thread</strong>
+            </Link>
           </div>
         </div>
       </div>

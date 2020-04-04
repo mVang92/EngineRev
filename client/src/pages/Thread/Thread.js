@@ -1,38 +1,54 @@
 import React, { Component } from "react";
 import Container from "../../components/Container";
-import ForumDetails from "../../components/ForumDetails";
 import vehicleApi from "../../utils/API";
 import forumApi from "../../utils/forumApi";
 import Loading from "../../components/Loading";
+import ThreadDetails from "../../components/ThreadDetails";
 import { firebase } from "../../firebase"
 import { themes } from "../../themes/Themes";
 import { toast } from "react-toastify";
-import { defaults } from "../../assets/Defaults";
 
-export default class Forum extends Component {
+export default class Thread extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loggedin: false,
-      pageLoaded: false,
+      props: props,
       uniqueCreatorId: "",
-      displayName: "",
-      userPhotoUrl: "",
       email: "",
+      loggedin: false,
       theme: "",
       currentTheme: "",
       backgroundPicture: "",
-      threadDescription: "",
+      pageLoaded: false,
+      threadId: "",
       threadTitle: "",
-      allThreads: []
+      threadDescription: "",
+      threadComment: "",
+      allThreadComments: [],
+      formattedEmail: "",
+      formattedDate: ""
     };
   };
 
   /**
-   * Perform these actions upon page load
+   * Get the theme for the user
    */
   componentDidMount = () => {
-    this.getAllThreads();
+    try {
+      this.setState(
+        {
+          threadId: this.state.props.location.state[0],
+          threadTitle: this.state.props.location.state[1],
+          threadDescription: this.state.props.location.state[2],
+          formattedEmail: this.state.props.location.state[3],
+          formattedDate: this.state.props.location.state[4]
+        }, () =>{
+          this.getUserInformation();
+          this.getAllThreadComments();
+        });
+    } catch (e) {
+      window.location = "/";
+    }
   };
 
   /**
@@ -52,46 +68,32 @@ export default class Forum extends Component {
   };
 
   /**
-   * Gets all of the threads from the database
-   * If successful or if there is an error, then find the user information
+   * Simulate the back button to go to the previous page
    */
-  getAllThreads = () => {
-    forumApi.getAllThreads()
-      .then(res => {
-        this.setState({ allThreads: res.data }, () => this.getUserInformation());
-      })
-      .catch(err => {
-        this.errorNotification(err);
-        this.getUserInformation();
-      });
+  backButton = () => {
+    try {
+      window.history.back();
+    } catch (e) {
+      window.location = "/";
+    }
   };
 
   /**
-   * Retrieve the information for the user then load the page
+   * Retrieve the theme for the user then load the page
    */
   getUserInformation = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        this.setState({
-          loggedin: true,
-          uniqueCreatorId: user.uid,
-          email: user.email,
-          displayName: user.displayName
-        }, () => {
-          if (!user.photoURL) {
-            this.setState({ userPhotoUrl: defaults.defaultProfilePicture });
-          }
-          if (!user.displayName) {
-            this.setState({ displayName: defaults.defaultDisplayName });
-          }
-        });
         vehicleApi.findUserInformationForOneUser(user.uid)
           .then(res => {
             try {
               this.setState({
                 theme: res.data.theme,
                 backgroundPicture: res.data.backgroundPicture,
-                pageLoaded: true
+                uniqueCreatorId: user.uid,
+                email: user.email,
+                pageLoaded: true,
+                loggedin: true
               }, () => {
                 this.determineTheme();
               });
@@ -110,24 +112,27 @@ export default class Forum extends Component {
     });
   };
 
+  getAllThreadComments = () => {
+    forumApi.getAllThreadComments(this.state.threadId)
+    .then(res => {
+      this.setState({ allThreadComments: res.data[0].comments });
+    })
+  };
+
   /**
-   * Add a new thread into the database
+   * Add a comment to the chosen thread
    */
-  addOneThread = e => {
+  addOneCommentToThread = e => {
     e.preventDefault();
-    let newThreadPayload = {
+    let threadCommentPayload = {
       creator: this.state.uniqueCreatorId,
       email: this.state.email,
-      threadTitle: this.state.threadTitle,
-      threadDescription: this.state.threadDescription,
-      comments: []
-    };
-    forumApi.addOneThread(newThreadPayload)
+      comment: this.state.threadComment,
+      votes: 0
+    }
+    forumApi.addOneCommentToOneThread(this.state.threadId, threadCommentPayload)
       .then(() => {
-        this.setState({
-          threadDescription: "",
-          threadTitle: ""
-        }, () => this.getAllThreads());
+        this.setState({ threadComment: "" }, () => this.getAllThreadComments());
       })
       .catch(err => this.errorNotification(err));
   };
@@ -184,14 +189,17 @@ export default class Forum extends Component {
           this.state.pageLoaded ?
             (
               <Container>
-                <ForumDetails
+                {console.log(this.state.allThreadComments)}
+                <ThreadDetails
                   loggedin={this.state.loggedin}
-                  handleChange={this.handleChange}
-                  addOneThread={this.addOneThread}
                   threadTitle={this.state.threadTitle}
                   threadDescription={this.state.threadDescription}
-                  allThreads={this.state.allThreads}
+                  threadComment={this.state.threadComment}
+                  allThreadComments={this.state.allThreadComments}
+                  handleChange={this.handleChange}
                   backToTopOfPage={this.backToTopOfPage}
+                  backButton={this.backButton}
+                  addOneCommentToThread={this.addOneCommentToThread}
                   currentTheme={this.state.currentTheme}
                 />
               </Container>
