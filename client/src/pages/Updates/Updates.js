@@ -11,6 +11,7 @@ import Loading from "../../components/Loading";
 import EditOneUpdateModal from "../../components/Modal/EditOneUpdateModal";
 import DeleteOneUpdateModal from "../../components/Modal/DeleteOneUpdateModal";
 import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
+import BottomActionButtons from "../../components/BottomActionButtons";
 import { toast } from "react-toastify";
 
 export default class Updates extends Component {
@@ -429,16 +430,9 @@ export default class Updates extends Component {
                           })
                         }
                         <br />
-                        <div className="row">
-                          <div className="col-md-6 text-left noWidthMobileDisplay">
-                            <Link to={{ pathname: "/" }}>
-                              <button className="backHomeBtn ">Back</button>
-                            </Link>
-                          </div>
-                          <div className="col-md-6 text-right noWidthMobileDisplay">
-                            <button className="backToTopButton" onClick={this.backToTopOfPage}>Top</button>
-                          </div>
-                        </div>
+                        <BottomActionButtons
+                          backToTopOfPage={this.backToTopOfPage}
+                        />
                         <EditOneUpdateModal
                           checkUserEnteredUpdatedReleaseNoteInput={this.checkUserEnteredUpdatedReleaseNoteInput}
                           showEditOneUpdateModal={this.state.showEditOneUpdateModal}

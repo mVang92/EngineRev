@@ -11,15 +11,25 @@ class AddThread extends Component {
               <div className="text-center">
                 <label><strong>Start a New Thread</strong></label>
               </div>
+              <input
+                id="newThreadTitleInput"
+                type="text"
+                ref="threadTitle"
+                onChange={this.props.handleChange}
+                value={this.props.threadTitle}
+                name="threadTitle"
+                maxLength="200">
+              </input>
+              <br /><br />
               <textarea
-                id="newThreadInput"
+                id="newThreadDescriptionInput"
                 className="commentsBox"
                 type="text"
                 ref="threadDescription"
                 onChange={this.props.handleChange}
                 value={this.props.threadDescription}
                 name="threadDescription"
-                maxLength="500">
+                maxLength="1000">
               </textarea>
             </div>
           </div>
@@ -31,7 +41,7 @@ class AddThread extends Component {
                 title="Submit Updates"
                 type="submit"
                 className="addBtn"
-                disabled={!this.props.threadDescription}>
+                disabled={!(this.props.threadTitle && this.props.threadDescription)}>
                 Submit
               </button>
             </div>

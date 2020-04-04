@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const forumSchema = new Schema({
   creator: { type: String },
   email: { type: String },
+  threadTitle: { type: String },
   threadDescription: { type: String },
   date: { type: Date, default: Date.now },
   comments: [{

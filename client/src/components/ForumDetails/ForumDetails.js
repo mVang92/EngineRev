@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
+import BottomActionButtons from "../../components/BottomActionButtons";
 import AddThread from "../../components/AddThread";
+import OneThread from "../../components/OneThread";
 
 class ForumDetails extends Component {
   render() {
@@ -9,8 +11,10 @@ class ForumDetails extends Component {
       loggedin,
       handleChange,
       addOneThread,
+      threadTitle,
       threadDescription,
-      allThreads
+      allThreads,
+      backToTopOfPage
     } = this.props;
 
     return (
@@ -28,13 +32,35 @@ class ForumDetails extends Component {
               <AddThread
                 handleChange={handleChange}
                 addOneThread={addOneThread}
+                threadTitle={threadTitle}
                 threadDescription={threadDescription}
                 currentTheme={currentTheme}
               />
             ) : (
-              <div className="text-center">Please sign in or create an account to start a thread.</div>
+              <div className="text-center">
+                <label><strong>Please sign in or create an account to start a thread.</strong></label>
+              </div>
             )
         }
+        {
+          allThreads.map(thread => {
+            return (
+              <OneThread
+                key={thread._id}
+                _id={thread._id}
+                date={thread.date}
+                email={thread.email}
+                threadTitle={thread.threadTitle}
+                threadDescription={thread.threadDescription}
+                currentTheme={currentTheme}
+              />
+            )
+          })
+        }
+        <br />
+        <BottomActionButtons
+          backToTopOfPage={backToTopOfPage}
+        />
       </div>
     );
   }

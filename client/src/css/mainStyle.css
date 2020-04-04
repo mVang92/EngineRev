@@ -574,6 +574,7 @@ input {
     margin-right: 0px;
 }
 
+.oneThreadHr,
 .oneUpdateHr {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;

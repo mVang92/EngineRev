@@ -23,6 +23,7 @@ export default class Forum extends Component {
       currentTheme: "",
       backgroundPicture: "",
       threadDescription: "",
+      threadTitle: "",
       allThreads: []
     };
   };
@@ -40,6 +41,14 @@ export default class Forum extends Component {
   handleChange = e => {
     let { name, value } = e.target;
     this.setState({ [name]: value });
+  };
+
+  /**
+   * Scroll to the top of the page
+   */
+  backToTopOfPage = () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   };
 
   /**
@@ -110,15 +119,16 @@ export default class Forum extends Component {
     let newThreadPayload = {
       creator: this.state.uniqueCreatorId,
       email: this.state.email,
+      threadTitle: this.state.threadTitle,
       threadDescription: this.state.threadDescription,
       comments: []
     };
     forumApi.addOneThread(newThreadPayload)
-      .then(res => {
+      .then(() => {
         this.setState({
-          // allThreads: res.data,
-          threadDescription: ""
-        });
+          threadDescription: "",
+          threadTitle: ""
+        }, () => this.getAllThreads());
       })
       .catch(err => this.errorNotification(err));
   };
@@ -180,8 +190,10 @@ export default class Forum extends Component {
                     loggedin={this.state.loggedin}
                     handleChange={this.handleChange}
                     addOneThread={this.addOneThread}
+                    threadTitle={this.state.threadTitle}
                     threadDescription={this.state.threadDescription}
                     allThreads={this.state.allThreads}
+                    backToTopOfPage={this.backToTopOfPage}
                     currentTheme={this.state.currentTheme}
                   />
                 </Container>
