@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
-import { Link } from "react-router-dom";
 import { firebase } from "../../firebase"
 import { themes } from "../../themes/Themes";
 import updateApi from "../../utils/updateApi";
@@ -10,6 +9,8 @@ import AddUpdates from "../../components/AddUpdates";
 import Loading from "../../components/Loading";
 import EditOneUpdateModal from "../../components/Modal/EditOneUpdateModal";
 import DeleteOneUpdateModal from "../../components/Modal/DeleteOneUpdateModal";
+import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
+import BottomActionButtons from "../../components/BottomActionButtons";
 import { toast } from "react-toastify";
 
 export default class Updates extends Component {
@@ -395,9 +396,7 @@ export default class Updates extends Component {
                       <div id="recentUpdatesContainer" className={this.state.currentTheme.background}>
                         <div id="field"></div>
                         <h4 className="text-center"><label>Release Notes and Updates</label></h4>
-                        <Link to={{ pathname: "/" }}>
-                          <button className="backHomeBtn">Back</button>
-                        </Link>
+                        <BackToHomeButtonRow />
                         <hr className={this.state.currentTheme.hr} />
                         {
                           this.state.admin ?
@@ -430,16 +429,9 @@ export default class Updates extends Component {
                           })
                         }
                         <br />
-                        <div className="row">
-                          <div className="col-md-6 text-left noWidthMobileDisplay">
-                            <Link to={{ pathname: "/" }}>
-                              <button className="backHomeBtn ">Back</button>
-                            </Link>
-                          </div>
-                          <div className="col-md-6 text-right noWidthMobileDisplay">
-                            <button className="backToTopButton" onClick={this.backToTopOfPage}>Top</button>
-                          </div>
-                        </div>
+                        <BottomActionButtons
+                          backToTopOfPage={this.backToTopOfPage}
+                        />
                         <EditOneUpdateModal
                           checkUserEnteredUpdatedReleaseNoteInput={this.checkUserEnteredUpdatedReleaseNoteInput}
                           showEditOneUpdateModal={this.state.showEditOneUpdateModal}

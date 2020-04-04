@@ -53,7 +53,7 @@ export const NavLoggedIn = props => {
                                                 className="dropdown-item"
                                                 type="button"
                                             >
-                                                <div className="nav-item" title="My Account">Account</div>
+                                                <div className="nav-item" title="Account">Account</div>
                                             </button>
                                         </Link>
                                     ) : (
@@ -63,17 +63,17 @@ export const NavLoggedIn = props => {
                                             type="button"
                                             disabled
                                         >
-                                            <div className="nav-item" title="My Account">Account</div>
+                                            <div className="nav-item" title="Account">Account</div>
                                         </button>
                                     )
                             }
-                            <Link to={{ pathname: "/about" }}>
+                            <Link to={{ pathname: "/forum" }}>
                                 <button
-                                    id="accountAboutButton"
+                                    id="forumNavButton"
                                     className="dropdown-item"
                                     type="button"
                                 >
-                                    <div className="nav-item" title="About">About</div>
+                                    <div className="nav-item" title="Forum">Forum</div>
                                 </button>
                             </Link>
                             <Link to={{ pathname: "/updates" }}>
@@ -83,6 +83,15 @@ export const NavLoggedIn = props => {
                                     type="button"
                                 >
                                     <div className="nav-item" title="Release Notes">Release Notes</div>
+                                </button>
+                            </Link>
+                            <Link to={{ pathname: "/about" }}>
+                                <button
+                                    id="accountAboutButton"
+                                    className="dropdown-item"
+                                    type="button"
+                                >
+                                    <div className="nav-item" title="About">About</div>
                                 </button>
                             </Link>
                             <button

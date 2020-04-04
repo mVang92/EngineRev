@@ -7,6 +7,8 @@ import { NavLoggedIn, NavLoggedOut } from "./components/Nav";
 import API from "./utils/API";
 import Main from "./pages/Main";
 import Log from "./pages/Log";
+import Forum from "./pages/Forum";
+import Thread from "./pages/Thread";
 import Account from "./pages/Account";
 import About from "./pages/About";
 import Updates from "./pages/Updates";
@@ -355,6 +357,8 @@ export default class App extends Component {
               )}
             />
             <Route exact path="/account/:id/vehicle/:id" component={Log} />
+            <Route exact path="/forum" component={Forum} />
+            <Route exact path="/forum/thread/:id" component={Thread} />
             <Route exact path="/account/:id" component={Account} />
             <Route exact path="/about" component={About} />
             <Route exact path="/updates" component={Updates} />

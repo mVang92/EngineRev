@@ -3,8 +3,8 @@ import carSpaceLogo from "../../images/carSpaceLogo.png";
 import vehicleApi from "../../utils/API";
 import Loading from "../../components/Loading";
 import { firebase } from "../../firebase"
-import { Link } from "react-router-dom";
 import { themes } from "../../themes/Themes";
+import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
 import { toast } from "react-toastify";
 
 export default class About extends Component {
@@ -120,7 +120,8 @@ export default class About extends Component {
                   </div>
                   <label>
                     <p>CarSpace allows you to keep track of your vehicle maintenance history.
-                    Keep your vehicle running smoothly by tracking your own vehicles by recording their service logs.</p>
+                    Keep your vehicle running smoothly by tracking your own vehicles by recording their service logs.
+                    Meet other passionate do-it-yourselfers to ask quesitons and share diagnostic solutions in the forum.</p>
                   </label>
                   <hr className={this.state.currentTheme.hr} />
                   <div className="row">
@@ -133,7 +134,7 @@ export default class About extends Component {
                     Users can create their own accounts and add vehicles they want to keep track of. They can also update their
                     account information along with updating vehicle and service log information.
                     Service logs are tracked by adding the date of service, the mileage of the vehicle, and the type of service performed on the vehicle.
-                    This will allow the user to keep track of specific maintenance or repair information.</p>
+                    Have a car repair question or want to help someone else out? Head to the forums to see what others are talking about.</p>
                   </label>
                   <hr className={this.state.currentTheme.hr} />
                   <div className="row">
@@ -150,9 +151,7 @@ export default class About extends Component {
                     CarSpace is intended to be simple to use and to the point.</p>
                   </label>
                   <br />
-                  <Link to={{ pathname: "/" }}>
-                    <button className="backHomeBtn">Back</button>
-                  </Link>
+                  <BackToHomeButtonRow />
                 </div>
               </div>
             ) : (
