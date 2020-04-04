@@ -275,6 +275,7 @@ input {
     color: rgb(128, 128, 128);
 }
 
+#forumNavButton,
 #accountNavButton,
 #accountAboutButton,
 #accountReleaseNotesButton,
@@ -283,6 +284,7 @@ input {
     color: rgb(212, 212, 212);
 }
 
+#forumNavButton:hover,
 #accountNavButton:hover,
 #accountAboutButton:hover,
 #accountReleaseNotesButton:hover,
@@ -405,6 +407,7 @@ input {
     height: 2em;
 }
 
+#forumPage,
 #accountPage,
 #noMatch,
 #noAuthorization {
@@ -799,6 +802,7 @@ footer {
         text-align: center;
     }
 
+    #forumNavButton,
     #accountNavButton,
     #accountAboutButton,
     #accountReleaseNotesButton,

@@ -10,6 +10,7 @@ import AddUpdates from "../../components/AddUpdates";
 import Loading from "../../components/Loading";
 import EditOneUpdateModal from "../../components/Modal/EditOneUpdateModal";
 import DeleteOneUpdateModal from "../../components/Modal/DeleteOneUpdateModal";
+import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
 import { toast } from "react-toastify";
 
 export default class Updates extends Component {
@@ -395,9 +396,7 @@ export default class Updates extends Component {
                       <div id="recentUpdatesContainer" className={this.state.currentTheme.background}>
                         <div id="field"></div>
                         <h4 className="text-center"><label>Release Notes and Updates</label></h4>
-                        <Link to={{ pathname: "/" }}>
-                          <button className="backHomeBtn">Back</button>
-                        </Link>
+                        <BackToHomeButtonRow />
                         <hr className={this.state.currentTheme.hr} />
                         {
                           this.state.admin ?

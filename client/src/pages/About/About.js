@@ -3,8 +3,8 @@ import carSpaceLogo from "../../images/carSpaceLogo.png";
 import vehicleApi from "../../utils/API";
 import Loading from "../../components/Loading";
 import { firebase } from "../../firebase"
-import { Link } from "react-router-dom";
 import { themes } from "../../themes/Themes";
+import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
 import { toast } from "react-toastify";
 
 export default class About extends Component {
@@ -150,9 +150,7 @@ export default class About extends Component {
                     CarSpace is intended to be simple to use and to the point.</p>
                   </label>
                   <br />
-                  <Link to={{ pathname: "/" }}>
-                    <button className="backHomeBtn">Back</button>
-                  </Link>
+                  <BackToHomeButtonRow />
                 </div>
               </div>
             ) : (

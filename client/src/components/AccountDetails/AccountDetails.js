@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
 
 class AccountDetails extends Component {
   render() {
@@ -14,16 +14,7 @@ class AccountDetails extends Component {
             <label><h4>Account</h4></label>
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-4">
-            <Link to={{ pathname: "/" }}>
-              <button className="backHomeBtn">Back</button>
-            </Link>
-            <br />
-          </div>
-          <div className="col-md-4"></div>
-          <div className="col-md-4"></div>
-        </div>
+        <BackToHomeButtonRow />
         <hr className={currentTheme.hr} />
         <div className={`row paddingDesktopDisplay ${currentTheme.accountDetails}`}>
           <div id="scrollableProfilePictureAccountDetails" className="col-md-4 text-center">
@@ -331,9 +322,7 @@ class AccountDetails extends Component {
           </div>
         </form>
         <hr className={currentTheme.hr} />
-        <Link to={{ pathname: "/" }}>
-          <button className="backHomeBtn">Back</button>
-        </Link>
+        <BackToHomeButtonRow />
       </div>
     );
   }

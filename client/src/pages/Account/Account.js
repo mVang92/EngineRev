@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
+import { defaults } from "../../assets/Defaults";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 import { firebase } from "../../firebase";
@@ -46,8 +47,8 @@ export default class Account extends Component {
       showUpdateProfilePictureSuccessModal: false,
       showUpdateDisplayNameSuccessModal: false,
       unableToLoadDatabase: false,
-      defaultProfilePicture: "https://image.flaticon.com/icons/png/512/64/64572.png",
-      defaultDisplayName: "CarSpace User"
+      defaultProfilePicture: defaults.defaultProfilePicture,
+      defaultDisplayName: defaults.defaultDisplayName
     };
   };
 
