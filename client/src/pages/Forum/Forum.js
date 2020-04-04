@@ -24,7 +24,8 @@ export default class Forum extends Component {
       backgroundPicture: "",
       threadDescription: "",
       threadTitle: "",
-      allThreads: []
+      allThreads: [],
+      disableSubmitNewThreadButton: false
     };
   };
 
@@ -49,6 +50,13 @@ export default class Forum extends Component {
   backToTopOfPage = () => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+  };
+
+  /**
+   * Check if the user input value is blank
+   */
+  checkIfStringIsBlank = string => {
+    return (!string || /^\s*$/.test(string));
   };
 
   /**
@@ -111,10 +119,27 @@ export default class Forum extends Component {
   };
 
   /**
+   * Validate the input values for a new thread before saving it
+   */
+  validateThreadInputValues = e => {
+    e.preventDefault();
+    if (
+      this.state.threadTitle === "" ||
+      this.state.threadDescription === "" ||
+      this.checkIfStringIsBlank(this.state.threadTitle) ||
+      this.checkIfStringIsBlank(this.state.threadDescription)
+    ) {
+      this.errorNotification(defaults.threadDetailsCannotBeBlank);
+    } else {
+      this.handleAddOneThread();
+    }
+  };
+
+  /**
    * Add a new thread into the database
    */
-  addOneThread = e => {
-    e.preventDefault();
+  handleAddOneThread = () => {
+    this.setState({ disableSubmitNewThreadButton: true });
     let newThreadPayload = {
       creator: this.state.uniqueCreatorId,
       email: this.state.email,
@@ -126,20 +151,20 @@ export default class Forum extends Component {
       .then(() => {
         this.setState({
           threadDescription: "",
-          threadTitle: ""
-        }, () => this.getAllThreads());
+          threadTitle: "",
+          disableSubmitNewThreadButton: false
+        }, () => {
+          this.addThreadSuccessNotification();
+          this.getAllThreads();
+        });
       })
-      .catch(err => this.errorNotification(err));
+      .catch(err => {
+        this.setState({ disableSubmitNewThreadButton: false });
+        this.errorNotification(err);
+      });
   };
 
-  /**
-   * Display the error notification when an error occurs while loading data from the database
-   * 
-   * @param err the error message to display to the user
-   */
-  errorNotification = err => {
-    toast.error(err.toString());
-  };
+
 
   /**
    * Determine what the current theme is
@@ -177,6 +202,22 @@ export default class Forum extends Component {
     }
   };
 
+  /**
+   * Display the success notification when the user deletes a service log
+   */
+  addThreadSuccessNotification = () => {
+    toast.success(`Thread created successfully.`);
+  };
+
+  /**
+     * Display the error notification when an error occurs while loading data from the database
+     * 
+     * @param err the error message to display to the user
+     */
+  errorNotification = err => {
+    toast.error(err.toString());
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -187,10 +228,11 @@ export default class Forum extends Component {
                 <ForumDetails
                   loggedin={this.state.loggedin}
                   handleChange={this.handleChange}
-                  addOneThread={this.addOneThread}
+                  validateThreadInputValues={this.validateThreadInputValues}
                   threadTitle={this.state.threadTitle}
                   threadDescription={this.state.threadDescription}
                   allThreads={this.state.allThreads}
+                  disableSubmitNewThreadButton={this.state.disableSubmitNewThreadButton}
                   backToTopOfPage={this.backToTopOfPage}
                   currentTheme={this.state.currentTheme}
                 />

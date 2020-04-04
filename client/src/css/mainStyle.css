@@ -127,6 +127,18 @@ input {
     padding: 1rem;
 }
 
+.threadTitleTextArea {
+    width: 100%;
+    height: 5rem !important;
+    margin: auto;
+}
+
+.threadDescriptionTextArea {
+    width: 100%;
+    height: 12rem !important;
+    margin: auto;
+}
+
 .commentsBox {
     width: 100%;
     height: 5rem;
@@ -305,11 +317,16 @@ input {
     color: rgb(255, 255, 255);
 }
 
+#deleteThreadButton,
 #addLogBackButton {
     background: rgb(220, 64, 48);
     color: rgb(255, 255, 255);
 }
 
+#deleteThreadButton,
+#saveEditedThreadTitleButton,
+#cancelEditThreadTitleButton,
+#editThreadTitleButton,
 #addLogBackButton,
 #addServiceLogButton,
 #addLogResetInputFieldsButton,
@@ -790,6 +807,10 @@ footer {
         max-width: 45%;
     }
 
+    #deleteThreadButton,
+    #saveEditedThreadTitleButton,
+    #cancelEditThreadTitleButton,
+    #editThreadTitleButton,
     #addLogBackButton,
     #addServiceLogButton,
     #addLogResetInputFieldsButton,
@@ -822,6 +843,10 @@ footer {
         max-width: 50%;
     }
 
+    #deleteThreadButton,
+    #saveEditedThreadTitleButton,
+    #cancelEditThreadTitleButton,
+    #editThreadTitleButton,
     #addLogBackButton,
     #addServiceLogButton,
     #addLogResetInputFieldsButton,
@@ -858,6 +883,10 @@ footer {
         width: 5em;
     }
 
+    #deleteThreadButton,
+    #saveEditedThreadTitleButton,
+    #cancelEditThreadTitleButton,
+    #editThreadTitleButton,
     #addLogBackButton,
     #addServiceLogButton,
     #addLogResetInputFieldsButton,
@@ -1000,6 +1029,14 @@ footer {
     #logBackToTopButton {
         margin-top: 1rem;
         text-align: left !important;
+    }
+
+    .threadTitleTextArea {
+        height: 13rem !important;
+    }
+
+    .threadDescriptionTextArea {
+        height: 15rem !important;
     }
 }
     

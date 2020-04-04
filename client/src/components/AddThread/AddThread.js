@@ -6,7 +6,7 @@ class AddThread extends Component {
   render() {
     return (
       <React.Fragment>
-        <form onSubmit={this.props.addOneThread}>
+        <form onSubmit={this.props.validateThreadInputValues}>
           <div className="row">
             <div className="col-md-12">
               <div className="text-center">
@@ -44,7 +44,7 @@ class AddThread extends Component {
                 title="Submit Thread"
                 type="submit"
                 className="addBtn"
-                disabled={!(this.props.threadTitle && this.props.threadDescription)}>
+                disabled={this.props.disableSubmitNewThreadButton}>
                 Submit
               </button>
             </div>

@@ -11,11 +11,12 @@ class ForumDetails extends Component {
       currentTheme,
       loggedin,
       handleChange,
-      addOneThread,
+      validateThreadInputValues,
       threadTitle,
       threadDescription,
       allThreads,
-      backToTopOfPage
+      backToTopOfPage,
+      disableSubmitNewThreadButton
     } = this.props;
 
     return (
@@ -32,9 +33,10 @@ class ForumDetails extends Component {
             (
               <AddThread
                 handleChange={handleChange}
-                addOneThread={addOneThread}
+                validateThreadInputValues={validateThreadInputValues}
                 threadTitle={threadTitle}
                 threadDescription={threadDescription}
+                disableSubmitNewThreadButton={disableSubmitNewThreadButton}
                 currentTheme={currentTheme}
               />
             ) : (

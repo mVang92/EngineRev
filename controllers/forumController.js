@@ -44,5 +44,34 @@ module.exports = {
             )
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
+    },
+
+    /**
+    * Update the title to the thread
+    */
+    updateThreadTitle: (req, res) => {
+        db.Forum
+            .findOneAndUpdate(
+                { _id: req.params.threadId },
+                {
+                    $set: {
+                        threadTitle: req.body.threadTitle,
+                        threadDescription: req.body.threadDescription,
+                    }
+                }
+            )
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    /**
+    * Delete the thread
+    */
+    deleteThread: (req, res) => {
+        db.Forum
+            .findById({ _id: req.params.threadId })
+            .then(result => result.remove())
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     }
 };

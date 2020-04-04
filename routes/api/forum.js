@@ -18,4 +18,14 @@ router
     .route("/getAllThreadComments/:threadId")
     .get(forumController.getAllThreadComments)
 
+// Matches with "/api/forum/updateThreadTitle/:threadId"
+router
+    .route("/updateThreadTitle/:threadId")
+    .put(forumController.updateThreadTitle)
+
+// Matches with "/api/forum/deleteThread/:threadId"
+router
+    .route("/deleteThread/:threadId")
+    .put(forumController.deleteThread)
+
 module.exports = router;

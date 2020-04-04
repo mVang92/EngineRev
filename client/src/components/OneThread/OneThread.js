@@ -26,12 +26,10 @@ const OneThread = props => {
         </div>
         <hr className="oneThreadHr" />
         <div className="row">
-          <div className="col-md-10">
-            <label>{formattedEmail} posted on {formattedDate}.</label>
-          </div>
+          <div className="col-md-10 breakWord">{formattedEmail} posted on {formattedDate}.</div>
           <div className="col-md-2 text-right">
             <Link to={{
-              pathname: "/thread/" + _id,
+              pathname: "/forum/thread/" + _id,
               state: [
                 _id,
                 threadTitle,

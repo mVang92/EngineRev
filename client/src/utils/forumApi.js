@@ -16,5 +16,13 @@ export default {
     // Add one comment to one thread
     addOneCommentToOneThread: (threadId, payload) => {
         return axios.put(`/api/forum/addOneCommentToOneThread/${threadId}`, payload);
+    },
+    // Update the title to a thread
+    updateThreadTitle: (threadId, payload) => {
+        return axios.put(`/api/forum/updateThreadTitle/${threadId}`, payload);
+    },
+    // Update the title to a thread
+    deleteThread: (threadId) => {
+        return axios.put(`/api/forum/deleteThread/${threadId}`);
     }
 };

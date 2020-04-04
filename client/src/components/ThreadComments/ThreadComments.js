@@ -16,12 +16,14 @@ const ThreadComments = props => {
     <React.Fragment key={_id}>
       <div className={`threadDetails ${currentTheme.oneThread}`}>
         <div className="row">
-          <div className="col-md-10 text-left"><label>{formattedEmail}</label></div>
-          <div className="col-md-2 text-right"><label>{votes}</label></div>
+          <div className="col-md-10 text-left breakWord">
+            {formattedEmail} posted on {formattedDate}.
+          </div>
         </div>
-        <div className="row">
-          <div className="col-md-12 text-left breakWord">{formattedDate}</div>
-        </div>
+        {/* <div className="row">
+          <div className="col-md-12 text-left breakWord">Votes: {votes}</div>
+        </div> */}
+        <hr className="oneThreadHr" />
         <div className="row">
           <div className="col-md-12 text-left breakWord">{comment}</div>
         </div>

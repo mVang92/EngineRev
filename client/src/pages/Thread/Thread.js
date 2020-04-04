@@ -7,6 +7,9 @@ import ThreadDetails from "../../components/ThreadDetails";
 import { firebase } from "../../firebase"
 import { themes } from "../../themes/Themes";
 import { toast } from "react-toastify";
+import { defaults } from "../../assets/Defaults";
+import DeleteThreadModal from "../../components/Modal/DeleteThreadModal";
+import UpdateThreadDetailsSuccessModal from "../../components/Modal/UpdateThreadDetailsSuccessModal";
 
 export default class Thread extends Component {
   constructor(props) {
@@ -22,11 +25,16 @@ export default class Thread extends Component {
       pageLoaded: false,
       threadId: "",
       threadTitle: "",
+      threadTitleBackup: "",
       threadDescription: "",
+      threadDescriptionBackup: "",
       threadComment: "",
-      allThreadComments: [],
+      allThreads: [],
       formattedEmail: "",
-      formattedDate: ""
+      formattedDate: "",
+      disableEditThreadDetails: true,
+      showUpdateThreadDetailsSuccessModal: false,
+      showDeleteThreadModal: false
     };
   };
 
@@ -39,11 +47,12 @@ export default class Thread extends Component {
         {
           threadId: this.state.props.location.state[0],
           threadTitle: this.state.props.location.state[1],
+          threadTitleBackup: this.state.props.location.state[1],
           threadDescription: this.state.props.location.state[2],
+          threadDescriptionBackup: this.state.props.location.state[2],
           formattedEmail: this.state.props.location.state[3],
           formattedDate: this.state.props.location.state[4]
-        }, () =>{
-          this.getUserInformation();
+        }, () => {
           this.getAllThreadComments();
         });
     } catch (e) {
@@ -76,6 +85,13 @@ export default class Thread extends Component {
     } catch (e) {
       window.location = "/";
     }
+  };
+
+  /**
+   * Check if the user input value is blank
+   */
+  checkIfStringIsBlank = string => {
+    return (!string || /^\s*$/.test(string));
   };
 
   /**
@@ -114,9 +130,15 @@ export default class Thread extends Component {
 
   getAllThreadComments = () => {
     forumApi.getAllThreadComments(this.state.threadId)
-    .then(res => {
-      this.setState({ allThreadComments: res.data[0].comments });
-    })
+      .then(res => {
+        this.setState({
+          allThreads: res.data[0]
+        }, () => this.getUserInformation());
+      })
+      .catch(err => {
+        this.errorNotification(err);
+        this.setState({ pageLoaded: true });
+      });
   };
 
   /**
@@ -132,18 +154,54 @@ export default class Thread extends Component {
     }
     forumApi.addOneCommentToOneThread(this.state.threadId, threadCommentPayload)
       .then(() => {
-        this.setState({ threadComment: "" }, () => this.getAllThreadComments());
+        this.setState({ threadComment: "" }, () => {
+          this.addCommentSuccessNotification();
+          this.getAllThreadComments();
+        });
       })
       .catch(err => this.errorNotification(err));
   };
 
   /**
-   * Display the error notification when an error occurs while loading data from the database
-   * 
-   * @param err the error message to display to the user
+   * Validate the edited thread title before saving it
    */
-  errorNotification = err => {
-    toast.error(err.toString());
+  validateEditedThreadDetails = () => {
+    if (
+      this.state.threadTitle === "" ||
+      this.state.threadDescription === "" ||
+      this.checkIfStringIsBlank(this.state.threadTitle) ||
+      this.checkIfStringIsBlank(this.state.threadDescription)
+    ) {
+      this.setState({
+        threadTitle: this.state.threadTitleBackup,
+        threadDescription: this.state.threadDescriptionBackup,
+      }, () => this.errorNotification(defaults.threadDetailsCannotBeBlank));
+    } else {
+      this.handleUpdateThreadTitle();
+    }
+  };
+
+  /**
+   * Update the title to the thread
+   */
+  handleUpdateThreadTitle = () => {
+    let threadPayload = {
+      threadTitle: this.state.threadTitle,
+      threadDescription: this.state.threadDescription
+    }
+    forumApi.updateThreadTitle(this.state.threadId, threadPayload)
+      .then(() => {
+        this.showUpdateThreadDetailsSuccessModal();
+      })
+      .catch(err => this.errorNotification(err));
+  };
+
+  handleDeleteThread = () => {
+    forumApi.deleteThread(this.state.threadId)
+      .then(() => {
+        window.location.assign(window.location.origin + "/forum");
+      })
+      .catch(err => this.errorNotification(err));
   };
 
   /**
@@ -182,6 +240,58 @@ export default class Thread extends Component {
     }
   };
 
+  /**
+   * Enable editing for the thread title
+   */
+  enableEditThreadDetails = () => {
+    if (this.state.disableEditThreadDetails) {
+      this.setState({ disableEditThreadDetails: false });
+    } else {
+      this.setState({ disableEditThreadDetails: true });
+    }
+  };
+
+  /**
+   * 
+   */
+  showDeleteThreadModal = () => {
+    this.setState({ showDeleteThreadModal: true });
+  };
+
+  /**
+   * Show the update thread details success modal
+   */
+  showUpdateThreadDetailsSuccessModal = () => {
+    this.setState({ showUpdateThreadDetailsSuccessModal: true });
+  };
+
+  hideDeleteThreadModal = () => {
+    this.setState({ showDeleteThreadModal: false });
+  };
+
+  /**
+   * Hide the update thread details success modal
+   */
+  hideUpdateThreadDetailsSuccessModal = () => {
+    window.location.assign(window.location.origin + "/forum");
+  };
+
+  /**
+   * Display the success notification when the user deletes a service log
+   */
+  addCommentSuccessNotification = () => {
+    toast.success(`Comment posted successfully.`);
+  };
+
+  /**
+   * Display the error notification when an error occurs while loading data from the database
+   * 
+   * @param err the error message to display to the user
+   */
+  errorNotification = err => {
+    toast.error(err.toString());
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -189,13 +299,17 @@ export default class Thread extends Component {
           this.state.pageLoaded ?
             (
               <Container>
-                {console.log(this.state.allThreadComments)}
                 <ThreadDetails
                   loggedin={this.state.loggedin}
+                  uniqueCreatorId={this.state.uniqueCreatorId}
                   threadTitle={this.state.threadTitle}
                   threadDescription={this.state.threadDescription}
                   threadComment={this.state.threadComment}
-                  allThreadComments={this.state.allThreadComments}
+                  allThreads={this.state.allThreads}
+                  disableEditThreadDetails={this.state.disableEditThreadDetails}
+                  showDeleteThreadModal={this.showDeleteThreadModal}
+                  validateEditedThreadDetails={this.validateEditedThreadDetails}
+                  enableEditThreadDetails={this.enableEditThreadDetails}
                   handleChange={this.handleChange}
                   backToTopOfPage={this.backToTopOfPage}
                   backButton={this.backButton}
@@ -207,6 +321,17 @@ export default class Thread extends Component {
               <Loading />
             )
         }
+        <DeleteThreadModal
+          showDeleteThreadModal={this.state.showDeleteThreadModal}
+          hideDeleteThreadModal={this.hideDeleteThreadModal}
+          handleDeleteThread={this.handleDeleteThread}
+          currentTheme={this.state.currentTheme}
+        />
+        <UpdateThreadDetailsSuccessModal
+          showUpdateThreadDetailsSuccessModal={this.state.showUpdateThreadDetailsSuccessModal}
+          hideUpdateThreadDetailsSuccessModal={this.hideUpdateThreadDetailsSuccessModal}
+          currentTheme={this.state.currentTheme}
+        />
       </React.Fragment>
     );
   };
