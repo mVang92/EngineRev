@@ -204,7 +204,8 @@ input {
     background: rgb(225, 225, 225);
 }
 
-.addBtn {
+.addBtn,
+.upVote {
     background: rgb(200, 255, 200);
 }
 
@@ -218,6 +219,7 @@ input {
     background: rgb(128, 200, 255);
 }
 
+.downVote,
 .deleteBtn,
 .deleteActionButton,
 .deleteReleaseNoteActionButton,
@@ -246,6 +248,8 @@ input {
     margin: auto;
 }
 
+.upVote:hover,
+.downVote:hover,
 .addBtn:hover,
 .resetButton:hover,
 .cancelBtn:hover,
@@ -264,10 +268,12 @@ input {
     transition-duration: 0.2s;
 }
 
-.addBtn:hover {
+.addBtn:hover,
+.upVote:hover {
     background: rgb(128, 255, 128);
 }
 
+.downVote:hover,
 #addLogBackButton:hover,
 .deleteBtn:hover,
 .deleteActionButton:hover,
@@ -705,35 +711,15 @@ footer {
     color: rgb(255, 48, 48);
 }
 
-.upVote,
-.downVote {
-    color: rgb(255, 255, 255);
+.upVote {
     border: 1px solid rgb(255, 255, 255);
     text-align: center;
-    cursor: pointer;
-    box-shadow: 0px 1px 3px rgb(32, 32, 32);
+    box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
     transition-duration: 0.2s;
-}
-
-.upVote:hover,
-.downVote:hover {
-    transition-duration: 0.2s;
-}
-
-.upVote {
-    background: rgb(48, 192, 48);
-}
-
-.upVote:hover {
-    background: rgb(48, 255, 48);
 }
 
 .downVote {
-    background: rgb(192, 48, 48);
-}
-
-.downVote:hover {
-    background: rgb(255, 48, 48);
+    transition-duration: 0.2s;
 }
 
 #loadingAnimation {

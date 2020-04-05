@@ -14,7 +14,7 @@ const OneThread = props => {
   const newDate = new Date(dateSubString);
   newDate.setDate(newDate.getDate() + 1);
   const formattedDate = newDate.toLocaleDateString("en-US");
-  const formattedDescription = threadDescription.substring(0, 100);
+  const formattedDescription = threadDescription.substring(0, 125);
   const formattedEmail = email.replace(/@[^@]+$/, '');
 
   return (

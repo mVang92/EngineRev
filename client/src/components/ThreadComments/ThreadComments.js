@@ -25,7 +25,7 @@ const ThreadComments = props => {
       <div className={`threadDetails ${currentTheme.oneThread}`}>
         <div className="row">
           <div className="col-md-9 text-left breakWord">
-            {formattedEmail} posted on {formattedDate}.
+            {formattedEmail} posted on {formattedDate}
           </div>
           <div className="col-md-2 noWidthMobileDisplay voteButtons">
             {
@@ -58,7 +58,26 @@ const ThreadComments = props => {
             }
           </div>
           <div className="col-md-1 votes noWidthMobileDisplay voteButtons">
-            <span className="showUnderMobileDisplay">Votes: </span>{votes}
+            {
+              votes > 0 ?
+                (
+                  <React.Fragment>
+                    <span className="text-success"><strong>+{votes}</strong></span>
+                  </React.Fragment>
+                ) : (
+                  null
+                )
+            }
+            {
+              votes < 0 ?
+                (
+                  <React.Fragment>
+                    <span className="text-danger"><strong>{votes}</strong></span>
+                  </React.Fragment>
+                ) : (
+                  null
+                )
+            }
           </div>
         </div>
         <hr className="oneThreadHr" />
