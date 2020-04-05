@@ -169,7 +169,6 @@ class ThreadDetails extends Component {
                     currentTheme={currentTheme}
                   />
                 </React.Fragment>
-
               ) : (
                 null
               )
