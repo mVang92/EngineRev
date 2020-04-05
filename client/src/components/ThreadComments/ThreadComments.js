@@ -14,7 +14,10 @@ const ThreadComments = props => {
     disableUpVoteButton,
     disableDownVoteButton
   } = props;
-  const formattedDate = date.substring(0, 10);
+  const dateSubString = date.substring(0, 10);
+  const newDate = new Date(dateSubString);
+  newDate.setDate(newDate.getDate() + 1);
+  const formattedDate = newDate.toLocaleDateString("en-US");
   const formattedEmail = email.replace(/@[^@]+$/, '');
 
   return (

@@ -27,7 +27,10 @@ class ThreadDetails extends Component {
       disableUpVoteButton,
       disableDownVoteButton
     } = this.props;
-    const formattedDate = allThreads.date.substring(0, 10);
+    const dateSubString = allThreads.date.substring(0, 10);
+    const newDate = new Date(dateSubString);
+    newDate.setDate(newDate.getDate() + 1);
+    const formattedDate = newDate.toLocaleDateString("en-US");
     const formattedEmail = allThreads.email.replace(/@[^@]+$/, '');
 
     return (
@@ -56,26 +59,38 @@ class ThreadDetails extends Component {
                   allThreads.creator === uniqueCreatorId ?
                     (
                       <React.Fragment>
-                        <textarea
-                          className="threadTitleTextArea"
-                          type="text"
-                          ref="threadTitle"
-                          name="threadTitle"
-                          maxLength="200"
-                          onChange={handleChange}
-                          disabled={disableEditThreadDetails}
-                          value={threadTitle}
-                        />
-                        <textarea
-                          className="threadDescriptionTextArea"
-                          type="text"
-                          ref="threadDescription"
-                          name="threadDescription"
-                          maxLength="1250"
-                          onChange={handleChange}
-                          disabled={disableEditThreadDetails}
-                          value={threadDescription}
-                        />
+                        {
+                          disableEditThreadDetails ?
+                            (
+                              <React.Fragment>
+                                <h4 className="breakWord">{threadTitle}</h4>
+                                <hr />
+                                <div className="breakWord">{threadDescription}</div>
+                                <br />
+                              </React.Fragment>
+                            ) : (
+                              <React.Fragment>
+                                <textarea
+                                  className="threadTitleTextArea"
+                                  type="text"
+                                  ref="threadTitle"
+                                  name="threadTitle"
+                                  maxLength="200"
+                                  onChange={handleChange}
+                                  value={threadTitle}
+                                />
+                                <textarea
+                                  className="threadDescriptionTextArea"
+                                  type="text"
+                                  ref="threadDescription"
+                                  name="threadDescription"
+                                  maxLength="1250"
+                                  onChange={handleChange}
+                                  value={threadDescription}
+                                />
+                              </React.Fragment>
+                            )
+                        }
                         <div className="row text-center">
                           {
                             disableEditThreadDetails ?

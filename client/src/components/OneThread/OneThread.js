@@ -10,7 +10,10 @@ const OneThread = props => {
     threadTitle,
     threadDescription
   } = props;
-  const formattedDate = date.substring(0, 10);
+  const dateSubString = date.substring(0, 10);
+  const newDate = new Date(dateSubString);
+  newDate.setDate(newDate.getDate() + 1);
+  const formattedDate = newDate.toLocaleDateString("en-US");
   const formattedDescription = threadDescription.substring(0, 100);
   const formattedEmail = email.replace(/@[^@]+$/, '');
 
@@ -28,7 +31,7 @@ const OneThread = props => {
           ]
         }}>
           <div className="row">
-            <h4 className="col-md-12 breakWord">{threadTitle}</h4>
+            <h4 className="col-md-12 breakWord threadTitleLink">{threadTitle}</h4>
           </div>
         </Link>
         <hr className="oneThreadHr" />
