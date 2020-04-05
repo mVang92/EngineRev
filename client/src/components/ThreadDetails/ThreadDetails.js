@@ -145,7 +145,6 @@ class ThreadDetails extends Component {
                               )
                           }
                         </div>
-                        <br />
                       </React.Fragment>
                     ) : (
                       <React.Fragment>

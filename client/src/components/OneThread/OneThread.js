@@ -30,8 +30,8 @@ const OneThread = props => {
             formattedDate
           ]
         }}>
-          <div className="row">
-            <h4 className="col-md-12 breakWord threadTitleLink">{threadTitle}</h4>
+          <div className="row threadTitleLink">
+            <h4 className="col-md-12 breakWord">{threadTitle}</h4>
           </div>
         </Link>
         <hr className="oneThreadHr" />
