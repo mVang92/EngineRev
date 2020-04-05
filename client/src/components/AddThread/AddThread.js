@@ -20,7 +20,7 @@ class AddThread extends Component {
                 value={this.props.threadTitle}
                 name="threadTitle"
                 maxLength="200"
-                placeholder="Add a Title">
+                placeholder="Title (Required)">
               </input>
               <br /><br />
               <textarea
@@ -32,7 +32,7 @@ class AddThread extends Component {
                 value={this.props.threadDescription}
                 name="threadDescription"
                 maxLength="1250"
-                placeholder="Add a Description">
+                placeholder="Description (Required)">
               </textarea>
             </div>
           </div>

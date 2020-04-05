@@ -12,7 +12,10 @@ const OneUpdate = props => {
   } = props;
   const editValue = "edit";
   const deleteValue = "delete";
-  const formattedDate = date.substring(0, 10);
+  const dateSubString = date.substring(0, 10);
+  const newDate = new Date(dateSubString);
+  newDate.setDate(newDate.getDate() + 1);
+  const formattedDate = newDate.toLocaleDateString("en-US");
 
   return (
     <React.Fragment key={_id}>
