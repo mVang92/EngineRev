@@ -73,5 +73,31 @@ module.exports = {
             .then(result => result.remove())
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
+    },
+
+    /**
+    * Increment the votes to the comment by 1
+    */
+    handleCommentUpVote: (req, res) => {
+        db.Forum
+            .updateOne(
+                { _id: req.params.threadId, comments: { $elemMatch: { _id: req.params.commentId } } },
+                { $inc: { "comments.$.votes": 1 } }
+            )
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    /**
+    * Decrement the votes to the comment by 1
+    */
+    handleCommentDownVote: (req, res) => {
+        db.Forum
+            .updateOne(
+                { _id: req.params.threadId, comments: { $elemMatch: { _id: req.params.commentId } } },
+                { $inc: { "comments.$.votes": -1 } }
+            )
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     }
 };

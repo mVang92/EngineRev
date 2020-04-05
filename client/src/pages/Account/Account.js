@@ -369,7 +369,6 @@ export default class Account extends Component {
    * Hide the update profile picture success modal
    */
   hideUpdateProfilePictureSuccessModal = () => {
-    this.setState({ showUpdateProfilePictureSuccessModal: false });
     window.location = "/";
   };
 
@@ -377,7 +376,6 @@ export default class Account extends Component {
    * Hide the update display name success modal
    */
   hideUpdateDisplayNameSuccessModal = () => {
-    this.setState({ showUpdateDisplayNameSuccessModal: false });
     window.location = "/";
   };
 

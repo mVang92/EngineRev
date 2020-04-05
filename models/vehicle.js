@@ -8,6 +8,7 @@ const vehicleSchema = new Schema({
   admin: { type: Boolean },
   theme: { type: String },
   backgroundPicture: { type: String },
+  votedComments: [{}],
   vehicles: [{
     vehicleName: { type: String },
     year: { type: Number, required: true },

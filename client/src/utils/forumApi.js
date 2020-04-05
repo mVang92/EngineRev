@@ -24,5 +24,13 @@ export default {
     // Update the title to a thread
     deleteThread: (threadId) => {
         return axios.put(`/api/forum/deleteThread/${threadId}`);
+    },
+    // Handle the upvote to a comment
+    handleCommentUpVote: (threadId, commentId) => {
+        return axios.put(`/api/forum/handleCommentUpVote/${threadId}/${commentId}`);
+    },
+    // Handle the downvote to a comment
+    handleCommentDownVote: (threadId, commentId) => {
+        return axios.put(`/api/forum/handleCommentDownVote/${threadId}/${commentId}`);
     }
 };

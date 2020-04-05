@@ -60,7 +60,7 @@ class ForumDetails extends Component {
             )
           })
         }
-        <br />
+        <hr className={currentTheme.hr} />
         <BottomActionButtons
           backToTopOfPage={backToTopOfPage}
         />

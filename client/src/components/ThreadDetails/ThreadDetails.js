@@ -21,7 +21,11 @@ class ThreadDetails extends Component {
       disableEditThreadDetails,
       enableEditThreadDetails,
       validateEditedThreadDetails,
-      showDeleteThreadModal
+      showDeleteThreadModal,
+      validateUserToUpvoteComment,
+      validateUserToDownvoteComment,
+      disableUpVoteButton,
+      disableDownVoteButton
     } = this.props;
     const formattedDate = allThreads.date.substring(0, 10);
     const formattedEmail = allThreads.email.replace(/@[^@]+$/, '');
@@ -167,10 +171,15 @@ class ThreadDetails extends Component {
                         <ThreadComments
                           key={threadComment._id}
                           _id={threadComment._id}
+                          loggedin={loggedin}
                           date={threadComment.date}
                           email={threadComment.email}
                           comment={threadComment.comment}
                           votes={threadComment.votes}
+                          validateUserToUpvoteComment={validateUserToUpvoteComment}
+                          validateUserToDownvoteComment={validateUserToDownvoteComment}
+                          disableUpVoteButton={disableUpVoteButton}
+                          disableDownVoteButton={disableDownVoteButton}
                           currentTheme={currentTheme}
                         />
                       )
@@ -178,10 +187,14 @@ class ThreadDetails extends Component {
                   }
                 </React.Fragment>
               ) : (
-                <div className="text-center"><label>{defaults.noCommentsOnThread}</label></div>
+                <div className="text-center">
+                  <strong>
+                    <label>{defaults.noCommentsOnThread}</label>
+                  </strong>
+                </div>
               )
           }
-          <br />
+          <hr className={currentTheme.hr} />
           <div className="row">
             <div className="col-md-6 text-left noWidthMobileDisplay">
               <button className="backButton" onClick={backButton}>Back</button>
