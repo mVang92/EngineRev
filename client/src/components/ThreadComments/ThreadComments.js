@@ -3,11 +3,16 @@ import React from "react";
 const ThreadComments = props => {
   const {
     _id,
+    loggedin,
     date,
     email,
     comment,
     votes,
-    currentTheme
+    currentTheme,
+    validateUserToUpvoteComment,
+    validateUserToDownvoteComment,
+    disableUpVoteButton,
+    disableDownVoteButton
   } = props;
   const formattedDate = date.substring(0, 10);
   const formattedEmail = email.replace(/@[^@]+$/, '');
@@ -16,13 +21,43 @@ const ThreadComments = props => {
     <React.Fragment key={_id}>
       <div className={`threadDetails ${currentTheme.oneThread}`}>
         <div className="row">
-          <div className="col-md-10 text-left breakWord">
+          <div className="col-md-9 text-left breakWord">
             {formattedEmail} posted on {formattedDate}.
           </div>
+          <div className="col-md-2 noWidthMobileDisplay voteButtons">
+            {
+              loggedin ?
+                (
+                  <div className="row noMarginMobileDisplay">
+                    <button
+                      className="col-md-4 noWidthMobileDisplay upVote"
+                      type="button"
+                      title="Up Vote"
+                      disabled={disableUpVoteButton}
+                      onClick={() => validateUserToUpvoteComment(_id)}
+                    >
+                      +
+                    </button>
+                    <div className="col-md-4 noWidthMobileDisplay"></div>
+                    <button
+                      className="col-md-4 noWidthMobileDisplay downVote"
+                      type="button"
+                      title="Down Vote"
+                      disabled={disableDownVoteButton}
+                      onClick={() => validateUserToDownvoteComment(_id)}
+                    >
+                      -
+                    </button>
+                  </div>
+                ) : (
+                  null
+                )
+            }
+          </div>
+          <div className="col-md-1 votes noWidthMobileDisplay voteButtons">
+            <span className="showUnderMobileDisplay">Votes: </span>{votes}
+          </div>
         </div>
-        {/* <div className="row">
-          <div className="col-md-12 text-left breakWord">Votes: {votes}</div>
-        </div> */}
         <hr className="oneThreadHr" />
         <div className="row">
           <div className="col-md-12 text-left breakWord">{comment}</div>

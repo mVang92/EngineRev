@@ -34,7 +34,9 @@ export default class Thread extends Component {
       formattedDate: "",
       disableEditThreadDetails: true,
       showUpdateThreadDetailsSuccessModal: false,
-      showDeleteThreadModal: false
+      showDeleteThreadModal: false,
+      disableUpVoteButton: false,
+      disableDownVoteButton: false
     };
   };
 
@@ -196,12 +198,119 @@ export default class Thread extends Component {
       .catch(err => this.errorNotification(err));
   };
 
+  /**
+   * Delete a thread
+   */
   handleDeleteThread = () => {
     forumApi.deleteThread(this.state.threadId)
       .then(() => {
         window.location.assign(window.location.origin + "/forum");
       })
       .catch(err => this.errorNotification(err));
+  };
+
+  /**
+   * Handle up vote on a comment
+   */
+  handleUpvoteComment = commentId => {
+    forumApi.handleCommentUpVote(this.state.threadId, commentId)
+      .then(() => {
+        vehicleApi.recordVotedThreadComment(this.state.uniqueCreatorId, commentId)
+          .then(() => {
+            this.setState(
+              { disableUpVoteButton: false },
+              () => this.getAllThreadComments()
+            );
+          })
+          .catch(err => {
+            this.setState(
+              { disableUpVoteButton: false },
+              () => this.errorNotification(err)
+            );
+          });
+      })
+      .catch(err => {
+        this.setState(
+          { disableUpVoteButton: false },
+          () => this.errorNotification(err)
+        );
+      });
+  };
+
+  /**
+   * Handle down vote on a comment
+   */
+  handleDownvoteComment = commentId => {
+    forumApi.handleCommentDownVote(this.state.threadId, commentId)
+      .then(() => {
+        vehicleApi.recordVotedThreadComment(this.state.uniqueCreatorId, commentId)
+          .then(() => {
+            this.setState(
+              { disableDownVoteButton: false },
+              () => this.getAllThreadComments()
+            );
+          })
+          .catch(err => {
+            this.setState(
+              { disableDownVoteButton: false },
+              () => this.errorNotification(err)
+            );
+          });
+      })
+      .catch(err => {
+        this.setState(
+          { disableDownVoteButton: false },
+          () => this.errorNotification(err)
+        );
+      });
+  };
+
+  /**
+   * Check if the user has voted on this comment before for up voting
+   */
+  validateUserToUpvoteComment = commentId => {
+    this.setState({ disableUpVoteButton: true });
+    vehicleApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+      .then(res => {
+        let votedComments = res.data.votedComments;
+        let hasUserVotedOnThisComment = votedComments.includes(commentId);
+        if (hasUserVotedOnThisComment) {
+          this.errorNotification(defaults.alreadyVotedOnComment);
+          this.setState({ disableUpVoteButton: false });
+        } else {
+          this.handleUpvoteComment(commentId);
+        }
+      })
+      .catch(err => {
+        this.setState(
+          { disableUpVoteButton: false },
+          () => this.errorNotification(err)
+        );
+      });
+  };
+
+  /**
+   * Check if the user has voted on this comment before for down voting
+   */
+  validateUserToDownvoteComment = commentId => {
+    this.setState({ disableDownVoteButton: true });
+    vehicleApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+      .then(res => {
+        let votedComments = res.data.votedComments;
+        let hasUserVotedOnThisComment = votedComments.includes(commentId);
+        if (hasUserVotedOnThisComment) {
+          this.errorNotification(defaults.alreadyVotedOnComment);
+          this.setState({ disableDownVoteButton: false });
+        } else {
+          this.handleDownvoteComment(commentId);
+        }
+      })
+      .catch(err => {
+        this.setState(
+          { disableDownVoteButton: false },
+          () => this.errorNotification(err)
+        );
+      });
   };
 
   /**
@@ -307,6 +416,8 @@ export default class Thread extends Component {
                   threadComment={this.state.threadComment}
                   allThreads={this.state.allThreads}
                   disableEditThreadDetails={this.state.disableEditThreadDetails}
+                  disableUpVoteButton={this.state.disableUpVoteButton}
+                  disableDownVoteButton={this.state.disableDownVoteButton}
                   showDeleteThreadModal={this.showDeleteThreadModal}
                   validateEditedThreadDetails={this.validateEditedThreadDetails}
                   enableEditThreadDetails={this.enableEditThreadDetails}
@@ -314,6 +425,8 @@ export default class Thread extends Component {
                   backToTopOfPage={this.backToTopOfPage}
                   backButton={this.backButton}
                   addOneCommentToThread={this.addOneCommentToThread}
+                  validateUserToUpvoteComment={this.validateUserToUpvoteComment}
+                  validateUserToDownvoteComment={this.validateUserToDownvoteComment}
                   currentTheme={this.state.currentTheme}
                 />
               </Container>

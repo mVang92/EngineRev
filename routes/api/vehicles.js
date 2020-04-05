@@ -58,4 +58,9 @@ router
   .route("/themes/:creatorId/:themeType")
   .put(controller.saveThemeForUser)
 
+// Matches with "/api/vehicles/recordVotedThreadComment/:creatorId/:commentId"
+router
+  .route("/recordVotedThreadComment/:creatorId/:commentId")
+  .put(controller.recordVotedThreadComment)
+
 module.exports = router;

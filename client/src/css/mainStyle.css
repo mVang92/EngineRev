@@ -43,6 +43,10 @@ body {
     width: 100%;
 }
 
+.votes {
+    text-align: right;
+}
+
 .dropdown-menu {
     background: rgb(48, 48, 48);
     min-width: 5rem;
@@ -692,6 +696,37 @@ footer {
     padding-right: 1rem;
 }
 
+.upVote,
+.downVote {
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0px 1px 3px rgb(32, 32, 32);
+    transition-duration: 0.2s;
+}
+
+.upVote:hover,
+.downVote:hover {
+    transition-duration: 0.2s;
+}
+
+.upVote {
+    background: rgb(48, 192, 48);
+}
+
+.upVote:hover {
+    background: rgb(48, 255, 48);
+}
+
+.downVote {
+    background: rgb(192, 48, 48);
+}
+
+.downVote:hover {
+    background: rgb(255, 48, 48);
+}
+
 #loadingAnimation {
     color: official;
     display: inline-block;
@@ -1037,6 +1072,19 @@ footer {
 
     .threadDescriptionTextArea {
         height: 15rem !important;
+    }
+
+    .votes {
+        text-align: left;
+    }
+
+    .voteButtons {
+        margin-top: 1rem;
+    }
+
+    .noMarginMobileDisplay {
+        margin-left: 0px;
+        margin-right: 0px;
     }
 }
     

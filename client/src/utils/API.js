@@ -59,7 +59,12 @@ export default {
   deleteOneUserAccount: id => {
     return axios.delete(`/api/vehicles/${id}`);
   },
+  // Save the theme for the user
   saveThemeForUser: (creatorId, themeType) => {
     return axios.put(`/api/vehicles/themes/${creatorId}/${themeType}`);
+  },
+  // Record the comment id in the user database
+  recordVotedThreadComment: (creatorId, commentId) => {
+    return axios.put(`/api/vehicles/recordVotedThreadComment/${creatorId}/${commentId}`);
   }
 };

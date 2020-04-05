@@ -17,30 +17,27 @@ const OneThread = props => {
   return (
     <React.Fragment key={_id}>
       <div className={`threadDetails ${currentTheme.oneThread}`}>
-        <div className="row">
-          <h4 className="col-md-12 breakWord">{threadTitle}</h4>
-        </div>
+        <Link to={{
+          pathname: "/forum/thread/" + _id,
+          state: [
+            _id,
+            threadTitle,
+            threadDescription,
+            formattedEmail,
+            formattedDate
+          ]
+        }}>
+          <div className="row">
+            <h4 className="col-md-12 breakWord">{threadTitle}</h4>
+          </div>
+        </Link>
         <hr className="oneThreadHr" />
         <div className="row">
           <div className="col-md-12 breakWord">{formattedDescription}...</div>
         </div>
         <hr className="oneThreadHr" />
         <div className="row">
-          <div className="col-md-10 breakWord">{formattedEmail} posted on {formattedDate}.</div>
-          <div className="col-md-2 text-right">
-            <Link to={{
-              pathname: "/forum/thread/" + _id,
-              state: [
-                _id,
-                threadTitle,
-                threadDescription,
-                formattedEmail,
-                formattedDate
-              ]
-            }}>
-              <strong>View Thread</strong>
-            </Link>
-          </div>
+          <div className="col-md-12 breakWord">{formattedEmail} posted on {formattedDate}.</div>
         </div>
       </div>
     </React.Fragment>
