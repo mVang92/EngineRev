@@ -696,6 +696,15 @@ footer {
     padding-right: 1rem;
 }
 
+.threadTitleLink {
+    transition-duration: 0.2s;
+}
+
+.threadTitleLink:hover {
+    transition-duration: 0.1s;
+    color: rgb(255, 48, 48);
+}
+
 .upVote,
 .downVote {
     color: rgb(255, 255, 255);
