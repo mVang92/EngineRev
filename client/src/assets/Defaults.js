@@ -6,6 +6,9 @@ export const defaults = {
     noCommentsOnThread: "There are no comments on this thread.",
     threadDetailsCannotBeBlank: "Please add a valid title and description for your thread.",
     areYouSureToDeleteThread: "Are you sure you want to delete this thread?",
+    areYouSureToDeleteThreadComment: "Are you sure you want to delete your comment?",
     threadDetailsUpdated: "Thread details updated!",
-    alreadyVotedOnComment: "You have already voted on this comment."
+    alreadyVotedOnComment: "You have already voted on this comment.",
+    addThreadCommentSucess: "Comment posted successfully.",
+    deleteThreadCommentSucess: "Comment deleted successfully.",
 };

@@ -99,5 +99,19 @@ module.exports = {
             )
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
+    },
+
+    /**
+   * Delete the comment from the thread
+   */
+    handleDeleteThreadComment: (req, res) => {
+        console.log(req.params)
+        db.Forum
+            .updateOne(
+                { _id: req.params.threadId },
+                { $pull: { comments: { _id: req.params.commentId } } }
+            )
+            .then(result => res.json(result))
+            .catch(err => res.status(422).json(err));
     }
 };
