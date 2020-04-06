@@ -1,8 +1,12 @@
 import React from "react";
+import editIcon from "../../images/editIcon.png";
+import deleteIcon from "../../images/deleteIcon.png";
 
 const ThreadComments = props => {
   const {
     _id,
+    uniqueCreatorId,
+    commentCreator,
     loggedin,
     date,
     email,
@@ -11,6 +15,8 @@ const ThreadComments = props => {
     currentTheme,
     validateUserToUpvoteComment,
     validateUserToDownvoteComment,
+    showEditThreadCommentModal,
+    showDeleteThreadCommentModal,
     disableUpVoteButton,
     disableDownVoteButton
   } = props;
@@ -31,26 +37,59 @@ const ThreadComments = props => {
             {
               loggedin ?
                 (
-                  <div className="row noMarginMobileDisplay">
-                    <button
-                      className="col-md-4 noWidthMobileDisplay upVote"
-                      type="button"
-                      title="Up Vote"
-                      disabled={disableUpVoteButton}
-                      onClick={() => validateUserToUpvoteComment(_id)}
-                    >
-                      +
-                    </button>
-                    <div className="col-md-4 noWidthMobileDisplay"></div>
-                    <button
-                      className="col-md-4 noWidthMobileDisplay downVote"
-                      type="button"
-                      title="Down Vote"
-                      disabled={disableDownVoteButton}
-                      onClick={() => validateUserToDownvoteComment(_id)}
-                    >
-                      -
-                    </button>
+                  <div className="row noMarginMobileDisplay text-center">
+                    {
+                      uniqueCreatorId === commentCreator ?
+                        (
+                          <React.Fragment>
+                            <div className="col-md-6 noWidthMobileDisplay">
+                              <button
+                                className="deleteActionButton"
+                                type="button"
+                                title="Delete Comment"
+                                onClick={() => showDeleteThreadCommentModal(_id)}
+                              >
+                                <img className="deleteIcon" src={deleteIcon} alt="delete"></img>
+                              </button>
+                            </div>
+                            <div className="col-md-6 noWidthMobileDisplay">
+                              {/* <button
+                                className="editActionButton"
+                                type="button"
+                                title="Edit Comment"
+                                onClick={() => showEditThreadCommentModal(_id)}
+                              >
+                                <img className="editIcon" src={editIcon} alt="edit"></img>
+                              </button> */}
+                            </div>
+                          </React.Fragment>
+                        ) : (
+                          <React.Fragment>
+                            <div className="col-md-6 noWidthMobileDisplay">
+                              <button
+                                className="upVote"
+                                type="button"
+                                title="Up Vote"
+                                disabled={disableUpVoteButton}
+                                onClick={() => validateUserToUpvoteComment(_id)}
+                              >
+                                <strong>+</strong>
+                              </button>
+                            </div>
+                            <div className="col-md-6 noWidthMobileDisplay">
+                              <button
+                                className="downVote"
+                                type="button"
+                                title="Down Vote"
+                                disabled={disableDownVoteButton}
+                                onClick={() => validateUserToDownvoteComment(_id)}
+                              >
+                                <strong>-</strong>
+                              </button>
+                            </div>
+                          </React.Fragment>
+                        )
+                    }
                   </div>
                 ) : (
                   null

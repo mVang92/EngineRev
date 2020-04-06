@@ -32,5 +32,9 @@ export default {
     // Handle the downvote to a comment
     handleCommentDownVote: (threadId, commentId) => {
         return axios.put(`/api/forum/handleCommentDownVote/${threadId}/${commentId}`);
+    },
+    // Delete a comment from the thread
+    handleDeleteThreadComment: (threadId, commentId) => {
+        return axios.put(`/api/forum/handleDeleteThreadComment/${threadId}/${commentId}`);
     }
 };

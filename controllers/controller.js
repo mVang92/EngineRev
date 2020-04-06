@@ -131,7 +131,7 @@ module.exports = {
    */
   removeOneVehicle: (req, res) => {
     db.Vehicle
-      .findOneAndUpdate(
+      .updateOne(
         { "vehicles._id": req.params.vehicleId },
         { $pull: { vehicles: { _id: req.params.vehicleId } } }
       )
@@ -144,7 +144,7 @@ module.exports = {
    */
   removeOneServiceLog: (req, res) => {
     db.Vehicle
-      .findOneAndUpdate(
+      .updateOne(
         { "vehicles._id": req.params.vehicleId },
         { $pull: { "vehicles.$.logs": { _id: req.params.serviceLogId } } }
       )

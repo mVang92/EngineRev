@@ -9,6 +9,7 @@ import { themes } from "../../themes/Themes";
 import { toast } from "react-toastify";
 import { defaults } from "../../assets/Defaults";
 import DeleteThreadModal from "../../components/Modal/DeleteThreadModal";
+import DeleteThreadCommentModal from "../../components/Modal/DeleteThreadCommentModal";
 import UpdateThreadDetailsSuccessModal from "../../components/Modal/UpdateThreadDetailsSuccessModal";
 
 export default class Thread extends Component {
@@ -17,6 +18,7 @@ export default class Thread extends Component {
     this.state = {
       props: props,
       uniqueCreatorId: "",
+      commentId: "",
       email: "",
       loggedin: false,
       theme: "",
@@ -36,7 +38,8 @@ export default class Thread extends Component {
       showUpdateThreadDetailsSuccessModal: false,
       showDeleteThreadModal: false,
       disableUpVoteButton: false,
-      disableDownVoteButton: false
+      disableDownVoteButton: false,
+      showDeleteThreadCommentModal: false
     };
   };
 
@@ -157,7 +160,7 @@ export default class Thread extends Component {
     forumApi.addOneCommentToOneThread(this.state.threadId, threadCommentPayload)
       .then(() => {
         this.setState({ threadComment: "" }, () => {
-          this.addCommentSuccessNotification();
+          this.successNotification(defaults.addThreadCommentSucess);
           this.getAllThreadComments();
         });
       })
@@ -266,6 +269,22 @@ export default class Thread extends Component {
   };
 
   /**
+   * Delete the comment from the thread
+   */
+  handleDeleteThreadComment = () => {
+    forumApi.handleDeleteThreadComment(this.state.threadId, this.state.commentId)
+      .then(() => {
+        this.successNotification(defaults.deleteThreadCommentSucess)
+        this.hideDeleteThreadCommentModal();
+        this.getAllThreadComments();
+      })
+      .catch(err => {
+        this.hideDeleteThreadCommentModal();
+        this.errorNotification(err)
+      });
+  };
+
+  /**
    * Check if the user has voted on this comment before for up voting
    */
   validateUserToUpvoteComment = commentId => {
@@ -350,7 +369,7 @@ export default class Thread extends Component {
   };
 
   /**
-   * Enable editing for the thread title
+   * Enable editing for the thread details
    */
   enableEditThreadDetails = () => {
     if (this.state.disableEditThreadDetails) {
@@ -361,7 +380,24 @@ export default class Thread extends Component {
   };
 
   /**
-   * 
+   * Enable editing for the thread comment
+   */
+  showEditThreadCommentModal = () => {
+    console.log("show")
+  };
+
+  /**
+   * Show the delete thread comment modal
+   */
+  showDeleteThreadCommentModal = commentId => {
+    this.setState({
+      showDeleteThreadCommentModal: true,
+      commentId: commentId
+    });
+  };
+
+  /**
+   * Show the delete thread modal
    */
   showDeleteThreadModal = () => {
     this.setState({ showDeleteThreadModal: true });
@@ -374,6 +410,19 @@ export default class Thread extends Component {
     this.setState({ showUpdateThreadDetailsSuccessModal: true });
   };
 
+  /**
+   * Hide the delete thread comment modal
+   */
+  hideDeleteThreadCommentModal = () => {
+    this.setState({
+      showDeleteThreadCommentModal: false,
+      commentId: ""
+    });
+  };
+
+  /**
+   * Hide the delete thread modal
+   */
   hideDeleteThreadModal = () => {
     this.setState({ showDeleteThreadModal: false });
   };
@@ -386,10 +435,10 @@ export default class Thread extends Component {
   };
 
   /**
-   * Display the success notification when the user deletes a service log
+   * Display the success notification when the user completes an action successfully
    */
-  addCommentSuccessNotification = () => {
-    toast.success(`Comment posted successfully.`);
+  successNotification = message => {
+    toast.success(message);
   };
 
   /**
@@ -418,6 +467,9 @@ export default class Thread extends Component {
                   disableEditThreadDetails={this.state.disableEditThreadDetails}
                   disableUpVoteButton={this.state.disableUpVoteButton}
                   disableDownVoteButton={this.state.disableDownVoteButton}
+                  disableEditThreadComment={this.state.disableEditThreadComment}
+                  showEditThreadCommentModal={this.showEditThreadCommentModal}
+                  showDeleteThreadCommentModal={this.showDeleteThreadCommentModal}
                   showDeleteThreadModal={this.showDeleteThreadModal}
                   validateEditedThreadDetails={this.validateEditedThreadDetails}
                   enableEditThreadDetails={this.enableEditThreadDetails}
@@ -438,6 +490,12 @@ export default class Thread extends Component {
           showDeleteThreadModal={this.state.showDeleteThreadModal}
           hideDeleteThreadModal={this.hideDeleteThreadModal}
           handleDeleteThread={this.handleDeleteThread}
+          currentTheme={this.state.currentTheme}
+        />
+        <DeleteThreadCommentModal
+          showDeleteThreadCommentModal={this.state.showDeleteThreadCommentModal}
+          hideDeleteThreadCommentModal={this.hideDeleteThreadCommentModal}
+          handleDeleteThreadComment={this.handleDeleteThreadComment}
           currentTheme={this.state.currentTheme}
         />
         <UpdateThreadDetailsSuccessModal

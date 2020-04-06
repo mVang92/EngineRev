@@ -24,8 +24,11 @@ class ThreadDetails extends Component {
       showDeleteThreadModal,
       validateUserToUpvoteComment,
       validateUserToDownvoteComment,
+      enableEditThreadComment,
+      showDeleteThreadCommentModal,
       disableUpVoteButton,
-      disableDownVoteButton
+      disableDownVoteButton,
+      showEditThreadCommentModal
     } = this.props;
     const dateSubString = allThreads.date.substring(0, 10);
     const newDate = new Date(dateSubString);
@@ -184,13 +187,18 @@ class ThreadDetails extends Component {
                         <ThreadComments
                           key={threadComment._id}
                           _id={threadComment._id}
+                          commentCreator={threadComment.creator}
+                          uniqueCreatorId={uniqueCreatorId}
                           loggedin={loggedin}
                           date={threadComment.date}
                           email={threadComment.email}
                           comment={threadComment.comment}
                           votes={threadComment.votes}
+                          showEditThreadCommentModal={showEditThreadCommentModal}
                           validateUserToUpvoteComment={validateUserToUpvoteComment}
                           validateUserToDownvoteComment={validateUserToDownvoteComment}
+                          enableEditThreadComment={enableEditThreadComment}
+                          showDeleteThreadCommentModal={showDeleteThreadCommentModal}
                           disableUpVoteButton={disableUpVoteButton}
                           disableDownVoteButton={disableDownVoteButton}
                           currentTheme={currentTheme}

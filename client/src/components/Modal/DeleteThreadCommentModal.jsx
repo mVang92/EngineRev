@@ -2,10 +2,10 @@ import React from "react";
 import ReactModal from "react-modal";
 import { defaults } from "../../assets/Defaults";
 
-const DeleteThreadModal = props => {
+const DeleteThreadCommentModal = props => {
     return (
         <ReactModal
-            isOpen={props.showDeleteThreadModal}
+            isOpen={props.showDeleteThreadCommentModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
@@ -16,25 +16,25 @@ const DeleteThreadModal = props => {
                     <div className={`modalBody ${props.currentTheme.background}`}>
                         <div className="row modal-header">
                             <div className="col-md-12 text-center">
-                                <label><strong>{defaults.areYouSureToDeleteThread}</strong></label>
+                                <label><strong>{defaults.areYouSureToDeleteThreadComment}</strong></label>
                             </div>
                         </div>
                         <div className="modal-footer">
                             <button
-                                id="closeDeleteThreadModalButton"
+                                id="closeDeleteThreadCommentModalButton"
                                 title="No"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.hideDeleteThreadModal}
+                                onClick={props.hideDeleteThreadCommentModal}
                                 data-dismiss="modal">
                                 No
                             </button>
                             <button
-                                id="confirmDeleteThreadButton"
+                                id="confirmDeleteThreadCommentButton"
                                 title="Yes"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.handleDeleteThread}
+                                onClick={props.handleDeleteThreadComment}
                                 data-dismiss="modal">
                                 Yes
                             </button>
@@ -46,4 +46,4 @@ const DeleteThreadModal = props => {
     );
 };
 
-export default DeleteThreadModal;
+export default DeleteThreadCommentModal;
