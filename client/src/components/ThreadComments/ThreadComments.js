@@ -67,17 +67,6 @@ const ThreadComments = props => {
                           <React.Fragment>
                             <div className="col-md-6 noWidthMobileDisplay">
                               <button
-                                className="upVote"
-                                type="button"
-                                title="Up Vote"
-                                disabled={disableUpVoteButton}
-                                onClick={() => validateUserToUpvoteComment(_id)}
-                              >
-                                <strong>+</strong>
-                              </button>
-                            </div>
-                            <div className="col-md-6 noWidthMobileDisplay">
-                              <button
                                 className="downVote"
                                 type="button"
                                 title="Down Vote"
@@ -85,6 +74,17 @@ const ThreadComments = props => {
                                 onClick={() => validateUserToDownvoteComment(_id)}
                               >
                                 <strong>-</strong>
+                              </button>
+                            </div>
+                            <div className="col-md-6 noWidthMobileDisplay">
+                              <button
+                                className="upVote"
+                                type="button"
+                                title="Up Vote"
+                                disabled={disableUpVoteButton}
+                                onClick={() => validateUserToUpvoteComment(_id)}
+                              >
+                                <strong>+</strong>
                               </button>
                             </div>
                           </React.Fragment>
