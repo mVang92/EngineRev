@@ -18,10 +18,10 @@ router
     .route("/getAllThreadComments/:threadId")
     .get(forumController.getAllThreadComments)
 
-// Matches with "/api/forum/updateThreadTitle/:threadId"
+// Matches with "/api/forum/handleUpdateThreadDetails/:threadId"
 router
-    .route("/updateThreadTitle/:threadId")
-    .put(forumController.updateThreadTitle)
+    .route("/handleUpdateThreadDetails/:threadId")
+    .put(forumController.handleUpdateThreadDetails)
 
 // Matches with "/api/forum/deleteThread/:threadId"
 router

@@ -15,8 +15,8 @@ module.exports = {
     },
 
     /**
-    * Add a comment to a thread
-    */
+     * Add a comment to a thread
+     */
     getAllThreadComments: (req, res) => {
         db.Forum.find({ _id: req.params.threadId })
             .then(dbModel => res.json(dbModel))
@@ -24,8 +24,8 @@ module.exports = {
     },
 
     /**
-    * Add a thread
-    */
+     * Add a thread
+     */
     addOneThread: (req, res) => {
         db.Forum
             .create(req.body)
@@ -34,11 +34,11 @@ module.exports = {
     },
 
     /**
-    * Add a comment to a thread
-    */
+     * Add a comment to a thread
+     */
     addOneCommentToOneThread: (req, res) => {
         db.Forum
-            .findOneAndUpdate(
+            .updateOne(
                 { _id: req.params.threadId },
                 { $push: { comments: [req.body] } }
             )
@@ -47,11 +47,11 @@ module.exports = {
     },
 
     /**
-    * Update the title to the thread
-    */
-    updateThreadTitle: (req, res) => {
+     * Update the details to the thread
+     */
+    handleUpdateThreadDetails: (req, res) => {
         db.Forum
-            .findOneAndUpdate(
+            .updateOne(
                 { _id: req.params.threadId },
                 {
                     $set: {
@@ -65,8 +65,8 @@ module.exports = {
     },
 
     /**
-    * Delete the thread
-    */
+     * Delete the thread
+     */
     deleteThread: (req, res) => {
         db.Forum
             .findById({ _id: req.params.threadId })
@@ -76,8 +76,8 @@ module.exports = {
     },
 
     /**
-    * Increment the votes to the comment by 1
-    */
+     * Increment the votes to the comment by 1
+     */
     handleCommentUpVote: (req, res) => {
         db.Forum
             .updateOne(
@@ -89,8 +89,8 @@ module.exports = {
     },
 
     /**
-    * Decrement the votes to the comment by 1
-    */
+     * Decrement the votes to the comment by 1
+     */
     handleCommentDownVote: (req, res) => {
         db.Forum
             .updateOne(
@@ -102,10 +102,9 @@ module.exports = {
     },
 
     /**
-   * Delete the comment from the thread
-   */
+     * Delete the comment from the thread
+     */
     handleDeleteThreadComment: (req, res) => {
-        console.log(req.params)
         db.Forum
             .updateOne(
                 { _id: req.params.threadId },

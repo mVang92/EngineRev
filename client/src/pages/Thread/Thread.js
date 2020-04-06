@@ -182,19 +182,19 @@ export default class Thread extends Component {
         threadDescription: this.state.threadDescriptionBackup,
       }, () => this.errorNotification(defaults.threadDetailsCannotBeBlank));
     } else {
-      this.handleUpdateThreadTitle();
+      this.handleUpdateThreadDetails();
     }
   };
 
   /**
    * Update the title to the thread
    */
-  handleUpdateThreadTitle = () => {
+  handleUpdateThreadDetails = () => {
     let threadPayload = {
       threadTitle: this.state.threadTitle,
       threadDescription: this.state.threadDescription
     }
-    forumApi.updateThreadTitle(this.state.threadId, threadPayload)
+    forumApi.handleUpdateThreadDetails(this.state.threadId, threadPayload)
       .then(() => {
         this.showUpdateThreadDetailsSuccessModal();
       })

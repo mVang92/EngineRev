@@ -18,8 +18,8 @@ export default {
         return axios.put(`/api/forum/addOneCommentToOneThread/${threadId}`, payload);
     },
     // Update the title to a thread
-    updateThreadTitle: (threadId, payload) => {
-        return axios.put(`/api/forum/updateThreadTitle/${threadId}`, payload);
+    handleUpdateThreadDetails: (threadId, payload) => {
+        return axios.put(`/api/forum/handleUpdateThreadDetails/${threadId}`, payload);
     },
     // Update the title to a thread
     deleteThread: (threadId) => {
