@@ -210,10 +210,10 @@ export default class Forum extends Component {
   };
 
   /**
-     * Display the error notification when an error occurs while loading data from the database
-     * 
-     * @param err the error message to display to the user
-     */
+   * Display the error notification when an error occurs while loading data from the database
+   * 
+   * @param err the error message to display to the user
+   */
   errorNotification = err => {
     toast.error(err.toString());
   };
