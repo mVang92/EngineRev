@@ -17,13 +17,13 @@ const ServiceLogBottomButtons = props => {
                             <div id="serviceLogBottomButtons" className="row hideWhilePrinting">
                                 <div className="col-md-3 text-left">
                                     <Link to={{ pathname: "/" }}>
-                                        <button className="backHomeBtn">Back</button>
+                                        <button className="backHomeBtn" title="Back">Back</button>
                                     </Link>
                                 </div>
                                 <div className="col-md-3"></div>
                                 <div className="col-md-3"></div>
                                 <div id="logBackToTopButton" className="col-md-3 text-right">
-                                    <button className="backToTopButton" onClick={backToTopOfPage}>Top</button>
+                                    <button className="backToTopButton" title="Back to Top"onClick={backToTopOfPage}>Top</button>
                                 </div>
                             </div>
                         </React.Fragment>

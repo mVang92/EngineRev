@@ -31,14 +31,19 @@ class ForumDetails extends Component {
         {
           loggedin ?
             (
-              <AddThread
-                handleChange={handleChange}
-                validateThreadInputValues={validateThreadInputValues}
-                threadTitle={threadTitle}
-                threadDescription={threadDescription}
-                disableSubmitNewThreadButton={disableSubmitNewThreadButton}
-                currentTheme={currentTheme}
-              />
+              <React.Fragment>
+                <AddThread
+                  handleChange={handleChange}
+                  validateThreadInputValues={validateThreadInputValues}
+                  threadTitle={threadTitle}
+                  threadDescription={threadDescription}
+                  disableSubmitNewThreadButton={disableSubmitNewThreadButton}
+                  currentTheme={currentTheme}
+                />
+                <div className="text-center">
+                  <strong><label>Threads</label></strong>
+                </div>
+              </React.Fragment>
             ) : (
               <div className="text-center">
                 <label><strong>{defaults.loggedOutStartThread}</strong></label>

@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
+import BottomActionButtons from "../../components/BottomActionButtons";
 
 class AccountDetails extends Component {
   render() {
-    const { currentTheme, unableToLoadDatabase } = this.props;
+    const {
+      currentTheme,
+      unableToLoadDatabase,
+      backToTopOfPage
+    } = this.props;
     let uniqueUserId = this.props.showUniqueUserId ? "showUniqueUserId" : "hideUniqueUserId";
     let uniqueUserIdMask = this.props.showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
 
@@ -322,7 +327,9 @@ class AccountDetails extends Component {
           </div>
         </form>
         <hr className={currentTheme.hr} />
-        <BackToHomeButtonRow />
+        <BottomActionButtons
+          backToTopOfPage={backToTopOfPage}
+        />
       </div>
     );
   }

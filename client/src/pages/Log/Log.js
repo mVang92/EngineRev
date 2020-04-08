@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { firebase } from "../../firebase"
 import { themes } from "../../themes/Themes";
+import { defaults } from "../../assets/Defaults";
 import LogPageErrorHeader from "../../components/LogPageErrorHeader";
 import LogPageVehicleNameDisplay from "../../components/LogPageVehicleNameDisplay";
 import Container from "../../components/Container";
@@ -236,7 +237,7 @@ export default class Log extends Component {
         this.setState({
           showEditOneVehicleNameModal: false
         }, () => {
-          this.updateOneVehicleNameSuccessNotification();
+          this.successNotification(defaults.vehicleNameUpdatedSuccessfully);
           this.getOneVehicle();
         });
       })
@@ -369,7 +370,7 @@ export default class Log extends Component {
           updatedModel: "",
           disableConfirmSaveEditVehicleNameButton: false
         }, () => {
-          this.updateOneVehicleNameSuccessNotification();
+          this.successNotification(defaults.vehicleNameUpdatedSuccessfully);
           this.hideEditOneVehicleNameModal();
           this.getOneVehicle();
         });
@@ -435,7 +436,7 @@ export default class Log extends Component {
    */
   handleDeleteOneVehicle = () => {
     API.deleteOneVehicle(this.state.vehicleId)
-      .then(() => this.deleteOneVehicleSuccessNotification())
+      .then(() => this.successNotification(defaults.vehicleDeletedSuccessfully))
       .catch(err => this.errorNotification(err));
   };
 
@@ -495,10 +496,11 @@ export default class Log extends Component {
   handleDeleteOneServiceLog = () => {
     API.deleteOneServiceLog(this.state.vehicleId, this.state.serviceLogId)
       .then(() => {
-        this.setState({ showDeleteOneLogModal: false }, () => {
-          this.getOneVehicle();
-          this.deleteOneServiceLogSuccessNotification();
-        });
+        this.setState({ showDeleteOneLogModal: false },
+          () => {
+            this.getOneVehicle();
+            this.successNotification(defaults.serviceLogDeletedSuccessfully);
+          });
       })
       .catch(err => this.errorNotification(err));
   };
@@ -576,7 +578,7 @@ export default class Log extends Component {
           this.renderTheme(themes.dark);
           break;
         default:
-          this.errorNotification("Error: Unable to process theme selection.");
+          this.errorNotification(defaults.themeSelectionError);
       }
     }
   };
@@ -594,10 +596,12 @@ export default class Log extends Component {
   };
 
   /**
-   * Display the success notification when the user updates a vehicle name
+   * Display the success notification when the user performs an action successfully
+   * 
+   * @param message the message to display to the user
    */
-  updateOneVehicleNameSuccessNotification = () => {
-    toast.success(`Vehicle Name Updated Successfully.`);
+  successNotification = message => {
+    toast.success(message);
   };
 
   /**
@@ -620,20 +624,6 @@ export default class Log extends Component {
    */
   updateOneServiceLogSuccessNotification = (date, mileage, service) => {
     toast.success(`Service Updated: ${service} at ${mileage} miles on ${date}.`);
-  };
-
-  /**
-   * Display the success notification when the user deletes a vehicle
-   */
-  deleteOneVehicleSuccessNotification = () => {
-    toast.success(`Vehicle Deleted Successfully.`);
-  };
-
-  /**
-   * Display the success notification when the user deletes a service log
-   */
-  deleteOneServiceLogSuccessNotification = () => {
-    toast.success(`Service Log Deleted Successfully.`);
   };
 
   /**

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { themes } from "../../themes/Themes";
+import { defaults } from "../../assets/Defaults";
 import API from "../../utils/API";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
@@ -93,7 +94,7 @@ export default class App extends Component {
           this.renderTheme(themes.dark);
           break;
         default:
-          this.state.props.errorNotification("Error: Unable to process theme selection.");
+          this.state.props.errorNotification(defaults.themeSelectionError);
       }
     }
   };

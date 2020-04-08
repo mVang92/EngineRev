@@ -7,7 +7,7 @@ class BackToHomeButtonRow extends Component {
       <div className="row">
         <div className="col-md-4">
           <Link to={{ pathname: "/" }}>
-            <button className="backHomeBtn">Back</button>
+            <button className="backHomeBtn" title="Back">Back</button>
           </Link>
           <br />
         </div>

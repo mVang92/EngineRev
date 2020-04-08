@@ -46,7 +46,7 @@ class ThreadDetails extends Component {
         <div>
           <div className="row">
             <div className="col-md-4">
-              <button className="backButton" onClick={backButton}>Back</button>
+              <button className="backButton" title="Back" onClick={backButton}>Back</button>
             </div>
             <div className="col-md-4"></div>
             <div className="col-md-4"></div>
@@ -181,6 +181,9 @@ class ThreadDetails extends Component {
             allThreads.comments.length > 0 ?
               (
                 <React.Fragment>
+                  <div className="text-center">
+                    <strong><label>Comments</label></strong>
+                  </div>
                   {
                     allThreads.comments.sort((a, b) => { return new Date(b.date) - new Date(a.date) }).map(threadComment => {
                       return (
@@ -209,20 +212,18 @@ class ThreadDetails extends Component {
                 </React.Fragment>
               ) : (
                 <div className="text-center">
-                  <strong>
-                    <label>{defaults.noCommentsOnThread}</label>
-                  </strong>
+                  <strong><label>{defaults.noCommentsOnThread}</label></strong>
                 </div>
               )
           }
           <hr className={currentTheme.hr} />
           <div className="row">
             <div className="col-md-6 text-left noWidthMobileDisplay">
-              <button className="backButton" onClick={backButton}>Back</button>
+              <button className="backButton" title="Back"onClick={backButton}>Back</button>
             </div>
             <br />
             <div className="col-md-6 text-right noWidthMobileDisplay">
-              <button className="backToTopButton" onClick={backToTopOfPage}>Top</button>
+              <button className="backToTopButton" title="Back to Top" onClick={backToTopOfPage}>Top</button>
             </div>
           </div>
         </div>
