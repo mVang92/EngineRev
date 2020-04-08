@@ -37,7 +37,7 @@ const ThreadComments = props => {
             {
               loggedin ?
                 (
-                  <div className="row noMarginMobileDisplay text-center">
+                  <div className="row text-center">
                     {
                       uniqueCreatorId === commentCreator ?
                         (
