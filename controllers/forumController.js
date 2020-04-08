@@ -112,5 +112,18 @@ module.exports = {
             )
             .then(result => res.json(result))
             .catch(err => res.status(422).json(err));
+    },
+
+    /**
+     * Update the comment on the thread
+     */
+    handleUpdateThreadComment: (req, res) => {
+        db.Forum
+            .updateOne(
+                { "comments._id": req.params.commentId },
+                { $set: { "comments.$.comment": req.body.comment } }
+            )
+            .then(result => res.json(result))
+            .catch(err => res.status(422).json(err));
     }
 };

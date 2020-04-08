@@ -36,5 +36,9 @@ export default {
     // Delete a comment from the thread
     handleDeleteThreadComment: (threadId, commentId) => {
         return axios.put(`/api/forum/handleDeleteThreadComment/${threadId}/${commentId}`);
+    },
+    // Update a comment on the thread
+    handleUpdateThreadComment: (commentId, payload) => {
+        return axios.put(`/api/forum/handleUpdateThreadComment/${commentId}`, payload);
     }
 };

@@ -15,7 +15,7 @@ const ThreadComments = props => {
     currentTheme,
     validateUserToUpvoteComment,
     validateUserToDownvoteComment,
-    showEditThreadCommentModal,
+    showEditOneThreadCommentModal,
     showDeleteThreadCommentModal,
     disableUpVoteButton,
     disableDownVoteButton
@@ -53,14 +53,14 @@ const ThreadComments = props => {
                               </button>
                             </div>
                             <div className="col-md-6 noWidthMobileDisplay">
-                              {/* <button
+                              <button
                                 className="editActionButton"
                                 type="button"
                                 title="Edit Comment"
-                                onClick={() => showEditThreadCommentModal(_id)}
+                                onClick={() => showEditOneThreadCommentModal(_id, comment)}
                               >
                                 <img className="editIcon" src={editIcon} alt="edit"></img>
-                              </button> */}
+                              </button>
                             </div>
                           </React.Fragment>
                         ) : (

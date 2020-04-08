@@ -11,4 +11,6 @@ export const defaults = {
     alreadyVotedOnComment: "You have already voted on this comment.",
     addThreadCommentSucess: "Comment posted successfully.",
     deleteThreadCommentSucess: "Comment deleted successfully.",
+    threadCommentsCannotBeBlank: "Please add a valid comment.",
+    updateThreadCommentSucess: "Comment updated successfully."
 };
