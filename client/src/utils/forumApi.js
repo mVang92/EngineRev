@@ -22,7 +22,7 @@ export default {
         return axios.put(`/api/forum/handleUpdateThreadDetails/${threadId}`, payload);
     },
     // Update the title to a thread
-    deleteThread: (threadId) => {
+    deleteThread: threadId => {
         return axios.put(`/api/forum/deleteThread/${threadId}`);
     },
     // Handle the upvote to a comment

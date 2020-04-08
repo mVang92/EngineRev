@@ -67,7 +67,6 @@ class ThreadDetails extends Component {
                             (
                               <React.Fragment>
                                 <h4 className="breakWord">{threadTitle}</h4>
-                                <hr />
                                 <div className="breakWord">{threadDescription}</div>
                                 <br />
                               </React.Fragment>
@@ -152,7 +151,6 @@ class ThreadDetails extends Component {
                     ) : (
                       <React.Fragment>
                         <h4 className="breakWord">{threadTitle}</h4>
-                        <hr />
                         <div className="breakWord">{threadDescription}</div>
                       </React.Fragment>
                     )
