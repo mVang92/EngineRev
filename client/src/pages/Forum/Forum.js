@@ -164,8 +164,6 @@ export default class Forum extends Component {
       });
   };
 
-
-
   /**
    * Determine what the current theme is
    */
