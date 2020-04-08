@@ -101,6 +101,14 @@ export default class Account extends Component {
   };
 
   /**
+   * Scroll to the top of the page
+   */
+  backToTopOfPage = () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  };
+
+  /**
    * Save the selected theme to the database for the targeted user
    * 
    * @param themeType the theme to pass to the API
@@ -449,6 +457,7 @@ export default class Account extends Component {
                         newBackgroundPicture={this.state.newBackgroundPicture}
                         newProfilePicture={this.state.newProfilePicture}
                         confirmNewPassword={this.state.confirmNewPassword}
+                        backToTopOfPage={this.backToTopOfPage}
                         showUpdateBackgroundPictureModal={this.showUpdateBackgroundPictureModal}
                         showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
                         showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}

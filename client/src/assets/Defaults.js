@@ -12,5 +12,29 @@ export const defaults = {
     addThreadCommentSucess: "Comment posted successfully.",
     deleteThreadCommentSucess: "Comment deleted successfully.",
     threadCommentsCannotBeBlank: "Please add a valid comment.",
-    updateThreadCommentSucess: "Comment updated successfully."
+    updateThreadCommentSucess: "Comment updated successfully.",
+    noAuthorization: "You are not authorized to perform this action.",
+    deleteOneReleaseNoteSuccess: "Release note deleted successfully.",
+    updateOneReleaseNoteSuccess: "Release note updated successfully.",
+    addOneReleaseNoteSuccess: "Release note added successfully.",
+    invalidInputDetected: "Invalid input detected.",
+    themeSelectionError: "Error: Unable to process theme selection.",
+    addThreadSuccessfully: "Thread created successfully.",
+    vehicleNameUpdatedSuccessfully: "Vehicle Name Updated Successfully.",
+    vehicleDeletedSuccessfully: "Vehicle Deleted Successfully.",
+    serviceLogDeletedSuccessfully: "Service Log Deleted Successfully.",
+    aboutCarSpace: "CarSpace allows you to keep track of your vehicle maintenance history. " +
+    "Keep your vehicle running smoothly by tracking your own vehicles by recording their service logs. " +
+    "Meet other passionate do-it-yourselfers to ask quesitons and share diagnostic solutions in the forum.",
+    whoIsCarSpaceFor: "CarSpace is for anyone, mechanically inclined or not, who want to keep track of their vehicle service maintenance history. " +
+    "Users can create their own accounts and add vehicles they want to keep track of. They can also update their " +
+    "account information along with updating vehicle and service log information. " +
+    "Service logs are tracked by adding the date of service, the mileage of the vehicle, and the type of service performed on the vehicle. " +
+    "Have a car repair question or want to help someone else out? Head to the forums to see what others are talking about.",
+    creatorDetails: "Not only do I work full-time as a Software Engineer, but I also have several years of experience in automotive repair " +
+    "(you don’t see that combination every day). As an automotive mechanic, I need a program where I can easily pull it up on a computer " +
+    "or my phone to access my vehicle maintenance and repair history, " +
+    "while being able to add new vehicles and service logs as well. This is where I thought of creating CarSpace (formerly known as CarLog), " +
+    "which allows just that without worrying about paying for monthly or annual subscriptions. " +
+    "CarSpace is intended to be simple to use and to the point."
 };

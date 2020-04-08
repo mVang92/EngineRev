@@ -200,9 +200,7 @@ export default class Thread extends Component {
       threadDescription: this.state.threadDescription
     }
     forumApi.handleUpdateThreadDetails(this.state.threadId, threadPayload)
-      .then(() => {
-        this.showUpdateThreadDetailsSuccessModal();
-      })
+      .then(() => this.showUpdateThreadDetailsSuccessModal())
       .catch(err => this.errorNotification(err));
   };
 
@@ -211,7 +209,7 @@ export default class Thread extends Component {
    */
   handleDeleteThread = () => {
     forumApi.deleteThread(this.state.threadId)
-      .then(() => { window.location.assign(window.location.origin + "/forum")})
+      .then(() => { window.location.assign(window.location.origin + "/forum") })
       .catch(err => this.errorNotification(err));
   };
 
@@ -291,6 +289,7 @@ export default class Thread extends Component {
    * Update the thread comment
    */
   handleUpdateThreadComment = newComment => {
+    this.setState({ disableConfirmSaveEditThreadCommentButton: true });
     let updatedThreadCommentPayload = {
       comment: newComment
     };
@@ -298,14 +297,17 @@ export default class Thread extends Component {
       this.state.commentId,
       updatedThreadCommentPayload
     ).then(() => {
-      this.setState({ threadCommentToUpdate: "" },
+      this.setState({
+        threadCommentToUpdate: "",
+        disableConfirmSaveEditThreadCommentButton: false
+      },
         () => {
           this.successNotification(defaults.updateThreadCommentSucess);
           this.hideEditOneThreadCommentModal();
           this.getAllThreadComments();
         });
     }).catch(err => {
-      this.hideEditOneThreadCommentModal();
+      this.setState({ disableConfirmSaveEditThreadCommentButton: false });
       this.errorNotification(err);
     });
   };
@@ -397,7 +399,7 @@ export default class Thread extends Component {
           this.renderTheme(themes.dark);
           break;
         default:
-          this.errorNotification("Error: Unable to process theme selection.");
+          this.errorNotification(defaults.themeSelectionError);
       }
     }
   };
@@ -492,7 +494,9 @@ export default class Thread extends Component {
   };
 
   /**
-   * Display the success notification when the user completes an action successfully
+   * Display the success notification when the user performs an action successfully
+   * 
+   * @param message the message to display to the user
    */
   successNotification = message => {
     toast.success(message);

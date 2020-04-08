@@ -154,7 +154,7 @@ export default class Forum extends Component {
           threadTitle: "",
           disableSubmitNewThreadButton: false
         }, () => {
-          this.addThreadSuccessNotification();
+          this.successNotification(defaults.addThreadSuccessfully);
           this.getAllThreads();
         });
       })
@@ -185,7 +185,7 @@ export default class Forum extends Component {
           this.renderTheme(themes.dark);
           break;
         default:
-          this.errorNotification("Error: Unable to process theme selection.");
+          this.errorNotification(defaults.themeSelectionError);
       }
     }
   };
@@ -203,10 +203,12 @@ export default class Forum extends Component {
   };
 
   /**
-   * Display the success notification when the user deletes a service log
+   * Display the success notification when the user performs an action successfully
+   * 
+   * @param message the message to display to the user
    */
-  addThreadSuccessNotification = () => {
-    toast.success(`Thread created successfully.`);
+  successNotification = message => {
+    toast.success(message);
   };
 
   /**

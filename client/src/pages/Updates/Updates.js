@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Modal from "react-modal";
 import { firebase } from "../../firebase"
 import { themes } from "../../themes/Themes";
+import { defaults } from "../../assets/Defaults";
 import updateApi from "../../utils/updateApi";
 import vehicleApi from "../../utils/API";
 import OneUpdate from "../../components/OneUpdate";
@@ -80,7 +81,7 @@ export default class Updates extends Component {
           updateApi.addOneUpdate(updateData)
             .then(() => {
               this.getAllUpdates();
-              this.addOneUpdateSuccessNotification();
+              this.successNotification(defaults.addOneReleaseNoteSuccess);
               this.setState({
                 updateChanges: "",
                 knownIssues: ""
@@ -88,13 +89,11 @@ export default class Updates extends Component {
             })
             .catch(err => this.errorNotification(err));
         } else {
-          alert("You are not authorized to perform this action.");
+          alert(defaults.noAuthorization);
           window.location = "/";
         }
       })
-      .catch(err => {
-        this.errorNotification(err);
-      });
+      .catch(err => this.errorNotification(err));
   };
 
   /**
@@ -163,7 +162,7 @@ export default class Updates extends Component {
           this.renderTheme(themes.dark);
           break;
         default:
-          this.errorNotification("Error: Unable to process theme selection.");
+          this.errorNotification(defaults.themeSelectionError);
       }
     }
   };
@@ -281,7 +280,7 @@ export default class Updates extends Component {
           updateApi.updateOneReleaseNote(this.state.updateId, payload)
             .then(() => {
               this.getAllUpdates();
-              this.updateOneUpdateSuccessNotification();
+              this.successNotification(defaults.updateOneReleaseNoteSuccess);
               this.setState({
                 showEditOneUpdateModal: false,
                 disableConfirmSaveEditReleaseNoteButton: false
@@ -292,13 +291,11 @@ export default class Updates extends Component {
               this.setState({ disableConfirmSaveEditReleaseNoteButton: false });
             });
         } else {
-          alert("You are not authorized to perform this action.");
+          alert(defaults.noAuthorization);
           window.location = "/";
         }
       })
-      .catch(err => {
-        this.errorNotification(err);
-      });
+      .catch(err => this.errorNotification(err));
   };
 
   /**
@@ -312,7 +309,7 @@ export default class Updates extends Component {
           updateApi.deleteOneReleaseNote(this.state.updateId)
             .then(() => {
               this.getAllUpdates();
-              this.deleteOneUpdateSuccessNotification();
+              this.successNotification(defaults.deleteOneReleaseNoteSuccess);
               this.setState({
                 showDeleteOneUpdateModal: false,
                 disableConfirmDeleteReleaseNoteButton: false
@@ -323,13 +320,11 @@ export default class Updates extends Component {
               this.setState({ disableConfirmDeleteReleaseNoteButton: false });
             });
         } else {
-          alert("You are not authorized to perform this action.");
+          alert(defaults.noAuthorization);
           window.location = "/";
         }
       })
-      .catch(err => {
-        this.errorNotification(err);
-      });
+      .catch(err => this.errorNotification(err));
   };
 
   /**
@@ -347,24 +342,12 @@ export default class Updates extends Component {
   };
 
   /**
-   * Display the success notification when the admin user submits an release note
+   * Display the success notification when the admin user performs an action successfully
+   * 
+   * @param message the message to display to the user
    */
-  addOneUpdateSuccessNotification = () => {
-    toast.success(`Release note added successfully.`);
-  };
-
-  /**
-   * Display the success notification when the admin user updates a release note
-   */
-  updateOneUpdateSuccessNotification = () => {
-    toast.success(`Release note updated successfully.`);
-  };
-
-  /**
-   * Display the success notification when the admin user deletes a release note
-   */
-  deleteOneUpdateSuccessNotification = () => {
-    toast.success(`Release note deleted successfully.`);
+  successNotification = message => {
+    toast.success(message);
   };
 
   /**
@@ -380,7 +363,7 @@ export default class Updates extends Component {
    * Display the error notification when there is invalid input while updating a release note
    */
   releaseNoteInvalidInputErrorNotification = () => {
-    toast.error(`Invalid input detected.`);
+    toast.error(defaults.invalidInputDetected);
   };
 
   render() {

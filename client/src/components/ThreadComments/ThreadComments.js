@@ -31,7 +31,7 @@ const ThreadComments = props => {
       <div className={`threadDetails ${currentTheme.oneThread}`}>
         <div className="row">
           <div className="col-md-9 text-left breakWord">
-            {formattedEmail} posted on {formattedDate}
+            <strong>{formattedEmail} posted on {formattedDate}</strong>
           </div>
           <div className="col-md-2 noWidthMobileDisplay voteButtons">
             {

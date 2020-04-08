@@ -30,7 +30,7 @@ module.exports = {
     updateOneReleaseNote: (req, res) => {
         db.Update
             .updateOne(
-                { "_id": req.params.updateId },
+                { _id: req.params.updateId },
                 {
                     $set: {
                         "updateChanges": req.body.newReleaseNotes,
