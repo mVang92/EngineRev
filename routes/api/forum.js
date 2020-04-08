@@ -43,4 +43,9 @@ router
     .route("/handleDeleteThreadComment/:threadId/:commentId")
     .put(forumController.handleDeleteThreadComment)
 
+// Matches with "/api/forum/handleUpdateThreadComment/:commentId"
+router
+    .route("/handleUpdateThreadComment/:commentId")
+    .put(forumController.handleUpdateThreadComment)
+
 module.exports = router;
