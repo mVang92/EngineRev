@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { defaults } from "../../assets/Defaults";
 import AddVehicleErrorModal from "../Modal/AddVehicleErrorModal";
 
 class AddVehicle extends Component {
@@ -6,8 +7,15 @@ class AddVehicle extends Component {
     super();
     this.state = {
       showAddVehicleErrorModal: false,
-      defaultProfilePicture: "https://image.flaticon.com/icons/png/512/64/64572.png"
+      defaultProfilePicture: defaults.defaultProfilePicture
     };
+  };
+
+  /**
+   * Check if the user input value is blank
+   */
+  checkIfStringIsBlank = string => {
+    return (!string || /^\s*$/.test(string));
   };
 
   /**
@@ -15,8 +23,14 @@ class AddVehicle extends Component {
    */
   handleSubmitAddOneVehicle = e => {
     e.preventDefault();
-    if (this.refs.year.value === "" || this.refs.make.value === "" || this.refs.model.value === "") {
-      this.showAddVehicleErrorModal()
+    if (this.refs.year.value === "" ||
+      this.refs.make.value === "" ||
+      this.refs.model.value === "" ||
+      this.checkIfStringIsBlank(this.refs.year.value) ||
+      this.checkIfStringIsBlank(this.refs.make.value) ||
+      this.checkIfStringIsBlank(this.refs.model.value)
+    ) {
+      this.showAddVehicleErrorModal();
     } else {
       const newVehiclePayload = {
         vehicleName: null,

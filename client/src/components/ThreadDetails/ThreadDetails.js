@@ -16,7 +16,7 @@ class ThreadDetails extends Component {
       threadTitle,
       threadDescription,
       threadComment,
-      addOneCommentToThread,
+      validateAddOneCommentToThread,
       allThreads,
       disableEditThreadDetails,
       enableEditThreadDetails,
@@ -28,7 +28,8 @@ class ThreadDetails extends Component {
       showDeleteThreadCommentModal,
       disableUpVoteButton,
       disableDownVoteButton,
-      showEditOneThreadCommentModal
+      showEditOneThreadCommentModal,
+      disableSubmitCommentOnThreadButton
     } = this.props;
     const dateSubString = allThreads.date.substring(0, 10);
     const newDate = new Date(dateSubString);
@@ -166,7 +167,8 @@ class ThreadDetails extends Component {
                   <AddCommentToThread
                     handleChange={handleChange}
                     threadComment={threadComment}
-                    addOneCommentToThread={addOneCommentToThread}
+                    validateAddOneCommentToThread={validateAddOneCommentToThread}
+                    disableSubmitCommentOnThreadButton={disableSubmitCommentOnThreadButton}
                     currentTheme={currentTheme}
                   />
                 </React.Fragment>
