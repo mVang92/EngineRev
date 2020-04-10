@@ -44,7 +44,8 @@ export default class Thread extends Component {
       disableDownVoteButton: false,
       showDeleteThreadCommentModal: false,
       disableConfirmSaveEditThreadCommentButton: false,
-      showEditOneThreadCommentModal: false
+      showEditOneThreadCommentModal: false,
+      disableSubmitCommentOnThreadButton: false
     };
   };
 
@@ -120,9 +121,7 @@ export default class Thread extends Component {
                 email: user.email,
                 pageLoaded: true,
                 loggedin: true
-              }, () => {
-                this.determineTheme();
-              });
+              }, () => this.determineTheme());
             } catch (err) {
               this.errorNotification(err);
               this.setState({ pageLoaded: true });
@@ -138,12 +137,14 @@ export default class Thread extends Component {
     });
   };
 
+  /**
+   * Get all comments to the thread
+   */
   getAllThreadComments = () => {
     forumApi.getAllThreadComments(this.state.threadId)
       .then(res => {
-        this.setState({
-          allThreads: res.data[0]
-        }, () => this.getUserInformation());
+        this.setState({ allThreads: res.data[0] },
+          () => this.getUserInformation());
       })
       .catch(err => {
         this.errorNotification(err);
@@ -154,8 +155,7 @@ export default class Thread extends Component {
   /**
    * Add a comment to the chosen thread
    */
-  addOneCommentToThread = e => {
-    e.preventDefault();
+  addOneCommentToThread = () => {
     let threadCommentPayload = {
       creator: this.state.uniqueCreatorId,
       email: this.state.email,
@@ -164,31 +164,19 @@ export default class Thread extends Component {
     }
     forumApi.addOneCommentToOneThread(this.state.threadId, threadCommentPayload)
       .then(() => {
-        this.setState({ threadComment: "" }, () => {
-          this.successNotification(defaults.addThreadCommentSucess);
-          this.getAllThreadComments();
-        });
+        this.setState({
+          threadComment: "",
+          disableSubmitCommentOnThreadButton: false
+        },
+          () => {
+            this.successNotification(defaults.addThreadCommentSucess);
+            this.getAllThreadComments();
+          });
       })
-      .catch(err => this.errorNotification(err));
-  };
-
-  /**
-   * Validate the edited thread title before saving it
-   */
-  validateEditedThreadDetails = () => {
-    if (
-      this.state.threadTitle === "" ||
-      this.state.threadDescription === "" ||
-      this.checkIfStringIsBlank(this.state.threadTitle) ||
-      this.checkIfStringIsBlank(this.state.threadDescription)
-    ) {
-      this.setState({
-        threadTitle: this.state.threadTitleBackup,
-        threadDescription: this.state.threadDescriptionBackup,
-      }, () => this.errorNotification(defaults.threadDetailsCannotBeBlank));
-    } else {
-      this.handleUpdateThreadDetails();
-    }
+      .catch(err => {
+        this.errorNotification(err);
+        this.setState({ disableSubmitCommentOnThreadButton: false });
+      });
   };
 
   /**
@@ -310,6 +298,39 @@ export default class Thread extends Component {
       this.setState({ disableConfirmSaveEditThreadCommentButton: false });
       this.errorNotification(err);
     });
+  };
+
+  /**
+   * Validate the new thread comment input before saving it
+   */
+  validateAddOneCommentToThread = e => {
+    e.preventDefault();
+    this.setState({ disableSubmitCommentOnThreadButton: true });
+    if (this.state.threadComment === "" || this.checkIfStringIsBlank(this.state.threadComment)) {
+      this.setState({ disableSubmitCommentOnThreadButton: false },
+        () => this.errorNotification(defaults.threadCommentsCannotBeBlank));
+    } else {
+      this.addOneCommentToThread();
+    }
+  };
+
+  /**
+   * Validate the edited thread title before saving it
+   */
+  validateEditedThreadDetails = () => {
+    if (
+      this.state.threadTitle === "" ||
+      this.state.threadDescription === "" ||
+      this.checkIfStringIsBlank(this.state.threadTitle) ||
+      this.checkIfStringIsBlank(this.state.threadDescription)
+    ) {
+      this.setState({
+        threadTitle: this.state.threadTitleBackup,
+        threadDescription: this.state.threadDescriptionBackup,
+      }, () => this.errorNotification(defaults.threadDetailsCannotBeBlank));
+    } else {
+      this.handleUpdateThreadDetails();
+    }
   };
 
   /**
@@ -529,6 +550,7 @@ export default class Thread extends Component {
                   disableUpVoteButton={this.state.disableUpVoteButton}
                   disableDownVoteButton={this.state.disableDownVoteButton}
                   disableEditThreadComment={this.state.disableEditThreadComment}
+                  disableSubmitCommentOnThreadButton={this.state.disableSubmitCommentOnThreadButton}
                   showEditOneThreadCommentModal={this.showEditOneThreadCommentModal}
                   showDeleteThreadCommentModal={this.showDeleteThreadCommentModal}
                   showDeleteThreadModal={this.showDeleteThreadModal}
@@ -537,7 +559,7 @@ export default class Thread extends Component {
                   handleChange={this.handleChange}
                   backToTopOfPage={this.backToTopOfPage}
                   backButton={this.backButton}
-                  addOneCommentToThread={this.addOneCommentToThread}
+                  validateAddOneCommentToThread={this.validateAddOneCommentToThread}
                   validateUserToUpvoteComment={this.validateUserToUpvoteComment}
                   validateUserToDownvoteComment={this.validateUserToDownvoteComment}
                   currentTheme={this.state.currentTheme}
