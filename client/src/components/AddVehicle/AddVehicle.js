@@ -120,7 +120,7 @@ class AddVehicle extends Component {
                 <div className="col-md-12 text-center">
                   <button
                     id="addVehicleButton"
-                    title="Add This Vehicle"
+                    title="Add Vehicle"
                     type="submit"
                     className="addBtn"
                     disabled={this.props.disableAddVehicleButton}>

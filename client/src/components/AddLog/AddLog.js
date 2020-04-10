@@ -78,7 +78,7 @@ class AddLog extends Component {
                   <div className="col-md-3 logSubmitBtn text-center addLogButtonsMobileDisplay">
                     <button
                       id="addServiceLogButton"
-                      title="Submit Service Log"
+                      title="Submit Log"
                       type="submit"
                       className="addBtn"
                       disabled={this.props.disableAddServiceLogButton}>

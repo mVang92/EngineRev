@@ -9,7 +9,7 @@ class TopActionButtons extends Component {
                     <Link to={{ pathname: "/" }}>
                         <button
                             id="addLogBackButton"
-                            title="Home"
+                            title="Back"
                             type="button"
                             className="cancelBtn">
                             Back
@@ -22,7 +22,7 @@ class TopActionButtons extends Component {
                             (
                                 <button
                                     id="printPageButton"
-                                    title="Print Service Logs"
+                                    title="Print Logs"
                                     type="button"
                                     className="cancelBtn"
                                     onClick={this.props.handlePrintPage}>
