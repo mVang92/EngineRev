@@ -34,7 +34,7 @@ const AddCommentToThread = props => {
               className="addBtn"
               disabled={disableSubmitCommentOnThreadButton}>
               Submit
-              </button>
+            </button>
           </div>
         </div>
       </form>
