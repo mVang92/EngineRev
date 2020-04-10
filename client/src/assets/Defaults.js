@@ -7,19 +7,19 @@ export const defaults = {
     threadDetailsCannotBeBlank: "Please add a valid title and description for your thread.",
     areYouSureToDeleteThread: "Are you sure you want to delete this thread?",
     areYouSureToDeleteThreadComment: "Are you sure you want to delete your comment?",
-    threadDetailsUpdated: "Thread details updated!",
+    threadDetailsUpdated: "Thread Details Updated.",
     alreadyVotedOnComment: "You have already voted on this comment.",
-    addThreadCommentSucess: "Comment posted successfully.",
-    deleteThreadCommentSucess: "Comment deleted successfully.",
-    threadCommentsCannotBeBlank: "Please add a valid comment.",
-    updateThreadCommentSucess: "Comment updated successfully.",
+    addThreadCommentSucess: "Comment Posted Successfully.",
+    deleteThreadCommentSucess: "Comment Deleted Successfully.",
+    threadCommentsCannotBeBlank: "Comments Cannot Be Blank.",
+    updateThreadCommentSucess: "Comment Updated Successfully.",
     noAuthorization: "You are not authorized to perform this action.",
-    deleteOneReleaseNoteSuccess: "Release note deleted successfully.",
-    updateOneReleaseNoteSuccess: "Release note updated successfully.",
-    addOneReleaseNoteSuccess: "Release note added successfully.",
-    invalidInputDetected: "Invalid input detected.",
+    deleteOneReleaseNoteSuccess: "Release Note Deleted Successfully.",
+    updateOneReleaseNoteSuccess: "Release Note Updated Successfully.",
+    addOneReleaseNoteSuccess: "Release Note Added Successfully.",
+    invalidInputDetected: "Invalid Input Detected.",
     themeSelectionError: "Error: Unable to process theme selection.",
-    addThreadSuccessfully: "Thread created successfully.",
+    addThreadSuccessfully: "Thread Created Successfully.",
     vehicleNameUpdatedSuccessfully: "Vehicle Name Updated Successfully.",
     vehicleDeletedSuccessfully: "Vehicle Deleted Successfully.",
     serviceLogDeletedSuccessfully: "Service Log Deleted Successfully.",
@@ -33,8 +33,7 @@ export const defaults = {
     "Have a car repair question or want to help someone else out? Head to the forums to see what others are talking about.",
     creatorDetails: "Not only do I work full-time as a Software Engineer, but I also have several years of experience in automotive repair " +
     "(you don’t see that combination every day). As an automotive mechanic, I need a program where I can easily pull it up on a computer " +
-    "or my phone to access my vehicle maintenance and repair history, " +
-    "while being able to add new vehicles and service logs as well. This is where I thought of creating CarSpace (formerly known as CarLog), " +
-    "which allows just that without worrying about paying for monthly or annual subscriptions. " +
+    "or my phone to access my vehicle maintenance and repair history. This is where CarSpace comes in, " +
+    "which allows users to add vehicles and keep track of service logs while being able to share ideas through the forum. " +
     "CarSpace is intended to be simple to use and to the point."
 };
