@@ -1,6 +1,8 @@
 import React from "react";
 import editIcon from "../../images/editIcon.png";
 import deleteIcon from "../../images/deleteIcon.png";
+import thumbsUp from "../../images/thumbsUp.png";
+import thumbsDown from "../../images/thumbsDown.png";
 
 const ThreadComments = props => {
   const {
@@ -49,7 +51,7 @@ const ThreadComments = props => {
                                 title="Delete Comment"
                                 onClick={() => showDeleteThreadCommentModal(_id)}
                               >
-                                <img className="deleteIcon" src={deleteIcon} alt="delete"></img>
+                                <img className="deleteIcon" src={deleteIcon} alt="delete" />
                               </button>
                             </div>
                             <div className="col-md-6 noWidthMobileDisplay">
@@ -59,7 +61,7 @@ const ThreadComments = props => {
                                 title="Edit Comment"
                                 onClick={() => showEditOneThreadCommentModal(_id, comment)}
                               >
-                                <img className="editIcon" src={editIcon} alt="edit"></img>
+                                <img className="editIcon" src={editIcon} alt="edit" />
                               </button>
                             </div>
                           </React.Fragment>
@@ -73,7 +75,7 @@ const ThreadComments = props => {
                                 disabled={disableDownVoteButton}
                                 onClick={() => validateUserToDownvoteComment(_id)}
                               >
-                                <strong>-</strong>
+                                <img className="thumbsVotingButton" src={thumbsDown} alt="downVote" />
                               </button>
                             </div>
                             <div className="col-md-6 noWidthMobileDisplay">
@@ -84,7 +86,7 @@ const ThreadComments = props => {
                                 disabled={disableUpVoteButton}
                                 onClick={() => validateUserToUpvoteComment(_id)}
                               >
-                                <strong>+</strong>
+                                <img className="thumbsVotingButton" src={thumbsUp} alt="upVote" />
                               </button>
                             </div>
                           </React.Fragment>
