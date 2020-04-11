@@ -729,6 +729,11 @@ footer {
     width: 3rem;
 }
 
+.thumbsVotingButton {
+    height: 2rem;
+    padding: 4px;
+}
+
 #loadingAnimation {
     color: official;
     display: inline-block;
@@ -967,13 +972,6 @@ footer {
     .centerButtonMobileDisplay {
         text-align: center;
         margin-top: 1em;
-    }
-
-    .editActionButton,
-    .deleteActionButton,
-    .editReleaseNoteActionButton,
-    .deleteReleaseNoteActionButton {
-        width: 6em;
     }
 
     .userInputErrorMessage {

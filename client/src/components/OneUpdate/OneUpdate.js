@@ -48,7 +48,7 @@ const OneUpdate = props => {
                           className="deleteReleaseNoteActionButton"
                           title="Delete Release Note"
                           onClick={event => props.getActionValue(event, _id, updateChanges, knownIssues, deleteValue)}>
-                          <img className="deleteIcon" src={deleteIcon} alt="delete"></img>
+                          <img className="deleteIcon" src={deleteIcon} alt="delete" />
                         </button>
                       </div>
                       <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
@@ -56,7 +56,7 @@ const OneUpdate = props => {
                           className="editReleaseNoteActionButton"
                           title="Edit Release Note"
                           onClick={event => props.getActionValue(event, _id, updateChanges, knownIssues, editValue)}>
-                          <img className="editIcon" src={editIcon} alt="edit"></img>
+                          <img className="editIcon" src={editIcon} alt="edit" />
                         </button>
                       </div>
                     </div>
