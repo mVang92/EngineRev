@@ -40,7 +40,7 @@ const OneUpdate = props => {
               <React.Fragment>
                 <hr className="oneUpdateHr" />
                 <div className="row">
-                  <div className="col-md-10"></div>
+                  <div className="col-md-9"></div>
                   <div className="col-md-2 smallNegativeTopMargin">
                     <div className="row centerButtonMobileDisplay">
                       <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
@@ -61,6 +61,7 @@ const OneUpdate = props => {
                       </div>
                     </div>
                   </div>
+                  <div className="col-md-1"></div>
                 </div>
               </React.Fragment>
             ) : (
