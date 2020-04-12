@@ -451,11 +451,8 @@ export default class Account extends Component {
                         userAccountCreationTime={this.state.userAccountCreationTime}
                         userAccountLastSignIn={this.state.userAccountLastSignIn}
                         updateDisplayName={this.updateDisplayName}
-                        newDisplayName={this.state.newDisplayName}
                         updatePassword={this.updatePassword}
                         newPassword={this.state.newPassword}
-                        newBackgroundPicture={this.state.newBackgroundPicture}
-                        newProfilePicture={this.state.newProfilePicture}
                         confirmNewPassword={this.state.confirmNewPassword}
                         backToTopOfPage={this.backToTopOfPage}
                         showUpdateBackgroundPictureModal={this.showUpdateBackgroundPictureModal}
