@@ -14,29 +14,30 @@ const UpdateProfilePictureModal = props => {
                 <div className="modal-body modalShadow">
                     <div className={`modalBody ${props.currentTheme.background}`}>
                         {
-                            props.newProfilePicture ? (
-                                <React.Fragment>
-                                    <div className="row modal-header">
-                                        <strong className="col-md-12 text-center">
-                                            <label>Use this image as your profile picture?</label>
-                                        </strong>
-                                    </div>
-                                    <div className="row">
-                                        <div id="scrollableProfilePicture" className="col-md-12 text-center">
-                                            <img
-                                                id="profilePicture"
-                                                src={props.newProfilePicture}
-                                                alt="Invalid Entry">
-                                            </img>
-                                        </div>
-                                    </div>
-                                </React.Fragment>
-                            ) : (
+                            !props.newProfilePicture || props.checkIfStringIsBlank(props.newProfilePicture) ?
+                                (
                                     <div className="row modal-header">
                                         <strong className="col-md-12 text-center">
                                             <label>Reset your profile picture to default?</label>
                                         </strong>
                                     </div>
+                                ) : (
+                                    <React.Fragment>
+                                        <div className="row modal-header">
+                                            <strong className="col-md-12 text-center">
+                                                <label>Use this image as your profile picture?</label>
+                                            </strong>
+                                        </div>
+                                        <div className="row">
+                                            <div id="scrollableBackgroundPicture" className="col-md-12 text-center">
+                                                <img
+                                                    id="profilePicture"
+                                                    src={props.newProfilePicture}
+                                                    alt="Invalid Entry">
+                                                </img>
+                                            </div>
+                                        </div>
+                                    </React.Fragment>
                                 )
                         }
                         <div className="modal-footer">
