@@ -27,7 +27,8 @@ const AccountDetails = props => {
     showUpdateDisplayNameModal,
     updatePassword,
     newPassword,
-    confirmNewPassword
+    confirmNewPassword,
+    newBackgroundPicture
   } = props;
   let uniqueUserId = showUniqueUserId ? "showUniqueUserId" : "hideUniqueUserId";
   let uniqueUserIdMask = showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
@@ -198,6 +199,7 @@ const AccountDetails = props => {
                         id="newBackgroundPicture"
                         type="text"
                         onChange={handleChange}
+                        value={newBackgroundPicture}
                         name="newBackgroundPicture"
                         maxLength="500"
                         placeholder="Insert photo URL"

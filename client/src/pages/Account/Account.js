@@ -134,9 +134,7 @@ export default class Account extends Component {
               admin: res.data.admin,
               theme: res.data.theme,
               pageLoaded: true
-            }, () => {
-              this.determineTheme();
-            })
+            }, () => this.determineTheme())
           } catch (err) {
             this.setState({
               vehicleCount: <div className="text-danger">{err.toString()}</div>,
@@ -175,6 +173,12 @@ export default class Account extends Component {
           break;
         default:
           this.errorNotification("Error: Unable to process theme selection.");
+      }
+    } else {
+      if (this.state.backgroundPicture) {
+        document.body.style.backgroundImage = "url(" + this.state.backgroundPicture + ")";
+      } else {
+        document.body.style.backgroundImage = "";
       }
     }
   };
@@ -448,6 +452,7 @@ export default class Account extends Component {
                         hideUniqueUserIdToPage={this.hideUniqueUserIdToPage}
                         loadingError={this.state.loadingError}
                         vehicleCount={this.state.vehicleCount}
+                        newBackgroundPicture={this.state.newBackgroundPicture}
                         userAccountCreationTime={this.state.userAccountCreationTime}
                         userAccountLastSignIn={this.state.userAccountLastSignIn}
                         updateDisplayName={this.updateDisplayName}
@@ -460,7 +465,6 @@ export default class Account extends Component {
                         showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
                         saveThemeForUser={this.saveThemeForUser}
                         admin={this.state.admin}
-                        theme={this.state.theme}
                         currentTheme={this.state.currentTheme}
                         unableToLoadDatabase={this.state.unableToLoadDatabase}
                       />
