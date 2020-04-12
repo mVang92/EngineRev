@@ -98,8 +98,8 @@ export default class Log extends Component {
   };
 
   /**
-    * Cleanup DOM elements to prevent memory leak 
-    */
+   * Cleanup DOM elements to prevent memory leak 
+   */
   componentWillUnmount = () => {
     clearTimeout(this.state.disableDeleteVehicleButtonTimer);
     clearTimeout(this.findUserInformationTimeout);
@@ -254,7 +254,13 @@ export default class Log extends Component {
     if (isNaN(this.state.mileage)) {
       this.showMileageInputErrorModal();
     } else {
-      if (this.state.date === "" || this.state.mileage === "" || this.state.service === "") {
+      if (this.state.date === "" ||
+        this.state.mileage === "" ||
+        this.state.service === "" ||
+        this.checkIfStringIsBlank(this.state.date) ||
+        this.checkIfStringIsBlank(this.state.mileage) ||
+        this.checkIfStringIsBlank(this.state.service)
+      ) {
         this.showAddLogErrorModal();
       } else {
         if (currentDate < loggedServiceDate) {
@@ -341,7 +347,13 @@ export default class Log extends Component {
     if (isNaN(serviceLogMileage)) {
       this.showUpdatedMileageInputErrorModal();
     } else {
-      if (serviceLogDate === "" || serviceLogMileage === "" || serviceLogService === "") {
+      if (serviceLogDate === "" ||
+        serviceLogMileage === "" ||
+        serviceLogService === "" ||
+        this.checkIfStringIsBlank(serviceLogDate) ||
+        this.checkIfStringIsBlank(serviceLogMileage) ||
+        this.checkIfStringIsBlank(serviceLogService)
+      ) {
         this.showUpdateLogErrorModal();
       } else {
         if (currentDate < updatedServiceLogDate) {
@@ -441,8 +453,8 @@ export default class Log extends Component {
   };
 
   /**
-  * Update one service log from record
-  */
+   * Update one service log from record
+   */
   handleUpdateOneServiceLog = updatedServiceLogDateToConvert => {
     let vehicleId = this.state.vehicleId;
     let serviceLogId = this.state.serviceLogId;
@@ -999,6 +1011,7 @@ export default class Log extends Component {
                     <AddLogErrorModal
                       showAddLogErrorModal={this.state.showAddLogErrorModal}
                       hideAddLogErrorModal={this.hideAddLogErrorModal}
+                      checkIfStringIsBlank={this.checkIfStringIsBlank}
                       date={this.state.date}
                       currentTheme={this.state.currentTheme}
                       mileage={this.state.mileage}
@@ -1008,6 +1021,7 @@ export default class Log extends Component {
                     <UpdateLogErrorModal
                       showUpdatedLogErrorModal={this.state.showUpdatedLogErrorModal}
                       hideUpdateLogErrorModal={this.hideUpdateLogErrorModal}
+                      checkIfStringIsBlank={this.checkIfStringIsBlank}
                       currentTheme={this.state.currentTheme}
                       serviceLogDate={this.state.serviceLogDate}
                       serviceLogMileage={this.state.serviceLogMileage}

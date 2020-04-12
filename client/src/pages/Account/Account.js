@@ -101,6 +101,13 @@ export default class Account extends Component {
   };
 
   /**
+   * Check if the user input value is blank
+   */
+  checkIfStringIsBlank = string => {
+    return (!string || /^\s*$/.test(string));
+  };
+
+  /**
    * Scroll to the top of the page
    */
   backToTopOfPage = () => {
@@ -199,11 +206,14 @@ export default class Account extends Component {
   /**
    * Update the display name for the user
    */
-  updateDisplayName = e => {
-    e.preventDefault();
+  updateDisplayName = () => {
     const user = this.state.user;
+    let newDisplayName = this.state.newDisplayName;
+    if (this.checkIfStringIsBlank(newDisplayName)) {
+      newDisplayName = defaults.defaultDisplayName;
+    }
     if (this.state.loggedin) {
-      user.updateProfile({ displayName: this.state.newDisplayName })
+      user.updateProfile({ displayName: newDisplayName })
         .then(() => {
           this.setState({
             showUpdateDisplayNameModal: false,
@@ -222,7 +232,11 @@ export default class Account extends Component {
    * Update the background picture for the user
    */
   updateBackgroundPicture = () => {
-    API.updateUserBackgroundPicture(this.state.userId, this.state.newBackgroundPicture)
+    let newBackgroundPicture = this.state.newBackgroundPicture;
+    if (this.checkIfStringIsBlank(newBackgroundPicture)) {
+      newBackgroundPicture = "";
+    }
+    API.updateUserBackgroundPicture(this.state.userId, newBackgroundPicture)
       .then(() => {
         this.getVehicleData();
         this.setState({
@@ -239,11 +253,14 @@ export default class Account extends Component {
   /**
    * Update the profile picture for the user
    */
-  updateProfilePicture = e => {
-    e.preventDefault();
+  updateProfilePicture = () => {
     const user = this.state.user;
+    let newProfilePicture = this.state.newProfilePicture;
+    if (this.checkIfStringIsBlank(newProfilePicture)) {
+      newProfilePicture = defaults.defaultProfilePicture;
+    }
     if (this.state.loggedin) {
-      user.updateProfile({ photoURL: this.state.newProfilePicture })
+      user.updateProfile({ photoURL: newProfilePicture })
         .then(() => {
           this.setState({ showUpdateProfilePictureModal: false });
           this.showUpdateProfilePictureSuccessModal();
@@ -473,6 +490,7 @@ export default class Account extends Component {
                       showUpdateBackgroundPictureModal={this.state.showUpdateBackgroundPictureModal}
                       updateBackgroundPicture={this.updateBackgroundPicture}
                       hideUpdateBackgroundPictureModal={this.hideUpdateBackgroundPictureModal}
+                      checkIfStringIsBlank={this.checkIfStringIsBlank}
                       newBackgroundPicture={this.state.newBackgroundPicture}
                       currentTheme={this.state.currentTheme}
                     />
@@ -480,6 +498,7 @@ export default class Account extends Component {
                       showUpdateProfilePictureModal={this.state.showUpdateProfilePictureModal}
                       updateProfilePicture={this.updateProfilePicture}
                       hideUpdateProfilePictureModal={this.hideUpdateProfilePictureModal}
+                      checkIfStringIsBlank={this.checkIfStringIsBlank}
                       newProfilePicture={this.state.newProfilePicture}
                       currentTheme={this.state.currentTheme}
                     />
@@ -487,6 +506,7 @@ export default class Account extends Component {
                       showUpdateDisplayNameModal={this.state.showUpdateDisplayNameModal}
                       updateDisplayName={this.updateDisplayName}
                       hideUpdateDisplayNameModal={this.hideUpdateDisplayNameModal}
+                      checkIfStringIsBlank={this.checkIfStringIsBlank}
                       newDisplayName={this.state.newDisplayName}
                       currentTheme={this.state.currentTheme}
                     />

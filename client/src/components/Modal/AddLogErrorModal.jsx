@@ -10,7 +10,8 @@ const AddLogErrorModal = props => {
         mileage,
         service,
         comment,
-        hideAddLogErrorModal
+        hideAddLogErrorModal,
+        checkIfStringIsBlank
     } = props;
     let dateToShowFormatted = "";
     if (date) {
@@ -39,7 +40,7 @@ const AddLogErrorModal = props => {
                                 </div>
                                 <div className="col-md-12">
                                     {
-                                        date === "" ?
+                                        date === "" || checkIfStringIsBlank(date) ?
                                             (
                                                 <div className="text-danger"><strong>Date:</strong></div>
                                             ) : (
@@ -49,7 +50,7 @@ const AddLogErrorModal = props => {
                                 </div>
                                 <div className="col-md-12">
                                     {
-                                        mileage === "" ?
+                                        mileage === "" || checkIfStringIsBlank(mileage) ?
                                             (
                                                 <div className="text-danger"><strong>Mileage:</strong></div>
                                             ) : (
@@ -59,7 +60,7 @@ const AddLogErrorModal = props => {
                                 </div>
                                 <div className="col-md-12 breakWord">
                                     {
-                                        service === "" ?
+                                        service === "" || checkIfStringIsBlank(service) ?
                                             (
                                                 <div className="text-danger"><strong>Service:</strong></div>
                                             ) : (

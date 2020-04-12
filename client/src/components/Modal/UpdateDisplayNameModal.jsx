@@ -14,16 +14,17 @@ const UpdateDisplayNameModal = props => {
                 <div className="modal-body modalShadow">
                     <div className={`modalBody ${props.currentTheme.background}`}>
                         {
-                            props.newDisplayName ? (
-                                <div className="row modal-header">
-                                    <strong className="col-md-12 text-center">
-                                        <label>Use "{props.newDisplayName}" as your name?</label>
-                                    </strong>
-                                </div>
-                            ) : (
+                            !props.newDisplayName || props.checkIfStringIsBlank(props.newDisplayName) ?
+                                (
                                     <div className="row modal-header">
                                         <strong className="col-md-12 text-center">
                                             <label>Reset your name to default?</label>
+                                        </strong>
+                                    </div>
+                                ) : (
+                                    <div className="row modal-header">
+                                        <strong className="col-md-12 text-center">
+                                            <label>Use "{props.newDisplayName}" as your name?</label>
                                         </strong>
                                     </div>
                                 )

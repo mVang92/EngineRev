@@ -14,29 +14,30 @@ const showUpdateBackgroundPictureModal = props => {
                 <div className="modal-body modalShadow">
                     <div className={`modalBody ${props.currentTheme.background}`}>
                         {
-                            props.newBackgroundPicture ? (
-                                <React.Fragment>
-                                    <div className="row modal-header">
-                                        <strong className="col-md-12 text-center">
-                                            <label>Use this image as your background picture?</label>
-                                        </strong>
-                                    </div>
-                                    <div className="row">
-                                        <div id="scrollableBackgroundPicture" className="col-md-12 text-center">
-                                            <img
-                                                id="backgroundPicture"
-                                                src={props.newBackgroundPicture}
-                                                alt="Invalid Entry">
-                                            </img>
-                                        </div>
-                                    </div>
-                                </React.Fragment>
-                            ) : (
+                            !props.newBackgroundPicture || props.checkIfStringIsBlank(props.newBackgroundPicture) ?
+                                (
                                     <div className="row modal-header">
                                         <strong className="col-md-12 text-center">
                                             <label>Reset your background picture to default?</label>
                                         </strong>
                                     </div>
+                                ) : (
+                                    <React.Fragment>
+                                        <div className="row modal-header">
+                                            <strong className="col-md-12 text-center">
+                                                <label>Use this image as your background picture?</label>
+                                            </strong>
+                                        </div>
+                                        <div className="row">
+                                            <div id="scrollableBackgroundPicture" className="col-md-12 text-center">
+                                                <img
+                                                    id="backgroundPicture"
+                                                    src={props.newBackgroundPicture}
+                                                    alt="Invalid Entry">
+                                                </img>
+                                            </div>
+                                        </div>
+                                    </React.Fragment>
                                 )
                         }
                         <div className="modal-footer">
