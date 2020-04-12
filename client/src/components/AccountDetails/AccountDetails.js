@@ -22,15 +22,12 @@ const AccountDetails = props => {
     userAccountCreationTime,
     userAccountLastSignIn,
     saveThemeForUser,
-    newBackgroundPicture,
     showUpdateBackgroundPictureModal,
-    newProfilePicture,
     showUpdateProfilePictureModal,
-    newDisplayName,
     showUpdateDisplayNameModal,
+    updatePassword,
     newPassword,
-    confirmNewPassword,
-    updatePassword
+    confirmNewPassword
   } = props;
   let uniqueUserId = showUniqueUserId ? "showUniqueUserId" : "hideUniqueUserId";
   let uniqueUserIdMask = showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
@@ -201,7 +198,6 @@ const AccountDetails = props => {
                         id="newBackgroundPicture"
                         type="text"
                         onChange={handleChange}
-                        value={newBackgroundPicture}
                         name="newBackgroundPicture"
                         maxLength="500"
                         placeholder="Insert photo URL"
@@ -237,7 +233,6 @@ const AccountDetails = props => {
                 id="newProfilePictureInput"
                 type="text"
                 onChange={handleChange}
-                value={newProfilePicture}
                 name="newProfilePicture"
                 maxLength="500"
                 placeholder="Insert photo URL"
@@ -270,7 +265,6 @@ const AccountDetails = props => {
                 id="newDisplayNameInput"
                 type="text"
                 onChange={handleChange}
-                value={newDisplayName}
                 name="newDisplayName"
                 maxLength="50"
               />
