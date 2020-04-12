@@ -256,7 +256,7 @@ const AccountDetails = props => {
         </div>
       </div>
       <br />
-      <div className="row">
+      <form className="row">
         <div className="col-md-4"><label><strong>Update Display Name:</strong></label></div>
         <div className="col-md-4">
           <div className="row">
@@ -285,9 +285,9 @@ const AccountDetails = props => {
             </div>
           </div>
         </div>
-      </div>
+      </form>
       <br />
-      <div className="row">
+      <form className="row">
         <div className="col-md-4"><label><strong>Update Password:</strong></label></div>
         <div className="col-md-4">
           <div className="row">
@@ -331,7 +331,7 @@ const AccountDetails = props => {
             </div>
           </div>
         </div>
-      </div>
+      </form>
       <hr className={currentTheme.hr} />
       <BottomActionButtons
         backToTopOfPage={backToTopOfPage}
