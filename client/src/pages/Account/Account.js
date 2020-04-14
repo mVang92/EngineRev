@@ -179,7 +179,7 @@ export default class Account extends Component {
           this.renderTheme(themes.dark);
           break;
         default:
-          this.errorNotification("Error: Unable to process theme selection.");
+          this.errorNotification(defaults.themeSelectionError);
       }
     } else {
       if (this.state.backgroundPicture) {
@@ -280,7 +280,7 @@ export default class Account extends Component {
     if (this.state.loggedin) {
       let isDomainCarspace = (this.state.userEmail).includes("carspace.com");
       if (isDomainCarspace) {
-        this.unableToUpdatePasswordProductionTestUsers();
+        this.errorNotification(defaults.noAuthorizationToPerformAction);
         this.setState({
           newPassword: "",
           confirmNewPassword: ""
@@ -289,7 +289,7 @@ export default class Account extends Component {
         if (this.state.newPassword === this.state.confirmNewPassword) {
           this.state.user.updatePassword(this.state.confirmNewPassword)
             .then(() => {
-              this.updatePasswordSuccessNotification();
+              this.successNotification(defaults.passwordUpdatedSuccessfully);
               this.setState({
                 newPassword: "",
                 confirmNewPassword: ""
@@ -306,7 +306,7 @@ export default class Account extends Component {
             newPassword: "",
             confirmNewPassword: ""
           });
-          this.passwordsDoNotMatchErrorNotification();
+          this.errorNotification(defaults.passwordsDoNotMatch);
         }
       }
     }
@@ -409,17 +409,12 @@ export default class Account extends Component {
   };
 
   /**
-   * Display the success notification when the password is updated successfully
+   * Display the success notification when the user performs an action successfully
+   * 
+   * @param message the message to display to the user
    */
-  updatePasswordSuccessNotification = () => {
-    toast.success(`Password Updated Successfully.`);
-  };
-
-  /**
-   * Display the error notification when the new password and confirm passwords do not match
-   */
-  passwordsDoNotMatchErrorNotification = () => {
-    toast.warn(`Passwords do not match. Try again.`);
+  successNotification = message => {
+    toast.success(message);
   };
 
   /**
@@ -438,13 +433,6 @@ export default class Account extends Component {
    */
   errorNotification = err => {
     toast.error(err.toString());
-  };
-
-  /**
-   * Display the error notification when updating the password to a production test user
-   */
-  unableToUpdatePasswordProductionTestUsers = () => {
-    toast.error(`You are not authorized to perform this action.`);
   };
 
   render() {

@@ -1,77 +1,75 @@
-import React, { Component } from "react";
+import React from "react";
 import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
 import BottomActionButtons from "../../components/BottomActionButtons";
 import { defaults } from "../../assets/Defaults";
 import AddThread from "../../components/AddThread";
 import OneThread from "../../components/OneThread";
 
-class ForumDetails extends Component {
-  render() {
-    const {
-      currentTheme,
-      loggedin,
-      handleChange,
-      validateThreadInputValues,
-      threadTitle,
-      threadDescription,
-      allThreads,
-      backToTopOfPage,
-      disableSubmitNewThreadButton
-    } = this.props;
+const ForumDetails = props => {
+  const {
+    currentTheme,
+    loggedin,
+    handleChange,
+    validateThreadInputValues,
+    threadTitle,
+    threadDescription,
+    allThreads,
+    backToTopOfPage,
+    disableSubmitNewThreadButton
+  } = props;
 
-    return (
-      <div id="forumPage" className={`mt-3 box ${currentTheme.background}`}>
-        <div className="row text-center">
-          <div className="col-md-12">
-            <label><h4>Forum</h4></label>
-          </div>
+  return (
+    <div id="forumPage" className={`mt-3 box ${currentTheme.background}`}>
+      <div className="row text-center">
+        <div className="col-md-12">
+          <label><h4>Forum</h4></label>
         </div>
-        <BackToHomeButtonRow />
-        <hr className={currentTheme.hr} />
-        {
-          loggedin ?
-            (
-              <React.Fragment>
-                <AddThread
-                  handleChange={handleChange}
-                  validateThreadInputValues={validateThreadInputValues}
-                  threadTitle={threadTitle}
-                  threadDescription={threadDescription}
-                  disableSubmitNewThreadButton={disableSubmitNewThreadButton}
-                  currentTheme={currentTheme}
-                />
-                <div className="text-center">
-                  <strong><label>Threads</label></strong>
-                </div>
-              </React.Fragment>
-            ) : (
-              <div className="text-center">
-                <label><strong>{defaults.loggedOutStartThread}</strong></label>
-              </div>
-            )
-        }
-        {
-          allThreads.map(thread => {
-            return (
-              <OneThread
-                key={thread._id}
-                _id={thread._id}
-                date={thread.date}
-                email={thread.email}
-                threadTitle={thread.threadTitle}
-                threadDescription={thread.threadDescription}
+      </div>
+      <BackToHomeButtonRow />
+      <hr className={currentTheme.hr} />
+      {
+        loggedin ?
+          (
+            <React.Fragment>
+              <AddThread
+                handleChange={handleChange}
+                validateThreadInputValues={validateThreadInputValues}
+                threadTitle={threadTitle}
+                threadDescription={threadDescription}
+                disableSubmitNewThreadButton={disableSubmitNewThreadButton}
                 currentTheme={currentTheme}
               />
-            )
-          })
-        }
-        <hr className={currentTheme.hr} />
-        <BottomActionButtons
-          backToTopOfPage={backToTopOfPage}
-        />
-      </div>
-    );
-  }
+              <div className="text-center">
+                <strong><label>Threads</label></strong>
+              </div>
+            </React.Fragment>
+          ) : (
+            <div className="text-center">
+              <label><strong>{defaults.loggedOutStartThread}</strong></label>
+            </div>
+          )
+      }
+      {
+        allThreads.map(thread => {
+          return (
+            <OneThread
+              key={thread._id}
+              _id={thread._id}
+              date={thread.date}
+              email={thread.email}
+              threadTitle={thread.threadTitle}
+              threadDescription={thread.threadDescription}
+              currentTheme={currentTheme}
+            />
+          )
+        })
+      }
+      <hr className={currentTheme.hr} />
+      <BottomActionButtons
+        backToTopOfPage={backToTopOfPage}
+      />
+    </div>
+  );
 };
 
 export default ForumDetails;

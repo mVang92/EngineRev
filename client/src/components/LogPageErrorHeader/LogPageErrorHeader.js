@@ -1,4 +1,5 @@
 import React from "react";
+import { defaults } from "../../assets/Defaults";
 
 const LogPageErrorHeader = props => {
   const errorMessage = props.errorMessage.toString();
@@ -9,7 +10,7 @@ const LogPageErrorHeader = props => {
           (
             <label><h3>{errorMessage}</h3></label>
           ) : (
-            <label><h3>You do not have permission to view this content</h3></label>
+            <label><h3>{defaults.noAuthorizationToViewPage}</h3></label>
           )
       }
     </div>

@@ -4,7 +4,7 @@ export const defaults = {
     loggedOutStartThread: "Please sign in or create an account to start a thread.",
     startANewThread: "Start a New Thread",
     noCommentsOnThread: "There are no comments on this thread.",
-    threadDetailsCannotBeBlank: "Please add a valid title and description for your thread.",
+    threadDetailsCannotBeBlank: "Title and description are required.",
     areYouSureToDeleteThread: "Are you sure you want to delete this thread?",
     areYouSureToDeleteThreadComment: "Are you sure you want to delete your comment?",
     threadDetailsUpdated: "Thread Details Updated.",
@@ -13,7 +13,8 @@ export const defaults = {
     deleteThreadCommentSucess: "Comment Deleted Successfully.",
     threadCommentsCannotBeBlank: "Comments Cannot Be Blank.",
     updateThreadCommentSucess: "Comment Updated Successfully.",
-    noAuthorization: "You are not authorized to perform this action.",
+    noAuthorizationToPerformAction: "You are not authorized to perform this action.",
+    noAuthorizationToViewPage: "You do not have permission to view this content.",
     deleteOneReleaseNoteSuccess: "Release Note Deleted Successfully.",
     updateOneReleaseNoteSuccess: "Release Note Updated Successfully.",
     addOneReleaseNoteSuccess: "Release Note Added Successfully.",
@@ -23,6 +24,8 @@ export const defaults = {
     vehicleNameUpdatedSuccessfully: "Vehicle Name Updated Successfully.",
     vehicleDeletedSuccessfully: "Vehicle Deleted Successfully.",
     serviceLogDeletedSuccessfully: "Service Log Deleted Successfully.",
+    passwordUpdatedSuccessfully: "Password Updated Successfully.",
+    passwordsDoNotMatch: "Passwords do not match. Try again.",
     aboutCarSpace: "CarSpace allows you to keep track of your vehicle maintenance history. " +
     "Keep your vehicle running smoothly by tracking your own vehicles by recording their service logs. " +
     "Meet other passionate do-it-yourselfers to ask quesitons and share diagnostic solutions in the forum.",
