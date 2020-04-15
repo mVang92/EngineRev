@@ -91,7 +91,7 @@ const ThreadDetails = props => {
                             </React.Fragment>
                           )
                       }
-                      <div className="row text-center">
+                      <div className="row text-center smallMarginTop">
                         {
                           disableEditThreadDetails ?
                             (

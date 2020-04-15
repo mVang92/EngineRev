@@ -25,7 +25,7 @@ const AddCommentToThread = props => {
             </textarea>
           </div>
         </div>
-        <div className="row">
+        <div className="row smallMarginTop">
           <div className="col-md-12 text-right">
             <button
               id="submitCommentOnThreadButton"
