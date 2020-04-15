@@ -57,7 +57,7 @@ const AddLog = props => {
                   </textarea>
                 </div>
               </div>
-              <div className="row">
+              <div className="row smallMarginTop">
                 <div className="col-md-3"></div>
                 <div className="col-md-3"></div>
                 <div className="col-md-3 text-center addLogButtonsMobileDisplay" >
