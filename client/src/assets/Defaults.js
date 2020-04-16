@@ -32,6 +32,8 @@ export const defaults = {
     passwordUpdatedSuccessfully: "Password Updated Successfully.",
     passwordsDoNotMatch: "Passwords do not match. Try again.",
     errorLoadingVehicleCount: "Error Loading Vehicle Count",
+    passwordConfirmationSent: "Password confirmation sent. Please check your email.",
+    inputFieldsReset: "Input Fields Reset.",
     aboutCarSpace: "CarSpace allows you to keep track of your vehicle maintenance history. " +
     "Keep your vehicle running smoothly by tracking your own vehicles by recording their service logs. " +
     "Meet other passionate do-it-yourselfers to ask quesitons and share diagnostic solutions in the forum.",
