@@ -71,7 +71,7 @@ const AccountDetails = props => {
               {
                 loadingError ?
                   (
-                  <span id="accountPageVehicleCount" className="text-danger">{defaults.errorLoadingVehicleCount}</span>
+                    <span id="accountPageVehicleCount" className="text-danger">{defaults.errorLoadingVehicleCount}</span>
                   ) : (
                     <span id="accountPageVehicleCount">{vehicleCount}</span>
                   )
