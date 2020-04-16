@@ -48,7 +48,8 @@ export default class Account extends Component {
       showUpdateDisplayNameSuccessModal: false,
       unableToLoadDatabase: false,
       defaultProfilePicture: defaults.defaultProfilePicture,
-      defaultDisplayName: defaults.defaultDisplayName
+      defaultDisplayName: defaults.defaultDisplayName,
+      disableThemeToggleButton: false
     };
   };
 
@@ -120,11 +121,17 @@ export default class Account extends Component {
    * 
    * @param themeType the theme to pass to the API
    */
-  saveThemeForUser = (event, themeType) => {
-    event.preventDefault();
+  saveThemeForUser = themeType => {
+    this.setState({ disableThemeToggleButton: true });
     API.saveThemeForUser(this.state.userId, themeType)
-      .then(() => this.getVehicleData())
-      .catch(err => this.errorNotification(err));
+      .then(() => {
+        this.setState({ disableThemeToggleButton: false },
+          this.getVehicleData())
+      })
+      .catch(err => {
+        this.setState({ disableThemeToggleButton: false },
+          this.errorNotification(err))
+      });
   };
 
   /**
@@ -470,6 +477,7 @@ export default class Account extends Component {
                         showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
                         saveThemeForUser={this.saveThemeForUser}
                         admin={this.state.admin}
+                        disableThemeToggleButton={this.state.disableThemeToggleButton}
                         currentTheme={this.state.currentTheme}
                         unableToLoadDatabase={this.state.unableToLoadDatabase}
                       />
