@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { firebase, auth } from "./firebase"
 import { ToastContainer, toast } from "react-toastify";
 import { NavLoggedIn, NavLoggedOut } from "./components/Nav";
+import { defaults } from "./assets/Defaults";
 import API from "./utils/API";
 import Main from "./pages/Main";
 import Log from "./pages/Log";
@@ -178,7 +179,7 @@ export default class App extends Component {
     auth
       .doPasswordReset(this.state.email)
       .then(() => {
-        this.sendPasswordResetEmailConfirmationSuccessNotification();
+        this.successNotification(defaults.passwordConfirmationSent);
         this.setState({
           showForgotPasswordModal: false,
           disableForgotPasswordSubmitButton: false
@@ -280,17 +281,19 @@ export default class App extends Component {
   };
 
   /**
-   * Display the success notification when the password confirmation email sends
+   * Display the success notification when the user performs an action successfully
+   * 
+   * @param message the message to display to the user
    */
-  sendPasswordResetEmailConfirmationSuccessNotification = () => {
-    toast.success(`Password confirmation sent. Please check your email.`);
+  successNotification = message => {
+    toast.success(message);
   };
 
   /**
    * Display the info notification when the user resets the fields to add a vehicle
    */
   handleResetAddVehicleFields = () => {
-    toast.info(`Input Fields Reset.`);
+    toast.info(defaults.inputFieldsReset);
   };
 
   /**

@@ -642,7 +642,7 @@ export default class Log extends Component {
    * Display the info notification when the user resets the fields to add a service log
    */
   resetFieldsNotification = () => {
-    toast.info(`Input Fields Reset.`);
+    toast.info(defaults.inputFieldsReset);
   };
 
   /**
