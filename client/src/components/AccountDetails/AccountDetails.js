@@ -1,6 +1,7 @@
 import React from "react";
 import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
 import BottomActionButtons from "../../components/BottomActionButtons";
+import { defaults } from "../../assets/Defaults";
 
 const AccountDetails = props => {
   const {
@@ -28,7 +29,8 @@ const AccountDetails = props => {
     updatePassword,
     newPassword,
     confirmNewPassword,
-    newBackgroundPicture
+    newBackgroundPicture,
+    disableThemeToggleButton
   } = props;
   let uniqueUserId = showUniqueUserId ? "showUniqueUserId" : "hideUniqueUserId";
   let uniqueUserIdMask = showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
@@ -69,7 +71,7 @@ const AccountDetails = props => {
               {
                 loadingError ?
                   (
-                    <span id="accountPageVehicleCount" className="text-danger">Error Loading Vehicle Count</span>
+                  <span id="accountPageVehicleCount" className="text-danger">{defaults.errorLoadingVehicleCount}</span>
                   ) : (
                     <span id="accountPageVehicleCount">{vehicleCount}</span>
                   )
@@ -96,7 +98,7 @@ const AccountDetails = props => {
       <div className="row">
         <div className="col-md-4"><label><strong>Unique User Id:</strong></label></div>
         <div className="col-md-4">
-          <label><span id={uniqueUserIdMask}>*****************************************</span></label>
+          <label><span id={uniqueUserIdMask}>{defaults.uniqueUserIdMask}</span></label>
           <span id={uniqueUserId}>{userId}</span>
         </div>
         <div className="col-md-4">
@@ -152,7 +154,8 @@ const AccountDetails = props => {
                         id="carSpaceThemeToggleButton"
                         title="CarSpace Theme"
                         type="button"
-                        onClick={event => saveThemeForUser(event, "carSpace")}>
+                        onClick={() => saveThemeForUser(defaults.carSpaceTheme)}
+                        disabled={disableThemeToggleButton}>
                         CarSpace
                       </button>
                     </div>
@@ -161,7 +164,8 @@ const AccountDetails = props => {
                         id="lightThemeToggleButton"
                         title="Light Theme"
                         type="button"
-                        onClick={event => saveThemeForUser(event, "light")}>
+                        onClick={() => saveThemeForUser(defaults.lightTheme)}
+                        disabled={disableThemeToggleButton}>
                         Light
                       </button>
                     </div>
@@ -172,7 +176,8 @@ const AccountDetails = props => {
                         id="greyThemeToggleButton"
                         title="Grey Theme"
                         type="button"
-                        onClick={event => saveThemeForUser(event, "grey")}>
+                        onClick={() => saveThemeForUser(defaults.greyTheme)}
+                        disabled={disableThemeToggleButton}>
                         Grey
                       </button>
                     </div>
@@ -181,7 +186,8 @@ const AccountDetails = props => {
                         id="darkThemeToggleButton"
                         title="Dark Theme"
                         type="button"
-                        onClick={event => saveThemeForUser(event, "dark")}>
+                        onClick={() => saveThemeForUser(defaults.darkTheme)}
+                        disabled={disableThemeToggleButton}>
                         Dark
                       </button>
                     </div>
