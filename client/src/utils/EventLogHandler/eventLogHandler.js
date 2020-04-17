@@ -4,24 +4,26 @@ import { events } from "../../assets/Events";
 let eventPayload = {};
 
 export default {
-    addOneEventSuccessful: (creatorId, email, event) => {
+    successful: (creatorId, email, event) => {
         eventPayload = {
             creator: creatorId,
             email: email,
             event: event,
-            type: events.eventSuccess
+            status: events.eventSuccess
         }
-        eventLogApi.addOneEvent(eventPayload);
+        eventLogApi.addOneEvent(eventPayload)
+            .then(() => eventLogApi.removeOldEvents());
     },
 
-    addOneEventFailure: (creatorId, email, event, error) => {
+    failure: (creatorId, email, event, error) => {
         eventPayload = {
             creator: creatorId,
             email: email,
             event: event,
-            type: events.eventError,
+            status: events.eventError,
             error: error.toString()
         }
-        eventLogApi.addOneEvent(eventPayload);
+        eventLogApi.addOneEvent(eventPayload)
+            .then(() => eventLogApi.removeOldEvents());
     }
 }

@@ -244,13 +244,13 @@ export default class Log extends Component {
         this.setState({
           showEditOneVehicleNameModal: false
         }, () => {
-          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+          eventLogHandler.successful(creatorId, email, event);
           this.successNotification(defaults.vehicleNameUpdatedSuccessfully);
           this.getOneVehicle();
         });
       })
       .catch(err => {
-        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        eventLogHandler.failure(creatorId, email, event, err);
         this.errorNotification(err);
       });
   };
@@ -396,14 +396,14 @@ export default class Log extends Component {
           updatedModel: "",
           disableConfirmSaveEditVehicleNameButton: false
         }, () => {
-          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+          eventLogHandler.successful(creatorId, email, event);
           this.successNotification(defaults.vehicleNameUpdatedSuccessfully);
           this.hideEditOneVehicleNameModal();
           this.getOneVehicle();
         });
       })
       .catch(err => {
-        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        eventLogHandler.failure(creatorId, email, event, err);
         this.errorNotification(err);
         this.setState({ disableConfirmSaveEditVehicleNameButton: false });
       });
@@ -439,13 +439,13 @@ export default class Log extends Component {
           comment: "",
           disableAddServiceLogButton: false
         }, () => {
-          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+          eventLogHandler.successful(creatorId, email, event);
           this.addOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory);
           this.getOneVehicle();
         });
       })
       .catch(err => {
-        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        eventLogHandler.failure(creatorId, email, event, err);
         this.errorNotification(err);
         this.setState({ disableAddServiceLogButton: false });
       });
@@ -472,11 +472,11 @@ export default class Log extends Component {
     const event = events.deletedVehicle;
     API.deleteOneVehicle(this.state.vehicleId)
       .then(() => {
-        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+        eventLogHandler.successful(creatorId, email, event);
         this.successNotification(defaults.vehicleDeletedSuccessfully);
       })
       .catch(err => {
-        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        eventLogHandler.failure(creatorId, email, event, err);
         this.errorNotification(err);
       });
   };
@@ -522,7 +522,7 @@ export default class Log extends Component {
           serviceLogComment: "",
           disableConfirmSaveEditServiceLogButton: false
         }, () => {
-          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+          eventLogHandler.successful(creatorId, email, event);
           this.hideEditOneServiceLogModal();
           this.hideUpdatedFutureDateConfirmationModal();
           this.updateOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory);
@@ -530,7 +530,7 @@ export default class Log extends Component {
         });
       })
       .catch(err => {
-        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        eventLogHandler.failure(creatorId, email, event, err);
         this.errorNotification(err);
         this.setState({ disableConfirmSaveEditServiceLogButton: false });
       });
@@ -547,13 +547,13 @@ export default class Log extends Component {
       .then(() => {
         this.setState({ showDeleteOneLogModal: false },
           () => {
-            eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+            eventLogHandler.successful(creatorId, email, event);
             this.getOneVehicle();
             this.successNotification(defaults.serviceLogDeletedSuccessfully);
           });
       })
       .catch(err => {
-        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        eventLogHandler.failure(creatorId, email, event, err);
         this.errorNotification(err);
       });
   };

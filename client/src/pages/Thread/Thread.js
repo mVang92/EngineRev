@@ -174,13 +174,13 @@ export default class Thread extends Component {
           disableSubmitCommentOnThreadButton: false
         },
           () => {
-            eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+            eventLogHandler.successful(creatorId, email, event);
             this.successNotification(defaults.addThreadCommentSucess);
             this.getAllThreadComments();
           });
       })
       .catch(err => {
-        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        eventLogHandler.failure(creatorId, email, event, err);
         this.errorNotification(err);
         this.setState({ disableSubmitCommentOnThreadButton: false });
       });
@@ -199,11 +199,11 @@ export default class Thread extends Component {
     }
     forumApi.handleUpdateThreadDetails(this.state.threadId, threadPayload)
       .then(() => {
-        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+        eventLogHandler.successful(creatorId, email, event);
         this.showUpdateThreadDetailsSuccessModal();
       })
       .catch(err => {
-        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        eventLogHandler.failure(creatorId, email, event, err);
         this.errorNotification(err);
       });
   };
@@ -217,11 +217,11 @@ export default class Thread extends Component {
     const event = events.deleteThread;
     forumApi.deleteThread(this.state.threadId)
       .then(() => {
-        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+        eventLogHandler.successful(creatorId, email, event);
         window.location.assign(window.location.origin + "/forum");
       })
       .catch(err => {
-        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        eventLogHandler.failure(creatorId, email, event, err);
         this.errorNotification(err);
       });
   };
@@ -235,7 +235,7 @@ export default class Thread extends Component {
     const event = events.upvoteComment;
     forumApi.handleCommentUpVote(this.state.threadId, commentId)
       .then(() => {
-        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+        eventLogHandler.successful(creatorId, email, event);
         vehicleApi.recordVotedThreadComment(this.state.uniqueCreatorId, commentId)
           .then(() => {
             this.setState({ disableUpVoteButton: false }, () => {
@@ -250,7 +250,7 @@ export default class Thread extends Component {
       })
       .catch(err => {
         this.setState({ disableUpVoteButton: false }, () => {
-          eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+          eventLogHandler.failure(creatorId, email, event, err);
           this.errorNotification(err);
         });
       });
@@ -265,7 +265,7 @@ export default class Thread extends Component {
     const event = events.downvoteComment;
     forumApi.handleCommentDownVote(this.state.threadId, commentId)
       .then(() => {
-        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+        eventLogHandler.successful(creatorId, email, event);
         vehicleApi.recordVotedThreadComment(this.state.uniqueCreatorId, commentId)
           .then(() => {
             this.setState({ disableDownVoteButton: false }, () => {
@@ -280,7 +280,7 @@ export default class Thread extends Component {
       })
       .catch(err => {
         this.setState({ disableDownVoteButton: false }, () => {
-          eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+          eventLogHandler.failure(creatorId, email, event, err);
           this.errorNotification(err);
         });
       });
@@ -295,13 +295,13 @@ export default class Thread extends Component {
     const event = events.deleteThreadComment;
     forumApi.handleDeleteThreadComment(this.state.threadId, this.state.commentId)
       .then(() => {
-        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+        eventLogHandler.successful(creatorId, email, event);
         this.successNotification(defaults.deleteThreadCommentSucess)
         this.hideDeleteThreadCommentModal();
         this.getAllThreadComments();
       })
       .catch(err => {
-        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        eventLogHandler.failure(creatorId, email, event, err);
         this.hideDeleteThreadCommentModal();
         this.errorNotification(err);
       });
@@ -327,13 +327,13 @@ export default class Thread extends Component {
         disableConfirmSaveEditThreadCommentButton: false
       },
         () => {
-          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+          eventLogHandler.successful(creatorId, email, event);
           this.successNotification(defaults.updateThreadCommentSucess);
           this.hideEditOneThreadCommentModal();
           this.getAllThreadComments();
         });
     }).catch(err => {
-      eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+      eventLogHandler.failure(creatorId, email, event, err);
       this.setState({ disableConfirmSaveEditThreadCommentButton: false });
       this.errorNotification(err);
     });

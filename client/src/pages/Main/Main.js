@@ -138,14 +138,14 @@ export default class App extends Component {
     } else {
       API.addOneVehicle(creatorId, newVehicle)
         .then(() => {
-          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+          eventLogHandler.successful(creatorId, email, event);
           this.state.props.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
           this.findUserInformationForOneUser(this.state.uid);
           this.setState({ disableAddVehicleButton: false });
           document.getElementById("field").reset();
         })
         .catch(err => {
-          eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+          eventLogHandler.failure(creatorId, email, event, err);
           this.state.props.errorNotification(err);
           this.setState({ disableAddVehicleButton: false });
         });
