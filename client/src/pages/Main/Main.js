@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { themes } from "../../themes/Themes";
 import { defaults } from "../../assets/Defaults";
 import API from "../../utils/API";
+import eventLogAPI from "../../utils/eventLogApi";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 import LoggedOut from "../../components/LoggedOut";
@@ -127,19 +128,37 @@ export default class App extends Component {
     const id = this.state.uid;
     const date = new Date();
     const futureYear = date.getFullYear() + 2;
+    const email = this.state.props.email;
     this.setState({ disableAddVehicleButton: true });
     if (isNaN(newVehicle.year) || (newVehicle.year < 1885) || (newVehicle.year > futureYear)) {
       this.showAddVehicleYearNanErrorModal();
       this.setState({ disableAddVehicleButton: false });
     } else {
+      const event = defaults.addedNewVehicle;
+      let eventPayload = {};
       API.addOneVehicle(id, newVehicle)
         .then(() => {
+          eventPayload = {
+            creator: id,
+            email: email,
+            event: event,
+            type: defaults.eventSuccess
+          }
+          eventLogAPI.addOneEvent(eventPayload);
           this.state.props.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
           this.findUserInformationForOneUser(this.state.uid);
           this.setState({ disableAddVehicleButton: false });
           document.getElementById("field").reset();
         })
         .catch(err => {
+          eventPayload = {
+            creator: id,
+            email: email,
+            event: event,
+            type: defaults.eventError,
+            error: err.toString()
+          }
+          eventLogAPI.addOneEvent(eventPayload)
           this.state.props.errorNotification(err);
           this.setState({ disableAddVehicleButton: false });
         });
