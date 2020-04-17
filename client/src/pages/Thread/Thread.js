@@ -8,6 +8,8 @@ import { firebase } from "../../firebase"
 import { themes } from "../../themes/Themes";
 import { toast } from "react-toastify";
 import { defaults } from "../../assets/Defaults";
+import { events } from "../../assets/Events";
+import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import DeleteThreadModal from "../../components/Modal/DeleteThreadModal";
 import DeleteThreadCommentModal from "../../components/Modal/DeleteThreadCommentModal";
 import EditOneThreadCommentModal from "../../components/Modal/EditOneThreadCommentModal";
@@ -156,6 +158,9 @@ export default class Thread extends Component {
    * Add a comment to the chosen thread
    */
   addOneCommentToThread = () => {
+    const creatorId = this.state.uniqueCreatorId;
+    const email = this.state.email;
+    const event = events.addCommentToThread;
     let threadCommentPayload = {
       creator: this.state.uniqueCreatorId,
       email: this.state.email,
@@ -169,11 +174,13 @@ export default class Thread extends Component {
           disableSubmitCommentOnThreadButton: false
         },
           () => {
+            eventLogHandler.addOneEventSuccessful(creatorId, email, event);
             this.successNotification(defaults.addThreadCommentSucess);
             this.getAllThreadComments();
           });
       })
       .catch(err => {
+        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
         this.errorNotification(err);
         this.setState({ disableSubmitCommentOnThreadButton: false });
       });
@@ -183,49 +190,69 @@ export default class Thread extends Component {
    * Update the title to the thread
    */
   handleUpdateThreadDetails = () => {
+    const creatorId = this.state.uniqueCreatorId;
+    const email = this.state.email;
+    const event = events.updateThreadDetails;
     let threadPayload = {
       threadTitle: this.state.threadTitle,
       threadDescription: this.state.threadDescription
     }
     forumApi.handleUpdateThreadDetails(this.state.threadId, threadPayload)
-      .then(() => this.showUpdateThreadDetailsSuccessModal())
-      .catch(err => this.errorNotification(err));
+      .then(() => {
+        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+        this.showUpdateThreadDetailsSuccessModal();
+      })
+      .catch(err => {
+        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        this.errorNotification(err);
+      });
   };
 
   /**
    * Delete a thread
    */
   handleDeleteThread = () => {
+    const creatorId = this.state.uniqueCreatorId;
+    const email = this.state.email;
+    const event = events.deleteThread;
     forumApi.deleteThread(this.state.threadId)
-      .then(() => { window.location.assign(window.location.origin + "/forum") })
-      .catch(err => this.errorNotification(err));
+      .then(() => {
+        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+        window.location.assign(window.location.origin + "/forum");
+      })
+      .catch(err => {
+        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        this.errorNotification(err);
+      });
   };
 
   /**
    * Handle up vote on a comment
    */
   handleUpvoteComment = commentId => {
+    const creatorId = this.state.uniqueCreatorId;
+    const email = this.state.email;
+    const event = events.upvoteComment;
     forumApi.handleCommentUpVote(this.state.threadId, commentId)
       .then(() => {
+        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
         vehicleApi.recordVotedThreadComment(this.state.uniqueCreatorId, commentId)
           .then(() => {
-            this.setState(
-              { disableUpVoteButton: false },
-              () => this.getAllThreadComments()
-            );
+            this.setState({ disableUpVoteButton: false }, () => {
+              this.getAllThreadComments();
+            });
           })
           .catch(err => {
-            this.setState(
-              { disableUpVoteButton: false },
-              () => this.errorNotification(err)
-            );
+            this.setState({ disableUpVoteButton: false }, () => {
+              this.errorNotification(err);
+            });
           });
       })
       .catch(err => {
-        this.setState(
-          { disableUpVoteButton: false },
-          () => this.errorNotification(err)
-        );
+        this.setState({ disableUpVoteButton: false }, () => {
+          eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+          this.errorNotification(err);
+        });
       });
   };
 
@@ -233,27 +260,29 @@ export default class Thread extends Component {
    * Handle down vote on a comment
    */
   handleDownvoteComment = commentId => {
+    const creatorId = this.state.uniqueCreatorId;
+    const email = this.state.email;
+    const event = events.downvoteComment;
     forumApi.handleCommentDownVote(this.state.threadId, commentId)
       .then(() => {
+        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
         vehicleApi.recordVotedThreadComment(this.state.uniqueCreatorId, commentId)
           .then(() => {
-            this.setState(
-              { disableDownVoteButton: false },
-              () => this.getAllThreadComments()
-            );
+            this.setState({ disableDownVoteButton: false }, () => {
+              this.getAllThreadComments();
+            });
           })
           .catch(err => {
-            this.setState(
-              { disableDownVoteButton: false },
-              () => this.errorNotification(err)
-            );
+            this.setState({ disableDownVoteButton: false }, () => {
+              this.errorNotification(err);
+            });
           });
       })
       .catch(err => {
-        this.setState(
-          { disableDownVoteButton: false },
-          () => this.errorNotification(err)
-        );
+        this.setState({ disableDownVoteButton: false }, () => {
+          eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+          this.errorNotification(err);
+        });
       });
   };
 
@@ -261,13 +290,18 @@ export default class Thread extends Component {
    * Delete the comment from the thread
    */
   handleDeleteThreadComment = () => {
+    const creatorId = this.state.uniqueCreatorId;
+    const email = this.state.email;
+    const event = events.deleteThreadComment;
     forumApi.handleDeleteThreadComment(this.state.threadId, this.state.commentId)
       .then(() => {
+        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
         this.successNotification(defaults.deleteThreadCommentSucess)
         this.hideDeleteThreadCommentModal();
         this.getAllThreadComments();
       })
       .catch(err => {
+        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
         this.hideDeleteThreadCommentModal();
         this.errorNotification(err);
       });
@@ -278,7 +312,10 @@ export default class Thread extends Component {
    */
   handleUpdateThreadComment = newComment => {
     this.setState({ disableConfirmSaveEditThreadCommentButton: true });
-    let updatedThreadCommentPayload = {
+    const creatorId = this.state.uniqueCreatorId;
+    const email = this.state.email;
+    const event = events.updateThreadComment;
+    const updatedThreadCommentPayload = {
       comment: newComment
     };
     forumApi.handleUpdateThreadComment(
@@ -290,11 +327,13 @@ export default class Thread extends Component {
         disableConfirmSaveEditThreadCommentButton: false
       },
         () => {
+          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
           this.successNotification(defaults.updateThreadCommentSucess);
           this.hideEditOneThreadCommentModal();
           this.getAllThreadComments();
         });
     }).catch(err => {
+      eventLogHandler.addOneEventFailure(creatorId, email, event, err);
       this.setState({ disableConfirmSaveEditThreadCommentButton: false });
       this.errorNotification(err);
     });

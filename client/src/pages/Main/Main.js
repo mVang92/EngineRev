@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { themes } from "../../themes/Themes";
 import { defaults } from "../../assets/Defaults";
+import { events } from "../../assets/Events";
 import API from "../../utils/API";
-import eventLogAPI from "../../utils/eventLogApi";
+import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 import LoggedOut from "../../components/LoggedOut";
@@ -125,40 +126,26 @@ export default class App extends Component {
    * @param newVehicle the new vehicle to record into data
    */
   handleAddOneVehicle = newVehicle => {
-    const id = this.state.uid;
+    const creatorId = this.state.uid;
     const date = new Date();
-    const futureYear = date.getFullYear() + 2;
     const email = this.state.props.email;
+    const event = events.addedNewVehicle;
+    const futureYear = date.getFullYear() + 2;
     this.setState({ disableAddVehicleButton: true });
     if (isNaN(newVehicle.year) || (newVehicle.year < 1885) || (newVehicle.year > futureYear)) {
       this.showAddVehicleYearNanErrorModal();
       this.setState({ disableAddVehicleButton: false });
     } else {
-      const event = defaults.addedNewVehicle;
-      let eventPayload = {};
-      API.addOneVehicle(id, newVehicle)
+      API.addOneVehicle(creatorId, newVehicle)
         .then(() => {
-          eventPayload = {
-            creator: id,
-            email: email,
-            event: event,
-            type: defaults.eventSuccess
-          }
-          eventLogAPI.addOneEvent(eventPayload);
+          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
           this.state.props.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
           this.findUserInformationForOneUser(this.state.uid);
           this.setState({ disableAddVehicleButton: false });
           document.getElementById("field").reset();
         })
         .catch(err => {
-          eventPayload = {
-            creator: id,
-            email: email,
-            event: event,
-            type: defaults.eventError,
-            error: err.toString()
-          }
-          eventLogAPI.addOneEvent(eventPayload)
+          eventLogHandler.addOneEventFailure(creatorId, email, event, err);
           this.state.props.errorNotification(err);
           this.setState({ disableAddVehicleButton: false });
         });

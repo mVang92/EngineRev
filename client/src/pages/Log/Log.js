@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
+import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import { firebase } from "../../firebase"
 import { themes } from "../../themes/Themes";
 import { defaults } from "../../assets/Defaults";
+import { events } from "../../assets/Events";
 import LogPageErrorHeader from "../../components/LogPageErrorHeader";
 import LogPageVehicleNameDisplay from "../../components/LogPageVehicleNameDisplay";
 import Container from "../../components/Container";
@@ -31,6 +33,7 @@ export default class Log extends Component {
     super(props)
     this.state = {
       uid: "",
+      email: "",
       loggedin: false,
       pageLoaded: false,
       currentTheme: "",
@@ -90,6 +93,7 @@ export default class Log extends Component {
         this.setState({
           vehicleId: this.props.match.params.id,
           uid: user.uid,
+          email: user.email,
           loggedin: true
         });
         this.findUserInformationForOneUser(user.uid);
@@ -232,16 +236,23 @@ export default class Log extends Component {
    * Delete the vehicle name to one vehicle
    */
   deleteVehicleName = () => {
+    const creatorId = this.state.uid;
+    const email = this.state.email;
+    const event = events.deleteVehicleName;
     API.deleteVehicleName(this.state.vehicleId, null)
       .then(() => {
         this.setState({
           showEditOneVehicleNameModal: false
         }, () => {
+          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
           this.successNotification(defaults.vehicleNameUpdatedSuccessfully);
           this.getOneVehicle();
         });
       })
-      .catch(err => this.errorNotification(err));
+      .catch(err => {
+        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        this.errorNotification(err);
+      });
   };
 
   /**
@@ -372,6 +383,9 @@ export default class Log extends Component {
    * @param updatedVehicleName the updated name for the vehicle
    */
   handleUpdateVehicleInformation = updatedVehicleName => {
+    const creatorId = this.state.uid;
+    const email = this.state.email;
+    const event = events.updateVehicleInformation;
     this.setState({ disableConfirmSaveEditVehicleNameButton: true });
     API.updateVehicleInformationForOneVehicle(this.state.vehicleId, updatedVehicleName)
       .then(() => {
@@ -382,12 +396,14 @@ export default class Log extends Component {
           updatedModel: "",
           disableConfirmSaveEditVehicleNameButton: false
         }, () => {
+          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
           this.successNotification(defaults.vehicleNameUpdatedSuccessfully);
           this.hideEditOneVehicleNameModal();
           this.getOneVehicle();
         });
       })
       .catch(err => {
+        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
         this.errorNotification(err);
         this.setState({ disableConfirmSaveEditVehicleNameButton: false });
       });
@@ -398,8 +414,10 @@ export default class Log extends Component {
    */
   handleSubmitOneServiceLog = () => {
     this.hideFutureDateConfirmationModal();
-    let vehicleId = this.state.vehicleId;
-    let creatorId = this.state.uid;
+    const creatorId = this.state.uid;
+    const vehicleId = this.state.vehicleId;
+    const email = this.state.email;
+    const event = events.addOneServiceLog;
     const serviceLogDate = new Date(this.state.date);
     serviceLogDate.setDate(serviceLogDate.getDate() + 1);
     let serviceLogToStore = {
@@ -421,11 +439,13 @@ export default class Log extends Component {
           comment: "",
           disableAddServiceLogButton: false
         }, () => {
+          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
           this.addOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory);
           this.getOneVehicle();
         });
       })
       .catch(err => {
+        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
         this.errorNotification(err);
         this.setState({ disableAddServiceLogButton: false });
       });
@@ -447,17 +467,29 @@ export default class Log extends Component {
    * Deletes one vehicle from record
    */
   handleDeleteOneVehicle = () => {
+    const creatorId = this.state.uid;
+    const email = this.state.email;
+    const event = events.deletedVehicle;
     API.deleteOneVehicle(this.state.vehicleId)
-      .then(() => this.successNotification(defaults.vehicleDeletedSuccessfully))
-      .catch(err => this.errorNotification(err));
+      .then(() => {
+        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+        this.successNotification(defaults.vehicleDeletedSuccessfully);
+      })
+      .catch(err => {
+        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        this.errorNotification(err);
+      });
   };
 
   /**
    * Update one service log from record
    */
   handleUpdateOneServiceLog = updatedServiceLogDateToConvert => {
-    let vehicleId = this.state.vehicleId;
-    let serviceLogId = this.state.serviceLogId;
+    const creatorId = this.state.uid;
+    const email = this.state.email;
+    const event = events.updateOneServiceLog;
+    const vehicleId = this.state.vehicleId;
+    const serviceLogId = this.state.serviceLogId;
     let updatedServiceLogDateToRecord = "";
     const updatedServiceLogDate = this.formatDateYyyyMmDd(updatedServiceLogDateToConvert);
     if (updatedServiceLogDate === "NaN-NaN-NaN") {
@@ -490,6 +522,7 @@ export default class Log extends Component {
           serviceLogComment: "",
           disableConfirmSaveEditServiceLogButton: false
         }, () => {
+          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
           this.hideEditOneServiceLogModal();
           this.hideUpdatedFutureDateConfirmationModal();
           this.updateOneServiceLogSuccessNotification(serviceLogDateMemory, serviceLogMileageMemory, serviceLogServiceMemory);
@@ -497,6 +530,7 @@ export default class Log extends Component {
         });
       })
       .catch(err => {
+        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
         this.errorNotification(err);
         this.setState({ disableConfirmSaveEditServiceLogButton: false });
       });
@@ -506,15 +540,22 @@ export default class Log extends Component {
    * Deletes one service log from record
    */
   handleDeleteOneServiceLog = () => {
+    const creatorId = this.state.uid;
+    const email = this.state.email;
+    const event = events.deleteOneServiceLog;
     API.deleteOneServiceLog(this.state.vehicleId, this.state.serviceLogId)
       .then(() => {
         this.setState({ showDeleteOneLogModal: false },
           () => {
+            eventLogHandler.addOneEventSuccessful(creatorId, email, event);
             this.getOneVehicle();
             this.successNotification(defaults.serviceLogDeletedSuccessfully);
           });
       })
-      .catch(err => this.errorNotification(err));
+      .catch(err => {
+        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        this.errorNotification(err);
+      });
   };
 
   /**

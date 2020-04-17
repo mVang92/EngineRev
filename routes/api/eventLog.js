@@ -7,9 +7,4 @@ router
     .route("/")
     .post(eventLogController.addOneEvent)
 
-// Matches with "/api/forum/addOneCommentToOneThread/:threadId"
-// router
-//     .route("/addOneCommentToOneThread/:threadId")
-//     .put(eventLogController.addOneCommentToOneThread)
-
 module.exports = router;
