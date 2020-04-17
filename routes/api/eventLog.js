@@ -6,5 +6,6 @@ console.log("eventLog route api loaded")
 router
     .route("/")
     .post(eventLogController.addOneEvent)
+    .delete(eventLogController.removeOldEvents)
 
 module.exports = router;

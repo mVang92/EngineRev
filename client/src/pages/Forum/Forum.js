@@ -159,13 +159,13 @@ export default class Forum extends Component {
           threadTitle: "",
           disableSubmitNewThreadButton: false
         }, () => {
-          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+          eventLogHandler.successful(creatorId, email, event);
           this.successNotification(defaults.addThreadSuccessfully);
           this.getAllThreads();
         });
       })
       .catch(err => {
-        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        eventLogHandler.failure(creatorId, email, event, err);
         this.setState({ disableSubmitNewThreadButton: false });
         this.errorNotification(err);
       });

@@ -130,13 +130,13 @@ export default class Account extends Component {
     this.setState({ disableThemeToggleButton: true });
     API.saveThemeForUser(this.state.userId, themeType)
       .then(() => {
-        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+        eventLogHandler.successful(creatorId, email, event);
         this.setState({ disableThemeToggleButton: false },
           this.getVehicleData());
       })
       .catch(err => {
         this.setState({ disableThemeToggleButton: false }, () => {
-          eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+          eventLogHandler.failure(creatorId, email, event, err);
           this.errorNotification(err);
         });
       });
@@ -237,12 +237,12 @@ export default class Account extends Component {
             showUpdateDisplayNameModal: false,
             newDisplayName: ""
           }, () => {
-            eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+            eventLogHandler.successful(creatorId, email, event);
             this.showUpdateDisplayNameSuccessModal();
           });
         })
         .catch(err => {
-          eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+          eventLogHandler.failure(creatorId, email, event, err);
           this.setState({ showUpdateDisplayNameModal: false });
           this.errorNotification(err);
         });
@@ -262,7 +262,7 @@ export default class Account extends Component {
     }
     API.updateUserBackgroundPicture(this.state.userId, newBackgroundPicture)
       .then(() => {
-        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+        eventLogHandler.successful(creatorId, email, event);
         this.getVehicleData();
         this.setState({
           showUpdateBackgroundPictureModal: false,
@@ -270,7 +270,7 @@ export default class Account extends Component {
         });
       })
       .catch(err => {
-        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+        eventLogHandler.failure(creatorId, email, event, err);
         this.setState({ showUpdateBackgroundPictureModal: false });
         this.errorNotification(err);
       });
@@ -291,12 +291,12 @@ export default class Account extends Component {
     if (this.state.loggedin) {
       user.updateProfile({ photoURL: newProfilePicture })
         .then(() => {
-          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+          eventLogHandler.successful(creatorId, email, event);
           this.setState({ showUpdateProfilePictureModal: false });
           this.showUpdateProfilePictureSuccessModal();
         })
         .catch(err => {
-          eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+          eventLogHandler.failure(creatorId, email, event, err);
           this.setState({ showUpdateProfilePictureModal: false });
           this.errorNotification(err);
         });
@@ -323,14 +323,14 @@ export default class Account extends Component {
         if (this.state.newPassword === this.state.confirmNewPassword) {
           this.state.user.updatePassword(this.state.confirmNewPassword)
             .then(() => {
-              eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+              eventLogHandler.successful(creatorId, email, event);
               this.successNotification(defaults.passwordUpdatedSuccessfully);
               this.setState({
                 newPassword: "",
                 confirmNewPassword: ""
               })
             }).catch(err => {
-              eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+              eventLogHandler.failure(creatorId, email, event, err);
               this.errorNotification(err);
               this.setState({
                 newPassword: "",
