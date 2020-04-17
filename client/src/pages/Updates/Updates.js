@@ -72,13 +72,13 @@ export default class Updates extends Component {
     vehicleApi.findUserInformationForOneUser(this.state.userId)
       .then(res => {
         if (res.data.admin) {
-          const updateData = {
+          const payload = {
             updateChanges: this.state.updateChanges,
             knownIssues: this.state.knownIssues,
             releaseNotesToUpdate: "",
             knownIssuesToUpdate: ""
           };
-          updateApi.addOneUpdate(updateData)
+          updateApi.addOneUpdate(payload)
             .then(() => {
               this.getAllUpdates();
               this.successNotification(defaults.addOneReleaseNoteSuccess);

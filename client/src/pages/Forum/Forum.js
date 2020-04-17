@@ -3,11 +3,13 @@ import Container from "../../components/Container";
 import ForumDetails from "../../components/ForumDetails";
 import vehicleApi from "../../utils/API";
 import forumApi from "../../utils/forumApi";
+import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import Loading from "../../components/Loading";
 import { firebase } from "../../firebase"
 import { themes } from "../../themes/Themes";
 import { toast } from "react-toastify";
 import { defaults } from "../../assets/Defaults";
+import { events } from "../../assets/Events";
 
 export default class Forum extends Component {
   constructor(props) {
@@ -140,6 +142,9 @@ export default class Forum extends Component {
    */
   handleAddOneThread = () => {
     this.setState({ disableSubmitNewThreadButton: true });
+    const creatorId = this.state.uniqueCreatorId;
+    const email = this.state.email;
+    const event = events.addOneThread;
     let newThreadPayload = {
       creator: this.state.uniqueCreatorId,
       email: this.state.email,
@@ -154,11 +159,13 @@ export default class Forum extends Component {
           threadTitle: "",
           disableSubmitNewThreadButton: false
         }, () => {
+          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
           this.successNotification(defaults.addThreadSuccessfully);
           this.getAllThreads();
         });
       })
       .catch(err => {
+        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
         this.setState({ disableSubmitNewThreadButton: false });
         this.errorNotification(err);
       });

@@ -53,7 +53,7 @@ module.exports = {
    */
   addOneVehicle: (req, res) => {
     db.Vehicle
-      .findOneAndUpdate(
+      .updateOne(
         { creator: req.params.id },
         { $push: { vehicles: [req.body] } }
       )

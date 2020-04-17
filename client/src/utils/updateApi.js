@@ -2,8 +2,8 @@ import axios from "axios";
 
 export default {
     // Insert a new update
-    addOneUpdate: data => {
-        return axios.post(`/api/updates/`, data);
+    addOneUpdate: payload => {
+        return axios.post(`/api/updates/`, payload);
     },
     // Get all recent updates
     getAllUpdates: () => {

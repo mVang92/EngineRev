@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
 import { defaults } from "../../assets/Defaults";
+import { events } from "../../assets/Events";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 import { firebase } from "../../firebase";
 import { themes } from "../../themes/Themes";
 import NoAuthorization from "../../components/NoAuthorization";
 import API from "../../utils/API";
+import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import AccountDetails from "../../components/AccountDetails";
 import UpdateBackgroundPictureModal from "../../components/Modal/UpdateBackgroundPictureModal";
 import UpdateProfilePictureModal from "../../components/Modal/UpdateProfilePictureModal";
@@ -122,15 +124,21 @@ export default class Account extends Component {
    * @param themeType the theme to pass to the API
    */
   saveThemeForUser = themeType => {
+    const creatorId = this.state.userId;
+    const email = this.state.userEmail;
+    const event = events.saveTheme;
     this.setState({ disableThemeToggleButton: true });
     API.saveThemeForUser(this.state.userId, themeType)
       .then(() => {
+        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
         this.setState({ disableThemeToggleButton: false },
-          this.getVehicleData())
+          this.getVehicleData());
       })
       .catch(err => {
-        this.setState({ disableThemeToggleButton: false },
-          this.errorNotification(err))
+        this.setState({ disableThemeToggleButton: false }, () => {
+          eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+          this.errorNotification(err);
+        });
       });
   };
 
@@ -215,6 +223,9 @@ export default class Account extends Component {
    */
   updateDisplayName = () => {
     const user = this.state.user;
+    const creatorId = this.state.userId;
+    const email = this.state.userEmail;
+    const event = events.updateDisplayName;
     let newDisplayName = this.state.newDisplayName;
     if (this.checkIfStringIsBlank(newDisplayName)) {
       newDisplayName = defaults.defaultDisplayName;
@@ -225,12 +236,15 @@ export default class Account extends Component {
           this.setState({
             showUpdateDisplayNameModal: false,
             newDisplayName: ""
+          }, () => {
+            eventLogHandler.addOneEventSuccessful(creatorId, email, event);
+            this.showUpdateDisplayNameSuccessModal();
           });
-          this.showUpdateDisplayNameSuccessModal();
         })
-        .catch(error => {
+        .catch(err => {
+          eventLogHandler.addOneEventFailure(creatorId, email, event, err);
           this.setState({ showUpdateDisplayNameModal: false });
-          this.errorNotification(error);
+          this.errorNotification(err);
         });
     };
   };
@@ -239,21 +253,26 @@ export default class Account extends Component {
    * Update the background picture for the user
    */
   updateBackgroundPicture = () => {
+    const creatorId = this.state.userId;
+    const email = this.state.userEmail;
+    const event = events.updateBackgroundPicture;
     let newBackgroundPicture = this.state.newBackgroundPicture;
     if (this.checkIfStringIsBlank(newBackgroundPicture)) {
       newBackgroundPicture = "";
     }
     API.updateUserBackgroundPicture(this.state.userId, newBackgroundPicture)
       .then(() => {
+        eventLogHandler.addOneEventSuccessful(creatorId, email, event);
         this.getVehicleData();
         this.setState({
           showUpdateBackgroundPictureModal: false,
           newBackgroundPicture: ""
         });
       })
-      .catch(error => {
+      .catch(err => {
+        eventLogHandler.addOneEventFailure(creatorId, email, event, err);
         this.setState({ showUpdateBackgroundPictureModal: false });
-        this.errorNotification(error);
+        this.errorNotification(err);
       });
   };
 
@@ -262,6 +281,9 @@ export default class Account extends Component {
    */
   updateProfilePicture = () => {
     const user = this.state.user;
+    const creatorId = this.state.userId;
+    const email = this.state.userEmail;
+    const event = events.updateProfilePicture;
     let newProfilePicture = this.state.newProfilePicture;
     if (this.checkIfStringIsBlank(newProfilePicture)) {
       newProfilePicture = defaults.defaultProfilePicture;
@@ -269,12 +291,14 @@ export default class Account extends Component {
     if (this.state.loggedin) {
       user.updateProfile({ photoURL: newProfilePicture })
         .then(() => {
+          eventLogHandler.addOneEventSuccessful(creatorId, email, event);
           this.setState({ showUpdateProfilePictureModal: false });
           this.showUpdateProfilePictureSuccessModal();
         })
-        .catch(error => {
+        .catch(err => {
+          eventLogHandler.addOneEventFailure(creatorId, email, event, err);
           this.setState({ showUpdateProfilePictureModal: false });
-          this.errorNotification(error);
+          this.errorNotification(err);
         });
     }
   };
@@ -284,6 +308,9 @@ export default class Account extends Component {
    */
   updatePassword = e => {
     e.preventDefault();
+    const creatorId = this.state.userId;
+    const email = this.state.userEmail;
+    const event = events.updatePassword;
     if (this.state.loggedin) {
       let isDomainCarspace = (this.state.userEmail).includes("carspace.com");
       if (isDomainCarspace) {
@@ -296,13 +323,15 @@ export default class Account extends Component {
         if (this.state.newPassword === this.state.confirmNewPassword) {
           this.state.user.updatePassword(this.state.confirmNewPassword)
             .then(() => {
+              eventLogHandler.addOneEventSuccessful(creatorId, email, event);
               this.successNotification(defaults.passwordUpdatedSuccessfully);
               this.setState({
                 newPassword: "",
                 confirmNewPassword: ""
               })
-            }).catch(error => {
-              this.errorNotification(error);
+            }).catch(err => {
+              eventLogHandler.addOneEventFailure(creatorId, email, event, err);
+              this.errorNotification(err);
               this.setState({
                 newPassword: "",
                 confirmNewPassword: ""

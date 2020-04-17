@@ -348,6 +348,7 @@ export default class App extends Component {
               component={() => (
                 <Main
                   user={this.state.user}
+                  email={this.state.userEmailForAccount}
                   loggedin={this.state.loggedin}
                   userProfilePicture={this.state.userProfilePicture}
                   checkUserDisplayName={this.checkUserDisplayName}
