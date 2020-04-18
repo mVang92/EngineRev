@@ -125,12 +125,6 @@
     color: rgb(0, 0, 0);
 }
 
-.greyThemeRedText,
-.darkThemeRedText {
-    color: rgb(220, 0, 0) !important;
-    font-weight: bold;
-}
-
 #carSpaceThemeToggleButton,
 #lightThemeToggleButton,
 #greyThemeToggleButton,

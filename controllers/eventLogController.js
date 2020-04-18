@@ -21,5 +21,16 @@ module.exports = {
             .deleteMany({ date: { $lt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) } })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
+    },
+
+    /**
+     * Get all events belonging to the user
+     */
+    getEventsForUser: (req, res) => {
+        db.EventLog
+            .find({ creator: req.params.creatorId })
+            .sort({ date: -1 })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     }
 };

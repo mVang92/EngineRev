@@ -25,7 +25,7 @@ const MyVehicles = props => {
                   className="cancelBtn"
                   onClick={reloadPage}>
                   Reload Page
-                  </button>
+                </button>
               </div>
             </div>
           ) : (
@@ -88,8 +88,8 @@ const MyVehicles = props => {
                               </div>
                             </React.Fragment>
                           ) : (
-                            <label className="text-danger">
-                              <strong className={currentTheme.redText}>No Vehicles on Record</strong>
+                            <label>
+                              <strong>No Vehicles on Record</strong>
                             </label>
                           )
                       ) : (

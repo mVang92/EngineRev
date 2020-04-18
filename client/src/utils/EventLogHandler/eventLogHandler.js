@@ -9,7 +9,8 @@ export default {
             creator: creatorId,
             email: email,
             event: event,
-            status: events.eventSuccess
+            status: events.eventSuccess,
+            error: events.eventNoErrors
         }
         eventLogApi.addOneEvent(eventPayload)
             .then(() => eventLogApi.removeOldEvents());

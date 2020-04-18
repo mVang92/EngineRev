@@ -1,6 +1,7 @@
 export const events = {
     eventSuccess: "Success",
     eventError: "Error",
+    eventNoErrors: "No errors.",
     addedNewVehicle: "Add a vehicle.",
     deletedVehicle: "Delete a vehicle.",
     updateOneServiceLog: "Update a service log.",

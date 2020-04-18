@@ -29,7 +29,7 @@ const FutureDateConfirmationModal = props => {
                             <div className="col-md-2 imageMobileDisplay">
                                 <img className="warningImage" src={warningImage} alt='warning' />
                             </div>
-                            <div className="col-md-10 redText">
+                            <div className="col-md-10">
                                 <label>
                                     <strong>You are about to submit a future service log.</strong>
                                 </label>
