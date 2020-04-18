@@ -36,7 +36,7 @@ export const defaults = {
     inputFieldsReset: "Input Fields Reset.",
     aboutCarSpace: "CarSpace allows you to keep track of your vehicle maintenance history. " +
     "Keep your vehicle running smoothly by tracking your own vehicles by recording their service logs. " +
-    "Meet other passionate do-it-yourselfers to ask quesitons and share diagnostic solutions in the forum.",
+    "Meet other passionate do-it-yourselfers in the forum by asking questions and sharing diagnostic solutions.",
     whoIsCarSpaceFor: "CarSpace is for anyone, mechanically inclined or not, who want to keep track of their vehicle service maintenance history. " +
     "Users can create their own accounts and add vehicles they want to keep track of. They can also update their " +
     "account information along with updating vehicle and service log information. " +

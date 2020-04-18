@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "../Footer";
 import createAccountLogo from "../../images/createAccount.png"
 import recordLogsLogo from "../../images/recordLogs.png"
-import manageDataLogo from "../../images/manageData.png"
+import collaborate from "../../images/collaborate.png"
 import notLoggedIn from "../../images/notLoggedIn.png"
 
 const LoggedOut = () => {
@@ -11,7 +11,8 @@ const LoggedOut = () => {
       <div className="row section noMarginDesktopDisplay">
         <div id="heading" className="col-md-12 text-center">
           <br /><br />
-          <div><label><h3>Easily record service logs for your vehicles</h3></label></div>
+          <div><label><h2>Welcome!</h2></label></div>
+          <hr />
           <div><img id="notLoggedInMainImage" src={notLoggedIn} alt="Create Account"></img></div>
         </div>
       </div>
@@ -42,10 +43,10 @@ const LoggedOut = () => {
               <div className="col-md-4">
                 <div className="row">
                   <div className="col-md-3">
-                    <img className="notLoggedInImages" src={manageDataLogo} alt="Manage Data"></img>
+                    <img className="notLoggedInImages" src={collaborate} alt="Collaborate"></img>
                   </div>
                   <div className="col-md-9">
-                    <label><h6><strong>Manage data</strong> through an easy to navigate user interface.</h6></label>
+                    <label><h6><strong>Collaborate with others</strong> through the forum.</h6></label>
                   </div>
                 </div>
               </div>
