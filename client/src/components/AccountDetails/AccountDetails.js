@@ -39,9 +39,7 @@ const AccountDetails = props => {
   return (
     <div id="accountPage" className={`mt-3 box ${currentTheme.background}`}>
       <div className="row text-center">
-        <div className="col-md-12">
-          <label><h4>Account</h4></label>
-        </div>
+        <div className="col-md-12"><label><h4>Account</h4></label></div>
       </div>
       <BackToHomeButtonRow />
       <hr className={currentTheme.hr} />
@@ -199,9 +197,7 @@ const AccountDetails = props => {
               <div className="removeMobileDisplay">
                 <hr className={currentTheme.hr} />
                 <div className="row">
-                  <div className="col-md-4">
-                    <label className="initialMargin"><strong>Event Logs:</strong></label>
-                  </div>
+                  <div className="col-md-4"><label><strong>Event Logs:</strong></label></div>
                   <div className="col-md-4">
                     <div className="row">
                       <div className="col-md-6">

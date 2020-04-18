@@ -357,7 +357,7 @@ export default class Account extends Component {
       .then(res => {
         const eventLogsObject = JSON.stringify(res.data);
         const eventLogToCSV = this.convertToCSV(eventLogsObject);
-        const exportedFilename = "CarSpace Event Logs" + ".csv" || "export.csv";
+        const exportedFilename = "CarSpace Event Logs.csv" || "export.csv";
         const blob = new Blob([eventLogToCSV], { type: "text/csv;charset=utf-8;" });
         if (navigator.msSaveBlob) {
           navigator.msSaveBlob(blob, exportedFilename);
@@ -386,7 +386,7 @@ export default class Account extends Component {
     for (let index = 0; index < array.length; index++) {
       let line = "";
       for (let element in array[index]) {
-        if (line != "") {
+        if (line !== "") {
           line += ","
         }
         line += array[index][element];
