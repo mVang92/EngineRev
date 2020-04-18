@@ -150,7 +150,7 @@ const AccountDetails = props => {
                 <div className="col-md-4"><label><strong>Themes:</strong></label></div>
                 <div className="col-md-4 text-center">
                   <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-6 smallBottomMargin">
                       <button
                         id="carSpaceThemeToggleButton"
                         title="CarSpace Theme"
@@ -160,7 +160,7 @@ const AccountDetails = props => {
                         CarSpace
                       </button>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-6 smallBottomMargin">
                       <button
                         id="lightThemeToggleButton"
                         title="Light Theme"
@@ -172,7 +172,7 @@ const AccountDetails = props => {
                     </div>
                   </div>
                   <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-6 bottomMarginMobileDisplay">
                       <button
                         id="greyThemeToggleButton"
                         title="Grey Theme"
@@ -199,21 +199,28 @@ const AccountDetails = props => {
               <div className="removeMobileDisplay">
                 <hr className={currentTheme.hr} />
                 <div className="row">
-                  <div className="col-md-4"><label><strong>Event Logs:</strong></label></div>
-                  <div className="col-md-4">{defaults.eventLogsDescription}</div>
+                  <div className="col-md-4">
+                    <label className="initialMargin"><strong>Event Logs:</strong></label>
+                  </div>
                   <div className="col-md-4">
                     <div className="row">
-                      <div className="col-md-12">
-                        <button
-                          id="downloadEventLogsButton"
-                          title="Download Event Logs"
-                          type="button"
-                          onClick={downloadEventLogCsvFile}>
-                          Download
-                      </button>
+                      <div className="col-md-6">
+                        <div className="row">
+                          <div className="col-md-12 text-center">
+                            <button
+                              id="downloadEventLogsButton"
+                              title="Download Event Logs"
+                              type="button"
+                              onClick={downloadEventLogCsvFile}>
+                              Download
+                            </button>
+                          </div>
+                        </div>
                       </div>
+                      <div className="col-md-6"></div>
                     </div>
                   </div>
+                  <div className="col-md-4"></div>
                 </div>
               </div>
               <hr className={currentTheme.hr} />
