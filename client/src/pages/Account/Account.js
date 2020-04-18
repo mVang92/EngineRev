@@ -8,6 +8,7 @@ import { firebase } from "../../firebase";
 import { themes } from "../../themes/Themes";
 import NoAuthorization from "../../components/NoAuthorization";
 import API from "../../utils/API";
+import eventLogApi from "../../utils/eventLogApi";
 import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import AccountDetails from "../../components/AccountDetails";
 import UpdateBackgroundPictureModal from "../../components/Modal/UpdateBackgroundPictureModal";
@@ -349,6 +350,53 @@ export default class Account extends Component {
   };
 
   /**
+   * Download the event logs in a CSV file
+   */
+  downloadEventLogCsvFile = () => {
+    eventLogApi.getEventsForUser(this.state.userId)
+      .then(res => {
+        const eventLogsObject = JSON.stringify(res.data);
+        const eventLogToCSV = this.convertToCSV(eventLogsObject);
+        const exportedFilename = "CarSpace Event Logs" + ".csv" || "export.csv";
+        const blob = new Blob([eventLogToCSV], { type: "text/csv;charset=utf-8;" });
+        if (navigator.msSaveBlob) {
+          navigator.msSaveBlob(blob, exportedFilename);
+        } else {
+          const link = document.createElement("a");
+          if (link.download !== undefined) {
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", exportedFilename);
+            link.style.visibility = "hidden";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
+        }
+      })
+      .catch(err => this.errorNotification(err));
+  };
+
+  /**
+   * Convert the event logs into a string separated appropriately by line and comma
+   */
+  convertToCSV = eventLogsObject => {
+    const array = JSON.parse(eventLogsObject);
+    let string = "";
+    for (let index = 0; index < array.length; index++) {
+      let line = "";
+      for (let element in array[index]) {
+        if (line != "") {
+          line += ","
+        }
+        line += array[index][element];
+      }
+      string += line + "\r\n";
+    }
+    return string;
+  };
+
+  /**
    * Display the modal to confirm updating the profile picture
    */
   showUpdateBackgroundPictureModal = e => {
@@ -500,6 +548,7 @@ export default class Account extends Component {
                         updatePassword={this.updatePassword}
                         newPassword={this.state.newPassword}
                         confirmNewPassword={this.state.confirmNewPassword}
+                        downloadEventLogCsvFile={this.downloadEventLogCsvFile}
                         backToTopOfPage={this.backToTopOfPage}
                         showUpdateBackgroundPictureModal={this.showUpdateBackgroundPictureModal}
                         showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}

@@ -173,7 +173,8 @@ input {
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton,
-#submitNewBackgroundPictureButton {
+#submitNewBackgroundPictureButton,
+#downloadEventLogsButton {
     border: none;
     cursor: pointer;
     transition-duration: 0.5s;
@@ -194,7 +195,8 @@ input {
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton,
-#submitNewBackgroundPictureButton {
+#submitNewBackgroundPictureButton,
+#downloadEventLogsButton {
     background: rgb(225, 225, 225);
 }
 
@@ -258,7 +260,8 @@ input {
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover,
-#submitNewBackgroundPictureButton:hover {
+#submitNewBackgroundPictureButton:hover,
+#downloadEventLogsButton:hover {
     transition-duration: 0.2s;
 }
 
@@ -283,7 +286,8 @@ input {
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover,
-#submitNewBackgroundPictureButton:hover {
+#submitNewBackgroundPictureButton:hover,
+#downloadEventLogsButton:hover {
     background: rgb(255, 255, 255);
 }
 

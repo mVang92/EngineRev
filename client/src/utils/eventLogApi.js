@@ -8,5 +8,9 @@ export default {
     // Remove old events
     removeOldEvents: () => {
         return axios.delete(`/api/eventLog/`);
+    },
+    // Get all events belonging to the user
+    getEventsForUser: creatorId => {
+        return axios.get(`/api/eventLog/getEventsForUser/${creatorId}`);
     }
 };

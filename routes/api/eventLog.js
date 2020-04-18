@@ -8,4 +8,9 @@ router
     .post(eventLogController.addOneEvent)
     .delete(eventLogController.removeOldEvents)
 
+// Matches with "/api/eventLog/getEventsForUser/:creatorId"
+router
+    .route("/getEventsForUser/:creatorId")
+    .get(eventLogController.getEventsForUser)
+
 module.exports = router;

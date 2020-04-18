@@ -37,19 +37,19 @@ const DeleteOneVehicleModal = props => {
                             </div>
                             <div className="col-md-2"></div>
                         </div>
-                        <div className={`modal-body text-danger ${currentTheme.redText}`}>
+                        <div className="modal-body">
                             {
                                 vehicleServiceLogs.length > 1 ?
                                     (
                                         <label>
                                             Deleting this vehicle will delete all {vehicleServiceLogs.length} of its service logs.
                                             Are you sure you want to continue? Consider printing your service logs.
-                                    </label>
+                                        </label>
                                     ) : (
                                         <label>
                                             You are about to delete this vehicle and any service logs associated with it.
                                             Are you sure you want to continue?
-                                    </label>
+                                        </label>
                                     )
                             }
                         </div>

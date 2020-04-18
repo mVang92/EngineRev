@@ -30,7 +30,8 @@ const AccountDetails = props => {
     newPassword,
     confirmNewPassword,
     newBackgroundPicture,
-    disableThemeToggleButton
+    disableThemeToggleButton,
+    downloadEventLogCsvFile
   } = props;
   let uniqueUserId = showUniqueUserId ? "showUniqueUserId" : "hideUniqueUserId";
   let uniqueUserIdMask = showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
@@ -194,6 +195,26 @@ const AccountDetails = props => {
                   </div>
                 </div>
                 <div className="col-md-4"></div>
+              </div>
+              <div className="removeMobileDisplay">
+                <hr className={currentTheme.hr} />
+                <div className="row">
+                  <div className="col-md-4"><label><strong>Event Logs:</strong></label></div>
+                  <div className="col-md-4">{defaults.eventLogsDescription}</div>
+                  <div className="col-md-4">
+                    <div className="row">
+                      <div className="col-md-12">
+                        <button
+                          id="downloadEventLogsButton"
+                          title="Download Event Logs"
+                          type="button"
+                          onClick={downloadEventLogCsvFile}>
+                          Download
+                      </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <hr className={currentTheme.hr} />
               <div className="row">
