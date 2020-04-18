@@ -27,8 +27,8 @@ const DeleteOneUpdateModal = props => {
                             <div className="col-md-2">
                                 <img className="removeMobileDisplay imageMobileDisplay" src={warningImage} alt='warning' />
                             </div>
-                            <div className="col-md-8 text-danger text-center">
-                                <label><strong className={currentTheme.redText}>Delete this release note?</strong></label>
+                            <div className="col-md-8 text-center">
+                                <label><strong>Delete this release note?</strong></label>
                             </div>
                             <div className="col-md-2"></div>
                         </div>
