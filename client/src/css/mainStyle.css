@@ -25,6 +25,10 @@ body {
     background: rgb(220, 220, 220);
 }
 
+label {
+    margin: initial;
+}
+
 #carSpaceLogo {
     max-width: 10rem;
     border-radius: 10%;
@@ -173,8 +177,7 @@ input {
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton,
-#submitNewBackgroundPictureButton,
-#downloadEventLogsButton {
+#submitNewBackgroundPictureButton {
     border: none;
     cursor: pointer;
     transition-duration: 0.5s;
@@ -195,8 +198,7 @@ input {
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton,
-#submitNewBackgroundPictureButton,
-#downloadEventLogsButton {
+#submitNewBackgroundPictureButton {
     background: rgb(225, 225, 225);
 }
 
@@ -260,8 +262,7 @@ input {
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover,
-#submitNewBackgroundPictureButton:hover,
-#downloadEventLogsButton:hover {
+#submitNewBackgroundPictureButton:hover {
     transition-duration: 0.2s;
 }
 
@@ -286,8 +287,7 @@ input {
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover,
-#submitNewBackgroundPictureButton:hover,
-#downloadEventLogsButton:hover {
+#submitNewBackgroundPictureButton:hover {
     background: rgb(255, 255, 255);
 }
 
