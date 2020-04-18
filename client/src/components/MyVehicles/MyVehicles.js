@@ -42,7 +42,7 @@ const MyVehicles = props => {
                                 {
                                   vehicleData.vehicles.length ?
                                     (
-                                      <div className="col-md-12">
+                                      <div className="col-md-12 smallBottomMargin">
                                         <label><strong>Vehicles on Record: <span id="vehicleCountForUser">{vehicleData.vehicles.length}</span></strong></label>
                                       </div>
                                     ) : (

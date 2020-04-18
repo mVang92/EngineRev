@@ -120,7 +120,7 @@ input {
 
 #aboutCarspaceContainer {
     background: rgb(245, 245, 245);
-    padding: 1em;
+    padding: 1rem;
     margin-bottom: 0.5rem;
 }
 
@@ -132,7 +132,8 @@ input {
 }
 
 .innerBox {
-    padding: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .threadTitleTextArea {
