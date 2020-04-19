@@ -34,9 +34,9 @@ export const defaults = {
     errorLoadingVehicleCount: "Error Loading Vehicle Count",
     passwordConfirmationSent: "Password confirmation sent. Please check your email.",
     inputFieldsReset: "Input Fields Reset.",
-    aboutCarSpace: "CarSpace allows you to keep track of your vehicle maintenance history. " +
-    "Keep your vehicle running smoothly by tracking your own vehicles by recording their service logs. " +
-    "Meet other passionate do-it-yourselfers in the forum by asking questions and sharing diagnostic solutions.",
+    aboutCarSpace: "CarSpace allows you to keep track of your vehicle maintenance history and collaborate with the community. " +
+    "Keep your vehicle running smoothly and meet other passionate do-it-yourselfers in the forum. " +
+    "Ask questions and share vehicle diagnostic solutions with the community.",
     whoIsCarSpaceFor: "CarSpace is for anyone, mechanically inclined or not, who want to keep track of their vehicle service maintenance history. " +
     "Users can create their own accounts and add vehicles they want to keep track of. They can also update their " +
     "account information along with updating vehicle and service log information. " +
