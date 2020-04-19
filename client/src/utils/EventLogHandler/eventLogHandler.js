@@ -13,7 +13,6 @@ export default {
             error: events.eventNoErrors
         }
         eventLogApi.addOneEvent(eventPayload)
-            .then(() => eventLogApi.removeOldEvents());
     },
 
     failure: (creatorId, email, event, error) => {
@@ -25,6 +24,5 @@ export default {
             error: error.toString()
         }
         eventLogApi.addOneEvent(eventPayload)
-            .then(() => eventLogApi.removeOldEvents());
     }
 }
