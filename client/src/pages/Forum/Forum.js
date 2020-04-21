@@ -125,16 +125,25 @@ export default class Forum extends Component {
    */
   validateThreadInputValues = e => {
     e.preventDefault();
-    if (
-      this.state.threadTitle === "" ||
-      this.state.threadDescription === "" ||
-      this.checkIfStringIsBlank(this.state.threadTitle) ||
-      this.checkIfStringIsBlank(this.state.threadDescription)
-    ) {
-      this.errorNotification(defaults.threadDetailsCannotBeBlank);
-    } else {
-      this.handleAddOneThread();
-    }
+    vehicleApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+      .then(res => {
+        if (res.data.creator) {
+          if (
+            this.state.threadTitle === "" ||
+            this.state.threadDescription === "" ||
+            this.checkIfStringIsBlank(this.state.threadTitle) ||
+            this.checkIfStringIsBlank(this.state.threadDescription)
+          ) {
+            this.errorNotification(defaults.threadDetailsCannotBeBlank);
+          } else {
+            this.handleAddOneThread();
+          }
+        } else {
+          alert(defaults.noAuthorizationToPerformAction);
+          window.location = "/";
+        }
+      })
+      .catch(err => this.errorNotification(err));
   };
 
   /**

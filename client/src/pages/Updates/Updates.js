@@ -89,7 +89,7 @@ export default class Updates extends Component {
             })
             .catch(err => this.errorNotification(err));
         } else {
-          alert(defaults.noAuthorization);
+          alert(defaults.noAuthorizationToPerformAction);
           window.location = "/";
         }
       })
@@ -104,9 +104,7 @@ export default class Updates extends Component {
     updateApi.getAllUpdates()
       .then(res => {
         this.setState({ allUpdates: res.data },
-          () => {
-            this.findUserInformationForOneUser();
-          });
+          () => this.findUserInformationForOneUser());
       })
       .catch(err => {
         this.errorNotification(err);
@@ -291,7 +289,7 @@ export default class Updates extends Component {
               this.setState({ disableConfirmSaveEditReleaseNoteButton: false });
             });
         } else {
-          alert(defaults.noAuthorization);
+          alert(defaults.noAuthorizationToPerformAction);
           window.location = "/";
         }
       })
@@ -320,7 +318,7 @@ export default class Updates extends Component {
               this.setState({ disableConfirmDeleteReleaseNoteButton: false });
             });
         } else {
-          alert(defaults.noAuthorization);
+          alert(defaults.noAuthorizationToPerformAction);
           window.location = "/";
         }
       })

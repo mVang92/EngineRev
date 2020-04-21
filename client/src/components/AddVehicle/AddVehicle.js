@@ -80,7 +80,7 @@ class AddVehicle extends Component {
           <hr className={this.props.currentTheme.hr}></hr>
           <div>
             <div className="row">
-              <div className="col-md-12 text-center">
+              <div className="col-md-12 smallBottomMargin text-center">
                 <label><strong>Add a Vehicle</strong></label>
               </div>
             </div>
