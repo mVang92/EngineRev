@@ -345,12 +345,21 @@ export default class Thread extends Component {
   validateAddOneCommentToThread = e => {
     e.preventDefault();
     this.setState({ disableSubmitCommentOnThreadButton: true });
-    if (this.state.threadComment === "" || this.checkIfStringIsBlank(this.state.threadComment)) {
-      this.setState({ disableSubmitCommentOnThreadButton: false },
-        () => this.errorNotification(defaults.threadCommentsCannotBeBlank));
-    } else {
-      this.addOneCommentToThread();
-    }
+    vehicleApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+      .then(res => {
+        if (res.data.creator) {
+          if (this.state.threadComment === "" || this.checkIfStringIsBlank(this.state.threadComment)) {
+            this.setState({ disableSubmitCommentOnThreadButton: false },
+              () => this.errorNotification(defaults.threadCommentsCannotBeBlank));
+          } else {
+            this.addOneCommentToThread();
+          }
+        } else {
+          alert(defaults.noAuthorizationToPerformAction);
+          window.location = "/";
+        }
+      })
+      .catch(err => this.errorNotification(err));
   };
 
   /**
@@ -379,13 +388,18 @@ export default class Thread extends Component {
     this.setState({ disableUpVoteButton: true });
     vehicleApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
       .then(res => {
-        let votedComments = res.data.votedComments;
-        let hasUserVotedOnThisComment = votedComments.includes(commentId);
-        if (hasUserVotedOnThisComment) {
-          this.errorNotification(defaults.alreadyVotedOnComment);
-          this.setState({ disableUpVoteButton: false });
-        } else {
-          this.handleUpvoteComment(commentId);
+        try {
+          let votedComments = res.data.votedComments;
+          let hasUserVotedOnThisComment = votedComments.includes(commentId);
+          if (hasUserVotedOnThisComment) {
+            this.errorNotification(defaults.alreadyVotedOnComment);
+            this.setState({ disableUpVoteButton: false });
+          } else {
+            this.handleUpvoteComment(commentId);
+          }
+        } catch (err) {
+          alert(defaults.noAuthorizationToPerformAction);
+          window.location = "/";
         }
       })
       .catch(err => {
@@ -403,13 +417,18 @@ export default class Thread extends Component {
     this.setState({ disableDownVoteButton: true });
     vehicleApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
       .then(res => {
-        let votedComments = res.data.votedComments;
-        let hasUserVotedOnThisComment = votedComments.includes(commentId);
-        if (hasUserVotedOnThisComment) {
-          this.errorNotification(defaults.alreadyVotedOnComment);
-          this.setState({ disableDownVoteButton: false });
-        } else {
-          this.handleDownvoteComment(commentId);
+        try {
+          let votedComments = res.data.votedComments;
+          let hasUserVotedOnThisComment = votedComments.includes(commentId);
+          if (hasUserVotedOnThisComment) {
+            this.errorNotification(defaults.alreadyVotedOnComment);
+            this.setState({ disableDownVoteButton: false });
+          } else {
+            this.handleDownvoteComment(commentId);
+          }
+        } catch (err) {
+          alert(defaults.noAuthorizationToPerformAction);
+          window.location = "/";
         }
       })
       .catch(err => {
