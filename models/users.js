@@ -1,8 +1,8 @@
-console.log("vehicle model loaded")
+console.log("users model loaded")
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const vehicleSchema = new Schema({
+const userSchema = new Schema({
   creator: { type: String },
   email: { type: String },
   admin: { type: Boolean },
@@ -24,6 +24,6 @@ const vehicleSchema = new Schema({
   }]
 });
 
-const Vehicle = mongoose.model("Vehicle", vehicleSchema);
+const Users = mongoose.model("Users", userSchema);
 
-module.exports = Vehicle;
+module.exports = Users;
