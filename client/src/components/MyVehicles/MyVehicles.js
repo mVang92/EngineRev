@@ -16,7 +16,7 @@ const MyVehicles = props => {
           (
             <div className="row">
               <div className={`col-md-12 text-danger`}>
-                <label><strong>{errorMessage}</strong></label>
+                <label className="smallBottomMargin"><strong>{errorMessage}</strong></label>
                 <br />
                 <button
                   id="reloadPage"

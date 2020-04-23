@@ -1,6 +1,6 @@
 const db = require("../models");
 const { ObjectId } = require("mongodb");
-console.log("vehicle controller loaded");
+console.log("users controller loaded");
 
 module.exports = {
 
@@ -8,7 +8,7 @@ module.exports = {
    * Create a database schema for the user upon first time login
    */
   createUserSchema: (req, res) => {
-    db.Vehicle
+    db.Users
       .create(req.body)
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
@@ -18,7 +18,7 @@ module.exports = {
    * Find all vehicles belonging to one user
    */
   findUserInformationForOneUser: (req, res) => {
-    db.Vehicle
+    db.Users
       .findOne({ creator: req.params.id })
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
@@ -28,7 +28,7 @@ module.exports = {
    * Find one vehicle belonging to one user
    */
   findOneVehicleForUser: (req, res) => {
-    db.Vehicle
+    db.Users
       .aggregate([
         { $match: { creator: req.params.creatorId } },
         {
@@ -52,7 +52,7 @@ module.exports = {
    * Add one vehicle for the current user logged in
    */
   addOneVehicle: (req, res) => {
-    db.Vehicle
+    db.Users
       .updateOne(
         { creator: req.params.id },
         { $push: { vehicles: [req.body] } }
@@ -65,7 +65,7 @@ module.exports = {
    * Add one service log for the selected vehicle
    */
   addOneLogForOneVehicle: (req, res) => {
-    db.Vehicle
+    db.Users
       .updateOne(
         { creator: req.params.creatorId, vehicles: { $elemMatch: { _id: req.params.vehicleId } } },
         { $push: { "vehicles.$.logs": [req.body] } }
@@ -78,7 +78,7 @@ module.exports = {
    * Update the vehicle name for the selected vehicle
    */
   updateOneVehicleInformation: (req, res) => {
-    db.Vehicle
+    db.Users
       .updateOne(
         { "vehicles._id": req.params.vehicleId },
         {
@@ -98,7 +98,7 @@ module.exports = {
    * Update one service log for the selected vehicle
    */
   updateOneLogForOneVehicle: (req, res) => {
-    db.Vehicle
+    db.Users
       .updateOne(
         { "vehicles._id": req.params.vehicleId },
         { $set: { "vehicles.$[].logs.$[logs]": req.body } },
@@ -117,7 +117,7 @@ module.exports = {
       backgroundPicture = url;
       break;
     }
-    db.Vehicle
+    db.Users
       .updateOne(
         { creator: req.params.creatorId },
         { $set: { backgroundPicture: backgroundPicture } }
@@ -130,7 +130,7 @@ module.exports = {
    * Remove the selected vehicle from the database
    */
   removeOneVehicle: (req, res) => {
-    db.Vehicle
+    db.Users
       .updateOne(
         { "vehicles._id": req.params.vehicleId },
         { $pull: { vehicles: { _id: req.params.vehicleId } } }
@@ -143,7 +143,7 @@ module.exports = {
    * Remove the selected service log from the database
    */
   removeOneServiceLog: (req, res) => {
-    db.Vehicle
+    db.Users
       .updateOne(
         { "vehicles._id": req.params.vehicleId },
         { $pull: { "vehicles.$.logs": { _id: req.params.serviceLogId } } }
@@ -156,7 +156,7 @@ module.exports = {
    * Delete the account for the user
    */
   removeOneVehicleName: (req, res) => {
-    db.Vehicle
+    db.Users
       .updateOne(
         { "vehicles._id": req.params.vehicleId },
         { $set: { "vehicles.$.vehicleName": req.body.emptyVehicleName } }
@@ -169,7 +169,7 @@ module.exports = {
    * Delete the account for the user
    */
   removeOneUserAccount: (req, res) => {
-    db.Vehicle
+    db.Users
       .findByIdAndDelete(req.params.id)
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
@@ -179,7 +179,7 @@ module.exports = {
    * Save a theme for the user
    */
   saveThemeForUser: (req, res) => {
-    db.Vehicle
+    db.Users
       .updateOne(
         { creator: req.params.creatorId },
         { $set: { theme: req.params.themeType } }
@@ -192,7 +192,7 @@ module.exports = {
    * Record the comment id in the user database
    */
   recordVotedThreadComment: (req, res) => {
-    db.Vehicle
+    db.Users
       .updateOne(
         { creator: req.params.creatorId },
         { $push: { votedComments: req.params.commentId } }
