@@ -3,7 +3,7 @@
 ![Alt Text](client/src/images/carSpaceLogo.png)
 
 ## About CarSpace
-CarSpace allows you to keep track of your vehicle maintenance history and collaborate with the community. Keep your vehicle running smoothly. and meet other passionate do-it-yourselfers in the forum. Ask questions and share vehicle diagnostic solutions with the community.
+CarSpace allows you to keep track of your vehicle maintenance history and collaborate with the community. Keep your vehicle running smoothly and meet other passionate do-it-yourselfers in the forum. Ask questions and share vehicle diagnostic solutions with the community.
 
 ## Who is CarSpace For?
 CarSpace is for anyone, mechanically inclined or not, who want to keep track of their vehicle service maintenance history. Users can create their own accounts and add vehicles they want to keep track of. They can also update their account information along with updating vehicle and service log information. Service logs are tracked by adding the date of service, the mileage of the vehicle, and the type of service performed on the vehicle. This will allow the user to keep track of specific maintenance or repair information.
