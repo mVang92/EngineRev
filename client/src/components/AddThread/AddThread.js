@@ -16,7 +16,7 @@ const AddThread = props => {
       <form onSubmit={validateThreadInputValues}>
         <div className="row">
           <div className="col-md-12">
-            <div className="text-center">
+            <div className="text-center smallBottomMargin">
               <label><strong>{defaults.startANewThread}</strong></label>
             </div>
             <input
@@ -26,8 +26,8 @@ const AddThread = props => {
               value={threadTitle}
               name="threadTitle"
               maxLength="200"
-              placeholder="Title (Required)">
-            </input>
+              placeholder="Title (Required)"
+            />
             <br /><br />
             <textarea
               id="newThreadDescriptionInput"
@@ -37,8 +37,8 @@ const AddThread = props => {
               value={threadDescription}
               name="threadDescription"
               maxLength="1250"
-              placeholder="Description (Required)">
-            </textarea>
+              placeholder="Description (Required)"
+            />
           </div>
         </div>
         <br />

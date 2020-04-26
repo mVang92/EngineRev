@@ -106,7 +106,7 @@ const ThreadDetails = props => {
                                     className="cancelBtn"
                                     onClick={() => enableEditThreadDetails()}>
                                     Edit
-                                    </button>
+                                  </button>
                                 </div>
                               </React.Fragment>
                             ) : (
@@ -119,7 +119,7 @@ const ThreadDetails = props => {
                                     className="addBtn"
                                     onClick={() => showDeleteThreadModal()}>
                                     Delete
-                                    </button>
+                                  </button>
                                 </div>
                                 <div className="col-md-4">
                                   <button
@@ -129,7 +129,7 @@ const ThreadDetails = props => {
                                     className="addBtn"
                                     onClick={() => validateEditedThreadDetails()}>
                                     Save
-                                    </button>
+                                  </button>
                                 </div>
                                 <div className="col-md-4">
                                   <button
@@ -139,7 +139,7 @@ const ThreadDetails = props => {
                                     className="cancelBtn"
                                     onClick={() => enableEditThreadDetails()}>
                                     Cancel
-                                    </button>
+                                  </button>
                                 </div>
                               </React.Fragment>
                             )
