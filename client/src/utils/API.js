@@ -9,8 +9,7 @@ export default {
         email: userEmail,
         admin: false,
         theme: "carSpace",
-        backgroundPicture: "",
-        vehicleName: [{}]
+        backgroundPicture: ""
       })
     );
   },
