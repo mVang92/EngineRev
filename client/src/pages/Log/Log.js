@@ -633,6 +633,12 @@ export default class Log extends Component {
         default:
           this.errorNotification(defaults.themeSelectionError);
       }
+    } else {
+      if (this.state.backgroundPicture) {
+        document.body.style.backgroundImage = "url(" + this.state.backgroundPicture + ")";
+      } else {
+        document.body.style.backgroundImage = "";
+      }
     }
   };
 

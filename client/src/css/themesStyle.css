@@ -12,7 +12,8 @@
     box-shadow: -1px 0px 3px rgb(168, 168, 168);
 }
 
-.carSpaceThemeAccountDetails {
+.carSpaceThemeAccountDetails,
+.carSpaceAboutContainer {
     background: rgb(245, 245, 245);
 }
 
@@ -41,7 +42,8 @@
     color: rgb(0, 0, 0);
 }
 
-.lightThemeAccountDetails {
+.lightThemeAccountDetails,
+.lightThemeAboutContainer {
     background: rgb(240, 240, 240) !important;
     color: rgb(0, 0, 0);
 }
@@ -75,7 +77,8 @@
     box-shadow: -1px 0px 3px rgb(0, 0, 0) !important;
 }
 
-.greyThemeAccountDetails {
+.greyThemeAccountDetails,
+.greyThemeAboutContainer {
     background: rgb(225, 225, 225) !important;
     color: rgb(0, 0, 0);
 }
@@ -107,7 +110,8 @@
 
 .darkThemeOneThread,
 .darkThemeOneUpdate,
-.darkThemeAccountDetails {
+.darkThemeAccountDetails,
+.darkThemeAboutContainer {
     background: rgb(200, 200, 200) !important;
     color: rgb(0, 0, 0);
 }

@@ -604,6 +604,10 @@ input {
     margin-top: 1rem;
 }
 
+.smallPadding {
+    padding: 1rem;
+}
+
 .noMarginDesktopDisplay {
     margin-left: 0px;
     margin-right: 0px;

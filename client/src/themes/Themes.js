@@ -8,6 +8,7 @@ export const themes = {
     oneThread: "carSpaceThemeOneThread",
     oneUpdate: "carSpaceThemeOneUpdate",
     accountDetails: "carSpaceThemeAccountDetails",
+    aboutContainer: "carSpaceAboutContainer",
     backgroundColor: "rgb(220, 220, 220)"
   },
   light: {
@@ -19,6 +20,7 @@ export const themes = {
     oneThread: "lightThemeOneThread",
     oneUpdate: "lightThemeOneUpdate",
     accountDetails: "lightThemeAccountDetails",
+    aboutContainer: "lightThemeAboutContainer",
     backgroundColor: "rgb(235, 235, 235)"
   },
   grey: {
@@ -30,6 +32,7 @@ export const themes = {
     oneThread: "greyThemeOneThread",
     oneUpdate: "greyThemeOneUpdate",
     accountDetails: "greyThemeAccountDetails",
+    aboutContainer: "greyThemeAboutContainer",
     backgroundColor: "rgb(112, 112, 112)"
   },
   dark: {
@@ -41,6 +44,7 @@ export const themes = {
     oneThread: "darkThemeOneThread",
     oneUpdate: "darkThemeOneUpdate",
     accountDetails: "darkThemeAccountDetails",
+    aboutContainer: "darkThemeAboutContainer",
     backgroundColor: "rgb(32, 32, 32)"
   }
 };
