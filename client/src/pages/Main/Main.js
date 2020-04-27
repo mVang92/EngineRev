@@ -98,6 +98,12 @@ export default class App extends Component {
         default:
           this.state.props.errorNotification(defaults.themeSelectionError);
       }
+    } else {
+      if (this.state.backgroundPicture) {
+        document.body.style.backgroundImage = "url(" + this.state.backgroundPicture + ")";
+      } else {
+        document.body.style.backgroundImage = "";
+      }
     }
   };
 

@@ -87,6 +87,12 @@ export default class About extends Component {
         default:
           this.errorNotification(defaults.themeSelectionError);
       }
+    } else {
+      if (this.state.backgroundPicture) {
+        document.body.style.backgroundImage = "url(" + this.state.backgroundPicture + ")";
+      } else {
+        document.body.style.backgroundImage = "";
+      }
     }
   };
 
@@ -114,26 +120,28 @@ export default class About extends Component {
                   <img id="carSpaceLogo" src={carSpaceLogo} alt="CarSpace Logo"></img>
                 </div>
                 <div className={`box ${this.state.currentTheme.background}`}>
-                  <div className="row">
-                    <div className="col-md-12 text-center">
-                      <label><h5>About CarSpace</h5></label>
+                  <div className={`smallPadding ${this.state.currentTheme.accountDetails}`}>
+                    <div className="row">
+                      <div className="col-md-12 text-center">
+                        <label><h5>About CarSpace</h5></label>
+                      </div>
                     </div>
-                  </div>
-                  <label><p>{defaults.aboutCarSpace}</p></label>
-                  <hr className={this.state.currentTheme.hr} />
-                  <div className="row">
-                    <div className="col-md-12 text-center">
-                      <label><h5>Who is CarSpace For?</h5></label>
+                    <label><p>{defaults.aboutCarSpace}</p></label>
+                    <hr />
+                    <div className="row">
+                      <div className="col-md-12 text-center">
+                        <label><h5>Who is CarSpace For?</h5></label>
+                      </div>
                     </div>
-                  </div>
-                  <label><p>{defaults.whoIsCarSpaceFor}</p></label>
-                  <hr className={this.state.currentTheme.hr} />
-                  <div className="row">
-                    <div className="col-md-12 text-center">
-                      <label><h5>A Little About the Creator</h5></label>
+                    <label><p>{defaults.whoIsCarSpaceFor}</p></label>
+                    <hr />
+                    <div className="row">
+                      <div className="col-md-12 text-center">
+                        <label><h5>A Little About the Creator</h5></label>
+                      </div>
                     </div>
+                    <label><p>{defaults.creatorDetails}</p></label>
                   </div>
-                  <label><p>{defaults.creatorDetails}</p></label>
                   <br />
                   <BackToHomeButtonRow />
                 </div>
