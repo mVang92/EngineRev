@@ -34,7 +34,7 @@ export default class App extends Component {
       userAccountCreationTime: "",
       userAccountLastSignIn: "",
       userDisplayName: "",
-      defaultDisplayName: "CarSpace User",
+      defaultDisplayName: defaults.defaultDisplayName,
       showSignInModal: false,
       showSignUpModal: false,
       showSignOutModal: false,
