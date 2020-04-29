@@ -153,9 +153,8 @@ export default class App extends Component {
           this.setState({ disableSignUpButton: false });
         });
     } else {
-      const error = "Error: Passwords do not match."
       this.setState({ disableSignUpButton: false });
-      this.errorNotification(error);
+      this.errorNotification(defaults.passwordsDoNotMatch);
     }
   };
 

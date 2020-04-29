@@ -30,7 +30,7 @@ export const defaults = {
     vehicleDeletedSuccessfully: "Vehicle Deleted Successfully.",
     serviceLogDeletedSuccessfully: "Service Log Deleted Successfully.",
     passwordUpdatedSuccessfully: "Password Updated Successfully.",
-    passwordsDoNotMatch: "Passwords do not match. Try again.",
+    passwordsDoNotMatch: "Error: Passwords do not match.",
     errorLoadingVehicleCount: "Error Loading Vehicle Count",
     passwordConfirmationSent: "Password confirmation sent. Please check your email.",
     inputFieldsReset: "Input Fields Reset.",
