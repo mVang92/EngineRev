@@ -8,7 +8,6 @@ import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 import LoggedOut from "../../components/LoggedOut";
 import LoggedIn from "../../components/LoggedIn";
-import "react-toastify/dist/ReactToastify.css";
 
 export default class App extends Component {
   constructor(props) {

@@ -17,6 +17,7 @@ import NoMatch from "./pages/NoMatch";
 import SignUpModal from "./components/Modal/SignUpModal";
 import SignInModal from "./components/Modal/SignInModal";
 import ForgotPasswordModal from "./components/Modal/ForgotPasswordModal";
+import "react-toastify/dist/ReactToastify.css";
 import "./css/mainStyle.css";
 import "./css/themesStyle.css";
 
