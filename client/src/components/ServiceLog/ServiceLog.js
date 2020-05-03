@@ -36,40 +36,42 @@ const ServiceLog = props => {
 
   return (
     <React.Fragment key={serviceLogId}>
-      <div className={`row serviceLogFullDetails ${props.currentTheme.serviceLogs}`} style={serviceLogFullDetails}>
-        <div className="col-md-2 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Date: </strong></span>{serviceLogDateFormatted}</div>
-        <div className="col-md-2 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Mileage: </strong></span>{mileage} miles</div>
-        <div className="col-md-3 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Service: </strong></span>{service}</div>
-        {
-          comment ?
-            (
-              <div className="col-md-3 logDetailsMobileDisplay">
-                <span className="showUnderMobileDisplay">
-                  <strong>Comments: </strong>
-                </span>
-                {comment}
+      <div className="serviceLog">
+        <div className={`row serviceLogFullDetails ${props.currentTheme.serviceLogs}`} style={serviceLogFullDetails}>
+          <div className="col-md-2 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Date: </strong></span>{serviceLogDateFormatted}</div>
+          <div className="col-md-2 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Mileage: </strong></span>{mileage} miles</div>
+          <div className="col-md-3 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Service: </strong></span>{service}</div>
+          {
+            comment ?
+              (
+                <div className="col-md-3 logDetailsMobileDisplay">
+                  <span className="showUnderMobileDisplay">
+                    <strong>Comments: </strong>
+                  </span>
+                  {comment}
+                </div>
+              ) : (
+                <div className="col-md-3 logDetailsMobileDisplay"></div>
+              )
+          }
+          <div className="col-md-2">
+            <div className="row centerButtonMobileDisplay">
+              <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
+                <button
+                  className="deleteActionButton"
+                  title="Delete Log"
+                  onClick={event => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, "delete")}>
+                  <img className="deleteIcon" src={deleteIcon} alt="delete" />
+                </button>
               </div>
-            ) : (
-              <div className="col-md-3 logDetailsMobileDisplay"></div>
-            )
-        }
-        <div className="col-md-2">
-          <div className="row centerButtonMobileDisplay">
-            <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
-              <button
-                className="deleteActionButton"
-                title="Delete Log"
-                onClick={event => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, "delete")}>
-                <img className="deleteIcon" src={deleteIcon} alt="delete" />
-              </button>
-            </div>
-            <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
-              <button
-                className="editActionButton"
-                title="Edit Log"
-                onClick={event => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, "edit")}>
-                <img className="editIcon" src={editIcon} alt="edit" />
-              </button>
+              <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
+                <button
+                  className="editActionButton"
+                  title="Edit Log"
+                  onClick={event => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, "edit")}>
+                  <img className="editIcon" src={editIcon} alt="edit" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
