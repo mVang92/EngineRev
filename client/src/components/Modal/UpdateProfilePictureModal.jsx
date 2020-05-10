@@ -54,7 +54,7 @@ const UpdateProfilePictureModal = props => {
                                 id="confirmUpdatePictureButton"
                                 title="Yes"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 onClick={props.updateProfilePicture}
                                 data-dismiss="modal">
                                 Yes

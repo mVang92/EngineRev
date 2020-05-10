@@ -27,7 +27,7 @@ const AddVehicleYearNanErrorModal = props => {
                                 id="closeAddVehicleYearNanErrorModal"
                                 title="Okay"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 onClick={props.hideAddVehicleYearNanErrorModal}
                                 data-dismiss="modal">
                                 Okay

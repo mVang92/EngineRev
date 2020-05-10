@@ -24,7 +24,7 @@ const DeleteThreadCommentModal = props => {
                                 id="closeDeleteThreadCommentModalButton"
                                 title="No"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 onClick={props.hideDeleteThreadCommentModal}
                                 data-dismiss="modal">
                                 No

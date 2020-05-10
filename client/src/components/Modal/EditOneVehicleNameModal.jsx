@@ -128,7 +128,7 @@ const EditOneVehicleNameModal = props => {
                                         <button
                                             title="Save"
                                             id="confirmSaveEditVehicleNameButton"
-                                            className="cancelBtn"
+                                            className="standardButton"
                                             type="submit"
                                             disabled={disableConfirmSaveEditVehicleNameButton}>
                                             Save

@@ -10,7 +10,7 @@ const TopActionButtons = props => {
                         id="addLogBackButton"
                         title="Back"
                         type="button"
-                        className="cancelBtn">
+                        className="standardButton">
                         Back
                     </button>
                 </Link>
@@ -23,7 +23,7 @@ const TopActionButtons = props => {
                                 id="printPageButton"
                                 title="Print Logs"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 onClick={props.handlePrintPage}>
                                 Print Logs
                             </button>
@@ -32,7 +32,7 @@ const TopActionButtons = props => {
                                 id="printPageButton"
                                 title="Disabled"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 disabled>
                                 Print Logs
                             </button>
@@ -47,7 +47,7 @@ const TopActionButtons = props => {
                                 id="addLogSortLogsButton"
                                 title="Sort Dates"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 onClick={props.changeSortOrder}>
                                 Sort Dates
                             </button>
@@ -56,7 +56,7 @@ const TopActionButtons = props => {
                                 id="addLogSortLogsButton"
                                 title="Disabled"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 disabled>
                                 Sort Dates
                             </button>
@@ -71,7 +71,7 @@ const TopActionButtons = props => {
                                 id="editVehicleNameButton"
                                 title="Edit Vehicle"
                                 type="button"
-                                className="cancelBtn hideWhilePrinting"
+                                className="standardButton hideWhilePrinting"
                                 onClick={props.showEditOneVehicleNameModal}>
                                 Edit Vehicle
                             </button>

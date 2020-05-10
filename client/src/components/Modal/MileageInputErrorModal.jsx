@@ -35,9 +35,9 @@ const MileageInputErrorModal = props => {
                         </div>
                         <div className="modal-footer">
                             <button
-                                title="Understood"
+                                title="Okay"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 onClick={hideMileageInputErrorModal}
                                 data-dismiss="modal">
                                 Okay
