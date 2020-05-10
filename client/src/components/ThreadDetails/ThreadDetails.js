@@ -24,11 +24,10 @@ const ThreadDetails = props => {
     validateUserToUpvoteComment,
     validateUserToDownvoteComment,
     enableEditThreadComment,
-    showDeleteThreadCommentModal,
-    disableUpVoteButton,
-    disableDownVoteButton,
     showEditOneThreadCommentModal,
-    disableSubmitCommentOnThreadButton
+    disableSubmitCommentOnThreadButton,
+    disableUpVoteButton,
+    disableDownVoteButton
   } = props;
   const dateSubString = allThreads.date.substring(0, 10);
   const newDate = new Date(dateSubString);
@@ -198,7 +197,6 @@ const ThreadDetails = props => {
                         validateUserToUpvoteComment={validateUserToUpvoteComment}
                         validateUserToDownvoteComment={validateUserToDownvoteComment}
                         enableEditThreadComment={enableEditThreadComment}
-                        showDeleteThreadCommentModal={showDeleteThreadCommentModal}
                         disableUpVoteButton={disableUpVoteButton}
                         disableDownVoteButton={disableDownVoteButton}
                         currentTheme={currentTheme}

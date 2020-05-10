@@ -1,6 +1,4 @@
 import React from "react";
-import editIcon from "../../images/editIcon.png";
-import deleteIcon from "../../images/deleteIcon.png";
 
 const ServiceLog = props => {
   const dateToFormat = props.date;
@@ -44,32 +42,24 @@ const ServiceLog = props => {
           {
             comment ?
               (
-                <div className="col-md-3 logDetailsMobileDisplay">
+                <div className="col-md-4 logDetailsMobileDisplay">
                   <span className="showUnderMobileDisplay">
                     <strong>Comments: </strong>
                   </span>
                   {comment}
                 </div>
               ) : (
-                <div className="col-md-3 logDetailsMobileDisplay"></div>
+                <div className="col-md-4 logDetailsMobileDisplay"></div>
               )
           }
-          <div className="col-md-2">
+          <div className="col-md-1">
             <div className="row centerButtonMobileDisplay">
-              <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
-                <button
-                  className="deleteActionButton"
-                  title="Delete Log"
-                  onClick={event => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, "delete")}>
-                  <img className="deleteIcon" src={deleteIcon} alt="delete" />
-                </button>
-              </div>
-              <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
+              <div className="col-md-12 alignLeftButtonsMobileDisplay hideWhilePrinting">
                 <button
                   className="editActionButton"
-                  title="Edit Log"
-                  onClick={event => props.getServiceLogActionValue(event, serviceLogId, serviceLogDateFormatted, mileage, service, comment, "edit")}>
-                  <img className="editIcon" src={editIcon} alt="edit" />
+                  title="Edit Service Log"
+                  onClick={() => props.showEditOneServiceLogModal(serviceLogId, serviceLogDateFormatted, mileage, service, comment)}>
+                  Edit
                 </button>
               </div>
             </div>

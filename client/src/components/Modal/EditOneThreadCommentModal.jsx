@@ -4,6 +4,7 @@ import ReactModal from "react-modal";
 const EditOneThreadCommentModal = props => {
     const {
         showEditOneThreadCommentModal,
+        showDeleteThreadCommentModal,
         validateThreadCommentInput,
         currentTheme,
         handleChange,
@@ -42,24 +43,39 @@ const EditOneThreadCommentModal = props => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="modal-footer">
-                                <button
-                                    id="cancelUpdateThreadCommentButton"
-                                    title="Cancel"
-                                    type="button"
-                                    className="cancelBtn"
-                                    onClick={hideEditOneThreadCommentModal}
-                                    data-dismiss="modal">
-                                    Cancel
-                                </button>
-                                <button
-                                    id="confirmSaveEditThreadCommentButton"
-                                    title="Save Comment"
-                                    className="cancelBtn"
-                                    type="submit"
-                                    disabled={disableConfirmSaveEditThreadCommentButton}>
-                                    Save
-                                </button>
+                            <div className="modal-footer noFlex">
+                                <div className="row">
+                                    <div className="col-md-5 bottomMarginMobileDisplay">
+                                        <button
+                                            id="deleteThreadCommentButton"
+                                            title="Delete Comment"
+                                            type="button"
+                                            className="deleteBtn"
+                                            onClick={showDeleteThreadCommentModal}>
+                                            Delete Comment
+                                        </button>
+                                    </div>
+                                    <div className="col-md-7">
+                                        <button
+                                            id="cancelUpdateThreadCommentButton"
+                                            title="Cancel"
+                                            type="button"
+                                            className="cancelBtn"
+                                            onClick={hideEditOneThreadCommentModal}
+                                            data-dismiss="modal">
+                                            Cancel
+                                        </button>
+                                        <button
+                                            id="confirmSaveEditThreadCommentButton"
+                                            title="Save Comment"
+                                            className="cancelBtn"
+                                            type="submit"
+                                            disabled={disableConfirmSaveEditThreadCommentButton}>
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

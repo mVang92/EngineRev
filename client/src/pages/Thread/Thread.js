@@ -526,10 +526,10 @@ export default class Thread extends Component {
   /**
    * Show the delete thread comment modal
    */
-  showDeleteThreadCommentModal = commentId => {
+  showDeleteThreadCommentModal = () => {
     this.setState({
-      showDeleteThreadCommentModal: true,
-      commentId: commentId
+      showEditOneThreadCommentModal: false,
+      showDeleteThreadCommentModal: true
     });
   };
 
@@ -611,12 +611,11 @@ export default class Thread extends Component {
                   threadComment={this.state.threadComment}
                   allThreads={this.state.allThreads}
                   disableEditThreadDetails={this.state.disableEditThreadDetails}
+                  disableEditThreadComment={this.state.disableEditThreadComment}
                   disableUpVoteButton={this.state.disableUpVoteButton}
                   disableDownVoteButton={this.state.disableDownVoteButton}
-                  disableEditThreadComment={this.state.disableEditThreadComment}
                   disableSubmitCommentOnThreadButton={this.state.disableSubmitCommentOnThreadButton}
                   showEditOneThreadCommentModal={this.showEditOneThreadCommentModal}
-                  showDeleteThreadCommentModal={this.showDeleteThreadCommentModal}
                   showDeleteThreadModal={this.showDeleteThreadModal}
                   validateEditedThreadDetails={this.validateEditedThreadDetails}
                   enableEditThreadDetails={this.enableEditThreadDetails}
@@ -648,6 +647,7 @@ export default class Thread extends Component {
         <EditOneThreadCommentModal
           commentsToShowInModal={this.state.commentsToShowInModal}
           showEditOneThreadCommentModal={this.state.showEditOneThreadCommentModal}
+          showDeleteThreadCommentModal={this.showDeleteThreadCommentModal}
           disableConfirmSaveEditThreadCommentButton={this.state.disableConfirmSaveEditThreadCommentButton}
           handleChange={this.handleChange}
           hideEditOneThreadCommentModal={this.hideEditOneThreadCommentModal}
