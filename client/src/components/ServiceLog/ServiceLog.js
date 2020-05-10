@@ -52,7 +52,7 @@ const ServiceLog = props => {
                 <div className="col-md-3 logDetailsMobileDisplay"></div>
               )
           }
-          <div className="col-md-2">
+          <div className="col-md-2 smallMarginTopMobileDisplay">
             <div className="row">
               <div className="col-md-12 alignRightButtonsDesktopDisplay alignLeftButtonsMobileDisplay hideWhilePrinting">
                 <button

@@ -729,8 +729,7 @@ footer {
     background: none;
     border: none;
     font-weight: bold;
-    cursor: pointer;
-    height: 1.6rem;
+    margin-left: -0.35rem;
 }
 
 #loadingAnimation {
@@ -1084,6 +1083,10 @@ footer {
     .noMarginMobileDisplay {
         margin-left: 0px;
         margin-right: 0px;
+    }
+
+    .smallMarginTopMobileDisplay {
+        margin-top: 1rem;
     }
 
     .commentPoster {
