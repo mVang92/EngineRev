@@ -55,12 +55,12 @@ const DeleteOneVehicleModal = props => {
                         </div>
                         <div className="modal-footer">
                             <button
-                                title="Cancel"
+                                title="No"
                                 type="button"
                                 className="cancelBtn"
                                 onClick={hideDeleteOneVehicleModal}
                                 data-dismiss="modal">
-                                Cancel
+                                No
                             </button>
                             {
                                 vehicleServiceLogs.length > 1 ?
@@ -80,7 +80,7 @@ const DeleteOneVehicleModal = props => {
                             }
                             <Link to={"/"}>
                                 <button
-                                    title="Delete This Vehicle"
+                                    title="Delete Vehicle"
                                     id="confirmDeleteVehicleButton"
                                     className="deleteBtn"
                                     type="button"

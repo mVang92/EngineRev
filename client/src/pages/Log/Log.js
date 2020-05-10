@@ -574,23 +574,6 @@ export default class Log extends Component {
   };
 
   /**
-   * Execute the value from the service log action dropdown
-   */
-  getServiceLogActionValue = (event, serviceLogId, date, mileage, service, comment, actionValue) => {
-    event.preventDefault();
-    switch (actionValue) {
-      case "edit":
-        this.showEditOneServiceLogModal(serviceLogId, date, mileage, service, comment);
-        break;
-      case "delete":
-        this.showDeleteOneServiceLogModal(serviceLogId, date, mileage, service, comment);
-        break;
-      default:
-        this.errorNotification("Error Processing Request");
-    };
-  };
-
-  /**
    * Check the state of the sort and sort the vehicle logs depending on the state of the sort
    */
   sortServiceLogs = () => {
@@ -816,14 +799,10 @@ export default class Log extends Component {
    * @param service      the service log service type
    * @param comment      the service log comment
    */
-  showDeleteOneServiceLogModal = (serviceLogId, date, mileage, service, comment) => {
+  showDeleteOneServiceLogModal = () => {
     this.setState({
       showDeleteOneLogModal: true,
-      serviceLogId: serviceLogId,
-      serviceLogDate: date,
-      serviceLogMileage: mileage,
-      serviceLogService: service,
-      serviceLogComment: comment
+      showEditOneLogModal: false
     });
   };
 
@@ -976,7 +955,7 @@ export default class Log extends Component {
                                 sortVehicleServiceLogsMostRecent={this.state.sortVehicleServiceLogsMostRecent}
                                 currentTheme={this.state.currentTheme}
                                 sortServiceLogs={this.sortServiceLogs}
-                                getServiceLogActionValue={this.getServiceLogActionValue}
+                                showEditOneServiceLogModal={this.showEditOneServiceLogModal}
                               />
                             )
                         }
@@ -1004,6 +983,7 @@ export default class Log extends Component {
                     <EditOneServiceLogModal
                       disableConfirmSaveEditServiceLogButton={this.state.disableConfirmSaveEditServiceLogButton}
                       checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
+                      showDeleteOneServiceLogModal={this.showDeleteOneServiceLogModal}
                       showEditOneLogModal={this.state.showEditOneLogModal}
                       hideEditOneServiceLogModal={this.hideEditOneServiceLogModal}
                       handleChange={this.handleChange}
@@ -1050,10 +1030,6 @@ export default class Log extends Component {
                       showDeleteOneLogModal={this.state.showDeleteOneLogModal}
                       hideDeleteOneServiceLogModal={this.hideDeleteOneServiceLogModal}
                       currentTheme={this.state.currentTheme}
-                      serviceLogDate={this.state.serviceLogDate}
-                      serviceLogMileage={this.state.serviceLogMileage}
-                      serviceLogService={this.state.serviceLogService}
-                      serviceLogComment={this.state.serviceLogComment}
                     />
                     <AddLogErrorModal
                       showAddLogErrorModal={this.state.showAddLogErrorModal}

@@ -18,7 +18,7 @@ const ServiceLogDisplay = props => {
                   mileage={serviceLog.mileage}
                   service={serviceLog.service}
                   comment={serviceLog.comment}
-                  getServiceLogActionValue={props.getServiceLogActionValue}
+                  showEditOneServiceLogModal={props.showEditOneServiceLogModal}
                   currentTheme={props.currentTheme}
                 />
               )
@@ -33,7 +33,7 @@ const ServiceLogDisplay = props => {
                   mileage={serviceLog.mileage}
                   service={serviceLog.service}
                   comment={serviceLog.comment}
-                  getServiceLogActionValue={props.getServiceLogActionValue}
+                  showEditOneServiceLogModal={props.showEditOneServiceLogModal}
                   currentTheme={props.currentTheme}
                 />
               )

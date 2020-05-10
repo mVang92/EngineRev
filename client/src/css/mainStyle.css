@@ -47,10 +47,6 @@ label {
     width: 100%;
 }
 
-.votes {
-    text-align: right;
-}
-
 .dropdown-menu {
     background: rgb(48, 48, 48);
     min-width: 5rem;
@@ -203,8 +199,7 @@ input {
     background: rgb(225, 225, 225);
 }
 
-.addBtn,
-.upVote {
+.addBtn {
     background: rgb(200, 255, 200);
 }
 
@@ -218,7 +213,6 @@ input {
     background: rgb(128, 200, 255);
 }
 
-.downVote,
 .deleteBtn,
 .deleteActionButton,
 .deleteReleaseNoteActionButton,
@@ -247,8 +241,6 @@ input {
     margin: auto;
 }
 
-.upVote:hover,
-.downVote:hover,
 .addBtn:hover,
 .resetButton:hover,
 .cancelBtn:hover,
@@ -267,12 +259,10 @@ input {
     transition-duration: 0.2s;
 }
 
-.addBtn:hover,
-.upVote:hover {
+.addBtn:hover {
     background: rgb(128, 255, 128);
 }
 
-.downVote:hover,
 #addLogBackButton:hover,
 .deleteBtn:hover,
 .deleteActionButton:hover,
@@ -556,7 +546,9 @@ input {
 }
 
 #confirmDeleteVehicleButton,
-#addLogDeleteVehicleButton {
+#addLogDeleteVehicleButton,
+#deleteServiceLogButton,
+#deleteThreadCommentButton {
     width: 9em;
 }
 
@@ -623,6 +615,7 @@ input {
     border-top: initial;
 }
 
+.votes,
 .alignRightButtonsDesktopDisplay {
     text-align: right;
 }
@@ -722,9 +715,6 @@ footer {
     transition-duration: 0.1s;
     color: rgb(255, 48, 48);
 }
-
-.upVote,
-.downVote,
 .deleteReleaseNoteActionButton,
 .editReleaseNoteActionButton,
 .deleteActionButton,
@@ -732,20 +722,12 @@ footer {
     width: 3rem;
 }
 
-.upVote {
-    border: 1px solid rgb(255, 255, 255);
-    text-align: center;
-    box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
-    transition-duration: 0.2s;
-}
-
-.downVote {
-    transition-duration: 0.2s;
-}
-
-.thumbsVotingButton {
-    height: 2rem;
-    padding: 4px;
+.votingButton {
+    background: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    height: 1.6rem;
 }
 
 #loadingAnimation {
@@ -1041,6 +1023,10 @@ footer {
         text-align: initial;
     }
 
+    .alignLeftButtonsMobileDisplay {
+        text-align: left;
+    }
+
     .paddingDesktopDisplay {
         padding-right: initial;
         padding-left: initial;
@@ -1092,13 +1078,13 @@ footer {
         text-align: left;
     }
 
-    .voteButtons {
-        margin-top: 1rem;
-    }
-
     .noMarginMobileDisplay {
         margin-left: 0px;
         margin-right: 0px;
+    }
+
+    .commentPoster {
+        margin-bottom: 1rem;
     }
 }
     

@@ -12,7 +12,8 @@ const EditOneServiceLogModal = props => {
         serviceLogService,
         serviceLogComment,
         hideEditOneServiceLogModal,
-        disableConfirmSaveEditServiceLogButton
+        disableConfirmSaveEditServiceLogButton,
+        showDeleteOneServiceLogModal
     } = props;
     let date = new Date(serviceLogDate),
         month = "" + (date.getMonth() + 1),
@@ -108,24 +109,38 @@ const EditOneServiceLogModal = props => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="modal-footer">
-                                <button
-                                    id="cancelUpdateServiceLog"
-                                    title="Cancel"
-                                    type="button"
-                                    className="cancelBtn"
-                                    onClick={hideEditOneServiceLogModal}
-                                    data-dismiss="modal">
-                                    Cancel
-                                </button>
-                                <button
-                                    id="confirmSaveEditServiceLogButton"
-                                    title="Save Service Log"
-                                    className="cancelBtn"
-                                    type="submit"
-                                    disabled={disableConfirmSaveEditServiceLogButton}>
-                                    Save
-                                </button>
+                            <div className="modal-footer noFlex">
+                                <div className="row">
+                                    <div className="col-md-4 bottomMarginMobileDisplay">
+                                        <button
+                                            id="deleteServiceLogButton"
+                                            title="Delete Service Log"
+                                            type="button"
+                                            className="deleteBtn"
+                                            onClick={showDeleteOneServiceLogModal}>
+                                            Delete Service Log
+                                        </button>
+                                    </div>
+                                    <div className="col-md-8 alignRightButtonsDesktopDisplay">
+                                        <button
+                                            id="cancelUpdateServiceLog"
+                                            title="Cancel"
+                                            type="button"
+                                            className="cancelBtn"
+                                            onClick={hideEditOneServiceLogModal}
+                                            data-dismiss="modal">
+                                            Cancel
+                                        </button>
+                                        <button
+                                            id="confirmSaveEditServiceLogButton"
+                                            title="Save Service Log"
+                                            className="cancelBtn"
+                                            type="submit"
+                                            disabled={disableConfirmSaveEditServiceLogButton}>
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

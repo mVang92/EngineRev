@@ -6,10 +6,6 @@ const DeleteOneServiceLogModal = props => {
     const {
         showDeleteOneLogModal,
         currentTheme,
-        serviceLogDate,
-        serviceLogMileage,
-        serviceLogService,
-        serviceLogComment,
         hideDeleteOneServiceLogModal,
         handleDeleteOneServiceLog
     } = props;
@@ -29,59 +25,18 @@ const DeleteOneServiceLogModal = props => {
                                 <img className="removeMobileDisplay imageMobileDisplay" src={warningImage} alt='warning' />
                             </div>
                             <div className="col-md-8 text-center">
-                                <label><strong>Delete this service log?</strong></label>
+                                <label><strong>Delete this service log from the vehicle?</strong></label>
                             </div>
                             <div className="col-md-2"></div>
                         </div>
-                        <div className="modal-body">
-                            <div className="row">
-                                <div className="col-md-3">
-                                    <label><strong>Date:</strong></label>
-                                </div>
-                                <div className="col-md-9">
-                                    {serviceLogDate}
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-3">
-                                    <label><strong>Mileage:</strong></label>
-                                </div>
-                                <div className="col-md-9">
-                                    {serviceLogMileage}
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-3">
-                                    <label><strong>Service:</strong></label>
-                                </div>
-                                <div className="col-md-9">
-                                    {serviceLogService}
-                                </div>
-                            </div>
-                            {
-                                serviceLogComment ?
-                                    (
-                                        <div className="row">
-                                            <div className="col-md-3">
-                                                <label><strong>Comments:</strong></label>
-                                            </div>
-                                            <div className="col-md-9">
-                                                {serviceLogComment}
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        null
-                                    )
-                            }
-                        </div>
                         <div className="modal-footer">
                             <button
-                                title="Cancel"
+                                title="No"
                                 type="button"
                                 className="cancelBtn"
                                 onClick={hideDeleteOneServiceLogModal}
                                 data-dismiss="modal">
-                                Cancel
+                                No
                             </button>
                             <button
                                 title="Delete Service Log"
@@ -89,7 +44,7 @@ const DeleteOneServiceLogModal = props => {
                                 className="deleteBtn"
                                 type="button"
                                 onClick={handleDeleteOneServiceLog}>
-                                Delete
+                                Yes
                             </button>
                         </div>
                     </div>

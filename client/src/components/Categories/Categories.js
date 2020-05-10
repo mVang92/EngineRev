@@ -12,11 +12,8 @@ const Categories = () => {
             <div className="col-md-3 logDetailsMobileDisplay">
                 <label><strong>Service</strong></label>
             </div>
-            <div className="col-md-3 logDetailsMobileDisplay">
+            <div className="col-md-5 logDetailsMobileDisplay">
                 <label><strong>Comments</strong></label>
-            </div>
-            <div className="col-md-2 logDetailsMobileDisplay hideWhilePrinting">
-                <label><strong>Actions</strong></label>
             </div>
         </div>
     )

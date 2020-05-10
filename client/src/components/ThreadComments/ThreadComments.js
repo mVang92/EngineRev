@@ -1,8 +1,4 @@
 import React from "react";
-import editIcon from "../../images/editIcon.png";
-import deleteIcon from "../../images/deleteIcon.png";
-import thumbsUp from "../../images/thumbsUp.png";
-import thumbsDown from "../../images/thumbsDown.png";
 
 const ThreadComments = props => {
   const {
@@ -18,7 +14,6 @@ const ThreadComments = props => {
     validateUserToUpvoteComment,
     validateUserToDownvoteComment,
     showEditOneThreadCommentModal,
-    showDeleteThreadCommentModal,
     disableUpVoteButton,
     disableDownVoteButton
   } = props;
@@ -32,10 +27,31 @@ const ThreadComments = props => {
     <React.Fragment key={_id}>
       <div className={`threadDetails ${currentTheme.oneThread}`}>
         <div className="row">
-          <div className="col-md-9 text-left breakWord">
-            <strong>{formattedEmail} posted on {formattedDate}</strong>
-          </div>
-          <div className="col-md-2 noWidthMobileDisplay voteButtons">
+          {
+            uniqueCreatorId === commentCreator ?
+              (
+                <div className="col-md-10 text-left bottomMarginMobileDisplay breakWord">
+                  <strong>{formattedEmail} posted on {formattedDate}</strong>
+                </div>
+              ) : (
+                <React.Fragment>
+                  <div className="col-md-8 text-left commentPoster breakWord">
+                    <strong>{formattedEmail} posted on {formattedDate}</strong>
+                  </div>
+                  <div className="col-md-2 alignRightButtonsDesktopDisplay breakWord">
+                    {
+                      loggedin ?
+                        (
+                          <label>Helpful?</label>
+                        ) : (
+                          null
+                        )
+                    }
+                  </div>
+                </React.Fragment>
+              )
+          }
+          <div className="col-md-1 noWidthMobileDisplay">
             {
               loggedin ?
                 (
@@ -44,24 +60,13 @@ const ThreadComments = props => {
                       uniqueCreatorId === commentCreator ?
                         (
                           <React.Fragment>
-                            <div className="col-md-6 noWidthMobileDisplay">
-                              <button
-                                className="deleteActionButton"
-                                type="button"
-                                title="Delete Comment"
-                                onClick={() => showDeleteThreadCommentModal(_id)}
-                              >
-                                <img className="deleteIcon" src={deleteIcon} alt="delete" />
-                              </button>
-                            </div>
-                            <div className="col-md-6 noWidthMobileDisplay">
+                            <div className="col-md-12 noWidthMobileDisplay">
                               <button
                                 className="editActionButton"
                                 type="button"
                                 title="Edit Comment"
-                                onClick={() => showEditOneThreadCommentModal(_id, comment)}
-                              >
-                                <img className="editIcon" src={editIcon} alt="edit" />
+                                onClick={() => showEditOneThreadCommentModal(_id, comment)}>
+                                Edit
                               </button>
                             </div>
                           </React.Fragment>
@@ -69,24 +74,20 @@ const ThreadComments = props => {
                           <React.Fragment>
                             <div className="col-md-6 noWidthMobileDisplay">
                               <button
-                                className="downVote"
-                                type="button"
-                                title="Down Vote"
+                                className="votingButton"
+                                title="Not Helpful"
                                 disabled={disableDownVoteButton}
-                                onClick={() => validateUserToDownvoteComment(_id)}
-                              >
-                                <img className="thumbsVotingButton" src={thumbsDown} alt="downVote" />
+                                onClick={() => validateUserToDownvoteComment(_id)}>
+                                No
                               </button>
                             </div>
                             <div className="col-md-6 noWidthMobileDisplay">
                               <button
-                                className="upVote"
-                                type="button"
-                                title="Up Vote"
+                                className="votingButton"
+                                title="Helpful"
                                 disabled={disableUpVoteButton}
-                                onClick={() => validateUserToUpvoteComment(_id)}
-                              >
-                                <img className="thumbsVotingButton" src={thumbsUp} alt="upVote" />
+                                onClick={() => validateUserToUpvoteComment(_id)}>
+                                Yes
                               </button>
                             </div>
                           </React.Fragment>
@@ -98,13 +99,13 @@ const ThreadComments = props => {
                 )
             }
           </div>
-          <div className="col-md-1 votes noWidthMobileDisplay voteButtons">
+          <div className="col-md-1 votes noWidthMobileDisplay">
             {
               votes > 0 ?
                 (
-                  <React.Fragment>
+                  <label>
                     <span className="text-success"><strong>+{votes}</strong></span>
-                  </React.Fragment>
+                  </label>
                 ) : (
                   null
                 )
@@ -112,9 +113,9 @@ const ThreadComments = props => {
             {
               votes < 0 ?
                 (
-                  <React.Fragment>
+                  <label>
                     <span className="text-danger"><strong>{votes}</strong></span>
-                  </React.Fragment>
+                  </label>
                 ) : (
                   null
                 )
@@ -126,7 +127,7 @@ const ThreadComments = props => {
           <div className="col-md-12 text-left breakWord">{comment}</div>
         </div>
       </div>
-    </React.Fragment>
+    </React.Fragment >
   )
 };
 
