@@ -52,7 +52,7 @@ const EditOneThreadCommentModal = props => {
                                             type="button"
                                             className="deleteBtn"
                                             onClick={showDeleteThreadCommentModal}>
-                                            Delete Comment
+                                            Delete
                                         </button>
                                     </div>
                                     <div className="col-md-7">

@@ -33,7 +33,7 @@ const DeleteThreadCommentModal = props => {
                                 id="confirmDeleteThreadCommentButton"
                                 title="Yes"
                                 type="button"
-                                className="cancelBtn"
+                                className="deleteBtn"
                                 onClick={props.handleDeleteThreadComment}
                                 data-dismiss="modal">
                                 Yes
