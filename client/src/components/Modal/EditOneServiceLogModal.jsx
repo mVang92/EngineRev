@@ -118,7 +118,7 @@ const EditOneServiceLogModal = props => {
                                             type="button"
                                             className="deleteBtn"
                                             onClick={showDeleteOneServiceLogModal}>
-                                            Delete Service Log
+                                            Delete
                                         </button>
                                     </div>
                                     <div className="col-md-8 alignRightButtonsDesktopDisplay">

@@ -42,19 +42,19 @@ const ServiceLog = props => {
           {
             comment ?
               (
-                <div className="col-md-4 logDetailsMobileDisplay">
+                <div className="col-md-3 logDetailsMobileDisplay">
                   <span className="showUnderMobileDisplay">
                     <strong>Comments: </strong>
                   </span>
                   {comment}
                 </div>
               ) : (
-                <div className="col-md-4 logDetailsMobileDisplay"></div>
+                <div className="col-md-3 logDetailsMobileDisplay"></div>
               )
           }
-          <div className="col-md-1">
-            <div className="row centerButtonMobileDisplay">
-              <div className="col-md-12 alignLeftButtonsMobileDisplay hideWhilePrinting">
+          <div className="col-md-2">
+            <div className="row">
+              <div className="col-md-12 alignRightButtonsDesktopDisplay alignLeftButtonsMobileDisplay hideWhilePrinting">
                 <button
                   className="editActionButton"
                   title="Edit Service Log"

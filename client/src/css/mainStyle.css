@@ -717,9 +717,12 @@ footer {
 }
 .deleteReleaseNoteActionButton,
 .editReleaseNoteActionButton,
-.deleteActionButton,
-.editActionButton {
+.deleteActionButton {
     width: 3rem;
+}
+
+.editActionButton {
+    width: 4rem;
 }
 
 .votingButton {
