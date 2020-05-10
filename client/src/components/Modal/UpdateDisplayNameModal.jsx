@@ -43,7 +43,7 @@ const UpdateDisplayNameModal = props => {
                                 id="confirmUpdateDisplayNameButton"
                                 title="Yes"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 onClick={props.updateDisplayName}
                                 data-dismiss="modal">
                                 Yes

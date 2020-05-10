@@ -23,7 +23,7 @@ const UpdateProfilePictureSuccessModal = props => {
                                 id="closeUpdateProfilePictureSuccessModalButton"
                                 title="Okay"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 onClick={props.hideUpdateProfilePictureSuccessModal}
                                 data-dismiss="modal">
                                 Okay

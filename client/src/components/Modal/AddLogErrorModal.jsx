@@ -78,7 +78,7 @@ const AddLogErrorModal = props => {
                                 id="closeAddLogErrorModal"
                                 title="Okay"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 onClick={hideAddLogErrorModal}
                                 data-dismiss="modal">
                                 Okay

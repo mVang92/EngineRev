@@ -68,7 +68,7 @@ const EditOneThreadCommentModal = props => {
                                         <button
                                             id="confirmSaveEditThreadCommentButton"
                                             title="Save Comment"
-                                            className="cancelBtn"
+                                            className="standardButton"
                                             type="submit"
                                             disabled={disableConfirmSaveEditThreadCommentButton}>
                                             Save

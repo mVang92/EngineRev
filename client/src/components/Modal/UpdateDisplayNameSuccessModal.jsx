@@ -23,7 +23,7 @@ const UpdateDisplayNameSuccessModal = props => {
                                 id="closeUpdateDisplayNameSuccessModalButton"
                                 title="Okay"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 onClick={props.hideUpdateDisplayNameSuccessModal}
                                 data-dismiss="modal">
                                 Okay

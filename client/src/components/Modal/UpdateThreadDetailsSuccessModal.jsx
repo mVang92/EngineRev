@@ -24,7 +24,7 @@ const UpdateThreadDetailsSuccessModal = props => {
                                 id="closeUpdateThreadDetailsSuccessModalButton"
                                 title="Okay"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 onClick={props.hideUpdateThreadDetailsSuccessModal}
                                 data-dismiss="modal">
                                 Okay

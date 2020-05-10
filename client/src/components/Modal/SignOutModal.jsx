@@ -41,7 +41,7 @@ const SignOutModal = props => {
                                 id="doSignOutButton"
                                 title="Sign Out"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 onClick={props.handleSignOut}
                                 data-dismiss="modal">
                                 Yes

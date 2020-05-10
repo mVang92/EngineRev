@@ -171,6 +171,7 @@ input {
 .backButton,
 .backHomeBtn,
 .backToTopButton,
+.standardButton,
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton,
@@ -192,6 +193,7 @@ input {
 .cancelBtn,
 .editActionButton,
 .editReleaseNoteActionButton,
+.standardButton,
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton,
@@ -250,6 +252,7 @@ input {
 .backToTopButton:hover,
 .editActionButton,
 .deleteActionButton,
+.standardButton:hover,
 .deleteReleaseNoteActionButton,
 .editReleaseNoteActionButton,
 #submitNewPasswordButton:hover,
@@ -274,6 +277,7 @@ input {
 
 .cancelBtn:hover,
 .editActionButton:hover,
+.standardButton:hover,
 .editReleaseNoteActionButton:hover,
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
@@ -333,7 +337,7 @@ input {
 #editVehicleNameButton,
 #printPageButton,
 #printPageViaDeleteButton {
-    width: 9em;
+    width: 7em;
 }
 
 .nav-link:hover {
@@ -845,20 +849,6 @@ footer {
 @media only screen and (max-width: 1200px) {
     .actionButtonsMobileDisplay {
         max-width: 45%;
-    }
-
-    #deleteThreadButton,
-    #saveEditedThreadTitleButton,
-    #cancelEditThreadTitleButton,
-    #editThreadTitleButton,
-    #addLogBackButton,
-    #addServiceLogButton,
-    #addLogResetInputFieldsButton,
-    #addLogSortLogsButton,
-    #editVehicleNameButton,
-    #printPageButton,
-    #printPageViaDeleteButton {
-        width: 7em;
     }
 }
 

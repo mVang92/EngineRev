@@ -54,7 +54,7 @@ const showUpdateBackgroundPictureModal = props => {
                                 id="confirmUpdatePictureButton"
                                 title="Yes"
                                 type="button"
-                                className="cancelBtn"
+                                className="standardButton"
                                 onClick={props.updateBackgroundPicture}
                                 data-dismiss="modal">
                                 Yes
