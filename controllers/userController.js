@@ -52,13 +52,19 @@ module.exports = {
    * Add one vehicle for the current user logged in
    */
   addOneVehicle: (req, res) => {
-    db.Users
-      .updateOne(
-        { creator: req.params.id },
-        { $push: { vehicles: [req.body] } }
-      )
-      .then(result => res.json(result))
-      .catch(err => res.status(422).json(err));
+    const date = new Date();
+    const futureYear = date.getFullYear() + 2;
+    if ((req.body.year < 1885) || (req.body.year > futureYear)) {
+      res.status(400).json();
+    } else {
+      db.Users
+        .updateOne(
+          { creator: req.params.id },
+          { $push: { vehicles: [req.body] } }
+        )
+        .then(result => res.json(result))
+        .catch(err => res.status(422).json(err));
+    }
   },
 
   /**
@@ -78,20 +84,26 @@ module.exports = {
    * Update the vehicle name for the selected vehicle
    */
   updateOneVehicleInformation: (req, res) => {
-    db.Users
-      .updateOne(
-        { "vehicles._id": req.params.vehicleId },
-        {
-          $set: {
-            "vehicles.$.vehicleName": req.body.vehicleName,
-            "vehicles.$.year": req.body.year,
-            "vehicles.$.make": req.body.make,
-            "vehicles.$.model": req.body.model
+    const date = new Date();
+    const futureYear = date.getFullYear() + 2;
+    if ((req.body.year < 1885) || (req.body.year > futureYear)) {
+      res.status(400).json();
+    } else {
+      db.Users
+        .updateOne(
+          { "vehicles._id": req.params.vehicleId },
+          {
+            $set: {
+              "vehicles.$.vehicleName": req.body.vehicleName,
+              "vehicles.$.year": req.body.year,
+              "vehicles.$.make": req.body.make,
+              "vehicles.$.model": req.body.model
+            }
           }
-        }
-      )
-      .then(result => res.json(result))
-      .catch(err => res.status(422).json(err));
+        )
+        .then(result => res.json(result))
+        .catch(err => res.status(422).json(err));
+    }
   },
 
   /**
