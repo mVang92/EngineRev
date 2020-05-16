@@ -51,7 +51,7 @@ const EditOneVehicleNameModal = props => {
                                     <div className="col-md-4 text-right textLeftMobileDisplay">
                                         <button
                                             id="removeVehicleNameButton"
-                                            title="Remove Vehicle Name"
+                                            title="Delete Name"
                                             type="button"
                                             onClick={deleteVehicleName}>
                                             Delete Name
@@ -109,7 +109,7 @@ const EditOneVehicleNameModal = props => {
                                     <div className="col-md-4 bottomMarginMobileDisplay">
                                         <button
                                             id="addLogDeleteVehicleButton"
-                                            title="Delete This Vehicle"
+                                            title="Delete Vehicle"
                                             type="button"
                                             className="deleteBtn"
                                             onClick={showDeleteOneVehicleModal}>
