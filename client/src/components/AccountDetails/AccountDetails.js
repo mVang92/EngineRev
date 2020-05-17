@@ -97,7 +97,7 @@ const AccountDetails = props => {
       <div className="row">
         <div className="col-md-4"><label><strong>Unique User Id:</strong></label></div>
         <div className="col-md-4">
-          <label><span id={uniqueUserIdMask}>{defaults.uniqueUserIdMask}</span></label>
+          <span id={uniqueUserIdMask}>{defaults.uniqueUserIdMask}</span>
           <span id={uniqueUserId}>{userId}</span>
         </div>
         <div className="col-md-4">
@@ -145,10 +145,12 @@ const AccountDetails = props => {
           ) : (
             <React.Fragment>
               <div className="row">
-                <div className="col-md-4"><label><strong>Themes:</strong></label></div>
+                <div className="col-md-4 bottomMarginMobileDisplay">
+                  <label><strong>Themes:</strong></label>
+                </div>
                 <div className="col-md-4 text-center">
                   <div className="row">
-                    <div className="col-md-6 smallBottomMargin">
+                    <div className="col-md-6 smallBottomMargin noWidthMobileDisplay">
                       <button
                         id="carSpaceThemeToggleButton"
                         title="CarSpace Theme"
@@ -158,7 +160,7 @@ const AccountDetails = props => {
                         CarSpace
                       </button>
                     </div>
-                    <div className="col-md-6 smallBottomMargin">
+                    <div className="col-md-6 smallBottomMargin noWidthMobileDisplay">
                       <button
                         id="lightThemeToggleButton"
                         title="Light Theme"
@@ -170,7 +172,7 @@ const AccountDetails = props => {
                     </div>
                   </div>
                   <div className="row">
-                    <div className="col-md-6 bottomMarginMobileDisplay">
+                    <div className="col-md-6 bottomMarginMobileDisplay noWidthMobileDisplay">
                       <button
                         id="greyThemeToggleButton"
                         title="Grey Theme"
@@ -180,7 +182,7 @@ const AccountDetails = props => {
                         Grey
                       </button>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-6 noWidthMobileDisplay">
                       <button
                         id="darkThemeToggleButton"
                         title="Dark Theme"
@@ -221,7 +223,9 @@ const AccountDetails = props => {
               </div>
               <hr className={currentTheme.hr} />
               <div className="row">
-                <div className="col-md-4"><label><strong>Update Background Picture:</strong></label></div>
+                <div className="col-md-4 bottomMarginMobileDisplay">
+                  <label><strong>Update Background Picture:</strong></label>
+                </div>
                 <div className="col-md-4">
                   <div className="row">
                     <div className="col-md-12">
@@ -257,7 +261,9 @@ const AccountDetails = props => {
       }
       <br />
       <div className="row">
-        <div className="col-md-4"><label><strong>Update Profile Picture:</strong></label></div>
+        <div className="col-md-4 bottomMarginMobileDisplay">
+          <label><strong>Update Profile Picture:</strong></label>
+        </div>
         <div className="col-md-4">
           <div className="row">
             <div className="col-md-12">
@@ -289,7 +295,9 @@ const AccountDetails = props => {
       </div>
       <br />
       <form className="row">
-        <div className="col-md-4"><label><strong>Update Display Name:</strong></label></div>
+        <div className="col-md-4 bottomMarginMobileDisplay">
+          <label><strong>Update Display Name:</strong></label>
+        </div>
         <div className="col-md-4">
           <div className="row">
             <div className="col-md-12">
@@ -320,7 +328,9 @@ const AccountDetails = props => {
       </form>
       <br />
       <form className="row">
-        <div className="col-md-4"><label><strong>Update Password:</strong></label></div>
+        <div className="col-md-4 bottomMarginMobileDisplay">
+          <label><strong>Update Password:</strong></label>
+        </div>
         <div className="col-md-4">
           <div className="row">
             <div className="col-md-12">

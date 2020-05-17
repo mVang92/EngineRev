@@ -732,13 +732,13 @@ export default class Log extends Component {
       showEditOneVehicleNameModal: false,
       showDeleteOneVehicleModal: true,
       disableDeleteOneVehicleButton: true,
-      confirmDeleteVehicleButtonText: "Please Wait",
+      confirmDeleteVehicleButtonText: "Waiting...",
       disableDeleteVehicleButtonTimer: setTimeout(() => {
         this.setState({
           disableDeleteOneVehicleButton: false,
           confirmDeleteVehicleButtonText: "Delete"
         });
-      }, 4000)
+      }, 5000)
     });
   };
 
