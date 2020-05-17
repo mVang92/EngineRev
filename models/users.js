@@ -15,9 +15,9 @@ const userSchema = new Schema({
     make: { type: String, required: true },
     model: { type: String, required: true },
     logs: [{
-      date: { type: String },
-      mileage: { type: String },
-      service: { type: String },
+      date: { type: String, required: true },
+      mileage: { type: Number, required: true },
+      service: { type: String, required: true },
       comment: { type: String }
     }],
     date: { type: Date, default: Date.now }

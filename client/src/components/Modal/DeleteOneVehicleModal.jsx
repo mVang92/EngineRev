@@ -67,7 +67,7 @@ const DeleteOneVehicleModal = props => {
                                     (
                                         <button
                                             id="printPageViaDeleteButton"
-                                            title="Print Service Logs"
+                                            title="Print Logs"
                                             type="button"
                                             className="addBtn"
                                             onClick={handlePrintPage}
@@ -80,7 +80,7 @@ const DeleteOneVehicleModal = props => {
                             }
                             <Link to={"/"}>
                                 <button
-                                    title="Delete Vehicle"
+                                    title="Delete"
                                     id="confirmDeleteVehicleButton"
                                     className="deleteBtn"
                                     type="button"

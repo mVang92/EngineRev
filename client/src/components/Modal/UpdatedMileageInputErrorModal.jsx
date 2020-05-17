@@ -26,7 +26,7 @@ const UpdatedMileageInputErrorModal = props => {
                             </div>
                             <div className="col-md-10 userInputErrorMessage">
                                 <div className="col-md-12">
-                                    <span className="text-danger">{serviceLogMileage}</span> is not a valid input for Mileage.
+                                    <strong><span className="text-danger">{serviceLogMileage}</span></strong> is not a valid input for Mileage.
                                 </div>
                                 <div className="col-md-12">
                                     Please enter numerical values. Exclude special characters.

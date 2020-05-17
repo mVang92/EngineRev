@@ -113,7 +113,7 @@ const EditOneVehicleNameModal = props => {
                                             type="button"
                                             className="deleteBtn"
                                             onClick={showDeleteOneVehicleModal}>
-                                            Delete Vehicle
+                                            Delete
                                         </button>
                                     </div>
                                     <div className="col-md-8 alignRightButtonsDesktopDisplay">

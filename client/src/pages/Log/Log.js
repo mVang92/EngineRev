@@ -736,7 +736,7 @@ export default class Log extends Component {
       disableDeleteVehicleButtonTimer: setTimeout(() => {
         this.setState({
           disableDeleteOneVehicleButton: false,
-          confirmDeleteVehicleButtonText: "Delete Vehicle"
+          confirmDeleteVehicleButtonText: "Delete"
         });
       }, 4000)
     });

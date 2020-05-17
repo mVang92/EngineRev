@@ -181,7 +181,7 @@ input {
     transition-duration: 0.5s;
     border: 1px solid rgb(255, 255, 255);
     box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
-    width: 6.8rem;
+    width: 7rem;
 }
 
 .editActionButton,
@@ -337,7 +337,7 @@ input {
 #editVehicleNameButton,
 #printPageButton,
 #printPageViaDeleteButton {
-    width: 7em;
+    width: 7rem;
 }
 
 .nav-link:hover {
@@ -547,13 +547,6 @@ input {
 .underline:active:before {
     left: 0;
     right: 0;
-}
-
-#confirmDeleteVehicleButton,
-#addLogDeleteVehicleButton,
-#deleteServiceLogButton,
-#deleteThreadCommentButton {
-    width: 9em;
 }
 
 #confirmDeleteVehicleButton:disabled {
@@ -872,20 +865,6 @@ footer {
     .actionButtonsMobileDisplay {
         max-width: 50%;
     }
-
-    #deleteThreadButton,
-    #saveEditedThreadTitleButton,
-    #cancelEditThreadTitleButton,
-    #editThreadTitleButton,
-    #addLogBackButton,
-    #addServiceLogButton,
-    #addLogResetInputFieldsButton,
-    #printPageButton,
-    #addLogSortLogsButton,
-    #editVehicleNameButton,
-    #printPageViaDeleteButton {
-        width: 6em;
-    }
 }
 
 @media only screen and (max-width: 767px) {
@@ -925,12 +904,10 @@ footer {
     #printPageButton {
         margin: 4px;
         width: 9em;
-        height: 2em;
     }
 
     #printPageViaDeleteButton {
         margin: 4px;
-        width: 9em;
     }
 
     .logSubmitBtn,
