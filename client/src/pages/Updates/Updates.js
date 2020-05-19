@@ -383,6 +383,7 @@ export default class Updates extends Component {
                       <div id="recentUpdatesContainer" className={this.state.currentTheme.background}>
                         <div id="field"></div>
                         <h4 className="text-center"><label>Release Notes and Updates</label></h4>
+                        <hr className={this.state.currentTheme.hr} />
                         <BackToHomeButtonRow />
                         <hr className={this.state.currentTheme.hr} />
                         {

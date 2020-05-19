@@ -25,6 +25,7 @@ const ForumDetails = props => {
           <label><h4>Forum</h4></label>
         </div>
       </div>
+      <hr className={currentTheme.hr} />
       <BackToHomeButtonRow />
       <hr className={currentTheme.hr} />
       {
