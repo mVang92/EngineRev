@@ -41,6 +41,7 @@ const AccountDetails = props => {
       <div className="row text-center">
         <div className="col-md-12"><label><h4>Account</h4></label></div>
       </div>
+      <hr className={currentTheme.hr} />
       <BackToHomeButtonRow />
       <hr className={currentTheme.hr} />
       <div className={`row paddingDesktopDisplay ${currentTheme.accountDetails}`}>

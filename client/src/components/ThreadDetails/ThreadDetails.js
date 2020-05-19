@@ -43,6 +43,7 @@ const ThreadDetails = props => {
         </div>
       </div>
       <div>
+        <hr className={currentTheme.hr} />
         <div className="row">
           <div className="col-md-4">
             <button className="backButton" title="Back" onClick={backButton}>Back</button>
