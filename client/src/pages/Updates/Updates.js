@@ -5,13 +5,8 @@ import { themes } from "../../themes/Themes";
 import { defaults } from "../../assets/Defaults";
 import updateApi from "../../utils/updateApi";
 import vehicleApi from "../../utils/API";
-import OneUpdate from "../../components/OneUpdate";
-import AddUpdates from "../../components/AddUpdates";
+import UpdatePageDetails from "../../components/UpdatePageDetails";
 import Loading from "../../components/Loading";
-import EditOneUpdateModal from "../../components/Modal/EditOneUpdateModal";
-import DeleteOneUpdateModal from "../../components/Modal/DeleteOneUpdateModal";
-import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
-import BottomActionButtons from "../../components/BottomActionButtons";
 import { toast } from "react-toastify";
 
 export default class Updates extends Component {
@@ -379,69 +374,27 @@ export default class Updates extends Component {
               {
                 this.state.pageLoaded ?
                   (
-                    <div className="container largeBottomMarginMobileDisplay">
-                      <div id="recentUpdatesContainer" className={this.state.currentTheme.background}>
-                        <div id="field"></div>
-                        <h4 className="text-center"><label>Release Notes and Updates</label></h4>
-                        <hr className={this.state.currentTheme.hr} />
-                        <BackToHomeButtonRow />
-                        <hr className={this.state.currentTheme.hr} />
-                        {
-                          this.state.admin ?
-                            (
-                              <AddUpdates
-                                handleChange={this.handleChange}
-                                addOneUpdate={this.addOneUpdate}
-                                updateChanges={this.state.updateChanges}
-                                knownIssues={this.state.knownIssues}
-                                currentTheme={this.state.currentTheme}
-                              />
-                            ) : (
-                              null
-                            )
-                        }
-                        {
-                          this.state.allUpdates.map(update => {
-                            return (
-                              <OneUpdate
-                                key={update._id}
-                                _id={update._id}
-                                date={update.date}
-                                updateChanges={update.updateChanges}
-                                knownIssues={update.knownIssues}
-                                getActionValue={this.getActionValue}
-                                currentTheme={this.state.currentTheme}
-                                admin={this.state.admin}
-                              />
-                            )
-                          })
-                        }
-                        <br />
-                        <BottomActionButtons
-                          backToTopOfPage={this.backToTopOfPage}
-                        />
-                        <EditOneUpdateModal
-                          checkUserEnteredUpdatedReleaseNoteInput={this.checkUserEnteredUpdatedReleaseNoteInput}
-                          showEditOneUpdateModal={this.state.showEditOneUpdateModal}
-                          hideEditOneUpdateModal={this.hideEditOneUpdateModal}
-                          handleChange={this.handleChange}
-                          currentTheme={this.state.currentTheme}
-                          updateChangesToShowInModal={this.state.updateChangesToShowInModal}
-                          knownIssuesToShowInModal={this.state.knownIssuesToShowInModal}
-                          disableConfirmSaveEditReleaseNoteButton={this.state.disableConfirmSaveEditReleaseNoteButton}
-                        />
-                        <DeleteOneUpdateModal
-                          handleDeleteOneReleaseNote={this.handleDeleteOneReleaseNote}
-                          showDeleteOneUpdateModal={this.state.showDeleteOneUpdateModal}
-                          hideDeleteOneUpdateModal={this.hideDeleteOneUpdateModal}
-                          handleChange={this.handleChange}
-                          currentTheme={this.state.currentTheme}
-                          updateChangesToShowInModal={this.state.updateChangesToShowInModal}
-                          knownIssuesToShowInModal={this.state.knownIssuesToShowInModal}
-                          disableConfirmDeleteReleaseNoteButton={this.state.disableConfirmDeleteReleaseNoteButton}
-                        />
-                      </div>
-                    </div>
+                    <UpdatePageDetails
+                      currentTheme={this.state.currentTheme}
+                      admin={this.state.admin}
+                      handleChange={this.handleChange}
+                      addOneUpdate={this.addOneUpdate}
+                      updateChanges={this.state.updateChanges}
+                      knownIssues={this.state.knownIssues}
+                      allUpdates={this.state.allUpdates}
+                      getActionValue={this.getActionValue}
+                      backToTopOfPage={this.backToTopOfPage}
+                      checkUserEnteredUpdatedReleaseNoteInput={this.checkUserEnteredUpdatedReleaseNoteInput}
+                      showEditOneUpdateModal={this.state.showEditOneUpdateModal}
+                      hideEditOneUpdateModal={this.hideEditOneUpdateModal}
+                      updateChangesToShowInModal={this.state.updateChangesToShowInModal}
+                      knownIssuesToShowInModal={this.state.knownIssuesToShowInModal}
+                      disableConfirmSaveEditReleaseNoteButton={this.state.disableConfirmSaveEditReleaseNoteButton}
+                      handleDeleteOneReleaseNote={this.handleDeleteOneReleaseNote}
+                      showDeleteOneUpdateModal={this.state.showDeleteOneUpdateModal}
+                      hideDeleteOneUpdateModal={this.hideDeleteOneUpdateModal}
+                      disableConfirmDeleteReleaseNoteButton={this.state.disableConfirmDeleteReleaseNoteButton}
+                    />
                   ) : (
                     <Loading />
                   )
