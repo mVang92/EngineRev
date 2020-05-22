@@ -67,9 +67,7 @@ const UpdatePageDetails = props => {
                     })
                 }
                 <br />
-                <BottomActionButtons
-                    backToTopOfPage={backToTopOfPage}
-                />
+                <BottomActionButtons backToTopOfPage={backToTopOfPage} />
                 <EditOneUpdateModal
                     checkUserEnteredUpdatedReleaseNoteInput={checkUserEnteredUpdatedReleaseNoteInput}
                     showEditOneUpdateModal={showEditOneUpdateModal}
