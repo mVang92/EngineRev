@@ -28,6 +28,7 @@ const UpdatePageDetails = props => {
         hideDeleteOneUpdateModal,
         disableConfirmDeleteReleaseNoteButton
     } = props;
+    
     return (
         <div className="container largeBottomMarginMobileDisplay">
             <div id="recentUpdatesContainer" className={currentTheme.background}>
