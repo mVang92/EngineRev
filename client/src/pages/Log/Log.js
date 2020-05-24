@@ -5,14 +5,9 @@ import { firebase } from "../../firebase"
 import { themes } from "../../themes/Themes";
 import { defaults } from "../../assets/Defaults";
 import { events } from "../../assets/Events";
-import LogPageErrorHeader from "../../components/LogPageErrorHeader";
-import LogPageVehicleNameDisplay from "../../components/LogPageVehicleNameDisplay";
+import VehicleLogContent from "../../components/VehicleLogContent";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
-import AddLog from "../../components/AddLog";
-import TopActionButtons from "../../components/TopActionButtons";
-import ServiceLogBottomButtons from "../../components/ServiceLogBottomButtons";
-import ServiceLogDisplay from "../../components/ServiceLogDisplay";
 import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal";
 import EditOneServiceLogModal from "../../components/Modal/EditOneServiceLogModal";
 import DeleteOneServiceLogModal from "../../components/Modal/DeleteOneServiceLogModal";
@@ -61,6 +56,7 @@ export default class Log extends Component {
       updatedServiceLogDateToConfirm: "",
       confirmDeleteVehicleButtonText: "",
       errorMessage: "",
+      disableDeleteVehicleButtonTimer: "",
       sortVehicleServiceLogsMostRecent: true,
       showEditOneLogModal: false,
       showDeleteOneVehicleModal: false,
@@ -76,8 +72,7 @@ export default class Log extends Component {
       disableAddServiceLogButton: false,
       disableDeleteOneVehicleButton: true,
       disableConfirmSaveEditServiceLogButton: false,
-      disableConfirmSaveEditVehicleNameButton: false,
-      disableDeleteVehicleButtonTimer: ""
+      disableConfirmSaveEditVehicleNameButton: false
     };
   };
 
@@ -896,76 +891,31 @@ export default class Log extends Component {
               this.state.pageLoaded ?
                 (
                   <Container>
-                    <div className={`box ${this.state.currentTheme.background}`}>
-                      {
-                        this.state.year ?
-                          (
-                            <LogPageVehicleNameDisplay
-                              vehicleName={this.state.vehicleName}
-                              year={this.state.year}
-                              make={this.state.make}
-                              model={this.state.model}
-                            />
-                          ) : (
-                            <LogPageErrorHeader
-                              errorMessage={this.state.errorMessage}
-                            />
-                          )
-                      }
-                      <hr className={`hideWhilePrinting ${this.state.currentTheme.hr}`} />
-                      <TopActionButtons
-                        handlePrintPage={this.handlePrintPage}
-                        changeSortOrder={this.changeSortOrder}
-                        showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
-                        showEditOneVehicleNameModal={this.showEditOneVehicleNameModal}
-                        vehicleServiceLogs={this.state.vehicleServiceLogs}
-                        year={this.state.year}
-                      />
-                      <hr className={this.state.currentTheme.hr} />
-                      <div className="hideWhilePrinting">
-                        <AddLog
-                          year={this.state.year}
-                          date={this.state.date}
-                          mileage={this.state.mileage}
-                          service={this.state.service}
-                          comment={this.state.comment}
-                          handleChange={this.handleChange}
-                          handleResetLogVehicleForm={this.handleResetLogVehicleForm}
-                          checkUserEnteredServiceLogInput={this.checkUserEnteredServiceLogInput}
-                          disableAddServiceLogButton={this.state.disableAddServiceLogButton}
-                        />
-                        {
-                          this.state.year ?
-                            (
-                              <hr className={this.state.currentTheme.hr} />
-                            ) : (
-                              null
-                            )
-                        }
-                      </div>
-                      <div className="row innerBox serviceLogMobileDisplay">
-                        {
-                          this.state.vehicleServiceLogs.length === 0 ?
-                            (
-                              <div className="col-md-12 text-center">
-                                <label><strong>No Service Logs on Record</strong></label>
-                              </div>
-                            ) : (
-                              <ServiceLogDisplay
-                                sortVehicleServiceLogsMostRecent={this.state.sortVehicleServiceLogsMostRecent}
-                                currentTheme={this.state.currentTheme}
-                                sortServiceLogs={this.sortServiceLogs}
-                                showEditOneServiceLogModal={this.showEditOneServiceLogModal}
-                              />
-                            )
-                        }
-                      </div>
-                      <ServiceLogBottomButtons
-                        vehicleServiceLogs={this.state.vehicleServiceLogs}
-                        backToTopOfPage={this.backToTopOfPage}
-                        currentTheme={this.state.currentTheme}
-                      />
-                    </div>
+                    <VehicleLogContent
+                      handleChange={this.handleChange}
+                      currentTheme={this.state.currentTheme}
+                      vehicleName={this.state.vehicleName}
+                      year={this.state.year}
+                      make={this.state.make}
+                      model={this.state.model}
+                      errorMessage={this.state.errorMessage}
+                      handlePrintPage={this.handlePrintPage}
+                      changeSortOrder={this.changeSortOrder}
+                      showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
+                      showEditOneVehicleNameModal={this.showEditOneVehicleNameModal}
+                      vehicleServiceLogs={this.state.vehicleServiceLogs}
+                      date={this.state.date}
+                      mileage={this.state.mileage}
+                      service={this.state.service}
+                      comment={this.state.comment}
+                      handleResetLogVehicleForm={this.handleResetLogVehicleForm}
+                      checkUserEnteredServiceLogInput={this.checkUserEnteredServiceLogInput}
+                      disableAddServiceLogButton={this.state.disableAddServiceLogButton}
+                      sortVehicleServiceLogsMostRecent={this.state.sortVehicleServiceLogsMostRecent}
+                      sortServiceLogs={this.sortServiceLogs}
+                      showEditOneServiceLogModal={this.showEditOneServiceLogModal}
+                      backToTopOfPage={this.backToTopOfPage}
+                    />
                     <EditOneVehicleNameModal
                       disableConfirmSaveEditVehicleNameButton={this.state.disableConfirmSaveEditVehicleNameButton}
                       showEditOneVehicleNameModal={this.state.showEditOneVehicleNameModal}
