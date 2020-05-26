@@ -45,9 +45,7 @@ const VehicleLogContent = props => {
                             model={model}
                         />
                     ) : (
-                        <LogPageErrorHeader
-                            errorMessage={errorMessage}
-                        />
+                        <LogPageErrorHeader errorMessage={errorMessage} />
                     )
             }
             <hr className={`hideWhilePrinting ${currentTheme.hr}`} />
