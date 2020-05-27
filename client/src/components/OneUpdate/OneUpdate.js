@@ -1,6 +1,4 @@
 import React from "react";
-import editIcon from "../../images/editIcon.png";
-import deleteIcon from "../../images/deleteIcon.png";
 
 const OneUpdate = props => {
   const {
@@ -10,10 +8,8 @@ const OneUpdate = props => {
     currentTheme,
     updateChanges,
     knownIssues,
-    getActionValue
+    editOneUpdateModal
   } = props;
-  const editValue = "edit";
-  const deleteValue = "delete";
   const dateSubString = date.substring(0, 10);
   const newDate = new Date(dateSubString);
   newDate.setDate(newDate.getDate() + 1);
@@ -24,7 +20,22 @@ const OneUpdate = props => {
       <div className={`releaseNote ${currentTheme.oneUpdate}`}>
         <div className="row">
           <div className="col-md-3"><label><strong>Date:</strong></label></div>
-          <div className="col-md-9"><label>{formattedDate}</label></div>
+          <div className="col-md-6"><label>{formattedDate}</label></div>
+          <div className="col-md-3 alignRightButtonsDesktopDisplay alignLeftButtonsMobileDisplay">
+            {
+              admin ?
+                (
+                  <button
+                    className="editActionButton smallMarginTopMobileDisplay"
+                    title="Edit Release Note"
+                    onClick={() => editOneUpdateModal(_id, updateChanges, knownIssues)}>
+                    Edit
+                  </button>
+                ) : (
+                  null
+                )
+            }
+          </div>
         </div>
         <hr className="oneUpdateHr" />
         <div className="row">
@@ -36,40 +47,6 @@ const OneUpdate = props => {
           <div className="col-md-3"><label><strong>Known Issues:</strong></label></div>
           <div className="col-md-9 breakWord">{knownIssues}</div>
         </div>
-        {
-          admin ?
-            (
-              <React.Fragment>
-                <hr className="oneUpdateHr" />
-                <div className="row">
-                  <div className="col-md-9"></div>
-                  <div className="col-md-2 smallNegativeTopMargin">
-                    <div className="row centerButtonMobileDisplay">
-                      <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
-                        <button
-                          className="deleteReleaseNoteActionButton"
-                          title="Delete Release Note"
-                          onClick={event => getActionValue(event, _id, updateChanges, knownIssues, deleteValue)}>
-                          <img className="deleteIcon" src={deleteIcon} alt="delete" />
-                        </button>
-                      </div>
-                      <div className="col-md-6 hideWhilePrinting actionButtonsMobileDisplay">
-                        <button
-                          className="editReleaseNoteActionButton"
-                          title="Edit Release Note"
-                          onClick={event => getActionValue(event, _id, updateChanges, knownIssues, editValue)}>
-                          <img className="editIcon" src={editIcon} alt="edit" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-1"></div>
-                </div>
-              </React.Fragment>
-            ) : (
-              null
-            )
-        }
       </div>
     </React.Fragment>
   )

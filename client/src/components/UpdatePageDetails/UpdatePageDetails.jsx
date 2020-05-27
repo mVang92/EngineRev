@@ -19,6 +19,8 @@ const UpdatePageDetails = props => {
         backToTopOfPage,
         checkUserEnteredUpdatedReleaseNoteInput,
         showEditOneUpdateModal,
+        editOneUpdateModal,
+        deleteOneUpdateModal,
         hideEditOneUpdateModal,
         updateChangesToShowInModal,
         knownIssuesToShowInModal,
@@ -63,6 +65,7 @@ const UpdatePageDetails = props => {
                                 getActionValue={getActionValue}
                                 currentTheme={currentTheme}
                                 admin={admin}
+                                editOneUpdateModal={editOneUpdateModal}
                             />
                         )
                     })
@@ -78,6 +81,7 @@ const UpdatePageDetails = props => {
                     updateChangesToShowInModal={updateChangesToShowInModal}
                     knownIssuesToShowInModal={knownIssuesToShowInModal}
                     disableConfirmSaveEditReleaseNoteButton={disableConfirmSaveEditReleaseNoteButton}
+                    deleteOneUpdateModal={deleteOneUpdateModal}
                 />
                 <DeleteOneUpdateModal
                     handleDeleteOneReleaseNote={handleDeleteOneReleaseNote}
@@ -85,8 +89,6 @@ const UpdatePageDetails = props => {
                     hideDeleteOneUpdateModal={hideDeleteOneUpdateModal}
                     handleChange={handleChange}
                     currentTheme={currentTheme}
-                    updateChangesToShowInModal={updateChangesToShowInModal}
-                    knownIssuesToShowInModal={knownIssuesToShowInModal}
                     disableConfirmDeleteReleaseNoteButton={disableConfirmDeleteReleaseNoteButton}
                 />
             </div>

@@ -622,6 +622,8 @@ export default class Log extends Component {
 
   /**
    * Render the theme and background picture
+   * 
+   * @param theme The type of theme to render
    */
   renderTheme = theme => {
     this.setState({ currentTheme: theme });

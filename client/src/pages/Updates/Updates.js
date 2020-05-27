@@ -168,6 +168,8 @@ export default class Updates extends Component {
 
   /**
    * Render the theme and background picture
+   * 
+   * @param theme The type of theme to render
    */
   renderTheme = theme => {
     this.setState({ currentTheme: theme });
@@ -179,30 +181,13 @@ export default class Updates extends Component {
   };
 
   /**
-   * Execute the value from the service log action dropdown
-   */
-  getActionValue = (event, updateId, updateChanges, knownIssues, actionValue) => {
-    event.preventDefault();
-    switch (actionValue) {
-      case "edit":
-        this.showEditOneUpdateModal(updateId, updateChanges, knownIssues);
-        break;
-      case "delete":
-        this.showDeleteOneUpdateModal(updateId, updateChanges, knownIssues);
-        break;
-      default:
-        alert("Error Processing Request");
-    }
-  };
-
-  /**
    * Display the modal to edit one update
    * 
    * @param updateId      the update id to target
    * @param updateChanges the update or release notes to save
    * @param knownIssues   the known issues to save
    */
-  showEditOneUpdateModal = (updateId, updateChanges, knownIssues) => {
+  editOneUpdateModal = (updateId, updateChanges, knownIssues) => {
     this.setState({
       showEditOneUpdateModal: true,
       updateId: updateId,
@@ -215,17 +200,11 @@ export default class Updates extends Component {
 
   /**
    * Display the modal to delete one update
-   * 
-   * @param updateId      the update id to target
-   * @param updateChanges the update or release notes to save
-   * @param knownIssues   the known issues to save
    */
-  showDeleteOneUpdateModal = (updateId, updateChanges, knownIssues) => {
+  deleteOneUpdateModal = () => {
     this.setState({
       showDeleteOneUpdateModal: true,
-      updateId: updateId,
-      updateChangesToShowInModal: updateChanges,
-      knownIssuesToShowInModal: knownIssues
+      showEditOneUpdateModal: false
     });
   };
 
@@ -266,6 +245,9 @@ export default class Updates extends Component {
 
   /**
    * Update the release note
+   * 
+   * @param newReleaseNotes The new release note to update the old one
+   * @param newKnownIssues The known issues to update the old one
    */
   handleUpdateOneReleaseNote = (newReleaseNotes, newKnownIssues) => {
     vehicleApi.findUserInformationForOneUser(this.state.userId)
@@ -386,6 +368,8 @@ export default class Updates extends Component {
                       backToTopOfPage={this.backToTopOfPage}
                       checkUserEnteredUpdatedReleaseNoteInput={this.checkUserEnteredUpdatedReleaseNoteInput}
                       showEditOneUpdateModal={this.state.showEditOneUpdateModal}
+                      editOneUpdateModal={this.editOneUpdateModal}
+                      deleteOneUpdateModal={this.deleteOneUpdateModal}
                       hideEditOneUpdateModal={this.hideEditOneUpdateModal}
                       updateChangesToShowInModal={this.state.updateChangesToShowInModal}
                       knownIssuesToShowInModal={this.state.knownIssuesToShowInModal}
