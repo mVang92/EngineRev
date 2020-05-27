@@ -184,15 +184,13 @@ input {
     width: 7rem;
 }
 
-.editActionButton,
-.editReleaseNoteActionButton {
+.editActionButton {
     border: 1px solid rgb(255, 255, 255);
     box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
 }
 
 .cancelBtn,
 .editActionButton,
-.editReleaseNoteActionButton,
 .standardButton,
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
@@ -217,7 +215,6 @@ input {
 
 .deleteBtn,
 .deleteActionButton,
-.deleteReleaseNoteActionButton,
 .backButton,
 .backHomeBtn {
     background: rgb(220, 64, 48);
@@ -253,8 +250,6 @@ input {
 .editActionButton,
 .deleteActionButton,
 .standardButton:hover,
-.deleteReleaseNoteActionButton,
-.editReleaseNoteActionButton,
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover,
@@ -269,7 +264,6 @@ input {
 #addLogBackButton:hover,
 .deleteBtn:hover,
 .deleteActionButton:hover,
-.deleteReleaseNoteActionButton:hover,
 .backButton:hover,
 .backHomeBtn:hover {
     background: rgb(255, 128, 128);
@@ -278,7 +272,6 @@ input {
 .cancelBtn:hover,
 .editActionButton:hover,
 .standardButton:hover,
-.editReleaseNoteActionButton:hover,
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover,
@@ -712,8 +705,7 @@ footer {
     transition-duration: 0.1s;
     color: rgb(255, 48, 48);
 }
-.deleteReleaseNoteActionButton,
-.editReleaseNoteActionButton,
+
 .deleteActionButton {
     width: 3rem;
 }

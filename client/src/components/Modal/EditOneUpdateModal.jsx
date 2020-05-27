@@ -10,8 +10,10 @@ const EditOneUpdateModal = props => {
         updateChangesToShowInModal,
         knownIssuesToShowInModal,
         hideEditOneUpdateModal,
-        disableConfirmSaveEditReleaseNoteButton
+        disableConfirmSaveEditReleaseNoteButton,
+        deleteOneUpdateModal
     } = props;
+    
     return (
         <ReactModal
             isOpen={showEditOneUpdateModal}
@@ -61,24 +63,38 @@ const EditOneUpdateModal = props => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="modal-footer">
-                                <button
-                                    id="cancelUpdateReleaseNote"
-                                    title="Cancel"
-                                    type="button"
-                                    className="cancelBtn"
-                                    onClick={hideEditOneUpdateModal}
-                                    data-dismiss="modal">
-                                    Cancel
-                                </button>
-                                <button
-                                    id="confirmSaveEditReleaseNoteButton"
-                                    title="Save Release Note"
-                                    className="standardButton"
-                                    type="submit"
-                                    disabled={disableConfirmSaveEditReleaseNoteButton}>
-                                    Save
-                                </button>
+                            <div className="modal-footer noFlex">
+                                <div className="row">
+                                    <div className="col-md-4 bottomMarginMobileDisplay">
+                                        <button
+                                            id="deleteReleaseNoteButton"
+                                            title="Delete Release Note"
+                                            type="button"
+                                            className="deleteBtn"
+                                            onClick={deleteOneUpdateModal}>
+                                            Delete
+                                        </button>
+                                    </div>
+                                    <div className="col-md-8 alignRightButtonsDesktopDisplay">
+                                        <button
+                                            id="cancelUpdateReleaseNote"
+                                            title="Cancel"
+                                            type="button"
+                                            className="cancelBtn"
+                                            onClick={hideEditOneUpdateModal}
+                                            data-dismiss="modal">
+                                            Cancel
+                                        </button>
+                                        <button
+                                            id="confirmSaveEditReleaseNoteButton"
+                                            title="Save Release Note"
+                                            className="standardButton"
+                                            type="submit"
+                                            disabled={disableConfirmSaveEditReleaseNoteButton}>
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

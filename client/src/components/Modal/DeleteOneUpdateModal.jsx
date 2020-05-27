@@ -6,12 +6,11 @@ const DeleteOneUpdateModal = props => {
     const {
         showDeleteOneUpdateModal,
         currentTheme,
-        updateChangesToShowInModal,
-        knownIssuesToShowInModal,
         hideDeleteOneUpdateModal,
         handleDeleteOneReleaseNote,
         disableConfirmDeleteReleaseNoteButton
     } = props;
+    
     return (
         <ReactModal
             isOpen={showDeleteOneUpdateModal}
@@ -32,25 +31,6 @@ const DeleteOneUpdateModal = props => {
                             </div>
                             <div className="col-md-2"></div>
                         </div>
-                        <div className="modal-body">
-                            <div className="row">
-                                <div className="col-md-3">
-                                    <label><strong>Updates:</strong></label>
-                                </div>
-                                <div className="col-md-9 updateChangesDeletePreview">
-                                    {updateChangesToShowInModal}
-                                </div>
-                            </div>
-                            <hr className={currentTheme.hr} />
-                            <div className="row">
-                                <div className="col-md-3">
-                                    <label><strong>Known Issues:</strong></label>
-                                </div>
-                                <div className="col-md-9 knownIssuesDeletePreview">
-                                    {knownIssuesToShowInModal}
-                                </div>
-                            </div>
-                        </div>
                         <div className="modal-footer">
                             <button
                                 id="cancelDeleteReleaseNote"
@@ -59,7 +39,7 @@ const DeleteOneUpdateModal = props => {
                                 className="cancelBtn"
                                 onClick={hideDeleteOneUpdateModal}
                                 data-dismiss="modal">
-                                Cancel
+                                No
                             </button>
                             <button
                                 title="Delete Release Note"
@@ -68,7 +48,7 @@ const DeleteOneUpdateModal = props => {
                                 type="button"
                                 onClick={handleDeleteOneReleaseNote}
                                 disabled={disableConfirmDeleteReleaseNoteButton}>
-                                Delete
+                                Yes
                             </button>
                         </div>
                     </div>
