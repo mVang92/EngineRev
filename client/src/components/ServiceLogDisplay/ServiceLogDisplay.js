@@ -13,7 +13,7 @@ const ServiceLogDisplay = props => {
               return (
                 <ServiceLog
                   key={serviceLog._id}
-                  _id={serviceLog._id}
+                  serviceLogId={serviceLog._id}
                   date={serviceLog.date}
                   mileage={serviceLog.mileage}
                   service={serviceLog.service}
@@ -28,7 +28,7 @@ const ServiceLogDisplay = props => {
               return (
                 <ServiceLog
                   key={serviceLog._id}
-                  _id={serviceLog._id}
+                  serviceLogId={serviceLog._id}
                   date={serviceLog.date}
                   mileage={serviceLog.mileage}
                   service={serviceLog.service}
