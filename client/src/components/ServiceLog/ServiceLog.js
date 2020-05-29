@@ -2,7 +2,7 @@ import React from "react";
 
 const ServiceLog = props => {
   const {
-    _id,
+    serviceLogId,
     date,
     mileage,
     service,
@@ -32,7 +32,7 @@ const ServiceLog = props => {
   };
 
   return (
-    <React.Fragment key={_id}>
+    <React.Fragment key={serviceLogId}>
       <div className="serviceLog">
         <div className={`row serviceLogFullDetails ${currentTheme.serviceLogs}`} style={serviceLogFullDetails}>
           <div className="col-md-2 logDetailsMobileDisplay"><span className="showUnderMobileDisplay"><strong>Date: </strong></span>{serviceLogDateFormatted}</div>
@@ -57,7 +57,7 @@ const ServiceLog = props => {
                 <button
                   className="editActionButton"
                   title="Edit Service Log"
-                  onClick={() => showEditOneServiceLogModal(_id, serviceLogDateFormatted, mileage, service, comment)}>
+                  onClick={() => showEditOneServiceLogModal(serviceLogId, serviceLogDateFormatted, mileage, service, comment)}>
                   Edit
                 </button>
               </div>
