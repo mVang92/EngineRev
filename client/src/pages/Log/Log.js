@@ -6,19 +6,9 @@ import { themes } from "../../themes/Themes";
 import { defaults } from "../../assets/Defaults";
 import { events } from "../../assets/Events";
 import VehicleLogContent from "../../components/VehicleLogContent";
+import VehicleLogModals from "../../components/VehicleLogModals";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
-import DeleteOneVehicleModal from "../../components/Modal/DeleteOneVehicleModal";
-import EditOneServiceLogModal from "../../components/Modal/EditOneServiceLogModal";
-import DeleteOneServiceLogModal from "../../components/Modal/DeleteOneServiceLogModal";
-import FutureDateConfirmationModal from "../../components/Modal/FutureDateConfirmationModal";
-import UpdatedFutureDateConfirmationModal from "../../components/Modal/UpdatedFutureDateConfirmationModal";
-import EditOneVehicleNameModal from "../../components/Modal/EditOneVehicleNameModal";
-import AddLogErrorModal from "../../components/Modal/AddLogErrorModal";
-import UpdateLogErrorModal from "../../components/Modal/UpdateLogErrorModal";
-import MileageInputErrorModal from "../../components/Modal/MileageInputErrorModal";
-import UpdatedMileageInputErrorModal from "../../components/Modal/UpdatedMileageInputErrorModal";
-import UpdatedVehicleYearNanErrorModal from "../../components/Modal/UpdatedVehicleYearNanErrorModal";
 import NoAuthorization from "../../components/NoAuthorization";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
@@ -59,7 +49,7 @@ export default class Log extends Component {
       disableDeleteVehicleButtonTimer: "",
       sortVehicleServiceLogsMostRecent: true,
       showEditOneLogModal: false,
-      showDeleteOneVehicleModal: false,
+      deleteOneVehicleModal: false,
       showAddLogErrorModal: false,
       showMileageInputErrorModal: false,
       showDeleteOneLogModal: false,
@@ -557,8 +547,8 @@ export default class Log extends Component {
    * Show the print screen for the user to print all service logs
    */
   handlePrintPage = () => {
-    if (this.state.showDeleteOneVehicleModal) {
-      this.setState({ showDeleteOneVehicleModal: false });
+    if (this.state.deleteOneVehicleModal) {
+      this.setState({ deleteOneVehicleModal: false });
       clearTimeout(this.state.disableDeleteVehicleButtonTimer);
       setTimeout(() => {
         window.print();
@@ -727,7 +717,7 @@ export default class Log extends Component {
   showDeleteOneVehicleModal = () => {
     this.setState({
       showEditOneVehicleNameModal: false,
-      showDeleteOneVehicleModal: true,
+      deleteOneVehicleModal: true,
       disableDeleteOneVehicleButton: true,
       confirmDeleteVehicleButtonText: "Waiting...",
       disableDeleteVehicleButtonTimer: setTimeout(() => {
@@ -850,7 +840,7 @@ export default class Log extends Component {
    */
   hideDeleteOneVehicleModal = () => {
     this.setState({
-      showDeleteOneVehicleModal: false,
+      deleteOneVehicleModal: false,
       disableDeleteOneVehicleButton: true
     });
     clearTimeout(this.state.disableDeleteVehicleButtonTimer);
@@ -918,102 +908,60 @@ export default class Log extends Component {
                       showEditOneServiceLogModal={this.showEditOneServiceLogModal}
                       backToTopOfPage={this.backToTopOfPage}
                     />
-                    <EditOneVehicleNameModal
-                      disableConfirmSaveEditVehicleNameButton={this.state.disableConfirmSaveEditVehicleNameButton}
-                      showEditOneVehicleNameModal={this.state.showEditOneVehicleNameModal}
-                      hideEditOneVehicleNameModal={this.hideEditOneVehicleNameModal}
-                      checkUserEnteredUpdatedVehicleNameInput={this.checkUserEnteredUpdatedVehicleNameInput}
-                      showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
-                      handleChange={this.handleChange}
-                      deleteVehicleName={this.deleteVehicleName}
+                    <VehicleLogModals
                       currentTheme={this.state.currentTheme}
+                      handleChange={this.handleChange}
+                      handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
+                      handleUpdateOneServiceLog={this.handleUpdateOneServiceLog}
+                      handleDeleteOneVehicle={this.handleDeleteOneVehicle}
+                      handlePrintPage={this.handlePrintPage}
+                      handleDeleteOneServiceLog={this.handleDeleteOneServiceLog}
+                      disableConfirmSaveEditVehicleNameButton={this.state.disableConfirmSaveEditVehicleNameButton}
+                      disableConfirmSaveEditServiceLogButton={this.state.disableConfirmSaveEditServiceLogButton}
+                      disableDeleteOneVehicleButton={this.state.disableDeleteOneVehicleButton}
+                      showEditOneVehicleNameModal={this.state.showEditOneVehicleNameModal}
+                      showDeleteOneServiceLogModal={this.showDeleteOneServiceLogModal}
+                      showEditOneLogModal={this.state.showEditOneLogModal}
+                      showUpdatedVehicleYearNanErrorModal={this.state.showUpdatedVehicleYearNanErrorModal}
+                      showFutureDateConfirmationModal={this.state.showFutureDateConfirmationModal}
+                      showUpdatedFutureDateConfirmationModal={this.state.showUpdatedFutureDateConfirmationModal}
+                      deleteOneVehicleModal={this.state.deleteOneVehicleModal}
+                      showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
+                      showDeleteOneLogModal={this.state.showDeleteOneLogModal}
+                      showAddLogErrorModal={this.state.showAddLogErrorModal}
+                      showUpdatedLogErrorModal={this.state.showUpdatedLogErrorModal}
+                      showMileageInputErrorModal={this.state.showMileageInputErrorModal}
+                      showUpdatedMileageInputErrorModal={this.state.showUpdatedMileageInputErrorModal}
+                      hideEditOneVehicleNameModal={this.hideEditOneVehicleNameModal}
+                      hideEditOneServiceLogModal={this.hideEditOneServiceLogModal}
+                      hideUpdatedVehicleYearNanErrorModal={this.hideUpdatedVehicleYearNanErrorModal}
+                      hideFutureDateConfirmationModal={this.hideFutureDateConfirmationModal}
+                      hideUpdatedFutureDateConfirmationModal={this.hideUpdatedFutureDateConfirmationModal}
+                      hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
+                      hideDeleteOneServiceLogModal={this.hideDeleteOneServiceLogModal}
+                      hideAddLogErrorModal={this.hideAddLogErrorModal}
+                      hideUpdateLogErrorModal={this.hideUpdateLogErrorModal}
+                      hideMileageInputErrorModal={this.hideMileageInputErrorModal}
+                      hideUpdatedMileageInputErrorModal={this.hideUpdatedMileageInputErrorModal}
+                      checkUserEnteredUpdatedVehicleNameInput={this.checkUserEnteredUpdatedVehicleNameInput}
+                      checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
+                      checkIfStringIsBlank={this.checkIfStringIsBlank}
+                      deleteVehicleName={this.deleteVehicleName}
+                      confirmDeleteVehicleButtonText={this.state.confirmDeleteVehicleButtonText}
                       vehicleName={this.state.vehicleName}
                       year={this.state.year}
                       make={this.state.make}
                       model={this.state.model}
-                    />
-                    <EditOneServiceLogModal
-                      disableConfirmSaveEditServiceLogButton={this.state.disableConfirmSaveEditServiceLogButton}
-                      checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
-                      showDeleteOneServiceLogModal={this.showDeleteOneServiceLogModal}
-                      showEditOneLogModal={this.state.showEditOneLogModal}
-                      hideEditOneServiceLogModal={this.hideEditOneServiceLogModal}
-                      handleChange={this.handleChange}
-                      currentTheme={this.state.currentTheme}
                       serviceLogDate={this.state.serviceLogDate}
                       serviceLogMileage={this.state.serviceLogMileage}
                       serviceLogService={this.state.serviceLogService}
                       serviceLogComment={this.state.serviceLogComment}
-                    />
-                    <UpdatedVehicleYearNanErrorModal
-                      showUpdatedVehicleYearNanErrorModal={this.state.showUpdatedVehicleYearNanErrorModal}
-                      hideUpdatedVehicleYearNanErrorModal={this.hideUpdatedVehicleYearNanErrorModal}
-                      currentTheme={this.state.currentTheme}
-                    />
-                    <FutureDateConfirmationModal
-                      handleSubmitOneServiceLog={this.handleSubmitOneServiceLog}
-                      showFutureDateConfirmationModal={this.state.showFutureDateConfirmationModal}
-                      hideFutureDateConfirmationModal={this.hideFutureDateConfirmationModal}
                       date={this.state.date}
-                      currentTheme={this.state.currentTheme}
-                    />
-                    <UpdatedFutureDateConfirmationModal
-                      handleUpdateOneServiceLog={this.handleUpdateOneServiceLog}
-                      showUpdatedFutureDateConfirmationModal={this.state.showUpdatedFutureDateConfirmationModal}
-                      hideUpdatedFutureDateConfirmationModal={this.hideUpdatedFutureDateConfirmationModal}
                       updatedServiceLogDateToConfirm={this.state.updatedServiceLogDateToConfirm}
-                      currentTheme={this.state.currentTheme}
-                    />
-                    <DeleteOneVehicleModal
-                      handleDeleteOneVehicle={this.handleDeleteOneVehicle}
-                      showDeleteOneVehicleModal={this.state.showDeleteOneVehicleModal}
-                      hideDeleteOneVehicleModal={this.hideDeleteOneVehicleModal}
-                      handlePrintPage={this.handlePrintPage}
-                      currentTheme={this.state.currentTheme}
-                      year={this.state.year}
-                      make={this.state.make}
-                      model={this.state.model}
                       vehicleServiceLogs={this.state.vehicleServiceLogs}
-                      disableDeleteOneVehicleButton={this.state.disableDeleteOneVehicleButton}
-                      confirmDeleteVehicleButtonText={this.state.confirmDeleteVehicleButtonText}
-                    />
-                    <DeleteOneServiceLogModal
-                      handleDeleteOneServiceLog={this.handleDeleteOneServiceLog}
-                      showDeleteOneLogModal={this.state.showDeleteOneLogModal}
-                      hideDeleteOneServiceLogModal={this.hideDeleteOneServiceLogModal}
-                      currentTheme={this.state.currentTheme}
-                    />
-                    <AddLogErrorModal
-                      showAddLogErrorModal={this.state.showAddLogErrorModal}
-                      hideAddLogErrorModal={this.hideAddLogErrorModal}
-                      checkIfStringIsBlank={this.checkIfStringIsBlank}
-                      date={this.state.date}
-                      currentTheme={this.state.currentTheme}
                       mileage={this.state.mileage}
                       service={this.state.service}
                       comment={this.state.comment}
-                    />
-                    <UpdateLogErrorModal
-                      showUpdatedLogErrorModal={this.state.showUpdatedLogErrorModal}
-                      hideUpdateLogErrorModal={this.hideUpdateLogErrorModal}
-                      checkIfStringIsBlank={this.checkIfStringIsBlank}
-                      currentTheme={this.state.currentTheme}
-                      serviceLogDate={this.state.serviceLogDate}
-                      serviceLogMileage={this.state.serviceLogMileage}
-                      serviceLogService={this.state.serviceLogService}
-                      serviceLogComment={this.state.serviceLogComment}
-                    />
-                    <MileageInputErrorModal
-                      showMileageInputErrorModal={this.state.showMileageInputErrorModal}
-                      hideMileageInputErrorModal={this.hideMileageInputErrorModal}
-                      currentTheme={this.state.currentTheme}
-                      mileage={this.state.mileage}
-                    />
-                    <UpdatedMileageInputErrorModal
-                      showUpdatedMileageInputErrorModal={this.state.showUpdatedMileageInputErrorModal}
-                      hideUpdatedMileageInputErrorModal={this.hideUpdatedMileageInputErrorModal}
-                      currentTheme={this.state.currentTheme}
-                      serviceLogMileage={this.state.serviceLogMileage}
                     />
                   </Container>
                 ) : (

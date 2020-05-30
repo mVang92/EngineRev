@@ -5,7 +5,7 @@ import warningImage from "../../images/warning.png";
 
 const DeleteOneVehicleModal = props => {
     const {
-        showDeleteOneVehicleModal,
+        deleteOneVehicleModal,
         currentTheme,
         year,
         make,
@@ -19,7 +19,7 @@ const DeleteOneVehicleModal = props => {
     } = props;
     return (
         <ReactModal
-            isOpen={showDeleteOneVehicleModal}
+            isOpen={deleteOneVehicleModal}
             contentLabel="Minimal Modal Example"
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
