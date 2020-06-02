@@ -34,6 +34,8 @@ export const defaults = {
     errorLoadingVehicleCount: "Error Loading vehicle count.",
     passwordConfirmationSent: "Password confirmation sent. Please check your email.",
     inputFieldsReset: "Input fields reset.",
+    deleteVehicleWarning: "You are about to delete this vehicle and any service logs associated with it. " +
+    "Are you sure you want to continue?",
     aboutCarSpace: "CarSpace allows you to keep track of your vehicle maintenance history and collaborate with the community. " +
     "Keep your vehicle running smoothly and meet other passionate do-it-yourselfers in the forum. " +
     "Ask questions and share vehicle diagnostic solutions with the community.",

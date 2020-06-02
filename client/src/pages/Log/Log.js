@@ -925,7 +925,6 @@ export default class Log extends Component {
                       showUpdatedVehicleYearNanErrorModal={this.state.showUpdatedVehicleYearNanErrorModal}
                       showFutureDateConfirmationModal={this.state.showFutureDateConfirmationModal}
                       showUpdatedFutureDateConfirmationModal={this.state.showUpdatedFutureDateConfirmationModal}
-                      deleteOneVehicleModal={this.state.deleteOneVehicleModal}
                       showDeleteOneVehicleModal={this.showDeleteOneVehicleModal}
                       showDeleteOneLogModal={this.state.showDeleteOneLogModal}
                       showAddLogErrorModal={this.state.showAddLogErrorModal}
@@ -947,6 +946,7 @@ export default class Log extends Component {
                       checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
                       checkIfStringIsBlank={this.checkIfStringIsBlank}
                       deleteVehicleName={this.deleteVehicleName}
+                      deleteOneVehicleModal={this.state.deleteOneVehicleModal}
                       confirmDeleteVehicleButtonText={this.state.confirmDeleteVehicleButtonText}
                       vehicleName={this.state.vehicleName}
                       year={this.state.year}
