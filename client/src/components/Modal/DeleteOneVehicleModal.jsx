@@ -1,6 +1,7 @@
 import React from "react";
 import ReactModal from "react-modal";
 import { Link } from "react-router-dom";
+import { defaults } from "../../assets/Defaults";
 import warningImage from "../../images/warning.png";
 
 const DeleteOneVehicleModal = props => {
@@ -46,10 +47,7 @@ const DeleteOneVehicleModal = props => {
                                             Are you sure you want to continue? Consider printing your service logs.
                                         </label>
                                     ) : (
-                                        <label>
-                                            You are about to delete this vehicle and any service logs associated with it.
-                                            Are you sure you want to continue?
-                                        </label>
+                                        <label>{defaults.deleteVehicleWarning}</label>
                                     )
                             }
                         </div>

@@ -61,13 +61,11 @@ label {
 }
 
 .accountModal {
-    z-index: 1;
     margin-top: 3rem;
     background: rgba(255, 255, 255, 0.7);
 }
 
 .ReactModal__Overlay {
-    z-index: 2;
     background: rgba(32, 32, 32, 0.5) !important;
     box-shadow: 0px 2px 30px 1px;
 }
@@ -388,10 +386,6 @@ input {
     transition-duration: 0.07s;
 }
 
-.Toastify__toast-container {
-    z-index: 9;
-}
-
 .Toastify__toast-container--top-right {
     top: 3em !important;
     right: 1px !important;
@@ -455,6 +449,7 @@ input {
 #scrollableBackgroundPicture {
     max-height: 17rem;
     overflow: auto;
+    margin-top: 1rem;
 }
 
 .addLogButtonsMobileDisplay {
