@@ -1,6 +1,7 @@
 import React from "react";
 import ReactModal from "react-modal";
 import { defaults } from "../../assets/Defaults";
+import warningImage from "../../images/warning.png";
 
 const DeleteThreadModal = props => {
     return (
@@ -15,9 +16,13 @@ const DeleteThreadModal = props => {
                 <div className="modal-body modalShadow">
                     <div className={`modalBody ${props.currentTheme.background}`}>
                         <div className="row modal-header">
-                            <div className="col-md-12 text-center">
+                            <div className="col-md-2">
+                                <img className="removeMobileDisplay imageMobileDisplay" src={warningImage} alt='warning' />
+                            </div>
+                            <div className="col-md-8 text-center">
                                 <label><strong>{defaults.areYouSureToDeleteThread}</strong></label>
                             </div>
+                            <div className="col-md-2"></div>
                         </div>
                         <div className="modal-footer">
                             <button
