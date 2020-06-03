@@ -16,7 +16,7 @@ const DeleteThreadModal = props => {
                 <div className="modal-body modalShadow">
                     <div className={`modalBody ${props.currentTheme.background}`}>
                         <div className="row modal-header">
-                        <div className="col-md-2">
+                            <div className="col-md-2">
                                 <img className="removeMobileDisplay imageMobileDisplay" src={warningImage} alt='warning' />
                             </div>
                             <div className="col-md-8 text-center">
