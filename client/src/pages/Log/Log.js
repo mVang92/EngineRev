@@ -23,7 +23,6 @@ export default class Log extends Component {
       pageLoaded: false,
       currentTheme: "",
       backgroundPicture: "",
-      vehicle: [],
       vehicleId: "",
       year: "",
       make: "",
