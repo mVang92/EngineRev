@@ -10,7 +10,7 @@ export const defaults = {
     startANewThread: "Start a New Thread",
     noCommentsOnThread: "There are no comments on this thread.",
     threadDetailsCannotBeBlank: "Title and description are required.",
-    areYouSureToDeleteThread: "Are you sure you want to delete this thread?",
+    areYouSureToDeleteThread: "Are you sure you want to delete this thread? All associated comments will also be deleted.",
     areYouSureToDeleteThreadComment: "Are you sure you want to delete your comment?",
     threadDetailsUpdated: "Thread successfully updated.",
     alreadyVotedOnComment: "You have already voted on this comment.",
