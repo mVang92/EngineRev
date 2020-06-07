@@ -1,6 +1,7 @@
 const db = require("../models");
 const threadCategories = [
     "Ask Car Question",
+    "Tips and Tricks",
     "Share a Story",
     "Other"
 ];
@@ -59,18 +60,23 @@ module.exports = {
      * Update the details to the thread
      */
     handleUpdateThreadDetails: (req, res) => {
-        db.Forum
-            .updateOne(
-                { _id: req.params.threadId },
-                {
-                    $set: {
-                        threadTitle: req.body.threadTitle,
-                        threadDescription: req.body.threadDescription,
+        if (threadCategories.includes(req.body.threadCategory)) {
+            db.Forum
+                .updateOne(
+                    { _id: req.params.threadId },
+                    {
+                        $set: {
+                            threadTitle: req.body.threadTitle,
+                            threadDescription: req.body.threadDescription,
+                            threadCategory: req.body.threadCategory
+                        }
                     }
-                }
-            )
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
+                )
+                .then(dbModel => res.json(dbModel))
+                .catch(err => res.status(422).json(err));
+        } else {
+            res.status(400).json();
+        }
     },
 
     /**

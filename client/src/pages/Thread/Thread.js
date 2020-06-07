@@ -189,14 +189,17 @@ export default class Thread extends Component {
 
   /**
    * Update the title to the thread
+   * 
+   * @param threadCategory the category to record for the thread
    */
-  handleUpdateThreadDetails = () => {
+  handleUpdateThreadDetails = threadCategory => {
     const creatorId = this.state.uniqueCreatorId;
     const email = this.state.email;
     const event = events.updateThreadDetails;
     let threadPayload = {
       threadTitle: this.state.threadTitle,
-      threadDescription: this.state.threadDescription
+      threadDescription: this.state.threadDescription,
+      threadCategory: threadCategory
     }
     forumApi.handleUpdateThreadDetails(this.state.threadId, threadPayload)
       .then(() => {
@@ -378,7 +381,9 @@ export default class Thread extends Component {
         threadDescription: this.state.threadDescriptionBackup,
       }, () => this.errorNotification(defaults.threadDetailsCannotBeBlank));
     } else {
-      this.handleUpdateThreadDetails();
+      let getThreadCategory = document.getElementById("threadCategoryDropdown");
+      let threadCategory = getThreadCategory.options[getThreadCategory.selectedIndex].value;
+      this.handleUpdateThreadDetails(threadCategory);
     }
   };
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { defaults } from "../../assets/Defaults";
+import ThreadCategoriesDropdown from "../../components/ThreadCategoriesDropdown";
 
 const AddThread = props => {
   const {
@@ -19,14 +20,7 @@ const AddThread = props => {
             <div className="text-center smallBottomMargin">
               <label><strong>{defaults.startANewThread}</strong></label>
             </div>
-            <div className="text-left">
-              <strong>Category: </strong>
-              <select id="threadCategoryDropdown" name="threadCategory">
-                <option value="Ask Car Question">Ask Car Question</option>
-                <option value="Share a Story">Share a Story</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+            <ThreadCategoriesDropdown />
             <br />
             <input
               id="newThreadTitleInput"

@@ -718,7 +718,8 @@ footer {
 
 #threadCategoryDropdown {
     box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
-    height: 100%;
+    cursor: pointer;
+    border-radius: 3px;
 }
 
 #loadingAnimation {
