@@ -3,6 +3,7 @@ import Container from "../../components/Container";
 import { defaults } from "../../assets/Defaults";
 import AddCommentToThread from "../../components/AddCommentToThread";
 import ThreadComments from "../../components/ThreadComments";
+import ThreadCategoriesDropdown from "../../components/ThreadCategoriesDropdown";
 
 const ThreadDetails = props => {
   const {
@@ -61,9 +62,28 @@ const ThreadDetails = props => {
               {
                 threadCategory ?
                   (
-                    <div>Category: {threadCategory}</div>
-                  ) : (
-                    <div>Category: {defaults.defaultThreadCategory}</div>
+                    <React.Fragment>
+                      {
+                        disableEditThreadDetails ?
+                          (
+                            <div>Category: {threadCategory}</div>
+                          ) : (
+                            <ThreadCategoriesDropdown />
+                          )
+                      }
+                    </React.Fragment>
+                  ) :
+                  (
+                    <React.Fragment>
+                      {
+                        disableEditThreadDetails ?
+                          (
+                            <div>Category: {defaults.defaultThreadCategory}</div>
+                          ) : (
+                            <ThreadCategoriesDropdown />
+                          )
+                      }
+                    </React.Fragment>
                   )
               }
               <hr />
@@ -79,7 +99,8 @@ const ThreadDetails = props => {
                               <div className="breakWord">{threadDescription}</div>
                               <br />
                             </React.Fragment>
-                          ) : (
+                          ) :
+                          (
                             <React.Fragment>
                               <textarea
                                 className="threadTitleTextArea"
@@ -118,7 +139,8 @@ const ThreadDetails = props => {
                                   </button>
                                 </div>
                               </React.Fragment>
-                            ) : (
+                            ) :
+                            (
                               <React.Fragment>
                                 <div className="col-md-4">
                                   <button
@@ -178,7 +200,8 @@ const ThreadDetails = props => {
                   currentTheme={currentTheme}
                 />
               </React.Fragment>
-            ) : (
+            ) :
+            (
               null
             )
         }
@@ -215,7 +238,8 @@ const ThreadDetails = props => {
                   })
                 }
               </React.Fragment>
-            ) : (
+            ) :
+            (
               <div className="text-center">
                 <strong><label>{defaults.noCommentsOnThread}</label></strong>
               </div>

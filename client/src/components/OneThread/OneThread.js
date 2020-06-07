@@ -45,22 +45,17 @@ const OneThread = props => {
         {
           threadCategory ?
             (
-              <React.Fragment>
-                <div className="row">
-                  <div className="col-md-12 breakWord">Category: {threadCategory}</div>
-                </div>
-                <hr className="oneThreadHr" />
-              </React.Fragment>
+              <div className="row">
+                <div className="col-md-12 breakWord">Category: {threadCategory}</div>
+              </div>
             ) :
             (
-              <React.Fragment>
-                <div className="row">
-                  <div className="col-md-12 breakWord">Category: {defaults.defaultThreadCategory}</div>
-                </div>
-                <hr className="oneThreadHr" />
-              </React.Fragment>
+              <div className="row">
+                <div className="col-md-12 breakWord">Category: {defaults.defaultThreadCategory}</div>
+              </div>
             )
         }
+        <hr className="oneThreadHr" />
         <div className="row">
           <div className="col-md-12 breakWord">{formattedEmail} posted on {formattedDate}</div>
         </div>
