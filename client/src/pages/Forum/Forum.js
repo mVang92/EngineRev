@@ -136,7 +136,9 @@ export default class Forum extends Component {
           ) {
             this.errorNotification(defaults.threadDetailsCannotBeBlank);
           } else {
-            this.handleAddOneThread();
+            let getThreadCategory = document.getElementById("threadCategoryDropdown");
+            let threadCategory = getThreadCategory.options[getThreadCategory.selectedIndex].value;
+            this.handleAddOneThread(threadCategory);
           }
         } else {
           alert(defaults.noAuthorizationToPerformAction);
@@ -148,8 +150,10 @@ export default class Forum extends Component {
 
   /**
    * Add a new thread into the database
+   * 
+   * @param threadCategory the category to record for the thread
    */
-  handleAddOneThread = () => {
+  handleAddOneThread = threadCategory => {
     this.setState({ disableSubmitNewThreadButton: true });
     const creatorId = this.state.uniqueCreatorId;
     const email = this.state.email;
@@ -159,6 +163,7 @@ export default class Forum extends Component {
       email: this.state.email,
       threadTitle: this.state.threadTitle,
       threadDescription: this.state.threadDescription,
+      threadCategory: threadCategory,
       comments: []
     };
     forumApi.addOneThread(newThreadPayload)
@@ -212,6 +217,8 @@ export default class Forum extends Component {
 
   /**
    * Render the theme and background picture
+   * 
+   * @param theme the theme to render
    */
   renderTheme = theme => {
     this.setState({ currentTheme: theme });

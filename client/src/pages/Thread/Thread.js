@@ -63,8 +63,9 @@ export default class Thread extends Component {
           threadTitleBackup: this.state.props.location.state[1],
           threadDescription: this.state.props.location.state[2],
           threadDescriptionBackup: this.state.props.location.state[2],
-          formattedEmail: this.state.props.location.state[3],
-          formattedDate: this.state.props.location.state[4]
+          threadCategory: this.state.props.location.state[3],
+          formattedEmail: this.state.props.location.state[4],
+          formattedDate: this.state.props.location.state[5]
         }, () => {
           this.getAllThreadComments();
         });
@@ -608,6 +609,7 @@ export default class Thread extends Component {
                   uniqueCreatorId={this.state.uniqueCreatorId}
                   threadTitle={this.state.threadTitle}
                   threadDescription={this.state.threadDescription}
+                  threadCategory={this.state.threadCategory}
                   threadComment={this.state.threadComment}
                   allThreads={this.state.allThreads}
                   disableEditThreadDetails={this.state.disableEditThreadDetails}

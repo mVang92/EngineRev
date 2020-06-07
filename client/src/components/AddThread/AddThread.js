@@ -19,6 +19,15 @@ const AddThread = props => {
             <div className="text-center smallBottomMargin">
               <label><strong>{defaults.startANewThread}</strong></label>
             </div>
+            <div className="text-left">
+              <strong>Category: </strong>
+              <select id="threadCategoryDropdown" name="threadCategory">
+                <option value="Ask Car Question">Ask Car Question</option>
+                <option value="Share a Story">Share a Story</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <br />
             <input
               id="newThreadTitleInput"
               type="text"
@@ -51,7 +60,7 @@ const AddThread = props => {
               className="addBtn"
               disabled={disableSubmitNewThreadButton}>
               Submit
-              </button>
+            </button>
           </div>
         </div>
       </form>
