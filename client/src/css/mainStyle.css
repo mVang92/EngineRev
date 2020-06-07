@@ -716,6 +716,11 @@ footer {
     margin-left: -0.35rem;
 }
 
+#threadCategoryDropdown {
+    box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
+    height: 100%;
+}
+
 #loadingAnimation {
     color: official;
     display: inline-block;

@@ -14,6 +14,7 @@ const ThreadDetails = props => {
     backToTopOfPage,
     threadTitle,
     threadDescription,
+    threadCategory,
     threadComment,
     validateAddOneCommentToThread,
     allThreads,
@@ -57,6 +58,14 @@ const ThreadDetails = props => {
             <div className="col-md-12 breakWord">
               <div>Author: {formattedEmail}</div>
               <div>Posted on: {formattedDate}</div>
+              {
+                threadCategory ?
+                  (
+                    <div>Category: {threadCategory}</div>
+                  ) : (
+                    <div>Category: {defaults.defaultThreadCategory}</div>
+                  )
+              }
               <hr />
               {
                 allThreads.creator === uniqueCreatorId ?

@@ -3,6 +3,7 @@ export const defaults = {
     lightTheme: "light",
     greyTheme: "grey",
     darkTheme: "dark",
+    defaultThreadCategory: "Other",
     uniqueUserIdMask: "*****************************************",
     defaultProfilePicture: "https://image.flaticon.com/icons/png/512/64/64572.png",
     defaultDisplayName: "CarSpace User",

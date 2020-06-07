@@ -1,4 +1,9 @@
 const db = require("../models");
+const threadCategories = [
+    "Ask Car Question",
+    "Share a Story",
+    "Other"
+];
 console.log("forum controller loaded");
 
 module.exports = {
@@ -27,10 +32,14 @@ module.exports = {
      * Add a thread
      */
     addOneThread: (req, res) => {
-        db.Forum
-            .create(req.body)
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
+        if (threadCategories.includes(req.body.threadCategory)) {
+            db.Forum
+                .create(req.body)
+                .then(dbModel => res.json(dbModel))
+                .catch(err => res.status(422).json(err));
+        } else {
+            res.status(400).json();
+        }
     },
 
     /**

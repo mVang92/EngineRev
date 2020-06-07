@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { defaults } from "../../assets/Defaults";
 
 const OneThread = props => {
   const {
@@ -8,7 +9,8 @@ const OneThread = props => {
     email,
     currentTheme,
     threadTitle,
-    threadDescription
+    threadDescription,
+    threadCategory
   } = props;
   const dateSubString = date.substring(0, 10);
   const newDate = new Date(dateSubString);
@@ -26,6 +28,7 @@ const OneThread = props => {
             _id,
             threadTitle,
             threadDescription,
+            threadCategory,
             formattedEmail,
             formattedDate
           ]
@@ -39,6 +42,25 @@ const OneThread = props => {
           <div className="col-md-12 breakWord">{formattedDescription}...</div>
         </div>
         <hr className="oneThreadHr" />
+        {
+          threadCategory ?
+            (
+              <React.Fragment>
+                <div className="row">
+                  <div className="col-md-12 breakWord">Category: {threadCategory}</div>
+                </div>
+                <hr className="oneThreadHr" />
+              </React.Fragment>
+            ) :
+            (
+              <React.Fragment>
+                <div className="row">
+                  <div className="col-md-12 breakWord">Category: {defaults.defaultThreadCategory}</div>
+                </div>
+                <hr className="oneThreadHr" />
+              </React.Fragment>
+            )
+        }
         <div className="row">
           <div className="col-md-12 breakWord">{formattedEmail} posted on {formattedDate}</div>
         </div>

@@ -60,6 +60,7 @@ const ForumDetails = props => {
               email={thread.email}
               threadTitle={thread.threadTitle}
               threadDescription={thread.threadDescription}
+              threadCategory={thread.threadCategory}
               currentTheme={currentTheme}
             />
           )
