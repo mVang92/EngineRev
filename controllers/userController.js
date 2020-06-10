@@ -1,5 +1,8 @@
 const db = require("../models");
 const { ObjectId } = require("mongodb");
+const minimumYear = 1885;
+const date = new Date();
+const futureYear = date.getFullYear() + 2;
 console.log("users controller loaded");
 
 module.exports = {
@@ -52,9 +55,7 @@ module.exports = {
    * Add one vehicle for the current user logged in
    */
   addOneVehicle: (req, res) => {
-    const date = new Date();
-    const futureYear = date.getFullYear() + 2;
-    if ((req.body.year < 1885) || (req.body.year > futureYear)) {
+    if ((req.body.year < minimumYear) || (req.body.year > futureYear)) {
       res.status(400).json();
     } else {
       db.Users
@@ -84,9 +85,7 @@ module.exports = {
    * Update the vehicle name for the selected vehicle
    */
   updateOneVehicleInformation: (req, res) => {
-    const date = new Date();
-    const futureYear = date.getFullYear() + 2;
-    if ((req.body.year < 1885) || (req.body.year > futureYear)) {
+    if ((req.body.year < minimumYear) || (req.body.year > futureYear)) {
       res.status(400).json();
     } else {
       db.Users
