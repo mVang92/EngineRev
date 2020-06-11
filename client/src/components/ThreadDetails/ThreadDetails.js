@@ -67,7 +67,8 @@ const ThreadDetails = props => {
                         disableEditThreadDetails ?
                           (
                             <div>Category: {threadCategory}</div>
-                          ) : (
+                          ) :
+                          (
                             <ThreadCategoriesDropdown />
                           )
                       }
@@ -79,7 +80,8 @@ const ThreadDetails = props => {
                         disableEditThreadDetails ?
                           (
                             <div>Category: {defaults.defaultThreadCategory}</div>
-                          ) : (
+                          ) :
+                          (
                             <ThreadCategoriesDropdown />
                           )
                       }
@@ -177,7 +179,8 @@ const ThreadDetails = props => {
                         }
                       </div>
                     </React.Fragment>
-                  ) : (
+                  ) :
+                  (
                     <React.Fragment>
                       <h4 className="breakWord">{threadTitle}</h4>
                       <div className="breakWord">{threadDescription}</div>
