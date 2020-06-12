@@ -114,6 +114,8 @@ export default class App extends Component {
 
   /**
    * Show the display name to the main page
+   *
+   * @param displayName The display name to show
    */
   showDisplayName = displayName => {
     let displayNameToShow = document.createTextNode(displayName);
@@ -334,7 +336,8 @@ export default class App extends Component {
                   requestHideSignOutModal={this.requestHideSignOutModal}
                   handleSignOut={this.handleSignOut}
                 />
-              ) : (
+              ) :
+              (
                 <NavLoggedOut
                   requestShowSignInModal={this.requestShowSignInModal}
                   requestShowSignUpModal={this.requestShowSignUpModal}
