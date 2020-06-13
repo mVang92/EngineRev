@@ -1,5 +1,5 @@
 .carSpaceThemeBackground {
-    transition-duration: 0.5s;
+    transition-duration: 0.3s;
     background: rgb(235, 235, 235);
 }
 
@@ -18,7 +18,7 @@
 }
 
 .lightThemeBackground {
-    transition-duration: 0.5s;
+    transition-duration: 0.3s;
     background: rgba(255, 255, 255, 0.5) !important;
     backdrop-filter: blur(4px);
 }
@@ -49,7 +49,7 @@
 }
 
 .greyThemeBackground {
-    transition-duration: 0.5s;
+    transition-duration: 0.3s;
     background: rgba(168, 168, 168, 0.5) !important;
     color: rgb(0, 0, 0) !important;
     backdrop-filter: blur(4px);
@@ -84,7 +84,7 @@
 }
 
 .darkThemeBackground {
-    transition-duration: 0.5s;
+    transition-duration: 0.3s;
     background: rgba(80, 80, 80, 0.5) !important;
     color: rgb(255, 255, 255) !important;
     backdrop-filter: blur(4px);
