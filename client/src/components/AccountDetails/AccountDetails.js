@@ -262,9 +262,9 @@ const AccountDetails = props => {
                     <div className="col-md-6 noWidthMobileDisplay">
                       <button
                         id="resetNewBackgroundPictureButton"
-                        title="Reset"
+                        title="Reset Input Field"
                         onClick={event => resetInputFields(event, "newBackgroundPictureInput")}>
-                        Reset
+                        Reset Input
                       </button>
                     </div>
                   </div>
@@ -307,9 +307,9 @@ const AccountDetails = props => {
             <div className="col-md-6 noWidthMobileDisplay">
               <button
                 id="resetNewProfilePictureButton"
-                title="Reset"
+                title="Reset Input Field"
                 onClick={event => resetInputFields(event, "newProfilePictureInput")}>
-                Reset
+                Reset Input
               </button>
             </div>
           </div>
@@ -348,9 +348,9 @@ const AccountDetails = props => {
             <div className="col-md-6 noWidthMobileDisplay">
               <button
                 id="resetNewDisplayNameButton"
-                title="Reset"
+                title="Reset Input Field"
                 onClick={event => resetInputFields(event, "newDisplayNameInput")}>
-                Reset
+                Reset Input
               </button>
             </div>
           </div>
