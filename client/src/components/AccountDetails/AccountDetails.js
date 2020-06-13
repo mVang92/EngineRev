@@ -31,7 +31,8 @@ const AccountDetails = props => {
     confirmNewPassword,
     newBackgroundPicture,
     disableThemeToggleButton,
-    downloadEventLogCsvFile
+    downloadEventLogCsvFile,
+    resetInputFields
   } = props;
   let uniqueUserId = showUniqueUserId ? "showUniqueUserId" : "hideUniqueUserId";
   let uniqueUserIdMask = showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
@@ -235,7 +236,7 @@ const AccountDetails = props => {
                   <div className="row">
                     <div className="col-md-12">
                       <input
-                        id="newBackgroundPicture"
+                        id="newBackgroundPictureInput"
                         type="text"
                         onChange={handleChange}
                         value={newBackgroundPicture}
@@ -249,13 +250,21 @@ const AccountDetails = props => {
                 <br /><br />
                 <div className="col-md-4">
                   <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-6 noWidthMobileDisplay">
                       <button
                         id="submitNewBackgroundPictureButton"
                         title="Update Background Picture"
                         type="submit"
                         onClick={showUpdateBackgroundPictureModal}>
                         Submit
+                      </button>
+                    </div>
+                    <div className="col-md-6 noWidthMobileDisplay">
+                      <button
+                        id="resetNewBackgroundPictureButton"
+                        title="Reset"
+                        onClick={event => resetInputFields(event, "newBackgroundPictureInput")}>
+                        Reset
                       </button>
                     </div>
                   </div>
@@ -286,13 +295,21 @@ const AccountDetails = props => {
         <br /><br />
         <div className="col-md-4">
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-md-6 noWidthMobileDisplay">
               <button
                 id="submitNewProfilePictureButton"
                 title="Update Profile Picture"
                 type="submit"
                 onClick={showUpdateProfilePictureModal}>
                 Submit
+              </button>
+            </div>
+            <div className="col-md-6 noWidthMobileDisplay">
+              <button
+                id="resetNewProfilePictureButton"
+                title="Reset"
+                onClick={event => resetInputFields(event, "newProfilePictureInput")}>
+                Reset
               </button>
             </div>
           </div>
@@ -319,13 +336,21 @@ const AccountDetails = props => {
         <br /><br />
         <div className="col-md-4">
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-md-6 noWidthMobileDisplay">
               <button
                 id="submitNewDisplayNameButton"
                 title="Update Name"
                 type="submit"
                 onClick={showUpdateDisplayNameModal}>
                 Submit
+              </button>
+            </div>
+            <div className="col-md-6 noWidthMobileDisplay">
+              <button
+                id="resetNewDisplayNameButton"
+                title="Reset"
+                onClick={event => resetInputFields(event, "newDisplayNameInput")}>
+                Reset
               </button>
             </div>
           </div>

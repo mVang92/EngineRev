@@ -4,6 +4,7 @@
 }
 
 .carSpaceThemeHr {
+    transition-duration: 0.3s;
     border-top: 1px solid rgb(200, 200, 200) !important;
 }
 
@@ -24,6 +25,7 @@
 }
 
 .lightThemeHr {
+    transition-duration: 0.3s;
     border-top: 1px solid rgb(240, 240, 240) !important;
 }
 
@@ -56,6 +58,7 @@
 }
 
 .greyThemeHr {
+    transition-duration: 0.3s;
     border-top: 1px solid rgb(220, 220, 220) !important;
     box-shadow: 0px 0px 5px rgb(128, 128, 128);
 }
@@ -91,6 +94,7 @@
 }
 
 .darkThemeHr {
+    transition-duration: 0.3s;
     border-top: 1px solid rgb(200, 200, 200) !important;
 }
 
