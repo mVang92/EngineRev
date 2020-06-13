@@ -397,6 +397,26 @@ export default class Account extends Component {
   };
 
   /**
+   * Reset the specified input field
+   * 
+   * @param fieldToReset The input field to reset
+   */
+  resetInputFields = (e, fieldToReset) => {
+    e.preventDefault();
+    switch (fieldToReset) {
+      case "newBackgroundPictureInput":
+        this.setState({ newBackgroundPicture: "" }, () => this.resetFieldNotification());
+        break;
+      case "newProfilePictureInput":
+        this.setState({ newProfilePicture: "" }, () => this.resetFieldNotification());
+        break;
+      case "newDisplayNameInput":
+        this.setState({ newDisplayName: "" }, () => this.resetFieldNotification());
+    }
+    document.getElementById(fieldToReset).value = "";
+  };
+
+  /**
    * Display the modal to confirm updating the profile picture
    */
   showUpdateBackgroundPictureModal = e => {
@@ -502,6 +522,13 @@ export default class Account extends Component {
   };
 
   /**
+   * Display the info notification when the user resets the input field
+   */
+  resetFieldNotification = () => {
+    toast.info(defaults.inputFieldReset);
+  };
+
+  /**
    * Display the error notification when an error occurs while loading vehicles
    * 
    * @param err the error message to display to the user
@@ -558,6 +585,7 @@ export default class Account extends Component {
                         disableThemeToggleButton={this.state.disableThemeToggleButton}
                         currentTheme={this.state.currentTheme}
                         unableToLoadDatabase={this.state.unableToLoadDatabase}
+                        resetInputFields={this.resetInputFields}
                       />
                     </Container>
                     <UpdateBackgroundPictureModal

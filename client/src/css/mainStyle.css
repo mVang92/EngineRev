@@ -173,7 +173,10 @@ input {
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton,
-#submitNewBackgroundPictureButton {
+#submitNewBackgroundPictureButton,
+#resetNewBackgroundPictureButton,
+#resetNewProfilePictureButton,
+#resetNewDisplayNameButton {
     border: none;
     cursor: pointer;
     transition-duration: 0.5s;
@@ -193,7 +196,10 @@ input {
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton,
-#submitNewBackgroundPictureButton {
+#submitNewBackgroundPictureButton,
+#resetNewBackgroundPictureButton,
+#resetNewProfilePictureButton,
+#resetNewDisplayNameButton {
     background: rgb(225, 225, 225);
 }
 
@@ -251,7 +257,10 @@ input {
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover,
-#submitNewBackgroundPictureButton:hover {
+#submitNewBackgroundPictureButton:hover,
+#resetNewBackgroundPictureButton:hover,
+#resetNewProfilePictureButton:hover,
+#resetNewDisplayNameButton:hover {
     transition-duration: 0.2s;
 }
 
@@ -273,7 +282,10 @@ input {
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover,
-#submitNewBackgroundPictureButton:hover {
+#submitNewBackgroundPictureButton:hover,
+#resetNewBackgroundPictureButton:hover,
+#resetNewProfilePictureButton:hover,
+#resetNewDisplayNameButton:hover {
     background: rgb(255, 255, 255);
 }
 
