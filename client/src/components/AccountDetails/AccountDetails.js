@@ -72,7 +72,8 @@ const AccountDetails = props => {
                 loadingError ?
                   (
                     <span id="accountPageVehicleCount" className="text-danger">{defaults.errorLoadingVehicleCount}</span>
-                  ) : (
+                  ) :
+                  (
                     <span id="accountPageVehicleCount">{vehicleCount}</span>
                   )
               }
@@ -86,7 +87,8 @@ const AccountDetails = props => {
                 admin ?
                   (
                     <span id="userRole">Administrator</span>
-                  ) : (
+                  ) :
+                  (
                     <span id="userRole">User</span>
                   )
               }
@@ -113,7 +115,8 @@ const AccountDetails = props => {
                   onClick={hideUniqueUserIdToPage}>
                   Hide
                 </button>
-              ) : (
+              ) :
+              (
                 <button
                   id="showUniqueIdButton"
                   title="Show Unique Id"
@@ -143,7 +146,8 @@ const AccountDetails = props => {
         unableToLoadDatabase ?
           (
             null
-          ) : (
+          ) :
+          (
             <React.Fragment>
               <div className="row">
                 <div className="col-md-4 bottomMarginMobileDisplay">

@@ -1,6 +1,8 @@
 import React from "react";
 
 const AddLog = props => {
+  const { handleChange } = props;
+
   return (
     <React.Fragment>
       {
@@ -13,7 +15,7 @@ const AddLog = props => {
                   <input
                     id="serviceLogDateInput"
                     type="date"
-                    onChange={props.handleChange}
+                    onChange={handleChange}
                     value={props.date}
                     name="date">
                   </input>
@@ -23,7 +25,7 @@ const AddLog = props => {
                   <input
                     id="serviceLogMileageInput"
                     type="text"
-                    onChange={props.handleChange}
+                    onChange={handleChange}
                     value={props.mileage}
                     name="mileage"
                     maxLength="7">
@@ -34,7 +36,7 @@ const AddLog = props => {
                   <input
                     id="serviceLogServiceInput"
                     type="text"
-                    onChange={props.handleChange}
+                    onChange={handleChange}
                     value={props.service}
                     name="service"
                     maxLength="50">
@@ -50,7 +52,7 @@ const AddLog = props => {
                   <textarea
                     id="serviceLogCommentsInput"
                     className="commentsBox"
-                    onChange={props.handleChange}
+                    onChange={handleChange}
                     value={props.comment}
                     name="comment"
                     maxLength="250">
@@ -82,7 +84,8 @@ const AddLog = props => {
                 </div>
               </div>
             </form>
-          ) : (
+          ) :
+          (
             null
           )
       }

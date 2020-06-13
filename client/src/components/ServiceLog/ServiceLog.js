@@ -47,7 +47,8 @@ const ServiceLog = props => {
                   </span>
                   {comment}
                 </div>
-              ) : (
+              ) :
+              (
                 <div className="col-md-3 logDetailsMobileDisplay"></div>
               )
           }
