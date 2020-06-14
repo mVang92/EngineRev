@@ -264,7 +264,7 @@ const AccountDetails = props => {
                         id="resetNewBackgroundPictureButton"
                         title="Reset Input Field"
                         onClick={event => resetInputFields(event, "newBackgroundPictureInput")}>
-                        Reset Input
+                        Reset
                       </button>
                     </div>
                   </div>
@@ -309,7 +309,7 @@ const AccountDetails = props => {
                 id="resetNewProfilePictureButton"
                 title="Reset Input Field"
                 onClick={event => resetInputFields(event, "newProfilePictureInput")}>
-                Reset Input
+                Reset
               </button>
             </div>
           </div>
@@ -350,7 +350,7 @@ const AccountDetails = props => {
                 id="resetNewDisplayNameButton"
                 title="Reset Input Field"
                 onClick={event => resetInputFields(event, "newDisplayNameInput")}>
-                Reset Input
+                Reset
               </button>
             </div>
           </div>
