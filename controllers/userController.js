@@ -3,7 +3,6 @@ const { ObjectId } = require("mongodb");
 const minimumYear = 1885;
 const date = new Date();
 const futureYear = date.getFullYear() + 2;
-console.log("users controller loaded");
 
 module.exports = {
 

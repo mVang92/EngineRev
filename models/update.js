@@ -1,4 +1,3 @@
-console.log("updates model loaded")
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 

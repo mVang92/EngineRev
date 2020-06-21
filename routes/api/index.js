@@ -3,7 +3,6 @@ const usersRoutes = require("./users");
 const updatesRoutes = require("./updates");
 const forumRoutes = require("./forum");
 const eventLog = require("./eventLog");
-console.log("route api index loaded");
 
 // Users routes
 router.use("/users", usersRoutes);

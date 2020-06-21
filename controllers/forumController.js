@@ -5,7 +5,6 @@ const threadCategories = [
     "Share a Story",
     "Other"
 ];
-console.log("forum controller loaded");
 
 module.exports = {
 
