@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const controller = require("../../controllers/userController");
-console.log("route api loaded")
 
 // Matches with "/api/users"
 router

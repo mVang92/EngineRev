@@ -1,5 +1,4 @@
 const db = require("../models");
-console.log("updates controller loaded");
 
 module.exports = {
 

@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const forumController = require("../../controllers/forumController");
-console.log("forum route api loaded")
 
 // Matches with "/api/forum"
 router

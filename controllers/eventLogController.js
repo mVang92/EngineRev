@@ -1,5 +1,4 @@
 const db = require("../models");
-console.log("eventLog controller loaded");
 
 module.exports = {
 
