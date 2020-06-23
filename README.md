@@ -1,6 +1,6 @@
 # CarSpace
 
-![Alt Text](client/src/images/carSpaceLogo.png)
+![CarSpace Logo](client/src/images/carSpaceLogo.png)
 
 ## About CarSpace
 CarSpace allows you to keep track of your vehicle maintenance history and collaborate with the community. Keep your vehicle running smoothly and meet other passionate do-it-yourselfers in the forum. Ask questions and share vehicle diagnostic solutions with the community.
@@ -10,3 +10,7 @@ CarSpace is for anyone, mechanically inclined or not, who want to keep track of 
 
 ## A Little About the Creator
 Not only do I work full-time as a Software Engineer, but I also have several years of experience in automotive repair (you don’t see that combination every day). As an automotive mechanic, I need a program where I can easily pull it up on a computer or my phone to access my vehicle maintenance and repair history. This is where CarSpace comes in, which allows users to add vehicles and keep track of service logs while being able to share ideas through the forum. CarSpace is intended to be simple to use and to the point.
+
+## Test User
+* Email: **prodtestuser001@carspace.com**
+* Password: **123456**
