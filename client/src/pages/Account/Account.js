@@ -404,14 +404,17 @@ export default class Account extends Component {
   resetInputFields = (e, fieldToReset) => {
     e.preventDefault();
     switch (fieldToReset) {
-      case "newBackgroundPictureInput":
+      case defaults.newBackgroundPictureInput:
         this.setState({ newBackgroundPicture: "" }, () => this.resetFieldNotification());
         break;
-      case "newProfilePictureInput":
+      case defaults.newProfilePictureInput:
         this.setState({ newProfilePicture: "" }, () => this.resetFieldNotification());
         break;
-      case "newDisplayNameInput":
+      case defaults.newDisplayNameInput:
         this.setState({ newDisplayName: "" }, () => this.resetFieldNotification());
+        break;
+      default:
+        this.errorNotification(defaults.resetInputFieldError);
     }
     document.getElementById(fieldToReset).value = "";
   };

@@ -236,7 +236,7 @@ const AccountDetails = props => {
                   <div className="row">
                     <div className="col-md-12">
                       <input
-                        id="newBackgroundPictureInput"
+                        id={defaults.newBackgroundPictureInput}
                         type="text"
                         onChange={handleChange}
                         value={newBackgroundPicture}
@@ -282,7 +282,7 @@ const AccountDetails = props => {
           <div className="row">
             <div className="col-md-12">
               <input
-                id="newProfilePictureInput"
+                id={defaults.newProfilePictureInput}
                 type="text"
                 onChange={handleChange}
                 name="newProfilePicture"
@@ -324,7 +324,7 @@ const AccountDetails = props => {
           <div className="row">
             <div className="col-md-12">
               <input
-                id="newDisplayNameInput"
+                id={defaults.newDisplayNameInput}
                 type="text"
                 onChange={handleChange}
                 name="newDisplayName"
