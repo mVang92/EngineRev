@@ -1,6 +1,5 @@
 import React from "react";
 import ReactModal from "react-modal";
-import { Link } from "react-router-dom";
 import { defaults } from "../../assets/Defaults";
 import warningImage from "../../images/warning.png";
 
@@ -76,17 +75,15 @@ const DeleteOneVehicleModal = props => {
                                         null
                                     )
                             }
-                            <Link to={"/"}>
-                                <button
-                                    title="Delete"
-                                    id="confirmDeleteVehicleButton"
-                                    className="deleteBtn"
-                                    type="button"
-                                    onClick={handleDeleteOneVehicle}
-                                    disabled={disableDeleteOneVehicleButton}>
-                                    {confirmDeleteVehicleButtonText}
-                                </button>
-                            </Link>
+                            <button
+                                title="Delete"
+                                id="confirmDeleteVehicleButton"
+                                className="deleteBtn"
+                                type="button"
+                                onClick={handleDeleteOneVehicle}
+                                disabled={disableDeleteOneVehicleButton}>
+                                {confirmDeleteVehicleButtonText}
+                            </button>
                         </div>
                     </div>
                 </div>
