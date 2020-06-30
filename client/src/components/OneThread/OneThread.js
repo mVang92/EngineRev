@@ -10,7 +10,8 @@ const OneThread = props => {
     currentTheme,
     threadTitle,
     threadDescription,
-    threadCategory
+    threadCategory,
+    commentsCount
   } = props;
   const dateSubString = date.substring(0, 10);
   const newDate = new Date(dateSubString);
@@ -37,11 +38,16 @@ const OneThread = props => {
             <h4 className="col-md-12 breakWord">{threadTitle}</h4>
           </div>
         </Link>
-        <hr className="oneThreadHr" />
         <div className="row">
           <div className="col-md-12 breakWord">{formattedDescription}...</div>
         </div>
         <hr className="oneThreadHr" />
+        <div className="row">
+          <div className="col-md-12 breakWord">Poster: {formattedEmail}</div>
+        </div>
+        <div className="row">
+          <div className="col-md-12 breakWord">Date Posted: {formattedDate}</div>
+        </div>
         {
           threadCategory ?
             (
@@ -55,9 +61,8 @@ const OneThread = props => {
               </div>
             )
         }
-        <hr className="oneThreadHr" />
         <div className="row">
-          <div className="col-md-12 breakWord">{formattedEmail} posted on {formattedDate}</div>
+          <div className="col-md-12 breakWord">Comments: {commentsCount.length}</div>
         </div>
       </div>
     </React.Fragment>
