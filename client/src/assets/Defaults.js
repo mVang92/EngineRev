@@ -32,7 +32,6 @@ export const defaults = {
     resetInputFieldError: "Error: Unable to reset input field.",
     addThreadSuccessfully: "Thread created successfully.",
     vehicleNameUpdatedSuccessfully: "Vehicle name updated successfully.",
-    vehicleDeletedSuccessfully: "Vehicle deleted successfully.",
     serviceLogDeletedSuccessfully: "Service log deleted successfully.",
     passwordUpdatedSuccessfully: "Password updated successfully.",
     passwordsDoNotMatch: "Error: Passwords do not match.",
