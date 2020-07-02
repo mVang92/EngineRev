@@ -457,7 +457,8 @@ export default class Log extends Component {
     API.deleteOneVehicle(this.state.vehicleId)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
-        window.location.assign(window.location.origin);
+        document.getElementById("applicationName").click();
+        this.successNotification(defaults.deleteVehicleSucess);
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);

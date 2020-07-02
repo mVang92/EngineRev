@@ -43,7 +43,7 @@ const OneThread = props => {
         </div>
         <hr className="oneThreadHr" />
         <div className="row">
-          <div className="col-md-12 breakWord">Poster: {formattedEmail}</div>
+          <div className="col-md-12 breakWord">Author: {formattedEmail}</div>
         </div>
         <div className="row">
           <div className="col-md-12 breakWord">Date Posted: {formattedDate}</div>
