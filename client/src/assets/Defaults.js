@@ -20,6 +20,7 @@ export const defaults = {
     alreadyVotedOnComment: "You have already voted on this comment.",
     addThreadCommentSucess: "Comment posted successfully.",
     deleteThreadCommentSucess: "Comment deleted successfully.",
+    deleteVehicleSucess: "Vehicle deleted successfully.",
     threadCommentsCannotBeBlank: "Comments Cannot Be Blank.",
     updateThreadCommentSucess: "Comment updated successfully.",
     noAuthorizationToPerformAction: "You are not authorized to perform this action.",
