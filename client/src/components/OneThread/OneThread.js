@@ -46,7 +46,7 @@ const OneThread = props => {
           <div className="col-md-12 breakWord">Author: {formattedEmail}</div>
         </div>
         <div className="row">
-          <div className="col-md-12 breakWord">Date Posted: {formattedDate}</div>
+          <div className="col-md-12 breakWord">Date: {formattedDate}</div>
         </div>
         {
           threadCategory ?
