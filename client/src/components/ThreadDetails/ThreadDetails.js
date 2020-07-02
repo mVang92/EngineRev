@@ -58,7 +58,7 @@ const ThreadDetails = props => {
           <div className={`row threadDetails ${currentTheme.oneThread}`}>
             <div className="col-md-12 breakWord">
               <div>Author: {formattedEmail}</div>
-              <div>Posted on: {formattedDate}</div>
+              <div>Date: {formattedDate}</div>
               {
                 threadCategory ?
                   (
