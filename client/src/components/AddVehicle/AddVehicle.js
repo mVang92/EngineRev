@@ -19,9 +19,9 @@ class AddVehicle extends Component {
   };
 
   /**
-   * Add a vehicle to the database
+   * Add a vehicle
    */
-  handleSubmitAddOneVehicle = e => {
+  handleAddOneVehicle = e => {
     e.preventDefault();
     if (this.refs.year.value === "" ||
       this.refs.make.value === "" ||
@@ -59,7 +59,7 @@ class AddVehicle extends Component {
   render() {
     return (
       <React.Fragment>
-        <form id="field" onSubmit={this.handleSubmitAddOneVehicle.bind(this)}>
+        <form id="field" onSubmit={this.handleAddOneVehicle.bind(this)}>
           <div className="text-center row">
             {
               this.props.userProfilePicture ?
