@@ -44,7 +44,8 @@ const ForumDetails = props => {
                 <strong><label>Threads</label></strong>
               </div>
             </React.Fragment>
-          ) : (
+          ) :
+          (
             <div className="text-center">
               <label><strong>{defaults.loggedOutStartThread}</strong></label>
             </div>

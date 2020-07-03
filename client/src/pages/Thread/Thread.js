@@ -637,7 +637,8 @@ export default class Thread extends Component {
                   currentTheme={this.state.currentTheme}
                 />
               </Container>
-            ) : (
+            ) :
+            (
               <Loading />
             )
         }

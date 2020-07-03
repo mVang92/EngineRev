@@ -126,35 +126,44 @@ export default class App extends Component {
   };
 
   /**
-   * Add a new vehicle to the vehicle data for the user
+   * Check if the vehicle year is valid before adding it to the database
    * 
-   * @param newVehicle the new vehicle to record into data
+   * @param newVehicle the new vehicle data to check
    */
-  handleAddOneVehicle = newVehicle => {
-    const creatorId = this.state.uid;
+  checkIfVehicleYearIsValid = newVehicle => {
     const date = new Date();
-    const email = this.state.props.email;
-    const event = events.addedNewVehicle;
     const futureYear = date.getFullYear() + 2;
     this.setState({ disableAddVehicleButton: true });
     if (isNaN(newVehicle.year) || (newVehicle.year < 1885) || (newVehicle.year > futureYear)) {
       this.showAddVehicleYearNanErrorModal();
       this.setState({ disableAddVehicleButton: false });
     } else {
-      API.addOneVehicle(creatorId, newVehicle)
-        .then(() => {
-          eventLogHandler.successful(creatorId, email, event);
-          this.state.props.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
-          this.findUserInformationForOneUser(this.state.uid);
-          this.setState({ disableAddVehicleButton: false });
-          document.getElementById("field").reset();
-        })
-        .catch(err => {
-          eventLogHandler.failure(creatorId, email, event, err);
-          this.state.props.errorNotification(err);
-          this.setState({ disableAddVehicleButton: false });
-        });
-    };
+      this.handleAddOneVehicle(newVehicle);
+    }
+  };
+
+  /**
+   * Add the vehicle for the user
+   * 
+   * @param newVehicle the vehicle data to record
+   */
+  handleAddOneVehicle = newVehicle => {
+    const creatorId = this.state.uid;
+    const email = this.state.props.email;
+    const event = events.addedNewVehicle;
+    API.addOneVehicle(creatorId, newVehicle)
+      .then(() => {
+        eventLogHandler.successful(creatorId, email, event);
+        this.state.props.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
+        this.findUserInformationForOneUser(this.state.uid);
+        this.setState({ disableAddVehicleButton: false });
+        document.getElementById("addVehicleInputForm").reset();
+      })
+      .catch(err => {
+        eventLogHandler.failure(creatorId, email, event, err);
+        this.state.props.errorNotification(err);
+        this.setState({ disableAddVehicleButton: false });
+      });
   };
 
   /**
@@ -183,7 +192,7 @@ export default class App extends Component {
                     <LoggedIn
                       vehicleData={this.state.vehicleData}
                       handleResetAddVehicleFields={this.state.props.handleResetAddVehicleFields}
-                      addVehicle={this.handleAddOneVehicle}
+                      checkIfVehicleYearIsValid={this.checkIfVehicleYearIsValid}
                       userProfilePicture={this.state.props.userProfilePicture}
                       disableAddVehicleButton={this.state.disableAddVehicleButton}
                       currentTheme={this.state.currentTheme}
@@ -193,10 +202,12 @@ export default class App extends Component {
                       hideAddVehicleYearNanErrorModal={this.hideAddVehicleYearNanErrorModal}
                     />
                   </Container>
-                ) : (
+                ) :
+                (
                   <Loading />
                 )
-            ) : (
+            ) :
+            (
               <LoggedOut />
             )
         }

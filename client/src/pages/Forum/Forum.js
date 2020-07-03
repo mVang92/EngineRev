@@ -266,7 +266,8 @@ export default class Forum extends Component {
                   currentTheme={this.state.currentTheme}
                 />
               </Container>
-            ) : (
+            ) :
+            (
               <Loading />
             )
         }
