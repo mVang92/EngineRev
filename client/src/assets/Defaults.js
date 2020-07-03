@@ -21,7 +21,7 @@ export const defaults = {
     addThreadCommentSucess: "Comment posted successfully.",
     deleteThreadCommentSucess: "Comment deleted successfully.",
     deleteVehicleSucess: "Vehicle deleted successfully.",
-    threadCommentsCannotBeBlank: "Comments Cannot Be Blank.",
+    threadCommentsCannotBeBlank: "Comments cannot be blank.",
     updateThreadCommentSucess: "Comment updated successfully.",
     noAuthorizationToPerformAction: "You are not authorized to perform this action.",
     noAuthorizationToViewPage: "You do not have permission to view this content.",
