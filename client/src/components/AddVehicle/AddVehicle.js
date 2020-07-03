@@ -19,9 +19,9 @@ class AddVehicle extends Component {
   };
 
   /**
-   * Add a vehicle
+   * Add a vehicle to the database
    */
-  handleAddOneVehicle = e => {
+  checkIfVehicleInputsAreBlank = e => {
     e.preventDefault();
     if (this.refs.year.value === "" ||
       this.refs.make.value === "" ||
@@ -32,14 +32,14 @@ class AddVehicle extends Component {
     ) {
       this.showAddVehicleErrorModal();
     } else {
-      const newVehiclePayload = {
+      const vehiclePayload = {
         vehicleName: null,
         year: this.refs.year.value,
         make: this.refs.make.value,
         model: this.refs.model.value
       }
-      this.props.addVehicle(newVehiclePayload);
-    };
+      this.props.checkIfVehicleYearIsValid(vehiclePayload);
+    }
   };
 
   /**
@@ -59,7 +59,7 @@ class AddVehicle extends Component {
   render() {
     return (
       <React.Fragment>
-        <form id="field" onSubmit={this.handleAddOneVehicle.bind(this)}>
+        <form id="addVehicleInputForm" onSubmit={this.checkIfVehicleInputsAreBlank.bind(this)}>
           <div className="text-center row">
             {
               this.props.userProfilePicture ?
@@ -68,7 +68,8 @@ class AddVehicle extends Component {
                     <img id="mainPageProfilePicture" src={this.props.userProfilePicture} alt="You"></img>
                     <label><strong><span id="displayName"></span></strong></label>
                   </div>
-                ) : (
+                ) :
+                (
                   <div className="col-md-6 wrapword">
                     <img id="mainPageProfilePicture" src={this.state.defaultProfilePicture} alt="You"></img>
                     <label><strong><span id="displayName"></span></strong></label>

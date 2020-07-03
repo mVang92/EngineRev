@@ -964,10 +964,12 @@ export default class Log extends Component {
                       comment={this.state.comment}
                     />
                   </Container>
-                ) : (
+                ) :
+                (
                   <Loading />
                 )
-            ) : (
+            ) :
+            (
               <NoAuthorization />
             )
         }

@@ -8,7 +8,7 @@ const LoggedIn = props => {
     <div className={`box ${props.currentTheme.background}`}>
       <AddVehicle
         handleResetAddVehicleFields={props.handleResetAddVehicleFields}
-        addVehicle={props.addVehicle}
+        checkIfVehicleYearIsValid={props.checkIfVehicleYearIsValid}
         userProfilePicture={props.userProfilePicture}
         disableAddVehicleButton={props.disableAddVehicleButton}
         currentTheme={props.currentTheme}
