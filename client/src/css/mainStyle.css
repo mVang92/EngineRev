@@ -104,7 +104,8 @@ input {
 }
 
 #vehicleLogInformation,
-#addVehicleInputForm {
+#addVehicleInputForm,
+#pageTitle {
     margin-top: 3em;
 }
 
@@ -120,7 +121,7 @@ input {
 }
 
 .box,
-#recentUpdatesContainer {
+#updatesContainer {
     background: rgb(235, 235, 235);
     padding: 1em;
     margin-bottom: 4rem;
