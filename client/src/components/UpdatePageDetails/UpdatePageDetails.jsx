@@ -30,11 +30,11 @@ const UpdatePageDetails = props => {
         hideDeleteOneUpdateModal,
         disableConfirmDeleteReleaseNoteButton
     } = props;
-    
+
     return (
         <div className="container largeBottomMarginMobileDisplay">
-            <div id="recentUpdatesContainer" className={currentTheme.background}>
-                <div id="field"></div>
+            <div id="updatesContainer" className={currentTheme.background}>
+                <div id="pageTitle"></div>
                 <h4 className="text-center"><label>Release Notes and Updates</label></h4>
                 <hr className={currentTheme.hr} />
                 <BackToHomeButtonRow />
