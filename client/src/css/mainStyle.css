@@ -1066,6 +1066,10 @@ footer {
     .commentPoster {
         margin-bottom: 1rem;
     }
+
+    #startNewThreadButton {
+        margin-top: 1rem;
+    }
 }
     
 @media only screen and (max-width: 575px) {
