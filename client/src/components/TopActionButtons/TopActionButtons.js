@@ -27,7 +27,8 @@ const TopActionButtons = props => {
                                 onClick={props.handlePrintPage}>
                                 Print Logs
                             </button>
-                        ) : (
+                        ) :
+                        (
                             <button
                                 id="printPageButton"
                                 title="Disabled"
@@ -51,7 +52,8 @@ const TopActionButtons = props => {
                                 onClick={props.changeSortOrder}>
                                 Sort Dates
                             </button>
-                        ) : (
+                        ) :
+                        (
                             <button
                                 id="addLogSortLogsButton"
                                 title="Disabled"
@@ -75,7 +77,8 @@ const TopActionButtons = props => {
                                 onClick={props.showEditOneVehicleNameModal}>
                                 Edit Vehicle
                             </button>
-                        ) : (
+                        ) :
+                        (
                             null
                         )
                 }
