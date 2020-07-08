@@ -5,17 +5,16 @@ import { defaults } from "../../assets/Defaults";
 const BackToHomeButtonRow = props => {
   return (
     <div className="row">
-      <div className="col-md-4">
+      <div className="col-md-6 noWidthMobileDisplay">
         <Link to={{ pathname: "/" }}>
           <button className="backHomeBtn" title="Back">Back</button>
         </Link>
         <br />
       </div>
-      <div className="col-md-4"></div>
       {
-        window.location.href.indexOf("/forum") > -1 && props.loggedin ?
+        (window.location.href.indexOf("/forum") > -1) && (props.loggedin) ?
           (
-            <div className="col-md-4">
+            <div className="col-md-6 noWidthMobileDisplay">
               <div className="alignLeftButtonsMobileDisplay alignRightButtonsDesktopDisplay">
                 <button
                   id="startNewThreadButton"
@@ -26,13 +25,13 @@ const BackToHomeButtonRow = props => {
                   data-target="#startThreadForm"
                   aria-expanded="false"
                   aria-controls="collapse">
-                  {defaults.startANewThread}
+                  New
                 </button>
               </div>
             </div>
           ) :
           (
-            <div className="col-md-4"></div>
+            <div className="col-md-6"></div>
           )
       }
     </div>

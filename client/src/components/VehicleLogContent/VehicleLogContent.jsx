@@ -44,7 +44,8 @@ const VehicleLogContent = props => {
                             make={make}
                             model={model}
                         />
-                    ) : (
+                    ) :
+                    (
                         <LogPageErrorHeader errorMessage={errorMessage} />
                     )
             }
@@ -74,7 +75,8 @@ const VehicleLogContent = props => {
                     year ?
                         (
                             <hr className={currentTheme.hr} />
-                        ) : (
+                        ) :
+                        (
                             null
                         )
                 }
@@ -86,7 +88,8 @@ const VehicleLogContent = props => {
                             <div className="col-md-12 text-center">
                                 <label><strong>No Service Logs on Record</strong></label>
                             </div>
-                        ) : (
+                        ) :
+                        (
                             <ServiceLogDisplay
                                 sortVehicleServiceLogsMostRecent={sortVehicleServiceLogsMostRecent}
                                 currentTheme={currentTheme}
