@@ -59,6 +59,7 @@ const SignUp = props => {
                         <div className="modal-footer">
                             <button
                                 id="closeSignUpModal"
+                                title="Close"
                                 type="button"
                                 className="btn btn-light"
                                 onClick={props.requestHideSignUpModal}
@@ -67,6 +68,7 @@ const SignUp = props => {
                             </button>
                             <button
                                 id="signUpButton"
+                                title="Create Account"
                                 className="btn btn-light"
                                 type="submit"
                                 disabled={props.disableSignUpButton}>

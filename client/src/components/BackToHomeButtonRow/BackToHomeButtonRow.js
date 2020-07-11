@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { defaults } from "../../assets/Defaults";
 
 const BackToHomeButtonRow = props => {
   return (

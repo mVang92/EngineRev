@@ -14,7 +14,6 @@ export default {
         }
         eventLogApi.addOneEvent(eventPayload)
     },
-
     failure: (creatorId, email, event, error) => {
         eventPayload = {
             creator: creatorId,
