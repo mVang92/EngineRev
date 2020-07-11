@@ -34,6 +34,7 @@ const ForgotPasswordModal = props => {
                         <div className="modal-footer">
                             <button
                                 id="closeForgotPasswordModal"
+                                title="Close"
                                 type="button"
                                 className="btn btn-light"
                                 onClick={props.requestHideForgotPasswordModal}
@@ -42,6 +43,7 @@ const ForgotPasswordModal = props => {
                             </button>
                             <button
                                 id="forgotPasswordSubmitButton"
+                                title="Send Confirmation"
                                 className="btn btn-light"
                                 type="submit"
                                 disabled={props.disableForgotPasswordSubmitButton}>
