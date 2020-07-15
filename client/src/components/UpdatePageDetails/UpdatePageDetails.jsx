@@ -70,7 +70,7 @@ const UpdatePageDetails = props => {
                         )
                     })
                 }
-                <br />
+                <hr className={currentTheme.hr} />
                 <BottomActionButtons backToTopOfPage={backToTopOfPage} />
                 <EditOneUpdateModal
                     checkUserEnteredUpdatedReleaseNoteInput={checkUserEnteredUpdatedReleaseNoteInput}
