@@ -570,6 +570,7 @@ input {
 }
 
 #profilePicture,
+#profilePicturePreview,
 #backgroundPicture {
     width: 70%;
 }
@@ -956,6 +957,7 @@ footer {
     }
 
     #profilePicture,
+    #profilePicturePreview,
     #backgroundPicture {
         width: 55%;
     }
