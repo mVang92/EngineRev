@@ -31,7 +31,7 @@ const UpdateProfilePictureModal = props => {
                                         <div className="row">
                                             <div id="scrollableBackgroundPicture" className="col-md-12 text-center">
                                                 <img
-                                                    id="profilePicture"
+                                                    id="profilePicturePreview"
                                                     src={props.newProfilePicture}
                                                     alt="Invalid Entry">
                                                 </img>
