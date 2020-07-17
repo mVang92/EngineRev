@@ -50,8 +50,9 @@ const AccountDetails = props => {
           <a href={userPhotoUrl} target="_blank">
             <img
               id="profilePicture"
+              title={userDisplayName}
               src={userPhotoUrl}
-              alt="Invalid URL or Not Avaliable">
+              alt="Profile">
             </img>
           </a>
         </div>
@@ -339,7 +340,7 @@ const AccountDetails = props => {
             <div className="col-md-6 noWidthMobileDisplay">
               <button
                 id="submitNewDisplayNameButton"
-                title="Update Name"
+                title="Update Display Name"
                 type="submit"
                 onClick={showUpdateDisplayNameModal}>
                 Submit

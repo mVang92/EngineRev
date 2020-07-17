@@ -34,7 +34,7 @@ const DeleteOneUpdateModal = props => {
                         <div className="modal-footer">
                             <button
                                 id="cancelDeleteReleaseNote"
-                                title="Cancel"
+                                title="No"
                                 type="button"
                                 className="cancelBtn"
                                 onClick={hideDeleteOneUpdateModal}
@@ -42,7 +42,7 @@ const DeleteOneUpdateModal = props => {
                                 No
                             </button>
                             <button
-                                title="Delete Release Note"
+                                title="Yes"
                                 id="confirmDeleteReleaseNoteButton"
                                 className="deleteBtn"
                                 type="button"

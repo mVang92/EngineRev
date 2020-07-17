@@ -29,7 +29,8 @@ const ThreadDetails = props => {
     showEditOneThreadCommentModal,
     disableSubmitCommentOnThreadButton,
     disableUpVoteButton,
-    disableDownVoteButton
+    disableDownVoteButton,
+    disableSaveEditThreadButton
   } = props;
   const dateSubString = allThreads.date.substring(0, 10);
   const newDate = new Date(dateSubString);
@@ -128,9 +129,10 @@ const ThreadDetails = props => {
                           disableEditThreadDetails ?
                             (
                               <React.Fragment>
-                                <div className="col-md-4"></div>
-                                <div className="col-md-4"></div>
-                                <div className="col-md-4">
+                                <div className="col-md-3"></div>
+                                <div className="col-md-3"></div>
+                                <div className="col-md-3"></div>
+                                <div className="col-md-3">
                                   <button
                                     id="editThreadTitleButton"
                                     title="Edit"
@@ -144,6 +146,16 @@ const ThreadDetails = props => {
                             ) :
                             (
                               <React.Fragment>
+                                <div className="col-md-4">
+                                  <button
+                                    id="cancelEditThreadTitleButton"
+                                    title="Cancel"
+                                    type="button"
+                                    className="cancelBtn"
+                                    onClick={() => enableEditThreadDetails()}>
+                                    Cancel
+                                  </button>
+                                </div>
                                 <div className="col-md-4">
                                   <button
                                     id="deleteThreadButton"
@@ -160,18 +172,9 @@ const ThreadDetails = props => {
                                     title="Save Thread"
                                     type="button"
                                     className="addBtn"
-                                    onClick={() => validateEditedThreadDetails()}>
+                                    onClick={() => validateEditedThreadDetails()}
+                                    disabled={disableSaveEditThreadButton}>
                                     Save
-                                  </button>
-                                </div>
-                                <div className="col-md-4">
-                                  <button
-                                    id="cancelEditThreadTitleButton"
-                                    title="Cancel"
-                                    type="button"
-                                    className="cancelBtn"
-                                    onClick={() => enableEditThreadDetails()}>
-                                    Cancel
                                   </button>
                                 </div>
                               </React.Fragment>

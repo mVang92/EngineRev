@@ -47,7 +47,8 @@ export default class Thread extends Component {
       showDeleteThreadCommentModal: false,
       disableConfirmSaveEditThreadCommentButton: false,
       showEditOneThreadCommentModal: false,
-      disableSubmitCommentOnThreadButton: false
+      disableSubmitCommentOnThreadButton: false,
+      disableSaveEditThreadButton: false
     };
   };
 
@@ -188,7 +189,7 @@ export default class Thread extends Component {
   };
 
   /**
-   * Update the title to the thread
+   * Update the title, description, and category to the thread
    * 
    * @param threadCategory the category to record for the thread
    */
@@ -201,6 +202,7 @@ export default class Thread extends Component {
       threadDescription: this.state.threadDescription,
       threadCategory: threadCategory
     }
+    this.setState({ disableSaveEditThreadButton: true });
     forumApi.handleUpdateThreadDetails(this.state.threadId, threadPayload)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
@@ -208,6 +210,7 @@ export default class Thread extends Component {
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
+        this.setState({ disableSaveEditThreadButton: false });
         this.errorNotification(err);
       });
   };
@@ -363,7 +366,10 @@ export default class Thread extends Component {
           window.location = "/";
         }
       })
-      .catch(err => this.errorNotification(err));
+      .catch(err => {
+        this.setState({ disableSubmitCommentOnThreadButton: false });
+        this.errorNotification(err);
+      });
   };
 
   /**
@@ -634,6 +640,7 @@ export default class Thread extends Component {
                   validateAddOneCommentToThread={this.validateAddOneCommentToThread}
                   validateUserToUpvoteComment={this.validateUserToUpvoteComment}
                   validateUserToDownvoteComment={this.validateUserToDownvoteComment}
+                  disableSaveEditThreadButton={this.state.disableSaveEditThreadButton}
                   currentTheme={this.state.currentTheme}
                 />
               </Container>
