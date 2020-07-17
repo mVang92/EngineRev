@@ -48,7 +48,7 @@ const EditOneThreadCommentModal = props => {
                                     <div className="col-md-5 bottomMarginMobileDisplay">
                                         <button
                                             id="deleteThreadCommentButton"
-                                            title="Delete Comment"
+                                            title="Delete"
                                             type="button"
                                             className="deleteBtn"
                                             onClick={showDeleteThreadCommentModal}>
@@ -67,7 +67,7 @@ const EditOneThreadCommentModal = props => {
                                         </button>
                                         <button
                                             id="confirmSaveEditThreadCommentButton"
-                                            title="Save Comment"
+                                            title="Save"
                                             className="standardButton"
                                             type="submit"
                                             disabled={disableConfirmSaveEditThreadCommentButton}>

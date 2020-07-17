@@ -68,7 +68,7 @@ const EditOneUpdateModal = props => {
                                     <div className="col-md-4 bottomMarginMobileDisplay">
                                         <button
                                             id="deleteReleaseNoteButton"
-                                            title="Delete Release Note"
+                                            title="Delete"
                                             type="button"
                                             className="deleteBtn"
                                             onClick={deleteOneUpdateModal}>
@@ -87,7 +87,7 @@ const EditOneUpdateModal = props => {
                                         </button>
                                         <button
                                             id="confirmSaveEditReleaseNoteButton"
-                                            title="Save Release Note"
+                                            title="Save"
                                             className="standardButton"
                                             type="submit"
                                             disabled={disableConfirmSaveEditReleaseNoteButton}>
