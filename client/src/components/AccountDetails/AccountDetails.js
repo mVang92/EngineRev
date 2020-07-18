@@ -149,7 +149,6 @@ const AccountDetails = props => {
         <div className="col-md-4">{userAccountLastSignIn}</div>
         <div className="col-md-4"></div>
       </div>
-      <hr className={currentTheme.hr} />
       {
         unableToLoadDatabase ?
           (
@@ -157,10 +156,6 @@ const AccountDetails = props => {
           ) :
           (
             <React.Fragment>
-              <ThemeSelection
-                saveThemeForUser={saveThemeForUser}
-                disableThemeToggleButton={disableThemeToggleButton}
-              />
               <div className="removeMobileDisplay">
                 <hr className={currentTheme.hr} />
                 <div className="row">
@@ -169,7 +164,7 @@ const AccountDetails = props => {
                     <div className="row">
                       <div className="col-md-6">
                         <div className="row">
-                          <div className="col-md-12 text-center">
+                          <div className="col-md-12 text-left">
                             <button
                               id="downloadEventLogsButton"
                               title="Download Event Logs"
@@ -186,6 +181,11 @@ const AccountDetails = props => {
                   <div className="col-md-4"></div>
                 </div>
               </div>
+              <hr className={currentTheme.hr} />
+              <ThemeSelection
+                saveThemeForUser={saveThemeForUser}
+                disableThemeToggleButton={disableThemeToggleButton}
+              />
               <hr className={currentTheme.hr} />
               <div className="row">
                 <div className="col-md-4 bottomMarginMobileDisplay">

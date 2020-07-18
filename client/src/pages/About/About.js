@@ -75,6 +75,15 @@ export default class About extends Component {
         case defaults.carSpaceTheme:
           this.renderTheme(themes.carSpace);
           break;
+        case defaults.lightTheme:
+          this.renderTheme(themes.light);
+          break;
+        case defaults.greyTheme:
+          this.renderTheme(themes.grey);
+          break;
+        case defaults.darkTheme:
+          this.renderTheme(themes.dark);
+          break;
         case defaults.transparentLightTheme:
           this.renderTheme(themes.transparentLight);
           break;

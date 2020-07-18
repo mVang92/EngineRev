@@ -12,6 +12,45 @@ export const themes = {
     aboutContainer: "carSpaceAboutContainer",
     backgroundColor: "rgb(220, 220, 220)"
   },
+  light: {
+    theme: "Light",
+    background: "lightThemeBackground",
+    hr: "lightThemeHr",
+    serviceLogs: "lightThemeServiceLogs",
+    vehicleItemList: "lightThemeVehicleItemList",
+    vehicleItemListFont: "lightThemeVehicleItemListFont",
+    oneThread: "lightThemeOneThread",
+    oneUpdate: "lightThemeOneUpdate",
+    accountDetails: "lightThemeAccountDetails",
+    aboutContainer: "lightThemeAboutContainer",
+    backgroundColor: "rgb(235, 235, 235)"
+  },
+  grey: {
+    theme: "Grey",
+    background: "greyThemeBackground",
+    hr: "greyThemeHr",
+    serviceLogs: "greyThemeServiceLogs",
+    vehicleItemList: "greyThemeVehicleItemList",
+    vehicleItemListFont: "greyThemeVehicleItemListFont",
+    oneThread: "greyThemeOneThread",
+    oneUpdate: "greyThemeOneUpdate",
+    accountDetails: "greyThemeAccountDetails",
+    aboutContainer: "greyThemeAboutContainer",
+    backgroundColor: "rgb(112, 112, 112)"
+  },
+  dark: {
+    theme: "Dark",
+    background: "darkThemeBackground",
+    hr: "darkThemeHr",
+    serviceLogs: "darkThemeServiceLogs",
+    vehicleItemList: "darkThemeVehicleItemList",
+    vehicleItemListFont: "darkThemeVehicleItemListFont",
+    oneThread: "darkThemeOneThread",
+    oneUpdate: "darkThemeOneUpdate",
+    accountDetails: "darkThemeAccountDetails",
+    aboutContainer: "darkThemeAboutContainer",
+    backgroundColor: "rgb(32, 32, 32)"
+  },
   transparentLight: {
     theme: "Transparent Light",
     background: "transparentLightThemeBackground",

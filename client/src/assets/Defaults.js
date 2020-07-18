@@ -1,5 +1,9 @@
 export const defaults = {
+    noThemeSelection: "noThemeSelection",
     carSpaceTheme: "carSpace",
+    lightTheme: "light",
+    greyTheme: "grey",
+    darkTheme: "dark",
     transparentLightTheme: "transparentLight",
     transparentGreyTheme: "transparentGrey",
     transparentDarkTheme: "transparentDark",
@@ -28,7 +32,7 @@ export const defaults = {
     updateOneReleaseNoteSuccess: "Release note updated successfully.",
     addOneReleaseNoteSuccess: "Release note added successfully.",
     invalidInputDetected: "Invalid input detected.",
-    themeSelectionError: "Error: Unable to process theme selection.",
+    themeSelectionError: "Error: Unable to process theme selection. Try changing your theme in the Account page.",
     resetInputFieldError: "Error: Unable to reset input field.",
     addThreadSuccessfully: "Thread created successfully.",
     vehicleNameUpdatedSuccessfully: "Vehicle name updated successfully.",
