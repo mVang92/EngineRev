@@ -128,19 +128,22 @@ export default class Account extends Component {
     const event = events.saveTheme;
     let element = document.getElementById("themeSelectionDropdown");
     let selectedTheme = element.options[element.selectedIndex].value;
-    this.setState({ disableThemeToggleButton: true });
-    API.saveThemeForUser(this.state.userId, selectedTheme)
-      .then(() => {
-        eventLogHandler.successful(creatorId, email, event);
-        this.setState({ disableThemeToggleButton: false },
-          this.getVehicleData());
-      })
-      .catch(err => {
-        this.setState({ disableThemeToggleButton: false }, () => {
-          eventLogHandler.failure(creatorId, email, event, err);
-          this.errorNotification(err);
+    if (selectedTheme !== defaults.noThemeSelection) {
+      this.setState({ disableThemeToggleButton: true });
+      API.saveThemeForUser(creatorId, selectedTheme)
+        .then(() => {
+          this.setState({ disableThemeToggleButton: false }, () => {
+            eventLogHandler.successful(creatorId, email, event);
+            this.getVehicleData()
+          });
+        })
+        .catch(err => {
+          this.setState({ disableThemeToggleButton: false }, () => {
+            eventLogHandler.failure(creatorId, email, event, err);
+            this.errorNotification(err);
+          });
         });
-      });
+    }
   };
 
   /**

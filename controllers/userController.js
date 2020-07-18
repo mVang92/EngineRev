@@ -3,6 +3,15 @@ const { ObjectId } = require("mongodb");
 const minimumYear = 1885;
 const date = new Date();
 const futureYear = date.getFullYear() + 2;
+const themes = [
+  "carSpace",
+  "light",
+  "grey",
+  "dark",
+  "transparentLight",
+  "transparentGrey",
+  "transparentDark"
+];
 
 module.exports = {
 
@@ -189,13 +198,17 @@ module.exports = {
    * Save a theme for the user
    */
   saveThemeForUser: (req, res) => {
-    db.Users
-      .updateOne(
-        { creator: req.params.creatorId },
-        { $set: { theme: req.params.themeType } }
-      )
-      .then(result => res.json(result))
-      .catch(err => res.status(422).json(err));
+    if (themes.includes(req.params.themeType)) {
+      db.Users
+        .updateOne(
+          { creator: req.params.creatorId },
+          { $set: { theme: req.params.themeType } }
+        )
+        .then(result => res.json(result))
+        .catch(err => res.status(422).json(err));
+    } else {
+      res.status(400).json();
+    }
   },
 
   /**
