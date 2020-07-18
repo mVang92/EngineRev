@@ -18,36 +18,53 @@
     background: rgb(245, 245, 245);
 }
 
+.lightThemeBackground {
+    transition-duration: 0.3s;
+    background: rgb(255, 255, 255) !important;
+}
+
 .transparentLightThemeBackground {
     transition-duration: 0.3s;
     background: rgba(255, 255, 255, 0.5) !important;
     backdrop-filter: blur(4px);
 }
 
+.lightThemeHr,
 .transparentLightThemeHr {
     transition-duration: 0.3s;
     border-top: 1px solid rgb(240, 240, 240) !important;
 }
 
+.lightThemeVehicleItemList,
 .transparentLightThemeVehicleItemList {
     background: rgb(250, 250, 250) !important;
     box-shadow: -1px 0px 3px rgb(0, 0, 0) !important;
 }
 
+.lightThemeVehicleItemList:hover,
 .transparentLightThemeVehicleItemList:hover {
     background: rgb(240, 240, 240) !important;
     box-shadow: -1px 0px 3px rgb(255, 0, 0) !important;
 }
 
+.lightThemeOneThread,
+.lightThemeOneUpdate,
 .transparentLightThemeOneThread,
 .transparentLightThemeOneUpdate {
     color: rgb(0, 0, 0);
 }
 
+.lightThemeAccountDetails,
+.lightThemeAboutContainer,
 .transparentLightThemeAccountDetails,
 .transparentLightThemeAboutContainer {
     background: rgb(240, 240, 240) !important;
     color: rgb(0, 0, 0);
+}
+.greyThemeBackground {
+    transition-duration: 0.3s;
+    background: rgb(168, 168, 168) !important;
+    color: rgb(0, 0, 0) !important;
 }
 
 .transparentGreyThemeBackground {
@@ -57,22 +74,27 @@
     backdrop-filter: blur(4px);
 }
 
+.greyThemeHr,
 .transparentGreyThemeHr {
     transition-duration: 0.3s;
     border-top: 1px solid rgb(220, 220, 220) !important;
     box-shadow: 0px 0px 5px rgb(128, 128, 128);
 }
 
+.greyThemeVehicleItemList,
 .transparentGreyThemeVehicleItemList {
     background: rgb(235, 235, 235) !important;
     box-shadow: -1px 0px 3px rgb(0, 0, 0) !important;
 }
 
+.greyThemeVehicleItemList:hover,
 .transparentGreyThemeVehicleItemList:hover {
     background: rgb(245, 245, 245) !important;
     box-shadow: -1px 0px 3px rgb(92, 92, 92) !important;
 }
 
+.greyThemeOneThread,
+.greyThemeOneUpdate,
 .transparentGreyThemeOneThread,
 .transparentGreyThemeOneUpdate {
     background: rgb(225, 225, 225) !important;
@@ -80,10 +102,18 @@
     box-shadow: -1px 0px 3px rgb(0, 0, 0) !important;
 }
 
+.greyThemeAccountDetails,
+.greyThemeAboutContainer,
 .transparentGreyThemeAccountDetails,
 .transparentGreyThemeAboutContainer {
     background: rgb(225, 225, 225) !important;
     color: rgb(0, 0, 0);
+}
+
+.darkThemeBackground {
+    transition-duration: 0.3s;
+    background: rgb(80, 80, 80) !important;
+    color: rgb(255, 255, 255) !important;
 }
 
 .transparentDarkThemeBackground {
@@ -93,27 +123,35 @@
     backdrop-filter: blur(4px);
 }
 
+.darkThemeHr,
 .transparentDarkThemeHr {
     transition-duration: 0.3s;
     border-top: 1px solid rgb(200, 200, 200) !important;
 }
 
+.darkThemeVehicleItemList,
 .transparentDarkThemeVehicleItemList {
     background: rgb(128, 128, 128) !important;
     box-shadow: -1px 0px 3px rgb(0, 0, 0) !important;
 }
 
+.darkThemeVehicleItemList:hover,
 .transparentDarkThemeVehicleItemList:hover {
     background: rgb(168, 168, 168) !important;
     box-shadow: -1px 0px 3px rgb(255, 0, 0) !important;
 }
 
+.darkThemeVehicleItemListFont,
 .transparentDarkThemeVehicleItemListFont {
     color: rgb(255, 255, 255) !important;
 }
 
+.darkThemeOneThread,
+.darkThemeOneUpdate,
 .transparentDarkThemeOneThread,
 .transparentDarkThemeOneUpdate,
+.darkThemeAccountDetails,
+.darkThemeAboutContainer,
 .transparentDarkThemeAccountDetails,
 .transparentDarkThemeAboutContainer {
     background: rgb(200, 200, 200) !important;
@@ -121,29 +159,19 @@
 }
 
 .carSpaceThemeVehicleItemListFont,
+.lightThemeVehicleItemListFont,
+.greyThemeVehicleItemListFont,
 .transparentLightThemeVehicleItemListFont,
 .transparentGreyThemeVehicleItemListFont {
     color: rgb(0, 0, 0) !important;
 }
 
 .carSpaceThemeServiceLogs,
+.lightThemeServiceLogs,
+.greyThemeServiceLogs,
+.darkThemeServiceLogs,
 .transparentLightThemeServiceLogs,
 .transparentGreyThemeServiceLogs,
 .transparentDarkThemeServiceLogs {
     color: rgb(0, 0, 0);
-}
-
-#downloadEventLogsButton {
-    background: rgb(225, 225, 225);
-    transition-duration: 0.2s;
-    width: 7rem;
-    cursor: pointer;
-    border: 1px solid rgb(255, 255, 255);
-    box-shadow: 0 2px 2px 0 rgb(92, 92, 92);
-    width: 6.8rem;
-}
-
-#downloadEventLogsButton:hover {
-    background: rgb(255, 255, 255);
-    transition-duration: 0.1s;
 }

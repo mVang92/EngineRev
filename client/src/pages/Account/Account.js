@@ -126,8 +126,8 @@ export default class Account extends Component {
     const creatorId = this.state.userId;
     const email = this.state.userEmail;
     const event = events.saveTheme;
-    let getThemeSelection = document.getElementById("themeSelectionDropdown");
-    let selectedTheme = getThemeSelection.options[getThemeSelection.selectedIndex].value;
+    let element = document.getElementById("themeSelectionDropdown");
+    let selectedTheme = element.options[element.selectedIndex].value;
     this.setState({ disableThemeToggleButton: true });
     API.saveThemeForUser(this.state.userId, selectedTheme)
       .then(() => {
@@ -184,6 +184,15 @@ export default class Account extends Component {
       switch (this.state.theme) {
         case defaults.carSpaceTheme:
           this.renderTheme(themes.carSpace);
+          break;
+        case defaults.lightTheme:
+          this.renderTheme(themes.light);
+          break;
+        case defaults.greyTheme:
+          this.renderTheme(themes.grey);
+          break;
+        case defaults.darkTheme:
+          this.renderTheme(themes.dark);
           break;
         case defaults.transparentLightTheme:
           this.renderTheme(themes.transparentLight);

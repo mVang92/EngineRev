@@ -15,6 +15,9 @@ const ThemeSelection = props => {
       <div className="col-md-4 text-center bottomMarginMobileDisplay">
         <select id="themeSelectionDropdown" name="themeSelectionDropdown">
           <option value={defaults.carSpaceTheme}>CarSpace</option>
+          <option value={defaults.lightTheme}>Light</option>
+          <option value={defaults.greyTheme}>Grey</option>
+          <option value={defaults.darkTheme}>Dark</option>
           <option value={defaults.transparentLightTheme}>Transparent Light</option>
           <option value={defaults.transparentGreyTheme}>Transparent Grey</option>
           <option value={defaults.transparentDarkTheme}>Transparent Dark</option>
@@ -22,7 +25,7 @@ const ThemeSelection = props => {
       </div>
       <div className="col-md-4">
         <button
-          id="applyTheme"
+          id="applyThemeButton"
           title="Apply"
           type="button"
           onClick={() => saveThemeForUser()}
