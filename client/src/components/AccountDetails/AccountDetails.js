@@ -1,6 +1,7 @@
 import React from "react";
 import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
 import BottomActionButtons from "../../components/BottomActionButtons";
+import ThemeSelection from "../../components/ThemeSelection";
 import { defaults } from "../../assets/Defaults";
 
 const AccountDetails = props => {
@@ -68,21 +69,6 @@ const AccountDetails = props => {
           </div>
           <br />
           <div className="row">
-            <div className="col-md-5"><label><strong>Vehicles:</strong></label></div>
-            <div className="col-md-7">
-              {
-                loadingError ?
-                  (
-                    <span id="accountPageVehicleCount" className="text-danger">{defaults.errorLoadingVehicleCount}</span>
-                  ) :
-                  (
-                    <span id="accountPageVehicleCount">{vehicleCount}</span>
-                  )
-              }
-            </div>
-          </div>
-          <br />
-          <div className="row">
             <div className="col-md-5"><label><strong>Role:</strong></label></div>
             <div className="col-md-7">
               {
@@ -92,6 +78,26 @@ const AccountDetails = props => {
                   ) :
                   (
                     <span id="userRole">User</span>
+                  )
+              }
+            </div>
+          </div>
+          <br />
+          <div className="row">
+            <div className="col-md-5"><label><strong>Theme:</strong></label></div>
+            <div id="accountPageCurrentTheme" className="col-md-7 wrapword">{currentTheme.theme}</div>
+          </div>
+          <br />
+          <div className="row">
+            <div className="col-md-5"><label><strong>Vehicles:</strong></label></div>
+            <div className="col-md-7">
+              {
+                loadingError ?
+                  (
+                    <span id="accountPageVehicleCount" className="text-danger">{defaults.errorLoadingVehicleCount}</span>
+                  ) :
+                  (
+                    <span id="accountPageVehicleCount">{vehicleCount}</span>
                   )
               }
             </div>
@@ -151,58 +157,10 @@ const AccountDetails = props => {
           ) :
           (
             <React.Fragment>
-              <div className="row">
-                <div className="col-md-4 bottomMarginMobileDisplay">
-                  <label><strong>Themes:</strong></label>
-                </div>
-                <div className="col-md-4 text-center">
-                  <div className="row">
-                    <div className="col-md-6 smallBottomMargin noWidthMobileDisplay">
-                      <button
-                        id="carSpaceThemeToggleButton"
-                        title="CarSpace Theme"
-                        type="button"
-                        onClick={() => saveThemeForUser(defaults.carSpaceTheme)}
-                        disabled={disableThemeToggleButton}>
-                        CarSpace
-                      </button>
-                    </div>
-                    <div className="col-md-6 smallBottomMargin noWidthMobileDisplay">
-                      <button
-                        id="lightThemeToggleButton"
-                        title="Light Theme"
-                        type="button"
-                        onClick={() => saveThemeForUser(defaults.lightTheme)}
-                        disabled={disableThemeToggleButton}>
-                        Light
-                      </button>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-6 bottomMarginMobileDisplay noWidthMobileDisplay">
-                      <button
-                        id="greyThemeToggleButton"
-                        title="Grey Theme"
-                        type="button"
-                        onClick={() => saveThemeForUser(defaults.greyTheme)}
-                        disabled={disableThemeToggleButton}>
-                        Grey
-                      </button>
-                    </div>
-                    <div className="col-md-6 noWidthMobileDisplay">
-                      <button
-                        id="darkThemeToggleButton"
-                        title="Dark Theme"
-                        type="button"
-                        onClick={() => saveThemeForUser(defaults.darkTheme)}
-                        disabled={disableThemeToggleButton}>
-                        Dark
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4"></div>
-              </div>
+              <ThemeSelection
+                saveThemeForUser={saveThemeForUser}
+                disableThemeToggleButton={disableThemeToggleButton}
+              />
               <div className="removeMobileDisplay">
                 <hr className={currentTheme.hr} />
                 <div className="row">

@@ -172,6 +172,7 @@ input {
 .backHomeBtn,
 .backToTopButton,
 .standardButton,
+#applyTheme,
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton,
@@ -195,6 +196,7 @@ input {
 .cancelBtn,
 .editActionButton,
 .standardButton,
+#applyTheme,
 #submitNewPasswordButton,
 #submitNewDisplayNameButton,
 #submitNewProfilePictureButton,
@@ -256,6 +258,7 @@ input {
 .editActionButton,
 .deleteActionButton,
 .standardButton:hover,
+#applyTheme:hover,
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover,
@@ -281,6 +284,7 @@ input {
 .cancelBtn:hover,
 .editActionButton:hover,
 .standardButton:hover,
+#applyTheme:hover,
 #submitNewPasswordButton:hover,
 #submitNewDisplayNameButton:hover,
 #submitNewProfilePictureButton:hover,
@@ -735,6 +739,11 @@ footer {
     box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
     cursor: pointer;
     border-radius: 3px;
+}
+
+#themeSelectionDropdown {
+    width: 100%;
+    height: 100%;
 }
 
 #loadingAnimation {

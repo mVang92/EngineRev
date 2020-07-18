@@ -1,0 +1,37 @@
+import React from "react";
+import { defaults } from "../../assets/Defaults";
+
+const ThemeSelection = props => {
+  const {
+    disableThemeToggleButton,
+    saveThemeForUser
+  } = props;
+
+  return (
+    <div className="row">
+      <div className="col-md-4 bottomMarginMobileDisplay">
+        <label><strong>Themes:</strong></label>
+      </div>
+      <div className="col-md-4 text-center bottomMarginMobileDisplay">
+        <select id="themeSelectionDropdown" name="themeSelectionDropdown">
+          <option value={defaults.carSpaceTheme}>CarSpace</option>
+          <option value={defaults.transparentLightTheme}>Transparent Light</option>
+          <option value={defaults.transparentGreyTheme}>Transparent Grey</option>
+          <option value={defaults.transparentDarkTheme}>Transparent Dark</option>
+        </select>
+      </div>
+      <div className="col-md-4">
+        <button
+          id="applyTheme"
+          title="Apply"
+          type="button"
+          onClick={() => saveThemeForUser()}
+          disabled={disableThemeToggleButton}>
+          Apply
+        </button>
+      </div>
+    </div>
+  )
+};
+
+export default ThemeSelection;

@@ -82,17 +82,17 @@ export default class App extends Component {
   determineTheme = () => {
     if (this.state.theme) {
       switch (this.state.theme) {
-        case "carSpace":
+        case defaults.carSpaceTheme:
           this.renderTheme(themes.carSpace);
           break;
-        case "light":
-          this.renderTheme(themes.light);
+        case defaults.transparentLightTheme:
+          this.renderTheme(themes.transparentLight);
           break;
-        case "grey":
-          this.renderTheme(themes.grey);
+        case defaults.transparentGreyTheme:
+          this.renderTheme(themes.transparentGrey);
           break;
-        case "dark":
-          this.renderTheme(themes.dark);
+        case defaults.transparentDarkTheme:
+          this.renderTheme(themes.transparentDark);
           break;
         default:
           this.state.props.errorNotification(defaults.themeSelectionError);
