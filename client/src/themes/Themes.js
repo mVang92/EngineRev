@@ -1,5 +1,6 @@
 export const themes = {
   carSpace: {
+    theme: "CarSpace",
     background: "carSpaceThemeBackground",
     hr: "carSpaceThemeHr",
     serviceLogs: "carSpaceThemeServiceLogs",
@@ -11,40 +12,43 @@ export const themes = {
     aboutContainer: "carSpaceAboutContainer",
     backgroundColor: "rgb(220, 220, 220)"
   },
-  light: {
-    background: "lightThemeBackground",
-    hr: "lightThemeHr",
-    serviceLogs: "lightThemeServiceLogs",
-    vehicleItemList: "lightThemeVehicleItemList",
-    vehicleItemListFont: "lightThemeVehicleItemListFont",
-    oneThread: "lightThemeOneThread",
-    oneUpdate: "lightThemeOneUpdate",
-    accountDetails: "lightThemeAccountDetails",
-    aboutContainer: "lightThemeAboutContainer",
+  transparentLight: {
+    theme: "Transparent Light",
+    background: "transparentLightThemeBackground",
+    hr: "transparentLightThemeHr",
+    serviceLogs: "transparentLightThemeServiceLogs",
+    vehicleItemList: "transparentLightThemeVehicleItemList",
+    vehicleItemListFont: "transparentLightThemeVehicleItemListFont",
+    oneThread: "transparentLightThemeOneThread",
+    oneUpdate: "transparentLightThemeOneUpdate",
+    accountDetails: "transparentLightThemeAccountDetails",
+    aboutContainer: "transparentLightThemeAboutContainer",
     backgroundColor: "rgb(235, 235, 235)"
   },
-  grey: {
-    background: "greyThemeBackground",
-    hr: "greyThemeHr",
-    serviceLogs: "greyThemeServiceLogs",
-    vehicleItemList: "greyThemeVehicleItemList",
-    vehicleItemListFont: "greyThemeVehicleItemListFont",
-    oneThread: "greyThemeOneThread",
-    oneUpdate: "greyThemeOneUpdate",
-    accountDetails: "greyThemeAccountDetails",
-    aboutContainer: "greyThemeAboutContainer",
+  transparentGrey: {
+    theme: "Transparent Grey",
+    background: "transparentGreyThemeBackground",
+    hr: "transparentGreyThemeHr",
+    serviceLogs: "transparentGreyThemeServiceLogs",
+    vehicleItemList: "transparentGreyThemeVehicleItemList",
+    vehicleItemListFont: "transparentGreyThemeVehicleItemListFont",
+    oneThread: "transparentGreyThemeOneThread",
+    oneUpdate: "transparentGreyThemeOneUpdate",
+    accountDetails: "transparentGreyThemeAccountDetails",
+    aboutContainer: "transparentGreyThemeAboutContainer",
     backgroundColor: "rgb(112, 112, 112)"
   },
-  dark: {
-    background: "darkThemeBackground",
-    hr: "darkThemeHr",
-    serviceLogs: "darkThemeServiceLogs",
-    vehicleItemList: "darkThemeVehicleItemList",
-    vehicleItemListFont: "darkThemeVehicleItemListFont",
-    oneThread: "darkThemeOneThread",
-    oneUpdate: "darkThemeOneUpdate",
-    accountDetails: "darkThemeAccountDetails",
-    aboutContainer: "darkThemeAboutContainer",
+  transparentDark: {
+    theme: "Transparent Dark",
+    background: "transparentDarkThemeBackground",
+    hr: "transparentDarkThemeHr",
+    serviceLogs: "transparentDarkThemeServiceLogs",
+    vehicleItemList: "transparentDarkThemeVehicleItemList",
+    vehicleItemListFont: "transparentDarkThemeVehicleItemListFont",
+    oneThread: "transparentDarkThemeOneThread",
+    oneUpdate: "transparentDarkThemeOneUpdate",
+    accountDetails: "transparentDarkThemeAccountDetails",
+    aboutContainer: "transparentDarkThemeAboutContainer",
     backgroundColor: "rgb(32, 32, 32)"
   }
 };

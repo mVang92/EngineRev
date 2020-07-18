@@ -121,15 +121,15 @@ export default class Account extends Component {
 
   /**
    * Save the selected theme to the database for the targeted user
-   * 
-   * @param themeType the theme to pass to the API
    */
-  saveThemeForUser = themeType => {
+  saveThemeForUser = () => {
     const creatorId = this.state.userId;
     const email = this.state.userEmail;
     const event = events.saveTheme;
+    let getThemeSelection = document.getElementById("themeSelectionDropdown");
+    let selectedTheme = getThemeSelection.options[getThemeSelection.selectedIndex].value;
     this.setState({ disableThemeToggleButton: true });
-    API.saveThemeForUser(this.state.userId, themeType)
+    API.saveThemeForUser(this.state.userId, selectedTheme)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
         this.setState({ disableThemeToggleButton: false },
@@ -182,17 +182,17 @@ export default class Account extends Component {
   determineTheme = () => {
     if (this.state.theme) {
       switch (this.state.theme) {
-        case "carSpace":
+        case defaults.carSpaceTheme:
           this.renderTheme(themes.carSpace);
           break;
-        case "light":
-          this.renderTheme(themes.light);
+        case defaults.transparentLightTheme:
+          this.renderTheme(themes.transparentLight);
           break;
-        case "grey":
-          this.renderTheme(themes.grey);
+        case defaults.transparentGreyTheme:
+          this.renderTheme(themes.transparentGrey);
           break;
-        case "dark":
-          this.renderTheme(themes.dark);
+        case defaults.transparentDarkTheme:
+          this.renderTheme(themes.transparentDark);
           break;
         default:
           this.errorNotification(defaults.themeSelectionError);

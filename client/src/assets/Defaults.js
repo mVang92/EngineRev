@@ -1,8 +1,8 @@
 export const defaults = {
     carSpaceTheme: "carSpace",
-    lightTheme: "light",
-    greyTheme: "grey",
-    darkTheme: "dark",
+    transparentLightTheme: "transparentLight",
+    transparentGreyTheme: "transparentGrey",
+    transparentDarkTheme: "transparentDark",
     newBackgroundPictureInput: "newBackgroundPictureInput",
     newProfilePictureInput: "newProfilePictureInput",
     newDisplayNameInput: "newDisplayNameInput",

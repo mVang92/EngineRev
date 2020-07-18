@@ -39,7 +39,7 @@ const SignOutModal = props => {
                             </button>
                             <button
                                 id="doSignOutButton"
-                                title="Sign Out"
+                                title="Yes"
                                 type="button"
                                 className="standardButton"
                                 onClick={props.handleSignOut}
