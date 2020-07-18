@@ -149,6 +149,7 @@ const AccountDetails = props => {
         <div className="col-md-4">{userAccountLastSignIn}</div>
         <div className="col-md-4"></div>
       </div>
+      <hr className={currentTheme.hr} />
       {
         unableToLoadDatabase ?
           (
@@ -157,7 +158,6 @@ const AccountDetails = props => {
           (
             <React.Fragment>
               <div className="removeMobileDisplay">
-                <hr className={currentTheme.hr} />
                 <div className="row">
                   <div className="col-md-4"><label><strong>Event Logs:</strong></label></div>
                   <div className="col-md-4">
@@ -229,10 +229,10 @@ const AccountDetails = props => {
                   </div>
                 </div>
               </div>
+              <br />
             </React.Fragment>
           )
       }
-      <br />
       <div className="row">
         <div className="col-md-4 bottomMarginMobileDisplay">
           <label><strong>Update Profile Picture:</strong></label>
