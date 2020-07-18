@@ -180,8 +180,8 @@ const AccountDetails = props => {
                   </div>
                   <div className="col-md-4"></div>
                 </div>
+                <hr className={currentTheme.hr} />
               </div>
-              <hr className={currentTheme.hr} />
               <ThemeSelection
                 saveThemeForUser={saveThemeForUser}
                 disableThemeToggleButton={disableThemeToggleButton}
