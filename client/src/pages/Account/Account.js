@@ -147,7 +147,7 @@ export default class Account extends Component {
   };
 
   /**
-   * Get the vehicle data from the API
+   * Retrieve the information for the user then load the page
    */
   getVehicleData = () => {
     if (this.state.userId) {

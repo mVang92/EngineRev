@@ -15,21 +15,22 @@ export default class About extends Component {
       theme: "",
       currentTheme: "",
       backgroundPicture: "",
+      refreshCounter: 0,
       pageLoaded: false
     };
   };
 
   /**
-   * Get the theme for the user
+   * Grab user information
    */
   componentDidMount = () => {
-    this.getUserTheme();
+    this.getUserInformation();
   };
 
   /**
-   * Retrieve the theme for the user then load the page
+   * Retrieve the information for the user then load the page
    */
-  getUserTheme = () => {
+  getUserInformation = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         vehicleApi.findUserInformationForOneUser(user.uid)
@@ -39,12 +40,15 @@ export default class About extends Component {
                 theme: res.data.theme,
                 backgroundPicture: res.data.backgroundPicture,
                 pageLoaded: true
-              }, () => {
-                this.determineTheme();
-              });
+              }, () => this.determineTheme());
             } catch (err) {
-              this.errorNotification(err);
-              this.setState({ pageLoaded: true });
+              this.setState({ refreshCounter: this.state.refreshCounter + 1 });
+              if (this.state.refreshCounter <= 3) {
+                this.getUserInformation();
+              } else {
+                this.errorNotification(err);
+                this.setState({ pageLoaded: true });
+              }
             }
           })
           .catch(err => {

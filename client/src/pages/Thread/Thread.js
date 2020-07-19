@@ -110,7 +110,7 @@ export default class Thread extends Component {
   };
 
   /**
-   * Retrieve the theme for the user then load the page
+   * Retrieve the information for the user then load the page
    */
   getUserInformation = () => {
     firebase.auth.onAuthStateChanged(user => {
@@ -387,8 +387,8 @@ export default class Thread extends Component {
         threadDescription: this.state.threadDescriptionBackup,
       }, () => this.errorNotification(defaults.threadDetailsCannotBeBlank));
     } else {
-      let getThreadCategory = document.getElementById("threadCategoryDropdown");
-      let threadCategory = getThreadCategory.options[getThreadCategory.selectedIndex].value;
+      let element = document.getElementById("threadCategoryDropdown");
+      let threadCategory = element.options[element.selectedIndex].value;
       this.handleUpdateThreadDetails(threadCategory);
     }
   };

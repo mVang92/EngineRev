@@ -27,7 +27,8 @@ export default class Forum extends Component {
       threadDescription: "",
       threadTitle: "",
       allThreads: [],
-      disableSubmitNewThreadButton: false
+      disableSubmitNewThreadButton: false,
+      refreshCounter: 0,
     };
   };
 
@@ -102,12 +103,15 @@ export default class Forum extends Component {
                 theme: res.data.theme,
                 backgroundPicture: res.data.backgroundPicture,
                 pageLoaded: true
-              }, () => {
-                this.determineTheme();
-              });
+              }, () => this.determineTheme());
             } catch (err) {
-              this.errorNotification(err);
-              this.setState({ pageLoaded: true });
+              this.setState({ refreshCounter: this.state.refreshCounter + 1 });
+              if (this.state.refreshCounter <= 3) {
+                this.getUserInformation();
+              } else {
+                this.errorNotification(err);
+                this.setState({ pageLoaded: true });
+              }
             }
           })
           .catch(err => {

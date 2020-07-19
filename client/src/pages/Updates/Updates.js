@@ -27,6 +27,7 @@ export default class Updates extends Component {
       updateId: "",
       releaseNotesToUpdate: "",
       knownIssuesToUpdate: "",
+      refreshCounter: 0,
       showEditOneUpdateModal: false,
       showDeleteOneUpdateModal: false,
       disableConfirmSaveEditReleaseNoteButton: false,
@@ -108,7 +109,7 @@ export default class Updates extends Component {
   };
 
   /**
-   * Get user information for the user logged in
+   * Retrieve the information for the user then load the page
    */
   findUserInformationForOneUser = () => {
     firebase.auth.onAuthStateChanged(user => {
@@ -122,11 +123,15 @@ export default class Updates extends Component {
                 theme: res.data.theme,
                 backgroundPicture: res.data.backgroundPicture,
                 pageLoaded: true,
-              }, () => {
-                this.determineTheme();
-              });
+              }, () => this.determineTheme());
             } catch (err) {
-              this.setState({ pageLoaded: true });
+              this.setState({ refreshCounter: this.state.refreshCounter + 1 });
+              if (this.state.refreshCounter <= 3) {
+                this.findUserInformationForOneUser();
+              } else {
+                this.errorNotification(err);
+                this.setState({ pageLoaded: true });
+              }
             }
           })
           .catch(err => this.errorNotification(err));
