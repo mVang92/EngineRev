@@ -35,7 +35,7 @@ export default class App extends Component {
   };
 
   /**
-   * Find user information and set them to state
+   * Retrieve the information for the user then load the page
    */
   findUserInformationForOneUser = userId => {
     if (userId) {
@@ -56,7 +56,7 @@ export default class App extends Component {
           if (this.state.theme === "") {
             this.setState({ refreshCounter: this.state.refreshCounter + 1 });
             if (this.state.refreshCounter <= 3) {
-              this.findUserInformationForOneUser(userId)
+              this.findUserInformationForOneUser(userId);
             } else {
               this.setState({
                 pageLoaded: true,
