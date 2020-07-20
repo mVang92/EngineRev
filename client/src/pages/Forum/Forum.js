@@ -106,7 +106,7 @@ export default class Forum extends Component {
               }, () => this.determineTheme());
             } catch (err) {
               this.setState({ refreshCounter: this.state.refreshCounter + 1 });
-              if (this.state.refreshCounter <= 3) {
+              if (this.state.refreshCounter <= 10) {
                 this.getUserInformation();
               } else {
                 this.errorNotification(err);
