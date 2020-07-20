@@ -66,7 +66,6 @@ export default class App extends Component {
    * Upon page refresh, if the user is logged in, they will stay logged in
    */
   onAuthStateChanged = () => {
-    console.log("onauth")
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({
