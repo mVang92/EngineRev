@@ -249,7 +249,8 @@ export default class Log extends Component {
     if (isNaN(this.state.mileage)) {
       this.showMileageInputErrorModal();
     } else {
-      if (this.state.date === "" ||
+      if (
+        this.state.date === "" ||
         this.state.mileage === "" ||
         this.state.service === "" ||
         this.checkIfStringIsBlank(this.state.date) ||
@@ -313,6 +314,14 @@ export default class Log extends Component {
         updatedVehicleName = "";
       }
 
+      if (this.checkIfStringIsBlank(updatedMake)) {
+        updatedMake = this.state.make;
+      }
+
+      if (this.checkIfStringIsBlank(updatedModel)) {
+        updatedModel = this.state.model;
+      }
+
       let updatedVehicleInformation = {
         vehicleName: updatedVehicleName,
         year: updatedYear,
@@ -342,7 +351,8 @@ export default class Log extends Component {
     if (isNaN(serviceLogMileage)) {
       this.showUpdatedMileageInputErrorModal();
     } else {
-      if (serviceLogDate === "" ||
+      if (
+        serviceLogDate === "" ||
         serviceLogMileage === "" ||
         serviceLogService === "" ||
         this.checkIfStringIsBlank(serviceLogDate) ||
