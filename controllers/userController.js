@@ -13,6 +13,13 @@ const themes = [
   "transparentDark"
 ];
 
+/**
+ * Check if the string value is blank
+ */
+checkIfStringIsBlank = string => {
+  return (!string || /^\s*$/.test(string));
+};
+
 module.exports = {
 
   /**
@@ -93,8 +100,14 @@ module.exports = {
    * Update the vehicle name for the selected vehicle
    */
   updateOneVehicleInformation: (req, res) => {
-    if ((req.body.year < minimumYear) || (req.body.year > futureYear)) {
-      res.status(400).json();
+    if (
+      req.body.year < minimumYear ||
+      req.body.year > futureYear ||
+      checkIfStringIsBlank(req.body.year) ||
+      checkIfStringIsBlank(req.body.make) ||
+      checkIfStringIsBlank(req.body.model)
+    ) {
+      res.status(406).json({ status: 406, message: "Vehicle year out of range, or a required input (year/make/model) is empty." });
     } else {
       db.Users
         .updateOne(
