@@ -87,13 +87,21 @@ module.exports = {
    * Add one service log for the selected vehicle
    */
   addOneLogForOneVehicle: (req, res) => {
-    db.Users
-      .updateOne(
-        { creator: req.params.creatorId, vehicles: { $elemMatch: { _id: req.params.vehicleId } } },
-        { $push: { "vehicles.$.logs": [req.body] } }
-      )
-      .then(result => res.json(result))
-      .catch(err => res.status(422).json(err));
+    if (
+      checkIfStringIsBlank(req.body.date) ||
+      checkIfStringIsBlank(req.body.mileage) ||
+      checkIfStringIsBlank(req.body.service)
+    ) {
+      res.status(406).json({ status: 406, message: "A required input field is missing." });
+    } else {
+      db.Users
+        .updateOne(
+          { creator: req.params.creatorId, vehicles: { $elemMatch: { _id: req.params.vehicleId } } },
+          { $push: { "vehicles.$.logs": [req.body] } }
+        )
+        .then(result => res.json(result))
+        .catch(err => res.status(422).json(err));
+    }
   },
 
   /**
@@ -130,14 +138,22 @@ module.exports = {
    * Update one service log for the selected vehicle
    */
   updateOneLogForOneVehicle: (req, res) => {
-    db.Users
-      .updateOne(
-        { "vehicles._id": req.params.vehicleId },
-        { $set: { "vehicles.$[].logs.$[logs]": req.body } },
-        { arrayFilters: [{ "logs._id": req.params.serviceLogId }] }
-      )
-      .then(result => res.json(result))
-      .catch(err => res.status(422).json(err));
+    if (
+      checkIfStringIsBlank(req.body.date) ||
+      checkIfStringIsBlank(req.body.mileage) ||
+      checkIfStringIsBlank(req.body.service)
+    ) {
+      res.status(406).json({ status: 406, message: "A required input field is missing." });
+    } else {
+      db.Users
+        .updateOne(
+          { "vehicles._id": req.params.vehicleId },
+          { $set: { "vehicles.$[].logs.$[logs]": req.body } },
+          { arrayFilters: [{ "logs._id": req.params.serviceLogId }] }
+        )
+        .then(result => res.json(result))
+        .catch(err => res.status(422).json(err));
+    }
   },
 
   /**
