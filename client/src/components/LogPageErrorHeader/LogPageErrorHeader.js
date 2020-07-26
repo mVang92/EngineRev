@@ -9,7 +9,8 @@ const LogPageErrorHeader = props => {
         errorMessage ?
           (
             <label><h3>{errorMessage}</h3></label>
-          ) : (
+          ) :
+          (
             <label><h3>{defaults.noAuthorizationToViewPage}</h3></label>
           )
       }
