@@ -23,7 +23,8 @@ const ServiceLogDisplay = props => {
                 />
               )
             })
-          ) : (
+          ) :
+          (
             props.sortServiceLogs().map(serviceLog => {
               return (
                 <ServiceLog

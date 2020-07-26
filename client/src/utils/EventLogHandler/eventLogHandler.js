@@ -11,8 +11,8 @@ export default {
             event: event,
             status: events.eventSuccess,
             error: events.eventNoErrors
-        }
-        eventLogApi.addOneEvent(eventPayload)
+        };
+        eventLogApi.addOneEvent(eventPayload);
     },
     failure: (creatorId, email, event, error) => {
         eventPayload = {
@@ -21,7 +21,7 @@ export default {
             event: event,
             status: events.eventError,
             error: error.toString()
-        }
-        eventLogApi.addOneEvent(eventPayload)
+        };
+        eventLogApi.addOneEvent(eventPayload);
     }
 }

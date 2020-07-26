@@ -33,7 +33,8 @@ const ThreadComments = props => {
                 <div className="col-md-10 text-left bottomMarginMobileDisplay breakWord">
                   <strong>{formattedEmail} posted on {formattedDate}</strong>
                 </div>
-              ) : (
+              ) :
+              (
                 <React.Fragment>
                   <div className="col-md-8 text-left commentPoster breakWord">
                     <strong>{formattedEmail} posted on {formattedDate}</strong>
@@ -43,7 +44,8 @@ const ThreadComments = props => {
                       loggedin ?
                         (
                           <label>Helpful?</label>
-                        ) : (
+                        ) :
+                        (
                           null
                         )
                     }
@@ -70,7 +72,8 @@ const ThreadComments = props => {
                               </button>
                             </div>
                           </React.Fragment>
-                        ) : (
+                        ) :
+                        (
                           <React.Fragment>
                             <div className="col-md-6 noWidthMobileDisplay">
                               <button
@@ -94,7 +97,8 @@ const ThreadComments = props => {
                         )
                     }
                   </div>
-                ) : (
+                ) :
+                (
                   null
                 )
             }
@@ -106,7 +110,8 @@ const ThreadComments = props => {
                   <label>
                     <span className="text-success"><strong>+{votes}</strong></span>
                   </label>
-                ) : (
+                ) :
+                (
                   null
                 )
             }
@@ -116,7 +121,8 @@ const ThreadComments = props => {
                   <label>
                     <span className="text-danger"><strong>{votes}</strong></span>
                   </label>
-                ) : (
+                ) :
+                (
                   null
                 )
             }

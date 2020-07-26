@@ -245,18 +245,23 @@ export default class Thread extends Component {
         eventLogHandler.successful(creatorId, email, event);
         vehicleApi.recordVotedThreadComment(this.state.uniqueCreatorId, commentId)
           .then(() => {
-            this.setState({ disableUpVoteButton: false }, () => {
-              this.getAllThreadComments();
-            });
+            this.setState({
+              disableUpVoteButton: false,
+              disableDownVoteButton: false
+            }, () => this.getAllThreadComments());
           })
           .catch(err => {
-            this.setState({ disableUpVoteButton: false }, () => {
-              this.errorNotification(err);
-            });
+            this.setState({
+              disableUpVoteButton: false,
+              disableDownVoteButton: false
+            }, () => this.errorNotification(err));
           });
       })
       .catch(err => {
-        this.setState({ disableUpVoteButton: false }, () => {
+        this.setState({
+          disableUpVoteButton: false,
+          disableDownVoteButton: false
+        }, () => {
           eventLogHandler.failure(creatorId, email, event, err);
           this.errorNotification(err);
         });
@@ -275,18 +280,23 @@ export default class Thread extends Component {
         eventLogHandler.successful(creatorId, email, event);
         vehicleApi.recordVotedThreadComment(this.state.uniqueCreatorId, commentId)
           .then(() => {
-            this.setState({ disableDownVoteButton: false }, () => {
-              this.getAllThreadComments();
-            });
+            this.setState({
+              disableUpVoteButton: false,
+              disableDownVoteButton: false
+            }, () => this.getAllThreadComments());
           })
           .catch(err => {
-            this.setState({ disableDownVoteButton: false }, () => {
-              this.errorNotification(err);
-            });
+            this.setState({
+              disableUpVoteButton: false,
+              disableDownVoteButton: false
+            }, () => this.errorNotification(err));
           });
       })
       .catch(err => {
-        this.setState({ disableDownVoteButton: false }, () => {
+        this.setState({
+          disableUpVoteButton: false,
+          disableDownVoteButton: false
+        }, () => {
           eventLogHandler.failure(creatorId, email, event, err);
           this.errorNotification(err);
         });
@@ -384,7 +394,7 @@ export default class Thread extends Component {
     ) {
       this.setState({
         threadTitle: this.state.threadTitleBackup,
-        threadDescription: this.state.threadDescriptionBackup,
+        threadDescription: this.state.threadDescriptionBackup
       }, () => this.errorNotification(defaults.threadDetailsCannotBeBlank));
     } else {
       let element = document.getElementById("threadCategoryDropdown");
@@ -397,7 +407,10 @@ export default class Thread extends Component {
    * Check if the user has voted on this comment before for up voting
    */
   validateUserToUpvoteComment = commentId => {
-    this.setState({ disableUpVoteButton: true });
+    this.setState({
+      disableUpVoteButton: true,
+      disableDownVoteButton: true
+    });
     vehicleApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
       .then(res => {
         try {
@@ -405,7 +418,10 @@ export default class Thread extends Component {
           let hasUserVotedOnThisComment = votedComments.includes(commentId);
           if (hasUserVotedOnThisComment) {
             this.errorNotification(defaults.alreadyVotedOnComment);
-            this.setState({ disableUpVoteButton: false });
+            this.setState({
+              disableUpVoteButton: false,
+              disableDownVoteButton: false
+            });
           } else {
             this.handleUpvoteComment(commentId);
           }
@@ -415,10 +431,10 @@ export default class Thread extends Component {
         }
       })
       .catch(err => {
-        this.setState(
-          { disableUpVoteButton: false },
-          () => this.errorNotification(err)
-        );
+        this.setState({
+          disableUpVoteButton: false,
+          disableDownVoteButton: false
+        }, () => this.errorNotification(err));
       });
   };
 
@@ -426,7 +442,10 @@ export default class Thread extends Component {
    * Check if the user has voted on this comment before for down voting
    */
   validateUserToDownvoteComment = commentId => {
-    this.setState({ disableDownVoteButton: true });
+    this.setState({
+      disableUpVoteButton: true,
+      disableDownVoteButton: true
+    });
     vehicleApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
       .then(res => {
         try {
@@ -434,7 +453,10 @@ export default class Thread extends Component {
           let hasUserVotedOnThisComment = votedComments.includes(commentId);
           if (hasUserVotedOnThisComment) {
             this.errorNotification(defaults.alreadyVotedOnComment);
-            this.setState({ disableDownVoteButton: false });
+            this.setState({
+              disableUpVoteButton: false,
+              disableDownVoteButton: false
+            });
           } else {
             this.handleDownvoteComment(commentId);
           }
@@ -444,10 +466,10 @@ export default class Thread extends Component {
         }
       })
       .catch(err => {
-        this.setState(
-          { disableDownVoteButton: false },
-          () => this.errorNotification(err)
-        );
+        this.setState({
+          disableUpVoteButton: false,
+          disableDownVoteButton: false
+        }, () => this.errorNotification(err));
       });
   };
 
@@ -459,16 +481,12 @@ export default class Thread extends Component {
     let unTouchedComment = this.state.commentsToShowInModal;
     let commentToUpdate = this.state.threadCommentToUpdate;
     let newComment = "";
-    if (commentToUpdate) {
-      newComment = commentToUpdate;
-    } else {
+    if (this.checkIfStringIsBlank(commentToUpdate)) {
       newComment = unTouchedComment;
-    }
-    if (this.checkIfStringIsBlank(newComment)) {
-      this.errorNotification(defaults.threadCommentsCannotBeBlank);
     } else {
-      this.handleUpdateThreadComment(newComment);
+      newComment = commentToUpdate;
     }
+    this.handleUpdateThreadComment(newComment);
   };
 
   /**
@@ -510,11 +528,11 @@ export default class Thread extends Component {
     }
   };
 
-   /**
-   * Render the theme and background picture
-   * 
-   * @param theme the theme to render
-   */
+  /**
+  * Render the theme and background picture
+  * 
+  * @param theme the theme to render
+  */
   renderTheme = theme => {
     this.setState({ currentTheme: theme });
     if (this.state.backgroundPicture) {

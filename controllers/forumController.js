@@ -6,6 +6,13 @@ const threadCategories = [
     "Other"
 ];
 
+/**
+ * Check if the string value is blank
+ */
+checkIfStringIsBlank = string => {
+    return (!string || /^\s*$/.test(string));
+};
+
 module.exports = {
 
     /**
@@ -132,12 +139,16 @@ module.exports = {
      * Update the comment on the thread
      */
     handleUpdateThreadComment: (req, res) => {
-        db.Forum
-            .updateOne(
-                { "comments._id": req.params.commentId },
-                { $set: { "comments.$.comment": req.body.comment } }
-            )
-            .then(result => res.json(result))
-            .catch(err => res.status(422).json(err));
+        if (checkIfStringIsBlank(req.body.comment)) {
+            res.status(406).json({ status: 406, message: "Comments cannot be blank." });
+        } else {
+            db.Forum
+                .updateOne(
+                    { "comments._id": req.params.commentId },
+                    { $set: { "comments.$.comment": req.body.comment } }
+                )
+                .then(result => res.json(result))
+                .catch(err => res.status(422).json(err));
+        }
     }
 };
