@@ -352,9 +352,6 @@ export default class Log extends Component {
       this.showUpdatedMileageInputErrorModal();
     } else {
       if (
-        serviceLogDate === "" ||
-        serviceLogMileage === "" ||
-        serviceLogService === "" ||
         this.checkIfStringIsBlank(serviceLogDate) ||
         this.checkIfStringIsBlank(serviceLogMileage) ||
         this.checkIfStringIsBlank(serviceLogService)
@@ -409,7 +406,6 @@ export default class Log extends Component {
   handleSubmitOneServiceLog = () => {
     this.hideFutureDateConfirmationModal();
     const creatorId = this.state.uid;
-    const vehicleId = this.state.vehicleId;
     const email = this.state.email;
     const event = events.addOneServiceLog;
     const serviceLogDate = new Date(this.state.date);
@@ -424,7 +420,7 @@ export default class Log extends Component {
     let serviceLogMileageMemory = this.state.mileage;
     let serviceLogServiceMemory = this.state.service;
     this.setState({ disableAddServiceLogButton: true });
-    API.addOneLogForOneVehicle(creatorId, vehicleId, serviceLogToStore)
+    API.addOneLogForOneVehicle(creatorId, this.state.vehicleId, serviceLogToStore)
       .then(() => {
         this.setState({
           date: "",
@@ -483,8 +479,6 @@ export default class Log extends Component {
     const creatorId = this.state.uid;
     const email = this.state.email;
     const event = events.updateOneServiceLog;
-    const vehicleId = this.state.vehicleId;
-    const serviceLogId = this.state.serviceLogId;
     let updatedServiceLogDateToRecord = "";
     const updatedServiceLogDate = this.formatDateYyyyMmDd(updatedServiceLogDateToConvert);
     if (updatedServiceLogDate === "NaN-NaN-NaN") {
@@ -508,7 +502,7 @@ export default class Log extends Component {
     let serviceLogMileageMemory = this.state.serviceLogMileage;
     let serviceLogServiceMemory = this.state.serviceLogService;
     this.setState({ disableConfirmSaveEditServiceLogButton: true });
-    API.updateOneLogForOneVehicle(vehicleId, serviceLogId, serviceLogToUpdate)
+    API.updateOneLogForOneVehicle(this.state.vehicleId, this.state.serviceLogId, serviceLogToUpdate)
       .then(() => {
         this.setState({
           serviceLogDate: "",
