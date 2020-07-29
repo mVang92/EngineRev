@@ -406,7 +406,7 @@ input {
 
 .Toastify__toast-container--top-right {
     top: 3em !important;
-    right: 1px !important;
+    right: 5px !important;
 }
 
 #applicationName {
@@ -503,19 +503,19 @@ input {
 }
 
 .Toastify__toast--error {
-    background: rgba(255, 0, 0, 0.9);
+    background: rgba(225, 0, 0, 0.8);
 }
 
 .Toastify__toast--info {
-    background: rgba(32, 150, 255, 0.9);
+    background: rgba(32, 150, 255, 0.8);
 }
 
 .Toastify__toast--success {
-    background: rgba(32, 225, 64, 0.9);
+    background: rgba(16, 200, 31, 0.8);
 }
 
 .Toastify__toast--warning {
-    background: rgba(235, 200, 48, 0.9);
+    background: rgba(255, 168, 30, 0.8);
 }
 
 .underline {

@@ -355,7 +355,7 @@ export default class Account extends Component {
             newPassword: "",
             confirmNewPassword: ""
           });
-          this.errorNotification(defaults.passwordsDoNotMatch);
+          this.warningNotification(defaults.passwordsDoNotMatch);
         }
       }
     }
@@ -559,6 +559,15 @@ export default class Account extends Component {
    */
   errorNotification = err => {
     toast.error(err.toString());
+  };
+
+  /**
+   * Display the warning notification when a warning occurs
+   * 
+   * @param err the error message to display to the user
+   */
+  warningNotification = err => {
+    toast.warn(err.toString());
   };
 
   render() {
