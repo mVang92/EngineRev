@@ -70,8 +70,14 @@ module.exports = {
    * Add one vehicle for the current user logged in
    */
   addOneVehicle: (req, res) => {
-    if ((req.body.year < minimumYear) || (req.body.year > futureYear)) {
-      res.status(400).json();
+    if (
+      req.body.year < minimumYear ||
+      req.body.year > futureYear ||
+      checkIfStringIsBlank(req.body.year) ||
+      checkIfStringIsBlank(req.body.make) ||
+      checkIfStringIsBlank(req.body.model)
+    ) {
+      res.status(406).json({ status: 406, message: "Vehicle year out of range, or a required input (year/make/model) is empty." });
     } else {
       db.Users
         .updateOne(

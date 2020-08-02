@@ -23,7 +23,7 @@ export default class App extends Component {
       errorMessage: "",
       refreshCounter: 0,
       disableAddVehicleButton: false,
-      showAddVehicleYearNanErrorModal: false,
+      showAddVehicleYearNanErrorModal: false
     };
   };
 
@@ -143,7 +143,11 @@ export default class App extends Component {
     const date = new Date();
     const futureYear = date.getFullYear() + 2;
     this.setState({ disableAddVehicleButton: true });
-    if (isNaN(newVehicle.year) || (newVehicle.year < 1885) || (newVehicle.year > futureYear)) {
+    if (
+      isNaN(newVehicle.year) ||
+      (newVehicle.year < 1885) ||
+      (newVehicle.year > futureYear)
+    ) {
       this.showAddVehicleYearNanErrorModal();
       this.setState({ disableAddVehicleButton: false });
     } else {

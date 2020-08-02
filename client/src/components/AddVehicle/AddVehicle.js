@@ -19,13 +19,11 @@ class AddVehicle extends Component {
   };
 
   /**
-   * Add a vehicle to the database
+   * Check if the vehicle inputs are blank
    */
   checkIfVehicleInputsAreBlank = e => {
     e.preventDefault();
-    if (this.refs.year.value === "" ||
-      this.refs.make.value === "" ||
-      this.refs.model.value === "" ||
+    if (
       this.checkIfStringIsBlank(this.refs.year.value) ||
       this.checkIfStringIsBlank(this.refs.make.value) ||
       this.checkIfStringIsBlank(this.refs.model.value)
@@ -65,13 +63,13 @@ class AddVehicle extends Component {
               this.props.userProfilePicture ?
                 (
                   <div className="col-md-6 wrapword">
-                    <img id="mainPageProfilePicture" src={this.props.userProfilePicture} alt="You"></img>
+                    <img id="mainPageProfilePicture" src={this.props.userProfilePicture} alt="You"/>
                     <label><strong><span id="displayName"></span></strong></label>
                   </div>
                 ) :
                 (
                   <div className="col-md-6 wrapword">
-                    <img id="mainPageProfilePicture" src={this.state.defaultProfilePicture} alt="You"></img>
+                    <img id="mainPageProfilePicture" src={this.state.defaultProfilePicture} alt="You"/>
                     <label><strong><span id="displayName"></span></strong></label>
                   </div>
                 )
