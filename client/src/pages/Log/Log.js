@@ -135,6 +135,8 @@ export default class Log extends Component {
 
   /**
    * Format the date to yyyy-mm-dd
+   * 
+   * @param dateToConvert The date to convert
    */
   formatDateYyyyMmDd = dateToConvert => {
     let date = new Date(dateToConvert),
@@ -152,6 +154,8 @@ export default class Log extends Component {
 
   /**
    * Convert date to UTC
+   *
+   * @param date The date to convert
    */
   createDateAsUTC = date => {
     return new Date(
@@ -177,6 +181,8 @@ export default class Log extends Component {
 
   /**
    * Format the service log date for comparison with the current date
+   * 
+   * @param serviceLogDate The service log date to format
    */
   setHoursAndSetDateForServiceLogDate = serviceLogDate => {
     const date = new Date(serviceLogDate);
@@ -792,12 +798,6 @@ export default class Log extends Component {
 
   /**
    * Display the modal to notify the user about deleting the service log
-   * 
-   * @param serviceLogId the service log id to target
-   * @param date         the service log date
-   * @param mileage      the service log mileage
-   * @param service      the service log service type
-   * @param comment      the service log comment
    */
   showDeleteOneServiceLogModal = () => {
     this.setState({
