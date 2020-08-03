@@ -37,6 +37,7 @@ const EditOneServiceLogModal = props => {
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
+            onRequestClose={hideEditOneServiceLogModal}
         >
             <form onSubmit={checkUserEnteredUpdatedServiceLogInput}>
                 <div className="accountModal modal-content">

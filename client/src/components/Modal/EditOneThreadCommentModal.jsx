@@ -19,6 +19,7 @@ const EditOneThreadCommentModal = props => {
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
+            onRequestClose={hideEditOneThreadCommentModal}
         >
             <form onSubmit={validateThreadCommentInput}>
                 <div className="accountModal modal-content">

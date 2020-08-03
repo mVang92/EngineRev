@@ -23,6 +23,7 @@ const EditOneVehicleNameModal = props => {
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
+            onRequestClose={hideEditOneVehicleNameModal}
         >
             <form onSubmit={checkUserEnteredUpdatedVehicleNameInput}>
                 <div className="accountModal modal-content">

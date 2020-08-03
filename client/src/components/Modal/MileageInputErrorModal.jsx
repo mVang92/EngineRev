@@ -16,6 +16,7 @@ const MileageInputErrorModal = props => {
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
+            onRequestClose={hideMileageInputErrorModal}
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">

@@ -9,6 +9,7 @@ const UpdateProfilePictureSuccessModal = props => {
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
+            onRequestClose={props.hideUpdateProfilePictureSuccessModal}
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">

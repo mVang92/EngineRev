@@ -11,6 +11,7 @@ const AddVehicleErrorModal = props => {
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
+            onRequestClose={props.hideAddVehicleErrorModal}
         >
             <div id="addVehicleErrorModal" className="accountModal modal-content">
                 <div className="modal-body modalShadow">
