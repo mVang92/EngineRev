@@ -10,6 +10,7 @@ const AddVehicleYearNanErrorModal = props => {
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
+            onRequestClose={props.hideAddVehicleYearNanErrorModal}
         >
             <div id="addVehicleYearNanErrorModal" className="accountModal modal-content">
                 <div className="modal-body modalShadow">

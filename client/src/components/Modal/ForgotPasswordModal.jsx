@@ -8,6 +8,7 @@ const ForgotPasswordModal = props => {
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
+            onRequestClose={props.requestHideForgotPasswordModal}
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">

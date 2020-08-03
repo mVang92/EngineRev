@@ -20,6 +20,7 @@ const UpdateLogErrorModal = props => {
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
+            onRequestClose={hideUpdateLogErrorModal}
         >
             <div id="addLogErrorModal" className="accountModal modal-content">
                 <div className="modal-body modalShadow">

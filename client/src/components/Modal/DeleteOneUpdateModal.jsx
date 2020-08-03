@@ -18,6 +18,7 @@ const DeleteOneUpdateModal = props => {
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
+            onRequestClose={hideDeleteOneUpdateModal}
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
