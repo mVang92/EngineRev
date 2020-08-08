@@ -77,7 +77,10 @@ module.exports = {
       checkIfStringIsBlank(req.body.make) ||
       checkIfStringIsBlank(req.body.model)
     ) {
-      res.status(406).json({ status: 406, message: "Vehicle year out of range, or a required input (year/make/model) is empty." });
+      res.status(400).json({
+        status: 400,
+        message: "Vehicle year out of range, or a required input (year/make/model) is empty."
+      });
     } else {
       db.Users
         .updateOne(
@@ -98,7 +101,10 @@ module.exports = {
       checkIfStringIsBlank(req.body.mileage) ||
       checkIfStringIsBlank(req.body.service)
     ) {
-      res.status(406).json({ status: 406, message: "A required input field is missing." });
+      res.status(400).json({
+        status: 400,
+        message: "A required input field is missing."
+      });
     } else {
       db.Users
         .updateOne(
@@ -121,7 +127,10 @@ module.exports = {
       checkIfStringIsBlank(req.body.make) ||
       checkIfStringIsBlank(req.body.model)
     ) {
-      res.status(406).json({ status: 406, message: "Vehicle year out of range, or a required input (year/make/model) is empty." });
+      res.status(400).json({
+        status: 400,
+        message: "Vehicle year out of range, or a required input (year/make/model) is empty."
+      });
     } else {
       db.Users
         .updateOne(
@@ -149,7 +158,10 @@ module.exports = {
       checkIfStringIsBlank(req.body.mileage) ||
       checkIfStringIsBlank(req.body.service)
     ) {
-      res.status(406).json({ status: 406, message: "A required input field is missing." });
+      res.status(400).json({
+        status: 400,
+        message: "A required input field is missing."
+      });
     } else {
       db.Users
         .updateOne(
