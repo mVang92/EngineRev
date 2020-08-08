@@ -42,7 +42,7 @@ module.exports = {
     },
 
     /**
-    * Delete a release note / update on record
+    * Delete a release note/update from record
     */
     deleteOneReleaseNote: (req, res) => {
         db.Update

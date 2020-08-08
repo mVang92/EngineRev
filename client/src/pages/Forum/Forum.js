@@ -140,8 +140,8 @@ export default class Forum extends Component {
           ) {
             this.errorNotification(defaults.threadDetailsCannotBeBlank);
           } else {
-            let getThreadCategory = document.getElementById("threadCategoryDropdown");
-            let threadCategory = getThreadCategory.options[getThreadCategory.selectedIndex].value;
+            let element = document.getElementById("threadCategoryDropdown");
+            let threadCategory = element.options[element.selectedIndex].value;
             this.handleAddOneThread(threadCategory);
           }
         } else {

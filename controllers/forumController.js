@@ -45,7 +45,10 @@ module.exports = {
                 .then(dbModel => res.json(dbModel))
                 .catch(err => res.status(422).json(err));
         } else {
-            res.status(400).json();
+            res.status(400).json({
+                status: 400,
+                message: req.body.threadCategory + " is not a valid category."
+            });
         }
     },
 
@@ -81,7 +84,10 @@ module.exports = {
                 .then(dbModel => res.json(dbModel))
                 .catch(err => res.status(422).json(err));
         } else {
-            res.status(400).json();
+            res.status(400).json({
+                status: 400,
+                message: req.body.threadCategory + " is not a valid category."
+            });
         }
     },
 
@@ -140,7 +146,10 @@ module.exports = {
      */
     handleUpdateThreadComment: (req, res) => {
         if (checkIfStringIsBlank(req.body.comment)) {
-            res.status(406).json({ status: 406, message: "Comments cannot be blank." });
+            res.status(400).json({
+                status: 400,
+                message: "Comments cannot be blank."
+            });
         } else {
             db.Forum
                 .updateOne(
