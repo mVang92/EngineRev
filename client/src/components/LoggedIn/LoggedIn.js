@@ -1,12 +1,12 @@
 import React from "react";
-import MyVehicles from "../MyVehicles";
-import AddVehicle from "../AddVehicle";
+import MyVehiclesSection from "../MyVehiclesSection";
+import AddVehicleSection from "../AddVehicleSection";
 import AddVehicleYearNanErrorModal from "../../components/Modal/AddVehicleYearNanErrorModal";
 
 const LoggedIn = props => {
   return (
     <div className={`box ${props.currentTheme.background}`}>
-      <AddVehicle
+      <AddVehicleSection
         handleResetAddVehicleFields={props.handleResetAddVehicleFields}
         checkIfVehicleYearIsValid={props.checkIfVehicleYearIsValid}
         userProfilePicture={props.userProfilePicture}
@@ -14,7 +14,7 @@ const LoggedIn = props => {
         currentTheme={props.currentTheme}
       />
       <hr className={props.currentTheme.hr} />
-      <MyVehicles
+      <MyVehiclesSection
         vehicleData={props.vehicleData}
         currentTheme={props.currentTheme}
         errorMessage={props.errorMessage}

@@ -28,7 +28,7 @@ export default class App extends Component {
   };
 
   /**
-   * Find the user information  when the page loads
+   * Find the user information when the page loads
    */
   componentDidMount() {
     this.findUserInformationForOneUser(this.state.props.user.uid);
