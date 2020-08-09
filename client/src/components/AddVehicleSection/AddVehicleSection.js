@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { defaults } from "../../assets/Defaults";
 import AddVehicleErrorModal from "../Modal/AddVehicleErrorModal";
 
-class AddVehicle extends Component {
+class AddVehicleSection extends Component {
   constructor() {
     super();
     this.state = {
@@ -165,4 +165,4 @@ class AddVehicle extends Component {
   };
 };
 
-export default AddVehicle;
+export default AddVehicleSection;

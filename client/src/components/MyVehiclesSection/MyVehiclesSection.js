@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MyVehicles = props => {
+const MyVehiclesSection = props => {
   const {
     vehicleData,
     errorMessage,
@@ -28,7 +28,8 @@ const MyVehicles = props => {
                 </button>
               </div>
             </div>
-          ) : (
+          ) :
+          (
             <React.Fragment>
               {
                 vehicleData ?
@@ -45,7 +46,8 @@ const MyVehicles = props => {
                                       <div className="col-md-12 smallBottomMargin">
                                         <label><strong>Vehicles on Record: <span id="vehicleCountForUser">{vehicleData.vehicles.length}</span></strong></label>
                                       </div>
-                                    ) : (
+                                    ) :
+                                    (
                                       <div className="col-md-12">
                                         <label>Vehicles on Record:</label>
                                       </div>
@@ -70,7 +72,8 @@ const MyVehicles = props => {
                                                       <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
                                                         {vehicle.vehicleName}
                                                       </div>
-                                                    ) : (
+                                                    ) :
+                                                    (
                                                       <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
                                                         {vehicle.year} {vehicle.make} {vehicle.model}
                                                       </div>
@@ -87,15 +90,18 @@ const MyVehicles = props => {
                                 </div>
                               </div>
                             </React.Fragment>
-                          ) : (
+                          ) :
+                          (
                             <label>
                               <strong>No Vehicles on Record</strong>
                             </label>
                           )
-                      ) : (
+                      ) :
+                      (
                         null
                       )
-                  ) : (
+                  ) :
+                  (
                     null
                   )
               }
@@ -106,4 +112,4 @@ const MyVehicles = props => {
   );
 };
 
-export default MyVehicles;
+export default MyVehiclesSection;
