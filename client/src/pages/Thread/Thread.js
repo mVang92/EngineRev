@@ -235,6 +235,8 @@ export default class Thread extends Component {
 
   /**
    * Handle up vote on a comment
+   * 
+   * @param commentId the comment id to apply vote to and record to the user voted comments
    */
   handleUpvoteComment = commentId => {
     const creatorId = this.state.uniqueCreatorId;
@@ -270,6 +272,8 @@ export default class Thread extends Component {
 
   /**
    * Handle down vote on a comment
+   * 
+   * @param commentId the comment id to apply vote to and record to the user voted comments
    */
   handleDownvoteComment = commentId => {
     const creatorId = this.state.uniqueCreatorId;
@@ -326,15 +330,15 @@ export default class Thread extends Component {
 
   /**
    * Update the thread comment
+   * 
+   * @param newComment the new comment to update the current thread comment
    */
   handleUpdateThreadComment = newComment => {
     this.setState({ disableConfirmSaveEditThreadCommentButton: true });
     const creatorId = this.state.uniqueCreatorId;
     const email = this.state.email;
     const event = events.updateThreadComment;
-    const updatedThreadCommentPayload = {
-      comment: newComment
-    };
+    const updatedThreadCommentPayload = { comment: newComment };
     forumApi.handleUpdateThreadComment(
       this.state.commentId,
       updatedThreadCommentPayload
@@ -405,6 +409,8 @@ export default class Thread extends Component {
 
   /**
    * Check if the user has voted on this comment before for up voting
+   * 
+   * @param commentId the commment id to check before storing
    */
   validateUserToUpvoteComment = commentId => {
     this.setState({
@@ -440,6 +446,8 @@ export default class Thread extends Component {
 
   /**
    * Check if the user has voted on this comment before for down voting
+   * 
+   * @param commentId the commment id to check before storing
    */
   validateUserToDownvoteComment = commentId => {
     this.setState({
@@ -555,6 +563,9 @@ export default class Thread extends Component {
 
   /**
    * Enable editing for the thread comment
+   * 
+   * @param commentId the id to identify the comment
+   * @param commentsToShowInModal the commments to display in the modal
    */
   showEditOneThreadCommentModal = (commentId, commentsToShowInModal) => {
     this.setState({
