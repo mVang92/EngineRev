@@ -183,7 +183,7 @@ export default class Updates extends Component {
   /**
    * Render the theme and background picture
    * 
-   * @param theme The type of theme to render
+   * @param theme the theme to render
    */
   renderTheme = theme => {
     this.setState({ currentTheme: theme });
@@ -252,6 +252,8 @@ export default class Updates extends Component {
 
   /**
    * Check if the user input value is blank
+   * 
+   * @param string the user input to check against
    */
   checkIfStringIsBlank = string => {
     return (!string || /^\s*$/.test(string));
@@ -365,40 +367,43 @@ export default class Updates extends Component {
     return (
       <React.Fragment>
         {
-          this.state.allUpdates ? (
-            <React.Fragment>
-              {
-                this.state.pageLoaded ?
-                  (
-                    <UpdatePageDetails
-                      currentTheme={this.state.currentTheme}
-                      admin={this.state.admin}
-                      handleChange={this.handleChange}
-                      addOneUpdate={this.addOneUpdate}
-                      updateChanges={this.state.updateChanges}
-                      knownIssues={this.state.knownIssues}
-                      allUpdates={this.state.allUpdates}
-                      getActionValue={this.getActionValue}
-                      backToTopOfPage={this.backToTopOfPage}
-                      checkUserEnteredUpdatedReleaseNoteInput={this.checkUserEnteredUpdatedReleaseNoteInput}
-                      showEditOneUpdateModal={this.state.showEditOneUpdateModal}
-                      editOneUpdateModal={this.editOneUpdateModal}
-                      deleteOneUpdateModal={this.deleteOneUpdateModal}
-                      hideEditOneUpdateModal={this.hideEditOneUpdateModal}
-                      updateChangesToShowInModal={this.state.updateChangesToShowInModal}
-                      knownIssuesToShowInModal={this.state.knownIssuesToShowInModal}
-                      disableConfirmSaveEditReleaseNoteButton={this.state.disableConfirmSaveEditReleaseNoteButton}
-                      handleDeleteOneReleaseNote={this.handleDeleteOneReleaseNote}
-                      showDeleteOneUpdateModal={this.state.showDeleteOneUpdateModal}
-                      hideDeleteOneUpdateModal={this.hideDeleteOneUpdateModal}
-                      disableConfirmDeleteReleaseNoteButton={this.state.disableConfirmDeleteReleaseNoteButton}
-                    />
-                  ) : (
-                    <Loading />
-                  )
-              }
-            </React.Fragment>
-          ) : (
+          this.state.allUpdates ?
+            (
+              <React.Fragment>
+                {
+                  this.state.pageLoaded ?
+                    (
+                      <UpdatePageDetails
+                        currentTheme={this.state.currentTheme}
+                        admin={this.state.admin}
+                        handleChange={this.handleChange}
+                        addOneUpdate={this.addOneUpdate}
+                        updateChanges={this.state.updateChanges}
+                        knownIssues={this.state.knownIssues}
+                        allUpdates={this.state.allUpdates}
+                        getActionValue={this.getActionValue}
+                        backToTopOfPage={this.backToTopOfPage}
+                        checkUserEnteredUpdatedReleaseNoteInput={this.checkUserEnteredUpdatedReleaseNoteInput}
+                        showEditOneUpdateModal={this.state.showEditOneUpdateModal}
+                        editOneUpdateModal={this.editOneUpdateModal}
+                        deleteOneUpdateModal={this.deleteOneUpdateModal}
+                        hideEditOneUpdateModal={this.hideEditOneUpdateModal}
+                        updateChangesToShowInModal={this.state.updateChangesToShowInModal}
+                        knownIssuesToShowInModal={this.state.knownIssuesToShowInModal}
+                        disableConfirmSaveEditReleaseNoteButton={this.state.disableConfirmSaveEditReleaseNoteButton}
+                        handleDeleteOneReleaseNote={this.handleDeleteOneReleaseNote}
+                        showDeleteOneUpdateModal={this.state.showDeleteOneUpdateModal}
+                        hideDeleteOneUpdateModal={this.hideDeleteOneUpdateModal}
+                        disableConfirmDeleteReleaseNoteButton={this.state.disableConfirmDeleteReleaseNoteButton}
+                      />
+                    ) :
+                    (
+                      <Loading />
+                    )
+                }
+              </React.Fragment>
+            ) :
+            (
               <Loading />
             )
         }

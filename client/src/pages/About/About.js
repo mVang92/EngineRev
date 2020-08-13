@@ -111,6 +111,8 @@ export default class About extends Component {
 
   /**
    * Render the theme and background picture
+   * 
+   * @param theme the theme to render
    */
   renderTheme = theme => {
     this.setState({ currentTheme: theme });

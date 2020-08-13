@@ -106,6 +106,8 @@ export default class Account extends Component {
 
   /**
    * Check if the user input value is blank
+   * 
+   * @param string the user input to check against
    */
   checkIfStringIsBlank = string => {
     return (!string || /^\s*$/.test(string));
@@ -220,6 +222,8 @@ export default class Account extends Component {
 
   /**
    * Render the theme and background picture
+   * 
+   * @param theme the theme to render
    */
   renderTheme = theme => {
     this.setState({ currentTheme: theme });
@@ -391,6 +395,8 @@ export default class Account extends Component {
 
   /**
    * Convert the event logs into a string separated appropriately by line and comma
+   * 
+   * @param eventLogsObject the event logs to convert to CSV
    */
   convertToCSV = eventLogsObject => {
     const array = JSON.parse(eventLogsObject);

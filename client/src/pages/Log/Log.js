@@ -193,6 +193,8 @@ export default class Log extends Component {
 
   /**
    * Check if the user input value is blank
+   * 
+   * @param string the user input to check against
    */
   checkIfStringIsBlank = string => {
     return (!string || /^\s*$/.test(string));
@@ -480,6 +482,8 @@ export default class Log extends Component {
 
   /**
    * Update one service log from record
+   * 
+   * @param updatedServiceLogDateToConvert the date of the updated service log to convert
    */
   handleUpdateOneServiceLog = updatedServiceLogDateToConvert => {
     const creatorId = this.state.uid;

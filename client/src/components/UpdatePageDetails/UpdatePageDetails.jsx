@@ -49,7 +49,8 @@ const UpdatePageDetails = props => {
                                 knownIssues={knownIssues}
                                 currentTheme={currentTheme}
                             />
-                        ) : (
+                        ) :
+                        (
                             null
                         )
                 }

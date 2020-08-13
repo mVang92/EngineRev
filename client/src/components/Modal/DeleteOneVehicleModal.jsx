@@ -46,7 +46,8 @@ const DeleteOneVehicleModal = props => {
                                             Deleting this vehicle will delete all {vehicleServiceLogs.length} of its service logs.
                                             Are you sure you want to continue? Consider printing your service logs.
                                         </label>
-                                    ) : (
+                                    ) :
+                                    (
                                         <label>{defaults.deleteVehicleWarning}</label>
                                     )
                             }
@@ -72,7 +73,8 @@ const DeleteOneVehicleModal = props => {
                                             data-dismiss="modal">
                                             Print Logs
                                         </button>
-                                    ) : (
+                                    ) :
+                                    (
                                         null
                                     )
                             }

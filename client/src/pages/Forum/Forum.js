@@ -57,6 +57,8 @@ export default class Forum extends Component {
 
   /**
    * Check if the user input value is blank
+   * 
+   * @param string the user input to check against
    */
   checkIfStringIsBlank = string => {
     return (!string || /^\s*$/.test(string));
