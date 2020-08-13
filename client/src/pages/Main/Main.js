@@ -36,6 +36,8 @@ export default class App extends Component {
 
   /**
    * Retrieve the information for the user then load the page
+   * 
+   * @param userId the unique id from Firebase console
    */
   findUserInformationForOneUser = userId => {
     if (userId) {
@@ -117,6 +119,8 @@ export default class App extends Component {
 
   /**
    * Render the theme and background picture
+   * 
+   * @param theme the theme to render
    */
   renderTheme = theme => {
     this.setState({ currentTheme: theme });
