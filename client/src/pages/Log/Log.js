@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import API from "../../utils/API";
+import userApi from "../../utils/userApi";
 import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import { firebase } from "../../firebase"
 import { themes } from "../../themes/Themes";
@@ -99,7 +99,7 @@ export default class Log extends Component {
    * @param userUniqueId the unique id from Firebase console
    */
   findUserInformationForOneUser = userUniqueId => {
-    API.findUserInformationForOneUser(userUniqueId)
+    userApi.findUserInformationForOneUser(userUniqueId)
       .then(res => {
         this.setState({
           theme: res.data.theme,
@@ -206,7 +206,7 @@ export default class Log extends Component {
    */
   getOneVehicle = () => {
     clearTimeout(this.findUserInformationTimeout);
-    API.getOneVehicleForUser(this.state.uid, this.state.vehicleId)
+    userApi.getOneVehicleForUser(this.state.uid, this.state.vehicleId)
       .then(res => {
         try {
           this.setState({
@@ -231,7 +231,7 @@ export default class Log extends Component {
     const creatorId = this.state.uid;
     const email = this.state.email;
     const event = events.deleteVehicleName;
-    API.deleteVehicleName(this.state.vehicleId, null)
+    userApi.deleteVehicleName(this.state.vehicleId, null)
       .then(() => {
         this.setState({
           showEditOneVehicleNameModal: false
@@ -386,7 +386,7 @@ export default class Log extends Component {
     const email = this.state.email;
     const event = events.updateVehicleInformation;
     this.setState({ disableConfirmSaveEditVehicleNameButton: true });
-    API.updateVehicleInformationForOneVehicle(this.state.vehicleId, updatedVehicleName)
+    userApi.updateVehicleInformationForOneVehicle(this.state.vehicleId, updatedVehicleName)
       .then(() => {
         this.setState({
           vehicleName: "",
@@ -428,7 +428,7 @@ export default class Log extends Component {
     let serviceLogMileageMemory = this.state.mileage;
     let serviceLogServiceMemory = this.state.service;
     this.setState({ disableAddServiceLogButton: true });
-    API.addOneLogForOneVehicle(creatorId, this.state.vehicleId, serviceLogToStore)
+    userApi.addOneLogForOneVehicle(creatorId, this.state.vehicleId, serviceLogToStore)
       .then(() => {
         this.setState({
           date: "",
@@ -468,7 +468,7 @@ export default class Log extends Component {
     const creatorId = this.state.uid;
     const email = this.state.email;
     const event = events.deletedVehicle;
-    API.deleteOneVehicle(this.state.vehicleId)
+    userApi.deleteOneVehicle(this.state.vehicleId)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
         document.getElementById("applicationName").click();
@@ -512,7 +512,7 @@ export default class Log extends Component {
     let serviceLogMileageMemory = this.state.serviceLogMileage;
     let serviceLogServiceMemory = this.state.serviceLogService;
     this.setState({ disableConfirmSaveEditServiceLogButton: true });
-    API.updateOneLogForOneVehicle(this.state.vehicleId, this.state.serviceLogId, serviceLogToUpdate)
+    userApi.updateOneLogForOneVehicle(this.state.vehicleId, this.state.serviceLogId, serviceLogToUpdate)
       .then(() => {
         this.setState({
           serviceLogDate: "",
@@ -542,7 +542,7 @@ export default class Log extends Component {
     const creatorId = this.state.uid;
     const email = this.state.email;
     const event = events.deleteOneServiceLog;
-    API.deleteOneServiceLog(this.state.vehicleId, this.state.serviceLogId)
+    userApi.deleteOneServiceLog(this.state.vehicleId, this.state.serviceLogId)
       .then(() => {
         this.setState({ showDeleteOneLogModal: false },
           () => {

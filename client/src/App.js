@@ -5,7 +5,7 @@ import { firebase, auth } from "./firebase"
 import { ToastContainer, toast } from "react-toastify";
 import { NavLoggedIn, NavLoggedOut } from "./components/Nav";
 import { defaults } from "./assets/Defaults";
-import API from "./utils/API";
+import userApi from "./utils/userApi";
 import Main from "./pages/Main";
 import Log from "./pages/Log";
 import Forum from "./pages/Forum";
@@ -92,7 +92,7 @@ export default class App extends Component {
     this.requestHideSignUpModal();
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        API.createUserSchema(user.uid, user.email)
+        userApi.createUserSchema(user.uid, user.email)
           .catch(error => this.errorNotification(error));
       }
     });

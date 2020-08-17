@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Container from "../../components/Container";
 import ForumDetails from "../../components/ForumDetails";
-import vehicleApi from "../../utils/API";
+import userApi from "../../utils/userApi";
 import forumApi from "../../utils/forumApi";
 import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import Loading from "../../components/Loading";
@@ -98,7 +98,7 @@ export default class Forum extends Component {
             this.setState({ displayName: defaults.defaultDisplayName });
           }
         });
-        vehicleApi.findUserInformationForOneUser(user.uid)
+        userApi.findUserInformationForOneUser(user.uid)
           .then(res => {
             try {
               this.setState({
@@ -131,7 +131,7 @@ export default class Forum extends Component {
    */
   validateThreadInputValues = e => {
     e.preventDefault();
-    vehicleApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+    userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
       .then(res => {
         if (res.data.creator) {
           if (

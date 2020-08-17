@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { themes } from "../../themes/Themes";
 import { defaults } from "../../assets/Defaults";
 import { events } from "../../assets/Events";
-import API from "../../utils/API";
+import userApi from "../../utils/userApi";
 import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
@@ -41,7 +41,7 @@ export default class App extends Component {
    */
   findUserInformationForOneUser = userId => {
     if (userId) {
-      API.findUserInformationForOneUser(userId)
+      userApi.findUserInformationForOneUser(userId)
         .then(res =>
           this.setState({
             vehicleData: res.data,
@@ -168,7 +168,7 @@ export default class App extends Component {
     const creatorId = this.state.uid;
     const email = this.state.props.email;
     const event = events.addedNewVehicle;
-    API.addOneVehicle(creatorId, newVehicle)
+    userApi.addOneVehicle(creatorId, newVehicle)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
         this.state.props.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
