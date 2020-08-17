@@ -4,7 +4,7 @@ import { firebase } from "../../firebase"
 import { themes } from "../../themes/Themes";
 import { defaults } from "../../assets/Defaults";
 import updateApi from "../../utils/updateApi";
-import vehicleApi from "../../utils/API";
+import userApi from "../../utils/userApi";
 import UpdatePageDetails from "../../components/UpdatePageDetails";
 import Loading from "../../components/Loading";
 import { toast } from "react-toastify";
@@ -65,7 +65,7 @@ export default class Updates extends Component {
    */
   addOneUpdate = e => {
     e.preventDefault();
-    vehicleApi.findUserInformationForOneUser(this.state.userId)
+    userApi.findUserInformationForOneUser(this.state.userId)
       .then(res => {
         if (res.data.admin) {
           const payload = {
@@ -114,7 +114,7 @@ export default class Updates extends Component {
   findUserInformationForOneUser = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        vehicleApi.findUserInformationForOneUser(user.uid)
+        userApi.findUserInformationForOneUser(user.uid)
           .then(res => {
             try {
               this.setState({
@@ -266,7 +266,7 @@ export default class Updates extends Component {
    * @param newKnownIssues The known issues to update the old one
    */
   handleUpdateOneReleaseNote = (newReleaseNotes, newKnownIssues) => {
-    vehicleApi.findUserInformationForOneUser(this.state.userId)
+    userApi.findUserInformationForOneUser(this.state.userId)
       .then(res => {
         if (res.data.admin) {
           let payload = {
@@ -299,7 +299,7 @@ export default class Updates extends Component {
    * Delete the release note from record
    */
   handleDeleteOneReleaseNote = () => {
-    vehicleApi.findUserInformationForOneUser(this.state.userId)
+    userApi.findUserInformationForOneUser(this.state.userId)
       .then(res => {
         if (res.data.admin) {
           this.setState({ disableConfirmDeleteReleaseNoteButton: true });

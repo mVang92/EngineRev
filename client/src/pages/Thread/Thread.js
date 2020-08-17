@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Container from "../../components/Container";
-import vehicleApi from "../../utils/API";
+import userApi from "../../utils/userApi";
 import forumApi from "../../utils/forumApi";
 import Loading from "../../components/Loading";
 import ThreadDetails from "../../components/ThreadDetails";
@@ -117,7 +117,7 @@ export default class Thread extends Component {
   getUserInformation = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        vehicleApi.findUserInformationForOneUser(user.uid)
+        userApi.findUserInformationForOneUser(user.uid)
           .then(res => {
             try {
               this.setState({
@@ -247,7 +247,7 @@ export default class Thread extends Component {
     forumApi.handleCommentUpVote(this.state.threadId, commentId)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
-        vehicleApi.recordVotedThreadComment(this.state.uniqueCreatorId, commentId)
+        userApi.recordVotedThreadComment(this.state.uniqueCreatorId, commentId)
           .then(() => {
             this.setState({
               disableUpVoteButton: false,
@@ -284,7 +284,7 @@ export default class Thread extends Component {
     forumApi.handleCommentDownVote(this.state.threadId, commentId)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
-        vehicleApi.recordVotedThreadComment(this.state.uniqueCreatorId, commentId)
+        userApi.recordVotedThreadComment(this.state.uniqueCreatorId, commentId)
           .then(() => {
             this.setState({
               disableUpVoteButton: false,
@@ -368,7 +368,7 @@ export default class Thread extends Component {
   validateAddOneCommentToThread = e => {
     e.preventDefault();
     this.setState({ disableSubmitCommentOnThreadButton: true });
-    vehicleApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+    userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
       .then(res => {
         if (res.data.creator) {
           if (this.state.threadComment === "" || this.checkIfStringIsBlank(this.state.threadComment)) {
@@ -419,7 +419,7 @@ export default class Thread extends Component {
       disableUpVoteButton: true,
       disableDownVoteButton: true
     });
-    vehicleApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+    userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
       .then(res => {
         try {
           let votedComments = res.data.votedComments;
@@ -456,7 +456,7 @@ export default class Thread extends Component {
       disableUpVoteButton: true,
       disableDownVoteButton: true
     });
-    vehicleApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+    userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
       .then(res => {
         try {
           let votedComments = res.data.votedComments;

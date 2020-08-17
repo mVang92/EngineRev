@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import carSpaceLogo from "../../images/carSpaceLogo.png";
-import vehicleApi from "../../utils/API";
+import userApi from "../../utils/userApi";
 import Loading from "../../components/Loading";
 import { firebase } from "../../firebase"
 import { themes } from "../../themes/Themes";
@@ -33,7 +33,7 @@ export default class About extends Component {
   getUserInformation = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        vehicleApi.findUserInformationForOneUser(user.uid)
+        userApi.findUserInformationForOneUser(user.uid)
           .then(res => {
             try {
               this.setState({

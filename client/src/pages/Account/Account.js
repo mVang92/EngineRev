@@ -7,7 +7,7 @@ import Loading from "../../components/Loading";
 import { firebase } from "../../firebase";
 import { themes } from "../../themes/Themes";
 import NoAuthorization from "../../components/NoAuthorization";
-import API from "../../utils/API";
+import userApi from "../../utils/userApi";
 import eventLogApi from "../../utils/eventLogApi";
 import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import AccountDetails from "../../components/AccountDetails";
@@ -132,7 +132,7 @@ export default class Account extends Component {
     let selectedTheme = element.options[element.selectedIndex].value;
     if (selectedTheme !== defaults.noThemeSelection) {
       this.setState({ disableThemeToggleButton: true });
-      API.saveThemeForUser(creatorId, selectedTheme)
+      userApi.saveThemeForUser(creatorId, selectedTheme)
         .then(() => {
           this.setState({ disableThemeToggleButton: false }, () => {
             eventLogHandler.successful(creatorId, email, event);
@@ -153,7 +153,7 @@ export default class Account extends Component {
    */
   getVehicleData = () => {
     if (this.state.userId) {
-      API.findUserInformationForOneUser(this.state.userId)
+      userApi.findUserInformationForOneUser(this.state.userId)
         .then(res => {
           try {
             this.setState({
@@ -277,7 +277,7 @@ export default class Account extends Component {
     if (this.checkIfStringIsBlank(newBackgroundPicture)) {
       newBackgroundPicture = "";
     }
-    API.updateUserBackgroundPicture(this.state.userId, newBackgroundPicture)
+    userApi.updateUserBackgroundPicture(this.state.userId, newBackgroundPicture)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
         this.getVehicleData();
