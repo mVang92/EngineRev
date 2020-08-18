@@ -52,8 +52,10 @@ export default class Thread extends Component {
     };
   };
 
+  uniqueCreatorId;
+
   /**
-   * Get the theme for the user
+   * Load state
    */
   componentDidMount = () => {
     try {
@@ -127,7 +129,10 @@ export default class Thread extends Component {
                 email: user.email,
                 pageLoaded: true,
                 loggedin: true
-              }, () => this.determineTheme());
+              }, () => {
+                this.uniqueCreatorId = this.state.uniqueCreatorId;
+                this.determineTheme();
+              });
             } catch (err) {
               this.errorNotification(err);
               this.setState({ pageLoaded: true });
@@ -214,6 +219,21 @@ export default class Thread extends Component {
         eventLogHandler.failure(creatorId, email, event, err);
         this.setState({ disableSaveEditThreadButton: false });
         this.errorNotification(err);
+      });
+  };
+
+  /**
+   * Validate the user has permission to delete the thread
+   */
+  validateDeleteThread = () => {
+    userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+      .then((res) => {
+        if (res.data.creator === this.uniqueCreatorId) {
+          this.handleDeleteThread();
+        } else {
+          alert(defaults.noAuthorizationToPerformAction);
+          window.location = "/";
+        }
       });
   };
 
@@ -310,7 +330,22 @@ export default class Thread extends Component {
   };
 
   /**
-   * Delete the comment from the thread
+   * Validate the user is able to delete the comment
+   */
+  validateDeleteThreadComment = () => {
+    userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+      .then((res) => {
+        if (res.data.creator === this.uniqueCreatorId) {
+          this.handleDeleteThreadComment();
+        } else {
+          alert(defaults.noAuthorizationToPerformAction);
+          window.location = "/";
+        }
+      });
+  };
+
+  /**
+   * Delete the thread comment
    */
   handleDeleteThreadComment = () => {
     const creatorId = this.state.uniqueCreatorId;
@@ -405,7 +440,15 @@ export default class Thread extends Component {
     } else {
       let element = document.getElementById("threadCategoryDropdown");
       let threadCategory = element.options[element.selectedIndex].value;
-      this.handleUpdateThreadDetails(threadCategory);
+      userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+        .then((res) => {
+          if (res.data.creator === this.uniqueCreatorId) {
+            this.handleUpdateThreadDetails(threadCategory);
+          } else {
+            alert(defaults.noAuthorizationToPerformAction);
+            window.location = "/";
+          }
+        });
     }
   };
 
@@ -421,19 +464,23 @@ export default class Thread extends Component {
     });
     userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
       .then(res => {
-        try {
-          let votedComments = res.data.votedComments;
-          let hasUserVotedOnThisComment = votedComments.includes(commentId);
-          if (hasUserVotedOnThisComment) {
-            this.errorNotification(defaults.alreadyVotedOnComment);
-            this.setState({
-              disableUpVoteButton: false,
-              disableDownVoteButton: false
-            });
-          } else {
-            this.handleUpvoteComment(commentId);
+        if (res.data.creator === this.uniqueCreatorId) {
+          try {
+            let votedComments = res.data.votedComments;
+            if (votedComments.includes(commentId)) {
+              this.errorNotification(defaults.alreadyVotedOnComment);
+              this.setState({
+                disableUpVoteButton: false,
+                disableDownVoteButton: false
+              });
+            } else {
+              this.handleUpvoteComment(commentId);
+            }
+          } catch (err) {
+            alert(defaults.noAuthorizationToPerformAction);
+            window.location = "/";
           }
-        } catch (err) {
+        } else {
           alert(defaults.noAuthorizationToPerformAction);
           window.location = "/";
         }
@@ -458,19 +505,23 @@ export default class Thread extends Component {
     });
     userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
       .then(res => {
-        try {
-          let votedComments = res.data.votedComments;
-          let hasUserVotedOnThisComment = votedComments.includes(commentId);
-          if (hasUserVotedOnThisComment) {
-            this.errorNotification(defaults.alreadyVotedOnComment);
-            this.setState({
-              disableUpVoteButton: false,
-              disableDownVoteButton: false
-            });
-          } else {
-            this.handleDownvoteComment(commentId);
+        if (res.data.creator === this.uniqueCreatorId) {
+          try {
+            let votedComments = res.data.votedComments;
+            if (votedComments.includes(commentId)) {
+              this.errorNotification(defaults.alreadyVotedOnComment);
+              this.setState({
+                disableUpVoteButton: false,
+                disableDownVoteButton: false
+              });
+            } else {
+              this.handleDownvoteComment(commentId);
+            }
+          } catch (err) {
+            alert(defaults.noAuthorizationToPerformAction);
+            window.location = "/";
           }
-        } catch (err) {
+        } else {
           alert(defaults.noAuthorizationToPerformAction);
           window.location = "/";
         }
@@ -496,7 +547,15 @@ export default class Thread extends Component {
     } else {
       newComment = commentToUpdate;
     }
-    this.handleUpdateThreadComment(newComment);
+    userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+      .then((res) => {
+        if (res.data.creator === this.uniqueCreatorId) {
+          this.handleUpdateThreadComment(newComment);
+        } else {
+          alert(defaults.noAuthorizationToPerformAction);
+          window.location = "/";
+        }
+      });
   };
 
   /**
@@ -692,13 +751,13 @@ export default class Thread extends Component {
         <DeleteThreadModal
           showDeleteThreadModal={this.state.showDeleteThreadModal}
           hideDeleteThreadModal={this.hideDeleteThreadModal}
-          handleDeleteThread={this.handleDeleteThread}
+          validateDeleteThread={this.validateDeleteThread}
           currentTheme={this.state.currentTheme}
         />
         <DeleteThreadCommentModal
           showDeleteThreadCommentModal={this.state.showDeleteThreadCommentModal}
           hideDeleteThreadCommentModal={this.hideDeleteThreadCommentModal}
-          handleDeleteThreadComment={this.handleDeleteThreadComment}
+          validateDeleteThreadComment={this.validateDeleteThreadComment}
           currentTheme={this.state.currentTheme}
         />
         <EditOneThreadCommentModal

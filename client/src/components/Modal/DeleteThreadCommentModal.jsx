@@ -40,7 +40,7 @@ const DeleteThreadCommentModal = props => {
                                 title="Yes"
                                 type="button"
                                 className="deleteBtn"
-                                onClick={props.handleDeleteThreadComment}
+                                onClick={props.validateDeleteThreadComment}
                                 data-dismiss="modal">
                                 Yes
                             </button>

@@ -40,7 +40,7 @@ const DeleteThreadModal = props => {
                                 title="Yes"
                                 type="button"
                                 className="deleteBtn"
-                                onClick={props.handleDeleteThread}
+                                onClick={props.validateDeleteThread}
                                 data-dismiss="modal">
                                 Yes
                             </button>
