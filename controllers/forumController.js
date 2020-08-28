@@ -27,7 +27,7 @@ module.exports = {
     },
 
     /**
-     * Add a comment to a thread
+     * Get all comments to a thread
      */
     getAllThreadComments: (req, res) => {
         db.Forum.find({ _id: req.params.threadId })
