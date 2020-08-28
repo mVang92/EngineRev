@@ -24,7 +24,7 @@ module.exports = {
     },
 
     /**
-     * Edit a release note / update on record
+     * Edit a release note/update on record
      */
     updateOneReleaseNote: (req, res) => {
         db.Update

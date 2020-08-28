@@ -219,7 +219,7 @@ module.exports = {
   },
 
   /**
-   * Delete the account for the user
+   * Remove the name to the vehicle
    */
   removeOneVehicleName: (req, res) => {
     db.Users
