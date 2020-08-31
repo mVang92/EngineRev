@@ -231,8 +231,7 @@ export default class Thread extends Component {
         if (res.data.creator === this.uniqueCreatorId) {
           this.handleDeleteThread();
         } else {
-          alert(defaults.noAuthorizationToPerformAction);
-          window.location = "/";
+          this.doNoAuthorization();
         }
       });
   };
@@ -338,8 +337,7 @@ export default class Thread extends Component {
         if (res.data.creator === this.uniqueCreatorId) {
           this.handleDeleteThreadComment();
         } else {
-          alert(defaults.noAuthorizationToPerformAction);
-          window.location = "/";
+          this.doNoAuthorization();
         }
       });
   };
@@ -413,8 +411,7 @@ export default class Thread extends Component {
             this.addOneCommentToThread();
           }
         } else {
-          alert(defaults.noAuthorizationToPerformAction);
-          window.location = "/";
+          this.doNoAuthorization();
         }
       })
       .catch(err => {
@@ -445,8 +442,7 @@ export default class Thread extends Component {
           if (res.data.creator === this.uniqueCreatorId) {
             this.handleUpdateThreadDetails(threadCategory);
           } else {
-            alert(defaults.noAuthorizationToPerformAction);
-            window.location = "/";
+            this.doNoAuthorization();
           }
         });
     }
@@ -477,12 +473,10 @@ export default class Thread extends Component {
               this.handleUpvoteComment(commentId);
             }
           } catch (err) {
-            alert(defaults.noAuthorizationToPerformAction);
-            window.location = "/";
+            this.doNoAuthorization();
           }
         } else {
-          alert(defaults.noAuthorizationToPerformAction);
-          window.location = "/";
+          this.doNoAuthorization();
         }
       })
       .catch(err => {
@@ -518,12 +512,10 @@ export default class Thread extends Component {
               this.handleDownvoteComment(commentId);
             }
           } catch (err) {
-            alert(defaults.noAuthorizationToPerformAction);
-            window.location = "/";
+            this.doNoAuthorization();
           }
         } else {
-          alert(defaults.noAuthorizationToPerformAction);
-          window.location = "/";
+          this.doNoAuthorization();
         }
       })
       .catch(err => {
@@ -552,10 +544,17 @@ export default class Thread extends Component {
         if (res.data.creator === this.uniqueCreatorId) {
           this.handleUpdateThreadComment(newComment);
         } else {
-          alert(defaults.noAuthorizationToPerformAction);
-          window.location = "/";
+          this.doNoAuthorization();
         }
       });
+  };
+
+  /**
+   * Alert the user and navigate to the origin URL
+   */
+  doNoAuthorization = () => {
+    alert(defaults.noAuthorizationToPerformAction);
+    window.location = "/";
   };
 
   /**
