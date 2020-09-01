@@ -85,8 +85,7 @@ export default class Updates extends Component {
             })
             .catch(err => this.errorNotification(err));
         } else {
-          alert(defaults.noAuthorizationToPerformAction);
-          window.location = "/";
+          this.doNoAuthorization();
         }
       })
       .catch(err => this.errorNotification(err));
@@ -288,8 +287,7 @@ export default class Updates extends Component {
               this.setState({ disableConfirmSaveEditReleaseNoteButton: false });
             });
         } else {
-          alert(defaults.noAuthorizationToPerformAction);
-          window.location = "/";
+          this.doNoAuthorization();
         }
       })
       .catch(err => this.errorNotification(err));
@@ -317,11 +315,18 @@ export default class Updates extends Component {
               this.setState({ disableConfirmDeleteReleaseNoteButton: false });
             });
         } else {
-          alert(defaults.noAuthorizationToPerformAction);
-          window.location = "/";
+          this.doNoAuthorization();
         }
       })
       .catch(err => this.errorNotification(err));
+  };
+
+  /**
+   * Alert the user and navigate to the origin URL
+   */
+  doNoAuthorization = () => {
+    alert(defaults.noAuthorizationToPerformAction);
+    window.location = "/";
   };
 
   /**
