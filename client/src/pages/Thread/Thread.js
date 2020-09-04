@@ -227,7 +227,7 @@ export default class Thread extends Component {
    */
   validateDeleteThread = () => {
     userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
-      .then((res) => {
+      .then(res => {
         if (res.data.creator === this.uniqueCreatorId) {
           this.handleDeleteThread();
         } else {
@@ -333,7 +333,7 @@ export default class Thread extends Component {
    */
   validateDeleteThreadComment = () => {
     userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
-      .then((res) => {
+      .then(res => {
         if (res.data.creator === this.uniqueCreatorId) {
           this.handleDeleteThreadComment();
         } else {
@@ -438,7 +438,7 @@ export default class Thread extends Component {
       let element = document.getElementById("threadCategoryDropdown");
       let threadCategory = element.options[element.selectedIndex].value;
       userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
-        .then((res) => {
+        .then(res => {
           if (res.data.creator === this.uniqueCreatorId) {
             this.handleUpdateThreadDetails(threadCategory);
           } else {
@@ -540,7 +540,7 @@ export default class Thread extends Component {
       newComment = commentToUpdate;
     }
     userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
-      .then((res) => {
+      .then(res => {
         if (res.data.creator === this.uniqueCreatorId) {
           this.handleUpdateThreadComment(newComment);
         } else {
