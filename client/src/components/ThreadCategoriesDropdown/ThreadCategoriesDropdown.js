@@ -3,7 +3,7 @@ import React from "react";
 const ThreadCategoriesDropdown = () => {
 
   return (
-    <div className="text-left">
+    <div id="category" className="text-left">
       <span>Category: </span>
       <select id="threadCategoryDropdown" name="threadCategory">
         <option value="Ask Car Question">Ask Car Question</option>
