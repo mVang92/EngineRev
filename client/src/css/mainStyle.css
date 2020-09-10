@@ -569,8 +569,7 @@ input {
     margin-right: 5px;
 }
 
-#mainPageProfilePicture,
-#profilePicture {
+#mainPageProfilePicture {
     box-shadow: 0px 2px 5px rgb(32, 32, 32);
 }
 
