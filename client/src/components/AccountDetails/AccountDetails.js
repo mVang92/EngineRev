@@ -53,8 +53,8 @@ const AccountDetails = props => {
               id="profilePicture"
               title={userDisplayName}
               src={userPhotoUrl}
-              alt="Profile">
-            </img>
+              alt="Profile"
+            />
           </a>
         </div>
         <div className="col-md-8">
@@ -71,15 +71,7 @@ const AccountDetails = props => {
           <div className="row">
             <div className="col-md-5"><label><strong>Role:</strong></label></div>
             <div className="col-md-7">
-              {
-                admin ?
-                  (
-                    <span id="userRole">Administrator</span>
-                  ) :
-                  (
-                    <span id="userRole">User</span>
-                  )
-              }
+              {admin ? <span id="userRole">Administrator</span> : <span id="userRole">User</span>}
             </div>
           </div>
           <br />
