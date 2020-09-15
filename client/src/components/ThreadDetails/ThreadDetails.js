@@ -212,45 +212,43 @@ const ThreadDetails = props => {
             )
         }
         <hr className={currentTheme.hr} />
-        {
-          allThreads.comments.length > 0 ?
-            (
-              <React.Fragment>
-                <div className="text-center">
+        <div id="commentsSection" className="text-center">
+          {
+            allThreads.comments.length > 0 ?
+              (
+                <React.Fragment>
                   <strong><label>Comments</label></strong>
-                </div>
-                {
-                  allThreads.comments.sort((a, b) => { return new Date(b.date) - new Date(a.date) }).map(threadComment => {
-                    return (
-                      <ThreadComments
-                        key={threadComment._id}
-                        _id={threadComment._id}
-                        commentCreator={threadComment.creator}
-                        uniqueCreatorId={uniqueCreatorId}
-                        loggedin={loggedin}
-                        date={threadComment.date}
-                        email={threadComment.email}
-                        comment={threadComment.comment}
-                        votes={threadComment.votes}
-                        showEditOneThreadCommentModal={showEditOneThreadCommentModal}
-                        validateUserToUpvoteComment={validateUserToUpvoteComment}
-                        validateUserToDownvoteComment={validateUserToDownvoteComment}
-                        enableEditThreadComment={enableEditThreadComment}
-                        disableUpVoteButton={disableUpVoteButton}
-                        disableDownVoteButton={disableDownVoteButton}
-                        currentTheme={currentTheme}
-                      />
-                    )
-                  })
-                }
-              </React.Fragment>
-            ) :
-            (
-              <div className="text-center">
+                  {
+                    allThreads.comments.sort((a, b) => { return new Date(b.date) - new Date(a.date) }).map(threadComment => {
+                      return (
+                        <ThreadComments
+                          key={threadComment._id}
+                          _id={threadComment._id}
+                          commentCreator={threadComment.creator}
+                          uniqueCreatorId={uniqueCreatorId}
+                          loggedin={loggedin}
+                          date={threadComment.date}
+                          email={threadComment.email}
+                          comment={threadComment.comment}
+                          votes={threadComment.votes}
+                          showEditOneThreadCommentModal={showEditOneThreadCommentModal}
+                          validateUserToUpvoteComment={validateUserToUpvoteComment}
+                          validateUserToDownvoteComment={validateUserToDownvoteComment}
+                          enableEditThreadComment={enableEditThreadComment}
+                          disableUpVoteButton={disableUpVoteButton}
+                          disableDownVoteButton={disableDownVoteButton}
+                          currentTheme={currentTheme}
+                        />
+                      )
+                    })
+                  }
+                </React.Fragment>
+              ) :
+              (
                 <strong><label>{defaults.noCommentsOnThread}</label></strong>
-              </div>
-            )
-        }
+              )
+          }
+        </div>
         <hr className={currentTheme.hr} />
         <div className="row">
           <div className="col-md-6 text-left noWidthMobileDisplay">
