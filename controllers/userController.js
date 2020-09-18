@@ -242,7 +242,7 @@ module.exports = {
   },
 
   /**
-   * Save a theme for the user
+   * Save the theme for the user
    */
   saveThemeForUser: (req, res) => {
     if (themes.includes(req.params.themeType)) {
