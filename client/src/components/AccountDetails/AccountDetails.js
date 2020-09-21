@@ -307,8 +307,21 @@ const AccountDetails = props => {
           </div>
         </div>
       </form>
-      <br />
-      <form className="row">
+      <hr className={currentTheme.hr} />
+      <div className="row">
+        <div className="col-md-12 text-center">
+          <a
+            id="advancedSettingsToggle"
+            title="Advanced"
+            data-toggle="collapse"
+            data-target="#advancedSettingsForm"
+            aria-expanded="false"
+            aria-controls="collapse">
+            <strong>Advanced</strong>
+          </a>
+        </div>
+      </div>
+      <form id="advancedSettingsForm" className="row collapse smallMarginTop">
         <div className="col-md-4 bottomMarginMobileDisplay">
           <label><strong>Update Password:</strong></label>
         </div>

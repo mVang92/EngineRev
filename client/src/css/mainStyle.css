@@ -358,7 +358,8 @@ input {
     transition-duration: 0.2s;
 }
 
-.nav-link {
+.nav-link,
+#advancedSettingsToggle {
     cursor: pointer;
 }
 
