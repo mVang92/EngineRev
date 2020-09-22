@@ -14,8 +14,8 @@ export default class Updates extends Component {
     super(props)
     this.state = {
       userId: "",
+      roles: [],
       allUpdates: [],
-      admin: false,
       pageLoaded: false,
       updateChanges: "",
       knownIssues: "",
@@ -37,7 +37,7 @@ export default class Updates extends Component {
 
   /**
    * Fetch all updates and release notes
-   * Also check if the viewer is an admin user
+   * Also check if the viewer had admin rights
    */
   componentDidMount = () => {
     Modal.setAppElement("body");
@@ -67,7 +67,7 @@ export default class Updates extends Component {
     e.preventDefault();
     userApi.findUserInformationForOneUser(this.state.userId)
       .then(res => {
-        if (res.data.admin) {
+        if (res.data.roles.includes(defaults.adminRole)) {
           const payload = {
             updateChanges: this.state.updateChanges,
             knownIssues: this.state.knownIssues,
@@ -118,7 +118,7 @@ export default class Updates extends Component {
             try {
               this.setState({
                 userId: user.uid,
-                admin: res.data.admin,
+                roles: res.data.roles,
                 theme: res.data.theme,
                 backgroundPicture: res.data.backgroundPicture,
                 pageLoaded: true,
@@ -267,7 +267,7 @@ export default class Updates extends Component {
   handleUpdateOneReleaseNote = (newReleaseNotes, newKnownIssues) => {
     userApi.findUserInformationForOneUser(this.state.userId)
       .then(res => {
-        if (res.data.admin) {
+        if (res.data.roles.includes(defaults.adminRole)) {
           let payload = {
             newReleaseNotes,
             newKnownIssues
@@ -299,7 +299,7 @@ export default class Updates extends Component {
   handleDeleteOneReleaseNote = () => {
     userApi.findUserInformationForOneUser(this.state.userId)
       .then(res => {
-        if (res.data.admin) {
+        if (res.data.roles.includes(defaults.adminRole)) {
           this.setState({ disableConfirmDeleteReleaseNoteButton: true });
           updateApi.deleteOneReleaseNote(this.state.updateId)
             .then(() => {
@@ -380,7 +380,7 @@ export default class Updates extends Component {
                     (
                       <UpdatePageDetails
                         currentTheme={this.state.currentTheme}
-                        admin={this.state.admin}
+                        roles={this.state.roles}
                         handleChange={this.handleChange}
                         addOneUpdate={this.addOneUpdate}
                         updateChanges={this.state.updateChanges}

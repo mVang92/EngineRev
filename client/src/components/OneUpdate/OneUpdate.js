@@ -1,10 +1,11 @@
 import React from "react";
+import { defaults } from "../../assets/Defaults";
 
 const OneUpdate = props => {
   const {
     _id,
     date,
-    admin,
+    roles,
     currentTheme,
     updateChanges,
     knownIssues,
@@ -23,7 +24,7 @@ const OneUpdate = props => {
           <div className="col-md-6"><label>{formattedDate}</label></div>
           <div className="col-md-3 alignRightButtonsDesktopDisplay alignLeftButtonsMobileDisplay">
             {
-              admin ?
+              roles.includes(defaults.adminRole) ?
                 (
                   <button
                     className="editActionButton smallMarginTopMobileDisplay"
@@ -31,7 +32,8 @@ const OneUpdate = props => {
                     onClick={() => editOneUpdateModal(_id, updateChanges, knownIssues)}>
                     Edit
                   </button>
-                ) : (
+                ) :
+                (
                   null
                 )
             }

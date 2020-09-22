@@ -19,7 +19,7 @@ const AccountDetails = props => {
     userEmail,
     vehicleCount,
     loadingError,
-    admin,
+    roles,
     userId,
     userAccountCreationTime,
     userAccountLastSignIn,
@@ -69,9 +69,15 @@ const AccountDetails = props => {
           </div>
           <br />
           <div className="row">
-            <div className="col-md-5"><label><strong>Role:</strong></label></div>
-            <div className="col-md-7">
-              {admin ? <span id="userRole">Administrator</span> : <span id="userRole">User</span>}
+            <div className="col-md-5">
+              {
+                roles.length > 1
+                  ? <label><strong>Roles:</strong></label>
+                  : <label><strong>Role:</strong></label>
+              }
+            </div>
+            <div id="userRole" className="col-md-7">
+              {roles.join(", ")}
             </div>
           </div>
           <br />
@@ -84,13 +90,9 @@ const AccountDetails = props => {
             <div className="col-md-5"><label><strong>Vehicles:</strong></label></div>
             <div className="col-md-7">
               {
-                loadingError ?
-                  (
-                    <span id="accountPageVehicleCount" className="text-danger">{defaults.errorLoadingVehicleCount}</span>
-                  ) :
-                  (
-                    <span id="accountPageVehicleCount">{vehicleCount}</span>
-                  )
+                loadingError
+                  ? <span id="accountPageVehicleCount" className="text-danger">{defaults.errorLoadingVehicleCount}</span>
+                  : <span id="accountPageVehicleCount">{vehicleCount}</span>
               }
             </div>
           </div>
@@ -318,6 +320,9 @@ const AccountDetails = props => {
             aria-expanded="false"
             aria-controls="collapse">
             <strong>Advanced</strong>
+            <svg width="1em" height="1em" viewBox="0 1 16 16" className="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+            </svg>
           </a>
         </div>
       </div>

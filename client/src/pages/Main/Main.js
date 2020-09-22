@@ -11,7 +11,7 @@ import LoggedIn from "../../components/LoggedIn";
 
 export default class App extends Component {
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       props: props,
       pageLoaded: false,

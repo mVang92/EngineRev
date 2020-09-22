@@ -1,6 +1,7 @@
 import React from "react";
 import OneUpdate from "../../components/OneUpdate";
 import AddUpdates from "../../components/AddUpdates";
+import { defaults } from "../../assets/Defaults";
 import EditOneUpdateModal from "../../components/Modal/EditOneUpdateModal";
 import DeleteOneUpdateModal from "../../components/Modal/DeleteOneUpdateModal";
 import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
@@ -9,7 +10,7 @@ import BottomActionButtons from "../../components/BottomActionButtons";
 const UpdatePageDetails = props => {
     const {
         currentTheme,
-        admin,
+        roles,
         handleChange,
         addOneUpdate,
         updateChanges,
@@ -40,7 +41,7 @@ const UpdatePageDetails = props => {
                 <BackToHomeButtonRow />
                 <hr className={currentTheme.hr} />
                 {
-                    admin ?
+                    roles.includes(defaults.adminRole) ?
                         (
                             <AddUpdates
                                 handleChange={handleChange}
@@ -65,7 +66,7 @@ const UpdatePageDetails = props => {
                                 knownIssues={update.knownIssues}
                                 getActionValue={getActionValue}
                                 currentTheme={currentTheme}
-                                admin={admin}
+                                roles={roles}
                                 editOneUpdateModal={editOneUpdateModal}
                             />
                         )
