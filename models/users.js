@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   creator: { type: String },
   email: { type: String },
-  admin: { type: Boolean },
+  roles: [{}],
   theme: { type: String },
   backgroundPicture: { type: String },
   votedComments: [{}],

@@ -7,7 +7,7 @@ export default {
       axios.post("/api/users", {
         creator: creatorId,
         email: userEmail,
-        admin: false,
+        roles: ["User"],
         theme: "carSpace",
         backgroundPicture: ""
       })

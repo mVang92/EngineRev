@@ -20,12 +20,12 @@ import { toast } from "react-toastify";
 
 export default class Account extends Component {
   constructor(props) {
-    super(props)
+    super()
     this.state = {
       loggedin: false,
       pageLoaded: false,
-      admin: false,
       user: "",
+      roles: [],
       backgroundPicture: "",
       userEmail: "",
       userId: "",
@@ -159,7 +159,7 @@ export default class Account extends Component {
             this.setState({
               vehicleCount: res.data.vehicles.length,
               backgroundPicture: res.data.backgroundPicture,
-              admin: res.data.admin,
+              roles: res.data.roles,
               theme: res.data.theme,
               pageLoaded: true
             }, () => this.determineTheme())
@@ -329,8 +329,7 @@ export default class Account extends Component {
     const email = this.state.userEmail;
     const event = events.updatePassword;
     if (this.state.loggedin) {
-      let isDomainCarspace = (this.state.userEmail).includes("carspace.com");
-      if (isDomainCarspace) {
+      if (this.state.roles.includes(defaults.testUserRole)) {
         this.errorNotification(defaults.noAuthorizationToPerformAction);
         this.setState({
           newPassword: "",
@@ -611,7 +610,7 @@ export default class Account extends Component {
                         showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
                         showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
                         saveThemeForUser={this.saveThemeForUser}
-                        admin={this.state.admin}
+                        roles={this.state.roles}
                         disableThemeToggleButton={this.state.disableThemeToggleButton}
                         currentTheme={this.state.currentTheme}
                         unableToLoadDatabase={this.state.unableToLoadDatabase}
