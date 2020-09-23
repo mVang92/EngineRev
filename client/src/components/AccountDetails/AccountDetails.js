@@ -328,7 +328,7 @@ const AccountDetails = props => {
           </a>
         </div>
       </div>
-      <form id="advancedSettingsForm" className="collapse smallMarginTop" autoComplete="off">
+      <form id="advancedSettingsForm" className="collapse smallMarginTop">
         <div className="row">
           <div className="col-md-4 bottomMarginMobileDisplay">
             <label><strong>Update Email:</strong></label>
@@ -336,12 +336,11 @@ const AccountDetails = props => {
           <div className="col-md-4">
             <input
               id="newEmailInput"
-              type="text"
+              type="search"
               onChange={handleChange}
               value={newEmail}
               name="newEmail"
               maxLength="50"
-              autoComplete="off"
               placeholder={userEmail}
             />
           </div>
@@ -375,7 +374,6 @@ const AccountDetails = props => {
                   value={newPassword}
                   name="newPassword"
                   maxLength="50"
-                  autoComplete="off"
                   placeholder="New Password"
                 />
               </div>
@@ -388,7 +386,6 @@ const AccountDetails = props => {
                   value={confirmNewPassword}
                   name="confirmNewPassword"
                   maxLength="50"
-                  autoComplete="off"
                   placeholder="Confirm Password"
                 />
               </div>
