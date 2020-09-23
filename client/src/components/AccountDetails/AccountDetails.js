@@ -1,4 +1,5 @@
 import React from "react";
+import AdvancedSettings from "../../components/AdvancedSettings";
 import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
 import BottomActionButtons from "../../components/BottomActionButtons";
 import ThemeSelection from "../../components/ThemeSelection";
@@ -183,7 +184,7 @@ const AccountDetails = props => {
                 disableThemeToggleButton={disableThemeToggleButton}
               />
               <hr className={currentTheme.hr} />
-              <div className="row">
+              <form className="row">
                 <div className="col-md-4 bottomMarginMobileDisplay">
                   <label><strong>Update Background Picture:</strong></label>
                 </div>
@@ -224,12 +225,12 @@ const AccountDetails = props => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </form>
               <br />
             </React.Fragment>
           )
       }
-      <div className="row">
+      <form className="row">
         <div className="col-md-4 bottomMarginMobileDisplay">
           <label><strong>Update Profile Picture:</strong></label>
         </div>
@@ -269,7 +270,7 @@ const AccountDetails = props => {
             </div>
           </div>
         </div>
-      </div>
+      </form>
       <br />
       <form className="row">
         <div className="col-md-4 bottomMarginMobileDisplay">
@@ -329,85 +330,15 @@ const AccountDetails = props => {
         </div>
       </div>
       <div id="advancedSettingsForm" className="collapse smallMarginTop">
-        <div className="row">
-          <div className="col-md-4 bottomMarginMobileDisplay">
-            <label><strong>Update Email:</strong></label>
-          </div>
-          <div className="col-md-4">
-            <input
-              id="newEmailInput"
-              type="text"
-              onChange={handleChange}
-              value={newEmail}
-              name="newEmail"
-              maxLength="50"
-              autoComplete="newEmailInput"
-              placeholder={userEmail}
-            />
-          </div>
-          <br /><br />
-          <div className="col-md-4">
-            <div className="row">
-              <div className="col-md-12">
-                <button
-                  id="submitNewEmailButton"
-                  title="Update Email"
-                  type="submit"
-                  onClick={canUserUpdateEmail}>
-                  Submit
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br />
-        <div className="row">
-          <div className="col-md-4 bottomMarginMobileDisplay">
-            <label><strong>Update Password:</strong></label>
-          </div>
-          <div className="col-md-4">
-            <div className="row">
-              <div className="col-md-12">
-                <input
-                  id="newPasswordInput"
-                  type="password"
-                  onChange={handleChange}
-                  value={newPassword}
-                  name="newPassword"
-                  maxLength="50"
-                  placeholder="New Password"
-                />
-              </div>
-              <br /><br />
-              <div className="col-md-12">
-                <input
-                  id="confirmNewPasswordInput"
-                  type="password"
-                  onChange={handleChange}
-                  value={confirmNewPassword}
-                  name="confirmNewPassword"
-                  maxLength="50"
-                  placeholder="Confirm Password"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="row">
-              <div className="col-md-12"></div>
-              <br />
-              <div className="col-md-12">
-                <button
-                  id="submitNewPasswordButton"
-                  title="Update Password"
-                  type="submit"
-                  onClick={canUserUpdatePassword}>
-                  Submit
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <AdvancedSettings
+          handleChange={handleChange}
+          canUserUpdateEmail={canUserUpdateEmail}
+          canUserUpdatePassword={canUserUpdatePassword}
+          userEmail={userEmail}
+          newEmail={newEmail}
+          newPassword={newPassword}
+          confirmNewPassword={confirmNewPassword}
+        />
       </div>
       <hr className={currentTheme.hr} />
       <BottomActionButtons
