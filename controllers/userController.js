@@ -269,5 +269,18 @@ module.exports = {
       )
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Update the email address to the user
+   */
+  updateEmail: (req, res) => {
+    db.Users
+      .updateOne(
+        { creator: req.params.creatorId },
+        { $set: { email: req.params.newEmail } }
+      )
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
   }
 };

@@ -37,6 +37,7 @@ export const defaults = {
     addThreadSuccessfully: "Thread created successfully.",
     vehicleNameUpdatedSuccessfully: "Vehicle name updated successfully.",
     serviceLogDeletedSuccessfully: "Service log deleted successfully.",
+    emailUpdatedSuccessfully: "Email updated successfully.",
     passwordUpdatedSuccessfully: "Password updated successfully.",
     passwordsDoNotMatch: "Error: Passwords do not match.",
     errorLoadingVehicleCount: "Error Loading vehicle count.",

@@ -13,6 +13,7 @@ export const events = {
     updateDisplayName: "Update display name.",
     updateBackgroundPicture: "Update background picture.",
     updateProfilePicture: "Update profile picture.",
+    updateEmail: "Update Email.",
     updatePassword: "Update password.",
     addOneThread: "Add thread.",
     addCommentToThread: "Add a comment to a thread.",
