@@ -341,6 +341,7 @@ const AccountDetails = props => {
               value={newEmail}
               name="newEmail"
               maxLength="50"
+              autoComplete="off"
               placeholder={userEmail}
             />
           </div>
@@ -374,6 +375,7 @@ const AccountDetails = props => {
                   value={newPassword}
                   name="newPassword"
                   maxLength="50"
+                  autoComplete="off"
                   placeholder="New Password"
                 />
               </div>
@@ -386,6 +388,7 @@ const AccountDetails = props => {
                   value={confirmNewPassword}
                   name="confirmNewPassword"
                   maxLength="50"
+                  autoComplete="off"
                   placeholder="Confirm Password"
                 />
               </div>
