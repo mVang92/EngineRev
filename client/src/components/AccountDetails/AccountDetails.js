@@ -374,6 +374,7 @@ const AccountDetails = props => {
                   value={newPassword}
                   name="newPassword"
                   maxLength="50"
+                  autoComplete="off"
                   placeholder="New Password"
                 />
               </div>
