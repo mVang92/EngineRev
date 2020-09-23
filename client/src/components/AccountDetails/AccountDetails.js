@@ -271,7 +271,7 @@ const AccountDetails = props => {
         </div>
       </div>
       <br />
-      <form className="row">
+      <div className="row">
         <div className="col-md-4 bottomMarginMobileDisplay">
           <label><strong>Update Display Name:</strong></label>
         </div>
@@ -310,7 +310,7 @@ const AccountDetails = props => {
             </div>
           </div>
         </div>
-      </form>
+      </div>
       <hr className={currentTheme.hr} />
       <div className="row">
         <div className="col-md-12 text-center">
@@ -341,6 +341,7 @@ const AccountDetails = props => {
               value={newEmail}
               name="newEmail"
               maxLength="50"
+              autoComplete="newEmailInput"
               placeholder={userEmail}
             />
           </div>
@@ -374,6 +375,7 @@ const AccountDetails = props => {
                   value={newPassword}
                   name="newPassword"
                   maxLength="50"
+                  autoComplete="newPasswordInput"
                   placeholder="New Password"
                 />
               </div>
