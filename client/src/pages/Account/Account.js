@@ -19,7 +19,7 @@ import UpdateDisplayNameSuccessModal from "../../components/Modal/UpdateDisplayN
 import { toast } from "react-toastify";
 
 export default class Account extends Component {
-  constructor(props) {
+  constructor() {
     super()
     this.state = {
       loggedin: false,
@@ -32,6 +32,7 @@ export default class Account extends Component {
       userDisplayName: "",
       newDisplayName: "",
       userPhotoUrl: "",
+      newEmail: "",
       newPassword: "",
       confirmNewPassword: "",
       theme: "",
@@ -323,45 +324,104 @@ export default class Account extends Component {
   /**
    * Update the password to the user
    */
-  updatePassword = e => {
-    e.preventDefault();
+  updatePassword = () => {
     const creatorId = this.state.userId;
     const email = this.state.userEmail;
     const event = events.updatePassword;
     if (this.state.loggedin) {
-      if (this.state.roles.includes(defaults.testUserRole)) {
-        this.errorNotification(defaults.noAuthorizationToPerformAction);
+      if (this.state.newPassword === this.state.confirmNewPassword) {
+        this.state.user.updatePassword(this.state.confirmNewPassword)
+          .then(() => {
+            eventLogHandler.successful(creatorId, email, event);
+            this.successNotification(defaults.passwordUpdatedSuccessfully);
+            this.setState({
+              newPassword: "",
+              confirmNewPassword: ""
+            })
+          }).catch(err => {
+            eventLogHandler.failure(creatorId, email, event, err);
+            this.errorNotification(err);
+            this.setState({
+              newPassword: "",
+              confirmNewPassword: ""
+            });
+          });
+      } else {
+        this.warningNotification(defaults.passwordsDoNotMatch);
         this.setState({
           newPassword: "",
           confirmNewPassword: ""
         });
-      } else {
-        if (this.state.newPassword === this.state.confirmNewPassword) {
-          this.state.user.updatePassword(this.state.confirmNewPassword)
+      }
+    }
+  };
+
+  /**
+   * Update the email to the user
+   */
+  updateEmail = () => {
+    const creatorId = this.state.userId;
+    const email = this.state.userEmail;
+    const newEmail = this.state.newEmail;
+    const event = events.updateEmail;
+    if (this.state.loggedin) {
+      this.state.user.updateEmail(newEmail)
+        .then(() => {
+          userApi.updateEmail(creatorId, newEmail)
             .then(() => {
               eventLogHandler.successful(creatorId, email, event);
-              this.successNotification(defaults.passwordUpdatedSuccessfully);
-              this.setState({
-                newPassword: "",
-                confirmNewPassword: ""
-              })
-            }).catch(err => {
+              this.successNotification(defaults.emailUpdatedSuccessfully);
+              this.setState({ newEmail: "" })
+            })
+            .catch(err => {
               eventLogHandler.failure(creatorId, email, event, err);
               this.errorNotification(err);
-              this.setState({
-                newPassword: "",
-                confirmNewPassword: ""
-              });
+              this.setState({ newEmail: "" })
             });
-        } else {
+        })
+        .catch(err => {
+          eventLogHandler.failure(creatorId, email, event, err);
+          this.errorNotification(err);
+          this.setState({ newEmail: "" })
+        });
+    }
+  };
+
+  /**
+   * Verify if the user has permission to update their password
+   */
+  canUserUpdatePassword = e => {
+    e.preventDefault();
+    userApi.findUserInformationForOneUser(this.state.userId)
+      .then(res => {
+        if (res.data.roles.includes(defaults.testUserRole)) {
+          this.errorNotification(defaults.noAuthorizationToPerformAction);
           this.setState({
             newPassword: "",
             confirmNewPassword: ""
           });
-          this.warningNotification(defaults.passwordsDoNotMatch);
+        } else {
+          this.updatePassword();
         }
-      }
-    }
+      })
+      .catch(err => this.errorNotification(err));
+  };
+
+  /**
+   * Verify if the user has permission to update their email
+   */
+  canUserUpdateEmail = e => {
+    e.preventDefault();
+    userApi.findUserInformationForOneUser(this.state.userId)
+      .then(res => {
+        if (res.data.roles.includes(defaults.testUserRole)) {
+          this.errorNotification(defaults.noAuthorizationToPerformAction);
+          this.setState({ newEmail: "" });
+        } else {
+          this.updateEmail();
+        }
+      })
+      .catch(err => this.errorNotification(err));
   };
 
   /**
@@ -601,7 +661,9 @@ export default class Account extends Component {
                         userAccountCreationTime={this.state.userAccountCreationTime}
                         userAccountLastSignIn={this.state.userAccountLastSignIn}
                         updateDisplayName={this.updateDisplayName}
-                        updatePassword={this.updatePassword}
+                        canUserUpdateEmail={this.canUserUpdateEmail}
+                        canUserUpdatePassword={this.canUserUpdatePassword}
+                        newEmail={this.state.newEmail}
                         newPassword={this.state.newPassword}
                         confirmNewPassword={this.state.confirmNewPassword}
                         downloadEventLogCsvFile={this.downloadEventLogCsvFile}

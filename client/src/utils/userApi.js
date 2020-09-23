@@ -41,6 +41,10 @@ export default {
   updateUserBackgroundPicture: (creatorId, backgroundPicture) => {
     return axios.put(`/api/users/updateUserBackgroundPicture/${creatorId}`, backgroundPicture)
   },
+  //Update the user email address
+  updateEmail: (creatorId, newEmail) => {
+    return axios.put(`/api/users/updateEmail/${creatorId}/${newEmail}`)
+  },
   // Delete one vehicle
   deleteOneVehicle: vehicleId => {
     return axios.delete(`/api/users/deleteVehicle/${vehicleId}`);

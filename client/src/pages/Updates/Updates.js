@@ -37,7 +37,6 @@ export default class Updates extends Component {
 
   /**
    * Fetch all updates and release notes
-   * Also check if the viewer had admin rights
    */
   componentDidMount = () => {
     Modal.setAppElement("body");
@@ -98,8 +97,7 @@ export default class Updates extends Component {
   getAllUpdates = () => {
     updateApi.getAllUpdates()
       .then(res => {
-        this.setState({ allUpdates: res.data },
-          () => this.findUserInformationForOneUser());
+        this.setState({ allUpdates: res.data }, () => this.findUserInformationForOneUser());
       })
       .catch(err => {
         this.errorNotification(err);

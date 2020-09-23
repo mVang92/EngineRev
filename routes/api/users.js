@@ -62,4 +62,9 @@ router
   .route("/recordVotedThreadComment/:creatorId/:commentId")
   .put(controller.recordVotedThreadComment)
 
+// Matches with "/api/users/updateEmail/:creatorId/:newEmail"
+router
+  .route("/updateEmail/:creatorId/:newEmail")
+  .put(controller.updateEmail)
+
 module.exports = router;
