@@ -39,9 +39,8 @@ export const NavLoggedIn = props => {
                             className="btn dropdown-toggle"
                             data-toggle="dropdown"
                             aria-haspopup="true"
-                            aria-expanded="false"
-                        >
-                            <span className="caret">Menu</span>
+                            aria-expanded="false">
+                            Menu
                         </button>
                         <div className="dropdown-menu dropdown-menu-right">
                             {
@@ -51,18 +50,17 @@ export const NavLoggedIn = props => {
                                             <button
                                                 id="accountNavButton"
                                                 className="dropdown-item"
-                                                type="button"
-                                            >
+                                                type="button">
                                                 <div className="nav-item" title="Account">Account</div>
                                             </button>
                                         </Link>
-                                    ) : (
+                                    ) :
+                                    (
                                         <button
                                             id="accountNavButton"
                                             className="dropdown-item"
                                             type="button"
-                                            disabled
-                                        >
+                                            disabled>
                                             <div className="nav-item" title="Account">Account</div>
                                         </button>
                                     )
@@ -71,8 +69,7 @@ export const NavLoggedIn = props => {
                                 <button
                                     id="forumNavButton"
                                     className="dropdown-item"
-                                    type="button"
-                                >
+                                    type="button">
                                     <div className="nav-item" title="Forum">Forum</div>
                                 </button>
                             </Link>
@@ -80,8 +77,7 @@ export const NavLoggedIn = props => {
                                 <button
                                     id="accountReleaseNotesButton"
                                     className="dropdown-item"
-                                    type="button"
-                                >
+                                    type="button">
                                     <div className="nav-item" title="Release Notes">Release Notes</div>
                                 </button>
                             </Link>
@@ -89,8 +85,7 @@ export const NavLoggedIn = props => {
                                 <button
                                     id="accountAboutButton"
                                     className="dropdown-item"
-                                    type="button"
-                                >
+                                    type="button">
                                     <div className="nav-item" title="About">About</div>
                                 </button>
                             </Link>
@@ -98,8 +93,7 @@ export const NavLoggedIn = props => {
                                 id="signOutNavButton"
                                 className="dropdown-item"
                                 type="button"
-                                onClick={() => props.requestShowSignOutModal()}
-                            >
+                                onClick={() => props.requestShowSignOutModal()}>
                                 <div className="nav-item" title="Sign Out">Sign Out</div>
                             </button>
                         </div>
