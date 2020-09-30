@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/carSpace");
+mongoose.connect(process.env.DB_URI || "mongodb://localhost/carSpace");
 // mongoose.set("debug", true);
 
 // Start the API server
