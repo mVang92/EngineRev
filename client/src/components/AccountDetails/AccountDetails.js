@@ -219,7 +219,7 @@ const AccountDetails = props => {
                       <button
                         id="resetNewBackgroundPictureButton"
                         title="Reset Input Field"
-                        onClick={event => resetInputFields(event, "newBackgroundPictureInput")}>
+                        onClick={event => resetInputFields(event, defaults.newBackgroundPictureInput)}>
                         Reset
                       </button>
                     </div>
@@ -264,7 +264,7 @@ const AccountDetails = props => {
               <button
                 id="resetNewProfilePictureButton"
                 title="Reset Input Field"
-                onClick={event => resetInputFields(event, "newProfilePictureInput")}>
+                onClick={event => resetInputFields(event, defaults.newProfilePictureInput)}>
                 Reset
               </button>
             </div>
@@ -305,7 +305,7 @@ const AccountDetails = props => {
               <button
                 id="resetNewDisplayNameButton"
                 title="Reset Input Field"
-                onClick={event => resetInputFields(event, "newDisplayNameInput")}>
+                onClick={event => resetInputFields(event, defaults.newDisplayNameInput)}>
                 Reset
               </button>
             </div>
@@ -317,6 +317,7 @@ const AccountDetails = props => {
         <div className="col-md-12 text-center">
           <a
             id="advancedSettingsToggle"
+            href=""
             title="Advanced"
             data-toggle="collapse"
             data-target="#advancedSettingsForm"

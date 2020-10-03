@@ -367,6 +367,10 @@ input {
     cursor: pointer;
 }
 
+#advancedSettingsToggle {
+    color: inherit;
+}
+
 .navbar-toggler {
     border-color: rgb(255, 64, 48) !important;
     background: rgb(255, 255, 255);
