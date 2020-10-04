@@ -13,7 +13,7 @@ import { events } from "../../assets/Events";
 
 export default class Forum extends Component {
   constructor(props) {
-    super(props)
+    super()
     this.state = {
       loggedin: false,
       pageLoaded: false,
@@ -170,6 +170,7 @@ export default class Forum extends Component {
       threadTitle: this.state.threadTitle,
       threadDescription: this.state.threadDescription,
       threadCategory: threadCategory,
+      views: 0,
       comments: []
     };
     forumApi.addOneThread(newThreadPayload)

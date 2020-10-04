@@ -16,6 +16,7 @@ import Updates from "./pages/Updates";
 import NoMatch from "./pages/NoMatch";
 import SignUpModal from "./components/Modal/SignUpModal";
 import SignInModal from "./components/Modal/SignInModal";
+import SignOutModal from "./components/Modal/SignOutModal";
 import ForgotPasswordModal from "./components/Modal/ForgotPasswordModal";
 import "react-toastify/dist/ReactToastify.css";
 import "./css/mainStyle.css";
@@ -164,8 +165,7 @@ export default class App extends Component {
   /**
    * Signs the user out of the session
    */
-  handleSignOut = e => {
-    e.preventDefault();
+  handleSignOut = () => {
     auth
       .doSignOut()
       .then(() => window.location = "/")
@@ -385,6 +385,11 @@ export default class App extends Component {
             handleSignUp={this.handleSignUp}
             disableSignUpButton={this.state.disableSignUpButton}
             handleChange={this.handleChange}
+          />
+          <SignOutModal
+            showSignOutModal={this.state.showSignOutModal}
+            requestHideSignOutModal={this.requestHideSignOutModal}
+            handleSignOut={this.handleSignOut}
           />
           <ForgotPasswordModal
             showForgotPasswordModal={this.state.showForgotPasswordModal}

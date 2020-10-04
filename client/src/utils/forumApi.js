@@ -40,5 +40,9 @@ export default {
     // Update a comment on the thread
     handleUpdateThreadComment: (commentId, payload) => {
         return axios.put(`/api/forum/handleUpdateThreadComment/${commentId}`, payload);
+    },
+    // Increment the view on the thread
+    handleIncrementViews: (threadId) => {
+        return axios.put(`/api/forum/handleIncrementViews/${threadId}`);
     }
 };

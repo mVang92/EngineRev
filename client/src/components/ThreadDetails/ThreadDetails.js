@@ -30,13 +30,15 @@ const ThreadDetails = props => {
     disableSubmitCommentOnThreadButton,
     disableUpVoteButton,
     disableDownVoteButton,
-    disableSaveEditThreadButton
+    disableSaveEditThreadButton,
+    incrementViews
   } = props;
   const dateSubString = allThreads.date.substring(0, 10);
   const newDate = new Date(dateSubString);
   newDate.setDate(newDate.getDate() + 1);
   const formattedDate = newDate.toLocaleDateString("en-US");
   const formattedEmail = allThreads.email.replace(/@[^@]+$/, '');
+  if (currentTheme || !loggedin) incrementViews();
 
   return (
     <div id="forumPage" className={`mt-3 box ${currentTheme.background}`}>
@@ -58,8 +60,6 @@ const ThreadDetails = props => {
         <Container>
           <div className={`row threadDetails ${currentTheme.oneThread}`}>
             <div className="col-md-12 breakWord">
-              <div id="author">Author: {formattedEmail}</div>
-              <div id="date">Date: {formattedDate}</div>
               {
                 threadCategory ?
                   (
@@ -89,6 +89,8 @@ const ThreadDetails = props => {
                     </React.Fragment>
                   )
               }
+              <div id="author">Author: {formattedEmail}</div>
+              <div id="date">Date: {formattedDate}</div>
               <hr />
               {
                 allThreads.creator === uniqueCreatorId ?

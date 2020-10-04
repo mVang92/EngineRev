@@ -7,6 +7,7 @@ const forumSchema = new Schema({
   threadTitle: { type: String },
   threadDescription: { type: String },
   threadCategory: { type: String },
+  views: { type: Number },
   date: { type: Date, default: Date.now },
   comments: [{
     creator: { type: String },

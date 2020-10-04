@@ -1,5 +1,4 @@
 import React from "react";
-import SignOutModal from "../../components/Modal/SignOutModal";
 import { Link } from "react-router-dom";
 
 export const NavLoggedIn = props => {
@@ -93,18 +92,13 @@ export const NavLoggedIn = props => {
                                 id="signOutNavButton"
                                 className="dropdown-item"
                                 type="button"
-                                onClick={() => props.requestShowSignOutModal()}>
+                                onClick={() => props.handleSignOut()}>
                                 <div className="nav-item" title="Sign Out">Sign Out</div>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <SignOutModal
-                showSignOutModal={props.showSignOutModal}
-                requestHideSignOutModal={props.requestHideSignOutModal}
-                handleSignOut={props.handleSignOut}
-            />
         </React.Fragment>
     );
 };
