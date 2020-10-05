@@ -72,6 +72,7 @@ export default class Thread extends Component {
           formattedDate: this.state.props.location.state[5]
         }, () => {
           this.getAllThreadComments();
+          this.incrementViews();
         });
     } catch (e) {
       window.location = "/";
@@ -79,7 +80,7 @@ export default class Thread extends Component {
   };
 
   /**
-   * Cleanup DOM elements to prevent memory leak 
+   * Cleanup DOM elements to prevent memory leak
    */
   componentWillUnmount = () => {
     clearTimeout(this.incrementViewsTimeout);
@@ -566,7 +567,7 @@ export default class Thread extends Component {
     this.incrementViewsTimeout = setTimeout(() => {
       forumApi.handleIncrementViews(this.state.threadId)
         .catch(err => this.errorNotification(err));
-    }, 5000);
+    }, 10000);
   };
 
   /**
@@ -759,7 +760,6 @@ export default class Thread extends Component {
                   validateUserToUpvoteComment={this.validateUserToUpvoteComment}
                   validateUserToDownvoteComment={this.validateUserToDownvoteComment}
                   disableSaveEditThreadButton={this.state.disableSaveEditThreadButton}
-                  incrementViews={this.incrementViews}
                   currentTheme={this.state.currentTheme}
                 />
               </Container>

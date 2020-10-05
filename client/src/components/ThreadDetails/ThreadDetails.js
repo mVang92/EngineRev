@@ -30,15 +30,13 @@ const ThreadDetails = props => {
     disableSubmitCommentOnThreadButton,
     disableUpVoteButton,
     disableDownVoteButton,
-    disableSaveEditThreadButton,
-    incrementViews
+    disableSaveEditThreadButton
   } = props;
   const dateSubString = allThreads.date.substring(0, 10);
   const newDate = new Date(dateSubString);
   newDate.setDate(newDate.getDate() + 1);
   const formattedDate = newDate.toLocaleDateString("en-US");
   const formattedEmail = allThreads.email.replace(/@[^@]+$/, '');
-  if (currentTheme || !loggedin) incrementViews();
 
   return (
     <div id="forumPage" className={`mt-3 box ${currentTheme.background}`}>

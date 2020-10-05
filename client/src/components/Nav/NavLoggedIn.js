@@ -92,7 +92,7 @@ export const NavLoggedIn = props => {
                                 id="signOutNavButton"
                                 className="dropdown-item"
                                 type="button"
-                                onClick={() => props.handleSignOut()}>
+                                onClick={() => props.requestShowSignOutModal()}>
                                 <div className="nav-item" title="Sign Out">Sign Out</div>
                             </button>
                         </div>
