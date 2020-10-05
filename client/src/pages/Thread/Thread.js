@@ -17,7 +17,7 @@ import UpdateThreadDetailsSuccessModal from "../../components/Modal/UpdateThread
 
 export default class Thread extends Component {
   constructor(props) {
-    super(props)
+    super()
     this.state = {
       props: props,
       uniqueCreatorId: "",
@@ -53,6 +53,7 @@ export default class Thread extends Component {
   };
 
   uniqueCreatorId;
+  incrementViewsTimeout;
 
   /**
    * Load state
@@ -71,10 +72,18 @@ export default class Thread extends Component {
           formattedDate: this.state.props.location.state[5]
         }, () => {
           this.getAllThreadComments();
+          this.incrementViews();
         });
     } catch (e) {
       window.location = "/";
     }
+  };
+
+  /**
+   * Cleanup DOM elements to prevent memory leak
+   */
+  componentWillUnmount = () => {
+    clearTimeout(this.incrementViewsTimeout);
   };
 
   /**
@@ -549,6 +558,16 @@ export default class Thread extends Component {
           this.doNoAuthorization();
         }
       });
+  };
+
+  /**
+   * Increment the views to the thread
+   */
+  incrementViews = () => {
+    this.incrementViewsTimeout = setTimeout(() => {
+      forumApi.handleIncrementViews(this.state.threadId)
+        .catch(err => this.errorNotification(err));
+    }, 10000);
   };
 
   /**

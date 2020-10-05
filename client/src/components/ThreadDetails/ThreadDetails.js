@@ -58,8 +58,6 @@ const ThreadDetails = props => {
         <Container>
           <div className={`row threadDetails ${currentTheme.oneThread}`}>
             <div className="col-md-12 breakWord">
-              <div id="author">Author: {formattedEmail}</div>
-              <div id="date">Date: {formattedDate}</div>
               {
                 threadCategory ?
                   (
@@ -89,6 +87,8 @@ const ThreadDetails = props => {
                     </React.Fragment>
                   )
               }
+              <div id="author">Author: {formattedEmail}</div>
+              <div id="date">Date: {formattedDate}</div>
               <hr />
               {
                 allThreads.creator === uniqueCreatorId ?

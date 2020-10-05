@@ -1,5 +1,4 @@
 import React from "react";
-import SignOutModal from "../../components/Modal/SignOutModal";
 import { Link } from "react-router-dom";
 
 export const NavLoggedIn = props => {
@@ -100,11 +99,6 @@ export const NavLoggedIn = props => {
                     </div>
                 </div>
             </div>
-            <SignOutModal
-                showSignOutModal={props.showSignOutModal}
-                requestHideSignOutModal={props.requestHideSignOutModal}
-                handleSignOut={props.handleSignOut}
-            />
         </React.Fragment>
     );
 };

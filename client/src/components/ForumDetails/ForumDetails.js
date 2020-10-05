@@ -64,6 +64,7 @@ const ForumDetails = props => {
               threadTitle={thread.threadTitle}
               threadDescription={thread.threadDescription}
               threadCategory={thread.threadCategory}
+              views={thread.views}
               commentsCount={thread.comments}
               currentTheme={currentTheme}
             />

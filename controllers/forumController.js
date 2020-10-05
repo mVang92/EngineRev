@@ -159,5 +159,18 @@ module.exports = {
                 .then(result => res.json(result))
                 .catch(err => res.status(422).json(err));
         }
+    },
+
+    /**
+     * Increment the views to the thread
+     */
+    handleIncrementViews: (req, res) => {
+        db.Forum
+            .updateOne(
+                { _id: req.params.threadId },
+                { $inc: { views: 1 } }
+            )
+            .then(result => res.json(result))
+            .catch(err => res.status(422).json(err));
     }
 };
