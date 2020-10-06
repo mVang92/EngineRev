@@ -171,7 +171,7 @@ export default class Forum extends Component {
       threadDescription: this.state.threadDescription,
       threadCategory: threadCategory,
       views: 0,
-      clicks: 0,
+      hits: 0,
       comments: []
     };
     forumApi.addOneThread(newThreadPayload)
