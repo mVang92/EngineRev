@@ -44,5 +44,9 @@ export default {
     // Increment the view on the thread
     handleIncrementViews: (threadId) => {
         return axios.put(`/api/forum/handleIncrementViews/${threadId}`);
+    },
+    // Increment the hits on the thread
+    handleIncrementHits: (threadId) => {
+        return axios.put(`/api/forum/handleIncrementHits/${threadId}`);
     }
 };

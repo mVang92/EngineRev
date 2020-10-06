@@ -52,4 +52,9 @@ router
     .route("/handleIncrementViews/:threadId")
     .put(forumController.handleIncrementViews)
 
+// Matches with "/api/forum/handleIncrementHits/:commentId"
+router
+    .route("/handleIncrementHits/:threadId")
+    .put(forumController.handleIncrementHits)
+
 module.exports = router;
