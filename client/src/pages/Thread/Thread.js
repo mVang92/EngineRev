@@ -564,6 +564,7 @@ export default class Thread extends Component {
    * Increment the views to the thread
    */
   incrementViews = () => {
+    forumApi.handleIncrementHits(this.state.threadId);
     this.incrementViewsTimeout = setTimeout(() => {
       forumApi.handleIncrementViews(this.state.threadId)
         .catch(err => this.errorNotification(err));

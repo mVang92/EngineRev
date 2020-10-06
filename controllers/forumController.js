@@ -172,5 +172,18 @@ module.exports = {
             )
             .then(result => res.json(result))
             .catch(err => res.status(422).json(err));
+    },
+
+    /**
+     * Increment the hits to the thread
+     */
+    handleIncrementHits: (req, res) => {
+        db.Forum
+            .updateOne(
+                { _id: req.params.threadId },
+                { $inc: { hits: 1 } }
+            )
+            .then(result => res.json(result))
+            .catch(err => res.status(422).json(err));
     }
 };
