@@ -8,7 +8,7 @@ export default {
         creator: creatorId,
         email: userEmail,
         roles: ["User"],
-        theme: "carSpace",
+        theme: "engineRev",
         backgroundPicture: ""
       })
     );

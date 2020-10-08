@@ -26,7 +26,7 @@ const LoggedOut = () => {
                     <img className="notLoggedInImages" src={createAccountLogo} alt="Create Account"></img>
                   </div>
                   <div className="col-md-9">
-                    <label><h6><strong>Create an account</strong> to get your car space started.</h6></label>
+                    <label><h6><strong>Create an account</strong> to track vehicle service logs.</h6></label>
                   </div>
                 </div>
               </div>
@@ -36,7 +36,7 @@ const LoggedOut = () => {
                     <img className="notLoggedInImages" src={recordLogsLogo} alt="Record Services"></img>
                   </div>
                   <div className="col-md-9">
-                    <label><h6><strong>Add multiple vehicles</strong> and keep track of service history.</h6></label>
+                    <label><h6><strong>Log service history</strong> for multiple vehicles.</h6></label>
                   </div>
                 </div>
               </div>

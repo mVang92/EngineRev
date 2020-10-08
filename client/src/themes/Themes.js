@@ -1,15 +1,15 @@
 export const themes = {
-  carSpace: {
-    theme: "CarSpace",
-    background: "carSpaceThemeBackground",
-    hr: "carSpaceThemeHr",
-    serviceLogs: "carSpaceThemeServiceLogs",
-    vehicleItemList: "carSpaceThemeVehicleItemList",
-    vehicleItemListFont: "carSpaceThemeVehicleItemListFont",
-    oneThread: "carSpaceThemeOneThread",
-    oneUpdate: "carSpaceThemeOneUpdate",
-    accountDetails: "carSpaceThemeAccountDetails",
-    aboutContainer: "carSpaceAboutContainer",
+  engineRev: {
+    theme: "EngineRev",
+    background: "engineRevThemeBackground",
+    hr: "engineRevThemeHr",
+    serviceLogs: "engineRevThemeServiceLogs",
+    vehicleItemList: "engineRevThemeVehicleItemList",
+    vehicleItemListFont: "engineRevThemeVehicleItemListFont",
+    oneThread: "engineRevThemeOneThread",
+    oneUpdate: "engineRevThemeOneUpdate",
+    accountDetails: "engineRevThemeAccountDetails",
+    aboutContainer: "engineRevAboutContainer",
     backgroundColor: "rgb(220, 220, 220)"
   },
   light: {
