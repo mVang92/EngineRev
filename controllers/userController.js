@@ -272,14 +272,29 @@ module.exports = {
   },
 
   /**
-   * Update the email address to the user
+   * Update the email addresses for the user data, threads, and comments
    */
   updateEmail: (req, res) => {
-    db.Users
+    const updateUserEmail = db.Users
       .updateOne(
         { creator: req.params.creatorId },
         { $set: { email: req.params.newEmail } }
-      )
+      );
+
+    const updateThreadAuthor = db.Forum
+      .updateMany(
+        { creator: req.params.creatorId },
+        { $set: { email: req.params.newEmail } }
+      );
+
+    const updateThreadComments = db.Forum
+      .updateMany(
+        { "comments.creator": req.params.creatorId },
+        { $set: { "comments.$[element].email": req.params.newEmail } },
+        { arrayFilters: [{ "element.creator": req.params.creatorId }], "multi": true }
+      );
+
+    return Promise.all([updateUserEmail, updateThreadAuthor, updateThreadComments])
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   }

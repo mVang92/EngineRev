@@ -36,7 +36,8 @@ const AccountDetails = props => {
     newBackgroundPicture,
     disableThemeToggleButton,
     downloadEventLogCsvFile,
-    resetInputFields
+    resetInputFields,
+    disableUpdateEmailButton
   } = props;
   let uniqueUserId = showUniqueUserId ? "showUniqueUserId" : "hideUniqueUserId";
   let uniqueUserIdMask = showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
@@ -339,6 +340,7 @@ const AccountDetails = props => {
           newEmail={newEmail}
           newPassword={newPassword}
           confirmNewPassword={confirmNewPassword}
+          disableUpdateEmailButton={disableUpdateEmailButton}
         />
       </div>
       <hr className={currentTheme.hr} />
