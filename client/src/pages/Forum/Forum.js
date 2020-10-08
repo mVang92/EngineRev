@@ -28,7 +28,7 @@ export default class Forum extends Component {
       threadTitle: "",
       allThreads: [],
       disableSubmitNewThreadButton: false,
-      refreshCounter: 0,
+      refreshCounter: 0
     };
   };
 

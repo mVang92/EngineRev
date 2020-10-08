@@ -568,7 +568,7 @@ export default class Thread extends Component {
     this.incrementViewsTimeout = setTimeout(() => {
       forumApi.handleIncrementViews(this.state.threadId)
         .catch(err => this.errorNotification(err));
-    }, 10000);
+    }, 7000);
   };
 
   /**

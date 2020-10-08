@@ -275,11 +275,30 @@ module.exports = {
    * Update the email address to the user
    */
   updateEmail: (req, res) => {
-    db.Users
+    const updateEmail = db.Users
       .updateOne(
         { creator: req.params.creatorId },
         { $set: { email: req.params.newEmail } }
-      )
+      );
+
+    const updateThreadAuthor = db.Forum
+      .updateMany(
+        { creator: req.params.creatorId },
+        { $set: { email: req.params.newEmail } }
+      );
+
+    const updateThreadComments = db.Forum
+      .updateMany(
+        { "comments.creator": req.params.creatorId, "comments.creator": req.params.creatorId },
+        { $set: { "comments.$[].email": req.params.newEmail } }
+      );
+
+    // { "vehicles._id": req.params.vehicleId },
+    //   { $set: { "vehicles.$.vehicleName": req.body.emptyVehicleName } }
+
+    // vehicles: { $elemMatch: { _id: req.params.vehicleId } }
+
+    return Promise.all([updateEmail, updateThreadAuthor, updateThreadComments])
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   }

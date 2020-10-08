@@ -371,18 +371,18 @@ export default class Account extends Component {
             .then(() => {
               eventLogHandler.successful(creatorId, email, event);
               this.successNotification(defaults.emailUpdatedSuccessfully);
-              this.setState({ newEmail: "" })
+              this.setState({ newEmail: "" });
             })
             .catch(err => {
               eventLogHandler.failure(creatorId, email, event, err);
               this.errorNotification(err);
-              this.setState({ newEmail: "" })
+              this.setState({ newEmail: "" });
             });
         })
         .catch(err => {
           eventLogHandler.failure(creatorId, email, event, err);
           this.errorNotification(err);
-          this.setState({ newEmail: "" })
+          this.setState({ newEmail: "" });
         });
     }
   };
