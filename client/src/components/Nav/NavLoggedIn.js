@@ -26,7 +26,7 @@ export const NavLoggedIn = props => {
             <div className="navbar row">
                 <div className="col-md-2 noWidthMobileDisplay">
                     <Link to={{ pathname: "/" }}>
-                        <span id="applicationName" className="navbar-brand">CarSpace</span>
+                        <span id="applicationName" className="navbar-brand">EngineRev</span>
                     </Link>
                 </div>
                 <div className="col-md-9 noWidthMobileDisplay"></div>

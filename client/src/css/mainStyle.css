@@ -29,7 +29,7 @@ label {
     margin: initial;
 }
 
-#carSpaceLogo {
+#engineRevLogo {
     max-width: 10rem;
     border-radius: 10%;
 }
@@ -114,7 +114,7 @@ input {
     right: 0;
 }
 
-#aboutCarspaceContainer {
+#aboutEngineRevContainer {
     background: rgb(245, 245, 245);
     padding: 1rem;
     margin-bottom: 0.5rem;

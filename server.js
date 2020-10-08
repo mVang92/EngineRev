@@ -15,7 +15,7 @@ app.use(express.static("public"));
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   setInterval(function () {
-    axios.delete("https://car-space.herokuapp.com/api/eventLog/");
+    axios.delete("https://enginerev.herokuapp.com/api/eventLog/");
   }, 300000);
 } else {
   setInterval(function () {
@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.DB_URI || "mongodb://localhost/carSpace");
+mongoose.connect(process.env.DB_URI || "mongodb://localhost/engineRev");
 // mongoose.set("debug", true);
 
 // Start the API server

@@ -600,8 +600,8 @@ export default class Log extends Component {
   determineTheme = () => {
     if (this.state.theme) {
       switch (this.state.theme) {
-        case defaults.carSpaceTheme:
-          this.renderTheme(themes.carSpace);
+        case defaults.engineRevTheme:
+          this.renderTheme(themes.engineRev);
           break;
         case defaults.lightTheme:
           this.renderTheme(themes.light);

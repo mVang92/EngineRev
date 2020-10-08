@@ -8,7 +8,7 @@ export const NavLoggedOut = props => {
                 className="navbar-brand"
                 href="/"
             >
-                CarSpace
+                EngineRev
             </a>
             <button
                 className="navbar-toggler"

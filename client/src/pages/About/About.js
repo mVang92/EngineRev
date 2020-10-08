@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import carSpaceLogo from "../../images/carSpaceLogo.png";
+import engineRevLogo from "../../images/engineRevLogo.png";
 import userApi from "../../utils/userApi";
 import Loading from "../../components/Loading";
 import { firebase } from "../../firebase"
@@ -76,8 +76,8 @@ export default class About extends Component {
   determineTheme = () => {
     if (this.state.theme) {
       switch (this.state.theme) {
-        case defaults.carSpaceTheme:
-          this.renderTheme(themes.carSpace);
+        case defaults.engineRevTheme:
+          this.renderTheme(themes.engineRev);
           break;
         case defaults.lightTheme:
           this.renderTheme(themes.light);
@@ -130,25 +130,25 @@ export default class About extends Component {
           this.state.pageLoaded ?
             (
               <div className="container">
-                <div id="aboutCarspaceContainer" className={`text-center ${this.state.currentTheme.background}`}>
+                <div id="aboutEngineRevContainer" className={`text-center ${this.state.currentTheme.background}`}>
                   <br /><br />
-                  <img id="carSpaceLogo" src={carSpaceLogo} alt="CarSpace Logo"></img>
+                  <img id="engineRevLogo" src={engineRevLogo} alt="EngineRev Logo"></img>
                 </div>
                 <div className={`box ${this.state.currentTheme.background}`}>
                   <div className={`smallPadding ${this.state.currentTheme.accountDetails}`}>
                     <div className="row">
                       <div className="col-md-12 text-center">
-                        <label><h5>About CarSpace</h5></label>
+                        <label><h5>About EngineRev</h5></label>
                       </div>
                     </div>
-                    <label><p>{defaults.aboutCarSpace}</p></label>
+                    <label><p>{defaults.aboutEngineRev}</p></label>
                     <hr />
                     <div className="row">
                       <div className="col-md-12 text-center">
-                        <label><h5>Who is CarSpace For?</h5></label>
+                        <label><h5>Who is EngineRev For?</h5></label>
                       </div>
                     </div>
-                    <label><p>{defaults.whoIsCarSpaceFor}</p></label>
+                    <label><p>{defaults.whoIsEngineRevFor}</p></label>
                     <hr />
                     <div className="row">
                       <div className="col-md-12 text-center">
