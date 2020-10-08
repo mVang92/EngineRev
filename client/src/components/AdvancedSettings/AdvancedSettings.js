@@ -9,6 +9,7 @@ const AdvancedSettings = props => {
     newEmail,
     newPassword,
     confirmNewPassword,
+    disableUpdateEmailButton
   } = props;
 
   return (
@@ -37,7 +38,8 @@ const AdvancedSettings = props => {
                 id="submitNewEmailButton"
                 title="Update Email"
                 type="submit"
-                onClick={canUserUpdateEmail}>
+                onClick={canUserUpdateEmail}
+                disabled={disableUpdateEmailButton}>
                 Submit
               </button>
             </div>

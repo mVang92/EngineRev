@@ -4,6 +4,7 @@ import { defaults } from "../../assets/Defaults";
 import { events } from "../../assets/Events";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
+import PleaseWait from "../../components/PleaseWait";
 import { firebase } from "../../firebase";
 import { themes } from "../../themes/Themes";
 import NoAuthorization from "../../components/NoAuthorization";
@@ -24,6 +25,7 @@ export default class Account extends Component {
     this.state = {
       loggedin: false,
       pageLoaded: false,
+      pleaseWait: false,
       user: "",
       roles: [],
       backgroundPicture: "",
@@ -53,7 +55,8 @@ export default class Account extends Component {
       unableToLoadDatabase: false,
       defaultProfilePicture: defaults.defaultProfilePicture,
       defaultDisplayName: defaults.defaultDisplayName,
-      disableThemeToggleButton: false
+      disableThemeToggleButton: false,
+      disableUpdateEmailButton: false
     };
   };
 
@@ -365,24 +368,34 @@ export default class Account extends Component {
     const newEmail = this.state.newEmail;
     const event = events.updateEmail;
     if (this.state.loggedin) {
+      this.setState({ disableUpdateEmailButton: true });
       this.state.user.updateEmail(newEmail)
         .then(() => {
+          this.setState({ pleaseWait: true });
           userApi.updateEmail(creatorId, newEmail)
             .then(() => {
               eventLogHandler.successful(creatorId, email, event);
-              this.successNotification(defaults.emailUpdatedSuccessfully);
-              this.setState({ newEmail: "" });
+              document.getElementById(defaults.applicationName).click();
+              window.location.reload();
             })
             .catch(err => {
               eventLogHandler.failure(creatorId, email, event, err);
               this.errorNotification(err);
-              this.setState({ newEmail: "" });
+              this.setState({
+                newEmail: "",
+                disableUpdateEmailButton: false,
+                pleaseWait: false
+              });
             });
         })
         .catch(err => {
           eventLogHandler.failure(creatorId, email, event, err);
           this.errorNotification(err);
-          this.setState({ newEmail: "" });
+          this.setState({
+            newEmail: "",
+            disableUpdateEmailButton: false,
+            pleaseWait: false
+          });
         });
     }
   };
@@ -645,39 +658,50 @@ export default class Account extends Component {
                 (
                   <React.Fragment>
                     <Container>
-                      <AccountDetails
-                        handleChange={this.handleChange}
-                        userPhotoUrl={this.state.userPhotoUrl}
-                        userEmail={this.state.userEmail}
-                        userId={this.state.userId}
-                        userDisplayName={this.state.userDisplayName}
-                        showUniqueUserId={this.state.showUniqueUserId}
-                        showUniqueUserIdToPage={this.showUniqueUserIdToPage}
-                        showMaskUniqueUserId={this.state.showMaskUniqueUserId}
-                        hideUniqueUserIdToPage={this.hideUniqueUserIdToPage}
-                        loadingError={this.state.loadingError}
-                        vehicleCount={this.state.vehicleCount}
-                        newBackgroundPicture={this.state.newBackgroundPicture}
-                        userAccountCreationTime={this.state.userAccountCreationTime}
-                        userAccountLastSignIn={this.state.userAccountLastSignIn}
-                        updateDisplayName={this.updateDisplayName}
-                        canUserUpdateEmail={this.canUserUpdateEmail}
-                        canUserUpdatePassword={this.canUserUpdatePassword}
-                        newEmail={this.state.newEmail}
-                        newPassword={this.state.newPassword}
-                        confirmNewPassword={this.state.confirmNewPassword}
-                        downloadEventLogCsvFile={this.downloadEventLogCsvFile}
-                        backToTopOfPage={this.backToTopOfPage}
-                        showUpdateBackgroundPictureModal={this.showUpdateBackgroundPictureModal}
-                        showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
-                        showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
-                        saveThemeForUser={this.saveThemeForUser}
-                        roles={this.state.roles}
-                        disableThemeToggleButton={this.state.disableThemeToggleButton}
-                        currentTheme={this.state.currentTheme}
-                        unableToLoadDatabase={this.state.unableToLoadDatabase}
-                        resetInputFields={this.resetInputFields}
-                      />
+                      {
+                        this.state.pleaseWait ?
+                          (
+                            <PleaseWait
+                              currentTheme={this.state.currentTheme}
+                            />
+                          ) :
+                          (
+                            <AccountDetails
+                              handleChange={this.handleChange}
+                              userPhotoUrl={this.state.userPhotoUrl}
+                              userEmail={this.state.userEmail}
+                              userId={this.state.userId}
+                              userDisplayName={this.state.userDisplayName}
+                              showUniqueUserId={this.state.showUniqueUserId}
+                              showUniqueUserIdToPage={this.showUniqueUserIdToPage}
+                              showMaskUniqueUserId={this.state.showMaskUniqueUserId}
+                              hideUniqueUserIdToPage={this.hideUniqueUserIdToPage}
+                              loadingError={this.state.loadingError}
+                              vehicleCount={this.state.vehicleCount}
+                              newBackgroundPicture={this.state.newBackgroundPicture}
+                              userAccountCreationTime={this.state.userAccountCreationTime}
+                              userAccountLastSignIn={this.state.userAccountLastSignIn}
+                              updateDisplayName={this.updateDisplayName}
+                              canUserUpdateEmail={this.canUserUpdateEmail}
+                              canUserUpdatePassword={this.canUserUpdatePassword}
+                              newEmail={this.state.newEmail}
+                              newPassword={this.state.newPassword}
+                              confirmNewPassword={this.state.confirmNewPassword}
+                              downloadEventLogCsvFile={this.downloadEventLogCsvFile}
+                              backToTopOfPage={this.backToTopOfPage}
+                              showUpdateBackgroundPictureModal={this.showUpdateBackgroundPictureModal}
+                              showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
+                              showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
+                              saveThemeForUser={this.saveThemeForUser}
+                              roles={this.state.roles}
+                              disableThemeToggleButton={this.state.disableThemeToggleButton}
+                              currentTheme={this.state.currentTheme}
+                              unableToLoadDatabase={this.state.unableToLoadDatabase}
+                              resetInputFields={this.resetInputFields}
+                              disableUpdateEmailButton={this.state.disableUpdateEmailButton}
+                            />
+                          )
+                      }
                     </Container>
                     <UpdateBackgroundPictureModal
                       showUpdateBackgroundPictureModal={this.state.showUpdateBackgroundPictureModal}
@@ -714,10 +738,12 @@ export default class Account extends Component {
                       currentTheme={this.state.currentTheme}
                     />
                   </React.Fragment>
-                ) : (
+                ) :
+                (
                   <Loading />
                 )
-            ) : (
+            ) :
+            (
               <NoAuthorization />
             )
         }
