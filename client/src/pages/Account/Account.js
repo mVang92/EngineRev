@@ -132,7 +132,7 @@ export default class Account extends Component {
     const creatorId = this.state.userId;
     const email = this.state.userEmail;
     const event = events.saveTheme;
-    let element = document.getElementById("themeSelectionDropdown");
+    let element = document.getElementById(defaults.themeSelectionDropdown);
     let selectedTheme = element.options[element.selectedIndex].value;
     if (selectedTheme !== defaults.noThemeSelection) {
       this.setState({ disableThemeToggleButton: true });
@@ -445,7 +445,7 @@ export default class Account extends Component {
       .then(res => {
         const eventLogsObject = JSON.stringify(res.data);
         const eventLogToCSV = this.convertToCSV(eventLogsObject);
-        const exportedFilename = "CarSpace Event Logs.csv" || "export.csv";
+        const exportedFilename = "EngineRev Event Logs.csv" || "export.csv";
         const blob = new Blob([eventLogToCSV], { type: "text/csv;charset=utf-8;" });
         if (navigator.msSaveBlob) {
           navigator.msSaveBlob(blob, exportedFilename);
