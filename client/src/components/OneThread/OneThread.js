@@ -66,7 +66,15 @@ const OneThread = props => {
           <div className="col-md-12 breakWord">Comments: {commentsCount.length}</div>
         </div>
         <div className="row">
-          <div className="col-md-12 breakWord">Views: {views}</div>
+          {
+            views === 1 ?
+              (
+                <div className="col-md-12 breakWord">Viewed: {views} time</div>
+              ) :
+              (
+                <div className="col-md-12 breakWord">Viewed: {views} times</div>
+              )
+          }
         </div>
       </div>
     </React.Fragment>
