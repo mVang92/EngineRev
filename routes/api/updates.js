@@ -5,7 +5,7 @@ const updatesController = require("../../controllers/updatesController");
 router
     .route("/")
     .post(updatesController.addOneUpdate)
-    .get(updatesController.getAllUpdates);
+    .get(updatesController.getUpdates);
 
 // Matches with "/api/updates/updateOneReleaseNote/:updateId"
 router

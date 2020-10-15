@@ -40,7 +40,7 @@ export default class Updates extends Component {
    */
   componentDidMount = () => {
     Modal.setAppElement("body");
-    this.getAllUpdates();
+    this.getUpdates();
   };
 
   /**
@@ -75,7 +75,7 @@ export default class Updates extends Component {
           };
           updateApi.addOneUpdate(payload)
             .then(() => {
-              this.getAllUpdates();
+              this.getUpdates();
               this.successNotification(defaults.addOneReleaseNoteSuccess);
               this.setState({
                 updateChanges: "",
@@ -94,8 +94,8 @@ export default class Updates extends Component {
    * Gets all of the updates and release notes from the database
    * If successful or if there is an error, then find the user information
    */
-  getAllUpdates = () => {
-    updateApi.getAllUpdates()
+  getUpdates = () => {
+    updateApi.getUpdates()
       .then(res => {
         this.setState({ allUpdates: res.data }, () => this.findUserInformationForOneUser());
       })
@@ -273,7 +273,7 @@ export default class Updates extends Component {
           this.setState({ disableConfirmSaveEditReleaseNoteButton: true });
           updateApi.updateOneReleaseNote(this.state.updateId, payload)
             .then(() => {
-              this.getAllUpdates();
+              this.getUpdates();
               this.successNotification(defaults.updateOneReleaseNoteSuccess);
               this.setState({
                 showEditOneUpdateModal: false,
@@ -301,7 +301,7 @@ export default class Updates extends Component {
           this.setState({ disableConfirmDeleteReleaseNoteButton: true });
           updateApi.deleteOneReleaseNote(this.state.updateId)
             .then(() => {
-              this.getAllUpdates();
+              this.getUpdates();
               this.successNotification(defaults.deleteOneReleaseNoteSuccess);
               this.setState({
                 showDeleteOneUpdateModal: false,

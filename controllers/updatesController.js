@@ -5,7 +5,7 @@ module.exports = {
     /**
      * Get all updates on record
      */
-    getAllUpdates: (req, res) => {
+    getUpdates: (req, res) => {
         db.Update
             .find(req.query)
             .sort({ date: -1 })
@@ -32,8 +32,8 @@ module.exports = {
                 { _id: req.params.updateId },
                 {
                     $set: {
-                        "updateChanges": req.body.newReleaseNotes,
-                        "knownIssues": req.body.newKnownIssues
+                        updateChanges: req.body.newReleaseNotes,
+                        knownIssues: req.body.newKnownIssues
                     }
                 }
             )
