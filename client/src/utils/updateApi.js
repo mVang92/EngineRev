@@ -6,7 +6,7 @@ export default {
         return axios.post(`/api/updates/`, payload);
     },
     // Get all recent updates
-    getAllUpdates: () => {
+    getUpdates: () => {
         return axios.get("/api/updates");
     },
     // Update one update / release note
