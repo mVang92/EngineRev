@@ -48,7 +48,7 @@ export default class App extends Component {
   };
 
   /**
-   * Logs the user in if they are logged in
+   * Check if the user is logged in
    */
   componentDidMount = () => {
     Modal.setAppElement("body");
@@ -64,7 +64,7 @@ export default class App extends Component {
   };
 
   /**
-   * Upon page refresh, if the user is logged in, they will stay logged in
+   * Set the user information based if the user is logged in
    */
   onAuthStateChanged = () => {
     firebase.auth.onAuthStateChanged(user => {
