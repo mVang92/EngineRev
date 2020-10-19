@@ -25,6 +25,16 @@ body {
     background: rgb(220, 220, 220);
 }
 
+#homePageContent {
+    margin: 0 auto;
+    position: relative;
+}
+
+#frontLogo {
+    width: 100%;
+    border-radius: 5px;
+}
+
 label {
     margin: initial;
 }
@@ -32,10 +42,6 @@ label {
 #engineRevLogo {
     max-width: 10rem;
     border-radius: 10%;
-}
-
-#heading {
-    font-family: "Chivo", sans-serif;
 }
 
 #menuDropdownButton {
@@ -54,7 +60,6 @@ label {
 }
 
 .section {
-    background: rgba(245, 245, 245, 0.8);
     margin-bottom: 2rem;
     height: initial !important;
     padding: 1.5rem;
@@ -1020,10 +1025,6 @@ footer {
 
     #scrollableProfilePictureAccountDetails {
         margin-bottom: 2rem;
-    }
-
-    .section {
-        background: rgba(255, 255, 255, 0.5);
     }
 
     .centerOnMobileDisplay {
