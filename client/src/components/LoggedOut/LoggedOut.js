@@ -3,18 +3,15 @@ import Footer from "../Footer";
 import createAccountLogo from "../../images/createAccount.png"
 import recordLogsLogo from "../../images/recordLogs.png"
 import collaborate from "../../images/collaborate.png"
-import engineRevLogo from "../../images/engineRevLogo.png"
 
 const LoggedOut = () => {
   return (
     <React.Fragment>
       <div className="row section noMarginDesktopDisplay">
-        <div id="homePageContent" className="col-md-12">
+        <div className="col-md-6"></div>
+        <div className="col-md-6">
           <div className="row">
-            <div className="col-md-3">
-              <img id="frontLogo" src={engineRevLogo} alt="EngineRev"></img>
-            </div>
-            <div className="col-md-3 smallMarginTopMobileDisplay">
+            <div className="col-md-4 smallMarginTopMobileDisplay">
               <div className="row">
                 <div className="col-md-3">
                   <img className="notLoggedInImages" src={createAccountLogo} alt="Create Account"></img>
@@ -24,7 +21,7 @@ const LoggedOut = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-3 smallMarginTopMobileDisplay">
+            <div className="col-md-4 smallMarginTopMobileDisplay">
               <div className="row">
                 <div className="col-md-3">
                   <img className="notLoggedInImages" src={recordLogsLogo} alt="Record Services"></img>
@@ -34,7 +31,7 @@ const LoggedOut = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-3 smallMarginTopMobileDisplay">
+            <div className="col-md-4 smallMarginTopMobileDisplay">
               <div className="row">
                 <div className="col-md-3">
                   <img className="notLoggedInImages" src={collaborate} alt="Collaborate"></img>
