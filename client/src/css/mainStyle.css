@@ -35,6 +35,11 @@ label {
     margin-top: -15px;
 }
 
+#engineRevLogoAboutPage {
+    border-radius: 10%;
+    margin-top: -15px;
+}
+
 #heading {
     font-family: "Chivo", sans-serif;
 }
