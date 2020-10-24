@@ -132,7 +132,7 @@ export default class About extends Component {
               <div className="container">
                 <div id="aboutEngineRevContainer" className={`text-center ${this.state.currentTheme.background}`}>
                   <br /><br />
-                  <img id="engineRevLogo" src={engineRevLogo} alt="EngineRev Logo"></img>
+                  <img id="engineRevLogoAboutPage" src={engineRevLogo} alt="EngineRev Logo" />
                 </div>
                 <div className={`box ${this.state.currentTheme.background}`}>
                   <div className={`smallPadding ${this.state.currentTheme.accountDetails}`}>
