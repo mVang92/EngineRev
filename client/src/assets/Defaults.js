@@ -46,7 +46,7 @@ export const defaults = {
     inputFieldsReset: "Input fields reset.",
     inputFieldReset: "Input field reset.",
     adminRole: "Administrator",
-    userRole: "Role",
+    userRole: "User",
     testUserRole: "Test User",
     deleteVehicleWarning: "You are about to delete this vehicle and any service logs associated with it. " +
     "Are you sure you want to continue?",
