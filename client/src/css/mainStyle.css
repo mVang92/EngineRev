@@ -39,8 +39,9 @@ label {
 }
 
 #engineRevLogo {
-    max-width: 10rem;
+    width: 2rem;
     border-radius: 10%;
+    margin-top: -15px;
 }
 
 #menuDropdownButton {
@@ -504,13 +505,17 @@ input {
     width: 2rem;
 }
 
-#forgotPassword {
+#forgotPassword,
+#signUpLink,
+#signInLink {
     cursor: pointer;
     color: rgb(200, 0, 0);
     transition-duration: 0.2s;
 }
 
-#forgotPassword:hover {
+#forgotPassword:hover,
+#signUpLink:hover,
+#signInLink:hover {
     color: rgb(255, 0, 0);
     transition-duration: 0.2s;
 }
