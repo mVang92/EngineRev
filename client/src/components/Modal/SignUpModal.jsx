@@ -26,7 +26,7 @@ const SignUp = props => {
                                 </label>
                             </span>
                         </div>
-                        <div className="modal-body text-center">
+                        <div className="modal-body">
                             <input
                                 id="emailInput"
                                 type="text"
@@ -56,6 +56,13 @@ const SignUp = props => {
                                 placeholder="Confirm Password"
                                 maxLength="128">
                             </input>
+                            <br /><br />
+                            <span
+                                id="signInLink"
+                                onClick={props.requestShowSignInModal}
+                                title="Sign In">
+                                I Have an Account
+                            </span>
                         </div>
                         <div className="modal-footer">
                             <button

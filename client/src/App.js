@@ -373,6 +373,7 @@ export default class App extends Component {
           </Switch>
           <SignInModal
             showSignInModal={this.state.showSignInModal}
+            requestShowSignUpModal={this.requestShowSignUpModal}
             requestHideSignInModal={this.requestHideSignInModal}
             handleSignIn={this.handleSignIn}
             requestShowForgotPasswordModal={this.requestShowForgotPasswordModal}
@@ -381,6 +382,7 @@ export default class App extends Component {
           />
           <SignUpModal
             showSignUpModal={this.state.showSignUpModal}
+            requestShowSignInModal={this.requestShowSignInModal}
             requestHideSignUpModal={this.requestHideSignUpModal}
             handleSignUp={this.handleSignUp}
             disableSignUpButton={this.state.disableSignUpButton}

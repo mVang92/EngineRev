@@ -1,9 +1,9 @@
 import React from "react";
 import Footer from "../Footer";
+import engineRevLogo from "../../images/engineRevLogo.png"
 import createAccountLogo from "../../images/createAccount.png"
 import recordLogsLogo from "../../images/recordLogs.png"
 import collaborate from "../../images/collaborate.png"
-import notLoggedIn from "../../images/notLoggedIn.png"
 
 const LoggedOut = () => {
   return (
@@ -11,9 +11,14 @@ const LoggedOut = () => {
       <div className="row section noMarginDesktopDisplay">
         <div id="heading" className="col-md-12 text-center">
           <br /><br />
-          <div><label><h2>Welcome!</h2></label></div>
-          <hr />
-          <div><img id="notLoggedInMainImage" src={notLoggedIn} alt="Create Account"></img></div>
+          <div>
+            <img
+              id="engineRevLogo"
+              src={engineRevLogo}
+              alt="EngineRev"
+            />
+            <label><h2>EngineRev</h2></label>
+          </div>
         </div>
       </div>
       <div className="row section noMarginDesktopDisplay">
@@ -36,7 +41,7 @@ const LoggedOut = () => {
                     <img className="notLoggedInImages" src={recordLogsLogo} alt="Record Services"></img>
                   </div>
                   <div className="col-md-9">
-                    <label><h6><strong>Log service history</strong> for multiple vehicles.</h6></label>
+                    <label><h6><strong>Record service history</strong> for multiple vehicles.</h6></label>
                   </div>
                 </div>
               </div>
