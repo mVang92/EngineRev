@@ -45,14 +45,14 @@ const LoggedOut = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-4 smallMarginTopMobileDisplay">
-              <div className="row">
-                <div className="col-md-3">
-                  <img className="notLoggedInImages" src={collaborate} alt="Collaborate"></img>
-                </div>
-                <div className="col-md-9">
-                  <label><h6><strong>Collaborate with others</strong> through the forum.</h6></label>
+              <div className="col-md-4">
+                <div className="row">
+                  <div className="col-md-3">
+                    <img className="notLoggedInImages" src={collaborate} alt="Collaborate"></img>
+                  </div>
+                  <div className="col-md-9">
+                    <label><h6><strong>Collaborate with others</strong> through the forum.</h6></label>
+                  </div>
                 </div>
               </div>
             </div>
