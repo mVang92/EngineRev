@@ -10,6 +10,7 @@ const ThreadComments = props => {
     email,
     comment,
     votes,
+    edited,
     currentTheme,
     validateUserToUpvoteComment,
     validateUserToDownvoteComment,
@@ -32,23 +33,17 @@ const ThreadComments = props => {
               (
                 <div className="col-md-10 text-left bottomMarginMobileDisplay breakWord">
                   <strong>{formattedEmail} posted on {formattedDate}</strong>
+                  <span> {edited ? <span className="text-secondary">(edited)</span> : null}</span>
                 </div>
               ) :
               (
                 <React.Fragment>
                   <div className="col-md-8 text-left commentPoster breakWord">
                     <strong>{formattedEmail} posted on {formattedDate}</strong>
+                    <span> {edited ? <span className="text-secondary">(edited)</span> : null}</span>
                   </div>
                   <div className="col-md-2 alignRightButtonsDesktopDisplay breakWord">
-                    {
-                      loggedin ?
-                        (
-                          <label>Helpful?</label>
-                        ) :
-                        (
-                          null
-                        )
-                    }
+                    {loggedin ? <label>Helpful?</label> : null}
                   </div>
                 </React.Fragment>
               )

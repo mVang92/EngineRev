@@ -183,6 +183,7 @@ export default class Thread extends Component {
       creator: this.state.uniqueCreatorId,
       email: this.state.email,
       comment: this.state.threadComment,
+      edited: false,
       votes: 0
     }
     forumApi.addOneCommentToOneThread(this.state.threadId, threadCommentPayload)

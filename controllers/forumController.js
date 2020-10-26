@@ -154,7 +154,12 @@ module.exports = {
             db.Forum
                 .updateOne(
                     { "comments._id": req.params.commentId },
-                    { $set: { "comments.$.comment": req.body.comment } }
+                    {
+                        $set: {
+                            "comments.$.comment": req.body.comment,
+                            "comments.$.edited": true
+                        }
+                    }
                 )
                 .then(result => res.json(result))
                 .catch(err => res.status(422).json(err));
