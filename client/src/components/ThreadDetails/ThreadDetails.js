@@ -231,6 +231,7 @@ const ThreadDetails = props => {
                           email={threadComment.email}
                           comment={threadComment.comment}
                           votes={threadComment.votes}
+                          edited={threadComment.edited}
                           showEditOneThreadCommentModal={showEditOneThreadCommentModal}
                           validateUserToUpvoteComment={validateUserToUpvoteComment}
                           validateUserToDownvoteComment={validateUserToDownvoteComment}

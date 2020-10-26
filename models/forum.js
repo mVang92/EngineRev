@@ -15,6 +15,7 @@ const forumSchema = new Schema({
     email: { type: String },
     comment: { type: String },
     votes: { type: Number },
+    edited: { type: Boolean },
     date: { type: Date, default: Date.now }
   }]
 });
