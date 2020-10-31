@@ -369,6 +369,7 @@ input {
 }
 
 .nav-link,
+.editComment,
 #advancedSettingsToggle {
     cursor: pointer;
 }
@@ -1101,10 +1102,6 @@ footer {
 
     .smallMarginTopMobileDisplay {
         margin-top: 1rem;
-    }
-
-    .commentPoster {
-        margin-bottom: 1rem;
     }
 }
     
