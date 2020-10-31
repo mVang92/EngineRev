@@ -69,5 +69,9 @@ export default {
   // Record the comment id in the user database
   recordVotedThreadComment: (creatorId, commentId) => {
     return axios.put(`/api/users/recordVotedThreadComment/${creatorId}/${commentId}`);
+  },
+  // Get the vehicle count for the user
+  getVehicleCount: creatorId => {
+    return axios.put(`/api/users/getVehicleCount/${creatorId}`);
   }
 };

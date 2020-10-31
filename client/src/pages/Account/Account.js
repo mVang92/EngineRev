@@ -91,7 +91,7 @@ export default class Account extends Component {
             if (!user.displayName) {
               this.setState({ userDisplayName: this.state.defaultDisplayName });
             }
-            this.getVehicleData();
+            this.getVehicleCount();
           });
         } catch (err) {
           this.setState({ loggedin: false });
@@ -153,6 +153,21 @@ export default class Account extends Component {
   };
 
   /**
+   * Get the vehicle count for the user
+   */
+  getVehicleCount = () => {
+    userApi.getVehicleCount(this.state.userId)
+      .then(res => {
+        try {
+          this.setState({ vehicleCount: res.data[0].total }, this.getVehicleData());
+        } catch (err) {
+          this.setState({ vehicleCount: <div className="text-danger">{err.toString()}</div> }, this.getVehicleData());
+        }
+      })
+      .catch(err => this.errorNotification(err));
+  }
+
+  /**
    * Retrieve the information for the user then load the page
    */
   getVehicleData = () => {
@@ -161,7 +176,6 @@ export default class Account extends Component {
         .then(res => {
           try {
             this.setState({
-              vehicleCount: res.data.vehicles.length,
               backgroundPicture: res.data.backgroundPicture,
               roles: res.data.roles,
               theme: res.data.theme,
@@ -169,17 +183,12 @@ export default class Account extends Component {
             }, () => this.determineTheme())
           } catch (err) {
             this.setState({
-              vehicleCount: <div className="text-danger">{err.toString()}</div>,
               pageLoaded: true,
               unableToLoadDatabase: true
-            });
+            }, this.errorNotification(err))
           }
         })
-        .catch(err =>
-          this.setState({ loadingError: err },
-            this.loadVehiclesFailNotification(err)
-          )
-        );
+        .catch(err => this.setState({ loadingError: err }, this.loadVehiclesFailNotification(err)));
     } else {
       this.getVehicleData();
     }
