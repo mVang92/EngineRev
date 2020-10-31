@@ -272,6 +272,28 @@ module.exports = {
   },
 
   /**
+   * Get the vehicle count for the user
+   */
+  getVehicleCount: (req, res) => {
+    db.Users
+      .aggregate(
+        [
+          {
+            $match: { creator: req.params.creatorId }
+          },
+          {
+            $group: {
+              _id: "$vehicles",
+              total: { $sum: { $size: "$vehicles" } }
+            }
+          }
+        ]
+      )
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
    * Update the email addresses for the user data, threads, and comments
    */
   updateEmail: (req, res) => {

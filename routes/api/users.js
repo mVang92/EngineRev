@@ -67,4 +67,9 @@ router
   .route("/updateEmail/:creatorId/:newEmail")
   .put(controller.updateEmail)
 
+// Matches with "/api/users/getVehicleCount/:creatorId"
+router
+  .route("/getVehicleCount/:creatorId")
+  .put(controller.getVehicleCount)
+
 module.exports = router;
