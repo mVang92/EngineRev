@@ -70,6 +70,6 @@ router
 // Matches with "/api/users/getVehicleCount/:creatorId"
 router
   .route("/getVehicleCount/:creatorId")
-  .put(controller.getVehicleCount)
+  .get(controller.getVehicleCount)
 
 module.exports = router;
