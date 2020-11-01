@@ -25,7 +25,7 @@ router
 // Matches with "/api/forum/deleteThread/:threadId"
 router
     .route("/deleteThread/:threadId")
-    .put(forumController.deleteThread)
+    .delete(forumController.deleteThread)
 
 // Matches with "/api/forum/handleCommentUpVote/:threadId/:commentId"
 router

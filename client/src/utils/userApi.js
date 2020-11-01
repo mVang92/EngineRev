@@ -72,6 +72,6 @@ export default {
   },
   // Get the vehicle count for the user
   getVehicleCount: creatorId => {
-    return axios.put(`/api/users/getVehicleCount/${creatorId}`);
+    return axios.get(`/api/users/getVehicleCount/${creatorId}`);
   }
 };
