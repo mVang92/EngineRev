@@ -130,7 +130,7 @@ input {
 #updatesContainer {
     background: rgb(235, 235, 235);
     padding: 1em;
-    margin-bottom: 4rem;
+    margin-bottom: 1rem;
 }
 
 .innerBox {
@@ -498,6 +498,10 @@ input {
     display: initial;
 }
 
+.noFlexWrap {
+    flex-wrap: initial !important;
+}
+
 #addVehicleButton,
 #resetVehicleInputFieldsButton {
     width: 8rem;
@@ -749,10 +753,16 @@ footer {
 }
 
 .votingButton {
+    color: #6c757d;
     background: none;
     border: none;
-    font-weight: bold;
     margin-left: -0.35rem;
+    transition-duration: 0.2s;
+}
+
+.votingButton:hover {
+    color: initial;
+    transition-duration: 0.1s;
 }
 
 #threadCategoryDropdown {
