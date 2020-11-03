@@ -33,7 +33,7 @@ const UpdatePageDetails = props => {
     } = props;
 
     return (
-        <div className="container largeBottomMarginMobileDisplay">
+        <div className="container">
             <div id="updatesContainer" className={currentTheme.background}>
                 <div id="pageTitle"></div>
                 <h4 className="text-center"><label>Release Notes and Updates</label></h4>
