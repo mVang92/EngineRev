@@ -10,6 +10,7 @@ const ThreadDetails = props => {
     currentTheme,
     uniqueCreatorId,
     loggedin,
+    email,
     handleChange,
     backButton,
     backToTopOfPage,
@@ -228,7 +229,8 @@ const ThreadDetails = props => {
                           uniqueCreatorId={uniqueCreatorId}
                           loggedin={loggedin}
                           date={threadComment.date}
-                          email={threadComment.email}
+                          threadCommentEmail={threadComment.email}
+                          userEmail={email}
                           comment={threadComment.comment}
                           votes={threadComment.votes}
                           edited={threadComment.edited}
