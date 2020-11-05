@@ -740,6 +740,7 @@ export default class Thread extends Component {
               <Container>
                 <ThreadDetails
                   loggedin={this.state.loggedin}
+                  email={this.state.email}
                   uniqueCreatorId={this.state.uniqueCreatorId}
                   threadTitle={this.state.threadTitle}
                   threadDescription={this.state.threadDescription}

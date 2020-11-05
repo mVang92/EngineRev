@@ -7,7 +7,8 @@ const ThreadComments = props => {
     commentCreator,
     loggedin,
     date,
-    email,
+    threadCommentEmail,
+    userEmail,
     comment,
     votes,
     edited,
@@ -22,39 +23,19 @@ const ThreadComments = props => {
   const newDate = new Date(dateSubString);
   newDate.setDate(newDate.getDate() + 1);
   const formattedDate = newDate.toLocaleDateString("en-US");
-  const formattedEmail = email.replace(/@[^@]+$/, '');
+  const formattedEmail = threadCommentEmail.replace(/@[^@]+$/, '');
 
   return (
     <React.Fragment key={_id}>
       <div className={`threadDetails ${currentTheme.oneThread}`}>
         <div className="row">
           <div className="col-md-11 text-left breakWord">
-            <strong>{formattedEmail} posted on {formattedDate}</strong>
+            {userEmail === threadCommentEmail ? <strong>You posted on {formattedDate}</strong> : <strong>{formattedEmail} posted on {formattedDate}</strong>}
             <span> {edited ? <span className="text-secondary">(edited)</span> : null}</span>
           </div>
           <div className="col-md-1 votes noWidthMobileDisplay">
-            {
-              votes > 0 ?
-                (
-                  <label>
-                    <span className="text-success"><strong>+{votes}</strong></span>
-                  </label>
-                ) :
-                (
-                  null
-                )
-            }
-            {
-              votes < 0 ?
-                (
-                  <label>
-                    <span className="text-danger"><strong>{votes}</strong></span>
-                  </label>
-                ) :
-                (
-                  null
-                )
-            }
+            {votes > 0 ? <label><span className="text-success"><strong>+{votes}</strong></span></label> : null}
+            {votes < 0 ? <label><span className="text-danger"><strong>{votes}</strong></span></label> : null}
           </div>
         </div>
         <hr className="oneThreadHr" />

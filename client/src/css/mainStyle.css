@@ -368,6 +368,11 @@ input {
     transition-duration: 0.2s;
 }
 
+.editComment {
+    color: #6c757d;
+    transition-duration: 0.2s;
+}
+
 .nav-link,
 .editComment,
 #advancedSettingsToggle {
@@ -760,6 +765,7 @@ footer {
     transition-duration: 0.2s;
 }
 
+.editComment:hover,
 .votingButton:hover {
     color: initial;
     transition-duration: 0.1s;
