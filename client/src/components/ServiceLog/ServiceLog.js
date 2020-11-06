@@ -41,7 +41,7 @@ const ServiceLog = props => {
           {
             comment ?
               (
-                <div className="col-md-3 breakWord">
+                <div className="col-md-4 breakWord">
                   <span className="showUnderMobileDisplay">
                     <strong>Comments: </strong>
                   </span>
@@ -49,10 +49,10 @@ const ServiceLog = props => {
                 </div>
               ) :
               (
-                <div className="col-md-3 logDetailsMobileDisplay"></div>
+                <div className="col-md-4 logDetailsMobileDisplay"></div>
               )
           }
-          <div className="col-md-2 smallMarginTopMobileDisplay">
+          <div className="col-md-1 smallMarginTopMobileDisplay">
             <div className="row">
               <div className="col-md-12 alignRightButtonsDesktopDisplay alignLeftButtonsMobileDisplay hideWhilePrinting">
                 <span
