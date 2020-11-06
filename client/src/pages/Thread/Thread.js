@@ -196,7 +196,7 @@ export default class Thread extends Component {
             eventLogHandler.successful(creatorId, email, event);
             this.successNotification(defaults.addThreadCommentSucess);
             this.getAllThreadComments();
-            let element = document.getElementById("commentsSection");
+            let element = document.getElementById(defaults.commentsSection);
             element.scrollIntoView();
           });
       })

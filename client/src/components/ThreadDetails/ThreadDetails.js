@@ -63,28 +63,12 @@ const ThreadDetails = props => {
                 threadCategory ?
                   (
                     <React.Fragment>
-                      {
-                        disableEditThreadDetails ?
-                          (
-                            <div id="category">Category: {threadCategory}</div>
-                          ) :
-                          (
-                            <ThreadCategoriesDropdown />
-                          )
-                      }
+                      { disableEditThreadDetails ? <div id="category">Category: {threadCategory}</div> : <ThreadCategoriesDropdown />}
                     </React.Fragment>
                   ) :
                   (
                     <React.Fragment>
-                      {
-                        disableEditThreadDetails ?
-                          (
-                            <div id="category">Category: {defaults.defaultThreadCategory}</div>
-                          ) :
-                          (
-                            <ThreadCategoriesDropdown />
-                          )
-                      }
+                      { disableEditThreadDetails ? <div id="category">Category: {defaults.defaultThreadCategory}</div> : <ThreadCategoriesDropdown />}
                     </React.Fragment>
                   )
               }
@@ -213,7 +197,7 @@ const ThreadDetails = props => {
             )
         }
         <hr className={currentTheme.hr} />
-        <div id="commentsSection" className="text-center">
+        <div id={defaults.commentsSection} className="text-center">
           {
             allThreads.comments.length > 0 ?
               (

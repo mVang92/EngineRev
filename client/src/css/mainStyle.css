@@ -369,7 +369,7 @@ input {
 }
 
 .editComment {
-    color: #6c757d;
+    color: rgb(108, 117, 125);
     transition-duration: 0.2s;
 }
 
@@ -758,7 +758,7 @@ footer {
 }
 
 .votingButton {
-    color: #6c757d;
+    color: rgb(108, 117, 125);
     background: none;
     border: none;
     margin-left: -0.35rem;

@@ -48,6 +48,7 @@ export const defaults = {
     adminRole: "Administrator",
     userRole: "User",
     testUserRole: "Test User",
+    commentsSection: "commentsSection",
     deleteVehicleWarning: "You are about to delete this vehicle and any service logs associated with it. " +
     "Are you sure you want to continue?",
     aboutEngineRev: "EngineRev allows you to keep track of your vehicle maintenance history and collaborate with the community. " +
