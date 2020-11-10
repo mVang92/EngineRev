@@ -413,7 +413,7 @@ export default class Thread extends Component {
   validateAddOneCommentToThread = e => {
     e.preventDefault();
     this.setState({ disableSubmitCommentOnThreadButton: true });
-    userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+    userApi.findUserInformationForOneUser(this.uniqueCreatorId)
       .then(res => {
         if (res.data.creator) {
           if (this.state.threadComment === "" || this.checkIfStringIsBlank(this.state.threadComment)) {
