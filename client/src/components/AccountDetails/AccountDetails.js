@@ -286,6 +286,7 @@ const AccountDetails = props => {
                 onChange={handleChange}
                 name="newDisplayName"
                 maxLength="50"
+                placeHolder={userDisplayName}
               />
             </div>
           </div>
