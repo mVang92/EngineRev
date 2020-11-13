@@ -1,6 +1,5 @@
 export const defaults = {
     applicationName: "applicationName",
-    noThemeSelection: "noThemeSelection",
     engineRevTheme: "engineRev",
     lightTheme: "light",
     greyTheme: "grey",

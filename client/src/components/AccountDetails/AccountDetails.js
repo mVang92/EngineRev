@@ -8,6 +8,7 @@ import { defaults } from "../../assets/Defaults";
 const AccountDetails = props => {
   const {
     handleChange,
+    theme,
     currentTheme,
     unableToLoadDatabase,
     backToTopOfPage,
@@ -183,6 +184,7 @@ const AccountDetails = props => {
               <ThemeSelection
                 saveThemeForUser={saveThemeForUser}
                 disableThemeToggleButton={disableThemeToggleButton}
+                theme={theme}
               />
               <hr className={currentTheme.hr} />
               <form className="row">
@@ -286,7 +288,7 @@ const AccountDetails = props => {
                 onChange={handleChange}
                 name="newDisplayName"
                 maxLength="50"
-                placeHolder={userDisplayName}
+                placeholder={userDisplayName}
               />
             </div>
           </div>

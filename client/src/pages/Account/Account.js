@@ -134,7 +134,7 @@ export default class Account extends Component {
     const event = events.saveTheme;
     let element = document.getElementById(defaults.themeSelectionDropdown);
     let selectedTheme = element.options[element.selectedIndex].value;
-    if (selectedTheme !== defaults.noThemeSelection) {
+    if (selectedTheme !== this.state.theme) {
       this.setState({ disableThemeToggleButton: true });
       userApi.saveThemeForUser(creatorId, selectedTheme)
         .then(() => {
@@ -670,9 +670,7 @@ export default class Account extends Component {
                       {
                         this.state.pleaseWait ?
                           (
-                            <PleaseWait
-                              currentTheme={this.state.currentTheme}
-                            />
+                            <PleaseWait currentTheme={this.state.currentTheme} />
                           ) :
                           (
                             <AccountDetails
@@ -704,6 +702,7 @@ export default class Account extends Component {
                               saveThemeForUser={this.saveThemeForUser}
                               roles={this.state.roles}
                               disableThemeToggleButton={this.state.disableThemeToggleButton}
+                              theme={this.state.theme}
                               currentTheme={this.state.currentTheme}
                               unableToLoadDatabase={this.state.unableToLoadDatabase}
                               resetInputFields={this.resetInputFields}
