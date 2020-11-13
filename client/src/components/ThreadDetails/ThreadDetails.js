@@ -59,19 +59,7 @@ const ThreadDetails = props => {
         <Container>
           <div className={`row threadDetails ${currentTheme.oneThread}`}>
             <div className="col-md-12 breakWord">
-              {
-                threadCategory ?
-                  (
-                    <React.Fragment>
-                      { disableEditThreadDetails ? <div id="category">Category: {threadCategory}</div> : <ThreadCategoriesDropdown />}
-                    </React.Fragment>
-                  ) :
-                  (
-                    <React.Fragment>
-                      { disableEditThreadDetails ? <div id="category">Category: {defaults.defaultThreadCategory}</div> : <ThreadCategoriesDropdown />}
-                    </React.Fragment>
-                  )
-              }
+              {disableEditThreadDetails ? <div id="category">Category: {threadCategory}</div> : <ThreadCategoriesDropdown threadCategory={threadCategory} />}
               <div id="author">Author: {formattedEmail}</div>
               <div id="date">Date: {formattedDate}</div>
               <hr />

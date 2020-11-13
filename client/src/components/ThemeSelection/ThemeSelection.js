@@ -4,7 +4,8 @@ import { defaults } from "../../assets/Defaults";
 const ThemeSelection = props => {
   const {
     disableThemeToggleButton,
-    saveThemeForUser
+    saveThemeForUser,
+    theme
   } = props;
 
   return (
@@ -13,8 +14,7 @@ const ThemeSelection = props => {
         <label><strong>Themes:</strong></label>
       </div>
       <div className="col-md-4 text-center bottomMarginMobileDisplay">
-        <select id="themeSelectionDropdown" name="themeSelectionDropdown">
-          <option className="text-secondary" value={defaults.noThemeSelection}>--Select a Theme--</option>
+        <select id="themeSelectionDropdown" name="themeSelectionDropdown" defaultValue={theme}>
           <option value={defaults.engineRevTheme}>EngineRev</option>
           <option value={defaults.lightTheme}>Light</option>
           <option value={defaults.greyTheme}>Grey</option>
