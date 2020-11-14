@@ -40,7 +40,7 @@ export default class Thread extends Component {
       allThreads: [],
       formattedEmail: "",
       formattedDate: "",
-      disableEditThreadDetails: true,
+      enableEditThreadDetails: false,
       showUpdateThreadDetailsSuccessModal: false,
       showDeleteThreadModal: false,
       disableUpVoteButton: false,
@@ -448,7 +448,7 @@ export default class Thread extends Component {
         threadDescription: this.state.threadDescriptionBackup
       }, () => this.errorNotification(defaults.threadDetailsCannotBeBlank));
     } else {
-      let element = document.getElementById("threadCategoryDropdown");
+      let element = document.getElementById(defaults.threadCategoryDropdown);
       let threadCategory = element.options[element.selectedIndex].value;
       userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
         .then(res => {
@@ -635,14 +635,11 @@ export default class Thread extends Component {
   };
 
   /**
-   * Enable editing for the thread details
+   * Enable or disable editing for the thread details
    */
-  enableEditThreadDetails = () => {
-    if (this.state.disableEditThreadDetails) {
-      this.setState({ disableEditThreadDetails: false });
-    } else {
-      this.setState({ disableEditThreadDetails: true });
-    }
+  handleEditThreadDetails = enableEditing => {
+    this.backToTopOfPage();
+    this.setState({ enableEditThreadDetails: enableEditing });
   };
 
   /**
@@ -749,7 +746,7 @@ export default class Thread extends Component {
                   threadCategory={this.state.threadCategory}
                   threadComment={this.state.threadComment}
                   allThreads={this.state.allThreads}
-                  disableEditThreadDetails={this.state.disableEditThreadDetails}
+                  enableEditThreadDetails={this.state.enableEditThreadDetails}
                   disableEditThreadComment={this.state.disableEditThreadComment}
                   disableUpVoteButton={this.state.disableUpVoteButton}
                   disableDownVoteButton={this.state.disableDownVoteButton}
@@ -757,7 +754,7 @@ export default class Thread extends Component {
                   showEditOneThreadCommentModal={this.showEditOneThreadCommentModal}
                   showDeleteThreadModal={this.showDeleteThreadModal}
                   validateEditedThreadDetails={this.validateEditedThreadDetails}
-                  enableEditThreadDetails={this.enableEditThreadDetails}
+                  handleEditThreadDetails={this.handleEditThreadDetails}
                   handleChange={this.handleChange}
                   backToTopOfPage={this.backToTopOfPage}
                   backButton={this.backButton}

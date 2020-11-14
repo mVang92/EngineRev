@@ -4,6 +4,7 @@ export const defaults = {
     lightTheme: "light",
     greyTheme: "grey",
     darkTheme: "dark",
+    threadCategoryDropdown: "threadCategoryDropdown",
     themeSelectionDropdown: "themeSelectionDropdown",
     transparentLightTheme: "transparentLight",
     transparentGreyTheme: "transparentGrey",

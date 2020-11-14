@@ -14,7 +14,7 @@ const ThemeSelection = props => {
         <label><strong>Themes:</strong></label>
       </div>
       <div className="col-md-4 text-center bottomMarginMobileDisplay">
-        <select id="themeSelectionDropdown" name="themeSelectionDropdown" defaultValue={theme}>
+        <select id={defaults.themeSelectionDropdown} name={defaults.themeSelectionDropdown} defaultValue={theme}>
           <option value={defaults.engineRevTheme}>EngineRev</option>
           <option value={defaults.lightTheme}>Light</option>
           <option value={defaults.greyTheme}>Grey</option>
