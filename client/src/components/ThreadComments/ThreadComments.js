@@ -27,7 +27,7 @@ const ThreadComments = props => {
 
   return (
     <React.Fragment key={_id}>
-      <div className={`threadDetails ${currentTheme.oneThread}`}>
+      <div className={(userEmail === threadCommentEmail ? 'highlightComment ' : "") + `threadComment ${currentTheme.oneThread}`}>
         <div className="row">
           <div className="col-md-11 text-left breakWord">
             {userEmail === threadCommentEmail ? <strong>You posted on {formattedDate}</strong> : <strong>{formattedEmail} posted on {formattedDate}</strong>}

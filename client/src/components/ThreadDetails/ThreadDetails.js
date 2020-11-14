@@ -20,8 +20,8 @@ const ThreadDetails = props => {
     threadComment,
     validateAddOneCommentToThread,
     allThreads,
-    disableEditThreadDetails,
     enableEditThreadDetails,
+    handleEditThreadDetails,
     validateEditedThreadDetails,
     showDeleteThreadModal,
     validateUserToUpvoteComment,
@@ -59,8 +59,8 @@ const ThreadDetails = props => {
         <Container>
           <div className={`row threadDetails ${currentTheme.oneThread}`}>
             <div className="col-md-12 breakWord">
-              {disableEditThreadDetails ? <div id="category">Category: {threadCategory}</div> : <ThreadCategoriesDropdown threadCategory={threadCategory} />}
               <div id="author">Author: {formattedEmail}</div>
+              {enableEditThreadDetails ? <ThreadCategoriesDropdown threadCategory={threadCategory} /> : <div id="category">Category: {threadCategory}</div>}
               <div id="date">Date: {formattedDate}</div>
               <hr />
               {
@@ -68,14 +68,7 @@ const ThreadDetails = props => {
                   (
                     <React.Fragment>
                       {
-                        disableEditThreadDetails ?
-                          (
-                            <React.Fragment>
-                              <h4 id="threadTitle" className="breakWord">{threadTitle}</h4>
-                              <div id="threadDescription" className="breakWord">{threadDescription}</div>
-                              <br />
-                            </React.Fragment>
-                          ) :
+                        enableEditThreadDetails ?
                           (
                             <React.Fragment>
                               <textarea
@@ -95,27 +88,18 @@ const ThreadDetails = props => {
                                 value={threadDescription}
                               />
                             </React.Fragment>
+                          ) :
+                          (
+                            <React.Fragment>
+                              <h4 id="threadTitle" className="breakWord">{threadTitle}</h4>
+                              <div id="threadDescription" className="breakWord">{threadDescription}</div>
+                              <br />
+                            </React.Fragment>
                           )
                       }
                       <div className="row text-center smallMarginTop">
                         {
-                          disableEditThreadDetails ?
-                            (
-                              <React.Fragment>
-                                <div className="col-md-4"></div>
-                                <div className="col-md-4"></div>
-                                <div className="col-md-4">
-                                  <button
-                                    id="editThreadTitleButton"
-                                    title="Edit"
-                                    type="button"
-                                    className="cancelBtn"
-                                    onClick={() => enableEditThreadDetails()}>
-                                    Edit
-                                  </button>
-                                </div>
-                              </React.Fragment>
-                            ) :
+                          enableEditThreadDetails ?
                             (
                               <React.Fragment>
                                 <div className="col-md-4">
@@ -124,7 +108,7 @@ const ThreadDetails = props => {
                                     title="Cancel"
                                     type="button"
                                     className="cancelBtn"
-                                    onClick={() => enableEditThreadDetails()}>
+                                    onClick={() => handleEditThreadDetails(false)}>
                                     Cancel
                                   </button>
                                 </div>
@@ -147,6 +131,22 @@ const ThreadDetails = props => {
                                     onClick={() => validateEditedThreadDetails()}
                                     disabled={disableSaveEditThreadButton}>
                                     Save
+                                  </button>
+                                </div>
+                              </React.Fragment>
+                            ) :
+                            (
+                              <React.Fragment>
+                                <div className="col-md-4"></div>
+                                <div className="col-md-4"></div>
+                                <div className="col-md-4">
+                                  <button
+                                    id="editThreadTitleButton"
+                                    title="Edit"
+                                    type="button"
+                                    className="cancelBtn"
+                                    onClick={() => handleEditThreadDetails(true)}>
+                                    Edit
                                   </button>
                                 </div>
                               </React.Fragment>

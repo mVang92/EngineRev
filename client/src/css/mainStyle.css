@@ -660,6 +660,16 @@ input {
     margin-right: 5px;
 }
 
+.threadComment {
+    background: rgb(255, 255, 255);
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.highlightComment {
+    border-left: 5px solid rgb(220, 64, 48);
+}
+
 #threadCommentTextArea {
     width: 100%;
     height: 20rem;
