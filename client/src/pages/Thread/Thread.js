@@ -563,6 +563,17 @@ export default class Thread extends Component {
   };
 
   /**
+   * Hnadle replying to a thread comment
+   * 
+   * @param commentCreator The formatted email of the comment creator
+   */
+  replyToThreadComment = commentCreator => {
+    let element = document.getElementById("newThreadCommentInput");
+    element.value = "@" + commentCreator + ": ";
+    element.focus();
+  };
+
+  /**
    * Increment the views to the thread
    */
   incrementViews = () => {
@@ -761,6 +772,7 @@ export default class Thread extends Component {
                   validateAddOneCommentToThread={this.validateAddOneCommentToThread}
                   validateUserToUpvoteComment={this.validateUserToUpvoteComment}
                   validateUserToDownvoteComment={this.validateUserToDownvoteComment}
+                  replyToThreadComment={this.replyToThreadComment}
                   disableSaveEditThreadButton={this.state.disableSaveEditThreadButton}
                   currentTheme={this.state.currentTheme}
                 />
