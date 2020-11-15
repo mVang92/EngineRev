@@ -801,6 +801,18 @@ footer {
     transition-duration: 0.1s;
 }
 
+.replyButton {
+    font-size: 14px;
+    cursor: pointer;
+    color: rgb(108, 117, 125);
+    transition-duration: 0.2s;
+}
+
+.replyButton:hover {
+    color: initial;
+    transition-duration: 0.1s;
+}
+
 #loadingAnimation {
     color: official;
     display: inline-block;

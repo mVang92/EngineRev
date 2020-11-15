@@ -19,6 +19,7 @@ const ThreadDetails = props => {
     threadCategory,
     threadComment,
     validateAddOneCommentToThread,
+    replyToThreadComment,
     allThreads,
     enableEditThreadDetails,
     handleEditThreadDetails,
@@ -208,6 +209,7 @@ const ThreadDetails = props => {
                           showEditOneThreadCommentModal={showEditOneThreadCommentModal}
                           validateUserToUpvoteComment={validateUserToUpvoteComment}
                           validateUserToDownvoteComment={validateUserToDownvoteComment}
+                          replyToThreadComment={replyToThreadComment}
                           enableEditThreadComment={enableEditThreadComment}
                           disableUpVoteButton={disableUpVoteButton}
                           disableDownVoteButton={disableDownVoteButton}

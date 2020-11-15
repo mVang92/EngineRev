@@ -15,6 +15,7 @@ const ThreadComments = props => {
     currentTheme,
     validateUserToUpvoteComment,
     validateUserToDownvoteComment,
+    replyToThreadComment,
     showEditOneThreadCommentModal,
     disableUpVoteButton,
     disableDownVoteButton
@@ -89,6 +90,13 @@ const ThreadComments = props => {
                                 </button>
                               </div>
                             </div>
+                          </div>
+                          <div className="col-md-11 noWidthMobileDisplay">
+                            <span
+                              className="replyButton"
+                              onClick={() => replyToThreadComment(formattedEmail)}>
+                              Reply
+                            </span>
                           </div>
                         </React.Fragment>
                       )
