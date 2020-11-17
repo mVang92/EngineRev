@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { themes } from "../../themes/Themes";
 import { defaults } from "../../assets/Defaults";
 import { events } from "../../assets/Events";
 import userApi from "../../utils/userApi";
@@ -50,7 +49,7 @@ export default class App extends Component {
             uid: userId,
             pageLoaded: true,
           }, () => {
-            this.determineTheme();
+            this.renderTheme(defaults.determineTheme(this.state.theme, this.state.backgroundPicture));
             this.state.props.checkUserDisplayName(this.state.props.user);
           })
         )
@@ -75,45 +74,6 @@ export default class App extends Component {
             });
           }
         });
-    }
-  };
-
-  /**
-   * Determine what the current theme is
-   */
-  determineTheme = () => {
-    if (this.state.theme) {
-      switch (this.state.theme) {
-        case defaults.engineRevTheme:
-          this.renderTheme(themes.engineRev);
-          break;
-        case defaults.lightTheme:
-          this.renderTheme(themes.light);
-          break;
-        case defaults.greyTheme:
-          this.renderTheme(themes.grey);
-          break;
-        case defaults.darkTheme:
-          this.renderTheme(themes.dark);
-          break;
-        case defaults.transparentLightTheme:
-          this.renderTheme(themes.transparentLight);
-          break;
-        case defaults.transparentGreyTheme:
-          this.renderTheme(themes.transparentGrey);
-          break;
-        case defaults.transparentDarkTheme:
-          this.renderTheme(themes.transparentDark);
-          break;
-        default:
-          this.state.props.errorNotification(defaults.themeSelectionError);
-      }
-    } else {
-      if (this.state.backgroundPicture) {
-        document.body.style.backgroundImage = "url(" + this.state.backgroundPicture + ")";
-      } else {
-        document.body.style.backgroundImage = "";
-      }
     }
   };
 
