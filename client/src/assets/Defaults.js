@@ -1,5 +1,4 @@
 import { themes } from "../themes/Themes";
-import { toast } from "react-toastify";
 
 export const defaults = {
     applicationName: "applicationName",
@@ -37,7 +36,6 @@ export const defaults = {
     updateOneReleaseNoteSuccess: "Release note updated successfully.",
     addOneReleaseNoteSuccess: "Release note added successfully.",
     invalidInputDetected: "Invalid input detected.",
-    themeSelectionError: "Error: Unable to process theme selection. Try changing your theme in the Account page.",
     resetInputFieldError: "Error: Unable to reset input field.",
     addThreadSuccessfully: "Thread created successfully.",
     vehicleNameUpdatedSuccessfully: "Vehicle name updated successfully.",
@@ -94,7 +92,6 @@ export const defaults = {
                     break;
                 default:
                     themeType = themes.engineRev;
-                    this.errorNotification(defaults.themeSelectionError);
             }
         } else {
             if (backgroundPicture) {
@@ -104,8 +101,5 @@ export const defaults = {
             }
         }
         return themeType;
-    },
-    errorNotification(err) {
-        toast.error(err.toString());
     }
 };
