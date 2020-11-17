@@ -47,7 +47,7 @@ router
   .route("/deleteVehicle/:vehicleId")
   .delete(controller.removeOneVehicle)
 
-// Matches with "/api/deleteVehicle/:vehicleId"
+// Matches with "/api/deleteVehicleName/:vehicleId"
 router
   .route("/deleteVehicleName/:vehicleId")
   .delete(controller.removeOneVehicleName)

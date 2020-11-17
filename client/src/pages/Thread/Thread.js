@@ -5,7 +5,6 @@ import forumApi from "../../utils/forumApi";
 import Loading from "../../components/Loading";
 import ThreadDetails from "../../components/ThreadDetails";
 import { firebase } from "../../firebase"
-import { themes } from "../../themes/Themes";
 import { toast } from "react-toastify";
 import { defaults } from "../../assets/Defaults";
 import { events } from "../../assets/Events";
@@ -141,7 +140,7 @@ export default class Thread extends Component {
                 loggedin: true
               }, () => {
                 this.uniqueCreatorId = this.state.uniqueCreatorId;
-                this.determineTheme();
+                this.renderTheme(defaults.determineTheme(this.state.theme, this.state.backgroundPicture));
               });
             } catch (err) {
               this.errorNotification(err);
@@ -222,10 +221,10 @@ export default class Thread extends Component {
       threadDescription: this.state.threadDescription,
       threadCategory: threadCategory
     }
-    this.setState({ disableSaveEditThreadButton: true });
     forumApi.handleUpdateThreadDetails(this.state.threadId, threadPayload)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
+        this.setState({ disableSaveEditThreadButton: false });
         this.showUpdateThreadDetailsSuccessModal();
       })
       .catch(err => {
@@ -414,12 +413,12 @@ export default class Thread extends Component {
   validateAddOneCommentToThread = e => {
     e.preventDefault();
     this.setState({ disableSubmitCommentOnThreadButton: true });
-    userApi.findUserInformationForOneUser(this.uniqueCreatorId)
+    userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
       .then(res => {
-        if (res.data.creator) {
+        if (res.data.creator === this.uniqueCreatorId) {
           if (this.state.threadComment === "" || this.checkIfStringIsBlank(this.state.threadComment)) {
-            this.setState({ disableSubmitCommentOnThreadButton: false },
-              () => this.errorNotification(defaults.threadCommentsCannotBeBlank));
+            this.setState({ disableSubmitCommentOnThreadButton: false });
+            this.errorNotification(defaults.threadCommentsCannotBeBlank);
           } else {
             this.addOneCommentToThread();
           }
@@ -446,10 +445,12 @@ export default class Thread extends Component {
       this.setState({
         threadTitle: this.state.threadTitleBackup,
         threadDescription: this.state.threadDescriptionBackup
-      }, () => this.errorNotification(defaults.threadDetailsCannotBeBlank));
+      });
+      this.errorNotification(defaults.threadDetailsCannotBeBlank);
     } else {
       let element = document.getElementById(defaults.threadCategoryDropdown);
       let threadCategory = element.options[element.selectedIndex].value;
+      this.setState({ disableSaveEditThreadButton: true });
       userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
         .then(res => {
           if (res.data.creator === this.uniqueCreatorId) {
@@ -457,6 +458,10 @@ export default class Thread extends Component {
           } else {
             this.doNoAuthorization();
           }
+        })
+        .catch(err => {
+          this.setState({ disableSaveEditThreadButton: false });
+          this.errorNotification(err);
         });
     }
   };
@@ -535,7 +540,8 @@ export default class Thread extends Component {
         this.setState({
           disableUpVoteButton: false,
           disableDownVoteButton: false
-        }, () => this.errorNotification(err));
+        });
+        this.errorNotification(err);
       });
   };
 
@@ -579,8 +585,7 @@ export default class Thread extends Component {
   incrementViews = () => {
     forumApi.handleIncrementHits(this.state.threadId);
     this.incrementViewsTimeout = setTimeout(() => {
-      forumApi.handleIncrementViews(this.state.threadId)
-        .catch(err => this.errorNotification(err));
+      forumApi.handleIncrementViews(this.state.threadId);
     }, 7000);
   };
 
@@ -590,45 +595,6 @@ export default class Thread extends Component {
   doNoAuthorization = () => {
     alert(defaults.noAuthorizationToPerformAction);
     window.location = "/";
-  };
-
-  /**
-   * Determine what the current theme is
-   */
-  determineTheme = () => {
-    if (this.state.theme) {
-      switch (this.state.theme) {
-        case defaults.engineRevTheme:
-          this.renderTheme(themes.engineRev);
-          break;
-        case defaults.lightTheme:
-          this.renderTheme(themes.light);
-          break;
-        case defaults.greyTheme:
-          this.renderTheme(themes.grey);
-          break;
-        case defaults.darkTheme:
-          this.renderTheme(themes.dark);
-          break;
-        case defaults.transparentLightTheme:
-          this.renderTheme(themes.transparentLight);
-          break;
-        case defaults.transparentGreyTheme:
-          this.renderTheme(themes.transparentGrey);
-          break;
-        case defaults.transparentDarkTheme:
-          this.renderTheme(themes.transparentDark);
-          break;
-        default:
-          this.errorNotification(defaults.themeSelectionError);
-      }
-    } else {
-      if (this.state.backgroundPicture) {
-        document.body.style.backgroundImage = "url(" + this.state.backgroundPicture + ")";
-      } else {
-        document.body.style.backgroundImage = "";
-      }
-    }
   };
 
   /**

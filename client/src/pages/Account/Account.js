@@ -6,7 +6,6 @@ import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 import PleaseWait from "../../components/PleaseWait";
 import { firebase } from "../../firebase";
-import { themes } from "../../themes/Themes";
 import NoAuthorization from "../../components/NoAuthorization";
 import userApi from "../../utils/userApi";
 import eventLogApi from "../../utils/eventLogApi";
@@ -180,7 +179,7 @@ export default class Account extends Component {
               roles: res.data.roles,
               theme: res.data.theme,
               pageLoaded: true
-            }, () => this.determineTheme())
+            }, () => this.renderTheme(defaults.determineTheme(this.state.theme, this.state.backgroundPicture)))
           } catch (err) {
             this.setState({
               pageLoaded: true,
@@ -191,45 +190,6 @@ export default class Account extends Component {
         .catch(err => this.setState({ loadingError: err }, this.loadVehiclesFailNotification(err)));
     } else {
       this.getVehicleData();
-    }
-  };
-
-  /**
-   * Determine what the current theme is
-   */
-  determineTheme = () => {
-    if (this.state.theme) {
-      switch (this.state.theme) {
-        case defaults.engineRevTheme:
-          this.renderTheme(themes.engineRev);
-          break;
-        case defaults.lightTheme:
-          this.renderTheme(themes.light);
-          break;
-        case defaults.greyTheme:
-          this.renderTheme(themes.grey);
-          break;
-        case defaults.darkTheme:
-          this.renderTheme(themes.dark);
-          break;
-        case defaults.transparentLightTheme:
-          this.renderTheme(themes.transparentLight);
-          break;
-        case defaults.transparentGreyTheme:
-          this.renderTheme(themes.transparentGrey);
-          break;
-        case defaults.transparentDarkTheme:
-          this.renderTheme(themes.transparentDark);
-          break;
-        default:
-          this.errorNotification(defaults.themeSelectionError);
-      }
-    } else {
-      if (this.state.backgroundPicture) {
-        document.body.style.backgroundImage = "url(" + this.state.backgroundPicture + ")";
-      } else {
-        document.body.style.backgroundImage = "";
-      }
     }
   };
 

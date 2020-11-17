@@ -3,7 +3,6 @@ import engineRevLogo from "../../images/engineRevLogo.png";
 import userApi from "../../utils/userApi";
 import Loading from "../../components/Loading";
 import { firebase } from "../../firebase"
-import { themes } from "../../themes/Themes";
 import { defaults } from "../../assets/Defaults";
 import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
 import { toast } from "react-toastify";
@@ -40,7 +39,7 @@ export default class About extends Component {
                 theme: res.data.theme,
                 backgroundPicture: res.data.backgroundPicture,
                 pageLoaded: true
-              }, () => this.determineTheme());
+              }, () => this.renderTheme(defaults.determineTheme(this.state.theme, this.state.backgroundPicture)));
             } catch (err) {
               this.setState({ refreshCounter: this.state.refreshCounter + 1 });
               if (this.state.refreshCounter <= 3) {
@@ -68,45 +67,6 @@ export default class About extends Component {
    */
   errorNotification = err => {
     toast.error(err.toString());
-  };
-
-  /**
-   * Determine what the current theme is
-   */
-  determineTheme = () => {
-    if (this.state.theme) {
-      switch (this.state.theme) {
-        case defaults.engineRevTheme:
-          this.renderTheme(themes.engineRev);
-          break;
-        case defaults.lightTheme:
-          this.renderTheme(themes.light);
-          break;
-        case defaults.greyTheme:
-          this.renderTheme(themes.grey);
-          break;
-        case defaults.darkTheme:
-          this.renderTheme(themes.dark);
-          break;
-        case defaults.transparentLightTheme:
-          this.renderTheme(themes.transparentLight);
-          break;
-        case defaults.transparentGreyTheme:
-          this.renderTheme(themes.transparentGrey);
-          break;
-        case defaults.transparentDarkTheme:
-          this.renderTheme(themes.transparentDark);
-          break;
-        default:
-          this.errorNotification(defaults.themeSelectionError);
-      }
-    } else {
-      if (this.state.backgroundPicture) {
-        document.body.style.backgroundImage = "url(" + this.state.backgroundPicture + ")";
-      } else {
-        document.body.style.backgroundImage = "";
-      }
-    }
   };
 
   /**

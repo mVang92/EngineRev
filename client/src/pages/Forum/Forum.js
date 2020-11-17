@@ -6,7 +6,6 @@ import forumApi from "../../utils/forumApi";
 import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import Loading from "../../components/Loading";
 import { firebase } from "../../firebase"
-import { themes } from "../../themes/Themes";
 import { toast } from "react-toastify";
 import { defaults } from "../../assets/Defaults";
 import { events } from "../../assets/Events";
@@ -105,7 +104,7 @@ export default class Forum extends Component {
                 theme: res.data.theme,
                 backgroundPicture: res.data.backgroundPicture,
                 pageLoaded: true
-              }, () => this.determineTheme());
+              }, () => this.renderTheme(defaults.determineTheme(this.state.theme, this.state.backgroundPicture)));
             } catch (err) {
               this.setState({ refreshCounter: this.state.refreshCounter + 1 });
               if (this.state.refreshCounter <= 10) {
@@ -191,45 +190,6 @@ export default class Forum extends Component {
         this.setState({ disableSubmitNewThreadButton: false });
         this.errorNotification(err);
       });
-  };
-
-  /**
-   * Determine what the current theme is
-   */
-  determineTheme = () => {
-    if (this.state.theme) {
-      switch (this.state.theme) {
-        case defaults.engineRevTheme:
-          this.renderTheme(themes.engineRev);
-          break;
-        case defaults.lightTheme:
-          this.renderTheme(themes.light);
-          break;
-        case defaults.greyTheme:
-          this.renderTheme(themes.grey);
-          break;
-        case defaults.darkTheme:
-          this.renderTheme(themes.dark);
-          break;
-        case defaults.transparentLightTheme:
-          this.renderTheme(themes.transparentLight);
-          break;
-        case defaults.transparentGreyTheme:
-          this.renderTheme(themes.transparentGrey);
-          break;
-        case defaults.transparentDarkTheme:
-          this.renderTheme(themes.transparentDark);
-          break;
-        default:
-          this.errorNotification(defaults.themeSelectionError);
-      }
-    } else {
-      if (this.state.backgroundPicture) {
-        document.body.style.backgroundImage = "url(" + this.state.backgroundPicture + ")";
-      } else {
-        document.body.style.backgroundImage = "";
-      }
-    }
   };
 
   /**
