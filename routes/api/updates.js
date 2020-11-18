@@ -7,14 +7,14 @@ router
     .post(updatesController.addOneUpdate)
     .get(updatesController.getUpdates);
 
-// Matches with "/api/updates/updateOneReleaseNote/:updateId"
+// Matches with "/api/updates/:updateId/updateReleaseNote"
 router
-    .route("/updateOneReleaseNote/:updateId")
+    .route("/:updateId/updateReleaseNote")
     .put(updatesController.updateOneReleaseNote)
 
-// Matches with "/api/updates/updateOneReleaseNote/:updateId"
+// Matches with "/api/updates/:updateId/deleteReleaseNote"
 router
-    .route("/deleteOneReleaseNote/:updateId")
+    .route("/:updateId/deleteReleaseNote")
     .delete(updatesController.deleteOneReleaseNote)
 
 module.exports = router;

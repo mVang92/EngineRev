@@ -1,3 +1,5 @@
+import { defaults } from "../assets/Defaults";
+
 export const themes = {
   engineRev: {
     theme: "EngineRev",
@@ -89,5 +91,42 @@ export const themes = {
     accountDetails: "transparentDarkThemeAccountDetails",
     aboutContainer: "transparentDarkThemeAboutContainer",
     backgroundColor: "rgb(32, 32, 32)"
+  },
+  determineTheme(theme, backgroundPicture) {
+    let themeType;
+    if (theme) {
+      switch (theme) {
+        case defaults.engineRevTheme:
+          themeType = themes.engineRev;
+          break;
+        case defaults.lightTheme:
+          themeType = themes.light;
+          break;
+        case defaults.greyTheme:
+          themeType = themes.grey;
+          break;
+        case defaults.darkTheme:
+          themeType = themes.dark;
+          break;
+        case defaults.transparentLightTheme:
+          themeType = themes.transparentLight;
+          break;
+        case defaults.transparentGreyTheme:
+          themeType = themes.transparentGrey;
+          break;
+        case defaults.transparentDarkTheme:
+          themeType = themes.transparentDark;
+          break;
+        default:
+          themeType = themes.engineRev;
+      }
+    } else {
+      if (backgroundPicture) {
+        document.body.style.backgroundImage = "url(" + backgroundPicture + ")";
+      } else {
+        document.body.style.backgroundImage = "";
+      }
+    }
+    return themeType;
   }
 };

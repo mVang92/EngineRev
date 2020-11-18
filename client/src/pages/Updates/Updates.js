@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Modal from "react-modal";
 import { firebase } from "../../firebase"
 import { defaults } from "../../assets/Defaults";
+import { themes } from "../../themes/Themes";
 import updateApi from "../../utils/updateApi";
 import userApi from "../../utils/userApi";
 import UpdatePageDetails from "../../components/UpdatePageDetails";
@@ -119,7 +120,7 @@ export default class Updates extends Component {
                 theme: res.data.theme,
                 backgroundPicture: res.data.backgroundPicture,
                 pageLoaded: true,
-              }, () => this.renderTheme(defaults.determineTheme(this.state.theme, this.state.backgroundPicture)));
+              }, () => this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture)));
             } catch (err) {
               this.setState({ refreshCounter: this.state.refreshCounter + 1 });
               if (this.state.refreshCounter <= 10) {

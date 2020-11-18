@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { defaults } from "../../assets/Defaults";
+import { themes } from "../../themes/Themes";
 import { events } from "../../assets/Events";
 import userApi from "../../utils/userApi";
 import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
@@ -49,7 +50,7 @@ export default class App extends Component {
             uid: userId,
             pageLoaded: true,
           }, () => {
-            this.renderTheme(defaults.determineTheme(this.state.theme, this.state.backgroundPicture));
+            this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture));
             this.state.props.checkUserDisplayName(this.state.props.user);
           })
         )

@@ -9,9 +9,10 @@ import { firebase } from "../../firebase"
 import { toast } from "react-toastify";
 import { defaults } from "../../assets/Defaults";
 import { events } from "../../assets/Events";
+import { themes } from "../../themes/Themes";
 
 export default class Forum extends Component {
-  constructor(props) {
+  constructor() {
     super()
     this.state = {
       loggedin: false,
@@ -104,7 +105,7 @@ export default class Forum extends Component {
                 theme: res.data.theme,
                 backgroundPicture: res.data.backgroundPicture,
                 pageLoaded: true
-              }, () => this.renderTheme(defaults.determineTheme(this.state.theme, this.state.backgroundPicture)));
+              }, () => this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture)));
             } catch (err) {
               this.setState({ refreshCounter: this.state.refreshCounter + 1 });
               if (this.state.refreshCounter <= 10) {
