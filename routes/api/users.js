@@ -1,75 +1,79 @@
 const router = require("express").Router();
 const controller = require("../../controllers/userController");
 
-// Matches with "/api/users"
+// Matches with "/api/users/newUser"
 router
-  .route("/")
+  .route("/newUser")
   .post(controller.createUserSchema)
 
-// Matches with "/api/users/findOneVehicleForUser/:creatorId/:vehicleId"
+// Matches with "/api/users/:creatorId/:vehicleId/vehicle"
 router
-  .route("/findOneVehicleForUser/:creatorId/:vehicleId")
+  .route("/:creatorId/:vehicleId/vehicle")
   .get(controller.findOneVehicleForUser)
 
-// Matches with "/api/users/:id"
+// Matches with "/api/users/:id/user"
 router
-  .route("/:id")
-  .get(controller.findUserInformationForOneUser)
+  .route("/:id/user")
+  .get(controller.findUserInfoForOneUser)
+
+// Matches with "/api/users/:id/addVehicle"
+router
+  .route("/:id/addVehicle")
   .put(controller.addOneVehicle)
 
-// Matches with "/api/users/addOneServiceLog/:creatorId/:vehicleId"
+// Matches with "/api/users/:creatorId/:vehicleIdaddOneServiceLog/"
 router
-  .route("/addOneServiceLog/:creatorId/:vehicleId")
+  .route("/:creatorId/:vehicleId/addServiceLog")
   .put(controller.addOneLogForOneVehicle)
 
-// Matches with "/api/users/updateOneVehicleInformation/:vehicleId"
+// Matches with "/api/users/:vehicleId/updateOneVehicleInfo"
 router
-  .route("/updateOneVehicleInformation/:vehicleId")
-  .put(controller.updateOneVehicleInformation)
+  .route("/:vehicleId/updateVehicleInfo")
+  .put(controller.updateVehicleInfo)
 
-// Matches with "/api/users/updateOneServiceLog/:vehicleId/:serviceLogId"
+// Matches with "/api/users/:vehicleId/:serviceLogId/updateServiceLog"
 router
-  .route("/updateOneServiceLog/:vehicleId/:serviceLogId")
+  .route("/:vehicleId/:serviceLogId/updateServiceLog")
   .put(controller.updateOneLogForOneVehicle)
 
-// Matches with "/api/users/updateUserBackgroundPicture/:creatorId/:backgroundPicture"
+// Matches with "/api/users/:creatorId/:backgroundPicture/backgroundPicture"
 router
-  .route("/updateUserBackgroundPicture/:creatorId")
+  .route("/:creatorId/backgroundPicture")
   .put(controller.updateUserBackgroundPicture)
 
-// Matches with "/api/users/deleteServiceLog/:vehicleId/:serviceLogId"
+// Matches with "/api/users/:vehicleId/:serviceLogId/deleteServiceLog"
 router
-  .route("/deleteServiceLog/:vehicleId/:serviceLogId")
+  .route("/:vehicleId/:serviceLogId/deleteServiceLog")
   .delete(controller.removeOneServiceLog)
 
-// Matches with "/api/deleteVehicle/:vehicleId"
+// Matches with "/api/:vehicleId/deleteVehicle"
 router
-  .route("/deleteVehicle/:vehicleId")
+  .route("/:vehicleId/deleteVehicle")
   .delete(controller.removeOneVehicle)
 
-// Matches with "/api/deleteVehicleName/:vehicleId"
+// Matches with "/api/:vehicleId/deleteVehicleName"
 router
-  .route("/deleteVehicleName/:vehicleId")
+  .route("/:vehicleId/deleteVehicleName")
   .delete(controller.removeOneVehicleName)
 
 // Matches with "/api/users/themes/:creatorId/:themeType"
 router
-  .route("/themes/:creatorId/:themeType")
+  .route("/:creatorId/:themeType")
   .put(controller.saveThemeForUser)
 
-// Matches with "/api/users/recordVotedThreadComment/:creatorId/:commentId"
+// Matches with "/api/users/:creatorId/:commentId/vote"
 router
-  .route("/recordVotedThreadComment/:creatorId/:commentId")
+  .route("/:creatorId/:commentId/vote")
   .put(controller.recordVotedThreadComment)
 
-// Matches with "/api/users/updateEmail/:creatorId/:newEmail"
+// Matches with "/api/users/:creatorId/:newEmail/updateEmail"
 router
-  .route("/updateEmail/:creatorId/:newEmail")
+  .route("/:creatorId/:newEmail/updateEmail")
   .put(controller.updateEmail)
 
-// Matches with "/api/users/getVehicleCount/:creatorId"
+// Matches with "/api/users/:creatorId/count"
 router
-  .route("/getVehicleCount/:creatorId")
+  .route("/:creatorId/count")
   .get(controller.getVehicleCount)
 
 module.exports = router;

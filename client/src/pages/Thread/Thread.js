@@ -7,6 +7,7 @@ import ThreadDetails from "../../components/ThreadDetails";
 import { firebase } from "../../firebase"
 import { toast } from "react-toastify";
 import { defaults } from "../../assets/Defaults";
+import { themes } from "../../themes/Themes";
 import { events } from "../../assets/Events";
 import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import DeleteThreadModal from "../../components/Modal/DeleteThreadModal";
@@ -140,7 +141,7 @@ export default class Thread extends Component {
                 loggedin: true
               }, () => {
                 this.uniqueCreatorId = this.state.uniqueCreatorId;
-                this.renderTheme(defaults.determineTheme(this.state.theme, this.state.backgroundPicture));
+                this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture));
               });
             } catch (err) {
               this.errorNotification(err);

@@ -7,54 +7,54 @@ router
     .post(forumController.addOneThread)
     .get(forumController.getAllThreads);
 
-// Matches with "/api/forum/addOneCommentToOneThread/:threadId"
+// Matches with "/api/forum/:threadId/addComment"
 router
-    .route("/addOneCommentToOneThread/:threadId")
+    .route("/:threadId/addComment")
     .put(forumController.addOneCommentToOneThread)
 
-// Matches with "/api/forum/getAllThreadComments/:threadId"
+// Matches with "/api/forum/:threadId/thread"
 router
-    .route("/getAllThreadComments/:threadId")
+    .route("/:threadId/thread")
     .get(forumController.getAllThreadComments)
 
-// Matches with "/api/forum/handleUpdateThreadDetails/:threadId"
+// Matches with "/api/forum/:threadId/updateThreadDetails"
 router
-    .route("/handleUpdateThreadDetails/:threadId")
+    .route("/:threadId/updateThreadDetails")
     .put(forumController.handleUpdateThreadDetails)
 
-// Matches with "/api/forum/deleteThread/:threadId"
+// Matches with "/api/forum/:threadId/deleteThread"
 router
-    .route("/deleteThread/:threadId")
+    .route("/:threadId/deleteThread")
     .delete(forumController.deleteThread)
 
-// Matches with "/api/forum/handleCommentUpVote/:threadId/:commentId"
+// Matches with "/api/forum/:threadId/:commentId/upVote"
 router
-    .route("/handleCommentUpVote/:threadId/:commentId")
+    .route("/:threadId/:commentId/upVote")
     .put(forumController.handleCommentUpVote)
 
-// Matches with "/api/forum/handleCommentDownVote/:threadId/:commentId"
+// Matches with "/api/forum/:threadId/:commentId/downVote"
 router
-    .route("/handleCommentDownVote/:threadId/:commentId")
+    .route("/:threadId/:commentId/downVote")
     .put(forumController.handleCommentDownVote)
 
-// Matches with "/api/forum/handleDeleteThreadComment/:threadId/:commentId"
+// Matches with "/api/forum/:threadId/:commentId/deleteComment"
 router
-    .route("/handleDeleteThreadComment/:threadId/:commentId")
+    .route("/:threadId/:commentId/deleteComment")
     .put(forumController.handleDeleteThreadComment)
 
-// Matches with "/api/forum/handleUpdateThreadComment/:commentId"
+// Matches with "/api/forum/:commentId/updateComment"
 router
-    .route("/handleUpdateThreadComment/:commentId")
+    .route("/:commentId/updateComment")
     .put(forumController.handleUpdateThreadComment)
 
-// Matches with "/api/forum/handleIncrementViews/:commentId"
+// Matches with "/api/forum/:commentId/view"
 router
-    .route("/handleIncrementViews/:threadId")
+    .route("/:threadId/view")
     .put(forumController.handleIncrementViews)
 
-// Matches with "/api/forum/handleIncrementHits/:commentId"
+// Matches with "/api/forum/:commentId/hit"
 router
-    .route("/handleIncrementHits/:threadId")
+    .route("/:threadId/hit")
     .put(forumController.handleIncrementHits)
 
 module.exports = router;

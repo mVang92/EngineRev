@@ -1,5 +1,3 @@
-import { themes } from "../themes/Themes";
-
 export const defaults = {
     applicationName: "applicationName",
     engineRevTheme: "engineRev",
@@ -64,42 +62,5 @@ export const defaults = {
         "(you don’t see that combination every day). As an automotive mechanic, I need a program where I can easily pull it up on a computer " +
         "or my phone to access my vehicle maintenance and repair history. This is where EngineRev comes in, " +
         "which allows users to add vehicles and keep track of service logs while being able to share ideas through the forum. " +
-        "EngineRev is intended to be simple to use and to the point.",
-    determineTheme(theme, backgroundPicture) {
-        let themeType;
-        if (theme) {
-            switch (theme) {
-                case defaults.engineRevTheme:
-                    themeType = themes.engineRev;
-                    break;
-                case defaults.lightTheme:
-                    themeType = themes.light;
-                    break;
-                case defaults.greyTheme:
-                    themeType = themes.grey;
-                    break;
-                case defaults.darkTheme:
-                    themeType = themes.dark;
-                    break;
-                case defaults.transparentLightTheme:
-                    themeType = themes.transparentLight;
-                    break;
-                case defaults.transparentGreyTheme:
-                    themeType = themes.transparentGrey;
-                    break;
-                case defaults.transparentDarkTheme:
-                    themeType = themes.transparentDark;
-                    break;
-                default:
-                    themeType = themes.engineRev;
-            }
-        } else {
-            if (backgroundPicture) {
-                document.body.style.backgroundImage = "url(" + backgroundPicture + ")";
-            } else {
-                document.body.style.backgroundImage = "";
-            }
-        }
-        return themeType;
-    }
+        "EngineRev is intended to be simple to use and to the point."
 };

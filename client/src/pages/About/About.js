@@ -4,6 +4,7 @@ import userApi from "../../utils/userApi";
 import Loading from "../../components/Loading";
 import { firebase } from "../../firebase"
 import { defaults } from "../../assets/Defaults";
+import { themes } from "../../themes/Themes";
 import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
 import { toast } from "react-toastify";
 
@@ -39,7 +40,7 @@ export default class About extends Component {
                 theme: res.data.theme,
                 backgroundPicture: res.data.backgroundPicture,
                 pageLoaded: true
-              }, () => this.renderTheme(defaults.determineTheme(this.state.theme, this.state.backgroundPicture)));
+              }, () => this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture)));
             } catch (err) {
               this.setState({ refreshCounter: this.state.refreshCounter + 1 });
               if (this.state.refreshCounter <= 3) {

@@ -35,7 +35,7 @@ module.exports = {
   /**
    * Find all vehicles belonging to one user
    */
-  findUserInformationForOneUser: (req, res) => {
+  findUserInfoForOneUser: (req, res) => {
     db.Users
       .findOne({ creator: req.params.id })
       .then(result => res.json(result))
@@ -119,7 +119,7 @@ module.exports = {
   /**
    * Update the vehicle name for the selected vehicle
    */
-  updateOneVehicleInformation: (req, res) => {
+  updateVehicleInfo: (req, res) => {
     if (
       req.body.year < minimumYear ||
       req.body.year > futureYear ||

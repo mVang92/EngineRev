@@ -3,6 +3,7 @@ import userApi from "../../utils/userApi";
 import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import { firebase } from "../../firebase"
 import { defaults } from "../../assets/Defaults";
+import { themes } from "../../themes/Themes";
 import { events } from "../../assets/Events";
 import VehicleLogContent from "../../components/VehicleLogContent";
 import VehicleLogModals from "../../components/VehicleLogModals";
@@ -104,7 +105,7 @@ export default class Log extends Component {
           theme: res.data.theme,
           backgroundPicture: res.data.backgroundPicture
         }, () => {
-          this.renderTheme(defaults.determineTheme(this.state.theme, this.state.backgroundPicture));
+          this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture));
           this.getOneVehicle();
         });
       })
