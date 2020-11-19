@@ -71,15 +71,7 @@ const VehicleLogContent = props => {
                     checkUserEnteredServiceLogInput={checkUserEnteredServiceLogInput}
                     disableAddServiceLogButton={disableAddServiceLogButton}
                 />
-                {
-                    year ?
-                        (
-                            <hr className={currentTheme.hr} />
-                        ) :
-                        (
-                            null
-                        )
-                }
+                {year ? <hr className={currentTheme.hr} /> : null}
             </div>
             <div className="row innerBox serviceLogMobileDisplay">
                 {

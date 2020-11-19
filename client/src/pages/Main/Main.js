@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { defaults } from "../../assets/Defaults";
 import { themes } from "../../themes/Themes";
 import { events } from "../../assets/Events";
 import userApi from "../../utils/userApi";

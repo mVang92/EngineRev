@@ -75,7 +75,7 @@ export default class Log extends Component {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({
-          vehicleId: this.props.match.params.id,
+          vehicleId: this.props.location.state.vehicleId,
           uid: user.uid,
           email: user.email,
           loggedin: true

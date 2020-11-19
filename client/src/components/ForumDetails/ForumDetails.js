@@ -26,9 +26,7 @@ const ForumDetails = props => {
         </div>
       </div>
       <hr className={currentTheme.hr} />
-      <BackToHomeButtonRow
-        loggedin={loggedin}
-      />
+      <BackToHomeButtonRow loggedin={loggedin} />
       <hr className={currentTheme.hr} />
       {
         loggedin ?
@@ -72,9 +70,7 @@ const ForumDetails = props => {
         })
       }
       <hr className={currentTheme.hr} />
-      <BottomActionButtons
-        backToTopOfPage={backToTopOfPage}
-      />
+      <BottomActionButtons backToTopOfPage={backToTopOfPage} />
     </div>
   );
 };

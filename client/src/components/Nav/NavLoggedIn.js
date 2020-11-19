@@ -11,13 +11,14 @@ export const NavLoggedIn = props => {
         userId
     } = props;
     const accountPage = {
-        pathname: "/account/" + userId,
+        pathname: "/account",
         state: [
             userEmailForAccount,
             userAccountCreationTime,
             userDisplayName,
             userProfilePicture,
-            userAccountLastSignIn
+            userAccountLastSignIn,
+            userId
         ]
     };
 
