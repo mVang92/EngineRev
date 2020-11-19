@@ -62,7 +62,7 @@ const MyVehiclesSection = props => {
                                         <div className="col-md-2"></div>
                                         <div title={vehicle.year + " " + vehicle.make + " " + vehicle.model} className="col-md-8">
                                           <Link to={{
-                                            pathname: "/vehicle/" + vehicle.year + "-" + vehicle.make.toLowerCase() + "-" + vehicle.model.toLowerCase(),
+                                            pathname: "/vehicle/" + (vehicle.year + "-" + vehicle.make + "-" + vehicle.model).replace(/\s+/g, '-').toLowerCase(),
                                             state: { vehicleId: vehicle._id }
                                           }}>
                                             <div className="vehicleOnRecord">
