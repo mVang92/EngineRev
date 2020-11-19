@@ -18,14 +18,14 @@ const OneThread = props => {
   const newDate = new Date(dateSubString);
   newDate.setDate(newDate.getDate() + 1);
   const formattedDate = newDate.toLocaleDateString("en-US");
-  const formattedDescription = threadDescription.substring(0, 110);
+  const formattedDescription = threadDescription.substring(0, 100);
   const formattedEmail = email.replace(/@[^@]+$/, '');
 
   return (
     <React.Fragment key={_id}>
       <div className={`threadDetails ${currentTheme.oneThread}`}>
         <Link to={{
-          pathname: "/forum/thread/" + _id,
+          pathname: "/thread/" + threadTitle.replace(/\s+/g, '-').toLowerCase(),
           state: [
             _id,
             threadTitle,

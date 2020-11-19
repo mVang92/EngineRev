@@ -62,7 +62,8 @@ const MyVehiclesSection = props => {
                                         <div className="col-md-2"></div>
                                         <div title={vehicle.year + " " + vehicle.make + " " + vehicle.model} className="col-md-8">
                                           <Link to={{
-                                            pathname: "/account/" + vehicleData._id + "/vehicle/" + vehicle._id
+                                            pathname: "/vehicle/" + vehicle.year + "-" + vehicle.make.toLowerCase() + "-" + vehicle.model.toLowerCase(),
+                                            state: { vehicleId: vehicle._id }
                                           }}>
                                             <div className="vehicleOnRecord">
                                               <div className={`vehicleItemList ${currentTheme.vehicleItemList}`}>
