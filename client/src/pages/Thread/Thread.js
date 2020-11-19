@@ -721,7 +721,6 @@ export default class Thread extends Component {
                   threadCategory={this.state.threadCategory}
                   threadTitle={this.state.threadTitle}
                   threadDescription={this.state.threadDescription}
-                  threadCategory={this.state.threadCategory}
                   threadComment={this.state.threadComment}
                   allThreads={this.state.allThreads}
                   enableEditThreadDetails={this.state.enableEditThreadDetails}
