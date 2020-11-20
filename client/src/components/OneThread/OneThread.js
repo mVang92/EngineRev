@@ -24,17 +24,7 @@ const OneThread = props => {
   return (
     <React.Fragment key={_id}>
       <div className={`threadDetails ${currentTheme.oneThread}`}>
-        <Link to={{
-          pathname: "/thread/" + threadTitle.replace(/\s+/g, '-').toLowerCase(),
-          state: [
-            _id,
-            threadTitle,
-            threadDescription,
-            threadCategory,
-            formattedEmail,
-            formattedDate
-          ]
-        }}>
+        <Link to={{ pathname: "/thread/" + btoa(_id) }}>
           <div className="row threadTitleLink">
             <h4 className="col-md-12 breakWord">{threadTitle}</h4>
           </div>

@@ -26,9 +26,7 @@ export const NavLoggedIn = props => {
         <React.Fragment>
             <div className="navbar row">
                 <div className="col-md-2 noWidthMobileDisplay">
-                    <Link to={{ pathname: "/" }}>
-                        <span id="applicationName" className="navbar-brand">EngineRev</span>
-                    </Link>
+                    <Link to={{ pathname: "/" }}><span id="applicationName" className="navbar-brand">EngineRev</span></Link>
                 </div>
                 <div className="col-md-9 noWidthMobileDisplay"></div>
                 <div className="col-md-1 text-right noWidthMobileDisplay">
