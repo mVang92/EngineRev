@@ -363,10 +363,9 @@ export default class App extends Component {
                 />
               )}
             />
-            {/* <Route exact path="/account/:id/vehicle/:id" component={Log} /> */}
             <Route exact path="/vehicle/:vehicleId" component={Log} />
             <Route exact path="/forum" component={Forum} />
-            <Route exact path="/thread/:threadTitle" component={Thread} />
+            <Route exact path="/thread/:threadId" component={Thread} />
             <Route exact path="/account" component={Account} />
             <Route exact path="/about" component={About} />
             <Route exact path="/updates" component={Updates} />

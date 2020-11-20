@@ -61,10 +61,7 @@ const MyVehiclesSection = props => {
                                       <div key={vehicle._id} className="row">
                                         <div className="col-md-2"></div>
                                         <div title={vehicle.year + " " + vehicle.make + " " + vehicle.model} className="col-md-8">
-                                          <Link to={{
-                                            pathname: "/vehicle/" + (vehicle.year + "-" + vehicle.make + "-" + vehicle.model).replace(/\s+/g, '-').toLowerCase(),
-                                            state: { vehicleId: vehicle._id }
-                                          }}>
+                                          <Link to={{ pathname: "/vehicle/" + btoa(vehicle._id) }}>
                                             <div className="vehicleOnRecord">
                                               <div className={`vehicleItemList ${currentTheme.vehicleItemList}`}>
                                                 {

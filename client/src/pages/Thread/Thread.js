@@ -60,24 +60,11 @@ export default class Thread extends Component {
    * Load state
    */
   componentDidMount = () => {
-    try {
-      this.setState(
-        {
-          threadId: this.state.props.location.state[0],
-          threadTitle: this.state.props.location.state[1],
-          threadTitleBackup: this.state.props.location.state[1],
-          threadDescription: this.state.props.location.state[2],
-          threadDescriptionBackup: this.state.props.location.state[2],
-          threadCategory: this.state.props.location.state[3],
-          formattedEmail: this.state.props.location.state[4],
-          formattedDate: this.state.props.location.state[5]
-        }, () => {
-          this.getAllThreadComments();
-          this.incrementViews();
-        });
-    } catch (e) {
-      window.location = "/";
-    }
+    this.setState({ threadId: atob(this.props.match.params.threadId) },
+      () => {
+        this.getAllThreadComments();
+        this.incrementViews();
+      });
   };
 
   /**
@@ -107,11 +94,7 @@ export default class Thread extends Component {
    * Simulate the back button to go to the previous page
    */
   backButton = () => {
-    try {
-      window.history.back();
-    } catch (e) {
-      window.location = "/";
-    }
+    window.location = "/forum";
   };
 
   /**
@@ -164,7 +147,14 @@ export default class Thread extends Component {
   getAllThreadComments = () => {
     forumApi.getAllThreadComments(this.state.threadId)
       .then(res => {
-        this.setState({ allThreads: res.data[0] },
+        this.setState({
+          allThreads: res.data[0],
+          threadTitle: res.data[0].threadTitle,
+          threadTitleBackup: res.data[0].threadTitle,
+          threadDescription: res.data[0].threadDescription,
+          threadDescriptionBackup: res.data[0].threadDescription,
+          threadCategory: res.data[0].threadCategory
+        },
           () => this.getUserInformation());
       })
       .catch(err => {
