@@ -18,7 +18,7 @@ export default {
     return axios.get(`/api/users/${creatorId}/${vehicleId}/vehicle`);
   },
   // Retrieve all information for the targeted user
-  findUserInformationForOneUser: id => {
+  getUserInfoPartial: id => {
     return axios.get(`/api/users/${id}/user`);
   },
   // Add a new vehicle
@@ -66,12 +66,36 @@ export default {
   saveThemeForUser: (creatorId, themeType) => {
     return axios.put(`/api/users/${creatorId}/${themeType}`);
   },
-  // Record the comment id in the user database
+  // Record the comment id to the user database
   recordVotedThreadComment: (creatorId, commentId) => {
     return axios.put(`/api/users/${creatorId}/${commentId}/vote`);
   },
-  // Get the vehicle count for the user
+  // Get the vehicle count from the user
   getVehicleCount: creatorId => {
     return axios.get(`/api/users/${creatorId}/count`);
+  },
+  // Get the email from the user
+  getEmail: creatorId => {
+    return axios.get(`/api/users/${creatorId}/email`);
+  },
+  // Get the roles from the user
+  getRoles: creatorId => {
+    return axios.get(`/api/users/${creatorId}/roles`);
+  },
+  // Get the theme from the user
+  getTheme: creatorId => {
+    return axios.get(`/api/users/${creatorId}/theme`);
+  },
+  // Get the background picture from the user
+  getBackgroundPicture: creatorId => {
+    return axios.get(`/api/users/${creatorId}/background`);
+  },
+  // Get the voted comments from the user
+  getVotedComments: creatorId => {
+    return axios.get(`/api/users/${creatorId}/votes`);
+  },
+  // Get the vehicles from the user
+  getUserVehicles: creatorId => {
+    return axios.get(`/api/users/${creatorId}/vehicles`);
   }
 };

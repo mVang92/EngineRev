@@ -35,6 +35,8 @@ export default class Updates extends Component {
     };
   };
 
+  uniqueCreatorId;
+
   /**
    * Fetch all updates and release notes
    */
@@ -64,9 +66,9 @@ export default class Updates extends Component {
    */
   addOneUpdate = e => {
     e.preventDefault();
-    userApi.findUserInformationForOneUser(this.state.userId)
+    userApi.getRoles(this.uniqueCreatorId)
       .then(res => {
-        if (res.data.roles.includes(defaults.adminRole)) {
+        if (res.data[0].roles.includes(defaults.adminRole)) {
           const payload = {
             updateChanges: this.state.updateChanges,
             knownIssues: this.state.knownIssues,
@@ -97,34 +99,39 @@ export default class Updates extends Component {
   getUpdates = () => {
     updateApi.getUpdates()
       .then(res => {
-        this.setState({ allUpdates: res.data }, () => this.findUserInformationForOneUser());
+        this.setState({ allUpdates: res.data }, () => this.getUserInfoPartial());
       })
       .catch(err => {
         this.errorNotification(err);
-        this.findUserInformationForOneUser();
+        this.getUserInfoPartial();
       });
   };
 
   /**
    * Retrieve the information for the user then load the page
    */
-  findUserInformationForOneUser = () => {
+  getUserInfoPartial = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        userApi.findUserInformationForOneUser(user.uid)
-          .then(res => {
+        this.uniqueCreatorId = user.uid;
+        const roles = userApi.getRoles(this.uniqueCreatorId)
+        const partialInfo = userApi.getUserInfoPartial(this.uniqueCreatorId)
+        return Promise.all([roles, partialInfo])
+          .then(([roles, partialInfo]) => {
             try {
               this.setState({
                 userId: user.uid,
-                roles: res.data.roles,
-                theme: res.data.theme,
-                backgroundPicture: res.data.backgroundPicture,
+                roles: roles.data[0].roles,
+                theme: partialInfo.data.theme,
+                backgroundPicture: partialInfo.data.backgroundPicture,
                 pageLoaded: true,
-              }, () => this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture)));
+              }, () => {
+                this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture))
+              });
             } catch (err) {
               this.setState({ refreshCounter: this.state.refreshCounter + 1 });
               if (this.state.refreshCounter <= 10) {
-                this.findUserInformationForOneUser();
+                this.getUserInfoPartial();
               } else {
                 this.errorNotification(err);
                 this.setState({ pageLoaded: true });
@@ -224,9 +231,10 @@ export default class Updates extends Component {
    * @param newKnownIssues The known issues to update the old one
    */
   handleUpdateOneReleaseNote = (newReleaseNotes, newKnownIssues) => {
-    userApi.findUserInformationForOneUser(this.state.userId)
+    console.log(this.uniqueCreatorId)
+    userApi.getRoles(this.uniqueCreatorId)
       .then(res => {
-        if (res.data.roles.includes(defaults.adminRole)) {
+        if (res.data[0].roles.includes(defaults.adminRole)) {
           let payload = {
             newReleaseNotes,
             newKnownIssues
@@ -256,9 +264,9 @@ export default class Updates extends Component {
    * Delete the release note from record
    */
   handleDeleteOneReleaseNote = () => {
-    userApi.findUserInformationForOneUser(this.state.userId)
+    userApi.getRoles(this.uniqueCreatorId)
       .then(res => {
-        if (res.data.roles.includes(defaults.adminRole)) {
+        if (res.data[0].roles.includes(defaults.adminRole)) {
           this.setState({ disableConfirmDeleteReleaseNoteButton: true });
           updateApi.deleteOneReleaseNote(this.state.updateId)
             .then(() => {

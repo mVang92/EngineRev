@@ -35,9 +35,12 @@ module.exports = {
   /**
    * Find all vehicles belonging to one user
    */
-  findUserInfoForOneUser: (req, res) => {
+  getUserInfoPartial: (req, res) => {
     db.Users
-      .findOne({ creator: req.params.id })
+      .findOne(
+        { creator: req.params.id },
+        { _id: 0, creator: 1, backgroundPicture: 1, email: 1, theme: 1 }
+      )
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
@@ -259,7 +262,7 @@ module.exports = {
   },
 
   /**
-   * Record the comment id in the user database
+   * Record the comment id to the user database
    */
   recordVotedThreadComment: (req, res) => {
     db.Users
@@ -272,7 +275,7 @@ module.exports = {
   },
 
   /**
-   * Get the vehicle count for the user
+   * Get the vehicle count from the user
    */
   getVehicleCount: (req, res) => {
     db.Users
@@ -284,11 +287,71 @@ module.exports = {
           {
             $group: {
               _id: "$vehicles",
-              total: { $sum: { $size: "$vehicles" } }
+              total: { $sum: { $size: "$vehicles" } }, _id: 0
             }
           }
         ]
       )
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Get the email from the user
+   */
+  getEmail: (req, res) => {
+    db.Users
+      .find({ creator: req.params.creatorId }, { _id: 0, email: 1 })
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Get the roles from the user
+   */
+  getRoles: (req, res) => {
+    db.Users
+      .find({ creator: req.params.creatorId }, { _id: 0, roles: 1 })
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Get the theme from the user
+   */
+  getTheme: (req, res) => {
+    db.Users
+      .find({ creator: req.params.creatorId }, { _id: 0, theme: 1 })
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Get the background picture from the user
+   */
+  getBackgroundPicture: (req, res) => {
+    db.Users
+      .find({ creator: req.params.creatorId }, { _id: 0, backgroundPicture: 1 })
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Get the voted comments from the user
+   */
+  getVotedComments: (req, res) => {
+    db.Users
+      .find({ creator: req.params.creatorId }, { _id: 0, votedComments: 1 })
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Get the vehicles from the user
+   */
+  getUserVehicles: (req, res) => {
+    db.Users
+      .find({ creator: req.params.creatorId }, { _id: 0, vehicles: 1 })
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },

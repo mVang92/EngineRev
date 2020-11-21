@@ -8,7 +8,7 @@ const MyVehiclesSection = props => {
     reloadPage,
     currentTheme
   } = props;
-
+  
   return (
     <div className="text-center">
       {

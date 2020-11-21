@@ -5,7 +5,7 @@ const forumController = require("../../controllers/forumController");
 router
     .route("/")
     .post(forumController.addOneThread)
-    .get(forumController.getAllThreads);
+    .get(forumController.getAllThreadsPartial);
 
 // Matches with "/api/forum/:threadId/addComment"
 router
@@ -15,7 +15,7 @@ router
 // Matches with "/api/forum/:threadId/thread"
 router
     .route("/:threadId/thread")
-    .get(forumController.getAllThreadComments)
+    .get(forumController.getThreadData)
 
 // Matches with "/api/forum/:threadId/updateThreadDetails"
 router

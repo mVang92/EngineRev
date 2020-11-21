@@ -60,6 +60,8 @@ export default class Account extends Component {
     };
   };
 
+  userId;
+
   /**
    * Firebase onAuthStateChanged
    */
@@ -78,7 +80,6 @@ export default class Account extends Component {
           this.setState({
             user: user,
             loggedin: true,
-            userEmail: this.props.location.state[0],
             userAccountCreationTime: this.props.location.state[1],
             userDisplayName: this.props.location.state[2],
             userPhotoUrl: this.props.location.state[3],
@@ -91,7 +92,7 @@ export default class Account extends Component {
             if (!user.displayName) {
               this.setState({ userDisplayName: this.state.defaultDisplayName });
             }
-            this.getVehicleCount();
+            this.getUserData();
           });
         } catch (err) {
           this.setState({ loggedin: false });
@@ -106,6 +107,44 @@ export default class Account extends Component {
   handleChange = e => {
     let { name, value } = e.target;
     this.setState({ [name]: value });
+  };
+
+  /**
+   * Get data for the user and load the page after data retrieval
+   */
+  getUserData = () => {
+    this.userId = this.state.userId;
+    const vehicleCount = userApi.getVehicleCount(this.userId);
+    const email = userApi.getEmail(this.userId);
+    const roles = userApi.getRoles(this.userId);
+    const theme = userApi.getTheme(this.userId);
+    const backgroundPicture = userApi.getBackgroundPicture(this.userId);
+    return Promise.all([vehicleCount, email, roles, theme, backgroundPicture])
+      .then(([vehicleCount, email, roles, theme, backgroundPicture]) => {
+        try {
+          this.setState({
+            vehicleCount: vehicleCount.data[0].total,
+            userEmail: email.data[0].email,
+            roles: roles.data[0].roles,
+            theme: theme.data[0].theme,
+            backgroundPicture: backgroundPicture.data[0].backgroundPicture
+          }, () => {
+            this.setState({ pageLoaded: true });
+            this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture))
+          });
+        } catch (err) {
+          this.setState({
+            pageLoaded: true,
+            unableToLoadDatabase: true
+          }, this.errorNotification(err));
+        }
+      })
+      .catch(err => {
+        this.setState({
+          loadingError: err,
+          pageLoaded: true
+        }, this.errorNotification(err))
+      });
   };
 
   /**
@@ -140,7 +179,7 @@ export default class Account extends Component {
         .then(() => {
           this.setState({ disableThemeToggleButton: false }, () => {
             eventLogHandler.successful(creatorId, email, event);
-            this.getVehicleData()
+            this.getUserData();
           });
         })
         .catch(err => {
@@ -149,48 +188,6 @@ export default class Account extends Component {
             this.errorNotification(err);
           });
         });
-    }
-  };
-
-  /**
-   * Get the vehicle count for the user
-   */
-  getVehicleCount = () => {
-    userApi.getVehicleCount(this.state.userId)
-      .then(res => {
-        try {
-          this.setState({ vehicleCount: res.data[0].total }, this.getVehicleData());
-        } catch (err) {
-          this.setState({ vehicleCount: <div className="text-danger">{err.toString()}</div> }, this.getVehicleData());
-        }
-      })
-      .catch(err => this.errorNotification(err));
-  }
-
-  /**
-   * Retrieve the information for the user then load the page
-   */
-  getVehicleData = () => {
-    if (this.state.userId) {
-      userApi.findUserInformationForOneUser(this.state.userId)
-        .then(res => {
-          try {
-            this.setState({
-              backgroundPicture: res.data.backgroundPicture,
-              roles: res.data.roles,
-              theme: res.data.theme,
-              pageLoaded: true
-            }, () => this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture)))
-          } catch (err) {
-            this.setState({
-              pageLoaded: true,
-              unableToLoadDatabase: true
-            }, this.errorNotification(err))
-          }
-        })
-        .catch(err => this.setState({ loadingError: err }, this.loadVehiclesFailNotification(err)));
-    } else {
-      this.getVehicleData();
     }
   };
 
@@ -254,7 +251,7 @@ export default class Account extends Component {
     userApi.updateUserBackgroundPicture(this.state.userId, newBackgroundPicture)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
-        this.getVehicleData();
+        this.getUserData();
         this.setState({
           showUpdateBackgroundPictureModal: false,
           newBackgroundPicture: ""
@@ -375,9 +372,9 @@ export default class Account extends Component {
    */
   canUserUpdatePassword = e => {
     e.preventDefault();
-    userApi.findUserInformationForOneUser(this.state.userId)
+    userApi.getRoles(this.userId)
       .then(res => {
-        if (res.data.roles.includes(defaults.testUserRole)) {
+        if (res.data[0].roles.includes(defaults.testUserRole)) {
           this.errorNotification(defaults.noAuthorizationToPerformAction);
           this.setState({
             newPassword: "",
@@ -395,9 +392,9 @@ export default class Account extends Component {
    */
   canUserUpdateEmail = e => {
     e.preventDefault();
-    userApi.findUserInformationForOneUser(this.state.userId)
+    userApi.getRoles(this.state.userId)
       .then(res => {
-        if (res.data.roles.includes(defaults.testUserRole)) {
+        if (res.data[0].roles.includes(defaults.testUserRole)) {
           this.errorNotification(defaults.noAuthorizationToPerformAction);
           this.setState({ newEmail: "" });
         } else {
@@ -589,15 +586,6 @@ export default class Account extends Component {
    */
   resetFieldNotification = () => {
     toast.info(defaults.inputFieldReset);
-  };
-
-  /**
-   * Display the error notification when an error occurs while loading vehicles
-   * 
-   * @param err the error message to display to the user
-   */
-  loadVehiclesFailNotification = err => {
-    toast.error(`Loading Vehicles ${err.toString()}`);
   };
 
   /**

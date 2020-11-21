@@ -16,21 +16,35 @@ checkIfStringIsBlank = string => {
 module.exports = {
 
     /**
-     * Get all threads on record
+     * Get all threads on record via partial
      */
-    getAllThreads: (req, res) => {
+    getAllThreadsPartial: (req, res) => {
         db.Forum
-            .find(req.query)
+            .find(req.query, {
+                creator: 0,
+                hits: 0,
+                "comments._id": 0,
+                "comments.votes": 0,
+                "comments.edited": 0,
+                "comments.email": 0,
+                "comments.creator": 0,
+                "comments.comment": 0,
+                "comments.date": 0
+            })
             .sort({ date: -1 })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
 
     /**
-     * Get all comments to a thread
+     * Get one thread
      */
-    getAllThreadComments: (req, res) => {
-        db.Forum.find({ _id: req.params.threadId })
+    getThreadData: (req, res) => {
+        db.Forum
+            .find(
+                { _id: req.params.threadId },
+                { _id: 0, views: 0, hits: 0, __v: 0 }
+            )
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },

@@ -27,7 +27,10 @@ module.exports = {
      */
     getEventsForUser: (req, res) => {
         db.EventLog
-            .find({ creator: req.params.creatorId })
+            .find(
+                { creator: req.params.creatorId },
+                { _id: 0, __v: 0, creator: 0 }
+            )
             .sort({ date: -1 })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));

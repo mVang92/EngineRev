@@ -32,11 +32,13 @@ export default class Forum extends Component {
     };
   };
 
+  uniqueCreatorId;
+
   /**
    * Perform these actions upon page load
    */
   componentDidMount = () => {
-    this.getAllThreads();
+    this.getAllThreadsPartial();
   };
 
   /**
@@ -68,37 +70,32 @@ export default class Forum extends Component {
    * Gets all of the threads from the database
    * If successful or if there is an error, then find the user information
    */
-  getAllThreads = () => {
-    forumApi.getAllThreads()
-      .then(res => {
-        this.setState({ allThreads: res.data }, () => this.getUserInformation());
-      })
+  getAllThreadsPartial = () => {
+    forumApi.getAllThreadsPartial()
+      .then(res => this.setState({ allThreads: res.data }, () => this.getUserInfoPartial()))
       .catch(err => {
         this.errorNotification(err);
-        this.getUserInformation();
+        this.getUserInfoPartial();
       });
   };
 
   /**
    * Retrieve the information for the user then load the page
    */
-  getUserInformation = () => {
+  getUserInfoPartial = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
+        this.uniqueCreatorId = user.uid;
         this.setState({
           loggedin: true,
           uniqueCreatorId: user.uid,
           email: user.email,
           displayName: user.displayName
         }, () => {
-          if (!user.photoURL) {
-            this.setState({ userPhotoUrl: defaults.defaultProfilePicture });
-          }
-          if (!user.displayName) {
-            this.setState({ displayName: defaults.defaultDisplayName });
-          }
+          if (!user.photoURL) this.setState({ userPhotoUrl: defaults.defaultProfilePicture });
+          if (!user.displayName) this.setState({ displayName: defaults.defaultDisplayName });
         });
-        userApi.findUserInformationForOneUser(user.uid)
+        userApi.getUserInfoPartial(user.uid)
           .then(res => {
             try {
               this.setState({
@@ -109,7 +106,7 @@ export default class Forum extends Component {
             } catch (err) {
               this.setState({ refreshCounter: this.state.refreshCounter + 1 });
               if (this.state.refreshCounter <= 10) {
-                this.getUserInformation();
+                this.getUserInfoPartial();
               } else {
                 this.errorNotification(err);
                 this.setState({ pageLoaded: true });
@@ -131,9 +128,9 @@ export default class Forum extends Component {
    */
   validateThreadInputValues = e => {
     e.preventDefault();
-    userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+    userApi.getUserInfoPartial(this.uniqueCreatorId)
       .then(res => {
-        if (res.data.creator) {
+        if (res.data.creator === this.state.uniqueCreatorId) {
           if (
             this.state.threadTitle === "" ||
             this.state.threadDescription === "" ||
@@ -143,8 +140,7 @@ export default class Forum extends Component {
             this.errorNotification(defaults.threadDetailsCannotBeBlank);
           } else {
             let element = document.getElementById("threadCategoryDropdown");
-            let threadCategory = element.options[element.selectedIndex].value;
-            this.handleAddOneThread(threadCategory);
+            this.handleAddOneThread(element.options[element.selectedIndex].value);
           }
         } else {
           alert(defaults.noAuthorizationToPerformAction);
@@ -183,7 +179,7 @@ export default class Forum extends Component {
         }, () => {
           eventLogHandler.successful(creatorId, email, event);
           this.successNotification(defaults.addThreadSuccessfully);
-          this.getAllThreads();
+          this.getAllThreadsPartial();
         });
       })
       .catch(err => {

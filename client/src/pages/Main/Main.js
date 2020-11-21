@@ -30,7 +30,7 @@ export default class App extends Component {
    * Find the user information when the page loads
    */
   componentDidMount() {
-    this.findUserInformationForOneUser(this.state.props.user.uid);
+    this.getUserInfoPartial(this.state.props.user.uid);
   };
 
   /**
@@ -38,16 +38,18 @@ export default class App extends Component {
    * 
    * @param userId the unique id from Firebase console
    */
-  findUserInformationForOneUser = userId => {
+  getUserInfoPartial = userId => {
     if (userId) {
-      userApi.findUserInformationForOneUser(userId)
-        .then(res =>
+      const userInfo = userApi.getUserInfoPartial(userId);
+      const vehicles = userApi.getUserVehicles(userId);
+      return Promise.all([userInfo, vehicles])
+        .then(([userInfo, vehicles]) =>
           this.setState({
-            vehicleData: res.data,
-            theme: res.data.theme,
-            backgroundPicture: res.data.backgroundPicture,
+            vehicleData: vehicles.data[0],
+            theme: userInfo.data.theme,
+            backgroundPicture: userInfo.data.backgroundPicture,
             uid: userId,
-            pageLoaded: true,
+            pageLoaded: true
           }, () => {
             this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture));
             this.state.props.checkUserDisplayName(this.state.props.user);
@@ -57,7 +59,7 @@ export default class App extends Component {
           if (this.state.theme === "") {
             this.setState({ refreshCounter: this.state.refreshCounter + 1 });
             if (this.state.refreshCounter <= 10) {
-              this.findUserInformationForOneUser(userId);
+              this.getUserInfoPartial(userId);
             } else {
               this.setState({
                 pageLoaded: true,
@@ -132,7 +134,7 @@ export default class App extends Component {
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
         this.state.props.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
-        this.findUserInformationForOneUser(this.state.uid);
+        this.getUserInfoPartial(this.state.uid);
         this.setState({ disableAddVehicleButton: false });
         document.getElementById("addVehicleInputForm").reset();
       })
