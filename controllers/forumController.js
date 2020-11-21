@@ -43,7 +43,8 @@ module.exports = {
         db.Forum
             .find(
                 { _id: req.params.threadId },
-                { _id: 0, views: 0, hits: 0, __v: 0 })
+                { _id: 0, views: 0, hits: 0, __v: 0 }
+            )
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },

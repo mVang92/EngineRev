@@ -2,20 +2,20 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const forumSchema = new Schema({
-  creator: { type: String },
-  email: { type: String },
-  threadTitle: { type: String },
-  threadDescription: { type: String },
-  threadCategory: { type: String },
-  views: { type: Number },
-  hits: { type: Number },
+  creator: { type: String, required: true  },
+  email: { type: String, required: true  },
+  threadTitle: { type: String, required: true  },
+  threadDescription: { type: String, required: true  },
+  threadCategory: { type: String, required: true  },
+  views: { type: Number, required: true  },
+  hits: { type: Number, required: true  },
   date: { type: Date, default: Date.now },
   comments: [{
-    creator: { type: String },
-    email: { type: String },
-    comment: { type: String },
-    votes: { type: Number },
-    edited: { type: Boolean },
+    creator: { type: String, required: true  },
+    email: { type: String, required: true  },
+    comment: { type: String, required: true  },
+    votes: { type: Number, required: true  },
+    edited: { type: Boolean, required: true  },
     date: { type: Date, default: Date.now }
   }]
 });

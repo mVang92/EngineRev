@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  creator: { type: String },
-  email: { type: String },
+  creator: { type: String, required: true },
+  email: { type: String, required: true },
   roles: [{}],
-  theme: { type: String },
+  theme: { type: String, required: true },
   backgroundPicture: { type: String },
   votedComments: [{}],
   vehicles: [{

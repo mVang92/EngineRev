@@ -32,6 +32,8 @@ export default class Forum extends Component {
     };
   };
 
+  uniqueCreatorId;
+
   /**
    * Perform these actions upon page load
    */
@@ -70,9 +72,7 @@ export default class Forum extends Component {
    */
   getAllThreadsPartial = () => {
     forumApi.getAllThreadsPartial()
-      .then(res => {
-        this.setState({ allThreads: res.data }, () => this.getUserInfoPartial());
-      })
+      .then(res => this.setState({ allThreads: res.data }, () => this.getUserInfoPartial()))
       .catch(err => {
         this.errorNotification(err);
         this.getUserInfoPartial();
@@ -85,6 +85,7 @@ export default class Forum extends Component {
   getUserInfoPartial = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
+        this.uniqueCreatorId = user.uid;
         this.setState({
           loggedin: true,
           uniqueCreatorId: user.uid,
@@ -127,9 +128,9 @@ export default class Forum extends Component {
    */
   validateThreadInputValues = e => {
     e.preventDefault();
-    userApi.getUserInfoPartial(this.state.uniqueCreatorId)
+    userApi.getUserInfoPartial(this.uniqueCreatorId)
       .then(res => {
-        if (res.data.creator) {
+        if (res.data.creator === this.state.uniqueCreatorId) {
           if (
             this.state.threadTitle === "" ||
             this.state.threadDescription === "" ||
@@ -139,8 +140,7 @@ export default class Forum extends Component {
             this.errorNotification(defaults.threadDetailsCannotBeBlank);
           } else {
             let element = document.getElementById("threadCategoryDropdown");
-            let threadCategory = element.options[element.selectedIndex].value;
-            this.handleAddOneThread(threadCategory);
+            this.handleAddOneThread(element.options[element.selectedIndex].value);
           }
         } else {
           alert(defaults.noAuthorizationToPerformAction);

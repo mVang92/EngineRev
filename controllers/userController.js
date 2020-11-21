@@ -287,7 +287,7 @@ module.exports = {
           {
             $group: {
               _id: "$vehicles",
-              total: { $sum: { $size: "$vehicles" } }
+              total: { $sum: { $size: "$vehicles" } }, _id: 0
             }
           }
         ]
