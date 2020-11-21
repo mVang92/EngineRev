@@ -36,7 +36,7 @@ export default class Forum extends Component {
    * Perform these actions upon page load
    */
   componentDidMount = () => {
-    this.getAllThreads();
+    this.getAllThreadsPartial();
   };
 
   /**
@@ -68,21 +68,21 @@ export default class Forum extends Component {
    * Gets all of the threads from the database
    * If successful or if there is an error, then find the user information
    */
-  getAllThreads = () => {
-    forumApi.getAllThreads()
+  getAllThreadsPartial = () => {
+    forumApi.getAllThreadsPartial()
       .then(res => {
-        this.setState({ allThreads: res.data }, () => this.getUserPartialInfo());
+        this.setState({ allThreads: res.data }, () => this.getUserInfoPartial());
       })
       .catch(err => {
         this.errorNotification(err);
-        this.getUserPartialInfo();
+        this.getUserInfoPartial();
       });
   };
 
   /**
    * Retrieve the information for the user then load the page
    */
-  getUserPartialInfo = () => {
+  getUserInfoPartial = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({
@@ -91,14 +91,10 @@ export default class Forum extends Component {
           email: user.email,
           displayName: user.displayName
         }, () => {
-          if (!user.photoURL) {
-            this.setState({ userPhotoUrl: defaults.defaultProfilePicture });
-          }
-          if (!user.displayName) {
-            this.setState({ displayName: defaults.defaultDisplayName });
-          }
+          if (!user.photoURL) this.setState({ userPhotoUrl: defaults.defaultProfilePicture });
+          if (!user.displayName) this.setState({ displayName: defaults.defaultDisplayName });
         });
-        userApi.getUserPartialInfo(user.uid)
+        userApi.getUserInfoPartial(user.uid)
           .then(res => {
             try {
               this.setState({
@@ -109,7 +105,7 @@ export default class Forum extends Component {
             } catch (err) {
               this.setState({ refreshCounter: this.state.refreshCounter + 1 });
               if (this.state.refreshCounter <= 10) {
-                this.getUserPartialInfo();
+                this.getUserInfoPartial();
               } else {
                 this.errorNotification(err);
                 this.setState({ pageLoaded: true });
@@ -131,7 +127,7 @@ export default class Forum extends Component {
    */
   validateThreadInputValues = e => {
     e.preventDefault();
-    userApi.getUserPartialInfo(this.state.uniqueCreatorId)
+    userApi.getUserInfoPartial(this.state.uniqueCreatorId)
       .then(res => {
         if (res.data.creator) {
           if (
@@ -183,7 +179,7 @@ export default class Forum extends Component {
         }, () => {
           eventLogHandler.successful(creatorId, email, event);
           this.successNotification(defaults.addThreadSuccessfully);
-          this.getAllThreads();
+          this.getAllThreadsPartial();
         });
       })
       .catch(err => {

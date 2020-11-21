@@ -33,7 +33,7 @@ export default class About extends Component {
   getUserInformation = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        userApi.findUserInformationForOneUser(user.uid)
+        userApi.getUserInfoPartial(user.uid)
           .then(res => {
             try {
               this.setState({

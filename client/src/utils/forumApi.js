@@ -6,11 +6,11 @@ export default {
         return axios.post(`/api/forum`, payload);
     },
     // Get all threads
-    getAllThreads: () => {
+    getAllThreadsPartial: () => {
         return axios.get("/api/forum");
     },
     // Get all comments for one thread
-    getAllThreadComments: threadId => {
+    getThreadData: threadId => {
         return axios.get(`/api/forum/${threadId}/thread`);
     },
     // Add one comment to one thread

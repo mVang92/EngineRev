@@ -99,22 +99,23 @@ export default class Updates extends Component {
   getUpdates = () => {
     updateApi.getUpdates()
       .then(res => {
-        this.setState({ allUpdates: res.data }, () => this.getUserPartialInfo());
+        this.setState({ allUpdates: res.data }, () => this.getUserInfoPartial());
       })
       .catch(err => {
         this.errorNotification(err);
-        this.getUserPartialInfo();
+        this.getUserInfoPartial();
       });
   };
 
   /**
    * Retrieve the information for the user then load the page
    */
-  getUserPartialInfo = () => {
+  getUserInfoPartial = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        const roles = userApi.getRoles(user.uid)
-        const partialInfo = userApi.getUserPartialInfo(user.uid)
+        this.uniqueCreatorId = user.uid;
+        const roles = userApi.getRoles(this.uniqueCreatorId)
+        const partialInfo = userApi.getUserInfoPartial(this.uniqueCreatorId)
         return Promise.all([roles, partialInfo])
           .then(([roles, partialInfo]) => {
             try {
@@ -125,13 +126,12 @@ export default class Updates extends Component {
                 backgroundPicture: partialInfo.data.backgroundPicture,
                 pageLoaded: true,
               }, () => {
-                this.uniqueCreatorId = this.state.uniqueCreatorId;
                 this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture))
               });
             } catch (err) {
               this.setState({ refreshCounter: this.state.refreshCounter + 1 });
               if (this.state.refreshCounter <= 10) {
-                this.getUserPartialInfo();
+                this.getUserInfoPartial();
               } else {
                 this.errorNotification(err);
                 this.setState({ pageLoaded: true });
@@ -231,6 +231,7 @@ export default class Updates extends Component {
    * @param newKnownIssues The known issues to update the old one
    */
   handleUpdateOneReleaseNote = (newReleaseNotes, newKnownIssues) => {
+    console.log(this.uniqueCreatorId)
     userApi.getRoles(this.uniqueCreatorId)
       .then(res => {
         if (res.data[0].roles.includes(defaults.adminRole)) {

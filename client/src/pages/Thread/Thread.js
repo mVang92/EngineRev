@@ -62,7 +62,7 @@ export default class Thread extends Component {
   componentDidMount = () => {
     this.setState({ threadId: atob(this.props.match.params.threadId) },
       () => {
-        this.getAllThreadComments();
+        this.getThreadData();
         this.incrementViews();
       });
   };
@@ -109,10 +109,10 @@ export default class Thread extends Component {
   /**
    * Retrieve the information for the user then load the page
    */
-  getUserPartialInfo = () => {
+  getUserInfoPartial = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        userApi.getUserPartialInfo(user.uid)
+        userApi.getUserInfoPartial(user.uid)
           .then(res => {
             try {
               this.setState({
@@ -144,8 +144,8 @@ export default class Thread extends Component {
   /**
    * Get all comments to the thread
    */
-  getAllThreadComments = () => {
-    forumApi.getAllThreadComments(this.state.threadId)
+  getThreadData = () => {
+    forumApi.getThreadData(this.state.threadId)
       .then(res => {
         this.setState({
           allThreads: res.data[0],
@@ -155,7 +155,7 @@ export default class Thread extends Component {
           threadDescriptionBackup: res.data[0].threadDescription,
           threadCategory: res.data[0].threadCategory
         },
-          () => this.getUserPartialInfo());
+          () => this.getUserInfoPartial());
       })
       .catch(err => {
         this.errorNotification(err);
@@ -186,7 +186,7 @@ export default class Thread extends Component {
           () => {
             eventLogHandler.successful(creatorId, email, event);
             this.successNotification(defaults.addThreadCommentSucess);
-            this.getAllThreadComments();
+            this.getThreadData();
             let element = document.getElementById(defaults.commentsSection);
             element.scrollIntoView();
           });
@@ -229,7 +229,7 @@ export default class Thread extends Component {
    * Validate the user has permission to delete the thread
    */
   validateDeleteThread = () => {
-    userApi.getUserPartialInfo(this.state.uniqueCreatorId)
+    userApi.getUserInfoPartial(this.state.uniqueCreatorId)
       .then(res => {
         if (res.data.creator === this.uniqueCreatorId) {
           this.handleDeleteThread();
@@ -274,7 +274,7 @@ export default class Thread extends Component {
             this.setState({
               disableUpVoteButton: false,
               disableDownVoteButton: false
-            }, () => this.getAllThreadComments());
+            }, () => this.getThreadData());
           })
           .catch(err => {
             this.setState({
@@ -311,7 +311,7 @@ export default class Thread extends Component {
             this.setState({
               disableUpVoteButton: false,
               disableDownVoteButton: false
-            }, () => this.getAllThreadComments());
+            }, () => this.getThreadData());
           })
           .catch(err => {
             this.setState({
@@ -335,7 +335,7 @@ export default class Thread extends Component {
    * Validate the user is able to delete the comment
    */
   validateDeleteThreadComment = () => {
-    userApi.getUserPartialInfo(this.state.uniqueCreatorId)
+    userApi.getUserInfoPartial(this.state.uniqueCreatorId)
       .then(res => {
         if (res.data.creator === this.uniqueCreatorId) {
           this.handleDeleteThreadComment();
@@ -357,7 +357,7 @@ export default class Thread extends Component {
         eventLogHandler.successful(creatorId, email, event);
         this.successNotification(defaults.deleteThreadCommentSucess)
         this.hideDeleteThreadCommentModal();
-        this.getAllThreadComments();
+        this.getThreadData();
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
@@ -389,7 +389,7 @@ export default class Thread extends Component {
           eventLogHandler.successful(creatorId, email, event);
           this.successNotification(defaults.updateThreadCommentSucess);
           this.hideEditOneThreadCommentModal();
-          this.getAllThreadComments();
+          this.getThreadData();
         });
     }).catch(err => {
       eventLogHandler.failure(creatorId, email, event, err);
@@ -404,9 +404,9 @@ export default class Thread extends Component {
   validateAddOneCommentToThread = e => {
     e.preventDefault();
     this.setState({ disableSubmitCommentOnThreadButton: true });
-    userApi.getUserPartialInfo(this.state.uniqueCreatorId)
+    userApi.getUserInfoPartial(this.uniqueCreatorId)
       .then(res => {
-        if (res.data.creator === this.uniqueCreatorId) {
+        if (res.data.creator === this.state.uniqueCreatorId) {
           if (this.state.threadComment === "" || this.checkIfStringIsBlank(this.state.threadComment)) {
             this.setState({ disableSubmitCommentOnThreadButton: false });
             this.errorNotification(defaults.threadCommentsCannotBeBlank);
@@ -442,7 +442,7 @@ export default class Thread extends Component {
       let element = document.getElementById(defaults.threadCategoryDropdown);
       let threadCategory = element.options[element.selectedIndex].value;
       this.setState({ disableSaveEditThreadButton: true });
-      userApi.getUserPartialInfo(this.state.uniqueCreatorId)
+      userApi.getUserInfoPartial(this.state.uniqueCreatorId)
         .then(res => {
           if (res.data.creator === this.uniqueCreatorId) {
             this.handleUpdateThreadDetails(threadCategory);
@@ -467,20 +467,22 @@ export default class Thread extends Component {
       disableUpVoteButton: true,
       disableDownVoteButton: true
     });
-    userApi.getUserPartialInfo(this.state.uniqueCreatorId)
+    userApi.getUserInfoPartial(this.uniqueCreatorId)
       .then(res => {
-        if (res.data.creator === this.uniqueCreatorId) {
+        if (res.data.creator === this.state.uniqueCreatorId) {
           try {
-            let votedComments = res.data.votedComments;
-            if (votedComments.includes(commentId)) {
-              this.errorNotification(defaults.alreadyVotedOnComment);
-              this.setState({
-                disableUpVoteButton: false,
-                disableDownVoteButton: false
+            userApi.getVotedComments(this.uniqueCreatorId)
+              .then(res => {
+                if (res.data[0].votedComments.includes(commentId)) {
+                  this.errorNotification(defaults.alreadyVotedOnComment);
+                  this.setState({
+                    disableUpVoteButton: false,
+                    disableDownVoteButton: false
+                  });
+                } else {
+                  this.handleUpvoteComment(commentId);
+                }
               });
-            } else {
-              this.handleUpvoteComment(commentId);
-            }
           } catch (err) {
             this.doNoAuthorization();
           }
@@ -506,20 +508,22 @@ export default class Thread extends Component {
       disableUpVoteButton: true,
       disableDownVoteButton: true
     });
-    userApi.getUserPartialInfo(this.state.uniqueCreatorId)
+    userApi.getUserInfoPartial(this.uniqueCreatorId)
       .then(res => {
-        if (res.data.creator === this.uniqueCreatorId) {
+        if (res.data.creator === this.state.uniqueCreatorId) {
           try {
-            let votedComments = res.data.votedComments;
-            if (votedComments.includes(commentId)) {
-              this.errorNotification(defaults.alreadyVotedOnComment);
-              this.setState({
-                disableUpVoteButton: false,
-                disableDownVoteButton: false
+            userApi.getVotedComments(this.uniqueCreatorId)
+              .then(res => {
+                if (res.data[0].votedComments.includes(commentId)) {
+                  this.errorNotification(defaults.alreadyVotedOnComment);
+                  this.setState({
+                    disableUpVoteButton: false,
+                    disableDownVoteButton: false
+                  });
+                } else {
+                  this.handleDownvoteComment(commentId);
+                }
               });
-            } else {
-              this.handleDownvoteComment(commentId);
-            }
           } catch (err) {
             this.doNoAuthorization();
           }
@@ -549,7 +553,7 @@ export default class Thread extends Component {
     } else {
       newComment = commentToUpdate;
     }
-    userApi.getUserPartialInfo(this.state.uniqueCreatorId)
+    userApi.getUserInfoPartial(this.state.uniqueCreatorId)
       .then(res => {
         if (res.data.creator === this.uniqueCreatorId) {
           this.handleUpdateThreadComment(newComment);

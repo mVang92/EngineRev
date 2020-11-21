@@ -60,6 +60,8 @@ export default class Account extends Component {
     };
   };
 
+  userId;
+
   /**
    * Firebase onAuthStateChanged
    */
@@ -111,12 +113,12 @@ export default class Account extends Component {
    * Get data for the user and load the page after data retrieval
    */
   getUserData = () => {
-    const userId = this.state.userId;
-    const vehicleCount = userApi.getVehicleCount(userId);
-    const email = userApi.getEmail(userId);
-    const roles = userApi.getRoles(userId);
-    const theme = userApi.getTheme(userId);
-    const backgroundPicture = userApi.getBackgroundPicture(userId);
+    this.userId = this.state.userId;
+    const vehicleCount = userApi.getVehicleCount(this.userId);
+    const email = userApi.getEmail(this.userId);
+    const roles = userApi.getRoles(this.userId);
+    const theme = userApi.getTheme(this.userId);
+    const backgroundPicture = userApi.getBackgroundPicture(this.userId);
     return Promise.all([vehicleCount, email, roles, theme, backgroundPicture])
       .then(([vehicleCount, email, roles, theme, backgroundPicture]) => {
         try {
@@ -370,9 +372,9 @@ export default class Account extends Component {
    */
   canUserUpdatePassword = e => {
     e.preventDefault();
-    userApi.findUserInformationForOneUser(this.state.userId)
+    userApi.getRoles(this.userId)
       .then(res => {
-        if (res.data.roles.includes(defaults.testUserRole)) {
+        if (res.data[0].roles.includes(defaults.testUserRole)) {
           this.errorNotification(defaults.noAuthorizationToPerformAction);
           this.setState({
             newPassword: "",
@@ -390,9 +392,9 @@ export default class Account extends Component {
    */
   canUserUpdateEmail = e => {
     e.preventDefault();
-    userApi.findUserInformationForOneUser(this.state.userId)
+    userApi.getRoles(this.state.userId)
       .then(res => {
-        if (res.data.roles.includes(defaults.testUserRole)) {
+        if (res.data[0].roles.includes(defaults.testUserRole)) {
           this.errorNotification(defaults.noAuthorizationToPerformAction);
           this.setState({ newEmail: "" });
         } else {
