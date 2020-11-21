@@ -71,18 +71,18 @@ export default class Forum extends Component {
   getAllThreads = () => {
     forumApi.getAllThreads()
       .then(res => {
-        this.setState({ allThreads: res.data }, () => this.getUserInformation());
+        this.setState({ allThreads: res.data }, () => this.getUserPartialInfo());
       })
       .catch(err => {
         this.errorNotification(err);
-        this.getUserInformation();
+        this.getUserPartialInfo();
       });
   };
 
   /**
    * Retrieve the information for the user then load the page
    */
-  getUserInformation = () => {
+  getUserPartialInfo = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({
@@ -98,7 +98,7 @@ export default class Forum extends Component {
             this.setState({ displayName: defaults.defaultDisplayName });
           }
         });
-        userApi.findUserInformationForOneUser(user.uid)
+        userApi.getUserPartialInfo(user.uid)
           .then(res => {
             try {
               this.setState({
@@ -109,7 +109,7 @@ export default class Forum extends Component {
             } catch (err) {
               this.setState({ refreshCounter: this.state.refreshCounter + 1 });
               if (this.state.refreshCounter <= 10) {
-                this.getUserInformation();
+                this.getUserPartialInfo();
               } else {
                 this.errorNotification(err);
                 this.setState({ pageLoaded: true });
@@ -131,7 +131,7 @@ export default class Forum extends Component {
    */
   validateThreadInputValues = e => {
     e.preventDefault();
-    userApi.findUserInformationForOneUser(this.state.uniqueCreatorId)
+    userApi.getUserPartialInfo(this.state.uniqueCreatorId)
       .then(res => {
         if (res.data.creator) {
           if (

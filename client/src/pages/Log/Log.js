@@ -80,7 +80,7 @@ export default class Log extends Component {
           email: user.email,
           loggedin: true
         });
-        this.findUserInformationForOneUser(user.uid);
+        this.getUserPartialInfo(user.uid);
       };
     });
   };
@@ -98,8 +98,8 @@ export default class Log extends Component {
    * 
    * @param userUniqueId the unique id from Firebase console
    */
-  findUserInformationForOneUser = userUniqueId => {
-    userApi.findUserInformationForOneUser(userUniqueId)
+  getUserPartialInfo = userUniqueId => {
+    userApi.getUserPartialInfo(userUniqueId)
       .then(res => {
         this.setState({
           theme: res.data.theme,

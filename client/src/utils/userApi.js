@@ -18,7 +18,7 @@ export default {
     return axios.get(`/api/users/${creatorId}/${vehicleId}/vehicle`);
   },
   // Retrieve all information for the targeted user
-  findUserInformationForOneUser: id => {
+  getUserPartialInfo: id => {
     return axios.get(`/api/users/${id}/user`);
   },
   // Add a new vehicle
@@ -73,5 +73,21 @@ export default {
   // Get the vehicle count for the user
   getVehicleCount: creatorId => {
     return axios.get(`/api/users/${creatorId}/count`);
+  },
+  // Get the vehicle count for the user
+  getEmail: creatorId => {
+    return axios.get(`/api/users/${creatorId}/email`);
+  },
+  // Get the roles for the user
+  getRoles: creatorId => {
+    return axios.get(`/api/users/${creatorId}/roles`);
+  },
+  // Get the theme for the user
+  getTheme: creatorId => {
+    return axios.get(`/api/users/${creatorId}/theme`);
+  },
+  // Get the background picture for the user
+  getBackgroundPicture: creatorId => {
+    return axios.get(`/api/users/${creatorId}/background`);
   }
 };

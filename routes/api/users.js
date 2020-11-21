@@ -14,7 +14,7 @@ router
 // Matches with "/api/users/:id/user"
 router
   .route("/:id/user")
-  .get(controller.findUserInfoForOneUser)
+  .get(controller.getUserPartialInfo)
 
 // Matches with "/api/users/:id/addVehicle"
 router
@@ -75,5 +75,25 @@ router
 router
   .route("/:creatorId/count")
   .get(controller.getVehicleCount)
+
+// Matches with "/api/users/:creatorId/email"
+router
+  .route("/:creatorId/email")
+  .get(controller.getEmail)
+
+// Matches with "/api/users/:creatorId/roles"
+router
+  .route("/:creatorId/roles")
+  .get(controller.getRoles)
+
+// Matches with "/api/users/:creatorId/theme"
+router
+  .route("/:creatorId/theme")
+  .get(controller.getTheme)
+
+// Matches with "/api/users/:creatorId/background"
+router
+  .route("/:creatorId/background")
+  .get(controller.getBackgroundPicture)
 
 module.exports = router;

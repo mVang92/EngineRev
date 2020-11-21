@@ -30,7 +30,7 @@ export default class App extends Component {
    * Find the user information when the page loads
    */
   componentDidMount() {
-    this.findUserInformationForOneUser(this.state.props.user.uid);
+    this.getUserPartialInfo(this.state.props.user.uid);
   };
 
   /**
@@ -38,9 +38,9 @@ export default class App extends Component {
    * 
    * @param userId the unique id from Firebase console
    */
-  findUserInformationForOneUser = userId => {
+  getUserPartialInfo = userId => {
     if (userId) {
-      userApi.findUserInformationForOneUser(userId)
+      userApi.getUserPartialInfo(userId)
         .then(res =>
           this.setState({
             vehicleData: res.data,
@@ -57,7 +57,7 @@ export default class App extends Component {
           if (this.state.theme === "") {
             this.setState({ refreshCounter: this.state.refreshCounter + 1 });
             if (this.state.refreshCounter <= 10) {
-              this.findUserInformationForOneUser(userId);
+              this.getUserPartialInfo(userId);
             } else {
               this.setState({
                 pageLoaded: true,
@@ -132,7 +132,7 @@ export default class App extends Component {
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
         this.state.props.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
-        this.findUserInformationForOneUser(this.state.uid);
+        this.getUserPartialInfo(this.state.uid);
         this.setState({ disableAddVehicleButton: false });
         document.getElementById("addVehicleInputForm").reset();
       })

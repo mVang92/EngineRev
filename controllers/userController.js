@@ -35,9 +35,12 @@ module.exports = {
   /**
    * Find all vehicles belonging to one user
    */
-  findUserInfoForOneUser: (req, res) => {
+  getUserPartialInfo: (req, res) => {
     db.Users
-      .findOne({ creator: req.params.id })
+      .findOne(
+        { creator: req.params.id },
+        { backgroundPicture: 1, email: 1, vehicles: 1, theme: 1 }
+      )
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },
@@ -289,6 +292,46 @@ module.exports = {
           }
         ]
       )
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Get the email of the user
+   */
+  getEmail: (req, res) => {
+    db.Users
+      .find({ creator: req.params.creatorId }, { email: 1 })
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Get the roles of the user
+   */
+  getRoles: (req, res) => {
+    db.Users
+      .find({ creator: req.params.creatorId }, { roles: 1 })
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Get the theme of the user
+   */
+  getTheme: (req, res) => {
+    db.Users
+      .find({ creator: req.params.creatorId }, { theme: 1 })
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Get the background picture of the user
+   */
+  getBackgroundPicture: (req, res) => {
+    db.Users
+      .find({ creator: req.params.creatorId }, { backgroundPicture: 1 })
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   },

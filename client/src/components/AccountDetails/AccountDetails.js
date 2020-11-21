@@ -344,12 +344,11 @@ const AccountDetails = props => {
           newPassword={newPassword}
           confirmNewPassword={confirmNewPassword}
           disableUpdateEmailButton={disableUpdateEmailButton}
+          unableToLoadDatabase={unableToLoadDatabase}
         />
       </div>
       <hr className={currentTheme.hr} />
-      <BottomActionButtons
-        backToTopOfPage={backToTopOfPage}
-      />
+      <BottomActionButtons backToTopOfPage={backToTopOfPage} />
     </div>
   );
 };
