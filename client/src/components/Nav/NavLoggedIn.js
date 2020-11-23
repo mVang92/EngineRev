@@ -3,24 +3,9 @@ import { Link } from "react-router-dom";
 
 export const NavLoggedIn = props => {
     const {
-        userEmailForAccount,
-        userAccountCreationTime,
-        userAccountLastSignIn,
-        userDisplayName,
-        userProfilePicture,
-        userId
+        loggedin,
+        requestShowSignOutModal
     } = props;
-    const accountPage = {
-        pathname: "/account",
-        state: [
-            userEmailForAccount,
-            userAccountCreationTime,
-            userDisplayName,
-            userProfilePicture,
-            userAccountLastSignIn,
-            userId
-        ]
-    };
 
     return (
         <React.Fragment>
@@ -42,9 +27,9 @@ export const NavLoggedIn = props => {
                         </button>
                         <div className="dropdown-menu dropdown-menu-right">
                             {
-                                props.loggedin ?
+                                loggedin ?
                                     (
-                                        <Link to={accountPage}>
+                                        <Link to={{ pathname: "/account" }}>
                                             <button
                                                 id="accountNavButton"
                                                 className="dropdown-item"
@@ -91,7 +76,7 @@ export const NavLoggedIn = props => {
                                 id="signOutNavButton"
                                 className="dropdown-item"
                                 type="button"
-                                onClick={() => props.requestShowSignOutModal()}>
+                                onClick={() => requestShowSignOutModal()}>
                                 <div className="nav-item" title="Sign Out">Sign Out</div>
                             </button>
                         </div>

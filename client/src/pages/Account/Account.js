@@ -80,18 +80,14 @@ export default class Account extends Component {
           this.setState({
             user: user,
             loggedin: true,
-            userAccountCreationTime: this.props.location.state[1],
-            userDisplayName: this.props.location.state[2],
-            userPhotoUrl: this.props.location.state[3],
-            userAccountLastSignIn: this.props.location.state[4],
-            userId: this.props.location.state[5]
+            userAccountCreationTime: user.metadata.creationTime,
+            userDisplayName: user.displayName,
+            userPhotoUrl: user.photoURL,
+            userAccountLastSignIn: user.metadata.lastSignInTime,
+            userId: user.uid
           }, () => {
-            if (!user.photoURL) {
-              this.setState({ userPhotoUrl: this.state.defaultProfilePicture });
-            }
-            if (!user.displayName) {
-              this.setState({ userDisplayName: this.state.defaultDisplayName });
-            }
+            if (!user.photoURL) this.setState({ userPhotoUrl: this.state.defaultProfilePicture });
+            if (!user.displayName) this.setState({ userDisplayName: this.state.defaultDisplayName });
             this.getUserData();
           });
         } catch (err) {
@@ -130,7 +126,7 @@ export default class Account extends Component {
             backgroundPicture: backgroundPicture.data[0].backgroundPicture
           }, () => {
             this.setState({ pageLoaded: true });
-            this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture))
+            this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture));
           });
         } catch (err) {
           this.setState({
@@ -143,7 +139,7 @@ export default class Account extends Component {
         this.setState({
           loadingError: err,
           pageLoaded: true
-        }, this.errorNotification(err))
+        }, this.errorNotification(err));
       });
   };
 
