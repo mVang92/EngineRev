@@ -33,9 +33,6 @@ export default class App extends Component {
       confirmPassword: "",
       userProfilePicture: "",
       userEmailForAccount: "",
-      userAccountCreationTime: "",
-      userAccountLastSignIn: "",
-      userDisplayName: "",
       defaultDisplayName: defaults.defaultDisplayName,
       showSignInModal: false,
       showSignUpModal: false,
@@ -325,12 +322,7 @@ export default class App extends Component {
               (
                 <NavLoggedIn
                   loggedin={this.state.loggedin}
-                  userEmailForAccount={this.state.userEmailForAccount}
-                  userAccountCreationTime={this.state.userAccountCreationTime}
-                  userAccountLastSignIn={this.state.userAccountLastSignIn}
-                  userDisplayName={this.state.userDisplayName}
                   userProfilePicture={this.state.userProfilePicture}
-                  userId={this.state.userId}
                   requestShowSignOutModal={this.requestShowSignOutModal}
                   showSignOutModal={this.state.showSignOutModal}
                   requestHideSignOutModal={this.requestHideSignOutModal}
