@@ -14,8 +14,8 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 
 export default class Log extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       uid: "",
       email: "",
@@ -233,9 +233,7 @@ export default class Log extends Component {
     const event = events.deleteVehicleName;
     userApi.deleteVehicleName(this.state.vehicleId, null)
       .then(() => {
-        this.setState({
-          showEditOneVehicleNameModal: false
-        }, () => {
+        this.setState({ showEditOneVehicleNameModal: false }, () => {
           eventLogHandler.successful(creatorId, email, event);
           this.successNotification(defaults.vehicleNameUpdatedSuccessfully);
           this.getOneVehicle();
@@ -458,7 +456,7 @@ export default class Log extends Component {
       mileage: "",
       service: "",
       comment: ""
-    }, () => this.resetFieldsNotification());
+    }, () => toast.info(defaults.inputFieldsReset));
   };
 
   /**
@@ -544,12 +542,11 @@ export default class Log extends Component {
     const event = events.deleteOneServiceLog;
     userApi.deleteOneServiceLog(this.state.vehicleId, this.state.serviceLogId)
       .then(() => {
-        this.setState({ showDeleteOneLogModal: false },
-          () => {
-            eventLogHandler.successful(creatorId, email, event);
-            this.getOneVehicle();
-            this.successNotification(defaults.serviceLogDeletedSuccessfully);
-          });
+        this.setState({ showDeleteOneLogModal: false }, () => {
+          eventLogHandler.successful(creatorId, email, event);
+          this.getOneVehicle();
+          this.successNotification(defaults.serviceLogDeletedSuccessfully);
+        });
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
@@ -637,13 +634,6 @@ export default class Log extends Component {
    */
   updateOneServiceLogSuccessNotification = (date, mileage, service) => {
     toast.success(`Service Updated: ${service} at ${mileage} miles on ${date}.`);
-  };
-
-  /**
-   * Display the info notification when the user resets the fields to add a service log
-   */
-  resetFieldsNotification = () => {
-    toast.info(defaults.inputFieldsReset);
   };
 
   /**
