@@ -8,7 +8,7 @@ const MyVehiclesSection = props => {
     reloadPage,
     currentTheme
   } = props;
-  
+
   return (
     <div className="text-center">
       {
@@ -90,9 +90,7 @@ const MyVehiclesSection = props => {
                             </React.Fragment>
                           ) :
                           (
-                            <label>
-                              <strong>No Vehicles on Record</strong>
-                            </label>
+                            <label><strong>No Vehicles on Record</strong></label>
                           )
                       ) :
                       (

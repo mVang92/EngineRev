@@ -7,6 +7,7 @@ const LoggedIn = props => {
   return (
     <div className={`box ${props.currentTheme.background}`}>
       <AddVehicleSection
+        displayName={props.displayName}
         handleResetAddVehicleFields={props.handleResetAddVehicleFields}
         checkIfVehicleYearIsValid={props.checkIfVehicleYearIsValid}
         userProfilePicture={props.userProfilePicture}
