@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { defaults } from "../../assets/Defaults";
+import { Link } from "react-router-dom";
 import AddVehicleErrorModal from "../Modal/AddVehicleErrorModal";
 
 class AddVehicleSection extends Component {
@@ -59,21 +60,16 @@ class AddVehicleSection extends Component {
       <React.Fragment>
         <form id="addVehicleInputForm" onSubmit={this.checkIfVehicleInputsAreBlank.bind(this)}>
           <div className="text-center row">
-            {
-              this.props.userProfilePicture ?
-                (
-                  <div className="col-md-6 wrapword">
-                    <img id="mainPageProfilePicture" src={this.props.userProfilePicture} alt="You"/>
-                    <label><strong><span id="displayName"></span></strong></label>
-                  </div>
-                ) :
-                (
-                  <div className="col-md-6 wrapword">
-                    <img id="mainPageProfilePicture" src={this.state.defaultProfilePicture} alt="You"/>
-                    <label><strong><span id="displayName"></span></strong></label>
-                  </div>
-                )
-            }
+            <div className="col-md-6 wrapword">
+              <Link to={{ pathname: "/account" }}>
+                <img
+                  id="mainPageProfilePicture"
+                  src={this.props.userProfilePicture ? this.props.userProfilePicture : this.state.defaultProfilePicture}
+                  alt="You"
+                  title={this.props.displayName} />
+              </Link>
+              <label><strong><span id="displayName"></span></strong></label>
+            </div>
             <div className="col-md-6"></div>
           </div>
           <hr className={this.props.currentTheme.hr}></hr>

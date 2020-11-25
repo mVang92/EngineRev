@@ -7,6 +7,7 @@ import Container from "../../components/Container";
 import Loading from "../../components/Loading";
 import LoggedOut from "../../components/LoggedOut";
 import LoggedIn from "../../components/LoggedIn";
+import { defaults } from "../../assets/Defaults";
 
 export default class App extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ export default class App extends Component {
     this.state = {
       props: props,
       pageLoaded: false,
+      displayName: "",
       vehicleData: [],
       theme: "",
       uid: "",
@@ -49,6 +51,7 @@ export default class App extends Component {
             theme: userInfo.data.theme,
             backgroundPicture: userInfo.data.backgroundPicture,
             uid: userId,
+            displayName: this.state.props.user.displayName === null ? defaults.defaultDisplayName : this.state.props.user.displayName,
             pageLoaded: true
           }, () => {
             this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture));
@@ -170,6 +173,7 @@ export default class App extends Component {
                   <Container>
                     <LoggedIn
                       vehicleData={this.state.vehicleData}
+                      displayName={this.state.displayName}
                       handleResetAddVehicleFields={this.state.props.handleResetAddVehicleFields}
                       checkIfVehicleYearIsValid={this.checkIfVehicleYearIsValid}
                       userProfilePicture={this.state.props.userProfilePicture}
