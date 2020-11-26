@@ -588,6 +588,8 @@ input {
 }
 
 #mainPageProfilePicture {
+    box-shadow: 0px 2px 5px rgb(32, 32, 32);
+    transition-duration: 0.3s;
     border-radius: 50%;
     width: 3rem;
     height: 3rem;
@@ -595,8 +597,9 @@ input {
     margin-right: 5px;
 }
 
-#mainPageProfilePicture {
-    box-shadow: 0px 2px 5px rgb(32, 32, 32);
+#mainPageProfilePicture:hover {
+    box-shadow: 0px 2px 5px rgb(92, 92, 92);
+    transition-duration: 0.2s;
 }
 
 #profilePicture,

@@ -68,7 +68,7 @@ class AddVehicleSection extends Component {
                   alt="You"
                   title={this.props.displayName} />
               </Link>
-              <label><strong><span id="displayName"></span></strong></label>
+              <label><strong><span id="displayName">{this.props.displayName}</span></strong></label>
             </div>
             <div className="col-md-6"></div>
           </div>
