@@ -51,7 +51,7 @@ export const themes = {
     oneUpdate: "darkThemeOneUpdate",
     accountDetails: "darkThemeAccountDetails",
     aboutContainer: "darkThemeAboutContainer",
-    backgroundColor: "rgb(32, 32, 32)"
+    backgroundColor: "rgb(16, 16, 16)"
   },
   transparentLight: {
     theme: "Transparent Light",
@@ -90,7 +90,7 @@ export const themes = {
     oneUpdate: "transparentDarkThemeOneUpdate",
     accountDetails: "transparentDarkThemeAccountDetails",
     aboutContainer: "transparentDarkThemeAboutContainer",
-    backgroundColor: "rgb(32, 32, 32)"
+    backgroundColor: "rgb(16, 16, 16)"
   },
   determineTheme(theme, backgroundPicture) {
     let themeType;

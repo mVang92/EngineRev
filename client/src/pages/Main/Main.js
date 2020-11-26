@@ -53,10 +53,7 @@ export default class App extends Component {
             uid: userId,
             displayName: this.state.props.user.displayName === null ? defaults.defaultDisplayName : this.state.props.user.displayName,
             pageLoaded: true
-          }, () => {
-            this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture));
-            this.state.props.checkUserDisplayName(this.state.props.user);
-          })
+          }, () => this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture)))
         )
         .catch(err => {
           if (this.state.theme === "") {

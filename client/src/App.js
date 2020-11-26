@@ -33,7 +33,6 @@ export default class App extends Component {
       confirmPassword: "",
       userProfilePicture: "",
       userEmailForAccount: "",
-      defaultDisplayName: defaults.defaultDisplayName,
       showSignInModal: false,
       showSignUpModal: false,
       showSignOutModal: false,
@@ -94,31 +93,6 @@ export default class App extends Component {
           .catch(error => this.errorNotification(error));
       }
     });
-  };
-
-  /**
-   * Check if user display name exists
-   * 
-   * @param user The current user information
-   */
-  checkUserDisplayName = user => {
-    let displayName = user.displayName;
-    if (displayName) {
-      this.showDisplayName(displayName);
-    } else {
-      this.showDisplayName(this.state.defaultDisplayName);
-    }
-  };
-
-  /**
-   * Show the display name to the main page
-   *
-   * @param displayName The display name to show
-   */
-  showDisplayName = displayName => {
-    let displayNameToShow = document.createTextNode(displayName);
-    document.getElementById("displayName").innerHTML = "";
-    document.getElementById("displayName").appendChild(displayNameToShow);
   };
 
   /**
@@ -346,7 +320,6 @@ export default class App extends Component {
                   email={this.state.userEmailForAccount}
                   loggedin={this.state.loggedin}
                   userProfilePicture={this.state.userProfilePicture}
-                  checkUserDisplayName={this.checkUserDisplayName}
                   onAuthStateChanged={this.onAuthStateChanged}
                   handleResetAddVehicleFields={this.handleResetAddVehicleFields}
                   errorNotification={this.errorNotification}
