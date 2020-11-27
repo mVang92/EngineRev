@@ -58,7 +58,7 @@ const AccountDetails = props => {
               id="profilePicture"
               title={userDisplayName}
               src={userPhotoUrl}
-              alt="Profile"
+              alt={userDisplayName}
             />
           </a>
         </div>
