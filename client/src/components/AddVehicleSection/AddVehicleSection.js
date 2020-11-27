@@ -65,7 +65,7 @@ class AddVehicleSection extends Component {
                 <img
                   id="mainPageProfilePicture"
                   src={this.props.userProfilePicture ? this.props.userProfilePicture : this.state.defaultProfilePicture}
-                  alt="You"
+                  alt={this.props.displayName}
                   title={this.props.displayName} />
               </Link>
               <label><strong><span id="displayName">{this.props.displayName}</span></strong></label>
