@@ -61,11 +61,6 @@ router
   .route("/:creatorId/:themeType")
   .put(controller.saveThemeForUser)
 
-// Matches with "/api/users/:creatorId/:commentId/vote"
-router
-  .route("/:creatorId/:commentId/vote")
-  .put(controller.recordVotedThreadComment)
-
 // Matches with "/api/users/:creatorId/:newEmail/updateEmail"
 router
   .route("/:creatorId/:newEmail/updateEmail")

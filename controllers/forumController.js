@@ -120,12 +120,20 @@ module.exports = {
      * Increment the votes to the comment by 1
      */
     handleCommentUpVote: (req, res) => {
-        db.Forum
+        const incrementComment = db.Forum
             .updateOne(
                 { _id: req.params.threadId, comments: { $elemMatch: { _id: req.params.commentId } } },
                 { $inc: { "comments.$.votes": 1 } }
-            )
-            .then(dbModel => res.json(dbModel))
+            );
+
+        const recordComment = db.Users
+            .updateOne(
+                { creator: req.params.creatorId },
+                { $push: { votedComments: req.params.commentId } }
+            );
+
+        return Promise.all([incrementComment, recordComment])
+            .then(result => res.json(result))
             .catch(err => res.status(422).json(err));
     },
 
@@ -133,12 +141,20 @@ module.exports = {
      * Decrement the votes to the comment by 1
      */
     handleCommentDownVote: (req, res) => {
-        db.Forum
+        const decrementComment = db.Forum
             .updateOne(
                 { _id: req.params.threadId, comments: { $elemMatch: { _id: req.params.commentId } } },
                 { $inc: { "comments.$.votes": -1 } }
-            )
-            .then(dbModel => res.json(dbModel))
+            );
+
+        const recordComment = db.Users
+            .updateOne(
+                { creator: req.params.creatorId },
+                { $push: { votedComments: req.params.commentId } }
+            );
+
+        return Promise.all([decrementComment, recordComment])
+            .then(result => res.json(result))
             .catch(err => res.status(422).json(err));
     },
 

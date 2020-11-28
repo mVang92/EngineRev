@@ -75,15 +75,9 @@ const AccountDetails = props => {
           <br />
           <div className="row">
             <div className="col-md-5">
-              {
-                roles.length > 1
-                  ? <label><strong>Roles:</strong></label>
-                  : <label><strong>Role:</strong></label>
-              }
+              <label><strong>{roles.length > 1 ? "Roles" : "Role"}:</strong></label>
             </div>
-            <div id="userRole" className="col-md-7">
-              {roles.join(", ")}
-            </div>
+            <div id="userRole" className="col-md-7">{roles.join(", ")}</div>
           </div>
           <br />
           <div className="row">

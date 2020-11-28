@@ -26,12 +26,12 @@ export default {
         return axios.delete(`/api/forum/${threadId}/deleteThread`);
     },
     // Handle the upvote to a comment
-    handleCommentUpVote: (threadId, commentId) => {
-        return axios.put(`/api/forum/${threadId}/${commentId}/upVote`);
+    handleCommentUpVote: (creatorId, threadId, commentId) => {
+        return axios.put(`/api/forum/${creatorId}/${threadId}/${commentId}/upVote`);
     },
     // Handle the downvote to a comment
-    handleCommentDownVote: (threadId, commentId) => {
-        return axios.put(`/api/forum/${threadId}/${commentId}/downVote`);
+    handleCommentDownVote: (creatorId, threadId, commentId) => {
+        return axios.put(`/api/forum/${creatorId}/${threadId}/${commentId}/downVote`);
     },
     // Delete a comment from the thread
     handleDeleteThreadComment: (threadId, commentId) => {

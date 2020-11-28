@@ -266,22 +266,13 @@ export default class Thread extends Component {
     const creatorId = this.state.uniqueCreatorId;
     const email = this.state.email;
     const event = events.upvoteComment;
-    forumApi.handleCommentUpVote(this.state.threadId, commentId)
+    forumApi.handleCommentUpVote(creatorId, this.state.threadId, commentId)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
-        userApi.recordVotedThreadComment(this.state.uniqueCreatorId, commentId)
-          .then(() => {
-            this.setState({
-              disableUpVoteButton: false,
-              disableDownVoteButton: false
-            }, () => this.getThreadData());
-          })
-          .catch(err => {
-            this.setState({
-              disableUpVoteButton: false,
-              disableDownVoteButton: false
-            }, () => this.errorNotification(err));
-          });
+        this.setState({
+          disableUpVoteButton: false,
+          disableDownVoteButton: false
+        }, () => this.getThreadData());
       })
       .catch(err => {
         this.setState({
@@ -303,22 +294,13 @@ export default class Thread extends Component {
     const creatorId = this.state.uniqueCreatorId;
     const email = this.state.email;
     const event = events.downvoteComment;
-    forumApi.handleCommentDownVote(this.state.threadId, commentId)
+    forumApi.handleCommentDownVote(creatorId, this.state.threadId, commentId)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
-        userApi.recordVotedThreadComment(this.state.uniqueCreatorId, commentId)
-          .then(() => {
-            this.setState({
-              disableUpVoteButton: false,
-              disableDownVoteButton: false
-            }, () => this.getThreadData());
-          })
-          .catch(err => {
-            this.setState({
-              disableUpVoteButton: false,
-              disableDownVoteButton: false
-            }, () => this.errorNotification(err));
-          });
+        this.setState({
+          disableUpVoteButton: false,
+          disableDownVoteButton: false
+        }, () => this.getThreadData());
       })
       .catch(err => {
         this.setState({

@@ -66,10 +66,6 @@ export default {
   saveThemeForUser: (creatorId, themeType) => {
     return axios.put(`/api/users/${creatorId}/${themeType}`);
   },
-  // Record the comment id to the user database
-  recordVotedThreadComment: (creatorId, commentId) => {
-    return axios.put(`/api/users/${creatorId}/${commentId}/vote`);
-  },
   // Get the vehicle count from the user
   getVehicleCount: creatorId => {
     return axios.get(`/api/users/${creatorId}/count`);
