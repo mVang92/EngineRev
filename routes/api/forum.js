@@ -27,14 +27,14 @@ router
     .route("/:threadId/deleteThread")
     .delete(forumController.deleteThread)
 
-// Matches with "/api/forum/:threadId/:commentId/upVote"
+// Matches with "/api/forum/:creatorId/:threadId/:commentId/upVote"
 router
-    .route("/:threadId/:commentId/upVote")
+    .route("/:creatorId/:threadId/:commentId/upVote")
     .put(forumController.handleCommentUpVote)
 
-// Matches with "/api/forum/:threadId/:commentId/downVote"
+// Matches with "/api/forum/:creatorId/:threadId/:commentId/downVote"
 router
-    .route("/:threadId/:commentId/downVote")
+    .route("/:creatorId/:threadId/:commentId/downVote")
     .put(forumController.handleCommentDownVote)
 
 // Matches with "/api/forum/:threadId/:commentId/deleteComment"

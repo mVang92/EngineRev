@@ -262,19 +262,6 @@ module.exports = {
   },
 
   /**
-   * Record the comment id to the user database
-   */
-  recordVotedThreadComment: (req, res) => {
-    db.Users
-      .updateOne(
-        { creator: req.params.creatorId },
-        { $push: { votedComments: req.params.commentId } }
-      )
-      .then(result => res.json(result))
-      .catch(err => res.status(422).json(err));
-  },
-
-  /**
    * Get the vehicle count from the user
    */
   getVehicleCount: (req, res) => {
