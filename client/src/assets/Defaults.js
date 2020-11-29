@@ -50,7 +50,7 @@ export const defaults = {
     testUserRole: "Test User",
     commentsSection: "commentsSection",
     oldestThreadsSort: "oldestThreadSort",
-    mostRecentThreadsSort: "mostReventThreadsSort",
+    mostRecentThreadsSort: "mostRecentThreadsSort",
     mostViewsThreadsSort: "mostViewsThreadsSort",
     mostCommentsThreadsSort: "mostCommentsThreadsSort",
     askCarQuestionsSort: "askCarQuestionsSort",

@@ -7,6 +7,11 @@ router
     .post(forumController.addOneThread)
     .get(forumController.getAllThreadsPartial);
 
+// Matches with "/api/forum/oldest"
+router
+    .route("/oldest")
+    .get(forumController.getAllThreadsPartialSortByOldest);
+
 // Matches with "/api/forum/:threadId/addComment"
 router
     .route("/:threadId/addComment")

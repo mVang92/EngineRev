@@ -37,6 +37,26 @@ module.exports = {
     },
 
     /**
+     * Get all threads ordered by oldest to most recent
+     */
+    getAllThreadsPartialSortByOldest: (req, res) => {
+        db.Forum
+            .find(req.query, {
+                creator: 0,
+                hits: 0,
+                "comments._id": 0,
+                "comments.votes": 0,
+                "comments.edited": 0,
+                "comments.email": 0,
+                "comments.creator": 0,
+                "comments.comment": 0,
+                "comments.date": 0
+            })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    /**
      * Get one thread
      */
     getThreadData: (req, res) => {

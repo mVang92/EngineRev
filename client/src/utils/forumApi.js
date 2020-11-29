@@ -9,6 +9,9 @@ export default {
     getAllThreadsPartial: () => {
         return axios.get("/api/forum");
     },
+    getAllThreadsPartialSortByOldest: () => {
+        return axios.get("/api/forum/oldest");
+    },
     // Get all comments for one thread
     getThreadData: threadId => {
         return axios.get(`/api/forum/${threadId}/thread`);

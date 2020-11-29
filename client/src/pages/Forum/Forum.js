@@ -28,7 +28,8 @@ export default class Forum extends Component {
       threadTitle: "",
       allThreads: [],
       disableSubmitNewThreadButton: false,
-      refreshCounter: 0
+      refreshCounter: 0,
+      defaultSortOrder: defaults.mostRecentThreadsSort
     };
   };
 
@@ -47,6 +48,42 @@ export default class Forum extends Component {
   handleChange = e => {
     let { name, value } = e.target;
     this.setState({ [name]: value });
+  };
+
+  renderSortedThreads = () => {
+    if (this.state.currentTheme) {
+      let element = document.getElementById(defaults.sortThreadsDropdown);
+      let selectedSortOrder = element.options[element.selectedIndex].value;
+      switch (selectedSortOrder) {
+        case defaults.oldestThreadsSort:
+          console.log("oldest")
+          forumApi.getAllThreadsPartialSortByOldest()
+            .then(res => {
+              this.setState({ allThreads: res.data })
+            })
+          break;
+        case defaults.mostRecentThreadsSort:
+          console.log("recent")
+          break;
+        case defaults.mostViewsThreadsSort:
+          console.log("views")
+          break;
+        case defaults.mostCommentsThreadsSort:
+          console.log("comments")
+          break;
+        case defaults.askCarQuestionsSort:
+          console.log("ask")
+          break;
+        case defaults.tipsAndTricksThreadsSort:
+          console.log("tip")
+          break;
+        case defaults.shareStoryThreadsSort:
+          console.log("share")
+          break;
+        case defaults.otherCategoryThreadSort:
+          console.log("othert")
+      }
+    }
   };
 
   /**
@@ -237,6 +274,8 @@ export default class Forum extends Component {
                   allThreads={this.state.allThreads}
                   disableSubmitNewThreadButton={this.state.disableSubmitNewThreadButton}
                   backToTopOfPage={this.backToTopOfPage}
+                  defaultSortOrder={this.state.defaultSortOrder}
+                  renderSortedThreads={this.renderSortedThreads}
                   currentTheme={this.state.currentTheme}
                 />
               </Container>

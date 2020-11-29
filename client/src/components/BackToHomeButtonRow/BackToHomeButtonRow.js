@@ -13,25 +13,33 @@ const BackToHomeButtonRow = props => {
       {
         (window.location.href.indexOf("/forum") > -1) && (props.loggedin) ?
           (
-            <div className="col-md-4 smallMarginTopMobileDisplay text-center">
-              <button
-                id="startNewThreadButton"
-                title="New Thread"
-                type="button"
-                className="standardButton"
-                data-toggle="collapse"
-                data-target="#startThreadForm"
-                aria-expanded="false"
-                aria-controls="collapse">
-                New
+            <React.Fragment>
+              <div className="col-md-4 smallMarginTopMobileDisplay text-center">
+                <button
+                  id="startNewThreadButton"
+                  title="New Thread"
+                  type="button"
+                  className="standardButton"
+                  data-toggle="collapse"
+                  data-target="#startThreadForm"
+                  aria-expanded="false"
+                  aria-controls="collapse">
+                  New
               </button>
-            </div>
+              </div>
+              <div className="col-md-4 smallMarginTopMobileDisplay text-center">
+                <SortThreadsDropdown
+                  handleChange={props.handleChange}
+                  defaultSortOrder={props.defaultSortOrder}
+                  renderSortedThreads={props.renderSortedThreads()}
+                />
+              </div>
+            </React.Fragment>
           ) :
           (
-            <div className="col-md-4"></div>
+            <div className="col-md-8"></div>
           )
       }
-      <div className="col-md-4 text-center"><SortThreadsDropdown /></div>
     </div>
   );
 };

@@ -15,7 +15,9 @@ const ForumDetails = props => {
     threadDescription,
     allThreads,
     backToTopOfPage,
-    disableSubmitNewThreadButton
+    disableSubmitNewThreadButton,
+    defaultSortOrder,
+    renderSortedThreads
   } = props;
 
   return (
@@ -26,7 +28,12 @@ const ForumDetails = props => {
         </div>
       </div>
       <hr className={currentTheme.hr} />
-      <BackToHomeButtonRow loggedin={loggedin} />
+      <BackToHomeButtonRow
+        loggedin={loggedin}
+        handleChange={handleChange}
+        defaultSortOrder={defaultSortOrder}
+        renderSortedThreads={renderSortedThreads}
+      />
       <hr className={currentTheme.hr} />
       {
         loggedin ?
