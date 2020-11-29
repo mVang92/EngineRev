@@ -28,6 +28,7 @@ export default class Forum extends Component {
       threadTitle: "",
       allThreads: [],
       disableSubmitNewThreadButton: false,
+      disableSortThreadsButton: false,
       refreshCounter: 0,
       defaultSortOrder: defaults.mostRecentThreadsSort
     };
@@ -50,39 +51,130 @@ export default class Forum extends Component {
     this.setState({ [name]: value });
   };
 
+  /**
+   * Render the threads according to the sort criteria
+   */
   renderSortedThreads = () => {
-    if (this.state.currentTheme) {
-      let element = document.getElementById(defaults.sortThreadsDropdown);
-      let selectedSortOrder = element.options[element.selectedIndex].value;
-      switch (selectedSortOrder) {
-        case defaults.oldestThreadsSort:
-          console.log("oldest")
-          forumApi.getAllThreadsPartialSortByOldest()
-            .then(res => {
-              this.setState({ allThreads: res.data })
-            })
-          break;
-        case defaults.mostRecentThreadsSort:
-          console.log("recent")
-          break;
-        case defaults.mostViewsThreadsSort:
-          console.log("views")
-          break;
-        case defaults.mostCommentsThreadsSort:
-          console.log("comments")
-          break;
-        case defaults.askCarQuestionsSort:
-          console.log("ask")
-          break;
-        case defaults.tipsAndTricksThreadsSort:
-          console.log("tip")
-          break;
-        case defaults.shareStoryThreadsSort:
-          console.log("share")
-          break;
-        case defaults.otherCategoryThreadSort:
-          console.log("othert")
-      }
+    let element = document.getElementById(defaults.sortThreadsDropdown);
+    let selectedSortOrder = element.options[element.selectedIndex].value;
+    this.setState({ disableSortThreadsButton: true });
+    switch (selectedSortOrder) {
+      case defaults.mostRecentThreadsSort:
+        forumApi.getAllThreadsPartial()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      case defaults.oldestThreadsSort:
+        forumApi.getAllThreadsPartialSortByOldest()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      case defaults.mostViewsThreadsSort:
+        forumApi.getAllThreadsPartialSortByViews()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      case defaults.mostCommentsThreadsSort:
+        forumApi.getAllThreadsPartialSortByComments()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      case defaults.askCarQuestionsSort:
+        forumApi.getAllThreadsPartialShowAskCarQuestion()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      case defaults.tipsAndTricksThreadsSort:
+        forumApi.getAllThreadsPartialShowTipsAndTricks()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      case defaults.shareStoryThreadsSort:
+        forumApi.getAllThreadsPartialShowShareStory()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      case defaults.otherCategoryThreadSort:
+        forumApi.getAllThreadsPartialShowOther()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      default:
+        forumApi.getAllThreadsPartialShowOther()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
     }
   };
 
@@ -275,6 +367,7 @@ export default class Forum extends Component {
                   disableSubmitNewThreadButton={this.state.disableSubmitNewThreadButton}
                   backToTopOfPage={this.backToTopOfPage}
                   defaultSortOrder={this.state.defaultSortOrder}
+                  disableSortThreadsButton={this.state.disableSortThreadsButton}
                   renderSortedThreads={this.renderSortedThreads}
                   currentTheme={this.state.currentTheme}
                 />

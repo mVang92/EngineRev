@@ -170,6 +170,18 @@ input {
     margin-right: 5px;
 }
 
+#sortThreadsDropdown {
+    height: 100%;
+}
+
+#applySortToThreads {
+    border: none;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    border: 1px solid rgb(255, 255, 255);
+    box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
+}
+
 .addBtn,
 .resetButton,
 .cancelBtn,
@@ -274,7 +286,8 @@ input {
 #submitNewBackgroundPictureButton:hover,
 #resetNewBackgroundPictureButton:hover,
 #resetNewProfilePictureButton:hover,
-#resetNewDisplayNameButton:hover {
+#resetNewDisplayNameButton:hover,
+#applySortToThreads:hover {
     transition-duration: 0.2s;
 }
 
@@ -301,7 +314,8 @@ input {
 #submitNewBackgroundPictureButton:hover,
 #resetNewBackgroundPictureButton:hover,
 #resetNewProfilePictureButton:hover,
-#resetNewDisplayNameButton:hover {
+#resetNewDisplayNameButton:hover,
+#applySortToThreads:hover {
     background: rgb(255, 255, 255);
 }
 

@@ -7,10 +7,40 @@ router
     .post(forumController.addOneThread)
     .get(forumController.getAllThreadsPartial);
 
-// Matches with "/api/forum/oldest"
+// Matches with "/api/forum/sortByOldest"
 router
-    .route("/oldest")
+    .route("/sortByOldest")
     .get(forumController.getAllThreadsPartialSortByOldest);
+
+// Matches with "/api/forum/sortByViews"
+router
+    .route("/sortByViews")
+    .get(forumController.getAllThreadsPartialSortByViews);
+
+// Matches with "/api/forum/sortByComments"
+router
+    .route("/sortByComments")
+    .get(forumController.getAllThreadsPartialSortByComments);
+
+// Matches with "/api/forum/showAskCarQuestion"
+router
+    .route("/showAskCarQuestion")
+    .get(forumController.getAllThreadsPartialShowAskCarQuestion);
+
+// Matches with "/api/forum/showAskCarQuestion"
+router
+    .route("/showTipsAndTricks")
+    .get(forumController.getAllThreadsPartialShowTipsAndTricks);
+
+// Matches with "/api/forum/showShareStory"
+router
+    .route("/showShareStory")
+    .get(forumController.getAllThreadsPartialShowShareStory);
+
+// Matches with "/api/forum/showShareStory"
+router
+    .route("/showOther")
+    .get(forumController.getAllThreadsPartialShowOther);
 
 // Matches with "/api/forum/:threadId/addComment"
 router

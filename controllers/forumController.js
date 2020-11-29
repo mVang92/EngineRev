@@ -57,6 +57,132 @@ module.exports = {
     },
 
     /**
+     * Get all threads ordered by most to least views
+     */
+    getAllThreadsPartialSortByViews: (req, res) => {
+        db.Forum
+            .find(req.query, {
+                creator: 0,
+                hits: 0,
+                "comments._id": 0,
+                "comments.votes": 0,
+                "comments.edited": 0,
+                "comments.email": 0,
+                "comments.creator": 0,
+                "comments.comment": 0,
+                "comments.date": 0
+            })
+            .sort({ views: -1 })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    /**
+     * Get all threads ordered by most to least comments
+     */
+    getAllThreadsPartialSortByComments: (req, res) => {
+        db.Forum
+            .find(req.query, {
+                creator: 0,
+                hits: 0,
+                "comments._id": 0,
+                "comments.votes": 0,
+                "comments.edited": 0,
+                "comments.email": 0,
+                "comments.creator": 0,
+                "comments.comment": 0,
+                "comments.date": 0
+            })
+            .sort({ comments: -1 })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    /**
+     * Get all threads with category Ask Car Question
+     */
+    getAllThreadsPartialShowAskCarQuestion: (req, res) => {
+        db.Forum
+            .find({ threadCategory: threadCategories[0] }, {
+                creator: 0,
+                hits: 0,
+                "comments._id": 0,
+                "comments.votes": 0,
+                "comments.edited": 0,
+                "comments.email": 0,
+                "comments.creator": 0,
+                "comments.comment": 0,
+                "comments.date": 0
+            })
+            .sort({ date: -1 })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    /**
+     * Get all threads with category Tips And Tricks
+     */
+    getAllThreadsPartialShowTipsAndTricks: (req, res) => {
+        db.Forum
+            .find({ threadCategory: threadCategories[1] }, {
+                creator: 0,
+                hits: 0,
+                "comments._id": 0,
+                "comments.votes": 0,
+                "comments.edited": 0,
+                "comments.email": 0,
+                "comments.creator": 0,
+                "comments.comment": 0,
+                "comments.date": 0
+            })
+            .sort({ date: -1 })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    /**
+     * Get all threads with category Share A Story
+     */
+    getAllThreadsPartialShowShareStory: (req, res) => {
+        db.Forum
+            .find({ threadCategory: threadCategories[2] }, {
+                creator: 0,
+                hits: 0,
+                "comments._id": 0,
+                "comments.votes": 0,
+                "comments.edited": 0,
+                "comments.email": 0,
+                "comments.creator": 0,
+                "comments.comment": 0,
+                "comments.date": 0
+            })
+            .sort({ date: -1 })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    /**
+     * Get all threads with category Other
+     */
+    getAllThreadsPartialShowOther: (req, res) => {
+        db.Forum
+            .find({ threadCategory: threadCategories[3] }, {
+                creator: 0,
+                hits: 0,
+                "comments._id": 0,
+                "comments.votes": 0,
+                "comments.edited": 0,
+                "comments.email": 0,
+                "comments.creator": 0,
+                "comments.comment": 0,
+                "comments.date": 0
+            })
+            .sort({ date: -1 })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    /**
      * Get one thread
      */
     getThreadData: (req, res) => {

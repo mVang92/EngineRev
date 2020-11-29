@@ -13,31 +13,37 @@ const BackToHomeButtonRow = props => {
       {
         (window.location.href.indexOf("/forum") > -1) && (props.loggedin) ?
           (
-            <React.Fragment>
-              <div className="col-md-4 smallMarginTopMobileDisplay text-center">
-                <button
-                  id="startNewThreadButton"
-                  title="New Thread"
-                  type="button"
-                  className="standardButton"
-                  data-toggle="collapse"
-                  data-target="#startThreadForm"
-                  aria-expanded="false"
-                  aria-controls="collapse">
-                  New
+            <div className="col-md-4 smallMarginTopMobileDisplay text-center">
+              <button
+                id="startNewThreadButton"
+                title="New Thread"
+                type="button"
+                className="standardButton"
+                data-toggle="collapse"
+                data-target="#startThreadForm"
+                aria-expanded="false"
+                aria-controls="collapse">
+                New
               </button>
-              </div>
-              <div className="col-md-4 smallMarginTopMobileDisplay text-center">
-                <SortThreadsDropdown
-                  handleChange={props.handleChange}
-                  defaultSortOrder={props.defaultSortOrder}
-                  renderSortedThreads={props.renderSortedThreads()}
-                />
-              </div>
-            </React.Fragment>
+            </div>
           ) :
           (
-            <div className="col-md-8"></div>
+            <div className="col-md-4"></div>
+          )
+      }
+      {
+        window.location.href.indexOf("/forum") > -1 ?
+          (
+            <div className="col-md-4 smallMarginTopMobileDisplay text-center">
+              <SortThreadsDropdown
+                handleChange={props.handleChange}
+                defaultSortOrder={props.defaultSortOrder}
+                disableSortThreadsButton={props.disableSortThreadsButton}
+                renderSortedThreads={props.renderSortedThreads}
+              />
+            </div>
+          ) : (
+            <div className="col-md-4"></div>
           )
       }
     </div>
