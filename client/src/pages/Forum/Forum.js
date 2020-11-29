@@ -28,7 +28,9 @@ export default class Forum extends Component {
       threadTitle: "",
       allThreads: [],
       disableSubmitNewThreadButton: false,
-      refreshCounter: 0
+      disableSortThreadsButton: false,
+      refreshCounter: 0,
+      defaultSortOrder: defaults.mostRecentThreadsSort
     };
   };
 
@@ -47,6 +49,133 @@ export default class Forum extends Component {
   handleChange = e => {
     let { name, value } = e.target;
     this.setState({ [name]: value });
+  };
+
+  /**
+   * Render the threads according to the sort criteria
+   */
+  renderSortedThreads = () => {
+    let element = document.getElementById(defaults.sortThreadsDropdown);
+    let selectedSortOrder = element.options[element.selectedIndex].value;
+    this.setState({ disableSortThreadsButton: true });
+    switch (selectedSortOrder) {
+      case defaults.mostRecentThreadsSort:
+        forumApi.getAllThreadsPartial()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      case defaults.oldestThreadsSort:
+        forumApi.getAllThreadsPartialSortByOldest()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      case defaults.mostViewsThreadsSort:
+        forumApi.getAllThreadsPartialSortByViews()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      case defaults.mostCommentsThreadsSort:
+        forumApi.getAllThreadsPartialSortByComments()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      case defaults.askCarQuestionsSort:
+        forumApi.getAllThreadsPartialShowAskCarQuestion()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      case defaults.tipsAndTricksThreadsSort:
+        forumApi.getAllThreadsPartialShowTipsAndTricks()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      case defaults.shareStoryThreadsSort:
+        forumApi.getAllThreadsPartialShowShareStory()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      case defaults.otherCategoryThreadSort:
+        forumApi.getAllThreadsPartialShowOther()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+        break;
+      default:
+        forumApi.getAllThreadsPartialShowOther()
+          .then(res => {
+            this.setState({
+              allThreads: res.data,
+              disableSortThreadsButton: false
+            });
+          })
+          .catch(err => {
+            this.setState({ disableSortThreadsButton: false });
+            this.errorNotification(err);
+          });
+    }
   };
 
   /**
@@ -237,6 +366,9 @@ export default class Forum extends Component {
                   allThreads={this.state.allThreads}
                   disableSubmitNewThreadButton={this.state.disableSubmitNewThreadButton}
                   backToTopOfPage={this.backToTopOfPage}
+                  defaultSortOrder={this.state.defaultSortOrder}
+                  disableSortThreadsButton={this.state.disableSortThreadsButton}
+                  renderSortedThreads={this.renderSortedThreads}
                   currentTheme={this.state.currentTheme}
                 />
               </Container>

@@ -4,27 +4,28 @@ import AddVehicleSection from "../AddVehicleSection";
 import AddVehicleYearNanErrorModal from "../../components/Modal/AddVehicleYearNanErrorModal";
 
 const LoggedIn = props => {
+  const { currentTheme } = props;
   return (
-    <div className={`box ${props.currentTheme.background}`}>
+    <div className={`box ${currentTheme.background}`}>
       <AddVehicleSection
         displayName={props.displayName}
         handleResetAddVehicleFields={props.handleResetAddVehicleFields}
         checkIfVehicleYearIsValid={props.checkIfVehicleYearIsValid}
         userProfilePicture={props.userProfilePicture}
         disableAddVehicleButton={props.disableAddVehicleButton}
-        currentTheme={props.currentTheme}
+        currentTheme={currentTheme}
       />
-      <hr className={props.currentTheme.hr} />
+      <hr className={currentTheme.hr} />
       <MyVehiclesSection
         vehicleData={props.vehicleData}
-        currentTheme={props.currentTheme}
+        currentTheme={currentTheme}
         errorMessage={props.errorMessage}
         reloadPage={props.reloadPage}
       />
       <AddVehicleYearNanErrorModal
         showAddVehicleYearNanErrorModal={props.showAddVehicleYearNanErrorModal}
         hideAddVehicleYearNanErrorModal={props.hideAddVehicleYearNanErrorModal}
-        currentTheme={props.currentTheme}
+        currentTheme={currentTheme}
       />
     </div>
   );

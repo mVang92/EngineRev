@@ -9,6 +9,34 @@ export default {
     getAllThreadsPartial: () => {
         return axios.get("/api/forum");
     },
+    // Get all threads ordered by oldest to most recent
+    getAllThreadsPartialSortByOldest: () => {
+        return axios.get("/api/forum/sortByOldest");
+    },
+    // Get all threads ordered by most to least views
+    getAllThreadsPartialSortByViews: () => {
+        return axios.get("/api/forum/sortByViews");
+    },
+    // Get all threads ordered by most to least comments
+    getAllThreadsPartialSortByComments: () => {
+        return axios.get("/api/forum/sortByComments");
+    },
+    // Get all threads with category Ask Car Question
+    getAllThreadsPartialShowAskCarQuestion: () => {
+        return axios.get("/api/forum/showAskCarQuestion");
+    },
+    // Get all threads with category Tips And Tricks
+    getAllThreadsPartialShowTipsAndTricks: () => {
+        return axios.get("/api/forum/showTipsAndTricks");
+    },
+    // Get all threads with category Share A Story
+    getAllThreadsPartialShowShareStory: () => {
+        return axios.get("/api/forum/showShareStory");
+    },
+    // Get all threads with category Other
+    getAllThreadsPartialShowOther: () => {
+        return axios.get("/api/forum/showOther");
+    },
     // Get all comments for one thread
     getThreadData: threadId => {
         return axios.get(`/api/forum/${threadId}/thread`);
