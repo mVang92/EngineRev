@@ -488,10 +488,7 @@ input {
     margin-top: 1rem;
 }
 
-.addLogButtonsMobileDisplay {
-    text-align: center;
-}
-
+.addLogButtonsMobileDisplay,
 .topLogActionButtons {
     text-align: center;
 }
