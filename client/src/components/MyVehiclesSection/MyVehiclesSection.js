@@ -63,7 +63,7 @@ const MyVehiclesSection = props => {
                                         <div title={vehicle.year + " " + vehicle.make + " " + vehicle.model} className="col-md-8">
                                           <Link to={{ pathname: "/vehicle/" + btoa(vehicle._id) }}>
                                             <div className="vehicleOnRecord">
-                                              <div className={`vehicleItemList ${currentTheme.vehicleItemList}`}>
+                                              <div className={`fadeIn vehicleItemList ${currentTheme.vehicleItemList}`}>
                                                 {
                                                   vehicle.vehicleName ?
                                                     (

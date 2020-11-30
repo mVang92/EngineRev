@@ -4,12 +4,14 @@ import BottomActionButtons from "../../components/BottomActionButtons";
 import { defaults } from "../../assets/Defaults";
 import AddThread from "../../components/AddThread";
 import OneThread from "../../components/OneThread";
+import Loading from "../../components/Loading";
 
 const ForumDetails = props => {
   const {
     currentTheme,
     loggedin,
     handleChange,
+    loadingSortedThreads,
     validateThreadInputValues,
     threadTitle,
     threadDescription,
@@ -51,6 +53,7 @@ const ForumDetails = props => {
               />
               <div className="text-center">
                 <strong><label>Threads</label></strong>
+                {loadingSortedThreads ? <Loading /> : null}
               </div>
             </React.Fragment>
           ) :

@@ -96,7 +96,7 @@ export default class About extends Component {
                   <img id="engineRevLogoAboutPage" src={engineRevLogo} alt="EngineRev Logo" />
                 </div>
                 <div className={`box ${this.state.currentTheme.background}`}>
-                  <div className={`smallPadding ${this.state.currentTheme.accountDetails}`}>
+                  <div className={`fadeIn smallPadding ${this.state.currentTheme.accountDetails}`}>
                     <div className="row">
                       <div className="col-md-12 text-center">
                         <label><h5>About EngineRev</h5></label>

@@ -18,7 +18,7 @@ const OneUpdate = props => {
 
   return (
     <React.Fragment key={_id}>
-      <div className={`releaseNote ${currentTheme.oneUpdate}`}>
+      <div className={`fadeIn releaseNote ${currentTheme.oneUpdate}`}>
         <div className="row">
           <div className="col-md-3"><label><strong>Date:</strong></label></div>
           <div className="col-md-6"><label>{formattedDate}</label></div>
