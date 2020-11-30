@@ -17,6 +17,7 @@ export default class Forum extends Component {
     this.state = {
       loggedin: false,
       pageLoaded: false,
+      loadingSortedThreads: false,
       uniqueCreatorId: "",
       displayName: "",
       userPhotoUrl: "",
@@ -40,7 +41,7 @@ export default class Forum extends Component {
    * Perform these actions upon page load
    */
   componentDidMount = () => {
-    this.getAllThreadsPartial();
+    this.getAllThreads(defaults.mostRecentThreadsSort);
   };
 
   /**
@@ -57,125 +58,26 @@ export default class Forum extends Component {
   renderSortedThreads = () => {
     let element = document.getElementById(defaults.sortThreadsDropdown);
     let selectedSortOrder = element.options[element.selectedIndex].value;
-    this.setState({ disableSortThreadsButton: true });
-    switch (selectedSortOrder) {
-      case defaults.mostRecentThreadsSort:
-        forumApi.getAllThreadsPartial()
-          .then(res => {
-            this.setState({
-              allThreads: res.data,
-              disableSortThreadsButton: false
-            });
-          })
-          .catch(err => {
-            this.setState({ disableSortThreadsButton: false });
-            this.errorNotification(err);
-          });
-        break;
-      case defaults.oldestThreadsSort:
-        forumApi.getAllThreadsPartialSortByOldest()
-          .then(res => {
-            this.setState({
-              allThreads: res.data,
-              disableSortThreadsButton: false
-            });
-          })
-          .catch(err => {
-            this.setState({ disableSortThreadsButton: false });
-            this.errorNotification(err);
-          });
-        break;
-      case defaults.mostViewsThreadsSort:
-        forumApi.getAllThreadsPartialSortByViews()
-          .then(res => {
-            this.setState({
-              allThreads: res.data,
-              disableSortThreadsButton: false
-            });
-          })
-          .catch(err => {
-            this.setState({ disableSortThreadsButton: false });
-            this.errorNotification(err);
-          });
-        break;
-      case defaults.mostCommentsThreadsSort:
-        forumApi.getAllThreadsPartialSortByComments()
-          .then(res => {
-            this.setState({
-              allThreads: res.data,
-              disableSortThreadsButton: false
-            });
-          })
-          .catch(err => {
-            this.setState({ disableSortThreadsButton: false });
-            this.errorNotification(err);
-          });
-        break;
-      case defaults.askCarQuestionsSort:
-        forumApi.getAllThreadsPartialShowAskCarQuestion()
-          .then(res => {
-            this.setState({
-              allThreads: res.data,
-              disableSortThreadsButton: false
-            });
-          })
-          .catch(err => {
-            this.setState({ disableSortThreadsButton: false });
-            this.errorNotification(err);
-          });
-        break;
-      case defaults.tipsAndTricksThreadsSort:
-        forumApi.getAllThreadsPartialShowTipsAndTricks()
-          .then(res => {
-            this.setState({
-              allThreads: res.data,
-              disableSortThreadsButton: false
-            });
-          })
-          .catch(err => {
-            this.setState({ disableSortThreadsButton: false });
-            this.errorNotification(err);
-          });
-        break;
-      case defaults.shareStoryThreadsSort:
-        forumApi.getAllThreadsPartialShowShareStory()
-          .then(res => {
-            this.setState({
-              allThreads: res.data,
-              disableSortThreadsButton: false
-            });
-          })
-          .catch(err => {
-            this.setState({ disableSortThreadsButton: false });
-            this.errorNotification(err);
-          });
-        break;
-      case defaults.otherCategoryThreadSort:
-        forumApi.getAllThreadsPartialShowOther()
-          .then(res => {
-            this.setState({
-              allThreads: res.data,
-              disableSortThreadsButton: false
-            });
-          })
-          .catch(err => {
-            this.setState({ disableSortThreadsButton: false });
-            this.errorNotification(err);
-          });
-        break;
-      default:
-        forumApi.getAllThreadsPartialShowOther()
-          .then(res => {
-            this.setState({
-              allThreads: res.data,
-              disableSortThreadsButton: false
-            });
-          })
-          .catch(err => {
-            this.setState({ disableSortThreadsButton: false });
-            this.errorNotification(err);
-          });
-    }
+    this.setState({
+      disableSortThreadsButton: true,
+      loadingSortedThreads: true,
+      allThreads: []
+    });
+    forumApi.getAllThreads(selectedSortOrder)
+      .then(res => {
+        this.setState({
+          allThreads: res.data,
+          disableSortThreadsButton: false,
+          loadingSortedThreads: false
+        });
+      })
+      .catch(err => {
+        this.setState({
+          disableSortThreadsButton: false,
+          loadingSortedThreads: false
+        });
+        this.errorNotification(err);
+      });
   };
 
   /**
@@ -199,8 +101,8 @@ export default class Forum extends Component {
    * Gets all of the threads from the database
    * If successful or if there is an error, then find the user information
    */
-  getAllThreadsPartial = () => {
-    forumApi.getAllThreadsPartial()
+  getAllThreads = sortCriteria => {
+    forumApi.getAllThreads(sortCriteria)
       .then(res => this.setState({ allThreads: res.data }, () => this.getUserInfoPartial()))
       .catch(err => {
         this.errorNotification(err);
@@ -290,8 +192,8 @@ export default class Forum extends Component {
     const email = this.state.email;
     const event = events.addOneThread;
     let newThreadPayload = {
-      creator: this.state.uniqueCreatorId,
-      email: this.state.email,
+      creator: creatorId,
+      email: email,
       threadTitle: this.state.threadTitle,
       threadDescription: this.state.threadDescription,
       threadCategory: threadCategory,
@@ -308,7 +210,7 @@ export default class Forum extends Component {
         }, () => {
           eventLogHandler.successful(creatorId, email, event);
           this.successNotification(defaults.addThreadSuccessfully);
-          this.getAllThreadsPartial();
+          this.getAllThreads(defaults.mostRecentThreadsSort);
         });
       })
       .catch(err => {
@@ -359,6 +261,7 @@ export default class Forum extends Component {
               <Container>
                 <ForumDetails
                   loggedin={this.state.loggedin}
+                  loadingSortedThreads={this.state.loadingSortedThreads}
                   handleChange={this.handleChange}
                   validateThreadInputValues={this.validateThreadInputValues}
                   threadTitle={this.state.threadTitle}

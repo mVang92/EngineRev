@@ -171,7 +171,11 @@ input {
 }
 
 #sortThreadsDropdown {
+    box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
     height: 100%;
+    cursor: pointer;
 }
 
 #applySortToThreads {
@@ -909,15 +913,65 @@ footer {
     animation-delay: 0s;
   }
 
-  @keyframes lds-spinner {
-    0% {
-      opacity: 1;
-    }
-    
-    100% {
-      opacity: 0;
-    }
-  }
+  .fadeIn1 {
+    animation:0.2s ease 0s normal forwards 1 fadein;
+    -webkit-animation:0.2s ease 0s normal forwards 1 fadein;
+    opacity:1
+}
+
+.fadeIn2 {
+    animation:0.3s ease 0s normal forwards 1 fadein;
+    -webkit-animation:0.3s ease 0s normal forwards 1 fadein;
+    opacity:1
+}
+
+.fadeIn3 {
+    animation:0.4s ease 0s normal forwards 1 fadein;
+    -webkit-animation:0.4s ease 0s normal forwards 1 fadein;
+    opacity:1
+}
+
+.fadeIn4 {
+    animation:0.5s ease 0s normal forwards 1 fadein;
+    -webkit-animation:0.5s ease 0s normal forwards 1 fadein;
+    opacity:1
+}
+
+.fadeIn5 {
+    animation:0.6s ease 0s normal forwards 1 fadein;
+    -webkit-animation:0.6s ease 0s normal forwards 1 fadein;
+    opacity:1
+}
+
+.fadeIn {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+    animation-duration: 0.2s;
+}
+
+@keyframes fadeInOpacity {
+	0% { opacity: 0 }
+	100% { opacity: 1 }
+}
+
+@keyframes fadein {
+    0% { opacity: 0 }
+    40% { opacity: 0 }
+    100% { opacity: 1 }
+}
+
+@-webkit-keyframes fadein {
+    0% { opacity: 0 }
+    40% { opacity: 0 }
+    100% { opacity: 1 }
+}
+
+@keyframes lds-spinner {
+    0% { opacity: 1 }
+    100% { opacity: 0 }
+}
 
 @media print {
 	.hideWhilePrinting {

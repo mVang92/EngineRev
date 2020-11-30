@@ -49,14 +49,13 @@ export const defaults = {
     userRole: "User",
     testUserRole: "Test User",
     commentsSection: "commentsSection",
-    oldestThreadsSort: "oldestThreadSort",
+    oldestThreadsSort: "oldestThreadsSort",
     mostRecentThreadsSort: "mostRecentThreadsSort",
     mostViewsThreadsSort: "mostViewsThreadsSort",
-    mostCommentsThreadsSort: "mostCommentsThreadsSort",
-    askCarQuestionsSort: "askCarQuestionsSort",
+    askCarQuestionsThreadsSort: "askCarQuestionsThreadsSort",
     tipsAndTricksThreadsSort: "tipsAndTricksThreadsSort",
     shareStoryThreadsSort: "shareStoryThreadsSort",
-    otherCategoryThreadSort: "otherCategoryThreadSort",
+    otherCategoryThreadsSort: "otherCategoryThreadsSort",
     deleteVehicleWarning: "You are about to delete this vehicle and any service logs associated with it. " +
         "Are you sure you want to continue?",
     aboutEngineRev: "EngineRev allows you to keep track of your vehicle maintenance history and collaborate with the community. " +

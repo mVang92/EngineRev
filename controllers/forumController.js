@@ -5,6 +5,15 @@ const threadCategories = [
     "Share a Story",
     "Other"
 ];
+const sortCriterias = {
+    oldestThreadsSort: "oldestThreadsSort",
+    mostRecentThreadsSort: "mostRecentThreadsSort",
+    mostViewsThreadsSort: "mostViewsThreadsSort",
+    askCarQuestionsThreadsSort: "askCarQuestionsThreadsSort",
+    tipsAndTricksThreadsSort: "tipsAndTricksThreadsSort",
+    shareStoryThreadsSort: "shareStoryThreadsSort",
+    otherCategoryThreadsSort: "otherCategoryThreadsSort"
+};
 
 /**
  * Check if the string value is blank
@@ -13,173 +22,100 @@ checkIfStringIsBlank = string => {
     return (!string || /^\s*$/.test(string));
 };
 
+/**
+ * Get all threads ordered by date
+ */
+sortByDate = (res, sort) => {
+    db.Forum
+        .find({}, {
+            creator: 0,
+            hits: 0,
+            "comments._id": 0,
+            "comments.votes": 0,
+            "comments.edited": 0,
+            "comments.email": 0,
+            "comments.creator": 0,
+            "comments.comment": 0,
+            "comments.date": 0
+        })
+        .sort({ date: sort })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+};
+
+/**
+ * Get all threads ordered by most to least views
+ */
+mostViewsThreadsSort = (req, res) => {
+    db.Forum
+        .find(req.query, {
+            creator: 0,
+            hits: 0,
+            "comments._id": 0,
+            "comments.votes": 0,
+            "comments.edited": 0,
+            "comments.email": 0,
+            "comments.creator": 0,
+            "comments.comment": 0,
+            "comments.date": 0
+        })
+        .sort({ views: -1 })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+};
+
+/**
+ * Get all threads for a specific category
+ */
+sortByCategory = (res, index) => {
+    db.Forum
+        .find({ threadCategory: threadCategories[index] }, {
+            creator: 0,
+            hits: 0,
+            "comments._id": 0,
+            "comments.votes": 0,
+            "comments.edited": 0,
+            "comments.email": 0,
+            "comments.creator": 0,
+            "comments.comment": 0,
+            "comments.date": 0
+        })
+        .sort({ date: -1 })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+};
+
 module.exports = {
 
     /**
-     * Get all threads on record via partial
+     * Get all threads on record and sort according to sort criteria
      */
-    getAllThreadsPartial: (req, res) => {
-        db.Forum
-            .find(req.query, {
-                creator: 0,
-                hits: 0,
-                "comments._id": 0,
-                "comments.votes": 0,
-                "comments.edited": 0,
-                "comments.email": 0,
-                "comments.creator": 0,
-                "comments.comment": 0,
-                "comments.date": 0
-            })
-            .sort({ date: -1 })
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    },
-
-    /**
-     * Get all threads ordered by oldest to most recent
-     */
-    getAllThreadsPartialSortByOldest: (req, res) => {
-        db.Forum
-            .find(req.query, {
-                creator: 0,
-                hits: 0,
-                "comments._id": 0,
-                "comments.votes": 0,
-                "comments.edited": 0,
-                "comments.email": 0,
-                "comments.creator": 0,
-                "comments.comment": 0,
-                "comments.date": 0
-            })
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    },
-
-    /**
-     * Get all threads ordered by most to least views
-     */
-    getAllThreadsPartialSortByViews: (req, res) => {
-        db.Forum
-            .find(req.query, {
-                creator: 0,
-                hits: 0,
-                "comments._id": 0,
-                "comments.votes": 0,
-                "comments.edited": 0,
-                "comments.email": 0,
-                "comments.creator": 0,
-                "comments.comment": 0,
-                "comments.date": 0
-            })
-            .sort({ views: -1 })
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    },
-
-    /**
-     * Get all threads ordered by most to least comments
-     */
-    getAllThreadsPartialSortByComments: (req, res) => {
-        db.Forum
-            .find(req.query, {
-                creator: 0,
-                hits: 0,
-                "comments._id": 0,
-                "comments.votes": 0,
-                "comments.edited": 0,
-                "comments.email": 0,
-                "comments.creator": 0,
-                "comments.comment": 0,
-                "comments.date": 0
-            })
-            .sort({ comments: -1 })
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    },
-
-    /**
-     * Get all threads with category Ask Car Question
-     */
-    getAllThreadsPartialShowAskCarQuestion: (req, res) => {
-        db.Forum
-            .find({ threadCategory: threadCategories[0] }, {
-                creator: 0,
-                hits: 0,
-                "comments._id": 0,
-                "comments.votes": 0,
-                "comments.edited": 0,
-                "comments.email": 0,
-                "comments.creator": 0,
-                "comments.comment": 0,
-                "comments.date": 0
-            })
-            .sort({ date: -1 })
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    },
-
-    /**
-     * Get all threads with category Tips And Tricks
-     */
-    getAllThreadsPartialShowTipsAndTricks: (req, res) => {
-        db.Forum
-            .find({ threadCategory: threadCategories[1] }, {
-                creator: 0,
-                hits: 0,
-                "comments._id": 0,
-                "comments.votes": 0,
-                "comments.edited": 0,
-                "comments.email": 0,
-                "comments.creator": 0,
-                "comments.comment": 0,
-                "comments.date": 0
-            })
-            .sort({ date: -1 })
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    },
-
-    /**
-     * Get all threads with category Share A Story
-     */
-    getAllThreadsPartialShowShareStory: (req, res) => {
-        db.Forum
-            .find({ threadCategory: threadCategories[2] }, {
-                creator: 0,
-                hits: 0,
-                "comments._id": 0,
-                "comments.votes": 0,
-                "comments.edited": 0,
-                "comments.email": 0,
-                "comments.creator": 0,
-                "comments.comment": 0,
-                "comments.date": 0
-            })
-            .sort({ date: -1 })
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    },
-
-    /**
-     * Get all threads with category Other
-     */
-    getAllThreadsPartialShowOther: (req, res) => {
-        db.Forum
-            .find({ threadCategory: threadCategories[3] }, {
-                creator: 0,
-                hits: 0,
-                "comments._id": 0,
-                "comments.votes": 0,
-                "comments.edited": 0,
-                "comments.email": 0,
-                "comments.creator": 0,
-                "comments.comment": 0,
-                "comments.date": 0
-            })
-            .sort({ date: -1 })
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
+    getAllThreads: (req, res) => {
+        switch (req.params.sortCriteria) {
+            case sortCriterias.oldestThreadsSort:
+                sortByDate(res, 0);
+                break;
+            case sortCriterias.mostRecentThreadsSort:
+                sortByDate(res, -1);
+                break;
+            case sortCriterias.mostViewsThreadsSort:
+                mostViewsThreadsSort(req, res);
+                break;
+            case sortCriterias.askCarQuestionsThreadsSort:
+                sortByCategory(res, 0);
+                break;
+            case sortCriterias.tipsAndTricksThreadsSort:
+                sortByCategory(res, 1);
+                break;
+            case sortCriterias.shareStoryThreadsSort:
+                sortByCategory(res, 2);
+                break;
+            case sortCriterias.otherCategoryThreadsSort:
+                sortByCategory(res, 3);
+                break;
+            default:
+                sortByDate(res, -1);
+        }
     },
 
     /**

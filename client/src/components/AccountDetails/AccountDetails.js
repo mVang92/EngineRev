@@ -63,29 +63,29 @@ const AccountDetails = props => {
           </a>
         </div>
         <div className="col-md-8">
-          <div className="row">
+          <div className="row fadeIn1">
             <div className="col-md-5"><label><strong>Display Name:</strong></label></div>
             <div id="accountPageUserDisplayName" className="col-md-7 wrapword">{userDisplayName}</div>
           </div>
           <br />
-          <div className="row">
+          <div className="row fadeIn2">
             <div className="col-md-5"><label><strong>Email:</strong></label></div>
             <div id="accountPageUserEmail" className="col-md-7 wrapword">{userEmail}</div>
           </div>
           <br />
-          <div className="row">
+          <div className="row fadeIn3">
             <div className="col-md-5">
               <label><strong>{roles.length > 1 ? "Roles" : "Role"}:</strong></label>
             </div>
             <div id="userRole" className="col-md-7">{roles.join(", ")}</div>
           </div>
           <br />
-          <div className="row">
+          <div className="row fadeIn4">
             <div className="col-md-5"><label><strong>Theme:</strong></label></div>
             <div id="accountPageCurrentTheme" className="col-md-7 wrapword">{currentTheme.theme}</div>
           </div>
           <br />
-          <div className="row">
+          <div className="row fadeIn5">
             <div className="col-md-5"><label><strong>Vehicles:</strong></label></div>
             <div className="col-md-7">
               {
