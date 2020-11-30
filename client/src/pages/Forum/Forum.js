@@ -27,11 +27,11 @@ export default class Forum extends Component {
       backgroundPicture: "",
       threadDescription: "",
       threadTitle: "",
+      defaultSortOrder: "",
       allThreads: [],
       disableSubmitNewThreadButton: false,
       disableSortThreadsButton: false,
-      refreshCounter: 0,
-      defaultSortOrder: defaults.mostRecentThreadsSort
+      refreshCounter: 0
     };
   };
 
@@ -41,7 +41,13 @@ export default class Forum extends Component {
    * Perform these actions upon page load
    */
   componentDidMount = () => {
-    this.getAllThreads(defaults.mostRecentThreadsSort);
+    this.setState({ defaultSortOrder: localStorage.getItem("selectedSortOrder") });
+    if (localStorage.getItem("selectedSortOrder") === null) {
+      localStorage.setItem("selectedSortOrder", defaults.mostRecentThreadsSort);
+      this.getAllThreads(localStorage.getItem("selectedSortOrder"));
+    } else {
+      this.getAllThreads(localStorage.getItem("selectedSortOrder"));
+    }
   };
 
   /**
@@ -58,12 +64,13 @@ export default class Forum extends Component {
   renderSortedThreads = () => {
     let element = document.getElementById(defaults.sortThreadsDropdown);
     let selectedSortOrder = element.options[element.selectedIndex].value;
+    localStorage.setItem("selectedSortOrder", selectedSortOrder);
     this.setState({
       disableSortThreadsButton: true,
       loadingSortedThreads: true,
       allThreads: []
     });
-    forumApi.getAllThreads(selectedSortOrder)
+    forumApi.getAllThreads(localStorage.getItem("selectedSortOrder"))
       .then(res => {
         this.setState({
           allThreads: res.data,
@@ -206,11 +213,13 @@ export default class Forum extends Component {
         this.setState({
           threadDescription: "",
           threadTitle: "",
+          defaultSortOrder: defaults.mostRecentThreadsSort,
           disableSubmitNewThreadButton: false
         }, () => {
           eventLogHandler.successful(creatorId, email, event);
+          localStorage.removeItem("selectedSortOrder");
           this.successNotification(defaults.addThreadSuccessfully);
-          this.getAllThreads(defaults.mostRecentThreadsSort);
+          this.getAllThreads(this.state.defaultSortOrder);
         });
       })
       .catch(err => {
