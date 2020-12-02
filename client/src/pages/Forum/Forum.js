@@ -28,6 +28,7 @@ export default class Forum extends Component {
       threadDescription: "",
       threadTitle: "",
       defaultSortOrder: "",
+      noSortResults: "",
       allThreads: [],
       disableSubmitNewThreadButton: false,
       disableSortThreadsButton: false,
@@ -74,6 +75,7 @@ export default class Forum extends Component {
       .then(res => {
         this.setState({
           allThreads: res.data,
+          noSortResults: res.data === undefined || res.data.length === 0 ? defaults.noSortResults : null,
           disableSortThreadsButton: false,
           loadingSortedThreads: false
         });
@@ -110,7 +112,12 @@ export default class Forum extends Component {
    */
   getAllThreads = sortCriteria => {
     forumApi.getAllThreads(sortCriteria)
-      .then(res => this.setState({ allThreads: res.data }, () => this.getUserInfoPartial()))
+      .then(res => {
+        this.setState({
+          allThreads: res.data,
+          noSortResults: res.data === undefined || res.data.length === 0 ? defaults.noSortResults : null
+        }, () => this.getUserInfoPartial())
+      })
       .catch(err => {
         this.errorNotification(err);
         this.getUserInfoPartial();
@@ -278,6 +285,7 @@ export default class Forum extends Component {
                   allThreads={this.state.allThreads}
                   disableSubmitNewThreadButton={this.state.disableSubmitNewThreadButton}
                   backToTopOfPage={this.backToTopOfPage}
+                  noSortResults={this.state.noSortResults}
                   defaultSortOrder={this.state.defaultSortOrder}
                   disableSortThreadsButton={this.state.disableSortThreadsButton}
                   renderSortedThreads={this.renderSortedThreads}
