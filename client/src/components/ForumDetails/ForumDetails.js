@@ -19,6 +19,7 @@ const ForumDetails = props => {
     backToTopOfPage,
     disableSubmitNewThreadButton,
     defaultSortOrder,
+    noSortResults,
     disableSortThreadsButton,
     renderSortedThreads
   } = props;
@@ -52,7 +53,9 @@ const ForumDetails = props => {
                 currentTheme={currentTheme}
               />
               <div className="text-center">
-                <strong><label>Threads</label></strong>
+                {noSortResults ?
+                  <strong><label>{noSortResults}</label></strong> :
+                  <strong><label>Threads</label></strong>}
                 {loadingSortedThreads ? <Loading /> : null}
               </div>
             </React.Fragment>
