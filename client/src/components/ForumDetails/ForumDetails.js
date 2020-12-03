@@ -62,7 +62,10 @@ const ForumDetails = props => {
           ) :
           (
             <div className="text-center">
-              <label><strong>{defaults.loggedOutStartThread}</strong></label>
+              {noSortResults ?
+                <strong><label>{noSortResults}</label></strong> :
+                <strong><label>{defaults.loggedOutStartThread}</label></strong>}
+              {loadingSortedThreads ? <Loading /> : null}
             </div>
           )
       }
