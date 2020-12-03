@@ -18,7 +18,7 @@ export const defaults = {
     defaultProfilePicture: "https://image.flaticon.com/icons/png/512/64/64572.png",
     defaultDisplayName: "EngineRev User",
     loggedOutStartThread: "Please sign in or create an account to start a thread.",
-    noCommentsOnThread: "There are no comments on this thread.",
+    noCommentsOnThread: "No Comments on This Thread",
     threadDetailsCannotBeBlank: "Title and description are required.",
     areYouSureToDeleteThread: "Are you sure you want to delete this thread? All associated comments will also be deleted.",
     areYouSureToDeleteThreadComment: "Are you sure you want to delete your comment?",
