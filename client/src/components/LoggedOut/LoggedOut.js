@@ -25,7 +25,7 @@ const LoggedOut = () => {
         <div className="col-md-12">
           <div className="mt-3">
             <div className="row">
-              <div className="col-md-4">
+              <div className="col-md-4 fadeIn2">
                 <div className="row">
                   <div className="col-md-3">
                     <img className="notLoggedInImages" src={createAccountLogo} alt="Create Account"></img>
@@ -35,7 +35,7 @@ const LoggedOut = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-4 fadeIn4">
                 <div className="row">
                   <div className="col-md-3">
                     <img className="notLoggedInImages" src={recordLogsLogo} alt="Record Services"></img>
@@ -45,7 +45,7 @@ const LoggedOut = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-4 fadeIn6">
                 <div className="row">
                   <div className="col-md-3">
                     <img className="notLoggedInImages" src={collaborate} alt="Collaborate"></img>

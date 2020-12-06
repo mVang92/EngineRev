@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Modal from "react-modal";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { firebase, auth } from "./firebase"
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { NavLoggedIn, NavLoggedOut } from "./components/Nav";
 import { defaults } from "./assets/Defaults";
 import userApi from "./utils/userApi";
@@ -25,267 +25,266 @@ import "./css/themesStyle.css";
 export default class App extends Component {
   constructor() {
     super();
-    this.state = {
-      loggedin: false,
-      user: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      userProfilePicture: "",
-      userEmailForAccount: "",
-      showSignInModal: false,
-      showSignUpModal: false,
-      showSignOutModal: false,
-      showForgotPasswordModal: false,
-      disableSignInButton: false,
-      disableSignUpButton: false,
-      disableForgotPasswordSubmitButton: false
-    };
+    // this.state = {
+    //   loggedin: false,
+    //   user: "",
+    //   email: "",
+    //   password: "",
+    //   confirmPassword: "",
+    //   userProfilePicture: "",
+    //   userEmailForAccount: "",
+    //   showSignInModal: false,
+    //   showSignUpModal: false,
+    //   showSignOutModal: false,
+    //   showForgotPasswordModal: false,
+    //   disableSignInButton: false,
+    //   disableSignUpButton: false,
+    //   disableForgotPasswordSubmitButton: false
+    // };
   };
 
   /**
    * Check if the user is logged in
    */
-  componentDidMount = () => {
-    Modal.setAppElement("body");
-    this.onAuthStateChanged();
-  };
+  // componentDidMount = () => {
+  //   this.onAuthStateChanged();
+  // };
 
-  /**
-   * Handle real-time changes
-   */
-  handleChange = e => {
-    let { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
+  // /**
+  //  * Handle real-time changes
+  //  */
+  // handleChange = e => {
+  //   let { name, value } = e.target;
+  //   this.setState({ [name]: value });
+  // };
 
-  /**
-   * Set the user information based if the user is logged in
-   */
-  onAuthStateChanged = () => {
-    firebase.auth.onAuthStateChanged(user => {
-      if (user) {
-        this.setState({
-          user: user,
-          loggedin: true,
-          userId: user.uid,
-          userEmailForAccount: user.email,
-          userAccountCreationTime: user.metadata.creationTime,
-          userAccountLastSignIn: user.metadata.lastSignInTime,
-          userDisplayName: user.displayName,
-          userProfilePicture: user.photoURL,
-          showSignInModal: false,
-          showSignUpModal: false,
-          showForgotPasswordModal: false
-        });
-      }
-    });
-  };
+  // /**
+  //  * Set the user information based if the user is logged in
+  //  */
+  // onAuthStateChanged = () => {
+  //   firebase.auth.onAuthStateChanged(user => {
+  //     if (user) {
+  //       this.setState({
+  //         user: user,
+  //         loggedin: true,
+  //         userId: user.uid,
+  //         userEmailForAccount: user.email,
+  //         userAccountCreationTime: user.metadata.creationTime,
+  //         userAccountLastSignIn: user.metadata.lastSignInTime,
+  //         userDisplayName: user.displayName,
+  //         userProfilePicture: user.photoURL,
+  //         showSignInModal: false,
+  //         showSignUpModal: false,
+  //         showForgotPasswordModal: false
+  //       });
+  //     }
+  //   });
+  // };
 
-  /**
-   * Creates a schema for the user during first time login
-   */
-  createUserSchema = () => {
-    this.requestHideSignUpModal();
-    firebase.auth.onAuthStateChanged(user => {
-      if (user) {
-        userApi.createUserSchema(user.uid, user.email)
-          .catch(error => this.errorNotification(error));
-      }
-    });
-  };
+  // /**
+  //  * Creates a schema for the user during first time login
+  //  */
+  // createUserSchema = () => {
+  //   this.requestHideSignUpModal();
+  //   firebase.auth.onAuthStateChanged(user => {
+  //     if (user) {
+  //       userApi.createUserSchema(user.uid, user.email)
+  //         .catch(error => this.errorNotification(error));
+  //     }
+  //   });
+  // };
 
-  /**
-   * Handle user authentication when a user signs in
-   */
-  handleSignIn = e => {
-    e.preventDefault();
-    this.setState({ disableSignInButton: true });
-    auth
-      .doSignInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => {
-        this.requestHideSignInModal();
-        this.setState({ disableSignInButton: false });
-      })
-      .catch(error => {
-        this.setState({ disableSignInButton: false });
-        this.errorNotification(error);
-      });
-  };
+  // /**
+  //  * Handle user authentication when a user signs in
+  //  */
+  // handleSignIn = e => {
+  //   e.preventDefault();
+  //   this.setState({ disableSignInButton: true });
+  //   auth
+  //     .doSignInWithEmailAndPassword(this.state.email, this.state.password)
+  //     .then(() => {
+  //       this.requestHideSignInModal();
+  //       this.setState({ disableSignInButton: false });
+  //     })
+  //     .catch(error => {
+  //       this.setState({ disableSignInButton: false });
+  //       this.errorNotification(error);
+  //     });
+  // };
 
-  /**
-   * Handle user authentication when a user signs up
-   */
-  handleSignUp = e => {
-    e.preventDefault();
-    this.setState({ disableSignUpButton: true });
-    if (this.state.password === this.state.confirmPassword) {
-      auth
-        .doCreateUserWithEmailAndPassword(this.state.email, this.state.confirmPassword)
-        .then(() => this.createUserSchema())
-        .catch(error => {
-          this.errorNotification(error);
-          this.setState({ disableSignUpButton: false });
-        });
-    } else {
-      this.setState({ disableSignUpButton: false });
-      this.errorNotification(defaults.passwordsDoNotMatch);
-    }
-  };
+  // /**
+  //  * Handle user authentication when a user signs up
+  //  */
+  // handleSignUp = e => {
+  //   e.preventDefault();
+  //   this.setState({ disableSignUpButton: true });
+  //   if (this.state.password === this.state.confirmPassword) {
+  //     auth
+  //       .doCreateUserWithEmailAndPassword(this.state.email, this.state.confirmPassword)
+  //       .then(() => this.createUserSchema())
+  //       .catch(error => {
+  //         this.errorNotification(error);
+  //         this.setState({ disableSignUpButton: false });
+  //       });
+  //   } else {
+  //     this.setState({ disableSignUpButton: false });
+  //     this.errorNotification(defaults.passwordsDoNotMatch);
+  //   }
+  // };
 
-  /**
-   * Signs the user out of the session
-   */
-  handleSignOut = () => {
-    auth
-      .doSignOut()
-      .then(() => window.location = "/")
-      .catch(error => this.errorNotification(error));
-  };
+  // /**
+  //  * Signs the user out of the session
+  //  */
+  // handleSignOut = () => {
+  //   auth
+  //     .doSignOut()
+  //     .then(() => window.location = "/")
+  //     .catch(error => this.errorNotification(error));
+  // };
 
-  /**
-   * Show the forgot password modal and close the sign in modal
-   */
-  handlePasswordReset = e => {
-    e.preventDefault();
-    this.setState({ disableForgotPasswordSubmitButton: true });
-    auth
-      .doPasswordReset(this.state.email)
-      .then(() => {
-        this.successNotification(defaults.passwordConfirmationSent);
-        this.setState({
-          showForgotPasswordModal: false,
-          disableForgotPasswordSubmitButton: false
-        });
-      }).catch(error => {
-        this.setState({ disableForgotPasswordSubmitButton: false });
-        this.errorNotification(error);
-      });
-  };
+  // /**
+  //  * Show the forgot password modal and close the sign in modal
+  //  */
+  // handlePasswordReset = e => {
+  //   e.preventDefault();
+  //   this.setState({ disableForgotPasswordSubmitButton: true });
+  //   auth
+  //     .doPasswordReset(this.state.email)
+  //     .then(() => {
+  //       this.successNotification(defaults.passwordConfirmationSent);
+  //       this.setState({
+  //         showForgotPasswordModal: false,
+  //         disableForgotPasswordSubmitButton: false
+  //       });
+  //     }).catch(error => {
+  //       this.setState({ disableForgotPasswordSubmitButton: false });
+  //       this.errorNotification(error);
+  //     });
+  // };
 
-  /**
-   * Show the sign in modal
-   */
-  requestShowSignInModal = () => {
-    if (window.location.href.indexOf("account") > -1) {
-      window.location = "/";
-    } else {
-      this.setState({
-        showSignInModal: true,
-        showSignUpModal: false,
-        email: "",
-        password: ""
-      });
-    }
-  };
+  // /**
+  //  * Show the sign in modal
+  //  */
+  // requestShowSignInModal = () => {
+  //   if (window.location.href.indexOf("account") > -1) {
+  //     window.location = "/";
+  //   } else {
+  //     this.setState({
+  //       showSignInModal: true,
+  //       showSignUpModal: false,
+  //       email: "",
+  //       password: ""
+  //     });
+  //   }
+  // };
 
-  /**
-   * Show the sign up modal
-   */
-  requestShowSignUpModal = () => {
-    if (window.location.href.indexOf("account") > -1) {
-      window.location = "/";
-    } else {
-      this.setState({
-        showSignInModal: false,
-        showSignUpModal: true,
-        email: "",
-        password: "",
-        confirmPassword: ""
-      });
-    }
-  };
+  // /**
+  //  * Show the sign up modal
+  //  */
+  // requestShowSignUpModal = () => {
+  //   if (window.location.href.indexOf("account") > -1) {
+  //     window.location = "/";
+  //   } else {
+  //     this.setState({
+  //       showSignInModal: false,
+  //       showSignUpModal: true,
+  //       email: "",
+  //       password: "",
+  //       confirmPassword: ""
+  //     });
+  //   }
+  // };
 
-  /**
-   * Show the sign out modal
-   */
-  requestShowSignOutModal = () => {
-    this.setState({ showSignOutModal: true });
-  };
+  // /**
+  //  * Show the sign out modal
+  //  */
+  // requestShowSignOutModal = () => {
+  //   this.setState({ showSignOutModal: true });
+  // };
 
-  /**
-   * Show the forgot password modal
-   */
-  requestShowForgotPasswordModal = () => {
-    this.setState({
-      showSignInModal: false,
-      showForgotPasswordModal: true,
-      email: ""
-    });
-  };
+  // /**
+  //  * Show the forgot password modal
+  //  */
+  // requestShowForgotPasswordModal = () => {
+  //   this.setState({
+  //     showSignInModal: false,
+  //     showForgotPasswordModal: true,
+  //     email: ""
+  //   });
+  // };
 
-  /**
-   * Hide the sign in modal
-   */
-  requestHideSignInModal = () => {
-    this.setState({ showSignInModal: false });
-  };
+  // /**
+  //  * Hide the sign in modal
+  //  */
+  // requestHideSignInModal = () => {
+  //   this.setState({ showSignInModal: false });
+  // };
 
-  /**
-   * Hide the sign up modal
-   */
-  requestHideSignUpModal = () => {
-    this.setState({ showSignUpModal: false });
-  };
+  // /**
+  //  * Hide the sign up modal
+  //  */
+  // requestHideSignUpModal = () => {
+  //   this.setState({ showSignUpModal: false });
+  // };
 
-  /**
-   * Hide the sign out modal
-   */
-  requestHideSignOutModal = () => {
-    this.setState({ showSignOutModal: false });
-  };
+  // /**
+  //  * Hide the sign out modal
+  //  */
+  // requestHideSignOutModal = () => {
+  //   this.setState({ showSignOutModal: false });
+  // };
 
-  /**
-   * Hide the forgot password modal
-   */
-  requestHideForgotPasswordModal = () => {
-    this.setState({ showForgotPasswordModal: false });
-  };
+  // /**
+  //  * Hide the forgot password modal
+  //  */
+  // requestHideForgotPasswordModal = () => {
+  //   this.setState({ showForgotPasswordModal: false });
+  // };
 
-  /**
-   * Display the success notification when a vehicle is successfully added
-   * 
-   * @param year  the year of the vehicle
-   * @param make  the make of the vehicle
-   * @param model the model of the vehicle
-   */
-  addOneVehicleSuccessNotification = (year, make, model) => {
-    toast.success(`Added a ${year} ${make} ${model}.`);
-  };
+  // /**
+  //  * Display the success notification when a vehicle is successfully added
+  //  * 
+  //  * @param year  the year of the vehicle
+  //  * @param make  the make of the vehicle
+  //  * @param model the model of the vehicle
+  //  */
+  // addOneVehicleSuccessNotification = (year, make, model) => {
+  //   toast.success(`Added a ${year} ${make} ${model}.`);
+  // };
 
-  /**
-   * Display the success notification when the user performs an action successfully
-   * 
-   * @param message the message to display to the user
-   */
-  successNotification = message => {
-    toast.success(message);
-  };
+  // /**
+  //  * Display the success notification when the user performs an action successfully
+  //  * 
+  //  * @param message the message to display to the user
+  //  */
+  // successNotification = message => {
+  //   toast.success(message);
+  // };
 
-  /**
-   * Display the info notification when the user resets the fields to add a vehicle
-   */
-  handleResetAddVehicleFields = () => {
-    toast.info(defaults.inputFieldsReset);
-  };
+  // /**
+  //  * Display the info notification when the user resets the fields to add a vehicle
+  //  */
+  // handleResetAddVehicleFields = () => {
+  //   toast.info(defaults.inputFieldsReset);
+  // };
 
-  /**
-   * Display the error notification when an error occurs while loading vehicles
-   * 
-   * @param err the error message to display to the user
-   */
-  loadVehiclesFailNotification = err => {
-    toast.error(`Loading Vehicles ${err.toString()}`);
-  };
+  // /**
+  //  * Display the error notification when an error occurs while loading vehicles
+  //  * 
+  //  * @param err the error message to display to the user
+  //  */
+  // loadVehiclesFailNotification = err => {
+  //   toast.error(`Loading Vehicles ${err.toString()}`);
+  // };
 
-  /**
-   * Display an error notification when an error occurs
-   * 
-   * @param err the error message to display to the user
-   */
-  errorNotification = err => {
-    toast.error(err.toString());
-  };
+  // /**
+  //  * Display an error notification when an error occurs
+  //  * 
+  //  * @param err the error message to display to the user
+  //  */
+  // errorNotification = err => {
+  //   toast.error(err.toString());
+  // };
 
   render() {
     return (
@@ -316,15 +315,15 @@ export default class App extends Component {
               path="/"
               component={() => (
                 <Main
-                  user={this.state.user}
-                  email={this.state.userEmailForAccount}
-                  loggedin={this.state.loggedin}
-                  userProfilePicture={this.state.userProfilePicture}
-                  onAuthStateChanged={this.onAuthStateChanged}
-                  handleResetAddVehicleFields={this.handleResetAddVehicleFields}
-                  errorNotification={this.errorNotification}
-                  addOneVehicleSuccessNotification={this.addOneVehicleSuccessNotification}
-                  loadVehiclesFailNotification={this.loadVehiclesFailNotification}
+                  // user={this.state.user}
+                  // email={this.state.userEmailForAccount}
+                  // loggedin={this.state.loggedin}
+                  // userProfilePicture={this.state.userProfilePicture}
+                  // onAuthStateChanged={this.onAuthStateChanged}
+                  // handleResetAddVehicleFields={this.handleResetAddVehicleFields}
+                  // errorNotification={this.errorNotification}
+                  // addOneVehicleSuccessNotification={this.addOneVehicleSuccessNotification}
+                  // loadVehiclesFailNotification={this.loadVehiclesFailNotification}
                 />
               )}
             />

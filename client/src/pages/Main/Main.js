@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Modal from "react-modal";
+import { firebase, auth } from "../../firebase";
 import { themes } from "../../themes/Themes";
 import { events } from "../../assets/Events";
 import userApi from "../../utils/userApi";
@@ -8,13 +10,28 @@ import Loading from "../../components/Loading";
 import LoggedOut from "../../components/LoggedOut";
 import LoggedIn from "../../components/LoggedIn";
 import { defaults } from "../../assets/Defaults";
+import { toast } from "react-toastify";
 
 export default class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      props: props,
+      // props: props,
+      loggedin: false,
       pageLoaded: false,
+      user: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      userProfilePicture: "",
+      userEmailForAccount: "",
+      showSignInModal: false,
+      showSignUpModal: false,
+      showSignOutModal: false,
+      showForgotPasswordModal: false,
+      disableSignInButton: false,
+      disableSignUpButton: false,
+      disableForgotPasswordSubmitButton: false,
       displayName: "",
       vehicleData: [],
       theme: "",
@@ -32,7 +49,36 @@ export default class App extends Component {
    * Find the user information when the page loads
    */
   componentDidMount() {
-    this.getUserInfoPartial(this.state.props.user.uid);
+    Modal.setAppElement("body");
+    this.onAuthStateChanged();
+    // this.getUserInfoPartial(this.state.props.user.uid);
+  };
+
+  /**
+   * Set the user information based if the user is logged in
+   */
+  onAuthStateChanged = () => {
+    console.log("here")
+    firebase.auth.onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          user: user,
+          loggedin: true,
+          uid: user.uid,
+          userEmailForAccount: user.email,
+          userAccountCreationTime: user.metadata.creationTime,
+          userAccountLastSignIn: user.metadata.lastSignInTime,
+          userDisplayName: user.displayName,
+          userProfilePicture: user.photoURL,
+          showSignInModal: false,
+          showSignUpModal: false,
+          showForgotPasswordModal: false
+        }, () => {
+          console.log(this.state.loggedin)
+          this.getUserInfoPartial(this.state.uid)
+        });
+      }
+    });
   };
 
   /**
@@ -51,7 +97,7 @@ export default class App extends Component {
             theme: userInfo.data.theme,
             backgroundPicture: userInfo.data.backgroundPicture,
             uid: userId,
-            displayName: this.state.props.user.displayName === null ? defaults.defaultDisplayName : this.state.props.user.displayName,
+            displayName: this.state.displayName === null ? defaults.defaultDisplayName : this.state.user.displayName,
             pageLoaded: true
           }, () => this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture)))
         )
@@ -68,7 +114,7 @@ export default class App extends Component {
               });
             }
           } else {
-            this.state.props.loadVehiclesFailNotification(err);
+            this.loadVehiclesFailNotification(err);
             this.setState({
               pageLoaded: true,
               disableAddVehicleButton: true,
@@ -128,21 +174,181 @@ export default class App extends Component {
    */
   handleAddOneVehicle = newVehicle => {
     const creatorId = this.state.uid;
-    const email = this.state.props.email;
+    const email = this.state.email;
     const event = events.addedNewVehicle;
     userApi.addOneVehicle(creatorId, newVehicle)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
-        this.state.props.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
+        this.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
         this.getUserInfoPartial(this.state.uid);
         this.setState({ disableAddVehicleButton: false });
         document.getElementById("addVehicleInputForm").reset();
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
-        this.state.props.errorNotification(err);
+        this.errorNotification(err);
         this.setState({ disableAddVehicleButton: false });
       });
+  };
+
+  /**
+   * Creates a schema for the user during first time login
+   */
+  createUserSchema = () => {
+    this.requestHideSignUpModal();
+    firebase.auth.onAuthStateChanged(user => {
+      if (user) {
+        userApi.createUserSchema(user.uid, user.email)
+          .catch(error => this.errorNotification(error));
+      }
+    });
+  };
+
+  /**
+   * Handle user authentication when a user signs in
+   */
+  handleSignIn = e => {
+    e.preventDefault();
+    this.setState({ disableSignInButton: true });
+    auth
+      .doSignInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(() => {
+        this.requestHideSignInModal();
+        this.setState({ disableSignInButton: false });
+      })
+      .catch(error => {
+        this.setState({ disableSignInButton: false });
+        this.errorNotification(error);
+      });
+  };
+
+  /**
+   * Handle user authentication when a user signs up
+   */
+  handleSignUp = e => {
+    e.preventDefault();
+    this.setState({ disableSignUpButton: true });
+    if (this.state.password === this.state.confirmPassword) {
+      auth
+        .doCreateUserWithEmailAndPassword(this.state.email, this.state.confirmPassword)
+        .then(() => this.createUserSchema())
+        .catch(error => {
+          this.errorNotification(error);
+          this.setState({ disableSignUpButton: false });
+        });
+    } else {
+      this.setState({ disableSignUpButton: false });
+      this.errorNotification(defaults.passwordsDoNotMatch);
+    }
+  };
+
+  /**
+   * Signs the user out of the session
+   */
+  handleSignOut = () => {
+    auth
+      .doSignOut()
+      .then(() => window.location = "/")
+      .catch(error => this.errorNotification(error));
+  };
+
+  /**
+   * Show the forgot password modal and close the sign in modal
+   */
+  handlePasswordReset = e => {
+    e.preventDefault();
+    this.setState({ disableForgotPasswordSubmitButton: true });
+    auth
+      .doPasswordReset(this.state.email)
+      .then(() => {
+        this.successNotification(defaults.passwordConfirmationSent);
+        this.setState({
+          showForgotPasswordModal: false,
+          disableForgotPasswordSubmitButton: false
+        });
+      }).catch(error => {
+        this.setState({ disableForgotPasswordSubmitButton: false });
+        this.errorNotification(error);
+      });
+  };
+
+  /**
+   * Show the sign in modal
+   */
+  requestShowSignInModal = () => {
+    if (window.location.href.indexOf("account") > -1) {
+      window.location = "/";
+    } else {
+      this.setState({
+        showSignInModal: true,
+        showSignUpModal: false,
+        email: "",
+        password: ""
+      });
+    }
+  };
+
+  /**
+   * Show the sign up modal
+   */
+  requestShowSignUpModal = () => {
+    if (window.location.href.indexOf("account") > -1) {
+      window.location = "/";
+    } else {
+      this.setState({
+        showSignInModal: false,
+        showSignUpModal: true,
+        email: "",
+        password: "",
+        confirmPassword: ""
+      });
+    }
+  };
+
+  /**
+   * Show the sign out modal
+   */
+  requestShowSignOutModal = () => {
+    this.setState({ showSignOutModal: true });
+  };
+
+  /**
+   * Show the forgot password modal
+   */
+  requestShowForgotPasswordModal = () => {
+    this.setState({
+      showSignInModal: false,
+      showForgotPasswordModal: true,
+      email: ""
+    });
+  };
+
+  /**
+   * Hide the sign in modal
+   */
+  requestHideSignInModal = () => {
+    this.setState({ showSignInModal: false });
+  };
+
+  /**
+   * Hide the sign up modal
+   */
+  requestHideSignUpModal = () => {
+    this.setState({ showSignUpModal: false });
+  };
+
+  /**
+   * Hide the sign out modal
+   */
+  requestHideSignOutModal = () => {
+    this.setState({ showSignOutModal: false });
+  };
+
+  /**
+   * Hide the forgot password modal
+   */
+  requestHideForgotPasswordModal = () => {
+    this.setState({ showForgotPasswordModal: false });
   };
 
   /**
@@ -159,11 +365,56 @@ export default class App extends Component {
     this.setState({ showAddVehicleYearNanErrorModal: false });
   };
 
+  /**
+   * Display the success notification when a vehicle is successfully added
+   * 
+   * @param year  the year of the vehicle
+   * @param make  the make of the vehicle
+   * @param model the model of the vehicle
+   */
+  addOneVehicleSuccessNotification = (year, make, model) => {
+    toast.success(`Added a ${year} ${make} ${model}.`);
+  };
+
+  /**
+   * Display the success notification when the user performs an action successfully
+   * 
+   * @param message the message to display to the user
+   */
+  successNotification = message => {
+    toast.success(message);
+  };
+
+  /**
+   * Display the info notification when the user resets the fields to add a vehicle
+   */
+  handleResetAddVehicleFields = () => {
+    toast.info(defaults.inputFieldsReset);
+  };
+
+  /**
+   * Display the error notification when an error occurs while loading vehicles
+   * 
+   * @param err the error message to display to the user
+   */
+  loadVehiclesFailNotification = err => {
+    toast.error(`Loading Vehicles ${err.toString()}`);
+  };
+
+  /**
+   * Display an error notification when an error occurs
+   * 
+   * @param err the error message to display to the user
+   */
+  errorNotification = err => {
+    toast.error(err.toString());
+  };
+
   render() {
     return (
       <React.Fragment>
         {
-          this.state.props.loggedin ?
+          this.state.loggedin ?
             (
               this.state.pageLoaded ?
                 (
@@ -171,14 +422,14 @@ export default class App extends Component {
                     <LoggedIn
                       vehicleData={this.state.vehicleData}
                       displayName={this.state.displayName}
-                      handleResetAddVehicleFields={this.state.props.handleResetAddVehicleFields}
+                      handleResetAddVehicleFields={this.handleResetAddVehicleFields}
                       checkIfVehicleYearIsValid={this.checkIfVehicleYearIsValid}
-                      userProfilePicture={this.state.props.userProfilePicture}
+                      userProfilePicture={this.state.userProfilePicture}
                       disableAddVehicleButton={this.state.disableAddVehicleButton}
                       currentTheme={this.state.currentTheme}
                       errorMessage={this.state.errorMessage}
                       reloadPage={this.reloadPage}
-                      showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
+                      showAddVehicleYearNanErrorModal={this.showAddVehicleYearNanErrorModal}
                       hideAddVehicleYearNanErrorModal={this.hideAddVehicleYearNanErrorModal}
                     />
                   </Container>
