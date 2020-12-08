@@ -156,16 +156,14 @@ const AccountDetails = props => {
                   <div className="col-md-4">
                     <div className="row">
                       <div className="col-md-6">
-                        <div className="row">
-                          <div className="col-md-12 text-left">
-                            <button
-                              id="downloadEventLogsButton"
-                              title="Download Event Logs"
-                              type="button"
-                              onClick={downloadEventLogCsvFile}>
-                              Download
-                            </button>
-                          </div>
+                        <div className="text-left">
+                          <button
+                            id="downloadEventLogsButton"
+                            title="Download Event Logs"
+                            type="button"
+                            onClick={downloadEventLogCsvFile}>
+                            Download
+                          </button>
                         </div>
                       </div>
                       <div className="col-md-6"></div>
@@ -183,22 +181,18 @@ const AccountDetails = props => {
               <hr className={currentTheme.hr} />
               <form className="row">
                 <div className="col-md-4 bottomMarginMobileDisplay">
-                  <label><strong>Update Background Picture:</strong></label>
+                  <label htmlFor={defaults.newBackgroundPictureInput}><strong>Update Background Picture:</strong></label>
                 </div>
                 <div className="col-md-4">
-                  <div className="row">
-                    <div className="col-md-12">
-                      <input
-                        id={defaults.newBackgroundPictureInput}
-                        type="text"
-                        onChange={handleChange}
-                        value={newBackgroundPicture}
-                        name="newBackgroundPicture"
-                        maxLength="500"
-                        placeholder="Insert photo URL"
-                      />
-                    </div>
-                  </div>
+                  <input
+                    id={defaults.newBackgroundPictureInput}
+                    type="text"
+                    onChange={handleChange}
+                    value={newBackgroundPicture}
+                    name="newBackgroundPicture"
+                    maxLength="500"
+                    placeholder="Insert photo URL"
+                  />
                 </div>
                 <br /><br />
                 <div className="col-md-4">
@@ -229,21 +223,17 @@ const AccountDetails = props => {
       }
       <form className="row">
         <div className="col-md-4 bottomMarginMobileDisplay">
-          <label><strong>Update Profile Picture:</strong></label>
+          <label htmlFor={defaults.newProfilePictureInput}><strong>Update Profile Picture:</strong></label>
         </div>
         <div className="col-md-4">
-          <div className="row">
-            <div className="col-md-12">
-              <input
-                id={defaults.newProfilePictureInput}
-                type="text"
-                onChange={handleChange}
-                name="newProfilePicture"
-                maxLength="500"
-                placeholder="Insert photo URL"
-              />
-            </div>
-          </div>
+          <input
+            id={defaults.newProfilePictureInput}
+            type="text"
+            onChange={handleChange}
+            name="newProfilePicture"
+            maxLength="500"
+            placeholder="Insert photo URL"
+          />
         </div>
         <br /><br />
         <div className="col-md-4">
@@ -271,21 +261,17 @@ const AccountDetails = props => {
       <br />
       <form className="row">
         <div className="col-md-4 bottomMarginMobileDisplay">
-          <label><strong>Update Display Name:</strong></label>
+          <label htmlFor={defaults.newDisplayNameInput}><strong>Update Display Name:</strong></label>
         </div>
         <div className="col-md-4">
-          <div className="row">
-            <div className="col-md-12">
-              <input
-                id={defaults.newDisplayNameInput}
-                type="text"
-                onChange={handleChange}
-                name="newDisplayName"
-                maxLength="50"
-                placeholder={userDisplayName}
-              />
-            </div>
-          </div>
+          <input
+            id={defaults.newDisplayNameInput}
+            type="text"
+            onChange={handleChange}
+            name="newDisplayName"
+            maxLength="50"
+            placeholder={userDisplayName}
+          />
         </div>
         <br /><br />
         <div className="col-md-4">

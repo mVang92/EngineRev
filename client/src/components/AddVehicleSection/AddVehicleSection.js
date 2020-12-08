@@ -83,7 +83,7 @@ class AddVehicleSection extends Component {
             <div className="row innerBox">
               <div className="col-md-3">
                 <div>
-                  <label><span className="required">*</span>Year</label>
+                  <label htmlFor="vehicleYearInput"><span className="required">*</span>Year</label>
                 </div>
                 <div>
                   <input
@@ -98,7 +98,7 @@ class AddVehicleSection extends Component {
               </div>
               <div className="col-md-3">
                 <div>
-                  <label><span className="required">*</span>Make</label>
+                  <label htmlFor="vehicleMakeInput"><span className="required">*</span>Make</label>
                 </div>
                 <div>
                   <input
@@ -113,7 +113,7 @@ class AddVehicleSection extends Component {
               </div>
               <div className="col-md-3">
                 <div>
-                  <label><span className="required">*</span>Model</label>
+                  <label htmlFor="vehicleModelInput"><span className="required">*</span>Model</label>
                 </div>
                 <div>
                   <input
@@ -127,7 +127,7 @@ class AddVehicleSection extends Component {
                 </div>
               </div>
               <div className="col-md-3">
-                <div className="col-md-12 text-center">
+                <div className="text-center">
                   <button
                     id="addVehicleButton"
                     title="Add Vehicle"
@@ -138,7 +138,7 @@ class AddVehicleSection extends Component {
                   </button>
                 </div>
                 <br />
-                <div className="col-md-12 text-center">
+                <div className="text-center">
                   <button
                     id="resetVehicleInputFieldsButton"
                     title="Reset Input Fields"

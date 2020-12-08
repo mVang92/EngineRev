@@ -11,7 +11,7 @@ const AddLog = props => {
             <form onSubmit={props.checkUserEnteredServiceLogInput}>
               <div className="row">
                 <div className="col-md-4">
-                  <label><span className="required">*</span><strong>Date</strong></label>
+                  <label htmlFor="serviceLogDateInput"><span className="required">*</span><strong>Date</strong></label>
                   <input
                     id="serviceLogDateInput"
                     type="date"
@@ -21,7 +21,7 @@ const AddLog = props => {
                   </input>
                 </div>
                 <div className="col-md-4">
-                  <label><span className="required">*</span><strong>Mileage</strong></label>
+                  <label htmlFor="serviceLogMileageInput"><span className="required">*</span><strong>Mileage</strong></label>
                   <input
                     id="serviceLogMileageInput"
                     type="text"
@@ -32,7 +32,7 @@ const AddLog = props => {
                   </input>
                 </div>
                 <div className="col-md-4">
-                  <label><span className="required">*</span><strong>Service</strong></label>
+                  <label htmlFor="serviceLogServiceInput"><span className="required">*</span><strong>Service</strong></label>
                   <input
                     id="serviceLogServiceInput"
                     type="text"
@@ -46,7 +46,7 @@ const AddLog = props => {
               <br />
               <div className="row">
                 <div className="col-md-2 logButtonsMobileDisplay">
-                  <label><strong>Comments</strong></label>
+                  <label htmlFor="serviceLogCommentsInput"><strong>Comments</strong></label>
                 </div>
                 <div className="col-md-10">
                   <textarea
