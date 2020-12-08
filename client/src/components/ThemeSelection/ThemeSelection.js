@@ -11,7 +11,7 @@ const ThemeSelection = props => {
   return (
     <div className="row">
       <div className="col-md-4 bottomMarginMobileDisplay">
-        <label><strong>Themes:</strong></label>
+        <label htmlFor={defaults.themeSelectionDropdown}><strong>Themes:</strong></label>
       </div>
       <div className="col-md-4 text-center bottomMarginMobileDisplay">
         <select
