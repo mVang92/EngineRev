@@ -4,7 +4,7 @@ import { defaults } from "../../assets/Defaults";
 const SortThreadsDropdown = props => {
 
   return (
-    <div className="row text-center">
+    <div className="row alignRightButtonsDesktopDisplay centerOnMobileDisplay">
       <div className="col-md-12">
         <select
           id={defaults.sortThreadsDropdown}

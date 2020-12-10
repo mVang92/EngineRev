@@ -1029,10 +1029,6 @@ footer {
         margin-top: 2rem;
     }
 
-    .centerOnMobile {
-        text-align: center;
-    }
-
     .signOutImage {
         width: 5em;
     }
@@ -1135,7 +1131,7 @@ footer {
     }
 
     .centerOnMobileDisplay {
-        text-align: center;
+        text-align: center !important;
     }
 
     .alignRightButtonsDesktopDisplay {
