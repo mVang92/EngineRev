@@ -40,19 +40,9 @@ const MyVehiclesSection = props => {
                           (
                             <React.Fragment>
                               <div className="row">
-                                {
-                                  vehicleData.vehicles.length ?
-                                    (
-                                      <div className="col-md-12 smallBottomMargin">
-                                        <label><strong>Vehicles on Record: <span id="vehicleCountForUser">{vehicleData.vehicles.length}</span></strong></label>
-                                      </div>
-                                    ) :
-                                    (
-                                      <div className="col-md-12">
-                                        <label>Vehicles on Record:</label>
-                                      </div>
-                                    )
-                                }
+                                <div className="col-md-12 smallBottomMargin">
+                                  <label><strong>Vehicles on Record: <span id="vehicleCountForUser">{vehicleData.vehicles.length}</span></strong></label>
+                                </div>
                               </div>
                               <div className="row innerBox">
                                 <div className="col-md-12">
@@ -60,23 +50,15 @@ const MyVehiclesSection = props => {
                                     vehicleData.vehicles.sort((a, b) => { return a.year - b.year }).map(vehicle => (
                                       <div key={vehicle._id} className="row">
                                         <div className="col-md-2"></div>
-                                        <div title={vehicle.year + " " + vehicle.make + " " + vehicle.model} className="col-md-8">
+                                        <div
+                                          title={vehicle.vehicleName ? vehicle.vehicleName : vehicle.year + " " + vehicle.make + " " + vehicle.model}
+                                          className="col-md-8">
                                           <Link to={{ pathname: "/vehicle/" + btoa(vehicle._id) }}>
                                             <div className="vehicleOnRecord">
                                               <div className={`fadeIn vehicleItemList ${currentTheme.vehicleItemList}`}>
-                                                {
-                                                  vehicle.vehicleName ?
-                                                    (
-                                                      <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
-                                                        {vehicle.vehicleName}
-                                                      </div>
-                                                    ) :
-                                                    (
-                                                      <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
-                                                        {vehicle.year} {vehicle.make} {vehicle.model}
-                                                      </div>
-                                                    )
-                                                }
+                                                <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
+                                                  {vehicle.vehicleName ? vehicle.vehicleName : vehicle.year + " " + vehicle.make + " " + vehicle.model}
+                                                </div>
                                               </div>
                                             </div>
                                           </Link>
