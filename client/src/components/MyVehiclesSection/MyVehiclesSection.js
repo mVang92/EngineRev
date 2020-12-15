@@ -32,55 +32,43 @@ const MyVehiclesSection = props => {
           (
             <React.Fragment>
               {
-                vehicleData ?
+                vehicleData.vehicles.length ?
                   (
-                    vehicleData.vehicles ?
-                      (
-                        vehicleData.vehicles.length ?
-                          (
-                            <React.Fragment>
-                              <div className="row">
-                                <div className="col-md-12 smallBottomMargin">
-                                  <label><strong>Vehicles on Record: <span id="vehicleCountForUser">{vehicleData.vehicles.length}</span></strong></label>
-                                </div>
-                              </div>
-                              <div className="row innerBox">
-                                <div className="col-md-12">
-                                  {
-                                    vehicleData.vehicles.sort((a, b) => { return a.year - b.year }).map(vehicle => (
-                                      <div key={vehicle._id} className="row">
-                                        <div className="col-md-2"></div>
-                                        <div
-                                          title={vehicle.vehicleName ? vehicle.vehicleName : vehicle.year + " " + vehicle.make + " " + vehicle.model}
-                                          className="col-md-8">
-                                          <Link to={{ pathname: "/vehicle/" + btoa(vehicle._id) }}>
-                                            <div className="vehicleOnRecord">
-                                              <div className={`fadeIn vehicleItemList ${currentTheme.vehicleItemList}`}>
-                                                <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
-                                                  {vehicle.vehicleName ? vehicle.vehicleName : vehicle.year + " " + vehicle.make + " " + vehicle.model}
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </Link>
+                    <React.Fragment>
+                      <div className="row">
+                        <div className="col-md-12 smallBottomMargin">
+                          <label><strong>Vehicles on Record: <span id="vehicleCountForUser">{vehicleData.vehicles.length}</span></strong></label>
+                        </div>
+                      </div>
+                      <div className="row innerBox">
+                        <div className="col-md-12">
+                          {
+                            vehicleData.vehicles.sort((a, b) => { return a.year - b.year }).map(vehicle => (
+                              <div key={vehicle._id} className="row">
+                                <div className="col-md-2"></div>
+                                <div
+                                  title={vehicle.vehicleName ? vehicle.vehicleName : vehicle.year + " " + vehicle.make + " " + vehicle.model}
+                                  className="col-md-8">
+                                  <Link to={{ pathname: "/vehicle/" + btoa(vehicle._id) }}>
+                                    <div className="vehicleOnRecord">
+                                      <div className={`fadeIn vehicleItemList ${currentTheme.vehicleItemList}`}>
+                                        <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
+                                          {vehicle.vehicleName ? vehicle.vehicleName : vehicle.year + " " + vehicle.make + " " + vehicle.model}
                                         </div>
-                                        <div className="col-md-2"></div>
                                       </div>
-                                    ))
-                                  }
+                                    </div>
+                                  </Link>
                                 </div>
+                                <div className="col-md-2"></div>
                               </div>
-                            </React.Fragment>
-                          ) :
-                          (
-                            <label><strong>No Vehicles on Record</strong></label>
-                          )
-                      ) :
-                      (
-                        null
-                      )
+                            ))
+                          }
+                        </div>
+                      </div>
+                    </React.Fragment>
                   ) :
                   (
-                    null
+                    <label><strong>No Vehicles on Record</strong></label>
                   )
               }
             </React.Fragment>
