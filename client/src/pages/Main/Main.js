@@ -51,7 +51,7 @@ export default class App extends Component {
             theme: userInfo.data.theme,
             backgroundPicture: userInfo.data.backgroundPicture,
             uid: userId,
-            displayName: this.state.props.user.displayName === null ? defaults.defaultDisplayName : this.state.props.user.displayName,
+            displayName: this.state.props.user.displayName ? this.state.props.user.displayName : defaults.defaultDisplayName,
             pageLoaded: true
           }, () => this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture)))
         )
