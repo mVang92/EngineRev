@@ -366,7 +366,6 @@ input {
 #deleteThreadButton,
 #saveEditedThreadTitleButton,
 #cancelEditThreadTitleButton,
-#editThreadTitleButton,
 #addLogBackButton,
 #addServiceLogButton,
 #addLogResetInputFieldsButton,
@@ -386,13 +385,15 @@ input {
     transition-duration: 0.2s;
 }
 
-.editComment {
+.editComment,
+#editThreadTitleButton {
     color: rgb(108, 117, 125);
     transition-duration: 0.2s;
 }
 
 .nav-link,
 .editComment,
+#editThreadTitleButton,
 #advancedSettingsToggle {
     cursor: pointer;
 }
@@ -785,7 +786,8 @@ footer {
 }
 
 .editComment:hover,
-.votingButton:hover {
+.votingButton:hover,
+#editThreadTitleButton:hover {
     color: initial;
     transition-duration: 0.1s;
 }
@@ -1040,7 +1042,6 @@ footer {
     #deleteThreadButton,
     #saveEditedThreadTitleButton,
     #cancelEditThreadTitleButton,
-    #editThreadTitleButton,
     #addLogBackButton,
     #addServiceLogButton,
     #addLogResetInputFieldsButton,
