@@ -75,12 +75,7 @@ const VehicleLogContent = props => {
             </div>
             <div className="row innerBox serviceLogMobileDisplay">
                 {
-                    vehicleServiceLogs.length === 0 ?
-                        (
-                            <div className="col-md-12 text-center">
-                                <label><strong>No Service Logs on Record</strong></label>
-                            </div>
-                        ) :
+                    vehicleServiceLogs.length ?
                         (
                             <ServiceLogDisplay
                                 sortVehicleServiceLogsMostRecent={sortVehicleServiceLogsMostRecent}
@@ -88,6 +83,11 @@ const VehicleLogContent = props => {
                                 sortServiceLogs={sortServiceLogs}
                                 showEditOneServiceLogModal={showEditOneServiceLogModal}
                             />
+                        ) :
+                        (
+                            <div className="col-md-12 text-center">
+                                <label><strong>No Service Logs on Record</strong></label>
+                            </div>
                         )
                 }
             </div>

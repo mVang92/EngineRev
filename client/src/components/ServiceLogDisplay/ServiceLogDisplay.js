@@ -3,13 +3,18 @@ import Categories from "../../components/Categories";
 import ServiceLog from "../../components/ServiceLog";
 
 const ServiceLogDisplay = props => {
+  const {
+    sortVehicleServiceLogsMostRecent,
+    sortServiceLogs
+  } = props;
+  
   return (
     <div className="col-md-12">
       <Categories />
       {
-        props.sortVehicleServiceLogsMostRecent ?
+        sortVehicleServiceLogsMostRecent ?
           (
-            props.sortServiceLogs().map(serviceLog => {
+            sortServiceLogs().map(serviceLog => {
               return (
                 <ServiceLog
                   key={serviceLog._id}
@@ -25,7 +30,7 @@ const ServiceLogDisplay = props => {
             })
           ) :
           (
-            props.sortServiceLogs().map(serviceLog => {
+            sortServiceLogs().map(serviceLog => {
               return (
                 <ServiceLog
                   key={serviceLog._id}
