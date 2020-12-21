@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import createAccountLogo from "../../images/createAccount.png"
 
 const SignIn = props => {
+    const { handleChange } = props;
     return (
         <Modal
             isOpen={props.showSignInModal}
@@ -21,9 +22,7 @@ const SignIn = props => {
                                     src={createAccountLogo}
                                     alt="account"
                                 />
-                                <label>
-                                    <strong>Sign-In to Your Account</strong>
-                                </label>
+                                <label><strong>Sign-In to Your Account</strong></label>
                             </span>
                         </div>
                         <div className="modal-body">
@@ -32,7 +31,7 @@ const SignIn = props => {
                                 type="text"
                                 value={props.email}
                                 name="email"
-                                onChange={props.handleChange}
+                                onChange={handleChange}
                                 placeholder="Email"
                                 maxLength="128">
                             </input>
@@ -42,7 +41,7 @@ const SignIn = props => {
                                 type="password"
                                 value={props.password}
                                 name="password"
-                                onChange={props.handleChange}
+                                onChange={handleChange}
                                 placeholder="Password"
                                 maxLength="128">
                             </input>
