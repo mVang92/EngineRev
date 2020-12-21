@@ -24,9 +24,7 @@ const SignOutModal = props => {
                                     alt="warning"
                                 />
                             </div>
-                            <div className="col-md-10 text-center">
-                                Are you sure you want to sign out?
-                            </div>
+                            <div className="col-md-10 text-center"><label>Are you sure you want to sign out?</label></div>
                         </div>
                         <div className="modal-footer">
                             <button

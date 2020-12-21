@@ -21,9 +21,7 @@ const SignUp = props => {
                                     src={createAccountLogo}
                                     alt="account"
                                 />
-                                <label>
-                                    <strong>Sign-Up for a New Account</strong>
-                                </label>
+                                <label><strong>Sign-Up for a New Account</strong></label>
                             </span>
                         </div>
                         <div className="modal-body">
