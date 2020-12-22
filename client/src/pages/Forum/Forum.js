@@ -116,7 +116,7 @@ export default class Forum extends Component {
         this.setState({
           allThreads: res.data,
           noSortResults: res.data === undefined || res.data.length === 0 ? defaults.noSortResults : null
-        }, () => this.getUserInfoPartial())
+        }, () => this.getUserInfoPartial());
       })
       .catch(err => {
         this.errorNotification(err);
@@ -150,7 +150,7 @@ export default class Forum extends Component {
               }, () => this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture)));
             } catch (err) {
               this.setState({ refreshCounter: this.state.refreshCounter + 1 });
-              if (this.state.refreshCounter <= 10) {
+              if (this.state.refreshCounter < 10) {
                 this.getUserInfoPartial();
               } else {
                 this.errorNotification(err);
