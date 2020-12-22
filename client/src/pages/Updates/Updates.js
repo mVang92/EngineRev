@@ -130,7 +130,7 @@ export default class Updates extends Component {
               });
             } catch (err) {
               this.setState({ refreshCounter: this.state.refreshCounter + 1 });
-              if (this.state.refreshCounter <= 10) {
+              if (this.state.refreshCounter < 10) {
                 this.getUserInfoPartial();
               } else {
                 this.errorNotification(err);

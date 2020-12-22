@@ -58,7 +58,7 @@ export default class App extends Component {
         .catch(err => {
           if (this.state.theme === "") {
             this.setState({ refreshCounter: this.state.refreshCounter + 1 });
-            if (this.state.refreshCounter <= 10) {
+            if (this.state.refreshCounter < 10) {
               this.getUserInfoPartial(userId);
             } else {
               this.setState({
