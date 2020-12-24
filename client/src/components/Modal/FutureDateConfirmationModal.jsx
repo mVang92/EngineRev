@@ -49,8 +49,9 @@ const FutureDateConfirmationModal = props => {
                         <div className="modal-footer">
                             <button
                                 title="No"
-                                type="button"
+                                id="cancelSubmitFutureDateButton"
                                 className="cancelBtn"
+                                type="button"
                                 onClick={hideFutureDateConfirmationModal}
                                 data-dismiss="modal">
                                 No

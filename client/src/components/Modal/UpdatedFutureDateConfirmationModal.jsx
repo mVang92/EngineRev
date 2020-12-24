@@ -42,9 +42,7 @@ const UpdatedFutureDateConfirmationModal = props => {
                                 <img className="warningImage" src={warningImage} alt='warning' />
                             </div>
                             <div className="col-md-10 redText">
-                                <label>
-                                    <strong>You are about to submit a future service log.</strong>
-                                </label>
+                                <label><strong>You are about to submit a future service log.</strong></label>
                             </div>
                         </div>
                         <div className="modal-body">
@@ -62,6 +60,7 @@ const UpdatedFutureDateConfirmationModal = props => {
                         <div className="modal-footer">
                             <button
                                 title="No"
+                                id="cancelSubmitFutureDateButton"
                                 type="button"
                                 className="cancelBtn"
                                 onClick={hideUpdatedFutureDateConfirmationModal}
