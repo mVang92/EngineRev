@@ -101,7 +101,7 @@ const AccountDetails = props => {
       <div className="row">
         <div className="col-md-4"><label><strong>Unique User Id:</strong></label></div>
         <div className="col-md-4">
-          <span id={uniqueUserIdMask}>{defaults.uniqueUserIdMask}</span>
+          <span id={uniqueUserIdMask}><label>{defaults.uniqueUserIdMask}</label></span>
           <span id={uniqueUserId}>{userId}</span>
         </div>
         <div className="col-md-4">
