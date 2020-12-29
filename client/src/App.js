@@ -39,7 +39,8 @@ export default class App extends Component {
       showForgotPasswordModal: false,
       disableSignInButton: false,
       disableSignUpButton: false,
-      disableForgotPasswordSubmitButton: false
+      disableForgotPasswordSubmitButton: false,
+      disableDoSignOutButton: false
     };
   };
 
@@ -137,10 +138,14 @@ export default class App extends Component {
    * Signs the user out of the session
    */
   handleSignOut = () => {
+    this.setState({ disableDoSignOutButton: true });
     auth
       .doSignOut()
       .then(() => window.location = "/")
-      .catch(error => this.errorNotification(error));
+      .catch(error => {
+        this.setState({ disableDoSignOutButton: false });
+        this.errorNotification(error);
+      });
   };
 
   /**
@@ -355,6 +360,7 @@ export default class App extends Component {
           />
           <SignOutModal
             showSignOutModal={this.state.showSignOutModal}
+            disableDoSignOutButton={this.state.disableDoSignOutButton}
             requestHideSignOutModal={this.requestHideSignOutModal}
             handleSignOut={this.handleSignOut}
           />

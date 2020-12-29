@@ -42,7 +42,8 @@ const SignOutModal = props => {
                                 type="button"
                                 className="standardButton"
                                 onClick={props.handleSignOut}
-                                data-dismiss="modal">
+                                data-dismiss="modal"
+                                disabled={props.disableDoSignOutButton}>
                                 Yes
                             </button>
                         </div>
