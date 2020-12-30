@@ -93,6 +93,7 @@ const ThreadComments = props => {
                           </div>
                           <div className="col-md-11 noWidthMobileDisplay">
                             <span
+                              title={`Reply to ${formattedEmail}`}
                               className="replyButton"
                               onClick={() => replyToThreadComment(formattedEmail)}>
                               Reply
