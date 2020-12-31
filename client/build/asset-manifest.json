@@ -1,13 +1,12 @@
 {
-  "main.css": "static/css/main.458cdf3f.css",
-  "main.css.map": "static/css/main.458cdf3f.css.map",
-  "main.js": "static/js/main.7f999ecf.js",
-  "main.js.map": "static/js/main.7f999ecf.js.map",
+  "main.css": "static/css/main.94013d4a.css",
+  "main.css.map": "static/css/main.94013d4a.css.map",
+  "main.js": "static/js/main.286186df.js",
+  "main.js.map": "static/js/main.286186df.js.map",
+  "static\\media\\collaborate.png": "static/media/collaborate.729b6f7c.png",
   "static\\media\\createAccount.png": "static/media/createAccount.61794b08.png",
-  "static\\media\\manageData.png": "static/media/manageData.9e94fd30.png",
+  "static\\media\\engineRevLogo.png": "static/media/engineRevLogo.5c03063b.png",
   "static\\media\\noMatch.gif": "static/media/noMatch.84ee0e2c.gif",
-  "static\\media\\notLoggedInCarGif.gif": "static/media/notLoggedInCarGif.0a183c5e.gif",
   "static\\media\\recordLogs.png": "static/media/recordLogs.43cb13c4.png",
-  "static\\media\\signOut.png": "static/media/signOut.f0e74e53.png",
-  "static\\media\\warning.png": "static/media/warning.595113e0.png"
+  "static\\media\\signOut.png": "static/media/signOut.5d26abbf.png"
 }
