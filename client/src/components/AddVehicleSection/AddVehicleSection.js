@@ -137,7 +137,6 @@ class AddVehicleSection extends Component {
                     Add Vehicle
                   </button>
                 </div>
-                <br />
                 <div className="text-center">
                   <button
                     id="resetVehicleInputFieldsButton"

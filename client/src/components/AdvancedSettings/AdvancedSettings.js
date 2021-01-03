@@ -45,7 +45,7 @@ const AdvancedSettings = props => {
                     type="submit"
                     onClick={canUserUpdateEmail}
                     disabled={disableUpdateEmailButton}>
-                    Submit
+                    Save
                   </button>
                 </div>
               </form>
@@ -85,7 +85,7 @@ const AdvancedSettings = props => {
             title="Update Password"
             type="submit"
             onClick={canUserUpdatePassword}>
-            Submit
+            Save
           </button>
         </div>
       </form>

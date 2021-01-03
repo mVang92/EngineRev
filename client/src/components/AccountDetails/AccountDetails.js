@@ -203,7 +203,7 @@ const AccountDetails = props => {
                         title="Update Background Picture"
                         type="submit"
                         onClick={showUpdateBackgroundPictureModal}>
-                        Submit
+                        Save
                       </button>
                     </div>
                     <div className="col-md-6 noWidthMobileDisplay">
@@ -244,7 +244,7 @@ const AccountDetails = props => {
                 title="Update Profile Picture"
                 type="submit"
                 onClick={showUpdateProfilePictureModal}>
-                Submit
+                Save
               </button>
             </div>
             <div className="col-md-6 noWidthMobileDisplay">
@@ -282,7 +282,7 @@ const AccountDetails = props => {
                 title="Update Display Name"
                 type="submit"
                 onClick={showUpdateDisplayNameModal}>
-                Submit
+                Save
               </button>
             </div>
             <div className="col-md-6 noWidthMobileDisplay">

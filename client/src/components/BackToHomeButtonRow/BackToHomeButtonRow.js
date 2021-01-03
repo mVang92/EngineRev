@@ -15,7 +15,7 @@ const BackToHomeButtonRow = props => {
           (
             <div className="col-md-4 smallMarginTopMobileDisplay text-center">
               <button
-                id="startNewThreadButton"
+                id="composeThreadButton"
                 title="New Thread"
                 type="button"
                 className="standardButton"
@@ -23,7 +23,7 @@ const BackToHomeButtonRow = props => {
                 data-target="#startThreadForm"
                 aria-expanded="false"
                 aria-controls="collapse">
-                New
+                Compose
               </button>
             </div>
           ) :
