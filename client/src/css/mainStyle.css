@@ -778,7 +778,7 @@ footer {
     width: 4rem;
 }
 
-.votingButton {
+.threadCommentButton {
     color: rgb(108, 117, 125);
     background: none;
     border: none;
@@ -787,7 +787,7 @@ footer {
 }
 
 .editComment:hover,
-.votingButton:hover,
+.threadCommentButton:hover,
 #editThreadTitleButton:hover {
     color: initial;
     transition-duration: 0.1s;
@@ -816,18 +816,6 @@ footer {
 
 #downloadEventLogsButton:hover {
     background: rgb(255, 255, 255);
-    transition-duration: 0.1s;
-}
-
-.replyButton {
-    font-size: 14px;
-    cursor: pointer;
-    color: rgb(108, 117, 125);
-    transition-duration: 0.2s;
-}
-
-.replyButton:hover {
-    color: initial;
     transition-duration: 0.1s;
 }
 
@@ -1197,6 +1185,10 @@ footer {
 
     .smallMarginTopMobileDisplay {
         margin-top: 1rem;
+    }
+
+    .alignRightMobileDisplay {
+        text-align: right;
     }
 }
     
