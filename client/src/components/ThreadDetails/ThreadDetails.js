@@ -133,7 +133,7 @@ const ThreadDetails = props => {
                             <React.Fragment>
                               <div className="col-md-4"></div>
                               <div className="col-md-4"></div>
-                              <div className="col-md-4">
+                              <div className="col-md-4 alignRightMobileDisplay">
                                 <span
                                   id="editThreadTitleButton"
                                   title="Edit"
