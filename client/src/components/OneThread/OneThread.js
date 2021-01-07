@@ -36,19 +36,9 @@ const OneThread = props => {
         <div className="row">
           <div className="col-md-12 breakWord">Author: {formattedEmail}</div>
         </div>
-        {
-          threadCategory ?
-            (
-              <div className="row">
-                <div className="col-md-12 breakWord">Category: {threadCategory}</div>
-              </div>
-            ) :
-            (
-              <div className="row">
-                <div className="col-md-12 breakWord">Category: {defaults.defaultThreadCategory}</div>
-              </div>
-            )
-        }
+        <div className="row">
+          <div className="col-md-12 breakWord">Category: {threadCategory ? threadCategory : defaults.defaultThreadCategory}</div>
+        </div>
         <div className="row">
           <div className="col-md-12 breakWord">Date: {formattedDate}</div>
         </div>
@@ -56,15 +46,7 @@ const OneThread = props => {
           <div className="col-md-12 breakWord">Comments: {commentsCount.length}</div>
         </div>
         <div className="row">
-          {
-            views === 1 ?
-              (
-                <div className="col-md-12 breakWord">Viewed: {views} time</div>
-              ) :
-              (
-                <div className="col-md-12 breakWord">Viewed: {views} times</div>
-              )
-          }
+          <div className="col-md-12 breakWord">Viewed: {views} {views === 1 ? "time" : "times"}</div>
         </div>
       </div>
     </React.Fragment>
