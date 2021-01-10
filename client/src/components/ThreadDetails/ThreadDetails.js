@@ -219,15 +219,8 @@ const ThreadDetails = props => {
         }
       </div>
       <hr className={currentTheme.hr} />
-      <div className="row">
-        <div className="col-md-6 text-left noWidthMobileDisplay">
-          <button className="backButton" title="Back" onClick={backButton}>Back</button>
-        </div>
-        <br />
-        <div className="col-md-6 text-right noWidthMobileDisplay">
-          <button className="backToTopButton" title="Back to Top" onClick={backToTopOfPage}>Top</button>
-        </div>
-      </div>
+      <button className="backButton" title="Back" onClick={backButton}>Back</button>
+      <button className="backToTopButton" title="Back to Top" onClick={backToTopOfPage}>Top</button>
     </div>
   );
 };

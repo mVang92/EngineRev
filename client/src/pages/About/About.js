@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import engineRevLogo from "../../images/engineRevLogo.png";
 import userApi from "../../utils/userApi";
 import Loading from "../../components/Loading";
 import { firebase } from "../../firebase"
 import { defaults } from "../../assets/Defaults";
 import { themes } from "../../themes/Themes";
-import BackToHomeButtonRow from "../../components/BackToHomeButtonRow";
 import { toast } from "react-toastify";
 
 export default class About extends Component {
@@ -119,7 +119,9 @@ export default class About extends Component {
                     <label><p>{defaults.creatorDetails}</p></label>
                   </div>
                   <br />
-                  <BackToHomeButtonRow />
+                  <Link to={{ pathname: "/" }}>
+                    <button className="backHomeBtn" title="Back">Back</button>
+                  </Link>
                 </div>
               </div>
             ) : (
