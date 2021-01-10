@@ -14,15 +14,11 @@ const ServiceLogBottomButtons = props => {
                     (
                         <React.Fragment>
                             <hr className={`hideWhilePrinting ${currentTheme.hr}`} />
-                            <div id="serviceLogBottomButtons" className="row hideWhilePrinting">
-                                <div className="col-md-6 text-left noWidthMobileDisplay">
-                                    <Link to={{ pathname: "/" }}>
-                                        <button className="backHomeBtn" title="Back">Back</button>
-                                    </Link>
-                                </div>
-                                <div className="col-md-6 text-right noWidthMobileDisplay">
-                                    <button className="backToTopButton" title="Back to Top" onClick={backToTopOfPage}>Top</button>
-                                </div>
+                            <div id="serviceLogBottomButtons" className="hideWhilePrinting">
+                                <Link to={{ pathname: "/" }}>
+                                    <button className="backHomeBtn" title="Back">Back</button>
+                                </Link>
+                                <button className="backToTopButton" title="Back to Top" onClick={backToTopOfPage}>Top</button>
                             </div>
                         </React.Fragment>
                     ) :

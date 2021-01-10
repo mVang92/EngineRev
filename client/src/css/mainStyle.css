@@ -272,6 +272,10 @@ input {
     margin: auto;
 }
 
+.backToTopButton {
+    float: right;
+}
+
 .addBtn:hover,
 .resetButton:hover,
 .cancelBtn:hover,
