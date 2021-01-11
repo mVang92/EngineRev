@@ -196,25 +196,19 @@ const AccountDetails = props => {
                 </div>
                 <br /><br />
                 <div className="col-md-4">
-                  <div className="row">
-                    <div className="col-md-6 noWidthMobileDisplay">
-                      <button
-                        id="submitNewBackgroundPictureButton"
-                        title="Update Background Picture"
-                        type="submit"
-                        onClick={showUpdateBackgroundPictureModal}>
-                        Save
-                      </button>
-                    </div>
-                    <div className="col-md-6 noWidthMobileDisplay">
-                      <button
-                        id="resetNewBackgroundPictureButton"
-                        title="Reset Input Field"
-                        onClick={event => resetInputFields(event, defaults.newBackgroundPictureInput)}>
-                        Reset
-                      </button>
-                    </div>
-                  </div>
+                  <button
+                    id="submitNewBackgroundPictureButton"
+                    title="Update Background Picture"
+                    type="submit"
+                    onClick={showUpdateBackgroundPictureModal}>
+                    Save
+                  </button>
+                  <button
+                    id="resetNewBackgroundPictureButton"
+                    title="Reset Input Field"
+                    onClick={event => resetInputFields(event, defaults.newBackgroundPictureInput)}>
+                    Reset
+                  </button>
                 </div>
               </form>
               <br />
@@ -237,25 +231,19 @@ const AccountDetails = props => {
         </div>
         <br /><br />
         <div className="col-md-4">
-          <div className="row">
-            <div className="col-md-6 noWidthMobileDisplay">
-              <button
-                id="submitNewProfilePictureButton"
-                title="Update Profile Picture"
-                type="submit"
-                onClick={showUpdateProfilePictureModal}>
-                Save
-              </button>
-            </div>
-            <div className="col-md-6 noWidthMobileDisplay">
-              <button
-                id="resetNewProfilePictureButton"
-                title="Reset Input Field"
-                onClick={event => resetInputFields(event, defaults.newProfilePictureInput)}>
-                Reset
-              </button>
-            </div>
-          </div>
+          <button
+            id="submitNewProfilePictureButton"
+            title="Update Profile Picture"
+            type="submit"
+            onClick={showUpdateProfilePictureModal}>
+            Save
+          </button>
+          <button
+            id="resetNewProfilePictureButton"
+            title="Reset Input Field"
+            onClick={event => resetInputFields(event, defaults.newProfilePictureInput)}>
+            Reset
+          </button>
         </div>
       </form>
       <br />
@@ -275,25 +263,19 @@ const AccountDetails = props => {
         </div>
         <br /><br />
         <div className="col-md-4">
-          <div className="row">
-            <div className="col-md-6 noWidthMobileDisplay">
-              <button
-                id="submitNewDisplayNameButton"
-                title="Update Display Name"
-                type="submit"
-                onClick={showUpdateDisplayNameModal}>
-                Save
-              </button>
-            </div>
-            <div className="col-md-6 noWidthMobileDisplay">
-              <button
-                id="resetNewDisplayNameButton"
-                title="Reset Input Field"
-                onClick={event => resetInputFields(event, defaults.newDisplayNameInput)}>
-                Reset
-              </button>
-            </div>
-          </div>
+          <button
+            id="submitNewDisplayNameButton"
+            title="Update Display Name"
+            type="submit"
+            onClick={showUpdateDisplayNameModal}>
+            Save
+          </button>
+          <button
+            id="resetNewDisplayNameButton"
+            title="Reset Input Field"
+            onClick={event => resetInputFields(event, defaults.newDisplayNameInput)}>
+            Reset
+          </button>
         </div>
       </form>
       <hr className={currentTheme.hr} />

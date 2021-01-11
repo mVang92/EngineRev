@@ -272,7 +272,10 @@ input {
     margin: auto;
 }
 
-.backToTopButton {
+.backToTopButton,
+#resetNewBackgroundPictureButton,
+#resetNewProfilePictureButton,
+#resetNewDisplayNameButton {
     float: right;
 }
 
@@ -989,7 +992,7 @@ footer {
     }
 }
 
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 992px) {
     .navbar-nav {
         position: initial;
         right: 0;
@@ -1009,9 +1012,21 @@ footer {
     .actionButtonsMobileDisplay {
         max-width: 50%;
     }
+
+    #applyThemeButton,
+    #submitNewBackgroundPictureButton,
+    #submitNewProfilePictureButton,
+    #submitNewDisplayNameButton,
+    #submitNewEmailButton,
+    #submitNewPasswordButton,
+    #resetNewBackgroundPictureButton,
+    #resetNewProfilePictureButton,
+    #resetNewDisplayNameButton {
+        width: 5rem;
+    }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
     #userEmail{
         font-size: 22px;
     }
@@ -1193,6 +1208,18 @@ footer {
 
     .alignRightMobileDisplay {
         text-align: right;
+    }
+
+    #applyThemeButton,
+    #submitNewBackgroundPictureButton,
+    #submitNewProfilePictureButton,
+    #submitNewDisplayNameButton,
+    #submitNewEmailButton,
+    #submitNewPasswordButton,
+    #resetNewBackgroundPictureButton,
+    #resetNewProfilePictureButton,
+    #resetNewDisplayNameButton {
+        width: 7rem;
     }
 }
     

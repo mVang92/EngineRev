@@ -34,7 +34,7 @@ const ThemeSelection = props => {
           type="button"
           onClick={() => saveThemeForUser()}
           disabled={disableThemeToggleButton}>
-          Apply
+          Save
         </button>
       </div>
     </div>
