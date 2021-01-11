@@ -14,7 +14,7 @@ export const defaults = {
     newProfilePictureInput: "newProfilePictureInput",
     newDisplayNameInput: "newDisplayNameInput",
     defaultThreadCategory: "Other",
-    uniqueUserIdMask: "*****************************************",
+    uniqueUserIdMask: "********************************",
     defaultProfilePicture: "https://image.flaticon.com/icons/png/512/64/64572.png",
     defaultDisplayName: "EngineRev User",
     loggedOutStartThread: "Please sign in or create an account to start a thread.",
