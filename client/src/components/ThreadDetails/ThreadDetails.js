@@ -104,7 +104,7 @@ const ThreadDetails = props => {
                                   className="cancelBtn"
                                   onClick={() => handleEditThreadDetails(false)}>
                                   Cancel
-                                  </button>
+                                </button>
                               </div>
                               <div className="col-md-4">
                                 <button
@@ -114,7 +114,7 @@ const ThreadDetails = props => {
                                   className="addBtn"
                                   onClick={() => showDeleteThreadModal()}>
                                   Delete
-                                  </button>
+                                </button>
                               </div>
                               <div className="col-md-4">
                                 <button
@@ -125,7 +125,7 @@ const ThreadDetails = props => {
                                   onClick={() => validateEditedThreadDetails()}
                                   disabled={disableSaveEditThreadButton}>
                                   Save
-                                  </button>
+                                </button>
                               </div>
                             </React.Fragment>
                           ) :
