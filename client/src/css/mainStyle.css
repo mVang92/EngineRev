@@ -172,8 +172,7 @@ input {
 
 #sortThreadsDropdown {
     box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
+    margin-right: 0.5rem;
     height: 100%;
     cursor: pointer;
 }
