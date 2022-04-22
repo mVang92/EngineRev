@@ -112,7 +112,6 @@ export default class Forum extends Component {
    * If successful or if there is an error, then find the user information
    */
   getAllThreads = sortCriteria => {
-    console.log(sortCriteria)
     forumApi.getAllThreads(sortCriteria)
       .then(res => {
         this.setState({
