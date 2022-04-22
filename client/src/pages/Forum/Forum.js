@@ -36,18 +36,19 @@ export default class Forum extends Component {
     };
   };
 
+  SELECTED_SORT_ORDER = "selectedSortOrder"
   uniqueCreatorId;
 
   /**
    * Perform these actions upon page load
    */
   componentDidMount = () => {
-    this.setState({ defaultSortOrder: localStorage.getItem("selectedSortOrder") });
-    if (localStorage.getItem("selectedSortOrder") === null) {
-      localStorage.setItem("selectedSortOrder", defaults.mostRecentThreadsSort);
-      this.getAllThreads(localStorage.getItem("selectedSortOrder"));
+    this.setState({ defaultSortOrder: localStorage.getItem(this.SELECTED_SORT_ORDER) });
+    if (localStorage.getItem(this.SELECTED_SORT_ORDER) === null) {
+      localStorage.setItem(this.SELECTED_SORT_ORDER, defaults.mostRecentThreadsSort);
+      this.getAllThreads(localStorage.getItem(this.SELECTED_SORT_ORDER));
     } else {
-      this.getAllThreads(localStorage.getItem("selectedSortOrder"));
+      this.getAllThreads(localStorage.getItem(this.SELECTED_SORT_ORDER));
     }
   };
 
@@ -65,13 +66,13 @@ export default class Forum extends Component {
   renderSortedThreads = () => {
     let element = document.getElementById(defaults.sortThreadsDropdown);
     let selectedSortOrder = element.options[element.selectedIndex].value;
-    localStorage.setItem("selectedSortOrder", selectedSortOrder);
+    localStorage.setItem(this.SELECTED_SORT_ORDER, selectedSortOrder);
     this.setState({
       disableSortThreadsButton: true,
       loadingSortedThreads: true,
       allThreads: []
     });
-    forumApi.getAllThreads(localStorage.getItem("selectedSortOrder"))
+    forumApi.getAllThreads(localStorage.getItem(this.SELECTED_SORT_ORDER))
       .then(res => {
         this.setState({
           allThreads: res.data,
@@ -111,6 +112,7 @@ export default class Forum extends Component {
    * If successful or if there is an error, then find the user information
    */
   getAllThreads = sortCriteria => {
+    console.log(sortCriteria)
     forumApi.getAllThreads(sortCriteria)
       .then(res => {
         this.setState({
@@ -184,7 +186,7 @@ export default class Forum extends Component {
           ) {
             this.errorNotification(defaults.threadDetailsCannotBeBlank);
           } else {
-            let element = document.getElementById("threadCategoryDropdown");
+            let element = document.getElementById(defaults.threadCategoryDropdown);
             this.handleAddOneThread(element.options[element.selectedIndex].value);
           }
         } else {
@@ -224,7 +226,7 @@ export default class Forum extends Component {
           disableSubmitNewThreadButton: false
         }, () => {
           eventLogHandler.successful(creatorId, email, event);
-          localStorage.removeItem("selectedSortOrder");
+          localStorage.removeItem(this.SELECTED_SORT_ORDER);
           this.successNotification(defaults.addThreadSuccessfully);
           this.getAllThreads(this.state.defaultSortOrder);
         });
