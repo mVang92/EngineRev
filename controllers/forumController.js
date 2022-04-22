@@ -1,10 +1,12 @@
 const db = require("../models");
+
 const threadCategories = [
     "Ask Car Question",
     "Tips and Tricks",
     "Share a Story",
     "Other"
 ];
+
 const sortCriterias = {
     oldestThreadsSort: "oldestThreadsSort",
     mostRecentThreadsSort: "mostRecentThreadsSort",
@@ -30,6 +32,7 @@ sortByDate = (res, sort) => {
         .find({}, {
             creator: 0,
             hits: 0,
+            __v: 0,
             "comments._id": 0,
             "comments.votes": 0,
             "comments.edited": 0,
@@ -51,6 +54,7 @@ mostViewsThreadsSort = (req, res) => {
         .find(req.query, {
             creator: 0,
             hits: 0,
+            __v: 0,
             "comments._id": 0,
             "comments.votes": 0,
             "comments.edited": 0,
@@ -72,6 +76,7 @@ sortByCategory = (res, index) => {
         .find({ threadCategory: threadCategories[index] }, {
             creator: 0,
             hits: 0,
+            __v: 0,
             "comments._id": 0,
             "comments.votes": 0,
             "comments.edited": 0,

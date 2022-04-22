@@ -1,3 +1,5 @@
+import defaultProfilePicture from "../images/defaultProfilePicture.png";
+
 export const defaults = {
     applicationName: "applicationName",
     engineRevTheme: "engineRev",
@@ -15,7 +17,7 @@ export const defaults = {
     newDisplayNameInput: "newDisplayNameInput",
     defaultThreadCategory: "Other",
     uniqueUserIdMask: "********************************",
-    defaultProfilePicture: "https://image.flaticon.com/icons/png/512/64/64572.png",
+    defaultProfilePicture: defaultProfilePicture,
     defaultDisplayName: "EngineRev User",
     loggedOutStartThread: "Please sign in or create an account to start a thread.",
     noCommentsOnThread: "No Comments on This Thread",
