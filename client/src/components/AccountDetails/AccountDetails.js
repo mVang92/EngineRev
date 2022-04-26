@@ -40,6 +40,7 @@ const AccountDetails = props => {
     resetInputFields,
     disableUpdateEmailButton
   } = props;
+  
   let uniqueUserId = showUniqueUserId ? "showUniqueUserId" : "hideUniqueUserId";
   let uniqueUserIdMask = showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
 
