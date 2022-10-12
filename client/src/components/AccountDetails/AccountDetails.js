@@ -12,17 +12,12 @@ const AccountDetails = props => {
     currentTheme,
     unableToLoadDatabase,
     backToTopOfPage,
-    showUniqueUserId,
-    showMaskUniqueUserId,
-    showUniqueUserIdToPage,
-    hideUniqueUserIdToPage,
     userPhotoUrl,
     userDisplayName,
     userEmail,
     vehicleCount,
     loadingError,
     roles,
-    userId,
     userAccountCreationTime,
     userAccountLastSignIn,
     saveThemeForUser,
@@ -40,9 +35,6 @@ const AccountDetails = props => {
     resetInputFields,
     disableUpdateEmailButton
   } = props;
-  
-  let uniqueUserId = showUniqueUserId ? "showUniqueUserId" : "hideUniqueUserId";
-  let uniqueUserIdMask = showMaskUniqueUserId ? "showMaskUniqueUserId" : "hideMaskUniqueUserId";
 
   return (
     <div id="accountPage" className={`mt-3 box ${currentTheme.background}`}>
@@ -99,39 +91,6 @@ const AccountDetails = props => {
         </div>
       </div>
       <hr className={currentTheme.hr} />
-      <div className="row">
-        <div className="col-md-4"><label><strong>Unique User Id:</strong></label></div>
-        <div className="col-md-4">
-          <span id={uniqueUserIdMask}><label>{defaults.uniqueUserIdMask}</label></span>
-          <span id={uniqueUserId}>{userId}</span>
-        </div>
-        <div className="col-md-4">
-          {
-            showUniqueUserId ?
-              (
-                <button
-                  id="hideUniqueIdButton"
-                  title="Hide Unique Id"
-                  type="button"
-                  className="cancelBtn"
-                  onClick={hideUniqueUserIdToPage}>
-                  Hide
-                </button>
-              ) :
-              (
-                <button
-                  id="showUniqueIdButton"
-                  title="Show Unique Id"
-                  type="button"
-                  className="cancelBtn"
-                  onClick={showUniqueUserIdToPage}>
-                  Show
-                </button>
-              )
-          }
-        </div>
-      </div>
-      <br />
       <div className="row">
         <div className="col-md-4"><label><strong>Account Creation Date:</strong></label></div>
         <div className="col-md-4">{userAccountCreationTime}</div>
