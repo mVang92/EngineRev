@@ -16,7 +16,6 @@ export const defaults = {
     newProfilePictureInput: "newProfilePictureInput",
     newDisplayNameInput: "newDisplayNameInput",
     defaultThreadCategory: "Other",
-    uniqueUserIdMask: "********************************",
     defaultProfilePicture: defaultProfilePicture,
     defaultDisplayName: "EngineRev User",
     loggedOutStartThread: "Please sign in or create an account to start a thread.",

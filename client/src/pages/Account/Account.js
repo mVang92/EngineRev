@@ -45,8 +45,6 @@ export default class Account extends Component {
       userAccountLastSignIn: "",
       newBackgroundPicture: "",
       newProfilePicture: "",
-      showUniqueUserId: false,
-      showMaskUniqueUserId: true,
       showUpdateBackgroundPictureModal: false,
       showUpdateProfilePictureModal: false,
       showUpdateDisplayNameModal: false,
@@ -497,16 +495,6 @@ export default class Account extends Component {
   };
 
   /**
-   * Set the state of the unique id to true
-   */
-  showUniqueUserIdToPage = () => {
-    this.setState({
-      showUniqueUserId: true,
-      showMaskUniqueUserId: false
-    });
-  };
-
-  /**
    * Hide the modal to confirm updating the background picture
    */
   hideUpdateBackgroundPictureModal = () => {
@@ -525,16 +513,6 @@ export default class Account extends Component {
    */
   hideUpdateDisplayNameModal = () => {
     this.setState({ showUpdateDisplayNameModal: false });
-  };
-
-  /**
-   * Set the state of the unique id to false
-   */
-  hideUniqueUserIdToPage = () => {
-    this.setState({
-      showUniqueUserId: false,
-      showMaskUniqueUserId: true
-    });
   };
 
   /**
@@ -622,12 +600,7 @@ export default class Account extends Component {
                               handleChange={this.handleChange}
                               userPhotoUrl={this.state.userPhotoUrl}
                               userEmail={this.state.userEmail}
-                              userId={this.state.userId}
                               userDisplayName={this.state.userDisplayName}
-                              showUniqueUserId={this.state.showUniqueUserId}
-                              showUniqueUserIdToPage={this.showUniqueUserIdToPage}
-                              showMaskUniqueUserId={this.state.showMaskUniqueUserId}
-                              hideUniqueUserIdToPage={this.hideUniqueUserIdToPage}
                               loadingError={this.state.loadingError}
                               vehicleCount={this.state.vehicleCount}
                               newBackgroundPicture={this.state.newBackgroundPicture}
