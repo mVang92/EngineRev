@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { firebase, auth } from "./firebase"
 import { ToastContainer, toast } from "react-toastify";
 import { NavLoggedIn, NavLoggedOut } from "./components/Nav";
@@ -64,6 +64,7 @@ export default class App extends Component {
    * Set the user information based if the user is logged in
    */
   onAuthStateChanged = () => {
+    console.log("here")
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({
@@ -315,11 +316,10 @@ export default class App extends Component {
                 />
               )
           }
-          <Switch>
+          <Routes>
             <Route
-              exact
               path="/"
-              component={() => (
+              element={
                 <Main
                   user={this.state.user}
                   email={this.state.userEmailForAccount}
@@ -331,16 +331,16 @@ export default class App extends Component {
                   addOneVehicleSuccessNotification={this.addOneVehicleSuccessNotification}
                   loadVehiclesFailNotification={this.loadVehiclesFailNotification}
                 />
-              )}
+              }
             />
-            <Route exact path="/vehicle/:vehicleId" component={Log} />
-            <Route exact path="/forum" component={Forum} />
-            <Route exact path="/thread/:threadId" component={Thread} />
-            <Route exact path="/account" component={Account} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/updates" component={Updates} />
-            <Route component={NoMatch} />
-          </Switch>
+            <Route path="/vehicle/:vehicleId" element={<Log />} />
+            <Route path="/forum" element={<Forum />} />
+            <Route path="/thread/:threadId" element={<Thread />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/updates" element={<Updates />} />
+            <Route element={<NoMatch />} />
+          </Routes>
           <SignInModal
             showSignInModal={this.state.showSignInModal}
             requestShowSignUpModal={this.requestShowSignUpModal}
