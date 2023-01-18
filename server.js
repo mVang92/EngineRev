@@ -17,9 +17,10 @@ if (process.env.NODE_ENV === "production") {
   setInterval(function () {
     axios.delete("https://enginerev.herokuapp.com/api/eventLog/");
   }, 300000);
-} else {
+} 
+else {
   setInterval(function () {
-    axios.delete("http://localhost:3000/api/eventLog/");
+    axios.delete("http://127.0.0.1:3000/api/eventLog/");
   }, 5000);
 }
 
@@ -27,7 +28,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.DB_URI || "mongodb://localhost/engineRev");
+mongoose.connect(process.env.DB_URI || "mongodb://127.0.0.1/engineRev");
 // mongoose.set("debug", true);
 
 // Start the API server
