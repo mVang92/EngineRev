@@ -49,7 +49,8 @@ const MyVehiclesSection = props => {
                                 <div
                                   title={vehicle.vehicleName ? vehicle.vehicleName : vehicle.year + " " + vehicle.make + " " + vehicle.model}
                                   className="col-md-8">
-                                  <Link to={{ pathname: "/vehicle/" + btoa(vehicle._id) }}>
+                                  <Link to={`/vehicle/${vehicle._id}`}>
+                                    {/* <Link to={{ pathname: "/vehicle/" + btoa(vehicle._id) }}> */}
                                     <div className={`fadeIn vehicleItemList ${currentTheme.vehicleItemList}`}>
                                       <div className={`text-dark wrapword ${currentTheme.vehicleItemListFont}`}>
                                         {vehicle.vehicleName ? vehicle.vehicleName : vehicle.year + " " + vehicle.make + " " + vehicle.model}

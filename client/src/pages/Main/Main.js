@@ -5,7 +5,6 @@ import userApi from "../../utils/userApi";
 import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
-import LoggedOut from "../../components/LoggedOut";
 import LoggedIn from "../../components/LoggedIn";
 import { defaults } from "../../assets/Defaults";
 
@@ -32,6 +31,7 @@ export default class App extends Component {
    * Find the user information when the page loads
    */
   componentDidMount() {
+    console.log(this.props)
     this.getUserInfoPartial(this.state.props.user.uid);
   };
 
@@ -163,32 +163,26 @@ export default class App extends Component {
     return (
       <React.Fragment>
         {
-          this.state.props.loggedin ?
+          this.state.pageLoaded ?
             (
-              this.state.pageLoaded ?
-                (
-                  <Container>
-                    <LoggedIn
-                      vehicleData={this.state.vehicleData}
-                      displayName={this.state.displayName}
-                      handleResetAddVehicleFields={this.state.props.handleResetAddVehicleFields}
-                      checkIfVehicleYearIsValid={this.checkIfVehicleYearIsValid}
-                      userProfilePicture={this.state.props.userProfilePicture}
-                      disableAddVehicleButton={this.state.disableAddVehicleButton}
-                      currentTheme={this.state.currentTheme}
-                      errorMessage={this.state.errorMessage}
-                      reloadPage={this.reloadPage}
-                      showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
-                      hideAddVehicleYearNanErrorModal={this.hideAddVehicleYearNanErrorModal}
-                    />
-                  </Container>
-                ) :
-                (
-                  <Loading />
-                )
+              <Container>
+                <LoggedIn
+                  vehicleData={this.state.vehicleData}
+                  displayName={this.state.displayName}
+                  handleResetAddVehicleFields={this.state.props.handleResetAddVehicleFields}
+                  checkIfVehicleYearIsValid={this.checkIfVehicleYearIsValid}
+                  userProfilePicture={this.state.props.userProfilePicture}
+                  disableAddVehicleButton={this.state.disableAddVehicleButton}
+                  currentTheme={this.state.currentTheme}
+                  errorMessage={this.state.errorMessage}
+                  reloadPage={this.reloadPage}
+                  showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
+                  hideAddVehicleYearNanErrorModal={this.hideAddVehicleYearNanErrorModal}
+                />
+              </Container>
             ) :
             (
-              <LoggedOut />
+              <Loading />
             )
         }
       </React.Fragment>

@@ -18,6 +18,7 @@ import SignUpModal from "./components/Modal/SignUpModal";
 import SignInModal from "./components/Modal/SignInModal";
 import SignOutModal from "./components/Modal/SignOutModal";
 import ForgotPasswordModal from "./components/Modal/ForgotPasswordModal";
+import LoggedOut from "./components/LoggedOut";
 import "react-toastify/dist/ReactToastify.css";
 import "./css/mainStyle.css";
 import "./css/themesStyle.css";
@@ -64,7 +65,6 @@ export default class App extends Component {
    * Set the user information based if the user is logged in
    */
   onAuthStateChanged = () => {
-    console.log("here")
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({
@@ -317,22 +317,31 @@ export default class App extends Component {
               )
           }
           <Routes>
-            <Route
-              path="/"
-              element={
-                <Main
-                  user={this.state.user}
-                  email={this.state.userEmailForAccount}
-                  loggedin={this.state.loggedin}
-                  userProfilePicture={this.state.userProfilePicture}
-                  onAuthStateChanged={this.onAuthStateChanged}
-                  handleResetAddVehicleFields={this.handleResetAddVehicleFields}
-                  errorNotification={this.errorNotification}
-                  addOneVehicleSuccessNotification={this.addOneVehicleSuccessNotification}
-                  loadVehiclesFailNotification={this.loadVehiclesFailNotification}
-                />
-              }
-            />
+            {
+              <Route
+                path="/"
+                element={
+                  this.state.user ?
+                    (
+                      <Main
+                        user={this.state.user}
+                        email={this.state.userEmailForAccount}
+                        loggedin={this.state.loggedin}
+                        userProfilePicture={this.state.userProfilePicture}
+                        onAuthStateChanged={this.onAuthStateChanged}
+                        handleResetAddVehicleFields={this.handleResetAddVehicleFields}
+                        errorNotification={this.errorNotification}
+                        addOneVehicleSuccessNotification={this.addOneVehicleSuccessNotification}
+                        loadVehiclesFailNotification={this.loadVehiclesFailNotification}
+                      />
+
+                    ) :
+                    (
+                      <LoggedOut />
+                    )
+                }
+              />
+            }
             <Route path="/vehicle/:vehicleId" element={<Log />} />
             <Route path="/forum" element={<Forum />} />
             <Route path="/thread/:threadId" element={<Thread />} />

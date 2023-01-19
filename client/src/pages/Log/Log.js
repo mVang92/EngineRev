@@ -72,10 +72,11 @@ export default class Log extends Component {
    */
   componentDidMount = () => {
     Modal.setAppElement("body");
+    console.log(this.props)
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({
-          vehicleId: atob(this.props.match.params.vehicleId),
+          //vehicleId: this.props.match.params.vehicleId,
           uid: user.uid,
           email: user.email,
           loggedin: true
