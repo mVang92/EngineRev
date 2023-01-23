@@ -15,7 +15,7 @@ app.use(express.static("public"));
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   setInterval(function () {
-    axios.delete("https://enginerev.herokuapp.com/api/eventLog/");
+    axios.delete("https://enginerev.onrender.com/api/eventLog/");
   }, 300000);
 } 
 else {
