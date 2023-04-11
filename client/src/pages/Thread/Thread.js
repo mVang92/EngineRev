@@ -60,7 +60,8 @@ export default class Thread extends Component {
    * Load state
    */
   componentDidMount = () => {
-    this.setState({ threadId: atob(this.props.match.params.threadId) },
+    const threadId = window.location.pathname.split("/")[2]
+    this.setState({ threadId: threadId },
       () => {
         this.getThreadData();
         this.incrementViews();
