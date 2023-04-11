@@ -12,7 +12,6 @@ import Loading from "../../components/Loading";
 import NoAuthorization from "../../components/NoAuthorization";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
-import { useLocation  } from "react-router-dom";
 
 export default class Log extends Component {
   constructor() {
