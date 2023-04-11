@@ -110,13 +110,6 @@ export default class About extends Component {
                       </div>
                     </div>
                     <label><p>{defaults.whoIsEngineRevFor}</p></label>
-                    <hr />
-                    <div className="row">
-                      <div className="col-md-12 text-center">
-                        <label><h5>A Little About the Creator</h5></label>
-                      </div>
-                    </div>
-                    <label><p>{defaults.creatorDetails}</p></label>
                   </div>
                   <br />
                   <Link to={{ pathname: "/" }}>
