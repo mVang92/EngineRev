@@ -12,17 +12,17 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 // Serve up static assets and automatically delete old events
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-//   setInterval(function () {
-//     axios.delete("https://enginerev.onrender.com/api/eventLog/");
-//   }, 300000);
-// } 
-// else {
-//   setInterval(function () {
-//     axios.delete("http://127.0.0.1:3000/api/eventLog/");
-//   }, 5000);
-// }
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  setInterval(function () {
+    axios.delete("https://enginerev.onrender.com/api/eventLog/");
+  }, 300000);
+} 
+else {
+  setInterval(function () {
+    axios.delete("http://127.0.0.1:3000/api/eventLog/");
+  }, 5000);
+}
 
 // Add routes, both API and view
 app.use(routes);
