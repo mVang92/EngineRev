@@ -825,6 +825,10 @@ footer {
     transition-duration: 0.1s;
 }
 
+.Toastify__toast-body {
+    color: rgb(255, 255, 255)
+}
+
 #loadingAnimation {
     color: official;
     display: inline-block;

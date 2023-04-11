@@ -31,7 +31,6 @@ export default class App extends Component {
    * Find the user information when the page loads
    */
   componentDidMount() {
-    console.log(this.props)
     this.getUserInfoPartial(this.state.props.user.uid);
   };
 

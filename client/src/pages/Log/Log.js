@@ -12,6 +12,7 @@ import Loading from "../../components/Loading";
 import NoAuthorization from "../../components/NoAuthorization";
 import Modal from "react-modal";
 import { toast } from "react-toastify";
+import { useLocation  } from "react-router-dom";
 
 export default class Log extends Component {
   constructor() {
@@ -72,11 +73,11 @@ export default class Log extends Component {
    */
   componentDidMount = () => {
     Modal.setAppElement("body");
-    console.log(this.props)
+    const vehicleId = window.location.pathname.split("/")[2]
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({
-          //vehicleId: this.props.match.params.vehicleId,
+          vehicleId: vehicleId,
           uid: user.uid,
           email: user.email,
           loggedin: true
