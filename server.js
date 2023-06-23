@@ -15,7 +15,7 @@ app.use(express.static("public"));
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   setInterval(function () {
-    axios.delete("https://enginerev.onrender.com/api/eventLog/");
+    axios.delete("https://enginerev.herokuapp.com/api/eventLog/");
   }, 300000);
 } 
 else {
@@ -33,5 +33,5 @@ mongoose.connect(process.env.DB_URI || "mongodb://127.0.0.1/engineRev");
 
 // Start the API server
 app.listen(PORT, function () {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+  console.log(`API Server now listening on PORT ${PORT}!`);
 });
