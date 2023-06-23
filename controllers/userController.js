@@ -58,7 +58,7 @@ module.exports = {
               $filter: {
                 input: "$vehicles",
                 as: "vehicle",
-                cond: { $eq: ["$$vehicle._id", ObjectId(req.params.vehicleId)] }
+                cond: { $eq: ["$$vehicle._id", new ObjectId(req.params.vehicleId)] }
               }
             },
             _id: 0
