@@ -826,7 +826,15 @@ footer {
 }
 
 .Toastify__toast-body {
-    color: rgb(255, 255, 255)
+    color: rgb(255, 255, 255);
+}
+
+.Toastify__progress-bar--info {
+    background: rgb(32, 92, 255);
+}
+
+.Toastify__progress-bar--success {
+    background: rgb(0, 255, 128);
 }
 
 #loadingAnimation {
