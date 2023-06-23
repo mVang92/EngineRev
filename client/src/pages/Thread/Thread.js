@@ -392,7 +392,7 @@ export default class Thread extends Component {
         if (res.data.creator === this.state.uniqueCreatorId) {
           if (this.state.threadComment === "" || this.checkIfStringIsBlank(this.state.threadComment)) {
             this.setState({ disableSubmitCommentOnThreadButton: false });
-            this.errorNotification(defaults.threadCommentsCannotBeBlank);
+            this.warningNotification(defaults.threadCommentsCannotBeBlank);
           } else {
             this.addOneCommentToThread();
           }
@@ -420,7 +420,7 @@ export default class Thread extends Component {
         threadTitle: this.state.threadTitleBackup,
         threadDescription: this.state.threadDescriptionBackup
       });
-      this.errorNotification(defaults.threadDetailsCannotBeBlank);
+      this.warningNotification(defaults.threadDetailsCannotBeBlank);
     } else {
       let element = document.getElementById(defaults.threadCategoryDropdown);
       let threadCategory = element.options[element.selectedIndex].value;
@@ -682,6 +682,15 @@ export default class Thread extends Component {
    */
   errorNotification = err => {
     toast.error(err.toString());
+  };
+
+  /**
+   * Display the warning notification when a warning occurs
+   * 
+   * @param err the error message to display to the user
+   */
+  warningNotification = err => {
+    toast.warn(err.toString());
   };
 
   render() {

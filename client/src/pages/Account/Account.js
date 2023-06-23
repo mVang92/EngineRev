@@ -288,77 +288,58 @@ export default class Account extends Component {
   /**
    * Update the password to the user
    */
-  updatePassword = () => {
-    const creatorId = this.state.userId;
-    const email = this.state.userEmail;
-    const event = events.updatePassword;
-    if (this.state.loggedin) {
-      if (this.state.newPassword === this.state.confirmNewPassword) {
-        this.state.user.updatePassword(this.state.confirmNewPassword)
-          .then(() => {
-            eventLogHandler.successful(creatorId, email, event);
-            this.successNotification(defaults.passwordUpdatedSuccessfully);
-            this.setState({
-              newPassword: "",
-              confirmNewPassword: ""
-            })
-          }).catch(err => {
-            eventLogHandler.failure(creatorId, email, event, err);
-            this.errorNotification(err);
-            this.setState({
-              newPassword: "",
-              confirmNewPassword: ""
-            });
-          });
-      } else {
-        this.warningNotification(defaults.passwordsDoNotMatch);
+  updatePassword = (creatorId, userEmail, confirmNewPassword, updatePasswordEvent) => {
+    this.state.user.updatePassword(confirmNewPassword)
+      .then(() => {
+        eventLogHandler.successful(creatorId, userEmail, updatePasswordEvent);
+        this.successNotification(defaults.passwordUpdatedSuccessfully);
+        this.setState({
+          newPassword: "",
+          confirmNewPassword: ""
+        })
+      }).catch(err => {
+        eventLogHandler.failure(creatorId, userEmail, updatePasswordEvent, err);
+        this.errorNotification(err);
         this.setState({
           newPassword: "",
           confirmNewPassword: ""
         });
-      }
-    }
+      });
   };
 
   /**
    * Update the email to the user
    */
-  updateEmail = () => {
-    const creatorId = this.state.userId;
-    const email = this.state.userEmail;
-    const newEmail = this.state.newEmail;
-    const event = events.updateEmail;
-    if (this.state.loggedin) {
-      this.setState({ disableUpdateEmailButton: true });
-      this.state.user.updateEmail(newEmail)
-        .then(() => {
-          this.setState({ pleaseWait: true });
-          userApi.updateEmail(creatorId, newEmail)
-            .then(() => {
-              eventLogHandler.successful(creatorId, email, event);
-              document.getElementById(defaults.applicationName).click();
-              window.location.reload();
-            })
-            .catch(err => {
-              eventLogHandler.failure(creatorId, email, event, err);
-              this.errorNotification(err);
-              this.setState({
-                newEmail: "",
-                disableUpdateEmailButton: false,
-                pleaseWait: false
-              });
+  updateEmail = (creatorId, userEmail, newEmail, updateEmailEvent) => {
+    this.setState({ disableUpdateEmailButton: true });
+    this.state.user.updateEmail(newEmail)
+      .then(() => {
+        this.setState({ pleaseWait: true });
+        userApi.updateEmail(creatorId, newEmail)
+          .then(() => {
+            eventLogHandler.successful(creatorId, userEmail, updateEmailEvent);
+            document.getElementById(defaults.applicationName).click();
+            window.location.reload();
+          })
+          .catch(err => {
+            eventLogHandler.failure(creatorId, userEmail, updateEmailEvent, err);
+            this.errorNotification(err);
+            this.setState({
+              newEmail: "",
+              disableUpdateEmailButton: false,
+              pleaseWait: false
             });
-        })
-        .catch(err => {
-          eventLogHandler.failure(creatorId, email, event, err);
-          this.errorNotification(err);
-          this.setState({
-            newEmail: "",
-            disableUpdateEmailButton: false,
-            pleaseWait: false
           });
+      })
+      .catch(err => {
+        eventLogHandler.failure(creatorId, userEmail, updateEmailEvent, err);
+        this.errorNotification(err);
+        this.setState({
+          newEmail: "",
+          disableUpdateEmailButton: false,
+          pleaseWait: false
         });
-    }
+      });
   };
 
   /**
@@ -368,14 +349,44 @@ export default class Account extends Component {
     e.preventDefault();
     userApi.getRoles(this.userId)
       .then(res => {
-        if (res.data[0].roles.includes(defaults.testUserRole)) {
-          this.errorNotification(defaults.noAuthorizationToPerformAction);
-          this.setState({
-            newPassword: "",
-            confirmNewPassword: ""
-          });
+        const creatorId = this.state.userId;
+        const userEmail = this.state.userEmail;
+        const newPassword = this.state.newPassword;
+        const confirmNewPassword = this.state.confirmNewPassword;
+        const updatePasswordEvent = events.updatePassword;
+        const isUserTestUser = res.data[0].roles.includes(defaults.testUserRole)
+        if (
+          this.state.loggedin &&
+          newPassword &&
+          confirmNewPassword &&
+          newPassword === confirmNewPassword
+        ) {
+          this.updatePassword(creatorId, userEmail, confirmNewPassword, updatePasswordEvent);
         } else {
-          this.updatePassword();
+          if (!newPassword || !confirmNewPassword) {
+            eventLogHandler.failure(creatorId, userEmail, updatePasswordEvent, defaults.passwordBlankError);
+            this.warningNotification(defaults.passwordBlankError);
+            this.setState({
+              newPassword: "",
+              confirmNewPassword: ""
+            });
+          } else 
+          if (newPassword != confirmNewPassword) {
+            eventLogHandler.failure(creatorId, userEmail, updatePasswordEvent, defaults.passwordsDoNotMatch);
+            this.warningNotification(defaults.passwordsDoNotMatch);
+            this.setState({
+              newPassword: "",
+              confirmNewPassword: ""
+            });
+          }
+          if (isUserTestUser) {
+            eventLogHandler.failure(creatorId, userEmail, updatePasswordEvent, defaults.noAuthorizationToPerformAction);
+            this.errorNotification(defaults.noAuthorizationToPerformAction);
+            this.setState({
+              newPassword: "",
+              confirmNewPassword: ""
+            });
+          }
         }
       })
       .catch(err => this.errorNotification(err));
@@ -388,11 +399,26 @@ export default class Account extends Component {
     e.preventDefault();
     userApi.getRoles(this.state.userId)
       .then(res => {
-        if (res.data[0].roles.includes(defaults.testUserRole)) {
-          this.errorNotification(defaults.noAuthorizationToPerformAction);
-          this.setState({ newEmail: "" });
+        const creatorId = this.state.userId;
+        const newEmail = this.state.newEmail;
+        const userEmail = this.state.userEmail;
+        const updateEmailEvent = events.updateEmail;
+        const isUserTestUser = res.data[0].roles.includes(defaults.testUserRole)
+        if (
+          this.state.loggedin &&
+          newEmail &&
+          !isUserTestUser
+        ) {
+          this.updateEmail(creatorId, userEmail, newEmail, updateEmailEvent);
         } else {
-          this.updateEmail();
+          if (!newEmail) {
+            eventLogHandler.failure(creatorId, userEmail, updateEmailEvent, defaults.emailBlankError);
+            this.warningNotification(defaults.emailBlankError);
+          }
+          if (isUserTestUser) {
+            this.errorNotification(defaults.noAuthorizationToPerformAction);
+            this.setState({ newEmail: "" });
+          }
         }
       })
       .catch(err => this.errorNotification(err));
