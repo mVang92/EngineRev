@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "production") {
 } 
 else {
   setInterval(function () {
-    axios.delete("http://127.0.0.1:3000/api/eventLog/");
+    axios.delete("http://127.0.0.1:3001/api/eventLog/");
   }, 5000);
 }
 
