@@ -197,8 +197,7 @@ module.exports = {
      */
     deleteThread: (req, res) => {
         db.Forum
-            .findById({ _id: req.params.threadId })
-            .then(result => result.remove())
+            .findByIdAndDelete(req.params.threadId )
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },

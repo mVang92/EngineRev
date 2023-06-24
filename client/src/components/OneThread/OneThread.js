@@ -23,33 +23,32 @@ const OneThread = props => {
 
   return (
     <React.Fragment key={_id}>
-      <div className={`threadDetails fadeIn ${currentTheme.oneThread}`}>
       <Link to={`/thread/${_id}`}>
-        {/* <Link to={{ pathname: "/thread/" + btoa(_id) }}> */}
-          <div className="row threadTitleLink">
+        <div className={`threadDetails fadeIn threadLink ${currentTheme.oneThread}`}>
+          <div className="row">
             <h4 className="col-md-12 breakWord">{threadTitle}</h4>
           </div>
-        </Link>
-        <div className="row">
-          <div className="col-md-12 breakWord">{formattedDescription}...</div>
+          <div className="row">
+            <div className="col-md-12 breakWord">{formattedDescription}...</div>
+          </div>
+          <hr className="oneThreadHr" />
+          <div className="row">
+            <div className="col-md-12 breakWord">Author: {formattedEmail}</div>
+          </div>
+          <div className="row">
+            <div className="col-md-12 breakWord">Category: {threadCategory ? threadCategory : defaults.defaultThreadCategory}</div>
+          </div>
+          <div className="row">
+            <div className="col-md-12 breakWord">Posted On: {formattedDate}</div>
+          </div>
+          <div className="row">
+            <div className="col-md-12 breakWord">Comments: {commentsCount.length}</div>
+          </div>
+          <div className="row">
+            <div className="col-md-12 breakWord">Viewed: {views} {views === 1 ? "time" : "times"}</div>
+          </div>
         </div>
-        <hr className="oneThreadHr" />
-        <div className="row">
-          <div className="col-md-12 breakWord">Author: {formattedEmail}</div>
-        </div>
-        <div className="row">
-          <div className="col-md-12 breakWord">Category: {threadCategory ? threadCategory : defaults.defaultThreadCategory}</div>
-        </div>
-        <div className="row">
-          <div className="col-md-12 breakWord">Date: {formattedDate}</div>
-        </div>
-        <div className="row">
-          <div className="col-md-12 breakWord">Comments: {commentsCount.length}</div>
-        </div>
-        <div className="row">
-          <div className="col-md-12 breakWord">Viewed: {views} {views === 1 ? "time" : "times"}</div>
-        </div>
-      </div>
+      </Link>
     </React.Fragment>
   )
 };

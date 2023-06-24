@@ -766,13 +766,14 @@ footer {
     padding-right: 1rem;
 }
 
-.threadTitleLink {
-    transition-duration: 0.2s;
+.threadLink {
+    transition-duration: 0.5s;
 }
 
-.threadTitleLink:hover {
+.threadLink:hover {
+    color: rgb(0, 0, 0);
     transition-duration: 0.1s;
-    color: rgb(255, 48, 48);
+    box-shadow: 2px 2px 5px 1px rgb(0, 0, 0);
 }
 
 .deleteActionButton {
