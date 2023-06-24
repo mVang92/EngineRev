@@ -8,13 +8,18 @@
     border-top: 1px solid rgb(200, 200, 200) !important;
 }
 
-.engineRevThemeVehicleItemList {
-    background: rgb(255, 255, 255);
-    box-shadow: -1px 0px 3px rgb(168, 168, 168);
+.engineRevThemeVehicleItemList,
+.lightThemeVehicleItemList,
+.transparentLightThemeVehicleItemList {
+    background: rgb(225, 225, 225);
+    box-shadow: 1px 1px 1px 1px rgb(128, 128, 128);
 }
 
+.lightThemeVehicleItemList:hover,
+.transparentLightThemeVehicleItemList:hover,
 .engineRevThemeVehicleItemList:hover {
-    box-shadow: -1px 0px 3px rgb(168, 32, 32);
+    background: rgb(255, 255, 255);
+    box-shadow: 2px 1px 2px 1px rgb(0, 0, 0);
 }
 
 .engineRevThemeAccountDetails,
@@ -30,7 +35,7 @@
 .transparentLightThemeBackground {
     transition-duration: 0.3s;
     background: rgba(255, 255, 255, 0.5) !important;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(15px);
 }
 
 .lightThemeHr,
@@ -39,21 +44,8 @@
     border-top: 1px solid rgb(240, 240, 240) !important;
 }
 
-.lightThemeVehicleItemList,
-.transparentLightThemeVehicleItemList {
-    background: rgb(250, 250, 250) !important;
-    box-shadow: -1px 0px 3px rgb(0, 0, 0);
-}
-
-.lightThemeVehicleItemList:hover,
-.transparentLightThemeVehicleItemList:hover {
-    background: rgb(240, 240, 240) !important;
-    box-shadow: -1px 0px 3px rgb(168, 32, 32);
-}
-
 .lightThemeOneThread,
 .lightThemeOneUpdate,
-.transparentLightThemeOneThread,
 .transparentLightThemeOneUpdate {
     color: rgb(0, 0, 0);
 }
@@ -75,7 +67,7 @@
     transition-duration: 0.3s;
     background: rgba(168, 168, 168, 0.5) !important;
     color: rgb(0, 0, 0) !important;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(15px);
 }
 
 .greyThemeHr,
@@ -87,14 +79,14 @@
 
 .greyThemeVehicleItemList,
 .transparentGreyThemeVehicleItemList {
-    background: rgb(235, 235, 235) !important;
-    box-shadow: -1px 0px 3px rgb(0, 0, 0);
+    background: rgb(212, 212, 212);
+    box-shadow: 2px 1px 2px 1px rgb(64, 64, 64);
 }
 
 .greyThemeVehicleItemList:hover,
 .transparentGreyThemeVehicleItemList:hover {
-    background: rgb(245, 245, 245) !important;
-    box-shadow: -1px 0px 3px rgb(168, 32, 32);
+    background: rgb(235, 235, 235);
+    box-shadow: 2px 1px 2px 1px rgb(0, 0, 0);
 }
 
 .greyThemeOneThread,
@@ -102,8 +94,6 @@
 .transparentGreyThemeOneThread,
 .transparentGreyThemeOneUpdate {
     background: rgb(225, 225, 225) !important;
-    color: rgb(0, 0, 0);
-    box-shadow: -1px 0px 3px rgb(0, 0, 0) !important;
 }
 
 .greyThemeAccountDetails,
@@ -124,7 +114,7 @@
     transition-duration: 0.3s;
     background: rgba(64, 64, 64, 0.5) !important;
     color: rgb(255, 255, 255) !important;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(15px);
 }
 
 .darkThemeHr,
@@ -135,14 +125,14 @@
 
 .darkThemeVehicleItemList,
 .transparentDarkThemeVehicleItemList {
-    background: rgb(128, 128, 128) !important;
-    box-shadow: -1px 0px 3px rgb(0, 0, 0);
+    background: rgb(48, 48, 48);
+    box-shadow: 1px 1px 1px 1px rgb(24, 24, 24);
 }
 
 .darkThemeVehicleItemList:hover,
 .transparentDarkThemeVehicleItemList:hover {
-    background: rgb(168, 168, 168) !important;
-    box-shadow: -1px 0px 3px rgb(168, 32, 32);
+    background: rgb(92, 92, 92);
+    box-shadow: 2px 1px 2px 1px rgb(0, 0, 0);
 }
 
 .darkThemeVehicleItemListFont,

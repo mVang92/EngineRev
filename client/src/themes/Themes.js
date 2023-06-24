@@ -25,7 +25,7 @@ export const themes = {
     oneUpdate: "lightThemeOneUpdate",
     accountDetails: "lightThemeAccountDetails",
     aboutContainer: "lightThemeAboutContainer",
-    backgroundColor: "rgb(235, 235, 235)"
+    backgroundColor: "rgb(245, 245, 245)"
   },
   grey: {
     theme: "Grey",

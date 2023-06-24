@@ -55,7 +55,7 @@ const ForumDetails = props => {
               <div className="text-center">
                 {noSortResults ?
                   <strong><label>{noSortResults}</label></strong> :
-                  <strong><label>Threads</label></strong>}
+                  <></>}
                 {loadingSortedThreads ? <Loading /> : null}
               </div>
             </React.Fragment>
