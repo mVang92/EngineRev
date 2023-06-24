@@ -79,7 +79,7 @@ label {
 
 .modalBody {
     background: rgb(235, 235, 235);
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 .modalShadow {
@@ -172,6 +172,7 @@ input {
 }
 
 #sortThreadsDropdown {
+    color: rgb(0, 0, 0);
     box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
     margin-right: 0.5rem;
     cursor: pointer;
@@ -647,6 +648,10 @@ input {
     margin-top: 1rem;
 }
 
+.threadCredentials {
+    font-size: 12px;
+}
+
 .smallMarginTop {
     margin-top: 1rem;
 }
@@ -683,7 +688,7 @@ input {
 }
 
 .highlightComment {
-    border-left: 5px solid rgb(220, 64, 48);
+    border-left: 5px solid rgb(0, 192, 92);
 }
 
 #threadCommentTextArea {
@@ -800,6 +805,7 @@ footer {
 }
 
 #threadCategoryDropdown {
+    color: rgb(0, 0, 0);
     box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
     cursor: pointer;
     border-radius: 3px;
@@ -1038,7 +1044,7 @@ footer {
 }
 
 @media only screen and (max-width: 768px) {
-    #userEmail{
+    #userEmail {
         font-size: 22px;
     }
 

@@ -32,20 +32,22 @@ const OneThread = props => {
             <div className="col-md-12 breakWord">{formattedDescription}...</div>
           </div>
           <hr className="oneThreadHr" />
-          <div className="row">
-            <div className="col-md-12 breakWord">Author: {formattedEmail}</div>
-          </div>
-          <div className="row">
-            <div className="col-md-12 breakWord">Category: {threadCategory ? threadCategory : defaults.defaultThreadCategory}</div>
-          </div>
-          <div className="row">
-            <div className="col-md-12 breakWord">Posted On: {formattedDate}</div>
-          </div>
-          <div className="row">
-            <div className="col-md-12 breakWord">Comments: {commentsCount.length}</div>
-          </div>
-          <div className="row">
-            <div className="col-md-12 breakWord">Viewed: {views} {views === 1 ? "time" : "times"}</div>
+          <div className="threadCredentials">
+            <div className="row">
+              <div className="col-md-12 breakWord">Author: {formattedEmail}</div>
+            </div>
+            <div className="row">
+              <div className="col-md-12 breakWord">Category: {threadCategory ? threadCategory : defaults.defaultThreadCategory}</div>
+            </div>
+            <div className="row">
+              <div className="col-md-12 breakWord">Posted on: {formattedDate}</div>
+            </div>
+            <div className="row">
+              <div className="col-md-12 breakWord">Comments: {commentsCount.length}</div>
+            </div>
+            <div className="row">
+              <div className="col-md-12 breakWord">Viewed: {views} {views === 1 ? "time" : "times"}</div>
+            </div>
           </div>
         </div>
       </Link>
