@@ -359,7 +359,8 @@ export default class Account extends Component {
           this.state.loggedin &&
           newPassword &&
           confirmNewPassword &&
-          newPassword === confirmNewPassword
+          newPassword === confirmNewPassword &&
+          !isUserTestUser
         ) {
           this.updatePassword(creatorId, userEmail, confirmNewPassword, updatePasswordEvent);
         } else {
@@ -370,16 +371,14 @@ export default class Account extends Component {
               newPassword: "",
               confirmNewPassword: ""
             });
-          } else 
-          if (newPassword != confirmNewPassword) {
+          } else if (newPassword != confirmNewPassword) {
             eventLogHandler.failure(creatorId, userEmail, updatePasswordEvent, defaults.passwordsDoNotMatch);
             this.warningNotification(defaults.passwordsDoNotMatch);
             this.setState({
               newPassword: "",
               confirmNewPassword: ""
             });
-          }
-          if (isUserTestUser) {
+          } else if (isUserTestUser) {
             eventLogHandler.failure(creatorId, userEmail, updatePasswordEvent, defaults.noAuthorizationToPerformAction);
             this.errorNotification(defaults.noAuthorizationToPerformAction);
             this.setState({
@@ -414,8 +413,7 @@ export default class Account extends Component {
           if (!newEmail) {
             eventLogHandler.failure(creatorId, userEmail, updateEmailEvent, defaults.emailBlankError);
             this.warningNotification(defaults.emailBlankError);
-          }
-          if (isUserTestUser) {
+          } else if (isUserTestUser) {
             this.errorNotification(defaults.noAuthorizationToPerformAction);
             this.setState({ newEmail: "" });
           }
