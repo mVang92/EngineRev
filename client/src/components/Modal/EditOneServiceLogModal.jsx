@@ -87,7 +87,7 @@ const EditOneServiceLogModal = props => {
                                             id="updatedServiceLogService"
                                             type="text"
                                             name="serviceLogService"
-                                            maxLength="50"
+                                            maxLength="100"
                                             onChange={handleChange}
                                             defaultValue={serviceLogService}
                                         />
@@ -103,7 +103,7 @@ const EditOneServiceLogModal = props => {
                                             className="commentsBox"
                                             type="text"
                                             name="serviceLogComment"
-                                            maxLength="250"
+                                            maxLength="300"
                                             onChange={handleChange}
                                             defaultValue={serviceLogComment}
                                         />
