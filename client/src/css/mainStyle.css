@@ -208,6 +208,8 @@ input {
     border: 1px solid rgb(255, 255, 255);
     box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
     width: 7rem;
+    color: rgb(0, 0, 0);
+    font-weight: normal;
 }
 
 .editActionButton {
@@ -215,9 +217,11 @@ input {
     box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
 }
 
+.addBtn,
 .cancelBtn,
 .editActionButton,
 .standardButton,
+.resetButton,
 #applyThemeButton,
 #submitNewEmailButton,
 #submitNewPasswordButton,
@@ -230,16 +234,11 @@ input {
     background: rgb(225, 225, 225);
 }
 
-.addBtn {
-    background: rgb(200, 255, 200);
-}
-
-.resetButton,
 .backToTopButton {
     background: rgb(200, 235, 255);
 }
 
-.resetButton:hover,
+
 .backToTopButton:hover {
     background: rgb(128, 200, 255);
 }
@@ -301,10 +300,6 @@ input {
     transition-duration: 0.2s;
 }
 
-.addBtn:hover {
-    background: rgb(128, 255, 128);
-}
-
 #addLogBackButton:hover,
 .deleteBtn:hover,
 .deleteActionButton:hover,
@@ -313,9 +308,11 @@ input {
     background: rgb(255, 128, 128);
 }
 
+.addBtn:hover,
 .cancelBtn:hover,
 .editActionButton:hover,
 .standardButton:hover,
+.resetButton:hover,
 #applyThemeButton:hover,
 #submitNewEmailButton:hover,
 #submitNewPasswordButton:hover,
@@ -513,7 +510,6 @@ input {
     margin-top: 1rem;
 }
 
-.addLogButtonsMobileDisplay,
 .topLogActionButtons {
     text-align: center;
 }
@@ -528,7 +524,7 @@ input {
 
 #addVehicleButton,
 #resetVehicleInputFieldsButton {
-    width: 8rem;
+    width: 7.5rem;
     margin: 4px;
 }
 
@@ -1046,10 +1042,6 @@ footer {
         max-width: 100%;
     }
 
-    #addVehicleButton {
-        margin-top: 2rem;
-    }
-
     .signOutImage {
         width: 5em;
     }
@@ -1117,11 +1109,6 @@ footer {
     #profilePicturePreview,
     #backgroundPicture {
         width: 55%;
-    }
-
-    .topLogActionButtons,
-    .addLogButtonsMobileDisplay {
-        text-align: initial;
     }
 
     .topActionButtonsEditDeleteMobileDisplay {
@@ -1231,6 +1218,10 @@ footer {
     #resetNewProfilePictureButton,
     #resetNewDisplayNameButton {
         width: 7rem;
+    }
+
+    .centerWidthMobileDisplay {
+        width: 50%;
     }
 }
     

@@ -46,8 +46,7 @@ module.exports = {
     */
     deleteOneReleaseNote: (req, res) => {
         db.Update
-            .findById({ _id: req.params.updateId })
-            .then(result => result.remove())
+            .findByIdAndDelete( req.params.updateId )
             .then(result => res.json(result))
             .catch(err => res.status(422).json(err));
     }

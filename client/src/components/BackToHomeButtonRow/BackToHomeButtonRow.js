@@ -5,7 +5,7 @@ import SortThreadsDropdown from "../SortThreadsDropdown";
 const BackToHomeButtonRow = props => {
   return (
     <div className="row">
-      <div className="col-md-4 centerOnMobileDisplay">
+      <div className="col-md-4">
         <Link to={{ pathname: "/" }}>
           <button className="backHomeBtn" title="Back">Back</button>
         </Link>
