@@ -162,7 +162,8 @@ input {
 }
 
 .resetButton,
-.logSubmitBtn {
+.logSubmitBtn,
+.centerDesktopDisplay {
     text-align: center;
 }
 
@@ -173,11 +174,13 @@ input {
 #sortThreadsDropdown {
     box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
     margin-right: 0.5rem;
-    height: 100%;
     cursor: pointer;
+    height: 1.8rem;
 }
 
 #applySortToThreads {
+    color: black;
+    background: rgb(225, 225, 225);
     border: none;
     cursor: pointer;
     transition-duration: 0.5s;
@@ -1141,7 +1144,8 @@ footer {
         text-align: center !important;
     }
 
-    .alignRightButtonsDesktopDisplay {
+    .alignRightButtonsDesktopDisplay,
+    .centerDesktopDisplay {
         text-align: initial;
     }
 
