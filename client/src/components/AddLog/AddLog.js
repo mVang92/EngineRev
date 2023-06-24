@@ -39,7 +39,7 @@ const AddLog = props => {
                     onChange={handleChange}
                     value={props.service}
                     name="service"
-                    maxLength="50">
+                    maxLength="100">
                   </input>
                 </div>
               </div>
@@ -55,7 +55,7 @@ const AddLog = props => {
                     onChange={handleChange}
                     value={props.comment}
                     name="comment"
-                    maxLength="250">
+                    maxLength="300">
                   </textarea>
                 </div>
               </div>

@@ -13,7 +13,7 @@ const BackToHomeButtonRow = props => {
       {
         (window.location.href.indexOf("/forum") > -1) && (props.loggedin) ?
           (
-            <div className="col-md-4 smallMarginTopMobileDisplay text-center">
+            <div className="col-md-4 smallMarginTopMobileDisplay centerWidthMobileDisplay centerDesktopDisplay">
               <button
                 id="composeThreadButton"
                 title="New Thread"
@@ -34,7 +34,7 @@ const BackToHomeButtonRow = props => {
       {
         window.location.href.indexOf("/forum") > -1 ?
           (
-            <div className="col-md-4 smallMarginTopMobileDisplay text-center">
+            <div className="col-md-4 smallMarginTopMobileDisplay ">
               <SortThreadsDropdown
                 handleChange={props.handleChange}
                 defaultSortOrder={props.defaultSortOrder}
