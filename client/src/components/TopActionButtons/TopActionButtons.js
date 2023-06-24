@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const TopActionButtons = props => {
     return (
         <div className="row topLogActionButtons hideWhilePrinting">
-            <div className="col-md-3 noWidthMobileDisplay">
+            <div className="col-md-3 centerWidthMobileDisplay">
                 <Link to={{ pathname: "/" }}>
                     <button
                         id="addLogBackButton"
@@ -15,7 +15,7 @@ const TopActionButtons = props => {
                     </button>
                 </Link>
             </div>
-            <div className="col-md-3 noWidthMobileDisplay printPageButton">
+            <div className="col-md-3 centerWidthMobileDisplay printPageButton">
                 {
                     props.vehicleServiceLogs.length > 0 ?
                         (
@@ -40,7 +40,7 @@ const TopActionButtons = props => {
                         )
                 }
             </div>
-            <div className="col-md-3 noWidthMobileDisplay">
+            <div className="col-md-3 centerWidthMobileDisplay">
                 {
                     props.vehicleServiceLogs.length > 1 ?
                         (
@@ -65,7 +65,7 @@ const TopActionButtons = props => {
                         )
                 }
             </div>
-            <div className="col-md-3 noWidthMobileDisplay">
+            <div className="col-md-3 centerWidthMobileDisplay">
                 {
                     props.year ?
                         (

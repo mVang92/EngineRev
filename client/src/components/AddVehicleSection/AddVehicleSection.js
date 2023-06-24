@@ -80,8 +80,8 @@ class AddVehicleSection extends Component {
                 <label><strong>Add a Vehicle</strong></label>
               </div>
             </div>
-            <div className="row innerBox">
-              <div className="col-md-3">
+            <div className="row">
+              <div className="col-md-4">
                 <div>
                   <label htmlFor="vehicleYearInput"><span className="required">*</span>Year</label>
                 </div>
@@ -96,7 +96,7 @@ class AddVehicleSection extends Component {
                   />
                 </div>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-4">
                 <div>
                   <label htmlFor="vehicleMakeInput"><span className="required">*</span>Make</label>
                 </div>
@@ -111,7 +111,7 @@ class AddVehicleSection extends Component {
                   />
                 </div>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-4">
                 <div>
                   <label htmlFor="vehicleModelInput"><span className="required">*</span>Model</label>
                 </div>
@@ -126,26 +126,32 @@ class AddVehicleSection extends Component {
                   />
                 </div>
               </div>
-              <div className="col-md-3">
-                <div className="text-center">
-                  <button
-                    id="addVehicleButton"
-                    title="Add Vehicle"
-                    type="submit"
-                    className="addBtn"
-                    disabled={this.props.disableAddVehicleButton}>
-                    Add Vehicle
-                  </button>
-                </div>
-                <div className="text-center">
-                  <button
-                    id="resetVehicleInputFieldsButton"
-                    title="Reset Input Fields"
-                    type="reset"
-                    className="resetButton"
-                    onClick={this.props.handleResetAddVehicleFields}>
-                    Reset
-                  </button>
+            </div>
+            <div className="row smallMarginTop">
+              <div className="col-md-4"></div>
+              <div className="col-md-4"></div>
+              <div className="col-md-4">
+                <div className="row text-center">
+                  <div className="col-md-6 centerWidthMobileDisplay">
+                    <button
+                      id="addVehicleButton"
+                      title="Add Vehicle"
+                      type="submit"
+                      className="addBtn"
+                      disabled={this.props.disableAddVehicleButton}>
+                      Add Vehicle
+                    </button>
+                  </div>
+                  <div className="col-md-6 centerWidthMobileDisplay">
+                    <button
+                      id="resetVehicleInputFieldsButton"
+                      title="Reset Input Fields"
+                      type="reset"
+                      className="resetButton"
+                      onClick={this.props.handleResetAddVehicleFields}>
+                      Reset
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

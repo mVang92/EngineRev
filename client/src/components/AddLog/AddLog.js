@@ -60,27 +60,31 @@ const AddLog = props => {
                 </div>
               </div>
               <div className="row smallMarginTop">
-                <div className="col-md-3"></div>
-                <div className="col-md-3"></div>
-                <div className="col-md-3 text-center addLogButtonsMobileDisplay" >
-                  <button
-                    id="addLogResetInputFieldsButton"
-                    title="Reset Input Fields"
-                    type="reset"
-                    className="resetButton"
-                    onClick={props.handleResetLogVehicleForm}>
-                    Reset
-                  </button>
-                </div>
-                <div className="col-md-3 logSubmitBtn text-center addLogButtonsMobileDisplay">
-                  <button
-                    id="addServiceLogButton"
-                    title="Submit Log"
-                    type="submit"
-                    className="addBtn"
-                    disabled={props.disableAddServiceLogButton}>
-                    Submit Log
-                  </button>
+                <div className="col-md-4"></div>
+                <div className="col-md-4"></div>
+                <div className="col-md-4">
+                  <div className="row text-center">
+                    <div className="col-md-6 centerWidthMobileDisplay">
+                      <button
+                        id="addServiceLogButton"
+                        title="Submit Log"
+                        type="submit"
+                        className="addBtn"
+                        disabled={props.disableAddServiceLogButton}>
+                        Submit Log
+                      </button>
+                    </div>
+                    <div className="col-md-6 centerWidthMobileDisplay">
+                      <button
+                        id="addLogResetInputFieldsButton"
+                        title="Reset Input Fields"
+                        type="reset"
+                        className="resetButton"
+                        onClick={props.handleResetLogVehicleForm}>
+                        Reset
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </form>
