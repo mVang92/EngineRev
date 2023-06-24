@@ -59,6 +59,7 @@ export const defaults = {
     tipsAndTricksThreadsSort: "tipsAndTricksThreadsSort",
     shareStoryThreadsSort: "shareStoryThreadsSort",
     otherCategoryThreadsSort: "otherCategoryThreadsSort",
+    updatedFutureDateServiceLog: "is a future date. Proceed with this entry?",
     deleteVehicleWarning: "You are about to delete this vehicle and any service logs associated with it. " +
         "Are you sure you want to continue?",
     noSortResults: "No Results for Sort Criteria",

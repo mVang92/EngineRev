@@ -22,12 +22,13 @@ const ServiceLog = props => {
   let serviceLogFullDetails;
   if (currentDateFormatted === serviceLogDateFormatted) {
     serviceLogFullDetails = {
-      background: "rgb(200, 255, 200)"
+      borderLeft: "5px solid rgb(0, 192, 92)"
     };
   };
   if (currentDate.getTime() < serviceLogDate.getTime()) {
     serviceLogFullDetails = {
-      background: "rgb(255, 200, 200)"
+      borderLeft: "5px solid rgb(220, 64, 48)",
+      color: "rgb(220, 64, 48)"
     };
   };
 

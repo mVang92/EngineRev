@@ -53,9 +53,11 @@ const ThreadDetails = props => {
       <Container>
         <div className={`row threadDetails ${currentTheme.oneThread}`}>
           <div className="col-md-12 breakWord">
-            <div id="author">Author: {formattedEmail}</div>
-            {enableEditThreadDetails ? <ThreadCategoriesDropdown threadCategory={threadCategory} /> : <div id="category">Category: {threadCategory}</div>}
-            <div id="date">Date: {formattedDate}</div>
+            <div className="threadCredentials">
+              <div id="author">Author: {formattedEmail}</div>
+              {enableEditThreadDetails ? <ThreadCategoriesDropdown threadCategory={threadCategory} /> : <div id="category">Category: {threadCategory}</div>}
+              <div id="date">Posted on: {formattedDate}</div>
+            </div>
             <hr />
             {
               allThreads.creator === uniqueCreatorId ?

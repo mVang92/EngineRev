@@ -1,6 +1,7 @@
 import React from "react";
 import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
+import { defaults } from "../../assets/Defaults";
 
 const UpdatedFutureDateConfirmationModal = props => {
     const {
@@ -38,22 +39,18 @@ const UpdatedFutureDateConfirmationModal = props => {
                 <div className="modal-body modalShadow">
                     <div className={`modalBody ${currentTheme.background}`}>
                         <div className="modal-header">
-                            <div className="col-md-2 imageMobileDisplay">
+                            <div className="col-md-2 text-center">
                                 <img className="warningImage" src={warningImage} alt='warning' />
                             </div>
-                            <div className="col-md-10 redText">
-                                <label><strong>You are about to submit a future service log.</strong></label>
+                            <div className="col-md-8 text-center">
+                                <label><strong>Warning</strong></label>
                             </div>
+                            <div className="col-md-2"></div>
                         </div>
                         <div className="modal-body">
                             <div className="row">
                                 <div className="col-md-12">
-                                    <label>
-                                        {serviceDateToDisplay} is a future date.
-                                        This service log will appear in red to symbolize a
-                                        service has been logged for the future.
-                                        Are you sure you want to submit this?
-                                    </label>
+                                    <label>{serviceDateToDisplay} {defaults.updatedFutureDateServiceLog}</label>
                                 </div>
                             </div>
                         </div>
