@@ -228,7 +228,7 @@ module.exports = {
     db.Users
       .updateOne(
         { "vehicles._id": req.params.vehicleId },
-        { $set: { "vehicles.$.vehicleName": req.body.emptyVehicleName } }
+        { $set: { "vehicles.$.vehicleName": null } }
       )
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
