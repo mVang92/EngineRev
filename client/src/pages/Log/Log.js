@@ -226,27 +226,6 @@ export default class Log extends Component {
   };
 
   /**
-   * Delete the vehicle name to one vehicle
-   */
-  deleteVehicleName = () => {
-    const creatorId = this.state.uid;
-    const email = this.state.email;
-    const event = events.deleteVehicleName;
-    userApi.deleteVehicleName(this.state.vehicleId, null)
-      .then(() => {
-        this.setState({ showEditOneVehicleNameModal: false }, () => {
-          eventLogHandler.successful(creatorId, email, event);
-          this.successNotification(defaults.vehicleNameUpdatedSuccessfully);
-          this.getOneVehicle();
-        });
-      })
-      .catch(err => {
-        eventLogHandler.failure(creatorId, email, event, err);
-        this.errorNotification(err);
-      });
-  };
-
-  /**
    * Go through a series of conditions to validate the updated service log being entered
    */
   checkUserEnteredServiceLogInput = e => {
@@ -310,8 +289,10 @@ export default class Log extends Component {
       } else {
         updatedModel = this.state.model;
       }
-
+      
       if (this.state.updatedVehicleName) {
+        updatedVehicleName = this.state.updatedVehicleName;
+      } else if (this.state.updatedVehicleName == "") {
         updatedVehicleName = this.state.updatedVehicleName;
       } else {
         updatedVehicleName = this.state.vehicleName;
@@ -376,16 +357,16 @@ export default class Log extends Component {
   };
 
   /**
-   * Update one vehicle name from record
+   * Update one vehicle information
    * 
-   * @param updatedVehicleName the updated name for the vehicle
+   * @param updatedVehicleInformation the updated information for the vehicle
    */
-  handleUpdateVehicleInformation = updatedVehicleName => {
+  handleUpdateVehicleInformation = updatedVehicleInformation => {
     const creatorId = this.state.uid;
     const email = this.state.email;
     const event = events.updateVehicleInformation;
     this.setState({ disableConfirmSaveEditVehicleNameButton: true });
-    userApi.updateVehicleInformationForOneVehicle(this.state.vehicleId, updatedVehicleName)
+    userApi.updateVehicleInformationForOneVehicle(this.state.vehicleId, updatedVehicleInformation)
       .then(() => {
         this.setState({
           vehicleName: "",
@@ -914,7 +895,6 @@ export default class Log extends Component {
                       checkUserEnteredUpdatedVehicleNameInput={this.checkUserEnteredUpdatedVehicleNameInput}
                       checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
                       checkIfStringIsBlank={this.checkIfStringIsBlank}
-                      deleteVehicleName={this.deleteVehicleName}
                       deleteOneVehicleModal={this.state.deleteOneVehicleModal}
                       confirmDeleteVehicleButtonText={this.state.confirmDeleteVehicleButtonText}
                       vehicleName={this.state.vehicleName}

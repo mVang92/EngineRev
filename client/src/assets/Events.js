@@ -8,7 +8,6 @@ export const events = {
     deleteOneServiceLog: "Delete a service log.",
     addOneServiceLog: "Add a service log.",
     updateVehicleInformation: "Update vehicle information.",
-    deleteVehicleName: "Delete vehicle name.",
     saveTheme: "Save theme.",
     updateDisplayName: "Update display name.",
     updateBackgroundPicture: "Update background picture.",

@@ -8,7 +8,6 @@ const EditOneVehicleNameModal = props => {
         currentTheme,
         handleChange,
         vehicleName,
-        deleteVehicleName,
         year,
         make, 
         model,
@@ -39,7 +38,7 @@ const EditOneVehicleNameModal = props => {
                                     <div className="col-md-3">
                                         <label><strong>Name</strong></label>
                                     </div>
-                                    <div className="col-md-5 noPaddingRightDesktopDisplay">
+                                    <div className="col-md-9">
                                         <input
                                             id="vehicleNameInput"
                                             type="text"
@@ -48,15 +47,6 @@ const EditOneVehicleNameModal = props => {
                                             name="updatedVehicleName"
                                             maxLength="25"
                                         />
-                                    </div>
-                                    <div className="col-md-4 text-right textLeftMobileDisplay">
-                                        <button
-                                            id="removeVehicleNameButton"
-                                            title="Delete Name"
-                                            type="button"
-                                            onClick={deleteVehicleName}>
-                                            Delete Name
-                                        </button>
                                     </div>
                                 </div>
                                 <div className="row">

@@ -30,8 +30,8 @@ const ThreadComments = props => {
     <React.Fragment key={_id}>
       <div className={(userEmail === threadCommentEmail ? "highlightComment " : "") + `fadeIn threadDetails ${currentTheme.oneThread}`}>
         <div className="row">
-          <div className="col-md-11 text-left breakWord">
-            {userEmail === threadCommentEmail ? <strong>You posted on {formattedDate}</strong> : <strong>{formattedEmail} posted on {formattedDate}</strong>}
+          <div className="col-md-11 text-left breakWord threadCommentCredentials">
+            {userEmail === threadCommentEmail ? <>You posted on {formattedDate}</> : <>{formattedEmail} posted on {formattedDate}</>}
             <span> {edited ? <span className="text-secondary">(edited)</span> : null}</span>
           </div>
           <div className="col-md-1 votes noWidthMobileDisplay">

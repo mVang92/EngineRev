@@ -51,11 +51,6 @@ router
   .route("/:vehicleId/deleteVehicle")
   .delete(controller.removeOneVehicle)
 
-// Matches with "/api/:vehicleId/deleteVehicleName"
-router
-  .route("/:vehicleId/deleteVehicleName")
-  .delete(controller.removeOneVehicleName)
-
 // Matches with "/api/users/themes/:creatorId/:themeType"
 router
   .route("/:creatorId/:themeType")

@@ -53,10 +53,6 @@ export default {
   deleteOneServiceLog: (vehicleId, serviceLogId) => {
     return axios.delete(`/api/users/${vehicleId}/${serviceLogId}/deleteServiceLog`);
   },
-  // Delete the vehicle name for one vehicle
-  deleteVehicleName: (vehicleId, nullVehicleName) => {
-    return axios.delete(`/api/users/${vehicleId}/deleteVehicleName`, nullVehicleName);
-  },
   // Delete one user account
   // Will have to decide where to put this function in the app
   deleteOneUserAccount: id => {
