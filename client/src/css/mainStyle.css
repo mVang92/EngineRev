@@ -258,19 +258,6 @@ input {
     box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
 }
 
-#removeVehicleNameButton {
-    transition-duration: 0.5s;
-    border: 1px solid rgb(255, 255, 255);
-    box-shadow: 0 1px 1px 1px rgb(92, 92, 92);
-    background: rgb(220, 64, 48);
-    color: rgb(255, 255, 255);
-}
-
-#removeVehicleNameButton:hover {
-    transition-duration: 0.1s;
-    background: rgb(255, 128, 128);
-}
-
 #deleteBtn {
     margin: auto;
 }
@@ -648,8 +635,14 @@ input {
     margin-top: 1rem;
 }
 
-.threadCredentials {
+.threadCredentials,
+.threadCommentCredentials,
+.votes {
     font-size: 12px;
+}
+
+.threadCommentCredentials {
+    width: 79%;
 }
 
 .smallMarginTop {
@@ -688,7 +681,7 @@ input {
 }
 
 .highlightComment {
-    border-left: 5px solid rgb(0, 192, 92);
+    border-left: 5px solid rgb(0, 192, 92) !important;
 }
 
 #threadCommentTextArea {
@@ -715,10 +708,6 @@ input {
 
 .smallBottomMargin {
     margin-bottom: 1rem;
-}
-
-#removeVehicleNameButton {
-    width: 100%;
 }
 
 .noPaddingLeftDesktopDisplay {
@@ -1180,11 +1169,6 @@ footer {
     
     .noPaddingRightDesktopDisplay {
         padding-right: 15px;
-    }
-
-    #removeVehicleNameButton {
-        margin-top: 0.4rem;
-        width: 9rem;
     }
 
     .textLeftMobileDisplay {

@@ -222,19 +222,6 @@ module.exports = {
   },
 
   /**
-   * Remove the name to the vehicle
-   */
-  removeOneVehicleName: (req, res) => {
-    db.Users
-      .updateOne(
-        { "vehicles._id": req.params.vehicleId },
-        { $set: { "vehicles.$.vehicleName": null } }
-      )
-      .then(result => res.json(result))
-      .catch(err => res.status(422).json(err));
-  },
-
-  /**
    * Delete the account for the user
    */
   removeOneUserAccount: (req, res) => {
