@@ -7,6 +7,7 @@ const OneThread = props => {
     _id,
     date,
     email,
+    displayName,
     currentTheme,
     threadTitle,
     threadDescription,
@@ -34,7 +35,7 @@ const OneThread = props => {
           <hr className="oneThreadHr" />
           <div className="threadCredentials">
             <div className="row">
-              <div className="col-md-12 breakWord">Author: {formattedEmail}</div>
+              <div className="col-md-12 breakWord">Author: {displayName}</div>
             </div>
             <div className="row">
               <div className="col-md-12 breakWord">Category: {threadCategory ? threadCategory : defaults.defaultThreadCategory}</div>

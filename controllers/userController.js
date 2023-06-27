@@ -340,7 +340,7 @@ module.exports = {
         { $set: { email: req.params.newEmail } }
       );
 
-    const updateThreadAuthor = db.Forum
+    const updateThreadEmail = db.Forum
       .updateMany(
         { creator: req.params.creatorId },
         { $set: { email: req.params.newEmail } }
@@ -353,7 +353,29 @@ module.exports = {
         { arrayFilters: [{ "element.creator": req.params.creatorId }], "multi": true }
       );
 
-    return Promise.all([updateUserEmail, updateThreadAuthor, updateThreadComments])
+    return Promise.all([updateUserEmail, updateThreadEmail, updateThreadComments])
+      .then(result => res.json(result))
+      .catch(err => res.status(422).json(err));
+  },
+
+  /**
+   * Update the display names for the threads and comments
+   */
+  updateDisplayName: (req, res) => {
+    const updateThreadDisplayName = db.Forum
+      .updateMany(
+        { creator: req.params.creatorId },
+        { $set: { displayName: req.params.newDisplayName } }
+      );
+
+    const updateThreadComments = db.Forum
+      .updateMany(
+        { "comments.creator": req.params.creatorId },
+        { $set: { "comments.$[element].displayName": req.params.newDisplayName } },
+        { arrayFilters: [{ "element.creator": req.params.creatorId }], "multi": true }
+      );
+
+    return Promise.all([updateThreadDisplayName, updateThreadComments])
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));
   }

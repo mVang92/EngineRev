@@ -37,6 +37,7 @@ sortByDate = (res, sort) => {
             "comments.votes": 0,
             "comments.edited": 0,
             "comments.email": 0,
+            "comments.displayName": 0,
             "comments.creator": 0,
             "comments.comment": 0,
             "comments.date": 0
@@ -59,6 +60,7 @@ mostViewsThreadsSort = (req, res) => {
             "comments.votes": 0,
             "comments.edited": 0,
             "comments.email": 0,
+            "comments.displayName": 0,
             "comments.creator": 0,
             "comments.comment": 0,
             "comments.date": 0
@@ -81,6 +83,7 @@ sortByCategory = (res, index) => {
             "comments.votes": 0,
             "comments.edited": 0,
             "comments.email": 0,
+            "comments.displayName": 0,
             "comments.creator": 0,
             "comments.comment": 0,
             "comments.date": 0

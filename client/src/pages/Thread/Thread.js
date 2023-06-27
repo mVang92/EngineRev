@@ -23,6 +23,7 @@ export default class Thread extends Component {
       uniqueCreatorId: "",
       commentId: "",
       email: "",
+      displayName: "",
       loggedin: false,
       theme: "",
       currentTheme: "",
@@ -31,6 +32,7 @@ export default class Thread extends Component {
       threadId: "",
       threadCategory: "",
       threadTitle: "",
+      threadAuthor: "",
       threadTitleBackup: "",
       threadDescription: "",
       threadDescriptionBackup: "",
@@ -121,6 +123,7 @@ export default class Thread extends Component {
                 backgroundPicture: res.data.backgroundPicture,
                 uniqueCreatorId: user.uid,
                 email: user.email,
+                displayName: user.displayName,
                 pageLoaded: true,
                 loggedin: true
               }, () => {
@@ -152,6 +155,7 @@ export default class Thread extends Component {
           allThreads: res.data[0],
           threadTitle: res.data[0].threadTitle,
           threadTitleBackup: res.data[0].threadTitle,
+          threadAuthor: res.data[0].displayName,
           threadDescription: res.data[0].threadDescription,
           threadDescriptionBackup: res.data[0].threadDescription,
           threadCategory: res.data[0].threadCategory
@@ -174,6 +178,7 @@ export default class Thread extends Component {
     let threadCommentPayload = {
       creator: this.state.uniqueCreatorId,
       email: this.state.email,
+      displayName: this.state.displayName,
       comment: this.state.threadComment,
       edited: false,
       votes: 0
@@ -457,7 +462,7 @@ export default class Thread extends Component {
             userApi.getVotedComments(this.uniqueCreatorId)
               .then(res => {
                 if (res.data[0].votedComments.includes(commentId)) {
-                  this.errorNotification(defaults.alreadyVotedOnComment);
+                  this.warningNotification(defaults.alreadyVotedOnComment);
                   this.setState({
                     disableUpVoteButton: false,
                     disableDownVoteButton: false
@@ -498,7 +503,7 @@ export default class Thread extends Component {
             userApi.getVotedComments(this.uniqueCreatorId)
               .then(res => {
                 if (res.data[0].votedComments.includes(commentId)) {
-                  this.errorNotification(defaults.alreadyVotedOnComment);
+                  this.warningNotification(defaults.alreadyVotedOnComment);
                   this.setState({
                     disableUpVoteButton: false,
                     disableDownVoteButton: false
@@ -703,6 +708,7 @@ export default class Thread extends Component {
                 <ThreadDetails
                   loggedin={this.state.loggedin}
                   email={this.state.email}
+                  threadAuthor={this.state.threadAuthor}
                   uniqueCreatorId={this.state.uniqueCreatorId}
                   threadCategory={this.state.threadCategory}
                   threadTitle={this.state.threadTitle}

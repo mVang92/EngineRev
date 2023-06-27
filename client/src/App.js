@@ -91,7 +91,11 @@ export default class App extends Component {
     this.requestHideSignUpModal();
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        userApi.createUserSchema(user.uid, user.email)
+        user.updateProfile({ displayName: defaults.defaultDisplayName })
+          .then(() => {
+            userApi.createUserSchema(user.uid, user.email, user.displayName)
+              .catch(error => this.errorNotification(error));
+          })
           .catch(error => this.errorNotification(error));
       }
     });

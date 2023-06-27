@@ -213,15 +213,23 @@ export default class Account extends Component {
       newDisplayName = defaults.defaultDisplayName;
     }
     if (this.state.loggedin) {
-      user.updateProfile({ displayName: newDisplayName })
+      userApi.updateDisplayName(creatorId, newDisplayName)
         .then(() => {
-          this.setState({
-            showUpdateDisplayNameModal: false,
-            newDisplayName: ""
-          }, () => {
-            eventLogHandler.successful(creatorId, email, event);
-            this.showUpdateDisplayNameSuccessModal();
-          });
+          user.updateProfile({ displayName: newDisplayName })
+            .then(() => {
+              this.setState({
+                showUpdateDisplayNameModal: false,
+                newDisplayName: ""
+              }, () => {
+                eventLogHandler.successful(creatorId, email, event);
+                this.showUpdateDisplayNameSuccessModal();
+              });
+            })
+            .catch(err => {
+              eventLogHandler.failure(creatorId, email, event, err);
+              this.setState({ showUpdateDisplayNameModal: false });
+              this.errorNotification(err);
+            });
         })
         .catch(err => {
           eventLogHandler.failure(creatorId, email, event, err);

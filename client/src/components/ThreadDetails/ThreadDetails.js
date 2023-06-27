@@ -9,8 +9,9 @@ const ThreadDetails = props => {
   const {
     currentTheme,
     uniqueCreatorId,
-    loggedin,
     email,
+    threadAuthor,
+    loggedin,
     handleChange,
     backButton,
     backToTopOfPage,
@@ -38,7 +39,6 @@ const ThreadDetails = props => {
   const newDate = new Date(dateSubString);
   newDate.setDate(newDate.getDate() + 1);
   const formattedDate = newDate.toLocaleDateString("en-US");
-  const formattedEmail = allThreads.email.replace(/@[^@]+$/, '');
 
   return (
     <div id="forumPage" className={`mt-3 box ${currentTheme.background}`}>
@@ -54,7 +54,7 @@ const ThreadDetails = props => {
         <div className={`row threadDetails ${currentTheme.oneThread}`}>
           <div className="col-md-12 breakWord">
             <div className="threadCredentials">
-              <div id="author">Author: {formattedEmail}</div>
+              <div id="author">Author: {threadAuthor}</div>
               {enableEditThreadDetails ? <ThreadCategoriesDropdown threadCategory={threadCategory} /> : <div id="category">Category: {threadCategory}</div>}
               <div id="date">Posted on: {formattedDate}</div>
             </div>
@@ -198,6 +198,7 @@ const ThreadDetails = props => {
                         date={threadComment.date}
                         threadCommentEmail={threadComment.email}
                         userEmail={email}
+                        displayName={threadComment.displayName}
                         comment={threadComment.comment}
                         votes={threadComment.votes}
                         edited={threadComment.edited}

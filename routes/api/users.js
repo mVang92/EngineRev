@@ -61,6 +61,11 @@ router
   .route("/:creatorId/:newEmail/updateEmail")
   .put(controller.updateEmail)
 
+// Matches with "/api/users/:creatorId/:newDisplayName/updateDisplayName"
+router
+  .route("/:creatorId/:newDisplayName/updateDisplayName")
+  .put(controller.updateDisplayName)
+
 // Matches with "/api/users/:creatorId/count"
 router
   .route("/:creatorId/count")
