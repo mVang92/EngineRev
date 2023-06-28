@@ -359,24 +359,46 @@ module.exports = {
   },
 
   /**
-   * Update the display names for the threads and comments
+   * Update the display names throughout the application
    */
   updateDisplayName: (req, res) => {
-    const updateThreadDisplayName = db.Forum
-      .updateMany(
-        { creator: req.params.creatorId },
-        { $set: { displayName: req.params.newDisplayName } }
-      );
+    if (
+      !checkIfStringIsBlank(req.params.newDisplayName) &&
+      req.params.newDisplayName.length > 5
+    ) {
+      const updateThreadDisplayName = db.Forum
+        .updateMany(
+          { creator: req.params.creatorId },
+          { $set: { displayName: req.params.newDisplayName } }
+        );
 
-    const updateThreadComments = db.Forum
-      .updateMany(
-        { "comments.creator": req.params.creatorId },
-        { $set: { "comments.$[element].displayName": req.params.newDisplayName } },
-        { arrayFilters: [{ "element.creator": req.params.creatorId }], "multi": true }
-      );
+      const updateThreadComments = db.Forum
+        .updateMany(
+          { "comments.creator": req.params.creatorId },
+          { $set: { "comments.$[element].displayName": req.params.newDisplayName } },
+          { arrayFilters: [{ "element.creator": req.params.creatorId }], "multi": true }
+        );
 
-    return Promise.all([updateThreadDisplayName, updateThreadComments])
-      .then(result => res.json(result))
-      .catch(err => res.status(422).json(err));
+      const updateDisplayNameInUserDb = db.Users
+        .updateOne(
+          { creator: req.params.creatorId },
+          { $set: { displayName: req.params.newDisplayName } }
+        );
+
+      const updateDisplayNameInDisplayNameDb = db.DisplayNames
+        .updateOne(
+          { creator: req.params.creatorId },
+          { $set: { displayName: req.params.newDisplayName } }
+        );
+
+      return Promise.all([updateThreadDisplayName, updateThreadComments, updateDisplayNameInUserDb, updateDisplayNameInDisplayNameDb])
+        .then(result => res.json(result))
+        .catch(err => res.status(422).json(err));
+    } else {
+      res.status(400).json({
+        status: 400,
+        message: "Display name must be 6 characters or more."
+      });
+    };
   }
 };

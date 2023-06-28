@@ -26,6 +26,16 @@ const SignUp = props => {
                         </div>
                         <div className="modal-body">
                             <input
+                                id="displayNameInput"
+                                type="text"
+                                value={props.displayName}
+                                name="displayName"
+                                onChange={props.handleChange}
+                                placeholder="Display Name"
+                                maxLength="25">
+                            </input>
+                            <br /><br />
+                            <input
                                 id="emailInput"
                                 type="text"
                                 value={props.email}

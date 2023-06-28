@@ -9,12 +9,12 @@ import PleaseWait from "../../components/PleaseWait";
 import { firebase } from "../../firebase";
 import NoAuthorization from "../../components/NoAuthorization";
 import userApi from "../../utils/userApi";
+import displayNameApi from "../../utils/displayNameApi";
 import eventLogApi from "../../utils/eventLogApi";
 import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import AccountDetails from "../../components/AccountDetails";
 import UpdateBackgroundPictureModal from "../../components/Modal/UpdateBackgroundPictureModal";
 import UpdateProfilePictureModal from "../../components/Modal/UpdateProfilePictureModal";
-import UpdateDisplayNameModal from "../../components/Modal/UpdateDisplayNameModal";
 import UpdateProfilePictureSuccessModal from "../../components/Modal/UpdateProfilePictureSuccessModal";
 import UpdateDisplayNameSuccessModal from "../../components/Modal/UpdateDisplayNameSuccessModal";
 import { toast } from "react-toastify";
@@ -47,14 +47,14 @@ export default class Account extends Component {
       newProfilePicture: "",
       showUpdateBackgroundPictureModal: false,
       showUpdateProfilePictureModal: false,
-      showUpdateDisplayNameModal: false,
       showUpdateProfilePictureSuccessModal: false,
       showUpdateDisplayNameSuccessModal: false,
       unableToLoadDatabase: false,
       defaultProfilePicture: defaults.defaultProfilePicture,
       defaultDisplayName: defaults.defaultDisplayName,
       disableThemeToggleButton: false,
-      disableUpdateEmailButton: false
+      disableUpdateEmailButton: false,
+      disableUpdateDisplayNameButton: false
     };
   };
 
@@ -203,40 +203,53 @@ export default class Account extends Component {
   /**
    * Update the display name for the user
    */
-  updateDisplayName = () => {
+  updateDisplayName = e => {
+    e.preventDefault();
     const user = this.state.user;
     const creatorId = this.state.userId;
     const email = this.state.userEmail;
     const event = events.updateDisplayName;
     let newDisplayName = this.state.newDisplayName;
-    if (this.checkIfStringIsBlank(newDisplayName)) {
-      newDisplayName = defaults.defaultDisplayName;
+    if (!this.state.loggedin) return;
+    if (this.checkIfStringIsBlank(newDisplayName) && newDisplayName.length < 6) {
+      this.warningNotification(defaults.displayNameLengthNotMet);
+      return;
     }
-    if (this.state.loggedin) {
-      userApi.updateDisplayName(creatorId, newDisplayName)
-        .then(() => {
-          user.updateProfile({ displayName: newDisplayName })
+    displayNameApi.getDisplayNames()
+      .then(results => {
+        this.setState({ disableUpdateDisplayNameButton: true });
+        const displayNameList = results.data.find(user => user.displayName === newDisplayName);
+        if (!displayNameList) {
+          userApi.updateDisplayName(creatorId, newDisplayName)
             .then(() => {
-              this.setState({
-                showUpdateDisplayNameModal: false,
-                newDisplayName: ""
-              }, () => {
-                eventLogHandler.successful(creatorId, email, event);
-                this.showUpdateDisplayNameSuccessModal();
-              });
+              user.updateProfile({ displayName: newDisplayName })
+                .then(() => {
+                  this.setState({ newDisplayName: "" }, () => {
+                    eventLogHandler.successful(creatorId, email, event);
+                    this.showUpdateDisplayNameSuccessModal();
+                  });
+                })
+                .catch(err => {
+                  eventLogHandler.failure(creatorId, email, event, err);
+                  this.setState({ disableUpdateDisplayNameButton: false });
+                  this.errorNotification(err);
+                });
             })
             .catch(err => {
               eventLogHandler.failure(creatorId, email, event, err);
-              this.setState({ showUpdateDisplayNameModal: false });
+              this.setState({ disableUpdateDisplayNameButton: false });
               this.errorNotification(err);
             });
-        })
-        .catch(err => {
-          eventLogHandler.failure(creatorId, email, event, err);
-          this.setState({ showUpdateDisplayNameModal: false });
-          this.errorNotification(err);
-        });
-    };
+        } else {
+          this.setState({ disableUpdateDisplayNameButton: false });
+          this.warningNotification(defaults.displayNameAlreadyExists);
+        }
+      })
+      .catch(err => {
+        this.setState({ disableUpdateDisplayNameButton: false });
+        this.errorNotification(err);
+      });
+    // 
   };
 
   /**
@@ -503,6 +516,19 @@ export default class Account extends Component {
   };
 
   /**
+   * Get the current user display names
+   */
+  getCurrentDisplayName = () => {
+    let displayNameArray = [];
+    displayNameApi.getDisplayNames()
+      .then(results => {
+        displayNameArray.push(results.data)
+      })
+      .catch(err => this.errorNotification(err));
+    return displayNameArray;
+  }
+
+  /**
    * Display the modal to confirm updating the profile picture
    */
   showUpdateBackgroundPictureModal = e => {
@@ -519,14 +545,6 @@ export default class Account extends Component {
   };
 
   /**
-   * Display the modal to confirm updating the display name
-   */
-  showUpdateDisplayNameModal = e => {
-    e.preventDefault();
-    this.setState({ showUpdateDisplayNameModal: true });
-  };
-
-  /**
    * Hide the modal to confirm updating the background picture
    */
   hideUpdateBackgroundPictureModal = () => {
@@ -538,13 +556,6 @@ export default class Account extends Component {
    */
   hideUpdateProfilePictureModal = () => {
     this.setState({ showUpdateProfilePictureModal: false });
-  };
-
-  /**
-   * Hide the modal to confirm updating the display name
-   */
-  hideUpdateDisplayNameModal = () => {
-    this.setState({ showUpdateDisplayNameModal: false });
   };
 
   /**
@@ -648,7 +659,6 @@ export default class Account extends Component {
                               backToTopOfPage={this.backToTopOfPage}
                               showUpdateBackgroundPictureModal={this.showUpdateBackgroundPictureModal}
                               showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
-                              showUpdateDisplayNameModal={this.showUpdateDisplayNameModal}
                               saveThemeForUser={this.saveThemeForUser}
                               roles={this.state.roles}
                               disableThemeToggleButton={this.state.disableThemeToggleButton}
@@ -657,6 +667,7 @@ export default class Account extends Component {
                               unableToLoadDatabase={this.state.unableToLoadDatabase}
                               resetInputFields={this.resetInputFields}
                               disableUpdateEmailButton={this.state.disableUpdateEmailButton}
+                              disableUpdateDisplayNameButton={this.state.disableUpdateDisplayNameButton}
                             />
                           )
                       }
@@ -675,14 +686,6 @@ export default class Account extends Component {
                       hideUpdateProfilePictureModal={this.hideUpdateProfilePictureModal}
                       checkIfStringIsBlank={this.checkIfStringIsBlank}
                       newProfilePicture={this.state.newProfilePicture}
-                      currentTheme={this.state.currentTheme}
-                    />
-                    <UpdateDisplayNameModal
-                      showUpdateDisplayNameModal={this.state.showUpdateDisplayNameModal}
-                      updateDisplayName={this.updateDisplayName}
-                      hideUpdateDisplayNameModal={this.hideUpdateDisplayNameModal}
-                      checkIfStringIsBlank={this.checkIfStringIsBlank}
-                      newDisplayName={this.state.newDisplayName}
                       currentTheme={this.state.currentTheme}
                     />
                     <UpdateProfilePictureSuccessModal

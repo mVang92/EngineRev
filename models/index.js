@@ -2,5 +2,6 @@ module.exports = {
   Users: require("./users"),
   Update: require("./update"),
   Forum: require("./forum"),
-  EventLog: require("./eventLog")
+  EventLog: require("./eventLog"),
+  DisplayNames: require("./displayNames")
 };

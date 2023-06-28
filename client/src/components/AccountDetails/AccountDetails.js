@@ -33,7 +33,9 @@ const AccountDetails = props => {
     disableThemeToggleButton,
     downloadEventLogCsvFile,
     resetInputFields,
-    disableUpdateEmailButton
+    disableUpdateEmailButton,
+    disableUpdateDisplayNameButton,
+    updateDisplayName
   } = props;
 
   return (
@@ -227,7 +229,8 @@ const AccountDetails = props => {
             id="submitNewDisplayNameButton"
             title="Update Display Name"
             type="submit"
-            onClick={showUpdateDisplayNameModal}>
+            disabled={disableUpdateDisplayNameButton}
+            onClick={updateDisplayName}>
             Save
           </button>
           <button
