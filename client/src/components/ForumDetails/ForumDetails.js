@@ -21,7 +21,8 @@ const ForumDetails = props => {
     defaultSortOrder,
     noSortResults,
     disableSortThreadsButton,
-    renderSortedThreads
+    renderSortedThreads,
+    displayName
   } = props;
 
   return (
@@ -77,6 +78,7 @@ const ForumDetails = props => {
               _id={thread._id}
               date={thread.date}
               email={thread.email}
+              displayName={thread.displayName}
               threadTitle={thread.threadTitle}
               threadDescription={thread.threadDescription}
               threadCategory={thread.threadCategory}

@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const forumSchema = new Schema({
   creator: { type: String, required: true  },
   email: { type: String, required: true  },
+  displayName: {type: String, required: true},
   threadTitle: { type: String, required: true  },
   threadDescription: { type: String, required: true  },
   threadCategory: { type: String, required: true  },
@@ -13,6 +14,7 @@ const forumSchema = new Schema({
   comments: [{
     creator: { type: String, required: true  },
     email: { type: String, required: true  },
+    displayName: { type: String, required: true },
     comment: { type: String, required: true  },
     votes: { type: Number, required: true  },
     edited: { type: Boolean, required: true  },

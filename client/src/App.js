@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { NavLoggedIn, NavLoggedOut } from "./components/Nav";
 import { defaults } from "./assets/Defaults";
 import userApi from "./utils/userApi";
+import displayNameApi from "./utils/displayNameApi";
 import Main from "./pages/Main";
 import Log from "./pages/Log";
 import Forum from "./pages/Forum";
@@ -30,6 +31,7 @@ export default class App extends Component {
       loggedin: false,
       user: "",
       email: "",
+      displayName: "",
       password: "",
       confirmPassword: "",
       userProfilePicture: "",
@@ -87,11 +89,23 @@ export default class App extends Component {
   /**
    * Creates a schema for the user during first time login
    */
-  createUserSchema = () => {
+  createUserSchema = displayName => {
     this.requestHideSignUpModal();
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        userApi.createUserSchema(user.uid, user.email)
+        const userInformation = {
+          creator: user.uid,
+          displayName: displayName
+        };
+        displayNameApi.addOneDisplayName(userInformation)
+          .then(() => {
+            user.updateProfile({ displayName: displayName })
+              .then(() => {
+                userApi.createUserSchema(user.uid, user.email, user.displayName)
+                  .catch(error => this.errorNotification(error));
+              })
+              .catch(error => this.errorNotification(error));
+          })
           .catch(error => this.errorNotification(error));
       }
     });
@@ -120,19 +134,50 @@ export default class App extends Component {
    */
   handleSignUp = e => {
     e.preventDefault();
+    const displayName = this.state.displayName;
     this.setState({ disableSignUpButton: true });
-    if (this.state.password === this.state.confirmPassword) {
-      auth
-        .doCreateUserWithEmailAndPassword(this.state.email, this.state.confirmPassword)
-        .then(() => this.createUserSchema())
-        .catch(error => {
-          this.errorNotification(error);
-          this.setState({ disableSignUpButton: false });
-        });
-    } else {
+    if (this.state.password !== this.state.confirmPassword) {
+      this.warningNotification(defaults.passwordsDoNotMatch);
       this.setState({ disableSignUpButton: false });
-      this.errorNotification(defaults.passwordsDoNotMatch);
+      return;
     }
+    if (this.checkIfStringIsBlank(displayName)) {
+      this.warningNotification(defaults.displayNameLengthNotMet);
+      this.setState({ disableSignUpButton: false });
+      return;
+    }
+    if (!this.checkIfStringIsBlank(displayName) && displayName.length < 6) {
+      this.warningNotification(defaults.displayNameLengthNotMet);
+      this.setState({ disableSignUpButton: false });
+      return;
+    }
+    displayNameApi.getDisplayNames()
+      .then(results => {
+        const displayNameList = results.data.find(user => user.displayName === displayName);
+        if (displayNameList) {
+          this.warningNotification(defaults.displayNameAlreadyExists);
+          this.setState({ disableSignUpButton: false });
+        } else {
+          this.createUserWithUserInformation(displayName);
+        }
+      })
+      .catch(err => {
+        this.setState({ disableSignUpButton: false });
+        this.errorNotification(err)
+      });
+  };
+
+  /**
+   * Create the user account using email, password, and display name
+   */
+  createUserWithUserInformation = displayName => {
+    auth
+      .doCreateUserWithEmailAndPassword(this.state.email, this.state.confirmPassword)
+      .then(() => this.createUserSchema(displayName))
+      .catch(error => {
+        this.warningNotification(error);
+        this.setState({ disableSignUpButton: false });
+      });
   };
 
   /**
@@ -195,6 +240,7 @@ export default class App extends Component {
       this.setState({
         showSignInModal: false,
         showSignUpModal: true,
+        displayName: "",
         email: "",
         password: "",
         confirmPassword: ""
@@ -291,6 +337,24 @@ export default class App extends Component {
    */
   errorNotification = err => {
     toast.error(err.toString());
+  };
+
+  /**
+   * Display the warning notification when a warning occurs
+   * 
+   * @param err the error message to display to the user
+   */
+  warningNotification = err => {
+    toast.warn(err.toString());
+  };
+
+  /**
+  * Check if the user input value is blank
+  * 
+  * @param string the user input to check against
+  */
+  checkIfStringIsBlank = string => {
+    return (!string || /^\s*$/.test(string));
   };
 
   render() {

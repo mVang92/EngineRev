@@ -1,14 +1,16 @@
 import axios from "axios";
+import { defaults } from "../assets/Defaults";
 
 export default {
   // Upon signing up for new account, create this data for the new user
-  createUserSchema: (creatorId, userEmail) => {
+  createUserSchema: (creatorId, userEmail, userDisplayName) => {
     return (
       axios.post("/api/users/newUser", {
         creator: creatorId,
         email: userEmail,
+        displayName: userDisplayName,
         roles: ["User"],
-        theme: "engineRev",
+        theme: defaults.engineRevTheme,
         backgroundPicture: ""
       })
     );
@@ -44,6 +46,10 @@ export default {
   //Update the user email address
   updateEmail: (creatorId, newEmail) => {
     return axios.put(`/api/users/${creatorId}/${newEmail}/updateEmail`)
+  },
+   //Update the user display name
+   updateDisplayName: (creatorId, newDisplayName) => {
+    return axios.put(`/api/users/${creatorId}/${newDisplayName}/updateDisplayName`)
   },
   // Delete one vehicle
   deleteOneVehicle: vehicleId => {

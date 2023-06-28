@@ -205,10 +205,12 @@ export default class Forum extends Component {
     this.setState({ disableSubmitNewThreadButton: true });
     const creatorId = this.state.uniqueCreatorId;
     const email = this.state.email;
+    const displayName = this.state.displayName;
     const event = events.addOneThread;
     let newThreadPayload = {
       creator: creatorId,
       email: email,
+      displayName: displayName,
       threadTitle: this.state.threadTitle,
       threadDescription: this.state.threadDescription,
       threadCategory: threadCategory,
@@ -291,6 +293,7 @@ export default class Forum extends Component {
                   disableSortThreadsButton={this.state.disableSortThreadsButton}
                   renderSortedThreads={this.renderSortedThreads}
                   currentTheme={this.state.currentTheme}
+                  displayName={this.state.displayName}
                 />
               </Container>
             ) :
