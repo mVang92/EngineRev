@@ -16,7 +16,6 @@ module.exports = {
      * Add one display name
      */
     addOneDisplayName: (req, res) => {
-        console.log(req.body)
         db.DisplayNames
             .create(req.body)
             .then(result => res.json(result))

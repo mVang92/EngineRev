@@ -6,7 +6,7 @@ export default {
         return axios.get("/api/names");
     },
     // Add one display name
-    addOneDisplayName: userIformation => {
-        return axios.put(`/api/names`, userIformation);
+    addOneDisplayName: userInformation => {
+        return axios.put(`/api/names`, userInformation);
     }
 };
