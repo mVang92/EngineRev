@@ -2,6 +2,7 @@ import React from "react";
 import ReactModal from "react-modal";
 
 const UpdateProfilePictureModal = props => {
+    
     return (
         <ReactModal
             isOpen={props.showUpdateProfilePictureModal}
@@ -9,7 +10,7 @@ const UpdateProfilePictureModal = props => {
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
-            onRequestClose={props.hideUpdateProfilePictureModal}
+            onRequestClose={props.requestHideUpdateProfilePictureModal}
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
@@ -47,7 +48,7 @@ const UpdateProfilePictureModal = props => {
                                 title="No"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={props.hideUpdateProfilePictureModal}
+                                onClick={props.requestHideUpdateProfilePictureModal}
                                 data-dismiss="modal">
                                 No
                             </button>
@@ -57,7 +58,8 @@ const UpdateProfilePictureModal = props => {
                                 type="button"
                                 className="standardButton"
                                 onClick={props.updateProfilePicture}
-                                data-dismiss="modal">
+                                data-dismiss="modal"
+                                disabled={props.disableUpdateProfilePictureButton}>
                                 Yes
                             </button>
                         </div>

@@ -15,6 +15,7 @@ const Main = props => {
     currentTheme,
     errorMessage,
     disableAddVehicleButton,
+    showAddVehicleYearNanErrorModal,
     requestShowAddVehicleYearNanErrorModal,
     requestHideAddVehicleYearNanErrorModal
   } = props;
@@ -35,6 +36,7 @@ const Main = props => {
                 currentTheme={currentTheme}
                 errorMessage={errorMessage}
                 reloadPage={reloadPage}
+                showAddVehicleYearNanErrorModal={showAddVehicleYearNanErrorModal}
                 requestShowAddVehicleYearNanErrorModal={requestShowAddVehicleYearNanErrorModal}
                 requestHideAddVehicleYearNanErrorModal={requestHideAddVehicleYearNanErrorModal}
               />

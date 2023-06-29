@@ -8,7 +8,6 @@ import { defaults } from "../../assets/Defaults";
 const AccountDetails = props => {
   const {
     handleChange,
-    theme,
     currentTheme,
     unableToLoadDatabase,
     backToTopOfPage,
@@ -21,8 +20,8 @@ const AccountDetails = props => {
     userAccountCreationTime,
     userAccountLastSignIn,
     saveThemeForUser,
-    showUpdateBackgroundPictureModal,
-    showUpdateProfilePictureModal,
+    requestShowUpdateBackgroundPictureModal,
+    requestShowUpdateProfilePictureModal,
     canUserUpdateEmail,
     canUserUpdatePassword,
     newEmail,
@@ -36,7 +35,7 @@ const AccountDetails = props => {
     disableUpdateDisplayNameButton,
     updateDisplayName
   } = props;
-
+  
   return (
     <div id="accountPage" className={`mt-3 box ${currentTheme.background}`}>
       <div className="row text-center">
@@ -110,7 +109,7 @@ const AccountDetails = props => {
             null
           ) :
           (
-            <React.Fragment>
+            <>
               <div className="removeMobileDisplay">
                 <div className="row">
                   <div className="col-md-4"><label><strong>Event Logs:</strong></label></div>
@@ -137,7 +136,7 @@ const AccountDetails = props => {
               <ThemeSelection
                 saveThemeForUser={saveThemeForUser}
                 disableThemeToggleButton={disableThemeToggleButton}
-                theme={theme}
+                currentTheme={currentTheme}
               />
               <hr className={currentTheme.hr} />
               <form className="row">
@@ -161,7 +160,7 @@ const AccountDetails = props => {
                     id="submitNewBackgroundPictureButton"
                     title="Update Background Picture"
                     type="submit"
-                    onClick={showUpdateBackgroundPictureModal}>
+                    onClick={requestShowUpdateBackgroundPictureModal}>
                     Save
                   </button>
                   <button
@@ -173,7 +172,7 @@ const AccountDetails = props => {
                 </div>
               </form>
               <br />
-            </React.Fragment>
+            </>
           )
       }
       <form className="row">
@@ -196,7 +195,7 @@ const AccountDetails = props => {
             id="submitNewProfilePictureButton"
             title="Update Profile Picture"
             type="submit"
-            onClick={showUpdateProfilePictureModal}>
+            onClick={requestShowUpdateProfilePictureModal}>
             Save
           </button>
           <button

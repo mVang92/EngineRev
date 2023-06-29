@@ -24,7 +24,8 @@ const LoggedIn = props => {
       />
       <AddVehicleYearNanErrorModal
         showAddVehicleYearNanErrorModal={props.showAddVehicleYearNanErrorModal}
-        hideAddVehicleYearNanErrorModal={props.hideAddVehicleYearNanErrorModal}
+        requestShowAddVehicleYearNanErrorModal={props.requestShowAddVehicleYearNanErrorModal}
+        requestHideAddVehicleYearNanErrorModal={props.requestHideAddVehicleYearNanErrorModal}
         currentTheme={currentTheme}
       />
     </div>

@@ -10,6 +10,7 @@ import { events } from "./assets/Events";
 import eventLogHandler from "./utils/EventLogHandler/eventLogHandler";
 import userApi from "./utils/userApi";
 import displayNameApi from "./utils/displayNameApi";
+import eventLogApi from "./utils/eventLogApi";
 import Main from "./pages/Main";
 import Log from "./pages/Log";
 import Forum from "./pages/Forum";
@@ -46,6 +47,8 @@ export default class App extends Component {
       currentTheme: "",
       backgroundPicture: "",
       vehicleCount: "",
+      newDisplayName: "",
+      newProfilePicture: "",
       newBackgroundPicture: "",
       userAccountCreationTime: "",
       userAccountLastSignIn: "",
@@ -57,6 +60,9 @@ export default class App extends Component {
       showSignOutModal: false,
       showForgotPasswordModal: false,
       showUpdateDisplayNameSuccessModal: false,
+      showUpdateBackgroundPictureModal: false,
+      showUpdateProfilePictureModal: false,
+      showUpdateProfilePictureSuccessModal: false,
       disableSignInButton: false,
       disableSignUpButton: false,
       disableForgotPasswordSubmitButton: false,
@@ -66,6 +72,7 @@ export default class App extends Component {
       disableUpdateEmailButton: false,
       showAddVehicleYearNanErrorModal: false,
       disableUpdateDisplayNameButton: false,
+      disableUpdateProfilePictureButton: false,
       isUserNewUser: false,
       vehicleData: [],
       defaultProfilePicture: defaults.defaultProfilePicture,
@@ -95,22 +102,17 @@ export default class App extends Component {
   onAuthStateChanged = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        console.log(user)
         this.setState({
           user: user,
           loggedin: true,
           creatorId: user._delegate.uid,
           email: user._delegate.email,
-          displayName: user._delegate.displayName,
-          profilePicture: user._delegate.photoURL,
           userAccountCreationTime: user._delegate.metadata.creationTime,
           userAccountLastSignIn: user._delegate.metadata.lastSignInTime,
           showSignInModal: false,
           showSignUpModal: false,
           showForgotPasswordModal: false
         }, () => {
-          if (!user._delegate.photoURL) this.setState({ profilePicture: this.state.defaultProfilePicture });
-          if (!user._delegate.displayName) this.setState({ displayName: this.state.defaultDisplayName });
           this.getUserInfoPartial(this.state.creatorId);
           this.getUserDataForAccountPage();
         });
@@ -133,8 +135,17 @@ export default class App extends Component {
           .then(() => {
             user.updateProfile({ displayName: displayName })
               .then(() => {
-                userApi.createUserSchema(user.uid, user.email, user.displayName)
-                  .then(() => this.setState({ isUserNewUser: false }, () => this.getUserInfoPartial(this.state.user._delegate.uid)))
+                user.updateProfile({ photoURL: this.state.defaultProfilePicture })
+                  .then(() => {
+                    userApi.createUserSchema(user.uid, user.email, user.displayName)
+                      .then(() => this.setState({ isUserNewUser: false }, () => {
+                        this.getUserInfoPartial(this.state.user._delegate.uid);
+                        this.getUserRoles(this.state.creatorId);
+                        this.getVehicleCount(this.state.creatorId);
+                      }
+                      ))
+                      .catch(error => this.errorNotification(error));
+                  })
                   .catch(error => this.errorNotification(error));
               })
               .catch(error => this.errorNotification(error));
@@ -154,7 +165,6 @@ export default class App extends Component {
               vehicleData: vehicles.data[0],
               currentTheme: userInfo.data.theme,
               backgroundPicture: userInfo.data.backgroundPicture,
-              creatorId: userInfo.uid,
               displayName: userInfo.data.displayName,
               profilePicture: this.state.user._delegate.photoURL
             }, () => this.renderTheme(themes.determineTheme(this.state.currentTheme, this.state.backgroundPicture)))
@@ -182,28 +192,20 @@ export default class App extends Component {
    * Get data for the user and load the page after data retrieval
    */
   getUserDataForAccountPage = () => {
+    if (this.state.isUserNewUser) return;
     const creatorId = this.state.creatorId;
+    const theme = userApi.getTheme(creatorId)
     const vehicleCount = userApi.getVehicleCount(creatorId);
     const email = userApi.getEmail(creatorId);
     const roles = userApi.getRoles(creatorId);
-    const theme = userApi.getTheme(creatorId);
-    const backgroundPicture = userApi.getBackgroundPicture(creatorId);
-    return Promise.all([vehicleCount, email, roles, theme, backgroundPicture])
-      .then(([vehicleCount, email, roles, theme, backgroundPicture]) => {
-        try {
-          this.setState({
-            vehicleCount: vehicleCount.data[0].total,
-            email: email.data[0].email,
-            roles: roles.data[0].roles,
-            theme: theme.data[0].theme,
-            backgroundPicture: backgroundPicture.data[0].backgroundPicture
-          });
-        } catch (err) {
-          this.setState({
-            pageLoaded: true,
-            unableToLoadDatabase: true
-          }, this.errorNotification(err));
-        }
+    return Promise.all([theme, vehicleCount, email, roles])
+      .then(([theme, vehicleCount, email, roles]) => {
+        this.setState({
+          vehicleCount: vehicleCount.data[0].total,
+          email: email.data[0].email,
+          roles: roles.data[0].roles,
+          currentTheme: theme.data[0].theme
+        });
       })
       .catch(err => {
         this.setState({
@@ -211,6 +213,85 @@ export default class App extends Component {
           pageLoaded: true
         }, this.errorNotification(err));
       });
+  };
+
+  /**
+   * Download the event logs in a CSV file
+   */
+  downloadEventLogCsvFile = () => {
+    eventLogApi.getEventsForUser(this.state.creatorId)
+      .then(res => {
+        const eventLogsObject = JSON.stringify(res.data);
+        const eventLogToCSV = this.convertToCSV(eventLogsObject);
+        const exportedFilename = "EngineRev Event Logs.csv" || "export.csv";
+        const blob = new Blob([eventLogToCSV], { type: "text/csv;charset=utf-8;" });
+        if (navigator.msSaveBlob) {
+          navigator.msSaveBlob(blob, exportedFilename);
+        } else {
+          const link = document.createElement("a");
+          if (link.download !== undefined) {
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", exportedFilename);
+            link.style.visibility = "hidden";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
+        }
+      })
+      .catch(error => this.errorNotification(error));
+  };
+
+  /**
+   * Convert the event logs into a string separated appropriately by line and comma
+   * 
+   * @param eventLogsObject the event logs to convert to CSV
+   */
+  convertToCSV = eventLogsObject => {
+    const array = JSON.parse(eventLogsObject);
+    let string = "";
+    for (let index = 0; index < array.length; index++) {
+      let line = "";
+      for (let element in array[index]) {
+        if (line !== "") {
+          line += ","
+        }
+        line += array[index][element];
+      }
+      string += line + "\r\n";
+    }
+    return string;
+  };
+
+  /**
+   * Reset the specified input field
+   * 
+   * @param fieldToReset The input field to reset
+   */
+  resetInputFields = (e, fieldToReset) => {
+    e.preventDefault();
+    switch (fieldToReset) {
+      case defaults.newBackgroundPictureInput:
+        this.setState({ newBackgroundPicture: "" }, () => this.resetFieldNotification());
+        break;
+      case defaults.newProfilePictureInput:
+        this.setState({ newProfilePicture: "" }, () => this.resetFieldNotification());
+        break;
+      case defaults.newDisplayNameInput:
+        this.setState({ newDisplayName: "" }, () => this.resetFieldNotification());
+        break;
+      default:
+        this.errorNotification(defaults.resetInputFieldError);
+    }
+    document.getElementById(fieldToReset).value = "";
+  };
+
+  /**
+   * Display the info notification when the user resets the input field
+   */
+  resetFieldNotification = () => {
+    toast.info(defaults.inputFieldReset);
   };
 
   /**
@@ -350,22 +431,318 @@ export default class App extends Component {
     const event = events.addedNewVehicle;
     userApi.addOneVehicle(creatorId, newVehicle)
       .then(() => {
-        this.getUserInfoPartial(creatorId);
         eventLogHandler.successful(creatorId, email, event);
+        this.getUserInfoPartial(creatorId);
+        this.getVehicleCount(creatorId);
         this.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
         this.setState({ disableAddVehicleButton: false });
         document.getElementById("addVehicleInputForm").reset();
       })
-      .catch(err => {
-        eventLogHandler.failure(creatorId, email, event, err);
-        this.errorNotification(err);
+      .catch(error => {
+        eventLogHandler.failure(creatorId, email, event, error);
+        this.errorNotification(error);
         this.setState({ disableAddVehicleButton: false });
       });
   };
 
   /**
- * Reload the page
- */
+   * Get the vehicle count
+   * 
+   * @param creatorId the creator id
+   */
+  getVehicleCount = creatorId => {
+    userApi.getVehicleCount(creatorId)
+      .then(vehicleCount => this.setState({ vehicleCount: vehicleCount.data[0].total }))
+      .catch(error => {
+        this.errorNotification(error);
+      });
+  };
+
+  /**
+    * Get the roles for the user
+    * 
+    * @param creatorId the creator id
+    */
+  getUserRoles = creatorId => {
+    userApi.getRoles(creatorId)
+      .then(roles => this.setState({ roles: roles.data[0].roles }))
+      .catch(error => {
+        this.errorNotification(error);
+      });
+  };
+
+  /**
+   * Save the selected theme to the database for the targeted user
+   */
+  saveThemeForUser = () => {
+    const creatorId = this.state.creatorId;
+    const email = this.state.email;
+    const event = events.saveTheme;
+    let element = document.getElementById(defaults.themeSelectionDropdown);
+    let selectedTheme = element.options[element.selectedIndex].value;
+    if (selectedTheme !== this.state.theme) {
+      this.setState({ disableThemeToggleButton: true });
+      userApi.saveThemeForUser(creatorId, selectedTheme)
+        .then(() => {
+          eventLogHandler.successful(creatorId, email, event);
+          this.setState({ disableThemeToggleButton: false });
+          this.getUserDataForAccountPage();
+        })
+        .catch(err => {
+          eventLogHandler.failure(creatorId, email, event, err);
+          this.setState({ disableThemeToggleButton: false });
+          this.errorNotification(err);
+        });
+    }
+  };
+
+  /**
+   * Update the background picture for the user
+   */
+  updateBackgroundPicture = () => {
+    const creatorId = this.state.creatorId;
+    const email = this.state.email;
+    const event = events.updateBackgroundPicture;
+    let newBackgroundPicture = this.state.newBackgroundPicture;
+    if (this.checkIfStringIsBlank(newBackgroundPicture)) {
+      newBackgroundPicture = "";
+    }
+    userApi.updateUserBackgroundPicture(creatorId, newBackgroundPicture)
+      .then(() => {
+        eventLogHandler.successful(creatorId, email, event);
+        this.getUserDataForAccountPage();
+        this.setState({
+          showUpdateBackgroundPictureModal: false,
+          newBackgroundPicture: ""
+        });
+      })
+      .catch(error => {
+        eventLogHandler.failure(creatorId, email, event, error);
+        this.setState({ showUpdateBackgroundPictureModal: false });
+        this.errorNotification(error);
+      });
+  };
+
+  /**
+   * Update the profile picture for the user
+   */
+  updateProfilePicture = () => {
+    const user = this.state.user;
+    const creatorId = this.state.creatorId;
+    const email = this.state.email;
+    const event = events.updateProfilePicture;
+    let newProfilePicture = this.state.newProfilePicture;
+    if (this.checkIfStringIsBlank(newProfilePicture)) {
+      newProfilePicture = defaults.defaultProfilePicture;
+    }
+    if (this.state.loggedin) {
+      this.setState({ disableUpdateProfilePictureButton: true });
+      user.updateProfile({ photoURL: newProfilePicture })
+        .then(() => {
+          eventLogHandler.successful(creatorId, email, event);
+          // this.setState({ showUpdateProfilePictureModal: false });
+          // this.requestShowUpdateProfilePictureSuccessModal();
+          this.reload();
+        })
+        .catch(error => {
+          eventLogHandler.failure(creatorId, email, event, error);
+          this.setState({ showUpdateProfilePictureModal: false });
+          this.errorNotification(error);
+        });
+    }
+  };
+
+  /**
+   * Update the display name for the user
+   */
+  updateDisplayName = e => {
+    e.preventDefault();
+    const user = this.state.user;
+    const creatorId = this.state.creatorId;
+    const email = this.state.email;
+    const event = events.updateDisplayName;
+    let newDisplayName = this.state.newDisplayName;
+    if (!this.state.loggedin) return;
+    if (this.checkIfStringIsBlank(newDisplayName) && newDisplayName.length < 6) {
+      this.warningNotification(defaults.displayNameLengthNotMet);
+      return;
+    }
+    this.setState({ disableUpdateDisplayNameButton: true });
+    displayNameApi.getDisplayNames()
+      .then(results => {
+        const displayNameList = results.data.find(user => user.displayName === newDisplayName);
+        if (!displayNameList) {
+          userApi.updateDisplayName(creatorId, newDisplayName)
+            .then(() => {
+              user.updateProfile({ displayName: newDisplayName })
+                .then(() => {
+                  this.setState({ newDisplayName: "" });
+                  eventLogHandler.successful(creatorId, email, event);
+                  // this.requestShowUpdateDisplayNameSuccessModal();
+                  this.reload();
+                })
+                .catch(error => {
+                  eventLogHandler.failure(creatorId, email, event, error);
+                  this.setState({ disableUpdateDisplayNameButton: false });
+                  this.errorNotification(error);
+                });
+            })
+            .catch(error => {
+              eventLogHandler.failure(creatorId, email, event, error);
+              this.setState({ disableUpdateDisplayNameButton: false });
+              this.errorNotification(error);
+            });
+        } else {
+          this.setState({ disableUpdateDisplayNameButton: false });
+          this.warningNotification(defaults.displayNameAlreadyExists);
+        }
+      })
+      .catch(error => {
+        this.setState({ disableUpdateDisplayNameButton: false });
+        this.errorNotification(error);
+      });
+    // 
+  };
+
+  /**
+   * Verify if the user has permission to update their email
+   */
+  canUserUpdateEmail = e => {
+    e.preventDefault();
+    const creatorId = this.state.creatorId;
+    userApi.getRoles(creatorId)
+      .then(roles => {
+        const newEmail = this.state.newEmail;
+        const initialEmail = this.state.email;
+        const updateEmailEvent = events.updateEmail;
+        const isUserTestUser = roles.data[0].roles.includes(defaults.testUserRole)
+        if (
+          this.state.loggedin &&
+          newEmail &&
+          !isUserTestUser
+        ) {
+          this.updateEmail(creatorId, initialEmail, newEmail, updateEmailEvent);
+        } else {
+          if (!newEmail) {
+            eventLogHandler.failure(creatorId, initialEmail, updateEmailEvent, defaults.emailBlankError);
+            this.warningNotification(defaults.emailBlankError);
+          } else if (isUserTestUser) {
+            this.errorNotification(defaults.noAuthorizationToPerformAction);
+            this.setState({ newEmail: "" });
+          }
+        }
+      })
+      .catch(err => this.errorNotification(err));
+  };
+
+  /**
+   * Verify if the user has permission to update their password
+   */
+  canUserUpdatePassword = e => {
+    e.preventDefault();
+    const creatorId = this.state.creatorId;
+    const email = this.state.email;
+    const newPassword = this.state.newPassword;
+    const confirmNewPassword = this.state.confirmNewPassword;
+    const updatePasswordEvent = events.updatePassword;
+    userApi.getRoles(creatorId)
+      .then(roles => {
+        const isUserTestUser = roles.data[0].roles.includes(defaults.testUserRole)
+        if (
+          this.state.loggedin &&
+          newPassword &&
+          confirmNewPassword &&
+          newPassword === confirmNewPassword &&
+          !isUserTestUser
+        ) {
+          this.updatePassword(creatorId, email, confirmNewPassword, updatePasswordEvent);
+        } else {
+          if (!newPassword || !confirmNewPassword) {
+            eventLogHandler.failure(creatorId, email, updatePasswordEvent, defaults.passwordBlankError);
+            this.warningNotification(defaults.passwordBlankError);
+            this.setState({
+              newPassword: "",
+              confirmNewPassword: ""
+            });
+          } else if (newPassword != confirmNewPassword) {
+            eventLogHandler.failure(creatorId, email, updatePasswordEvent, defaults.passwordsDoNotMatch);
+            this.warningNotification(defaults.passwordsDoNotMatch);
+            this.setState({
+              newPassword: "",
+              confirmNewPassword: ""
+            });
+          } else if (isUserTestUser) {
+            eventLogHandler.failure(creatorId, email, updatePasswordEvent, defaults.noAuthorizationToPerformAction);
+            this.errorNotification(defaults.noAuthorizationToPerformAction);
+            this.setState({
+              newPassword: "",
+              confirmNewPassword: ""
+            });
+          }
+        }
+      })
+      .catch(error => this.errorNotification(error));
+  };
+
+  /**
+   * Update the email to the user
+   */
+  updateEmail = (creatorId, initialEmail, newEmail, updateEmailEvent) => {
+    this.setState({ disableUpdateEmailButton: true });
+    this.state.user.updateEmail(newEmail)
+      .then(() => {
+        this.setState({ pleaseWait: true });
+        userApi.updateEmail(creatorId, newEmail)
+          .then(() => {
+            eventLogHandler.successful(creatorId, initialEmail, updateEmailEvent);
+            this.reload();
+          })
+          .catch(error => {
+            eventLogHandler.failure(creatorId, initialEmail, updateEmailEvent, error);
+            this.errorNotification(error);
+            this.setState({
+              newEmail: "",
+              disableUpdateEmailButton: false,
+              pleaseWait: false
+            });
+          });
+      })
+      .catch(error => {
+        eventLogHandler.failure(creatorId, initialEmail, updateEmailEvent, error);
+        this.warningNotification(error);
+        this.setState({
+          newEmail: "",
+          disableUpdateEmailButton: false,
+          pleaseWait: false
+        });
+      });
+  };
+
+  /**
+   * Update the password to the user
+   */
+  updatePassword = (creatorId, userEmail, confirmNewPassword, updatePasswordEvent) => {
+    this.state.user.updatePassword(confirmNewPassword)
+      .then(() => {
+        eventLogHandler.successful(creatorId, userEmail, updatePasswordEvent);
+        this.successNotification(defaults.passwordUpdatedSuccessfully);
+        this.setState({
+          newPassword: "",
+          confirmNewPassword: ""
+        })
+      }).catch(error => {
+        eventLogHandler.failure(creatorId, userEmail, updatePasswordEvent, error);
+        this.errorNotification(error);
+        this.setState({
+          newPassword: "",
+          confirmNewPassword: ""
+        });
+      });
+  };
+
+  /**
+    * Reload the page
+    */
   reloadPage = () => {
     window.location.reload();
   };
@@ -392,6 +769,60 @@ export default class App extends Component {
   };
 
   /**
+   * Display the modal to confirm updating the background picture
+   */
+  requestShowUpdateBackgroundPictureModal = e => {
+    e.preventDefault();
+    this.setState({ showUpdateBackgroundPictureModal: true });
+  };
+
+  /**
+   * Display the success modal after updating profile picture
+   */
+  requestShowUpdateProfilePictureSuccessModal = () => {
+    this.setState({
+      showUpdateProfilePictureSuccessModal: true,
+      newProfilePicture: ""
+    });
+  };
+
+  /**
+   * Hide the modal to confirm updating the background picture
+   */
+  requestHideUpdateBackgroundPictureModal = () => {
+    this.setState({ showUpdateBackgroundPictureModal: false });
+  };
+
+  /**
+   * Display the modal to confirm updating the profile picture
+   */
+  requestShowUpdateProfilePictureModal = e => {
+    e.preventDefault();
+    this.setState({ showUpdateProfilePictureModal: true });
+  };
+
+  /**
+   * Hide the modal to confirm updating the profile picture
+   */
+  requestHideUpdateProfilePictureModal = () => {
+    this.setState({ showUpdateProfilePictureModal: false });
+  };
+
+  /**
+   * Hide the update profile picture success modal
+   */
+  requestHideUpdateProfilePictureSuccessModal = () => {
+    window.location = "/";
+  };
+
+  /**
+   * Hide the update display name success modal
+   */
+  requestHideUpdateDisplayNameSuccessModal = () => {
+    window.location = "/";
+  };
+
+  /**
  * Display the modal to notify the user the vehicle year must be a number
  */
   requestShowAddVehicleYearNanErrorModal = () => {
@@ -403,6 +834,13 @@ export default class App extends Component {
    */
   requestHideAddVehicleYearNanErrorModal = () => {
     this.setState({ showAddVehicleYearNanErrorModal: false });
+  };
+
+  /**
+   * Display the success modal after updating display name
+   */
+  requestShowUpdateDisplayNameSuccessModal = () => {
+    this.setState({ showUpdateDisplayNameSuccessModal: true });
   };
 
   /**
@@ -497,15 +935,6 @@ export default class App extends Component {
   };
 
   /**
-   * Display the success notification when the user performs an action successfully
-   * 
-   * @param message the message to display to the user
-   */
-  successNotification = message => {
-    toast.success(message);
-  };
-
-  /**
    * Display the info notification when the user resets the fields to add a vehicle
    */
   handleResetAddVehicleFields = () => {
@@ -515,10 +944,19 @@ export default class App extends Component {
   /**
    * Display the error notification when an error occurs while loading vehicles
    * 
-   * @param err the error message to display to the user
+   * @param error the error message to display to the user
    */
-  loadVehiclesFailNotification = err => {
-    toast.error(`Loading Vehicles Error: ${err.toString()}`);
+  loadVehiclesFailNotification = error => {
+    toast.error(`Loading Vehicles Error: ${error.toString()}`);
+  };
+
+  /**
+   * Display the success notification when the user performs an action successfully
+   * 
+   * @param message the message to display to the user
+   */
+  successNotification = message => {
+    toast.success(message);
   };
 
   /**
@@ -526,17 +964,17 @@ export default class App extends Component {
    * 
    * @param err the error message to display to the user
    */
-  errorNotification = err => {
-    toast.error(err.toString());
+  errorNotification = error => {
+    toast.error(error.toString());
   };
 
   /**
    * Display the warning notification when a warning occurs
    * 
-   * @param err the error message to display to the user
+   * @param error the error message to display to the user
    */
-  warningNotification = err => {
-    toast.warn(err.toString());
+  warningNotification = error => {
+    toast.warn(error.toString());
   };
 
   /**
@@ -546,6 +984,14 @@ export default class App extends Component {
   */
   checkIfStringIsBlank = string => {
     return (!string || /^\s*$/.test(string));
+  };
+
+  /**
+   * Scroll to the top of the page
+   */
+  backToTopOfPage = () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   };
 
   render() {
@@ -590,8 +1036,10 @@ export default class App extends Component {
                         disableAddVehicleButton={this.state.disableAddVehicleButton}
                         errorMessage={this.state.errorMessage}
                         reloadPage={this.reloadPage}
+                        showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
                         requestShowAddVehicleYearNanErrorModal={this.requestShowAddVehicleYearNanErrorModal}
                         requestHideAddVehicleYearNanErrorModal={this.requestHideAddVehicleYearNanErrorModal}
+
                       />
                     ) :
                     (
@@ -618,7 +1066,8 @@ export default class App extends Component {
                   errorMessage={this.state.errorMessage}
                   vehicleCount={this.state.vehicleCount}
                   newBackgroundPicture={this.state.newBackgroundPicture}
-                  userAccountCreationTime={this.userAccountCreationTime}
+                  newProfilePicture={this.state.newProfilePicture}
+                  userAccountCreationTime={this.state.userAccountCreationTime}
                   userAccountLastSignIn={this.state.userAccountLastSignIn}
                   updateDisplayName={this.updateDisplayName}
                   canUserUpdateEmail={this.canUserUpdateEmail}
@@ -628,25 +1077,28 @@ export default class App extends Component {
                   confirmNewPassword={this.state.confirmNewPassword}
                   downloadEventLogCsvFile={this.downloadEventLogCsvFile}
                   backToTopOfPage={this.backToTopOfPage}
-                  showUpdateBackgroundPictureModal={this.showUpdateBackgroundPictureModal}
-                  showUpdateProfilePictureModal={this.showUpdateProfilePictureModal}
+                  requestShowUpdateBackgroundPictureModal={this.requestShowUpdateBackgroundPictureModal}
+                  showUpdateBackgroundPictureModal={this.state.showUpdateBackgroundPictureModal}
+                  showUpdateProfilePictureModal={this.state.showUpdateProfilePictureModal}
                   saveThemeForUser={this.saveThemeForUser}
                   roles={this.state.roles}
                   disableThemeToggleButton={this.state.disableThemeToggleButton}
-                  theme={this.state.theme}
+                  disableUpdateProfilePictureButton={this.state.disableUpdateProfilePictureButton}
                   unableToLoadDatabase={this.state.unableToLoadDatabase}
                   resetInputFields={this.resetInputFields}
                   disableUpdateEmailButton={this.state.disableUpdateEmailButton}
                   disableUpdateDisplayNameButton={this.state.disableUpdateDisplayNameButton}
                   updateBackgroundPicture={this.updateBackgroundPicture}
-                  hideUpdateBackgroundPictureModal={this.hideUpdateBackgroundPictureModal}
+                  requestHideUpdateBackgroundPictureModal={this.requestHideUpdateBackgroundPictureModal}
+                  requestShowUpdateProfilePictureModal={this.requestShowUpdateProfilePictureModal}
+                  requestHideUpdateProfilePictureModal={this.requestHideUpdateProfilePictureModal}
                   checkIfStringIsBlank={this.checkIfStringIsBlank}
                   updateProfilePicture={this.updateProfilePicture}
-                  showUpdateProfilePictureSuccessModal={this.showUpdateProfilePictureSuccessModal}
-                  hideUpdateProfilePictureSuccessModal={this.hideUpdateProfilePictureSuccessModal}
+                  showUpdateProfilePictureSuccessModal={this.state.showUpdateProfilePictureSuccessModal}
+                  requestHideUpdateProfilePictureSuccessModal={this.requestHideUpdateProfilePictureSuccessModal}
                   hideUpdateProfilePictureModal={this.hideUpdateProfilePictureModal}
                   showUpdateDisplayNameSuccessModal={this.state.showUpdateDisplayNameSuccessModal}
-                  hideUpdateDisplayNameSuccessModal={this.hideUpdateDisplayNameSuccessModal}
+                  requestHideUpdateDisplayNameSuccessModal={this.requestHideUpdateDisplayNameSuccessModal}
                 />
               }
             />
