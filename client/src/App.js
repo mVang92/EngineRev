@@ -542,7 +542,7 @@ export default class App extends Component {
           eventLogHandler.successful(creatorId, email, event);
           // this.setState({ showUpdateProfilePictureModal: false });
           // this.requestShowUpdateProfilePictureSuccessModal();
-          this.reload();
+          this.reloadPage();
         })
         .catch(error => {
           eventLogHandler.failure(creatorId, email, event, error);
@@ -579,7 +579,7 @@ export default class App extends Component {
                   this.setState({ newDisplayName: "" });
                   eventLogHandler.successful(creatorId, email, event);
                   // this.requestShowUpdateDisplayNameSuccessModal();
-                  this.reload();
+                  this.reloadPage();
                 })
                 .catch(error => {
                   eventLogHandler.failure(creatorId, email, event, error);
@@ -695,7 +695,7 @@ export default class App extends Component {
         userApi.updateEmail(creatorId, newEmail)
           .then(() => {
             eventLogHandler.successful(creatorId, initialEmail, updateEmailEvent);
-            this.reload();
+            this.reloadPage();
           })
           .catch(error => {
             eventLogHandler.failure(creatorId, initialEmail, updateEmailEvent, error);
