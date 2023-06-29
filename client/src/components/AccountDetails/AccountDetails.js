@@ -8,22 +8,19 @@ import { defaults } from "../../assets/Defaults";
 const AccountDetails = props => {
   const {
     handleChange,
-    theme,
     currentTheme,
-    unableToLoadDatabase,
     backToTopOfPage,
-    userPhotoUrl,
-    userDisplayName,
-    userEmail,
+    profilePicture,
+    displayName,
+    email,
     vehicleCount,
-    loadingError,
+    errorMessage,
     roles,
     userAccountCreationTime,
     userAccountLastSignIn,
     saveThemeForUser,
-    showUpdateBackgroundPictureModal,
-    showUpdateProfilePictureModal,
-    showUpdateDisplayNameModal,
+    requestShowUpdateBackgroundPictureModal,
+    requestShowUpdateProfilePictureModal,
     canUserUpdateEmail,
     canUserUpdatePassword,
     newEmail,
@@ -48,24 +45,24 @@ const AccountDetails = props => {
       <hr className={currentTheme.hr} />
       <div className={`row paddingDesktopDisplay ${currentTheme.accountDetails}`}>
         <div id="scrollableProfilePictureAccountDetails" className="col-md-4 text-center">
-          <a href={userPhotoUrl} target="_blank">
+          <a href={profilePicture} target="_blank">
             <img
               id="profilePicture"
-              title={userDisplayName}
-              src={userPhotoUrl}
-              alt={userDisplayName}
+              title={displayName}
+              src={profilePicture}
+              alt={displayName}
             />
           </a>
         </div>
         <div className="col-md-8">
           <div className="row fadeIn1">
             <div className="col-md-5"><label><strong>Display Name:</strong></label></div>
-            <div id="accountPageUserDisplayName" className="col-md-7 wrapword">{userDisplayName}</div>
+            <div id="accountPageUserDisplayName" className="col-md-7 wrapword">{displayName}</div>
           </div>
           <br />
           <div className="row fadeIn2">
             <div className="col-md-5"><label><strong>Email:</strong></label></div>
-            <div id="accountPageUserEmail" className="col-md-7 wrapword">{userEmail}</div>
+            <div id="accountPageUserEmail" className="col-md-7 wrapword">{email}</div>
           </div>
           <br />
           <div className="row fadeIn3">
@@ -84,7 +81,7 @@ const AccountDetails = props => {
             <div className="col-md-5"><label><strong>Vehicles:</strong></label></div>
             <div className="col-md-7">
               {
-                loadingError
+                errorMessage
                   ? <span id="accountPageVehicleCount" className="text-danger">{defaults.errorLoadingVehicleCount}</span>
                   : <span id="accountPageVehicleCount">{vehicleCount}</span>
               }
@@ -105,79 +102,69 @@ const AccountDetails = props => {
         <div className="col-md-4"></div>
       </div>
       <hr className={currentTheme.hr} />
-      {
-        unableToLoadDatabase ?
-          (
-            null
-          ) :
-          (
-            <React.Fragment>
-              <div className="removeMobileDisplay">
-                <div className="row">
-                  <div className="col-md-4"><label><strong>Event Logs:</strong></label></div>
-                  <div className="col-md-4">
-                    <div className="row">
-                      <div className="col-md-6">
-                        <div className="text-left">
-                          <button
-                            id="downloadEventLogsButton"
-                            title="Download Event Logs"
-                            type="button"
-                            onClick={downloadEventLogCsvFile}>
-                            Download
-                          </button>
-                        </div>
-                      </div>
-                      <div className="col-md-6"></div>
-                    </div>
-                  </div>
-                  <div className="col-md-4"></div>
+      <div className="removeMobileDisplay">
+        <div className="row">
+          <div className="col-md-4"><label><strong>Event Logs:</strong></label></div>
+          <div className="col-md-4">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="text-left">
+                  <button
+                    id="downloadEventLogsButton"
+                    title="Download Event Logs"
+                    type="button"
+                    onClick={downloadEventLogCsvFile}>
+                    Download
+                  </button>
                 </div>
-                <hr className={currentTheme.hr} />
               </div>
-              <ThemeSelection
-                saveThemeForUser={saveThemeForUser}
-                disableThemeToggleButton={disableThemeToggleButton}
-                theme={theme}
-              />
-              <hr className={currentTheme.hr} />
-              <form className="row">
-                <div className="col-md-4 bottomMarginMobileDisplay">
-                  <label htmlFor={defaults.newBackgroundPictureInput}><strong>Update Background Picture:</strong></label>
-                </div>
-                <div className="col-md-4">
-                  <input
-                    id={defaults.newBackgroundPictureInput}
-                    type="text"
-                    onChange={handleChange}
-                    value={newBackgroundPicture}
-                    name="newBackgroundPicture"
-                    maxLength="500"
-                    placeholder="Insert photo URL"
-                  />
-                </div>
-                <br /><br />
-                <div className="col-md-4">
-                  <button
-                    id="submitNewBackgroundPictureButton"
-                    title="Update Background Picture"
-                    type="submit"
-                    onClick={showUpdateBackgroundPictureModal}>
-                    Save
-                  </button>
-                  <button
-                    id="resetNewBackgroundPictureButton"
-                    title="Reset Input Field"
-                    onClick={event => resetInputFields(event, defaults.newBackgroundPictureInput)}>
-                    Reset
-                  </button>
-                </div>
-              </form>
-              <br />
-            </React.Fragment>
-          )
-      }
-      <form className="row">
+              <div className="col-md-6"></div>
+            </div>
+          </div>
+          <div className="col-md-4"></div>
+        </div>
+        <hr className={currentTheme.hr} />
+      </div>
+      <ThemeSelection
+        saveThemeForUser={saveThemeForUser}
+        disableThemeToggleButton={disableThemeToggleButton}
+        currentTheme={currentTheme}
+      />
+      <hr className={currentTheme.hr} />
+      <form id="newBackgroundPictureInputForm" className="row">
+        <div className="col-md-4 bottomMarginMobileDisplay">
+          <label htmlFor={defaults.newBackgroundPictureInput}><strong>Update Background Picture:</strong></label>
+        </div>
+        <div className="col-md-4">
+          <input
+            id={defaults.newBackgroundPictureInput}
+            type="text"
+            onChange={handleChange}
+            value={newBackgroundPicture}
+            name="newBackgroundPicture"
+            maxLength="500"
+            placeholder="Insert photo URL"
+          />
+        </div>
+        <br /><br />
+        <div className="col-md-4">
+          <button
+            id="submitNewBackgroundPictureButton"
+            title="Update Background Picture"
+            type="submit"
+            onClick={requestShowUpdateBackgroundPictureModal}>
+            Save
+          </button>
+          <button
+            id="resetNewBackgroundPictureButton"
+            title="Reset Input Field"
+            onClick={event => resetInputFields(event, defaults.newBackgroundPictureInput)}>
+            Reset
+          </button>
+        </div>
+      </form>
+      <br />
+      <form id="newProfilePictureInputForm" className="row">
         <div className="col-md-4 bottomMarginMobileDisplay">
           <label htmlFor={defaults.newProfilePictureInput}><strong>Update Profile Picture:</strong></label>
         </div>
@@ -197,7 +184,7 @@ const AccountDetails = props => {
             id="submitNewProfilePictureButton"
             title="Update Profile Picture"
             type="submit"
-            onClick={showUpdateProfilePictureModal}>
+            onClick={requestShowUpdateProfilePictureModal}>
             Save
           </button>
           <button
@@ -209,7 +196,7 @@ const AccountDetails = props => {
         </div>
       </form>
       <br />
-      <form className="row">
+      <form id="newDisplayNameInputForm" className="row">
         <div className="col-md-4 bottomMarginMobileDisplay">
           <label htmlFor={defaults.newDisplayNameInput}><strong>Update Display Name:</strong></label>
         </div>
@@ -220,7 +207,7 @@ const AccountDetails = props => {
             onChange={handleChange}
             name="newDisplayName"
             maxLength="50"
-            placeholder={userDisplayName}
+            placeholder={displayName}
           />
         </div>
         <br /><br />
@@ -264,12 +251,11 @@ const AccountDetails = props => {
           handleChange={handleChange}
           canUserUpdateEmail={canUserUpdateEmail}
           canUserUpdatePassword={canUserUpdatePassword}
-          userEmail={userEmail}
+          email={email}
           newEmail={newEmail}
           newPassword={newPassword}
           confirmNewPassword={confirmNewPassword}
           disableUpdateEmailButton={disableUpdateEmailButton}
-          unableToLoadDatabase={unableToLoadDatabase}
         />
       </div>
       <hr className={currentTheme.hr} />

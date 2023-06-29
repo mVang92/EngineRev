@@ -39,7 +39,7 @@ module.exports = {
     db.Users
       .findOne(
         { creator: req.params.id },
-        { _id: 0, creator: 1, backgroundPicture: 1, email: 1, theme: 1 }
+        { _id: 0, creator: 1, backgroundPicture: 1, displayName: 1, theme: 1 }
       )
       .then(result => res.json(result))
       .catch(err => res.status(422).json(err));

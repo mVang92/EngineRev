@@ -3,6 +3,7 @@ import ReactModal from "react-modal";
 import warningImage from "../../images/warning.png";
 
 const AddVehicleYearNanErrorModal = props => {
+    
     return (
         <ReactModal
             isOpen={props.showAddVehicleYearNanErrorModal}
@@ -10,7 +11,7 @@ const AddVehicleYearNanErrorModal = props => {
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
-            onRequestClose={props.hideAddVehicleYearNanErrorModal}
+            onRequestClose={props.requestHideAddVehicleYearNanErrorModal}
         >
             <div id="addVehicleYearNanErrorModal" className="accountModal modal-content">
                 <div className="modal-body modalShadow">
@@ -29,7 +30,7 @@ const AddVehicleYearNanErrorModal = props => {
                                 title="Okay"
                                 type="button"
                                 className="standardButton"
-                                onClick={props.hideAddVehicleYearNanErrorModal}
+                                onClick={props.requestHideAddVehicleYearNanErrorModal}
                                 data-dismiss="modal">
                                 Okay
                             </button>

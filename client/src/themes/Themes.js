@@ -3,6 +3,7 @@ import { defaults } from "../assets/Defaults";
 export const themes = {
   engineRev: {
     theme: "EngineRev",
+    themeAlternate: "engineRev",
     background: "engineRevThemeBackground",
     hr: "engineRevThemeHr",
     serviceLogs: "engineRevThemeServiceLogs",
@@ -16,6 +17,7 @@ export const themes = {
   },
   light: {
     theme: "Light",
+    themeAlternate: "light",
     background: "lightThemeBackground",
     hr: "lightThemeHr",
     serviceLogs: "lightThemeServiceLogs",
@@ -29,6 +31,7 @@ export const themes = {
   },
   grey: {
     theme: "Grey",
+    themeAlternate: "grey",
     background: "greyThemeBackground",
     hr: "greyThemeHr",
     serviceLogs: "greyThemeServiceLogs",
@@ -42,6 +45,7 @@ export const themes = {
   },
   dark: {
     theme: "Dark",
+    themeAlternate: "dark",
     background: "darkThemeBackground",
     hr: "darkThemeHr",
     serviceLogs: "darkThemeServiceLogs",
@@ -55,6 +59,7 @@ export const themes = {
   },
   transparentLight: {
     theme: "Transparent Light",
+    themeAlternate: "transparentLight",
     background: "transparentLightThemeBackground",
     hr: "transparentLightThemeHr",
     serviceLogs: "transparentLightThemeServiceLogs",
@@ -68,6 +73,7 @@ export const themes = {
   },
   transparentGrey: {
     theme: "Transparent Grey",
+    themeAlternate: "transparentGrey",
     background: "transparentGreyThemeBackground",
     hr: "transparentGreyThemeHr",
     serviceLogs: "transparentGreyThemeServiceLogs",
@@ -81,6 +87,7 @@ export const themes = {
   },
   transparentDark: {
     theme: "Transparent Dark",
+    themeAlternate: "transparentDark",
     background: "transparentDarkThemeBackground",
     hr: "transparentDarkThemeHr",
     serviceLogs: "transparentDarkThemeServiceLogs",

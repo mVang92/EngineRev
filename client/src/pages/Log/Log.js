@@ -14,9 +14,10 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 
 export default class Log extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
+      props: props,
       uid: "",
       email: "",
       loggedin: false,
@@ -68,6 +69,14 @@ export default class Log extends Component {
   findUserInformationTimeout;
 
   /**
+   * Handle real-time changes
+   */
+  handleChange = e => {
+    let { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  /**
    * Check if the user is logged in
    */
   componentDidMount = () => {
@@ -116,14 +125,6 @@ export default class Log extends Component {
           errorMessage: err
         });
       });
-  };
-
-  /**
-   * Handle real-time changes
-   */
-  handleChange = e => {
-    let { name, value } = e.target;
-    this.setState({ [name]: value });
   };
 
   /**
@@ -193,15 +194,6 @@ export default class Log extends Component {
   };
 
   /**
-   * Check if the user input value is blank
-   * 
-   * @param string the user input to check against
-   */
-  checkIfStringIsBlank = string => {
-    return (!string || /^\s*$/.test(string));
-  };
-
-  /**
    * Get the vehicle information for the selected vehicle
    * then show the page after loading
    */
@@ -239,9 +231,9 @@ export default class Log extends Component {
         this.state.date === "" ||
         this.state.mileage === "" ||
         this.state.service === "" ||
-        this.checkIfStringIsBlank(this.state.date) ||
-        this.checkIfStringIsBlank(this.state.mileage) ||
-        this.checkIfStringIsBlank(this.state.service)
+        this.props.checkIfStringIsBlank(this.state.date) ||
+        this.props.checkIfStringIsBlank(this.state.mileage) ||
+        this.props.checkIfStringIsBlank(this.state.service)
       ) {
         this.showAddLogErrorModal();
       } else {
@@ -289,7 +281,7 @@ export default class Log extends Component {
       } else {
         updatedModel = this.state.model;
       }
-      
+
       if (this.state.updatedVehicleName) {
         updatedVehicleName = this.state.updatedVehicleName;
       } else if (this.state.updatedVehicleName == "") {
@@ -298,15 +290,15 @@ export default class Log extends Component {
         updatedVehicleName = this.state.vehicleName;
       }
 
-      if (this.checkIfStringIsBlank(updatedVehicleName)) {
+      if (this.props.checkIfStringIsBlank(updatedVehicleName)) {
         updatedVehicleName = "";
       }
 
-      if (this.checkIfStringIsBlank(updatedMake)) {
+      if (this.props.checkIfStringIsBlank(updatedMake)) {
         updatedMake = this.state.make;
       }
 
-      if (this.checkIfStringIsBlank(updatedModel)) {
+      if (this.props.checkIfStringIsBlank(updatedModel)) {
         updatedModel = this.state.model;
       }
 
@@ -340,9 +332,9 @@ export default class Log extends Component {
       this.showUpdatedMileageInputErrorModal();
     } else {
       if (
-        this.checkIfStringIsBlank(serviceLogDate) ||
-        this.checkIfStringIsBlank(serviceLogMileage) ||
-        this.checkIfStringIsBlank(serviceLogService)
+        this.props.checkIfStringIsBlank(serviceLogDate) ||
+        this.props.checkIfStringIsBlank(serviceLogMileage) ||
+        this.props.checkIfStringIsBlank(serviceLogService)
       ) {
         this.showUpdateLogErrorModal();
       } else {
@@ -376,6 +368,7 @@ export default class Log extends Component {
           disableConfirmSaveEditVehicleNameButton: false
         }, () => {
           eventLogHandler.successful(creatorId, email, event);
+          this.props.getUserInfoPartial(creatorId)
           this.successNotification(defaults.vehicleNameUpdatedSuccessfully);
           this.hideEditOneVehicleNameModal();
           this.getOneVehicle();
@@ -451,8 +444,10 @@ export default class Log extends Component {
     userApi.deleteOneVehicle(this.state.vehicleId)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
-        document.getElementById(defaults.applicationName).click();
+        this.props.getUserInfoPartial(creatorId);
+        this.props.getVehicleCount(creatorId);
         this.successNotification(defaults.deleteVehicleSucess);
+        document.getElementById(defaults.applicationName).click();
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
@@ -894,7 +889,7 @@ export default class Log extends Component {
                       hideUpdatedMileageInputErrorModal={this.hideUpdatedMileageInputErrorModal}
                       checkUserEnteredUpdatedVehicleNameInput={this.checkUserEnteredUpdatedVehicleNameInput}
                       checkUserEnteredUpdatedServiceLogInput={this.checkUserEnteredUpdatedServiceLogInput}
-                      checkIfStringIsBlank={this.checkIfStringIsBlank}
+                      checkIfStringIsBlank={this.props.checkIfStringIsBlank}
                       deleteOneVehicleModal={this.state.deleteOneVehicleModal}
                       confirmDeleteVehicleButtonText={this.state.confirmDeleteVehicleButtonText}
                       vehicleName={this.state.vehicleName}

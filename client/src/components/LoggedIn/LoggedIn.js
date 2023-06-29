@@ -11,7 +11,7 @@ const LoggedIn = props => {
         displayName={props.displayName}
         handleResetAddVehicleFields={props.handleResetAddVehicleFields}
         checkIfVehicleYearIsValid={props.checkIfVehicleYearIsValid}
-        userProfilePicture={props.userProfilePicture}
+        profilePicture={props.profilePicture}
         disableAddVehicleButton={props.disableAddVehicleButton}
         currentTheme={currentTheme}
       />
@@ -24,7 +24,8 @@ const LoggedIn = props => {
       />
       <AddVehicleYearNanErrorModal
         showAddVehicleYearNanErrorModal={props.showAddVehicleYearNanErrorModal}
-        hideAddVehicleYearNanErrorModal={props.hideAddVehicleYearNanErrorModal}
+        requestShowAddVehicleYearNanErrorModal={props.requestShowAddVehicleYearNanErrorModal}
+        requestHideAddVehicleYearNanErrorModal={props.requestHideAddVehicleYearNanErrorModal}
         currentTheme={currentTheme}
       />
     </div>

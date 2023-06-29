@@ -5,9 +5,9 @@ const ThemeSelection = props => {
   const {
     disableThemeToggleButton,
     saveThemeForUser,
-    theme
+    currentTheme
   } = props;
-
+  
   return (
     <div className="row">
       <div className="col-md-4 bottomMarginMobileDisplay">
@@ -17,7 +17,7 @@ const ThemeSelection = props => {
         <select
           id={defaults.themeSelectionDropdown}
           name={defaults.themeSelectionDropdown}
-          defaultValue={theme}>
+          defaultValue={currentTheme.themeAlternate}>
           <option value={defaults.engineRevTheme}>EngineRev</option>
           <option value={defaults.lightTheme}>Light</option>
           <option value={defaults.greyTheme}>Grey</option>
