@@ -6,7 +6,7 @@ const DeleteOneUpdateModal = props => {
     const {
         showDeleteOneUpdateModal,
         currentTheme,
-        hideDeleteOneUpdateModal,
+        requestHideDeleteOneUpdateModal,
         handleDeleteOneReleaseNote,
         disableConfirmDeleteReleaseNoteButton
     } = props;
@@ -18,7 +18,7 @@ const DeleteOneUpdateModal = props => {
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
-            onRequestClose={hideDeleteOneUpdateModal}
+            onRequestClose={requestHideDeleteOneUpdateModal}
         >
             <div className="accountModal modal-content">
                 <div className="modal-body modalShadow">
@@ -38,7 +38,7 @@ const DeleteOneUpdateModal = props => {
                                 title="No"
                                 type="button"
                                 className="cancelBtn"
-                                onClick={hideDeleteOneUpdateModal}
+                                onClick={requestHideDeleteOneUpdateModal}
                                 data-dismiss="modal">
                                 No
                             </button>

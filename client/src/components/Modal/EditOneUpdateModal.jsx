@@ -9,9 +9,9 @@ const EditOneUpdateModal = props => {
         handleChange,
         updateChangesToShowInModal,
         knownIssuesToShowInModal,
-        hideEditOneUpdateModal,
+        requestHideEditOneUpdateModal,
         disableConfirmSaveEditReleaseNoteButton,
-        deleteOneUpdateModal
+        requestShowDeleteOneUpdateModal
     } = props;
     
     return (
@@ -21,7 +21,7 @@ const EditOneUpdateModal = props => {
             className="Modal__Bootstrap modal-dialog"
             shouldCloseOnOverlayClick={true}
             closeTimeoutMS={0}
-            onRequestClose={hideEditOneUpdateModal}
+            onRequestClose={requestHideEditOneUpdateModal}
         >
             <form onSubmit={checkUserEnteredUpdatedReleaseNoteInput}>
                 <div className="accountModal modal-content">
@@ -72,7 +72,7 @@ const EditOneUpdateModal = props => {
                                             title="Delete"
                                             type="button"
                                             className="deleteBtn"
-                                            onClick={deleteOneUpdateModal}>
+                                            onClick={requestShowDeleteOneUpdateModal}>
                                             Delete
                                         </button>
                                     </div>
@@ -82,7 +82,7 @@ const EditOneUpdateModal = props => {
                                             title="Cancel"
                                             type="button"
                                             className="cancelBtn"
-                                            onClick={hideEditOneUpdateModal}
+                                            onClick={requestHideEditOneUpdateModal}
                                             data-dismiss="modal">
                                             Cancel
                                         </button>

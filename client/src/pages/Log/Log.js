@@ -128,14 +128,6 @@ export default class Log extends Component {
   };
 
   /**
-   * Scroll to the top of the page
-   */
-  backToTopOfPage = () => {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  };
-
-  /**
    * Format the date to yyyy-mm-dd
    * 
    * @param dateToConvert The date to convert
@@ -369,14 +361,14 @@ export default class Log extends Component {
         }, () => {
           eventLogHandler.successful(creatorId, email, event);
           this.props.getUserInfoPartial(creatorId)
-          this.successNotification(defaults.vehicleNameUpdatedSuccessfully);
+          this.props.successNotification(defaults.vehicleNameUpdatedSuccessfully);
           this.hideEditOneVehicleNameModal();
           this.getOneVehicle();
         });
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
-        this.errorNotification(err);
+        this.props.errorNotification(err);
         this.setState({ disableConfirmSaveEditVehicleNameButton: false });
       });
   };
@@ -417,7 +409,7 @@ export default class Log extends Component {
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
-        this.errorNotification(err);
+        this.props.errorNotification(err);
         this.setState({ disableAddServiceLogButton: false });
       });
   };
@@ -446,12 +438,12 @@ export default class Log extends Component {
         eventLogHandler.successful(creatorId, email, event);
         this.props.getUserInfoPartial(creatorId);
         this.props.getVehicleCount(creatorId);
-        this.successNotification(defaults.deleteVehicleSucess);
+        this.props.successNotification(defaults.deleteVehicleSucess);
         document.getElementById(defaults.applicationName).click();
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
-        this.errorNotification(err);
+        this.props.errorNotification(err);
       });
   };
 
@@ -505,7 +497,7 @@ export default class Log extends Component {
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
-        this.errorNotification(err);
+        this.props.errorNotification(err);
         this.setState({ disableConfirmSaveEditServiceLogButton: false });
       });
   };
@@ -522,12 +514,12 @@ export default class Log extends Component {
         this.setState({ showDeleteOneLogModal: false }, () => {
           eventLogHandler.successful(creatorId, email, event);
           this.getOneVehicle();
-          this.successNotification(defaults.serviceLogDeletedSuccessfully);
+          this.props.successNotification(defaults.serviceLogDeletedSuccessfully);
         });
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
-        this.errorNotification(err);
+        this.props.errorNotification(err);
       });
   };
 
@@ -583,15 +575,6 @@ export default class Log extends Component {
   };
 
   /**
-   * Display the success notification when the user performs an action successfully
-   * 
-   * @param message the message to display to the user
-   */
-  successNotification = message => {
-    toast.success(message);
-  };
-
-  /**
    * Display the success notification when the user adds a service log
    * 
    * @param date    the date when the service is logged
@@ -611,15 +594,6 @@ export default class Log extends Component {
    */
   updateOneServiceLogSuccessNotification = (date, mileage, service) => {
     toast.success(`Service Updated: ${service} at ${mileage} miles on ${date}.`);
-  };
-
-  /**
-   * Display the error notification when an error occurs while executing a database query
-   * 
-   * @param err the error message to display to the user
-   */
-  errorNotification = err => {
-    toast.error(err.toString());
   };
 
   /**
@@ -821,7 +795,7 @@ export default class Log extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         {
           this.state.loggedin ?
             (
@@ -851,7 +825,7 @@ export default class Log extends Component {
                       sortVehicleServiceLogsMostRecent={this.state.sortVehicleServiceLogsMostRecent}
                       sortServiceLogs={this.sortServiceLogs}
                       showEditOneServiceLogModal={this.showEditOneServiceLogModal}
-                      backToTopOfPage={this.backToTopOfPage}
+                      backToTopOfPage={this.props.backToTopOfPage}
                     />
                     <VehicleLogModals
                       currentTheme={this.state.currentTheme}
@@ -917,7 +891,7 @@ export default class Log extends Component {
               <NoAuthorization />
             )
         }
-      </React.Fragment>
+      </>
     );
   };
 };
