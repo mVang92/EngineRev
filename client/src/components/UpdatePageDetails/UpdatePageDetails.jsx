@@ -16,19 +16,18 @@ const UpdatePageDetails = props => {
         updateChanges,
         knownIssues,
         allUpdates,
-        getActionValue,
         backToTopOfPage,
         checkUserEnteredUpdatedReleaseNoteInput,
         showEditOneUpdateModal,
         editOneUpdateModal,
-        deleteOneUpdateModal,
-        hideEditOneUpdateModal,
+        requestShowDeleteOneUpdateModal,
+        requestHideEditOneUpdateModal,
         updateChangesToShowInModal,
         knownIssuesToShowInModal,
         disableConfirmSaveEditReleaseNoteButton,
         handleDeleteOneReleaseNote,
         showDeleteOneUpdateModal,
-        hideDeleteOneUpdateModal,
+        requestHideDeleteOneUpdateModal,
         disableConfirmDeleteReleaseNoteButton
     } = props;
 
@@ -64,7 +63,6 @@ const UpdatePageDetails = props => {
                                 date={update.date}
                                 updateChanges={update.updateChanges}
                                 knownIssues={update.knownIssues}
-                                getActionValue={getActionValue}
                                 currentTheme={currentTheme}
                                 roles={roles}
                                 editOneUpdateModal={editOneUpdateModal}
@@ -77,18 +75,18 @@ const UpdatePageDetails = props => {
                 <EditOneUpdateModal
                     checkUserEnteredUpdatedReleaseNoteInput={checkUserEnteredUpdatedReleaseNoteInput}
                     showEditOneUpdateModal={showEditOneUpdateModal}
-                    hideEditOneUpdateModal={hideEditOneUpdateModal}
+                    requestHideEditOneUpdateModal={requestHideEditOneUpdateModal}
                     handleChange={handleChange}
                     currentTheme={currentTheme}
                     updateChangesToShowInModal={updateChangesToShowInModal}
                     knownIssuesToShowInModal={knownIssuesToShowInModal}
                     disableConfirmSaveEditReleaseNoteButton={disableConfirmSaveEditReleaseNoteButton}
-                    deleteOneUpdateModal={deleteOneUpdateModal}
+                    requestShowDeleteOneUpdateModal={requestShowDeleteOneUpdateModal}
                 />
                 <DeleteOneUpdateModal
                     handleDeleteOneReleaseNote={handleDeleteOneReleaseNote}
                     showDeleteOneUpdateModal={showDeleteOneUpdateModal}
-                    hideDeleteOneUpdateModal={hideDeleteOneUpdateModal}
+                    requestHideDeleteOneUpdateModal={requestHideDeleteOneUpdateModal}
                     handleChange={handleChange}
                     currentTheme={currentTheme}
                     disableConfirmDeleteReleaseNoteButton={disableConfirmDeleteReleaseNoteButton}

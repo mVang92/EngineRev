@@ -10,6 +10,7 @@ import { events } from "./assets/Events";
 import eventLogHandler from "./utils/EventLogHandler/eventLogHandler";
 import userApi from "./utils/userApi";
 import displayNameApi from "./utils/displayNameApi";
+import updateApi from "./utils/updateApi";
 import eventLogApi from "./utils/eventLogApi";
 import Main from "./pages/Main";
 import Log from "./pages/Log";
@@ -53,6 +54,14 @@ export default class App extends Component {
       userAccountCreationTime: "",
       userAccountLastSignIn: "",
       roles: "",
+      updateChanges: "",
+      knownIssues: "",
+      updateChangesToShowInModal: "",
+      knownIssuesToShowInModal: "",
+      releaseNotesToUpdate: "",
+      knownIssuesToUpdate: "",
+      updateId: "",
+      updateChangesToShowInModal: "",
       pageLoaded: false,
       showSignInModal: false,
       showSignUpModal: false,
@@ -71,8 +80,13 @@ export default class App extends Component {
       showAddVehicleYearNanErrorModal: false,
       disableUpdateDisplayNameButton: false,
       disableUpdateProfilePictureButton: false,
+      disableConfirmSaveEditReleaseNoteButton: false,
+      disableConfirmDeleteReleaseNoteButton: false,
+      showDeleteOneUpdateModal: false,
+      showEditOneUpdateModal: false,
       isUserNewUser: false,
       vehicleData: [],
+      allUpdates: [],
       defaultProfilePicture: defaults.defaultProfilePicture,
       defaultDisplayName: defaults.defaultDisplayName
     };
@@ -116,6 +130,7 @@ export default class App extends Component {
         });
       }
     });
+    this.getUpdates();
   };
 
   /**
@@ -778,6 +793,158 @@ export default class App extends Component {
   };
 
   /**
+   * Gets all of the updates and release notes from the database
+   * If successful or if there is an error, then find the user information
+   */
+  getUpdates = () => {
+    updateApi.getUpdates()
+      .then(updates => this.setState({ allUpdates: updates.data }))
+      .catch(error => this.errorNotification(error));
+  };
+
+  /**
+   * Adds an update to the database
+   */
+  addOneUpdate = e => {
+    e.preventDefault();
+    userApi.getRoles(this.state.creatorId)
+      .then(roles => {
+        if (roles.data[0].roles.includes(defaults.adminRole)) {
+          const payload = {
+            updateChanges: this.state.updateChanges,
+            knownIssues: this.state.knownIssues,
+            releaseNotesToUpdate: "",
+            knownIssuesToUpdate: ""
+          };
+          updateApi.addOneUpdate(payload)
+            .then(() => {
+              this.successNotification(defaults.addOneReleaseNoteSuccess);
+              this.getUpdates();
+              this.setState({
+                updateChanges: "",
+                knownIssues: ""
+              });
+            })
+            .catch(error => this.errorNotification(error));
+        } else this.doNoAuthorization()
+      })
+      .catch(error => this.errorNotification(error));
+  };
+
+  /**
+   * Display the modal to edit one update
+   * 
+   * @param updateId      the update id to target
+   * @param updateChanges the update or release notes to save
+   * @param knownIssues   the known issues to save
+   */
+  editOneUpdateModal = (updateId, updateChanges, knownIssues) => {
+    this.setState({
+      showEditOneUpdateModal: true,
+      updateId: updateId,
+      updateChangesToShowInModal: updateChanges,
+      knownIssuesToShowInModal: knownIssues,
+      releaseNotesToUpdate: "",
+      knownIssuesToUpdate: ""
+    });
+  };
+
+  /**
+   * Delete the release note from record
+   */
+  handleDeleteOneReleaseNote = () => {
+    userApi.getRoles(this.state.creatorId)
+      .then(roles => {
+        if (roles.data[0].roles.includes(defaults.adminRole)) {
+          this.setState({ disableConfirmDeleteReleaseNoteButton: true });
+          updateApi.deleteOneReleaseNote(this.state.updateId)
+            .then(() => {
+              this.successNotification(defaults.deleteOneReleaseNoteSuccess);
+              this.getUpdates();
+              this.setState({
+                showDeleteOneUpdateModal: false,
+                disableConfirmDeleteReleaseNoteButton: false
+              });
+            })
+            .catch(error => {
+              this.errorNotification(error);
+              this.setState({ disableConfirmDeleteReleaseNoteButton: false });
+            });
+        } else this.doNoAuthorization();
+      })
+      .catch(error => this.errorNotification(error));
+  };
+
+  /**
+   * Update the release note
+   * 
+   * @param newReleaseNotes The new release note to update the old one
+   * @param newKnownIssues The known issues to update the old one
+   */
+  handleUpdateOneReleaseNote = (newReleaseNotes, newKnownIssues) => {
+    userApi.getRoles(this.state.creatorId)
+      .then(roles => {
+        if (roles.data[0].roles.includes(defaults.adminRole)) {
+          let payload = {
+            newReleaseNotes,
+            newKnownIssues
+          };
+          this.setState({ disableConfirmSaveEditReleaseNoteButton: true });
+          updateApi.updateOneReleaseNote(this.state.updateId, payload)
+            .then(() => {
+              this.successNotification(defaults.updateOneReleaseNoteSuccess);
+              this.getUpdates();
+              this.setState({
+                showEditOneUpdateModal: false,
+                disableConfirmSaveEditReleaseNoteButton: false
+              });
+            })
+            .catch(error => {
+              this.errorNotification(error);
+              this.setState({ disableConfirmSaveEditReleaseNoteButton: false });
+            });
+        } else this.doNoAuthorization()
+      })
+      .catch(error => this.errorNotification(error));
+  };
+
+  /**
+   * Validate the new data for editing a release note
+   */
+  checkUserEnteredUpdatedReleaseNoteInput = e => {
+    e.preventDefault();
+    let untouchedReleaseNote = this.state.updateChangesToShowInModal;
+    let untouchedKnownIssues = this.state.knownIssuesToShowInModal;
+    let releaseNotesToUpdate = this.state.releaseNotesToUpdate;
+    let knownIssuesToUpdate = this.state.knownIssuesToUpdate;
+    let newReleaseNotes = "";
+    let newKnownIssues = "";
+    if (releaseNotesToUpdate) {
+      newReleaseNotes = releaseNotesToUpdate;
+    } else {
+      newReleaseNotes = untouchedReleaseNote;
+    }
+    if (knownIssuesToUpdate) {
+      newKnownIssues = knownIssuesToUpdate;
+    } else {
+      newKnownIssues = untouchedKnownIssues;
+    }
+    if (this.checkIfStringIsBlank(newReleaseNotes) || this.checkIfStringIsBlank(newKnownIssues)) {
+      this.releaseNoteInvalidInputErrorNotification();
+    } else {
+      this.handleUpdateOneReleaseNote(newReleaseNotes, newKnownIssues);
+    }
+  };
+
+  /**
+   * Alert the user and navigate to the origin URL
+   */
+  doNoAuthorization = () => {
+    alert(defaults.noAuthorizationToPerformAction);
+    window.location = "/";
+  };
+
+  /**
    * Display the modal to confirm updating the background picture
    */
   requestShowUpdateBackgroundPictureModal = e => {
@@ -919,6 +1086,30 @@ export default class App extends Component {
   };
 
   /**
+   * Hide the edit one update modal
+   */
+  requestHideEditOneUpdateModal = () => {
+    this.setState({ showEditOneUpdateModal: false });
+  };
+
+  /**
+   * Display the modal to delete one update
+   */
+  requestShowDeleteOneUpdateModal = () => {
+    this.setState({
+      showDeleteOneUpdateModal: true,
+      showEditOneUpdateModal: false
+    });
+  };
+
+  /**
+   * Hide the delete one update modal
+   */
+  requestHideDeleteOneUpdateModal = () => {
+    this.setState({ showDeleteOneUpdateModal: false });
+  };
+
+  /**
    * Display the success notification when a vehicle is successfully added
    * 
    * @param year  the year of the vehicle
@@ -973,6 +1164,13 @@ export default class App extends Component {
   };
 
   /**
+   * Display the error notification when there is invalid input while updating a release note
+   */
+  releaseNoteInvalidInputErrorNotification = () => {
+    toast.error(defaults.invalidInputDetected);
+  };
+
+  /**
   * Check if the user input value is blank
   * 
   * @param string the user input to check against
@@ -992,157 +1190,184 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-        <React.Fragment>
+        {
+          this.state.loggedin ?
+            (
+              <NavLoggedIn
+                loggedin={this.state.loggedin}
+                profilePicture={this.state.profilePicture}
+                requestShowSignOutModal={this.requestShowSignOutModal}
+                showSignOutModal={this.state.showSignOutModal}
+                requestHideSignOutModal={this.requestHideSignOutModal}
+                handleSignOut={this.handleSignOut}
+              />
+            ) :
+            (
+              <NavLoggedOut
+                requestShowSignInModal={this.requestShowSignInModal}
+                requestShowSignUpModal={this.requestShowSignUpModal}
+              />
+            )
+        }
+        <Routes>
           {
-            this.state.loggedin ?
-              (
-                <NavLoggedIn
-                  loggedin={this.state.loggedin}
-                  profilePicture={this.state.profilePicture}
-                  requestShowSignOutModal={this.requestShowSignOutModal}
-                  showSignOutModal={this.state.showSignOutModal}
-                  requestHideSignOutModal={this.requestHideSignOutModal}
-                  handleSignOut={this.handleSignOut}
-                />
-              ) :
-              (
-                <NavLoggedOut
-                  requestShowSignInModal={this.requestShowSignInModal}
-                  requestShowSignUpModal={this.requestShowSignUpModal}
-                />
-              )
+            <Route
+              path="/"
+              element={
+                this.state.user ?
+                  (
+                    <Main
+                      pageLoaded={this.state.pageLoaded}
+                      vehicleData={this.state.vehicleData}
+                      profilePicture={this.state.profilePicture}
+                      onAuthStateChanged={this.onAuthStateChanged}
+                      handleResetAddVehicleFields={this.handleResetAddVehicleFields}
+                      displayName={this.state.displayName}
+                      checkIfVehicleYearIsValid={this.checkIfVehicleYearIsValid}
+                      currentTheme={this.state.currentTheme}
+                      disableAddVehicleButton={this.state.disableAddVehicleButton}
+                      errorMessage={this.state.errorMessage}
+                      reloadPage={this.reloadPage}
+                      showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
+                      requestShowAddVehicleYearNanErrorModal={this.requestShowAddVehicleYearNanErrorModal}
+                      requestHideAddVehicleYearNanErrorModal={this.requestHideAddVehicleYearNanErrorModal}
+                    />
+                  ) :
+                  (
+                    <LoggedOut />
+                  )
+              }
+            />
           }
-          <Routes>
-            {
-              <Route
-                path="/"
-                element={
-                  this.state.user ?
-                    (
-                      <Main
-                        pageLoaded={this.state.pageLoaded}
-                        vehicleData={this.state.vehicleData}
-                        profilePicture={this.state.profilePicture}
-                        onAuthStateChanged={this.onAuthStateChanged}
-                        handleResetAddVehicleFields={this.handleResetAddVehicleFields}
-                        displayName={this.state.displayName}
-                        checkIfVehicleYearIsValid={this.checkIfVehicleYearIsValid}
-                        currentTheme={this.state.currentTheme}
-                        disableAddVehicleButton={this.state.disableAddVehicleButton}
-                        errorMessage={this.state.errorMessage}
-                        reloadPage={this.reloadPage}
-                        showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
-                        requestShowAddVehicleYearNanErrorModal={this.requestShowAddVehicleYearNanErrorModal}
-                        requestHideAddVehicleYearNanErrorModal={this.requestHideAddVehicleYearNanErrorModal}
-                      />
-                    ) :
-                    (
-                      <LoggedOut />
-                    )
-                }
+          <Route
+            path="/vehicle/:vehicleId"
+            element={
+              <Log
+                getUserInfoPartial={this.getUserInfoPartial}
+                getVehicleCount={this.getVehicleCount}
+                checkIfStringIsBlank={this.checkIfStringIsBlank}
+                backToTopOfPage={this.backToTopOfPage}
+                successNotification={this.successNotification}
+                errorNotification={this.errorNotification}
               />
             }
-            <Route
-              path="/vehicle/:vehicleId"
-              element={
-                <Log
-                  getUserInfoPartial={this.getUserInfoPartial}
-                  getVehicleCount={this.getVehicleCount}
-                  checkIfStringIsBlank={this.checkIfStringIsBlank}
-                />
-              }
-            />
-            <Route path="/forum" element={<Forum />} />
-            <Route path="/thread/:threadId" element={<Thread />} />
-            <Route
-              path="/account"
-              element={
-                <Account
-                  handleChange={this.handleChange}
-                  loggedin={this.state.loggedin}
-                  pageLoaded={this.state.pageLoaded}
-                  currentTheme={this.state.currentTheme}
-                  profilePicture={this.state.profilePicture}
-                  email={this.state.email}
-                  displayName={this.state.displayName}
-                  errorMessage={this.state.errorMessage}
-                  vehicleCount={this.state.vehicleCount}
-                  newBackgroundPicture={this.state.newBackgroundPicture}
-                  newProfilePicture={this.state.newProfilePicture}
-                  userAccountCreationTime={this.state.userAccountCreationTime}
-                  userAccountLastSignIn={this.state.userAccountLastSignIn}
-                  updateDisplayName={this.updateDisplayName}
-                  canUserUpdateEmail={this.canUserUpdateEmail}
-                  canUserUpdatePassword={this.canUserUpdatePassword}
-                  newEmail={this.state.newEmail}
-                  newPassword={this.state.newPassword}
-                  confirmNewPassword={this.state.confirmNewPassword}
-                  downloadEventLogCsvFile={this.downloadEventLogCsvFile}
-                  backToTopOfPage={this.backToTopOfPage}
-                  requestShowUpdateBackgroundPictureModal={this.requestShowUpdateBackgroundPictureModal}
-                  showUpdateBackgroundPictureModal={this.state.showUpdateBackgroundPictureModal}
-                  showUpdateProfilePictureModal={this.state.showUpdateProfilePictureModal}
-                  saveThemeForUser={this.saveThemeForUser}
-                  roles={this.state.roles}
-                  disableThemeToggleButton={this.state.disableThemeToggleButton}
-                  disableUpdateProfilePictureButton={this.state.disableUpdateProfilePictureButton}
-                  resetInputFields={this.resetInputFields}
-                  disableUpdateEmailButton={this.state.disableUpdateEmailButton}
-                  disableUpdateDisplayNameButton={this.state.disableUpdateDisplayNameButton}
-                  updateBackgroundPicture={this.updateBackgroundPicture}
-                  requestHideUpdateBackgroundPictureModal={this.requestHideUpdateBackgroundPictureModal}
-                  requestShowUpdateProfilePictureModal={this.requestShowUpdateProfilePictureModal}
-                  requestHideUpdateProfilePictureModal={this.requestHideUpdateProfilePictureModal}
-                  checkIfStringIsBlank={this.checkIfStringIsBlank}
-                  updateProfilePicture={this.updateProfilePicture}
-                  showUpdateProfilePictureSuccessModal={this.state.showUpdateProfilePictureSuccessModal}
-                  requestHideUpdateProfilePictureSuccessModal={this.requestHideUpdateProfilePictureSuccessModal}
-                />
-              }
-            />
-            <Route
-              path="/about"
-              element={
-                <About
-                  currentTheme={this.state.currentTheme}
-                />
-              }
-            />
-            <Route path="/updates" element={<Updates />} />
-            <Route element={<NoMatch />} />
-          </Routes>
-          <SignInModal
-            showSignInModal={this.state.showSignInModal}
-            requestShowSignUpModal={this.requestShowSignUpModal}
-            requestHideSignInModal={this.requestHideSignInModal}
-            handleSignIn={this.handleSignIn}
-            requestShowForgotPasswordModal={this.requestShowForgotPasswordModal}
-            disableSignInButton={this.state.disableSignInButton}
-            handleChange={this.handleChange}
           />
-          <SignUpModal
-            showSignUpModal={this.state.showSignUpModal}
-            requestShowSignInModal={this.requestShowSignInModal}
-            requestHideSignUpModal={this.requestHideSignUpModal}
-            handleSignUp={this.handleSignUp}
-            disableSignUpButton={this.state.disableSignUpButton}
-            handleChange={this.handleChange}
+          <Route path="/forum" element={<Forum />} />
+          <Route path="/thread/:threadId" element={<Thread />} />
+          <Route
+            path="/account"
+            element={
+              <Account
+                handleChange={this.handleChange}
+                loggedin={this.state.loggedin}
+                pageLoaded={this.state.pageLoaded}
+                currentTheme={this.state.currentTheme}
+                profilePicture={this.state.profilePicture}
+                email={this.state.email}
+                displayName={this.state.displayName}
+                errorMessage={this.state.errorMessage}
+                vehicleCount={this.state.vehicleCount}
+                newBackgroundPicture={this.state.newBackgroundPicture}
+                newProfilePicture={this.state.newProfilePicture}
+                userAccountCreationTime={this.state.userAccountCreationTime}
+                userAccountLastSignIn={this.state.userAccountLastSignIn}
+                updateDisplayName={this.updateDisplayName}
+                canUserUpdateEmail={this.canUserUpdateEmail}
+                canUserUpdatePassword={this.canUserUpdatePassword}
+                newEmail={this.state.newEmail}
+                newPassword={this.state.newPassword}
+                confirmNewPassword={this.state.confirmNewPassword}
+                downloadEventLogCsvFile={this.downloadEventLogCsvFile}
+                backToTopOfPage={this.backToTopOfPage}
+                requestShowUpdateBackgroundPictureModal={this.requestShowUpdateBackgroundPictureModal}
+                showUpdateBackgroundPictureModal={this.state.showUpdateBackgroundPictureModal}
+                showUpdateProfilePictureModal={this.state.showUpdateProfilePictureModal}
+                saveThemeForUser={this.saveThemeForUser}
+                roles={this.state.roles}
+                disableThemeToggleButton={this.state.disableThemeToggleButton}
+                disableUpdateProfilePictureButton={this.state.disableUpdateProfilePictureButton}
+                resetInputFields={this.resetInputFields}
+                disableUpdateEmailButton={this.state.disableUpdateEmailButton}
+                disableUpdateDisplayNameButton={this.state.disableUpdateDisplayNameButton}
+                updateBackgroundPicture={this.updateBackgroundPicture}
+                requestHideUpdateBackgroundPictureModal={this.requestHideUpdateBackgroundPictureModal}
+                requestShowUpdateProfilePictureModal={this.requestShowUpdateProfilePictureModal}
+                requestHideUpdateProfilePictureModal={this.requestHideUpdateProfilePictureModal}
+                checkIfStringIsBlank={this.checkIfStringIsBlank}
+                updateProfilePicture={this.updateProfilePicture}
+                showUpdateProfilePictureSuccessModal={this.state.showUpdateProfilePictureSuccessModal}
+                requestHideUpdateProfilePictureSuccessModal={this.requestHideUpdateProfilePictureSuccessModal}
+              />
+            }
           />
-          <SignOutModal
-            showSignOutModal={this.state.showSignOutModal}
-            disableDoSignOutButton={this.state.disableDoSignOutButton}
-            requestHideSignOutModal={this.requestHideSignOutModal}
-            handleSignOut={this.handleSignOut}
+          <Route
+            path="/about"
+            element={
+              <About
+                currentTheme={this.state.currentTheme}
+              />
+            }
           />
-          <ForgotPasswordModal
-            showForgotPasswordModal={this.state.showForgotPasswordModal}
-            requestHideForgotPasswordModal={this.requestHideForgotPasswordModal}
-            handlePasswordReset={this.handlePasswordReset}
-            disableForgotPasswordSubmitButton={this.state.disableForgotPasswordSubmitButton}
-            handleChange={this.handleChange}
+          <Route
+            path="/updates"
+            element={
+              <Updates
+                handleChange={this.handleChange}
+                roles={this.state.roles}
+                allUpdates={this.state.allUpdates}
+                updateChanges={this.state.updateChanges}
+                knownIssues={this.state.knownIssues}
+                updateChangesToShowInModal={this.state.updateChangesToShowInModal}
+                knownIssuesToShowInModal={this.state.knownIssuesToShowInModal}
+                backToTopOfPage={this.backToTopOfPage}
+                currentTheme={this.state.currentTheme}
+                addOneUpdate={this.addOneUpdate}
+                showEditOneUpdateModal={this.state.showEditOneUpdateModal}
+                editOneUpdateModal={this.editOneUpdateModal}
+                requestShowDeleteOneUpdateModal={this.requestShowDeleteOneUpdateModal}
+                requestHideEditOneUpdateModal={this.requestHideEditOneUpdateModal}
+                requestHideDeleteOneUpdateModal={this.requestHideDeleteOneUpdateModal}
+                handleDeleteOneReleaseNote={this.handleDeleteOneReleaseNote}
+                showDeleteOneUpdateModal={this.state.showDeleteOneUpdateModal}
+                disableConfirmSaveEditReleaseNoteButton={this.state.disableConfirmSaveEditReleaseNoteButton}
+                disableConfirmDeleteReleaseNoteButton={this.state.disableConfirmDeleteReleaseNoteButton}
+                checkUserEnteredUpdatedReleaseNoteInput={this.checkUserEnteredUpdatedReleaseNoteInput}
+              />
+            }
           />
-          <ToastContainer />
-        </React.Fragment>
+          <Route element={<NoMatch />} />
+        </Routes>
+        <SignInModal
+          showSignInModal={this.state.showSignInModal}
+          requestShowSignUpModal={this.requestShowSignUpModal}
+          requestHideSignInModal={this.requestHideSignInModal}
+          handleSignIn={this.handleSignIn}
+          requestShowForgotPasswordModal={this.requestShowForgotPasswordModal}
+          disableSignInButton={this.state.disableSignInButton}
+          handleChange={this.handleChange}
+        />
+        <SignUpModal
+          showSignUpModal={this.state.showSignUpModal}
+          requestShowSignInModal={this.requestShowSignInModal}
+          requestHideSignUpModal={this.requestHideSignUpModal}
+          handleSignUp={this.handleSignUp}
+          disableSignUpButton={this.state.disableSignUpButton}
+          handleChange={this.handleChange}
+        />
+        <SignOutModal
+          showSignOutModal={this.state.showSignOutModal}
+          disableDoSignOutButton={this.state.disableDoSignOutButton}
+          requestHideSignOutModal={this.requestHideSignOutModal}
+          handleSignOut={this.handleSignOut}
+        />
+        <ForgotPasswordModal
+          showForgotPasswordModal={this.state.showForgotPasswordModal}
+          requestHideForgotPasswordModal={this.requestHideForgotPasswordModal}
+          handlePasswordReset={this.handlePasswordReset}
+          disableForgotPasswordSubmitButton={this.state.disableForgotPasswordSubmitButton}
+          handleChange={this.handleChange}
+        />
+        <ToastContainer />
       </Router>
     );
   };
