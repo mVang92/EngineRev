@@ -5,7 +5,7 @@ const AdvancedSettings = props => {
     handleChange,
     canUserUpdateEmail,
     canUserUpdatePassword,
-    userEmail,
+    email,
     newEmail,
     newPassword,
     confirmNewPassword,
@@ -34,7 +34,7 @@ const AdvancedSettings = props => {
                     name="newEmail"
                     maxLength="50"
                     autoComplete="newEmailInput"
-                    placeholder={userEmail}
+                    placeholder={email}
                   />
                 </div>
                 <br /><br />

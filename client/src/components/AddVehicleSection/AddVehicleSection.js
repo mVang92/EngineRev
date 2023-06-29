@@ -64,7 +64,7 @@ class AddVehicleSection extends Component {
               <Link to={{ pathname: "/account" }}>
                 <img
                   id="mainPageProfilePicture"
-                  src={this.props.userProfilePicture ? this.props.userProfilePicture : this.state.defaultProfilePicture}
+                  src={this.props.profilePicture ? this.props.profilePicture : this.state.defaultProfilePicture}
                   alt={this.props.displayName}
                   title={this.props.displayName}
                 />

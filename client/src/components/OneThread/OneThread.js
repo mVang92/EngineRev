@@ -6,7 +6,6 @@ const OneThread = props => {
   const {
     _id,
     date,
-    email,
     displayName,
     currentTheme,
     threadTitle,
@@ -20,7 +19,6 @@ const OneThread = props => {
   newDate.setDate(newDate.getDate() + 1);
   const formattedDate = newDate.toLocaleDateString("en-US");
   const formattedDescription = threadDescription.substring(0, 100);
-  const formattedEmail = email.replace(/@[^@]+$/, '');
 
   return (
     <React.Fragment key={_id}>

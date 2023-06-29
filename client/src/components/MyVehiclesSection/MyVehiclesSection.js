@@ -8,7 +8,7 @@ const MyVehiclesSection = props => {
     reloadPage,
     currentTheme
   } = props;
-
+  
   return (
     <div className="text-center">
       {
@@ -30,11 +30,11 @@ const MyVehiclesSection = props => {
             </div>
           ) :
           (
-            <React.Fragment>
+            <>
               {
                 vehicleData.vehicles.length ?
                   (
-                    <React.Fragment>
+                    <>
                       <div className="row">
                         <div className="col-md-12 smallBottomMargin">
                           <label><strong>Vehicles on Record: <span id="vehicleCountForUser">{vehicleData.vehicles.length}</span></strong></label>
@@ -64,13 +64,13 @@ const MyVehiclesSection = props => {
                           }
                         </div>
                       </div>
-                    </React.Fragment>
+                    </>
                   ) :
                   (
                     <label><strong>No Vehicles on Record</strong></label>
                   )
               }
-            </React.Fragment>
+            </>
           )
       }
     </div>

@@ -12,18 +12,17 @@ const AccountDetails = props => {
     currentTheme,
     unableToLoadDatabase,
     backToTopOfPage,
-    userPhotoUrl,
-    userDisplayName,
-    userEmail,
+    profilePicture,
+    displayName,
+    email,
     vehicleCount,
-    loadingError,
+    errorMessage,
     roles,
     userAccountCreationTime,
     userAccountLastSignIn,
     saveThemeForUser,
     showUpdateBackgroundPictureModal,
     showUpdateProfilePictureModal,
-    showUpdateDisplayNameModal,
     canUserUpdateEmail,
     canUserUpdatePassword,
     newEmail,
@@ -48,24 +47,24 @@ const AccountDetails = props => {
       <hr className={currentTheme.hr} />
       <div className={`row paddingDesktopDisplay ${currentTheme.accountDetails}`}>
         <div id="scrollableProfilePictureAccountDetails" className="col-md-4 text-center">
-          <a href={userPhotoUrl} target="_blank">
+          <a href={profilePicture} target="_blank">
             <img
               id="profilePicture"
-              title={userDisplayName}
-              src={userPhotoUrl}
-              alt={userDisplayName}
+              title={displayName}
+              src={profilePicture}
+              alt={displayName}
             />
           </a>
         </div>
         <div className="col-md-8">
           <div className="row fadeIn1">
             <div className="col-md-5"><label><strong>Display Name:</strong></label></div>
-            <div id="accountPageUserDisplayName" className="col-md-7 wrapword">{userDisplayName}</div>
+            <div id="accountPageUserDisplayName" className="col-md-7 wrapword">{displayName}</div>
           </div>
           <br />
           <div className="row fadeIn2">
             <div className="col-md-5"><label><strong>Email:</strong></label></div>
-            <div id="accountPageUserEmail" className="col-md-7 wrapword">{userEmail}</div>
+            <div id="accountPageUserEmail" className="col-md-7 wrapword">{email}</div>
           </div>
           <br />
           <div className="row fadeIn3">
@@ -84,7 +83,7 @@ const AccountDetails = props => {
             <div className="col-md-5"><label><strong>Vehicles:</strong></label></div>
             <div className="col-md-7">
               {
-                loadingError
+                errorMessage
                   ? <span id="accountPageVehicleCount" className="text-danger">{defaults.errorLoadingVehicleCount}</span>
                   : <span id="accountPageVehicleCount">{vehicleCount}</span>
               }
@@ -220,7 +219,7 @@ const AccountDetails = props => {
             onChange={handleChange}
             name="newDisplayName"
             maxLength="50"
-            placeholder={userDisplayName}
+            placeholder={displayName}
           />
         </div>
         <br /><br />
@@ -264,7 +263,7 @@ const AccountDetails = props => {
           handleChange={handleChange}
           canUserUpdateEmail={canUserUpdateEmail}
           canUserUpdatePassword={canUserUpdatePassword}
-          userEmail={userEmail}
+          email={email}
           newEmail={newEmail}
           newPassword={newPassword}
           confirmNewPassword={confirmNewPassword}

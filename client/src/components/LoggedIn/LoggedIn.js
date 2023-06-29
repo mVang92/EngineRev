@@ -11,7 +11,7 @@ const LoggedIn = props => {
         displayName={props.displayName}
         handleResetAddVehicleFields={props.handleResetAddVehicleFields}
         checkIfVehicleYearIsValid={props.checkIfVehicleYearIsValid}
-        userProfilePicture={props.userProfilePicture}
+        profilePicture={props.profilePicture}
         disableAddVehicleButton={props.disableAddVehicleButton}
         currentTheme={currentTheme}
       />
