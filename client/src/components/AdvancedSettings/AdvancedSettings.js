@@ -9,50 +9,40 @@ const AdvancedSettings = props => {
     newEmail,
     newPassword,
     confirmNewPassword,
-    disableUpdateEmailButton,
-    unableToLoadDatabase
+    disableUpdateEmailButton
   } = props;
 
   return (
-    <React.Fragment>
-      {
-        unableToLoadDatabase ?
-          (
-            null
-          ) : (
-            <React.Fragment>
-              <form className="row">
-                <div className="col-md-4 bottomMarginMobileDisplay">
-                  <label htmlFor="newEmailInput"><strong>Update Email:</strong></label>
-                </div>
-                <div className="col-md-4">
-                  <input
-                    id="newEmailInput"
-                    type="text"
-                    onChange={handleChange}
-                    value={newEmail}
-                    name="newEmail"
-                    maxLength="50"
-                    autoComplete="newEmailInput"
-                    placeholder={email}
-                  />
-                </div>
-                <br /><br />
-                <div className="col-md-4">
-                  <button
-                    id="submitNewEmailButton"
-                    title="Update Email"
-                    type="submit"
-                    onClick={canUserUpdateEmail}
-                    disabled={disableUpdateEmailButton}>
-                    Save
-                  </button>
-                </div>
-              </form>
-              <br />
-            </React.Fragment>
-          )
-      }
+    <>
+      <form className="row">
+        <div className="col-md-4 bottomMarginMobileDisplay">
+          <label htmlFor="newEmailInput"><strong>Update Email:</strong></label>
+        </div>
+        <div className="col-md-4">
+          <input
+            id="newEmailInput"
+            type="text"
+            onChange={handleChange}
+            value={newEmail}
+            name="newEmail"
+            maxLength="50"
+            autoComplete="newEmailInput"
+            placeholder={email}
+          />
+        </div>
+        <br /><br />
+        <div className="col-md-4">
+          <button
+            id="submitNewEmailButton"
+            title="Update Email"
+            type="submit"
+            onClick={canUserUpdateEmail}
+            disabled={disableUpdateEmailButton}>
+            Save
+          </button>
+        </div>
+      </form>
+      <br />
       <form className="row">
         <div className="col-md-4 bottomMarginMobileDisplay">
           <label><strong>Update Password:</strong></label>
@@ -89,7 +79,7 @@ const AdvancedSettings = props => {
           </button>
         </div>
       </form>
-    </React.Fragment>
+    </>
   );
 };
 

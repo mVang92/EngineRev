@@ -1,20 +1,17 @@
 import React from "react";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading";
-import PleaseWait from "../../components/PleaseWait";
 import NoAuthorization from "../../components/NoAuthorization";
 import AccountDetails from "../../components/AccountDetails";
 import UpdateBackgroundPictureModal from "../../components/Modal/UpdateBackgroundPictureModal";
 import UpdateProfilePictureModal from "../../components/Modal/UpdateProfilePictureModal";
 import UpdateProfilePictureSuccessModal from "../../components/Modal/UpdateProfilePictureSuccessModal";
-import UpdateDisplayNameSuccessModal from "../../components/Modal/UpdateDisplayNameSuccessModal";
 
 const Account = props => {
   const {
     handleChange,
     loggedin,
     pageLoaded,
-    pleaseWait,
     roles,
     email,
     displayName,
@@ -41,9 +38,7 @@ const Account = props => {
     showUpdateBackgroundPictureModal,
     showUpdateProfilePictureModal,
     showUpdateProfilePictureSuccessModal,
-    showUpdateDisplayNameSuccessModal,
     checkIfStringIsBlank,
-    unableToLoadDatabase,
     disableThemeToggleButton,
     disableUpdateEmailButton,
     disableUpdateDisplayNameButton,
@@ -52,8 +47,7 @@ const Account = props => {
     requestHideUpdateBackgroundPictureModal,
     requestShowUpdateProfilePictureModal,
     requestHideUpdateProfilePictureModal,
-    requestHideUpdateProfilePictureSuccessModal,
-    requestHideUpdateDisplayNameSuccessModal
+    requestHideUpdateProfilePictureSuccessModal
   } = props;
 
   return (
@@ -65,43 +59,34 @@ const Account = props => {
               (
                 <>
                   <Container>
-                    {
-                      pleaseWait ?
-                        (
-                          <PleaseWait currentTheme={currentTheme} />
-                        ) :
-                        (
-                          <AccountDetails
-                            handleChange={handleChange}
-                            profilePicture={profilePicture}
-                            email={email}
-                            displayName={displayName}
-                            errorMessage={errorMessage}
-                            vehicleCount={vehicleCount}
-                            newBackgroundPicture={newBackgroundPicture}
-                            userAccountCreationTime={userAccountCreationTime}
-                            userAccountLastSignIn={userAccountLastSignIn}
-                            updateDisplayName={updateDisplayName}
-                            canUserUpdateEmail={canUserUpdateEmail}
-                            canUserUpdatePassword={canUserUpdatePassword}
-                            newEmail={newEmail}
-                            newPassword={newPassword}
-                            confirmNewPassword={confirmNewPassword}
-                            downloadEventLogCsvFile={downloadEventLogCsvFile}
-                            backToTopOfPage={backToTopOfPage}
-                            requestShowUpdateBackgroundPictureModal={requestShowUpdateBackgroundPictureModal}
-                            requestShowUpdateProfilePictureModal={requestShowUpdateProfilePictureModal}
-                            saveThemeForUser={saveThemeForUser}
-                            roles={roles}
-                            disableThemeToggleButton={disableThemeToggleButton}
-                            currentTheme={currentTheme}
-                            unableToLoadDatabase={unableToLoadDatabase}
-                            resetInputFields={resetInputFields}
-                            disableUpdateEmailButton={disableUpdateEmailButton}
-                            disableUpdateDisplayNameButton={disableUpdateDisplayNameButton}
-                          />
-                        )
-                    }
+                    <AccountDetails
+                      handleChange={handleChange}
+                      profilePicture={profilePicture}
+                      email={email}
+                      displayName={displayName}
+                      errorMessage={errorMessage}
+                      vehicleCount={vehicleCount}
+                      newBackgroundPicture={newBackgroundPicture}
+                      userAccountCreationTime={userAccountCreationTime}
+                      userAccountLastSignIn={userAccountLastSignIn}
+                      updateDisplayName={updateDisplayName}
+                      canUserUpdateEmail={canUserUpdateEmail}
+                      canUserUpdatePassword={canUserUpdatePassword}
+                      newEmail={newEmail}
+                      newPassword={newPassword}
+                      confirmNewPassword={confirmNewPassword}
+                      downloadEventLogCsvFile={downloadEventLogCsvFile}
+                      backToTopOfPage={backToTopOfPage}
+                      requestShowUpdateBackgroundPictureModal={requestShowUpdateBackgroundPictureModal}
+                      requestShowUpdateProfilePictureModal={requestShowUpdateProfilePictureModal}
+                      saveThemeForUser={saveThemeForUser}
+                      roles={roles}
+                      disableThemeToggleButton={disableThemeToggleButton}
+                      currentTheme={currentTheme}
+                      resetInputFields={resetInputFields}
+                      disableUpdateEmailButton={disableUpdateEmailButton}
+                      disableUpdateDisplayNameButton={disableUpdateDisplayNameButton}
+                    />
                   </Container>
                   <UpdateBackgroundPictureModal
                     requestShowUpdateBackgroundPictureModal={requestShowUpdateBackgroundPictureModal}
@@ -125,11 +110,6 @@ const Account = props => {
                   <UpdateProfilePictureSuccessModal
                     showUpdateProfilePictureSuccessModal={showUpdateProfilePictureSuccessModal}
                     requestHideUpdateProfilePictureSuccessModal={requestHideUpdateProfilePictureSuccessModal}
-                    currentTheme={currentTheme}
-                  />
-                  <UpdateDisplayNameSuccessModal
-                    showUpdateDisplayNameSuccessModal={showUpdateDisplayNameSuccessModal}
-                    requestHideUpdateDisplayNameSuccessModal={requestHideUpdateDisplayNameSuccessModal}
                     currentTheme={currentTheme}
                   />
                 </>

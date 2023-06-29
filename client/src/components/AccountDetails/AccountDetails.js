@@ -9,7 +9,6 @@ const AccountDetails = props => {
   const {
     handleChange,
     currentTheme,
-    unableToLoadDatabase,
     backToTopOfPage,
     profilePicture,
     displayName,
@@ -35,7 +34,7 @@ const AccountDetails = props => {
     disableUpdateDisplayNameButton,
     updateDisplayName
   } = props;
-  
+
   return (
     <div id="accountPage" className={`mt-3 box ${currentTheme.background}`}>
       <div className="row text-center">
@@ -103,79 +102,69 @@ const AccountDetails = props => {
         <div className="col-md-4"></div>
       </div>
       <hr className={currentTheme.hr} />
-      {
-        unableToLoadDatabase ?
-          (
-            null
-          ) :
-          (
-            <>
-              <div className="removeMobileDisplay">
-                <div className="row">
-                  <div className="col-md-4"><label><strong>Event Logs:</strong></label></div>
-                  <div className="col-md-4">
-                    <div className="row">
-                      <div className="col-md-6">
-                        <div className="text-left">
-                          <button
-                            id="downloadEventLogsButton"
-                            title="Download Event Logs"
-                            type="button"
-                            onClick={downloadEventLogCsvFile}>
-                            Download
-                          </button>
-                        </div>
-                      </div>
-                      <div className="col-md-6"></div>
-                    </div>
-                  </div>
-                  <div className="col-md-4"></div>
+      <div className="removeMobileDisplay">
+        <div className="row">
+          <div className="col-md-4"><label><strong>Event Logs:</strong></label></div>
+          <div className="col-md-4">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="text-left">
+                  <button
+                    id="downloadEventLogsButton"
+                    title="Download Event Logs"
+                    type="button"
+                    onClick={downloadEventLogCsvFile}>
+                    Download
+                  </button>
                 </div>
-                <hr className={currentTheme.hr} />
               </div>
-              <ThemeSelection
-                saveThemeForUser={saveThemeForUser}
-                disableThemeToggleButton={disableThemeToggleButton}
-                currentTheme={currentTheme}
-              />
-              <hr className={currentTheme.hr} />
-              <form className="row">
-                <div className="col-md-4 bottomMarginMobileDisplay">
-                  <label htmlFor={defaults.newBackgroundPictureInput}><strong>Update Background Picture:</strong></label>
-                </div>
-                <div className="col-md-4">
-                  <input
-                    id={defaults.newBackgroundPictureInput}
-                    type="text"
-                    onChange={handleChange}
-                    value={newBackgroundPicture}
-                    name="newBackgroundPicture"
-                    maxLength="500"
-                    placeholder="Insert photo URL"
-                  />
-                </div>
-                <br /><br />
-                <div className="col-md-4">
-                  <button
-                    id="submitNewBackgroundPictureButton"
-                    title="Update Background Picture"
-                    type="submit"
-                    onClick={requestShowUpdateBackgroundPictureModal}>
-                    Save
-                  </button>
-                  <button
-                    id="resetNewBackgroundPictureButton"
-                    title="Reset Input Field"
-                    onClick={event => resetInputFields(event, defaults.newBackgroundPictureInput)}>
-                    Reset
-                  </button>
-                </div>
-              </form>
-              <br />
-            </>
-          )
-      }
-      <form className="row">
+              <div className="col-md-6"></div>
+            </div>
+          </div>
+          <div className="col-md-4"></div>
+        </div>
+        <hr className={currentTheme.hr} />
+      </div>
+      <ThemeSelection
+        saveThemeForUser={saveThemeForUser}
+        disableThemeToggleButton={disableThemeToggleButton}
+        currentTheme={currentTheme}
+      />
+      <hr className={currentTheme.hr} />
+      <form id="newBackgroundPictureInputForm" className="row">
+        <div className="col-md-4 bottomMarginMobileDisplay">
+          <label htmlFor={defaults.newBackgroundPictureInput}><strong>Update Background Picture:</strong></label>
+        </div>
+        <div className="col-md-4">
+          <input
+            id={defaults.newBackgroundPictureInput}
+            type="text"
+            onChange={handleChange}
+            value={newBackgroundPicture}
+            name="newBackgroundPicture"
+            maxLength="500"
+            placeholder="Insert photo URL"
+          />
+        </div>
+        <br /><br />
+        <div className="col-md-4">
+          <button
+            id="submitNewBackgroundPictureButton"
+            title="Update Background Picture"
+            type="submit"
+            onClick={requestShowUpdateBackgroundPictureModal}>
+            Save
+          </button>
+          <button
+            id="resetNewBackgroundPictureButton"
+            title="Reset Input Field"
+            onClick={event => resetInputFields(event, defaults.newBackgroundPictureInput)}>
+            Reset
+          </button>
+        </div>
+      </form>
+      <br />
+      <form id="newProfilePictureInputForm" className="row">
         <div className="col-md-4 bottomMarginMobileDisplay">
           <label htmlFor={defaults.newProfilePictureInput}><strong>Update Profile Picture:</strong></label>
         </div>
@@ -207,7 +196,7 @@ const AccountDetails = props => {
         </div>
       </form>
       <br />
-      <form className="row">
+      <form id="newDisplayNameInputForm" className="row">
         <div className="col-md-4 bottomMarginMobileDisplay">
           <label htmlFor={defaults.newDisplayNameInput}><strong>Update Display Name:</strong></label>
         </div>
@@ -267,7 +256,6 @@ const AccountDetails = props => {
           newPassword={newPassword}
           confirmNewPassword={confirmNewPassword}
           disableUpdateEmailButton={disableUpdateEmailButton}
-          unableToLoadDatabase={unableToLoadDatabase}
         />
       </div>
       <hr className={currentTheme.hr} />

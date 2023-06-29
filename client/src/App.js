@@ -53,13 +53,11 @@ export default class App extends Component {
       userAccountCreationTime: "",
       userAccountLastSignIn: "",
       roles: "",
-      unableToLoadDatabase: "",
       pageLoaded: false,
       showSignInModal: false,
       showSignUpModal: false,
       showSignOutModal: false,
       showForgotPasswordModal: false,
-      showUpdateDisplayNameSuccessModal: false,
       showUpdateBackgroundPictureModal: false,
       showUpdateProfilePictureModal: false,
       showUpdateProfilePictureSuccessModal: false,
@@ -81,19 +79,19 @@ export default class App extends Component {
   };
 
   /**
-   * Check if the user is logged in
-   */
-  componentDidMount = () => {
-    Modal.setAppElement("body");
-    this.onAuthStateChanged();
-  };
-
-  /**
    * Handle real-time changes
    */
   handleChange = e => {
     let { name, value } = e.target;
     this.setState({ [name]: value });
+  };
+
+  /**
+   * Check if the user is logged in
+   */
+  componentDidMount = () => {
+    Modal.setAppElement("body");
+    this.onAuthStateChanged();
   };
 
   /**
@@ -305,6 +303,7 @@ export default class App extends Component {
       document.body.style.backgroundImage = "url(" + this.state.backgroundPicture + ")";
       this.setState({ pageLoaded: true });
     } else {
+      document.body.style.backgroundImage = "";
       document.body.style.backgroundColor = theme.backgroundColor;
       this.setState({ pageLoaded: true });
     }
@@ -421,10 +420,10 @@ export default class App extends Component {
   };
 
   /**
- * Add the vehicle for the user
- * 
- * @param newVehicle the vehicle data to record
- */
+   * Add the vehicle for the user
+   * 
+   * @param newVehicle the vehicle data to record
+   */
   handleAddOneVehicle = newVehicle => {
     const creatorId = this.state.user._delegate.uid;
     const email = this.state.user._delegate.email;
@@ -453,9 +452,7 @@ export default class App extends Component {
   getVehicleCount = creatorId => {
     userApi.getVehicleCount(creatorId)
       .then(vehicleCount => this.setState({ vehicleCount: vehicleCount.data[0].total }))
-      .catch(error => {
-        this.errorNotification(error);
-      });
+      .catch(error => this.errorNotification(error));
   };
 
   /**
@@ -466,9 +463,7 @@ export default class App extends Component {
   getUserRoles = creatorId => {
     userApi.getRoles(creatorId)
       .then(roles => this.setState({ roles: roles.data[0].roles }))
-      .catch(error => {
-        this.errorNotification(error);
-      });
+      .catch(error => this.errorNotification(error));
   };
 
   /**
@@ -486,7 +481,7 @@ export default class App extends Component {
         .then(() => {
           eventLogHandler.successful(creatorId, email, event);
           this.setState({ disableThemeToggleButton: false });
-          this.getUserDataForAccountPage();
+          this.getUserInfoPartial(creatorId);
         })
         .catch(err => {
           eventLogHandler.failure(creatorId, email, event, err);
@@ -510,11 +505,12 @@ export default class App extends Component {
     userApi.updateUserBackgroundPicture(creatorId, newBackgroundPicture)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
-        this.getUserDataForAccountPage();
+        this.getUserInfoPartial(this.state.creatorId);
         this.setState({
           showUpdateBackgroundPictureModal: false,
           newBackgroundPicture: ""
         });
+        document.getElementById(defaults.newBackgroundPictureInput).value = "";
       })
       .catch(error => {
         eventLogHandler.failure(creatorId, email, event, error);
@@ -540,13 +536,20 @@ export default class App extends Component {
       user.updateProfile({ photoURL: newProfilePicture })
         .then(() => {
           eventLogHandler.successful(creatorId, email, event);
-          // this.setState({ showUpdateProfilePictureModal: false });
-          // this.requestShowUpdateProfilePictureSuccessModal();
-          this.reloadPage();
+          this.getUserInfoPartial(this.state.creatorId);
+          this.setState({
+            showUpdateProfilePictureModal: false,
+            disableUpdateProfilePictureButton: false,
+            newProfilePicture: ""
+          });
+          document.getElementById(defaults.newProfilePictureInput).value = "";
         })
         .catch(error => {
           eventLogHandler.failure(creatorId, email, event, error);
-          this.setState({ showUpdateProfilePictureModal: false });
+          this.setState({
+            showUpdateProfilePictureModal: false,
+            disableUpdateProfilePictureButton: false
+          });
           this.errorNotification(error);
         });
     }
@@ -576,10 +579,14 @@ export default class App extends Component {
             .then(() => {
               user.updateProfile({ displayName: newDisplayName })
                 .then(() => {
-                  this.setState({ newDisplayName: "" });
                   eventLogHandler.successful(creatorId, email, event);
-                  // this.requestShowUpdateDisplayNameSuccessModal();
-                  this.reloadPage();
+                  this.successNotification(defaults.displayNameUpdatedSuccessfully);
+                  this.getUserInfoPartial(this.state.creatorId);
+                  this.setState({
+                    disableUpdateDisplayNameButton: false,
+                    newDisplayName: ""
+                  });
+                  document.getElementById(defaults.newDisplayNameInput).value = "";
                 })
                 .catch(error => {
                   eventLogHandler.failure(creatorId, email, event, error);
@@ -632,7 +639,7 @@ export default class App extends Component {
           }
         }
       })
-      .catch(err => this.errorNotification(err));
+      .catch(error => this.errorNotification(error));
   };
 
   /**
@@ -691,19 +698,22 @@ export default class App extends Component {
     this.setState({ disableUpdateEmailButton: true });
     this.state.user.updateEmail(newEmail)
       .then(() => {
-        this.setState({ pleaseWait: true });
         userApi.updateEmail(creatorId, newEmail)
           .then(() => {
             eventLogHandler.successful(creatorId, initialEmail, updateEmailEvent);
-            this.reloadPage();
+            this.successNotification(defaults.emailUpdatedSuccessfully);
+            this.setState({
+              newEmail: "",
+              disableUpdateEmailButton: false
+            })
+            this.onAuthStateChanged();
           })
           .catch(error => {
             eventLogHandler.failure(creatorId, initialEmail, updateEmailEvent, error);
             this.errorNotification(error);
             this.setState({
               newEmail: "",
-              disableUpdateEmailButton: false,
-              pleaseWait: false
+              disableUpdateEmailButton: false
             });
           });
       })
@@ -712,8 +722,7 @@ export default class App extends Component {
         this.warningNotification(error);
         this.setState({
           newEmail: "",
-          disableUpdateEmailButton: false,
-          pleaseWait: false
+          disableUpdateEmailButton: false
         });
       });
   };
@@ -816,13 +825,6 @@ export default class App extends Component {
   };
 
   /**
-   * Hide the update display name success modal
-   */
-  requestHideUpdateDisplayNameSuccessModal = () => {
-    window.location = "/";
-  };
-
-  /**
  * Display the modal to notify the user the vehicle year must be a number
  */
   requestShowAddVehicleYearNanErrorModal = () => {
@@ -834,13 +836,6 @@ export default class App extends Component {
    */
   requestHideAddVehicleYearNanErrorModal = () => {
     this.setState({ showAddVehicleYearNanErrorModal: false });
-  };
-
-  /**
-   * Display the success modal after updating display name
-   */
-  requestShowUpdateDisplayNameSuccessModal = () => {
-    this.setState({ showUpdateDisplayNameSuccessModal: true });
   };
 
   /**
@@ -1039,7 +1034,6 @@ export default class App extends Component {
                         showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
                         requestShowAddVehicleYearNanErrorModal={this.requestShowAddVehicleYearNanErrorModal}
                         requestHideAddVehicleYearNanErrorModal={this.requestHideAddVehicleYearNanErrorModal}
-
                       />
                     ) :
                     (
@@ -1048,7 +1042,16 @@ export default class App extends Component {
                 }
               />
             }
-            <Route path="/vehicle/:vehicleId" element={<Log />} />
+            <Route
+              path="/vehicle/:vehicleId"
+              element={
+                <Log
+                  getUserInfoPartial={this.getUserInfoPartial}
+                  getVehicleCount={this.getVehicleCount}
+                  checkIfStringIsBlank={this.checkIfStringIsBlank}
+                />
+              }
+            />
             <Route path="/forum" element={<Forum />} />
             <Route path="/thread/:threadId" element={<Thread />} />
             <Route
@@ -1058,7 +1061,6 @@ export default class App extends Component {
                   handleChange={this.handleChange}
                   loggedin={this.state.loggedin}
                   pageLoaded={this.state.pageLoaded}
-                  pleaseWait={this.state.pleaseWait}
                   currentTheme={this.state.currentTheme}
                   profilePicture={this.state.profilePicture}
                   email={this.state.email}
@@ -1084,7 +1086,6 @@ export default class App extends Component {
                   roles={this.state.roles}
                   disableThemeToggleButton={this.state.disableThemeToggleButton}
                   disableUpdateProfilePictureButton={this.state.disableUpdateProfilePictureButton}
-                  unableToLoadDatabase={this.state.unableToLoadDatabase}
                   resetInputFields={this.resetInputFields}
                   disableUpdateEmailButton={this.state.disableUpdateEmailButton}
                   disableUpdateDisplayNameButton={this.state.disableUpdateDisplayNameButton}
@@ -1096,13 +1097,17 @@ export default class App extends Component {
                   updateProfilePicture={this.updateProfilePicture}
                   showUpdateProfilePictureSuccessModal={this.state.showUpdateProfilePictureSuccessModal}
                   requestHideUpdateProfilePictureSuccessModal={this.requestHideUpdateProfilePictureSuccessModal}
-                  hideUpdateProfilePictureModal={this.hideUpdateProfilePictureModal}
-                  showUpdateDisplayNameSuccessModal={this.state.showUpdateDisplayNameSuccessModal}
-                  requestHideUpdateDisplayNameSuccessModal={this.requestHideUpdateDisplayNameSuccessModal}
                 />
               }
             />
-            <Route path="/about" element={<About />} />
+            <Route
+              path="/about"
+              element={
+                <About
+                  currentTheme={this.state.currentTheme}
+                />
+              }
+            />
             <Route path="/updates" element={<Updates />} />
             <Route element={<NoMatch />} />
           </Routes>

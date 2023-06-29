@@ -24,7 +24,7 @@ const showUpdateBackgroundPictureModal = props => {
                                         </strong>
                                     </div>
                                 ) : (
-                                    <React.Fragment>
+                                    <>
                                         <div className="row modal-header">
                                             <strong className="col-md-12 text-center">
                                                 <label>Use this image as your background picture?</label>
@@ -39,7 +39,7 @@ const showUpdateBackgroundPictureModal = props => {
                                                 </img>
                                             </div>
                                         </div>
-                                    </React.Fragment>
+                                    </>
                                 )
                         }
                         <div className="modal-footer">

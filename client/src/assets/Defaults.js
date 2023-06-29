@@ -47,6 +47,7 @@ export const defaults = {
     inputFieldsReset: "Input fields reset.",
     inputFieldReset: "Input field reset.",
     emailBlankError: "Email cannot be blank.",
+    emailUpdatedSuccessfully: "Email updated successfully.",
     passwordBlankError: "Password cannot be blank.",
     adminRole: "Administrator",
     userRole: "User",
@@ -62,6 +63,7 @@ export const defaults = {
     updatedFutureDateServiceLog: "is a future date. Proceed with this entry?",
     displayNameLengthNotMet: "Display name must be 6 characters or more.",
     displayNameAlreadyExists: "Display name already in use.",
+    displayNameUpdatedSuccessfully: "Display name updated successfully.",
     deleteVehicleWarning: "You are about to delete this vehicle and any service logs associated with it. " +
         "Are you sure you want to continue?",
     noSortResults: "No Results for Sort Criteria",
