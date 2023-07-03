@@ -6,14 +6,13 @@ import forumApi from "../../utils/forumApi";
 import eventLogHandler from "../../utils/EventLogHandler/eventLogHandler";
 import Loading from "../../components/Loading";
 import { firebase } from "../../firebase"
-import { toast } from "react-toastify";
 import { defaults } from "../../assets/Defaults";
 import { events } from "../../assets/Events";
 import { themes } from "../../themes/Themes";
 
 export default class Forum extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       loggedin: false,
       pageLoaded: false,
@@ -86,25 +85,8 @@ export default class Forum extends Component {
           disableSortThreadsButton: false,
           loadingSortedThreads: false
         });
-        this.errorNotification(err);
+        this.props.errorNotification(err);
       });
-  };
-
-  /**
-   * Scroll to the top of the page
-   */
-  backToTopOfPage = () => {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  };
-
-  /**
-   * Check if the user input value is blank
-   * 
-   * @param string the user input to check against
-   */
-  checkIfStringIsBlank = string => {
-    return (!string || /^\s*$/.test(string));
   };
 
   /**
@@ -120,7 +102,7 @@ export default class Forum extends Component {
         }, () => this.getUserInfoPartial());
       })
       .catch(err => {
-        this.errorNotification(err);
+        this.props.errorNotification(err);
         this.getUserInfoPartial();
       });
   };
@@ -154,13 +136,13 @@ export default class Forum extends Component {
               if (this.state.refreshCounter < 10) {
                 this.getUserInfoPartial();
               } else {
-                this.errorNotification(err);
+                this.props.errorNotification(err);
                 this.setState({ pageLoaded: true });
               }
             }
           })
           .catch(err => {
-            this.errorNotification(err);
+            this.props.errorNotification(err);
             this.setState({ pageLoaded: true });
           });
       } else {
@@ -180,10 +162,10 @@ export default class Forum extends Component {
           if (
             this.state.threadTitle === "" ||
             this.state.threadDescription === "" ||
-            this.checkIfStringIsBlank(this.state.threadTitle) ||
-            this.checkIfStringIsBlank(this.state.threadDescription)
+            this.props.checkIfStringIsBlank(this.state.threadTitle) ||
+            this.props.checkIfStringIsBlank(this.state.threadDescription)
           ) {
-            this.errorNotification(defaults.threadDetailsCannotBeBlank);
+            this.props.warningNotification(defaults.threadDetailsCannotBeBlank);
           } else {
             let element = document.getElementById(defaults.threadCategoryDropdown);
             this.handleAddOneThread(element.options[element.selectedIndex].value);
@@ -193,7 +175,7 @@ export default class Forum extends Component {
           window.location = "/";
         }
       })
-      .catch(err => this.errorNotification(err));
+      .catch(err => this.props.errorNotification(err));
   };
 
   /**
@@ -228,14 +210,14 @@ export default class Forum extends Component {
         }, () => {
           eventLogHandler.successful(creatorId, email, event);
           localStorage.removeItem(this.SELECTED_SORT_ORDER);
-          this.successNotification(defaults.addThreadSuccessfully);
+          this.props.successNotification(defaults.addThreadSuccessfully);
           this.getAllThreads(this.state.defaultSortOrder);
         });
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
         this.setState({ disableSubmitNewThreadButton: false });
-        this.errorNotification(err);
+        this.props.errorNotification(err);
       });
   };
 
@@ -253,27 +235,9 @@ export default class Forum extends Component {
     }
   };
 
-  /**
-   * Display the success notification when the user performs an action successfully
-   * 
-   * @param message the message to display to the user
-   */
-  successNotification = message => {
-    toast.success(message);
-  };
-
-  /**
-   * Display the error notification when an error occurs while loading data from the database
-   * 
-   * @param err the error message to display to the user
-   */
-  errorNotification = err => {
-    toast.error(err.toString());
-  };
-
   render() {
     return (
-      <React.Fragment>
+      <>
         {
           this.state.pageLoaded ?
             (
@@ -287,7 +251,7 @@ export default class Forum extends Component {
                   threadDescription={this.state.threadDescription}
                   allThreads={this.state.allThreads}
                   disableSubmitNewThreadButton={this.state.disableSubmitNewThreadButton}
-                  backToTopOfPage={this.backToTopOfPage}
+                  backToTopOfPage={this.props.backToTopOfPage}
                   noSortResults={this.state.noSortResults}
                   defaultSortOrder={this.state.defaultSortOrder}
                   disableSortThreadsButton={this.state.disableSortThreadsButton}
@@ -301,7 +265,7 @@ export default class Forum extends Component {
               <Loading />
             )
         }
-      </React.Fragment>
+      </>
     );
   };
 };
