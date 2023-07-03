@@ -21,8 +21,7 @@ const ForumDetails = props => {
     defaultSortOrder,
     noSortResults,
     disableSortThreadsButton,
-    renderSortedThreads,
-    displayName
+    renderSortedThreads
   } = props;
 
   return (
@@ -44,7 +43,7 @@ const ForumDetails = props => {
       {
         loggedin ?
           (
-            <React.Fragment>
+            <>
               <AddThread
                 handleChange={handleChange}
                 validateThreadInputValues={validateThreadInputValues}
@@ -59,7 +58,7 @@ const ForumDetails = props => {
                   <></>}
                 {loadingSortedThreads ? <Loading /> : null}
               </div>
-            </React.Fragment>
+            </>
           ) :
           (
             <div className="text-center">

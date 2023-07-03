@@ -1246,14 +1246,34 @@ export default class App extends Component {
                 getUserInfoPartial={this.getUserInfoPartial}
                 getVehicleCount={this.getVehicleCount}
                 checkIfStringIsBlank={this.checkIfStringIsBlank}
-                backToTopOfPage={this.backToTopOfPage}
                 successNotification={this.successNotification}
+                errorNotification={this.errorNotification}
+                backToTopOfPage={this.backToTopOfPage}
+              />
+            }
+          />
+          <Route
+            path="/forum"
+            element={
+              <Forum
+                checkIfStringIsBlank={this.checkIfStringIsBlank}
+                successNotification={this.successNotification}
+                warningNotification={this.warningNotification}
+                errorNotification={this.errorNotification}
+                backToTopOfPage={this.backToTopOfPage}
+              />
+            }
+          />
+          <Route
+            path="/thread/:threadId"
+            element={
+              <Thread
+                successNotification={this.successNotification}
+                warningNotification={this.warningNotification}
                 errorNotification={this.errorNotification}
               />
             }
           />
-          <Route path="/forum" element={<Forum />} />
-          <Route path="/thread/:threadId" element={<Thread />} />
           <Route
             path="/account"
             element={

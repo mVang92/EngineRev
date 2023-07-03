@@ -5,7 +5,6 @@ import forumApi from "../../utils/forumApi";
 import Loading from "../../components/Loading";
 import ThreadDetails from "../../components/ThreadDetails";
 import { firebase } from "../../firebase"
-import { toast } from "react-toastify";
 import { defaults } from "../../assets/Defaults";
 import { themes } from "../../themes/Themes";
 import { events } from "../../assets/Events";
@@ -17,9 +16,8 @@ import UpdateThreadDetailsSuccessModal from "../../components/Modal/UpdateThread
 
 export default class Thread extends Component {
   constructor(props) {
-    super()
+    super(props)
     this.state = {
-      props: props,
       uniqueCreatorId: "",
       commentId: "",
       email: "",
@@ -131,12 +129,12 @@ export default class Thread extends Component {
                 this.renderTheme(themes.determineTheme(this.state.theme, this.state.backgroundPicture));
               });
             } catch (err) {
-              this.errorNotification(err);
+              this.props.errorNotification(err);
               this.setState({ pageLoaded: true });
             }
           })
           .catch(err => {
-            this.errorNotification(err);
+            this.props.errorNotification(err);
             this.setState({ pageLoaded: true });
           });
       } else {
@@ -163,7 +161,7 @@ export default class Thread extends Component {
           () => this.getUserInfoPartial());
       })
       .catch(err => {
-        this.errorNotification(err);
+        this.props.errorNotification(err);
         this.setState({ pageLoaded: true });
       });
   };
@@ -191,7 +189,7 @@ export default class Thread extends Component {
         },
           () => {
             eventLogHandler.successful(creatorId, email, event);
-            this.successNotification(defaults.addThreadCommentSucess);
+            this.props.successNotification(defaults.addThreadCommentSucess);
             this.getThreadData();
             let element = document.getElementById(defaults.commentsSection);
             element.scrollIntoView();
@@ -199,7 +197,7 @@ export default class Thread extends Component {
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
-        this.errorNotification(err);
+        this.props.errorNotification(err);
         this.setState({ disableSubmitCommentOnThreadButton: false });
       });
   };
@@ -227,7 +225,7 @@ export default class Thread extends Component {
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
         this.setState({ disableSaveEditThreadButton: false });
-        this.errorNotification(err);
+        this.props.errorNotification(err);
       });
   };
 
@@ -259,7 +257,7 @@ export default class Thread extends Component {
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
-        this.errorNotification(err);
+        this.props.errorNotification(err);
       });
   };
 
@@ -286,7 +284,7 @@ export default class Thread extends Component {
           disableDownVoteButton: false
         }, () => {
           eventLogHandler.failure(creatorId, email, event, err);
-          this.errorNotification(err);
+          this.props.errorNotification(err);
         });
       });
   };
@@ -314,7 +312,7 @@ export default class Thread extends Component {
           disableDownVoteButton: false
         }, () => {
           eventLogHandler.failure(creatorId, email, event, err);
-          this.errorNotification(err);
+          this.props.errorNotification(err);
         });
       });
   };
@@ -343,14 +341,14 @@ export default class Thread extends Component {
     forumApi.handleDeleteThreadComment(this.state.threadId, this.state.commentId)
       .then(() => {
         eventLogHandler.successful(creatorId, email, event);
-        this.successNotification(defaults.deleteThreadCommentSucess)
+        this.props.successNotification(defaults.deleteThreadCommentSucess)
         this.hideDeleteThreadCommentModal();
         this.getThreadData();
       })
       .catch(err => {
         eventLogHandler.failure(creatorId, email, event, err);
         this.hideDeleteThreadCommentModal();
-        this.errorNotification(err);
+        this.props.errorNotification(err);
       });
   };
 
@@ -375,14 +373,14 @@ export default class Thread extends Component {
       },
         () => {
           eventLogHandler.successful(creatorId, email, event);
-          this.successNotification(defaults.updateThreadCommentSucess);
+          this.props.successNotification(defaults.updateThreadCommentSucess);
           this.hideEditOneThreadCommentModal();
           this.getThreadData();
         });
     }).catch(err => {
       eventLogHandler.failure(creatorId, email, event, err);
       this.setState({ disableConfirmSaveEditThreadCommentButton: false });
-      this.errorNotification(err);
+      this.props.errorNotification(err);
     });
   };
 
@@ -397,7 +395,7 @@ export default class Thread extends Component {
         if (res.data.creator === this.state.uniqueCreatorId) {
           if (this.state.threadComment === "" || this.checkIfStringIsBlank(this.state.threadComment)) {
             this.setState({ disableSubmitCommentOnThreadButton: false });
-            this.warningNotification(defaults.threadCommentsCannotBeBlank);
+            this.props.warningNotification(defaults.threadCommentsCannotBeBlank);
           } else {
             this.addOneCommentToThread();
           }
@@ -407,7 +405,7 @@ export default class Thread extends Component {
       })
       .catch(err => {
         this.setState({ disableSubmitCommentOnThreadButton: false });
-        this.errorNotification(err);
+        this.props.errorNotification(err);
       });
   };
 
@@ -425,7 +423,7 @@ export default class Thread extends Component {
         threadTitle: this.state.threadTitleBackup,
         threadDescription: this.state.threadDescriptionBackup
       });
-      this.warningNotification(defaults.threadDetailsCannotBeBlank);
+      this.props.warningNotification(defaults.threadDetailsCannotBeBlank);
     } else {
       let element = document.getElementById(defaults.threadCategoryDropdown);
       let threadCategory = element.options[element.selectedIndex].value;
@@ -440,7 +438,7 @@ export default class Thread extends Component {
         })
         .catch(err => {
           this.setState({ disableSaveEditThreadButton: false });
-          this.errorNotification(err);
+          this.props.errorNotification(err);
         });
     }
   };
@@ -462,7 +460,7 @@ export default class Thread extends Component {
             userApi.getVotedComments(this.uniqueCreatorId)
               .then(res => {
                 if (res.data[0].votedComments.includes(commentId)) {
-                  this.warningNotification(defaults.alreadyVotedOnComment);
+                  this.props.warningNotification(defaults.alreadyVotedOnComment);
                   this.setState({
                     disableUpVoteButton: false,
                     disableDownVoteButton: false
@@ -482,7 +480,7 @@ export default class Thread extends Component {
         this.setState({
           disableUpVoteButton: false,
           disableDownVoteButton: false
-        }, () => this.errorNotification(err));
+        }, () => this.props.errorNotification(err));
       });
   };
 
@@ -503,7 +501,7 @@ export default class Thread extends Component {
             userApi.getVotedComments(this.uniqueCreatorId)
               .then(res => {
                 if (res.data[0].votedComments.includes(commentId)) {
-                  this.warningNotification(defaults.alreadyVotedOnComment);
+                  this.props.warningNotification(defaults.alreadyVotedOnComment);
                   this.setState({
                     disableUpVoteButton: false,
                     disableDownVoteButton: false
@@ -524,7 +522,7 @@ export default class Thread extends Component {
           disableUpVoteButton: false,
           disableDownVoteButton: false
         });
-        this.errorNotification(err);
+        this.props.errorNotification(err);
       });
   };
 
@@ -671,36 +669,9 @@ export default class Thread extends Component {
     this.setState({ showEditOneThreadCommentModal: false });
   };
 
-  /**
-   * Display the success notification when the user performs an action successfully
-   * 
-   * @param message the message to display to the user
-   */
-  successNotification = message => {
-    toast.success(message);
-  };
-
-  /**
-   * Display the error notification when an error occurs while loading data from the database
-   * 
-   * @param err the error message to display to the user
-   */
-  errorNotification = err => {
-    toast.error(err.toString());
-  };
-
-  /**
-   * Display the warning notification when a warning occurs
-   * 
-   * @param err the error message to display to the user
-   */
-  warningNotification = err => {
-    toast.warn(err.toString());
-  };
-
   render() {
     return (
-      <React.Fragment>
+      <>
         {
           this.state.pageLoaded ?
             (
@@ -767,7 +738,7 @@ export default class Thread extends Component {
           hideUpdateThreadDetailsSuccessModal={this.hideUpdateThreadDetailsSuccessModal}
           currentTheme={this.state.currentTheme}
         />
-      </React.Fragment>
+      </>
     );
   };
 };
