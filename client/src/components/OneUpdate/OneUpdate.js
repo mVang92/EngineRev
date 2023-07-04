@@ -41,12 +41,12 @@ const OneUpdate = props => {
         </div>
         <hr className="oneUpdateHr" />
         <div className="row">
-          <div className="col-md-3"><label><strong>Updates:</strong></label></div>
+          <div className="col-md-3 releaseNoteCredentials"><label><strong>Updates:</strong></label></div>
           <div className="col-md-9 breakWord">{updateChanges}</div>
         </div>
         <hr className="oneUpdateHr" />
         <div className="row">
-          <div className="col-md-3"><label><strong>Known Issues:</strong></label></div>
+          <div className="col-md-3 releaseNoteCredentials"><label><strong>Known Issues:</strong></label></div>
           <div className="col-md-9 breakWord">{knownIssues}</div>
         </div>
       </div>

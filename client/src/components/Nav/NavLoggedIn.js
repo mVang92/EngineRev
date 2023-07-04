@@ -8,7 +8,7 @@ export const NavLoggedIn = props => {
     } = props;
 
     return (
-        <React.Fragment>
+        <>
             <div className="navbar row">
                 <div className="col-md-2 noWidthMobileDisplay">
                     <Link to={{ pathname: "/" }}><span id="applicationName" className="navbar-brand">EngineRev</span></Link>
@@ -83,6 +83,6 @@ export const NavLoggedIn = props => {
                     </div>
                 </div>
             </div>
-        </React.Fragment>
+        </>
     );
 };

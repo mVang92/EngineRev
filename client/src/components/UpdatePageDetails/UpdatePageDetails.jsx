@@ -35,7 +35,7 @@ const UpdatePageDetails = props => {
         <div className="container">
             <div id="updatesContainer" className={currentTheme.background}>
                 <div id="pageTitle"></div>
-                <h4 className="text-center"><label>Release Notes and Updates</label></h4>
+                <h4 className="text-center"><label>Release Notes</label></h4>
                 <hr className={currentTheme.hr} />
                 <BackToHomeButtonRow />
                 <hr className={currentTheme.hr} />
