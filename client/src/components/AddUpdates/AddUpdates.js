@@ -10,7 +10,7 @@ const AddUpdates = props => {
   } = props;
 
   return (
-    <React.Fragment>
+    <>
       <form onSubmit={addOneUpdate}>
         <div className="row">
           <div className="col-md-6">
@@ -53,7 +53,7 @@ const AddUpdates = props => {
         </div>
       </form>
       <hr className={currentTheme.hr} />
-    </React.Fragment>
+    </>
   );
 };
 

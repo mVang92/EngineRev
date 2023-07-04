@@ -4,7 +4,7 @@ import { defaults } from "../../assets/Defaults";
 
 const NoAuthorization = () => {
   return (
-    <React.Fragment>
+    <>
       <div id="noAuthorization" className="text-center text-danger mt-3 section">
         <label><h3>{defaults.noAuthorizationToViewPage}</h3></label>
         <hr />
@@ -18,7 +18,7 @@ const NoAuthorization = () => {
           <div className="col-md-4"></div>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

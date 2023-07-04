@@ -20,7 +20,7 @@ const OneUpdate = props => {
     <React.Fragment key={_id}>
       <div className={`fadeIn releaseNote ${currentTheme.oneUpdate}`}>
         <div className="row">
-          <div className="col-md-3"><label><strong>Date:</strong></label></div>
+          <div className="col-md-3 releaseNoteCredentials"><label><strong>Date:</strong></label></div>
           <div className="col-md-6"><label>{formattedDate}</label></div>
           <div className="col-md-3 alignRightButtonsDesktopDisplay alignLeftButtonsMobileDisplay">
             {
@@ -41,12 +41,12 @@ const OneUpdate = props => {
         </div>
         <hr className="oneUpdateHr" />
         <div className="row">
-          <div className="col-md-3"><label><strong>Updates:</strong></label></div>
+          <div className="col-md-3 releaseNoteCredentials"><label><strong>Updates:</strong></label></div>
           <div className="col-md-9 breakWord">{updateChanges}</div>
         </div>
         <hr className="oneUpdateHr" />
         <div className="row">
-          <div className="col-md-3"><label><strong>Known Issues:</strong></label></div>
+          <div className="col-md-3 releaseNoteCredentials"><label><strong>Known Issues:</strong></label></div>
           <div className="col-md-9 breakWord">{knownIssues}</div>
         </div>
       </div>
