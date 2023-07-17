@@ -196,8 +196,6 @@ const ThreadDetails = props => {
                         uniqueCreatorId={uniqueCreatorId}
                         loggedin={loggedin}
                         date={threadComment.date}
-                        threadCommentEmail={threadComment.email}
-                        userEmail={email}
                         displayName={threadComment.displayName}
                         comment={threadComment.comment}
                         votes={threadComment.votes}
