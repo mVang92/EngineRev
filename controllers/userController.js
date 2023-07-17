@@ -33,7 +33,7 @@ module.exports = {
   },
 
   /**
-   * Find all vehicles belonging to one user
+   * Get the user creatorId, background picture, displayName, and theme
    */
   getUserInfoPartial: (req, res) => {
     db.Users
@@ -46,9 +46,9 @@ module.exports = {
   },
 
   /**
-   * Find one vehicle belonging to one user
+   * Get one vehicle belonging to one user
    */
-  findOneVehicleForUser: (req, res) => {
+  getOneVehicleForUser: (req, res) => {
     db.Users
       .aggregate([
         { $match: { creator: req.params.creatorId } },

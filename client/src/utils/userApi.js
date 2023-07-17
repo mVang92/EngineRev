@@ -20,12 +20,12 @@ export default {
     return axios.get(`/api/users/${creatorId}/${vehicleId}/vehicle`);
   },
   // Retrieve all information for the targeted user
-  getUserInfoPartial: id => {
-    return axios.get(`/api/users/${id}/user`);
+  getUserInfoPartial: creatorId => {
+    return axios.get(`/api/users/${creatorId}/user`);
   },
   // Add a new vehicle
-  addOneVehicle: (id, data) => {
-    return axios.put(`/api/users/${id}/addVehicle`, data);
+  addOneVehicle: (creatorId, data) => {
+    return axios.put(`/api/users/${creatorId}/addVehicle`, data);
   },
   // Add a service log for one vehicle
   addOneLogForOneVehicle: (creatorId, vehicleId, log) => {
@@ -61,8 +61,8 @@ export default {
   },
   // Delete one user account
   // Will have to decide where to put this function in the app
-  deleteOneUserAccount: id => {
-    return axios.delete(`/api/users/${id}`);
+  deleteOneUserAccount: creatorId => {
+    return axios.delete(`/api/users/${creatorId}`);
   },
   // Save the theme for the user
   saveThemeForUser: (creatorId, themeType) => {

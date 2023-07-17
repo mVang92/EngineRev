@@ -9,7 +9,7 @@ router
 // Matches with "/api/users/:creatorId/:vehicleId/vehicle"
 router
   .route("/:creatorId/:vehicleId/vehicle")
-  .get(controller.findOneVehicleForUser)
+  .get(controller.getOneVehicleForUser)
 
 // Matches with "/api/users/:id/user"
 router

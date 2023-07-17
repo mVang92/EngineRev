@@ -8,8 +8,6 @@ const ThreadComments = props => {
     displayName,
     loggedin,
     date,
-    threadCommentEmail,
-    userEmail,
     comment,
     votes,
     edited,
@@ -28,10 +26,10 @@ const ThreadComments = props => {
 
   return (
     <React.Fragment key={_id}>
-      <div className={(userEmail === threadCommentEmail ? "highlightComment " : "") + `fadeIn threadDetails ${currentTheme.oneThread}`}>
+      <div className={(uniqueCreatorId === commentCreator ? "highlightComment " : "") + `fadeIn threadDetails ${currentTheme.oneThread}`}>
         <div className="row">
           <div className="col-md-11 text-left breakWord threadCommentCredentials">
-            {userEmail === threadCommentEmail ? <>You posted on {formattedDate}</> : <>{displayName} posted on {formattedDate}</>}
+            {uniqueCreatorId === commentCreator ? <>You posted on {formattedDate}</> : <>{displayName} posted on {formattedDate}</>}
             <span> {edited ? <span className="text-secondary">(edited)</span> : null}</span>
           </div>
           <div className="col-md-1 votes noWidthMobileDisplay">
