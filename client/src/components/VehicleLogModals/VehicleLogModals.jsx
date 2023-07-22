@@ -28,7 +28,7 @@ const VehicleLogModals = props => {
     } = props;
 
     return (
-        <React.Fragment>
+        <>
             <EditOneVehicleNameModal
                 disableConfirmSaveEditVehicleNameButton={props.disableConfirmSaveEditVehicleNameButton}
                 showEditOneVehicleNameModal={props.showEditOneVehicleNameModal}
@@ -126,7 +126,7 @@ const VehicleLogModals = props => {
                 currentTheme={currentTheme}
                 serviceLogMileage={serviceLogMileage}
             />
-        </React.Fragment>
+        </>
     );
 };
 
