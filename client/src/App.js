@@ -45,6 +45,7 @@ export default class App extends Component {
       newPassword: "",
       profilePicture: "",
       errorMessage: "",
+      themeToDetermine: "",
       currentTheme: "",
       backgroundPicture: "",
       vehicleCount: "",
@@ -171,16 +172,16 @@ export default class App extends Component {
   getUserInfoPartial = creatorId => {
     if (this.state.isUserNewUser) return;
     userApi.getUserInfoPartial(creatorId)
-      .then(userInfo => {
+      .then(user => {
         userApi.getUserVehicles(creatorId)
           .then(vehicles => {
             this.setState({
               vehicleData: vehicles.data[0],
-              currentTheme: userInfo.data.theme,
-              backgroundPicture: userInfo.data.backgroundPicture,
-              displayName: userInfo.data.displayName,
+              themeToDetermine: user.data.theme,
+              backgroundPicture: user.data.backgroundPicture,
+              displayName: user.data.displayName,
               profilePicture: this.state.user._delegate.photoURL
-            }, () => this.renderTheme(themes.determineTheme(this.state.currentTheme, this.state.backgroundPicture)))
+            }, () => this.renderThemeAndBackgroundPicture(themes.determineTheme(this.state.themeToDetermine)))
           })
           .catch(error => {
             this.loadVehiclesFailNotification(error);
@@ -207,17 +208,15 @@ export default class App extends Component {
   getUserDataForAccountPage = () => {
     if (this.state.isUserNewUser) return;
     const creatorId = this.state.creatorId;
-    const theme = userApi.getTheme(creatorId)
     const vehicleCount = userApi.getVehicleCount(creatorId);
     const email = userApi.getEmail(creatorId);
     const roles = userApi.getRoles(creatorId);
-    return Promise.all([theme, vehicleCount, email, roles])
-      .then(([theme, vehicleCount, email, roles]) => {
+    return Promise.all([vehicleCount, email, roles])
+      .then(([vehicleCount, email, roles]) => {
         this.setState({
           vehicleCount: vehicleCount.data[0].total,
           email: email.data[0].email,
-          roles: roles.data[0].roles,
-          currentTheme: theme.data[0].theme
+          roles: roles.data[0].roles
         });
       })
       .catch(err => {
@@ -301,27 +300,21 @@ export default class App extends Component {
   };
 
   /**
-   * Display the info notification when the user resets the input field
-   */
-  resetFieldNotification = () => {
-    toast.info(defaults.inputFieldReset);
-  };
-
-  /**
    * Render the theme and background picture
    * 
    * @param theme the theme to render
    */
-  renderTheme = theme => {
-    this.setState({ currentTheme: theme });
+  renderThemeAndBackgroundPicture = theme => {
     if (this.state.backgroundPicture) {
       document.body.style.backgroundImage = "url(" + this.state.backgroundPicture + ")";
-      this.setState({ pageLoaded: true });
     } else {
       document.body.style.backgroundImage = "";
       document.body.style.backgroundColor = theme.backgroundColor;
-      this.setState({ pageLoaded: true });
     }
+    this.setState({
+      currentTheme: theme,
+      pageLoaded: true
+    });
   };
 
   /**
@@ -1168,6 +1161,13 @@ export default class App extends Component {
    */
   releaseNoteInvalidInputErrorNotification = () => {
     toast.error(defaults.invalidInputDetected);
+  };
+
+  /**
+   * Display the info notification when the user resets the input field
+   */
+  resetFieldNotification = () => {
+    toast.info(defaults.inputFieldReset);
   };
 
   /**
