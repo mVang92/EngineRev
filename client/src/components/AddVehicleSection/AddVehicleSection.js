@@ -13,21 +13,14 @@ class AddVehicleSection extends Component {
   };
 
   /**
-   * Check if the user input value is blank
-   */
-  checkIfStringIsBlank = string => {
-    return (!string || /^\s*$/.test(string));
-  };
-
-  /**
    * Check if the vehicle inputs are blank
    */
   checkIfVehicleInputsAreBlank = e => {
     e.preventDefault();
     if (
-      this.checkIfStringIsBlank(this.refs.year.value) ||
-      this.checkIfStringIsBlank(this.refs.make.value) ||
-      this.checkIfStringIsBlank(this.refs.model.value)
+      this.props.checkIfStringIsBlank(this.refs.year.value) ||
+      this.props.checkIfStringIsBlank(this.refs.make.value) ||
+      this.props.checkIfStringIsBlank(this.refs.model.value)
     ) {
       this.showAddVehicleErrorModal();
     } else {
@@ -57,14 +50,14 @@ class AddVehicleSection extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <form id="addVehicleInputForm" onSubmit={this.checkIfVehicleInputsAreBlank.bind(this)}>
           <div className="text-center row">
             <div className="col-md-6 wrapword">
               <Link to={{ pathname: "/account" }}>
                 <img
                   id="mainPageProfilePicture"
-                  src={this.props.profilePicture ? this.props.profilePicture : this.state.defaultProfilePicture}
+                  src={this.props.profilePicture}
                   alt={this.props.displayName}
                   title={this.props.displayName}
                 />
@@ -162,7 +155,7 @@ class AddVehicleSection extends Component {
           hideAddVehicleErrorModal={this.hideAddVehicleErrorModal}
           currentTheme={this.props.currentTheme}
         />
-      </React.Fragment>
+      </>
     );
   };
 };

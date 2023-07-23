@@ -12,7 +12,7 @@ const AddThread = props => {
   } = props;
 
   return (
-    <React.Fragment>
+    <>
       <form onSubmit={validateThreadInputValues}>
         <div id="startThreadForm" className="collapse">
           <div className="row">
@@ -58,7 +58,7 @@ const AddThread = props => {
         </div>
       </form>
 
-    </React.Fragment >
+    </>
   );
 };
 

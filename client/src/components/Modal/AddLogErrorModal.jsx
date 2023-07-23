@@ -9,7 +9,6 @@ const AddLogErrorModal = props => {
         currentTheme,
         mileage,
         service,
-        comment,
         hideAddLogErrorModal,
         checkIfStringIsBlank
     } = props;
@@ -37,15 +36,12 @@ const AddLogErrorModal = props => {
                             </div>
                             <div className="col-md-10 userInputErrorMessage">
                                 <div className="col-md-12">
-                                    <label><strong>Please fill in the missing fields:</strong></label>
-                                </div>
-                                <div className="col-md-12">
                                     {
                                         date === "" || checkIfStringIsBlank(date) ?
                                             (
-                                                <div className="text-danger"><strong>Date:</strong></div>
+                                                <div><strong>Date is required.</strong></div>
                                             ) : (
-                                                <div>Date: <span>{dateToShowFormatted}</span></div>
+                                                null
                                             )
                                     }
                                 </div>
@@ -53,9 +49,9 @@ const AddLogErrorModal = props => {
                                     {
                                         mileage === "" || checkIfStringIsBlank(mileage) ?
                                             (
-                                                <div className="text-danger"><strong>Mileage:</strong></div>
+                                                <div><strong>Mileage is required.</strong></div>
                                             ) : (
-                                                <div>Mileage: <span>{mileage}</span></div>
+                                                null
                                             )
                                     }
                                 </div>
@@ -63,14 +59,11 @@ const AddLogErrorModal = props => {
                                     {
                                         service === "" || checkIfStringIsBlank(service) ?
                                             (
-                                                <div className="text-danger"><strong>Service:</strong></div>
+                                                <div><strong>Service is required.</strong></div>
                                             ) : (
-                                                <div>Service: <span>{service}</span></div>
+                                                null
                                             )
                                     }
-                                </div>
-                                <div className="col-md-12 breakWord">
-                                    <div>Comments: <span>{comment}</span></div>
                                 </div>
                             </div>
                         </div>

@@ -4,7 +4,7 @@ const AddLog = props => {
   const { handleChange } = props;
 
   return (
-    <React.Fragment>
+    <>
       {
         props.year ?
           (
@@ -93,7 +93,7 @@ const AddLog = props => {
             null
           )
       }
-    </React.Fragment>
+    </>
   );
 };
 

@@ -14,6 +14,7 @@ const LoggedIn = props => {
         profilePicture={props.profilePicture}
         disableAddVehicleButton={props.disableAddVehicleButton}
         currentTheme={currentTheme}
+        checkIfStringIsBlank={props.checkIfStringIsBlank}
       />
       <hr className={currentTheme.hr} />
       <MyVehiclesSection

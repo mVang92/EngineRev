@@ -102,7 +102,6 @@ const VehicleLogModals = props => {
                 currentTheme={currentTheme}
                 mileage={mileage}
                 service={props.service}
-                comment={props.comment}
             />
             <UpdateLogErrorModal
                 showUpdatedLogErrorModal={props.showUpdatedLogErrorModal}

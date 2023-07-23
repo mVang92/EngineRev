@@ -8,9 +8,13 @@ const themes = [
   "light",
   "grey",
   "dark",
+  "red",
+  "orange",
   "transparentLight",
   "transparentGrey",
-  "transparentDark"
+  "transparentDark",
+  "transparentRed",
+  "transparentOrange"
 ];
 
 /**
