@@ -239,15 +239,6 @@ input {
     background: rgb(225, 225, 225);
 }
 
-.backToTopButton {
-    background: rgb(200, 235, 255);
-}
-
-
-.backToTopButton:hover {
-    background: rgb(128, 200, 255);
-}
-
 .deleteBtn,
 .deleteActionButton,
 .backButton,

@@ -1228,6 +1228,7 @@ export default class App extends Component {
                       disableAddVehicleButton={this.state.disableAddVehicleButton}
                       errorMessage={this.state.errorMessage}
                       reloadPage={this.reloadPage}
+                      checkIfStringIsBlank={this.checkIfStringIsBlank}
                       showAddVehicleYearNanErrorModal={this.state.showAddVehicleYearNanErrorModal}
                       requestShowAddVehicleYearNanErrorModal={this.requestShowAddVehicleYearNanErrorModal}
                       requestHideAddVehicleYearNanErrorModal={this.requestHideAddVehicleYearNanErrorModal}
@@ -1378,6 +1379,7 @@ export default class App extends Component {
           showSignOutModal={this.state.showSignOutModal}
           disableDoSignOutButton={this.state.disableDoSignOutButton}
           requestHideSignOutModal={this.requestHideSignOutModal}
+          currentTheme={this.state.currentTheme}
           handleSignOut={this.handleSignOut}
         />
         <ForgotPasswordModal

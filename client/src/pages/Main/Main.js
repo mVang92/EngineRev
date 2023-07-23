@@ -15,6 +15,7 @@ const Main = props => {
     currentTheme,
     errorMessage,
     disableAddVehicleButton,
+    checkIfStringIsBlank,
     showAddVehicleYearNanErrorModal,
     requestShowAddVehicleYearNanErrorModal,
     requestHideAddVehicleYearNanErrorModal
@@ -36,6 +37,7 @@ const Main = props => {
                 currentTheme={currentTheme}
                 errorMessage={errorMessage}
                 reloadPage={reloadPage}
+                checkIfStringIsBlank={checkIfStringIsBlank}
                 showAddVehicleYearNanErrorModal={showAddVehicleYearNanErrorModal}
                 requestShowAddVehicleYearNanErrorModal={requestShowAddVehicleYearNanErrorModal}
                 requestHideAddVehicleYearNanErrorModal={requestHideAddVehicleYearNanErrorModal}

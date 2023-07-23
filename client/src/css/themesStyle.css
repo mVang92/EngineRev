@@ -35,7 +35,7 @@
 .transparentLightThemeBackground {
     transition-duration: 0.3s;
     background: rgba(255, 255, 255, 0.5) !important;
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(4px);
 }
 
 .lightThemeHr,
@@ -67,10 +67,12 @@
     transition-duration: 0.3s;
     background: rgba(168, 168, 168, 0.5) !important;
     color: rgb(0, 0, 0) !important;
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(4px);
 }
 
 .greyThemeHr,
+.orangeThemeHr,
+.transparentOrangeThemeHr,
 .transparentGreyThemeHr {
     transition-duration: 0.3s;
     border-top: 1px solid rgb(220, 220, 220) !important;
@@ -91,6 +93,10 @@
 
 .greyThemeOneThread,
 .greyThemeOneUpdate,
+.orangeThemeOneThread,
+.orangeThemeOneUpdate,
+.transparentOrangeThemeOneThread,
+.transparentOrangeThemeOneUpdate,
 .transparentGreyThemeOneThread,
 .transparentGreyThemeOneUpdate {
     background: rgb(225, 225, 225) !important;
@@ -98,6 +104,10 @@
 
 .greyThemeAccountDetails,
 .greyThemeAboutContainer,
+.orangeThemeAccountDetails,
+.orangeThemeAboutContainer,
+.transparentOrangeThemeAccountDetails,
+.transparentOrangeThemeAboutContainer,
 .transparentGreyThemeAccountDetails,
 .transparentGreyThemeAboutContainer {
     background: rgb(225, 225, 225) !important;
@@ -114,10 +124,12 @@
     transition-duration: 0.3s;
     background: rgba(64, 64, 64, 0.5) !important;
     color: rgb(255, 255, 255) !important;
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(4px);
 }
 
+.redThemeHr,
 .darkThemeHr,
+.transparentRedThemeHr,
 .transparentDarkThemeHr {
     transition-duration: 0.3s;
     border-top: 1px solid rgb(200, 200, 200) !important;
@@ -135,26 +147,88 @@
     box-shadow: 2px 1px 2px 1px rgb(0, 0, 0);
 }
 
+.redThemeVehicleItemListFont,
 .darkThemeVehicleItemListFont,
+.transparentRedThemeVehicleItemListFont,
 .transparentDarkThemeVehicleItemListFont {
     color: rgb(255, 255, 255) !important;
 }
 
+.redThemeBackground {
+    transition-duration: 0.3s;
+    background: rgb(112, 0, 0) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+.orangeThemeBackground {
+    transition-duration: 0.3s;
+    background: rgb(192, 92, 0) !important;
+    color: rgb(0, 0, 0) !important;
+}
+
+.redThemeVehicleItemList,
+.transparentRedThemeVehicleItemList {
+    background: rgb(68, 0, 0);
+    box-shadow: 1px 1px 3px 1px rgb(24, 24, 24);
+}
+
+.redThemeVehicleItemList:hover,
+.transparentRedThemeVehicleItemList:hover {
+    background: rgb(92, 0, 0);
+    box-shadow: 2px 1px 2px 1px rgb(0, 0, 0);
+}
+
+.orangeThemeVehicleItemList,
+.transparentOrangeThemeVehicleItemList {
+    background: rgb(212, 112, 0);
+    box-shadow: 1px 1px 3px 1px rgb(24, 24, 24);
+}
+
+.orangeThemeVehicleItemList:hover,
+.transparentOrangeThemeVehicleItemList:hover {
+    background: rgb(225, 125, 0);
+    box-shadow: 2px 1px 2px 1px rgb(0, 0, 0);
+}
+
+.transparentRedThemeBackground {
+    transition-duration: 0.3s;
+    background: rgba(112, 0, 0, 0.5) !important;
+    color: rgb(255, 255, 255) !important;
+    backdrop-filter: blur(4px);
+}
+
+.transparentOrangeThemeBackground {
+    transition-duration: 0.3s;
+    background: rgba(192, 92, 0, 0.5) !important;
+    color: rgb(0, 0, 0) !important;
+    backdrop-filter: blur(4px);
+}
+
+.redThemeAccountDetails,
+.redThemeOneUpdate,
+.redThemeOneThread,
+.redThemeAboutContainer,
 .darkThemeOneThread,
 .darkThemeOneUpdate,
+.transparentRedThemeOneUpdate,
+.transparentRedThemeOneThread,
 .transparentDarkThemeOneThread,
 .transparentDarkThemeOneUpdate,
 .darkThemeAccountDetails,
 .darkThemeAboutContainer,
+.transparentRedThemeAccountDetails,
+.transparentRedThemeAboutContainer,
 .transparentDarkThemeAccountDetails,
 .transparentDarkThemeAboutContainer {
-    background: rgb(200, 200, 200) !important;
+    background: rgb(192, 192, 192) !important;
     color: rgb(0, 0, 0);
 }
 
 .engineRevThemeVehicleItemListFont,
 .lightThemeVehicleItemListFont,
 .greyThemeVehicleItemListFont,
+.orangeThemeVehicleItemListFont,
+.transparentOrangeThemeVehicleItemListFont,
 .transparentLightThemeVehicleItemListFont,
 .transparentGreyThemeVehicleItemListFont {
     color: rgb(0, 0, 0) !important;
@@ -164,6 +238,10 @@
 .lightThemeServiceLogs,
 .greyThemeServiceLogs,
 .darkThemeServiceLogs,
+.redThemeServiceLogs,
+.orangeThemeServiceLogs,
+.transparentOrangeThemeServiceLogs,
+.transparentRedThemeServiceLogs,
 .transparentLightThemeServiceLogs,
 .transparentGreyThemeServiceLogs,
 .transparentDarkThemeServiceLogs {

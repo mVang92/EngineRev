@@ -57,6 +57,34 @@ export const themes = {
     aboutContainer: "darkThemeAboutContainer",
     backgroundColor: "rgb(16, 16, 16)"
   },
+  red: {
+    theme: "Red",
+    themeAlternate: "red",
+    background: "redThemeBackground",
+    hr: "redThemeHr",
+    serviceLogs: "redThemeServiceLogs",
+    vehicleItemList: "redThemeVehicleItemList",
+    vehicleItemListFont: "redThemeVehicleItemListFont",
+    oneThread: "redThemeOneThread",
+    oneUpdate: "redThemeOneUpdate",
+    accountDetails: "redThemeAccountDetails",
+    aboutContainer: "redThemeAboutContainer",
+    backgroundColor: "rgb(68, 0, 0)"
+  },
+  orange: {
+    theme: "Orange",
+    themeAlternate: "orange",
+    background: "orangeThemeBackground",
+    hr: "orangeThemeHr",
+    serviceLogs: "orangeThemeServiceLogs",
+    vehicleItemList: "orangeThemeVehicleItemList",
+    vehicleItemListFont: "orangeThemeVehicleItemListFont",
+    oneThread: "orangeThemeOneThread",
+    oneUpdate: "orangeThemeOneUpdate",
+    accountDetails: "orangeThemeAccountDetails",
+    aboutContainer: "orangeThemeAboutContainer",
+    backgroundColor: "rgb(168, 68, 0)"
+  },
   transparentLight: {
     theme: "Transparent Light",
     themeAlternate: "transparentLight",
@@ -99,6 +127,34 @@ export const themes = {
     aboutContainer: "transparentDarkThemeAboutContainer",
     backgroundColor: "rgb(16, 16, 16)"
   },
+  transparentRed: {
+    theme: "Transparent Red",
+    themeAlternate: "transparentRed",
+    background: "transparentRedThemeBackground",
+    hr: "transparentRedThemeHr",
+    serviceLogs: "transparentRedThemeServiceLogs",
+    vehicleItemList: "transparentRedThemeVehicleItemList",
+    vehicleItemListFont: "transparentRedThemeVehicleItemListFont",
+    oneThread: "transparentRedThemeOneThread",
+    oneUpdate: "transparentRedThemeOneUpdate",
+    accountDetails: "transparentRedThemeAccountDetails",
+    aboutContainer: "transparentRedThemeAboutContainer",
+    backgroundColor: "rgb(68, 0, 0)"
+  },
+  transparentOrange: {
+    theme: "Transparent Orange",
+    themeAlternate: "transparentOrange",
+    background: "transparentOrangeThemeBackground",
+    hr: "transparentOrangeThemeHr",
+    serviceLogs: "transparentOrangeThemeServiceLogs",
+    vehicleItemList: "transparentOrangeThemeVehicleItemList",
+    vehicleItemListFont: "transparentOrangeThemeVehicleItemListFont",
+    oneThread: "transparentOrangeThemeOneThread",
+    oneUpdate: "transparentOrangeThemeOneUpdate",
+    accountDetails: "transparentOrangeThemeAccountDetails",
+    aboutContainer: "transparentOrangeThemeAboutContainer",
+    backgroundColor: "rgb(168, 68, 0)"
+  },
   determineTheme(theme) {
     let themeType;
     switch (theme) {
@@ -114,6 +170,12 @@ export const themes = {
       case defaults.darkTheme:
         themeType = themes.dark;
         break;
+      case defaults.redTheme:
+        themeType = themes.red;
+        break;
+      case defaults.orangeTheme:
+        themeType = themes.orange;
+        break;
       case defaults.transparentLightTheme:
         themeType = themes.transparentLight;
         break;
@@ -122,6 +184,12 @@ export const themes = {
         break;
       case defaults.transparentDarkTheme:
         themeType = themes.transparentDark;
+        break;
+      case defaults.transparentRedTheme:
+        themeType = themes.transparentRed;
+        break;
+      case defaults.transparentOrangeTheme:
+        themeType = themes.transparentOrange;
         break;
       default:
         themeType = themes.engineRev;
