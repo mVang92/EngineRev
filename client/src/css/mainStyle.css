@@ -660,6 +660,10 @@ input {
     border-top: initial;
 }
 
+.modal-header {
+    border-bottom: initial;
+}
+
 .votes,
 .alignRightButtonsDesktopDisplay {
     text-align: right;
