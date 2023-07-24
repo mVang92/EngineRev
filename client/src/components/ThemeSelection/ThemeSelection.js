@@ -24,7 +24,7 @@ const ThemeSelection = props => {
           <option value={defaults.yellowTheme}>Yellow</option>
           <option value={defaults.greenTheme}>Green</option>
           <option value={defaults.blueTheme}>Blue</option>
-          <option value={defaults.lavendarTheme}>Lavendar</option>
+          <option value={defaults.lavenderTheme}>Lavender</option>
           <option value={defaults.violetTheme}>Violet</option>
           <option value={defaults.lightTheme}>Light</option>
           <option value={defaults.greyTheme}>Grey</option>
@@ -34,7 +34,7 @@ const ThemeSelection = props => {
           <option value={defaults.transparentYellowTheme}>Transparent Yellow</option>
           <option value={defaults.transparentGreenTheme}>Transparent Green</option>
           <option value={defaults.transparentBlueTheme}>Transparent Blue</option>
-          <option value={defaults.transparentLavendarTheme}>Transparent Lavendar</option>
+          <option value={defaults.transparentLavenderTheme}>Transparent Lavender</option>
           <option value={defaults.transparentVioletTheme}>Transparent Violet</option>
           <option value={defaults.transparentLightTheme}>Transparent Light</option>
           <option value={defaults.transparentGreyTheme}>Transparent Grey</option>

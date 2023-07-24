@@ -127,18 +127,18 @@ export const themes = {
     aboutContainer: "blueThemeAboutContainer",
     backgroundColor: "rgb(16, 32, 168)"
   },
-  lavendar: {
-    theme: "Lavendar",
-    themeAlternate: "lavendar",
-    background: "lavendarThemeBackground",
-    hr: "lavendarThemeHr",
-    serviceLogs: "lavendarThemeServiceLogs",
-    vehicleItemList: "lavendarThemeVehicleItemList",
-    vehicleItemListFont: "lavendarThemeVehicleItemListFont",
-    oneThread: "lavendarThemeOneThread",
-    oneUpdate: "lavendarThemeOneUpdate",
-    accountDetails: "lavendarThemeAccountDetails",
-    aboutContainer: "lavendarThemeAboutContainer",
+  lavender: {
+    theme: "Lavender",
+    themeAlternate: "lavender",
+    background: "lavenderThemeBackground",
+    hr: "lavenderThemeHr",
+    serviceLogs: "lavenderThemeServiceLogs",
+    vehicleItemList: "lavenderThemeVehicleItemList",
+    vehicleItemListFont: "lavenderThemeVehicleItemListFont",
+    oneThread: "lavenderThemeOneThread",
+    oneUpdate: "lavenderThemeOneUpdate",
+    accountDetails: "lavenderThemeAccountDetails",
+    aboutContainer: "lavenderThemeAboutContainer",
     backgroundColor: "rgb(120, 90, 140)"
   },
   violet: {
@@ -267,18 +267,18 @@ export const themes = {
     aboutContainer: "transparentBlueThemeAboutContainer",
     backgroundColor: "rgb(16, 32, 168)"
   },
-  transparentLavendar: {
-    theme: "Transparent Lavendar",
-    themeAlternate: "transparentLavendar",
-    background: "transparentLavendarThemeBackground",
-    hr: "transparentLavendarThemeHr",
-    serviceLogs: "transparentLavendarThemeServiceLogs",
-    vehicleItemList: "transparentLavendarThemeVehicleItemList",
-    vehicleItemListFont: "transparentLavendarThemeVehicleItemListFont",
-    oneThread: "transparentLavendarThemeOneThread",
-    oneUpdate: "transparentLavendarThemeOneUpdate",
-    accountDetails: "transparentLavendarThemeAccountDetails",
-    aboutContainer: "transparentLavendarThemeAboutContainer",
+  transparentLavender: {
+    theme: "Transparent Lavender",
+    themeAlternate: "transparentLavender",
+    background: "transparentLavenderThemeBackground",
+    hr: "transparentLavenderThemeHr",
+    serviceLogs: "transparentLavenderThemeServiceLogs",
+    vehicleItemList: "transparentLavenderThemeVehicleItemList",
+    vehicleItemListFont: "transparentLavenderThemeVehicleItemListFont",
+    oneThread: "transparentLavenderThemeOneThread",
+    oneUpdate: "transparentLavenderThemeOneUpdate",
+    accountDetails: "transparentLavenderThemeAccountDetails",
+    aboutContainer: "transparentLavenderThemeAboutContainer",
     backgroundColor: "rgb(120, 90, 140)"
   },
   transparentViolet: {
@@ -325,8 +325,8 @@ export const themes = {
       case defaults.blueTheme:
         themeType = themes.blue;
         break;
-      case defaults.lavendarTheme:
-        themeType = themes.lavendar;
+      case defaults.lavenderTheme:
+        themeType = themes.lavender;
         break;
       case defaults.violetTheme:
         themeType = themes.violet;
@@ -355,8 +355,8 @@ export const themes = {
       case defaults.transparentBlueTheme:
         themeType = themes.transparentBlue;
         break;
-      case defaults.transparentLavendarTheme:
-        themeType = themes.transparentLavendar;
+      case defaults.transparentLavenderTheme:
+        themeType = themes.transparentLavender;
         break;
       case defaults.transparentVioletTheme:
         themeType = themes.transparentViolet;

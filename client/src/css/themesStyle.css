@@ -148,10 +148,10 @@
 
 .redThemeHr,
 .darkThemeHr,
-.lavendarThemeHr,
+.lavenderThemeHr,
 .violetThemeHr,
 .transparentVioletThemeHr,
-.transparentLavendarThemeHr,
+.transparentLavenderThemeHr,
 .transparentRedThemeHr,
 .transparentDarkThemeHr {
     transition-duration: 0.3s;
@@ -172,13 +172,13 @@
 
 .redThemeVehicleItemListFont,
 .blueThemeVehicleItemListFont,
-.lavendarThemeVehicleItemListFont,
+.lavenderThemeVehicleItemListFont,
 .violetThemeVehicleItemListFont,
 .darkThemeVehicleItemListFont,
 .transparentRedThemeVehicleItemListFont,
 .transparentDarkThemeVehicleItemListFont,
 .transparentBlueThemeVehicleItemListFont,
-.transparentLavendarThemeVehicleItemListFont,
+.transparentLavenderThemeVehicleItemListFont,
 .transparentVioletThemeVehicleItemListFont {
     color: rgb(255, 255, 255) !important;
 }
@@ -213,7 +213,7 @@
     color: rgb(255, 255, 255) !important;
 }
 
-.lavendarThemeBackground {
+.lavenderThemeBackground {
     transition-duration: 0.3s;
     background: rgb(140, 112, 168) !important;
     color: rgb(255, 255, 255) !important;
@@ -285,14 +285,14 @@
     box-shadow: 1px 1px 3px 1px rgb(24, 24, 24);
 }
 
-.lavendarThemeVehicleItemList,
-.transparentLavendarThemeVehicleItemList {
+.lavenderThemeVehicleItemList,
+.transparentLavenderThemeVehicleItemList {
     background: rgb(130, 90, 150);
     box-shadow: 1px 1px 2px 1px rgb(24, 24, 24);
 }
 
-.lavendarThemeVehicleItemList:hover,
-.transparentLavendarThemeVehicleItemList:hover {
+.lavenderThemeVehicleItemList:hover,
+.transparentLavenderThemeVehicleItemList:hover {
     background: rgb(140, 100, 160);
     box-shadow: 1px 1px 3px 1px rgb(24, 24, 24);
 }
@@ -344,7 +344,7 @@
     backdrop-filter: blur(4px);
 }
 
-.transparentLavendarThemeBackground {
+.transparentLavenderThemeBackground {
     transition-duration: 0.3s;
     background: rgba(140, 112, 168, 0.5) !important;
     color: rgb(255, 255, 255) !important;
@@ -366,10 +366,10 @@
 .blueThemeOneUpdate,
 .blueThemeAccountDetails,
 .blueThemeAboutContainer,
-.lavendarThemeOneThread,
-.lavendarThemeOneUpdate,
-.lavendarThemeAccountDetails,
-.lavendarThemeAboutContainer,
+.lavenderThemeOneThread,
+.lavenderThemeOneUpdate,
+.lavenderThemeAccountDetails,
+.lavenderThemeAboutContainer,
 .violetThemeOneThread,
 .violetThemeOneUpdate,
 .violetThemeAccountDetails,
@@ -388,10 +388,10 @@
 .transparentBlueThemeOneUpdate,
 .transparentBlueThemeAccountDetails,
 .transparentBlueThemeAboutContainer,
-.transparentLavendarThemeOneThread,
-.transparentLavendarThemeOneUpdate,
-.transparentLavendarThemeAccountDetails,
-.transparentLavendarThemeAboutContainer,
+.transparentLavenderThemeOneThread,
+.transparentLavenderThemeOneUpdate,
+.transparentLavenderThemeAccountDetails,
+.transparentLavenderThemeAboutContainer,
 .transparentVioletThemeOneThread,
 .transparentVioletThemeOneUpdate,
 .transparentVioletThemeAccountDetails,
@@ -425,10 +425,10 @@
 .yellowThemeServiceLogs,
 .greenThemeServiceLogs,
 .blueThemeServiceLogs,
-.lavendarThemeServiceLogs,
+.lavenderThemeServiceLogs,
 .violetThemeServiceLogs,
 .transparentVioletThemeServiceLogs,
-.transparentLavendarThemeServiceLogs,
+.transparentLavenderThemeServiceLogs,
 .transparentBlueThemeServiceLogs,
 .transparentGreenThemeServiceLogs,
 .transparentYellowThemeServiceLogs,

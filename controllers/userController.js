@@ -13,7 +13,7 @@ const themes = [
   "yellow",
   "green",
   "blue",
-  "lavendar",
+  "lavender",
   "violet",
   "transparentLight",
   "transparentGrey",
@@ -23,7 +23,7 @@ const themes = [
   "transparentYellow",
   "transparentGreen",
   "transparentBlue",
-  "transparentLavendar",
+  "transparentLavender",
   "transparentViolet"
 ];
 
