@@ -10,11 +10,21 @@ const themes = [
   "dark",
   "red",
   "orange",
+  "yellow",
+  "green",
+  "blue",
+  "lavendar",
+  "violet",
   "transparentLight",
   "transparentGrey",
   "transparentDark",
   "transparentRed",
-  "transparentOrange"
+  "transparentOrange",
+  "transparentYellow",
+  "transparentGreen",
+  "transparentBlue",
+  "transparentLavendar",
+  "transparentViolet"
 ];
 
 /**
