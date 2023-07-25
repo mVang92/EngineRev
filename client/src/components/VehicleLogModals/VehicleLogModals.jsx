@@ -111,7 +111,6 @@ const VehicleLogModals = props => {
                 serviceLogDate={serviceLogDate}
                 serviceLogMileage={serviceLogMileage}
                 serviceLogService={serviceLogService}
-                serviceLogComment={serviceLogComment}
             />
             <MileageInputErrorModal
                 showMileageInputErrorModal={props.showMileageInputErrorModal}
