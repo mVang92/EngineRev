@@ -337,7 +337,7 @@ export default class App extends Component {
           disableSignInButton: false,
           isUserNewUser: false
         });
-        this.errorNotification(error);
+        this.errorNotification(error.message);
       });
   };
 
@@ -388,7 +388,7 @@ export default class App extends Component {
       .doCreateUserWithEmailAndPassword(this.state.email, this.state.confirmPassword)
       .then(() => this.createUserSchema(displayName))
       .catch(error => {
-        this.warningNotification(error);
+        this.warningNotification(error.message);
         this.setState({ disableSignUpButton: false });
       });
   };
@@ -403,7 +403,7 @@ export default class App extends Component {
       .then(() => window.location = "/")
       .catch(error => {
         this.setState({ disableDoSignOutButton: false });
-        this.errorNotification(error);
+        this.errorNotification(error.message);
       });
   };
 
@@ -423,7 +423,7 @@ export default class App extends Component {
         });
       }).catch(error => {
         this.setState({ disableForgotPasswordSubmitButton: false });
-        this.errorNotification(error);
+        this.warningNotification(error.message);
       });
   };
 
