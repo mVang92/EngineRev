@@ -110,8 +110,7 @@ input {
 }
 
 #vehicleLogInformation,
-#addVehicleInputForm,
-#pageTitle {
+#addVehicleInputForm {
     margin-top: 3em;
 }
 
@@ -126,8 +125,7 @@ input {
     margin-bottom: 0.5rem;
 }
 
-.box,
-#updatesContainer {
+.box {
     background: rgb(235, 235, 235);
     padding: 1em;
     margin-bottom: 1rem;
@@ -461,6 +459,7 @@ input {
 
 #forumPage,
 #accountPage,
+#releaseNotesPage,
 #noMatch,
 #noAuthorization {
     padding-top: 4em;

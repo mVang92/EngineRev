@@ -1,4 +1,5 @@
 import React from "react";
+import Container from "../../components/Container";
 import UpdatePageDetails from "../../components/UpdatePageDetails";
 import Loading from "../../components/Loading";
 
@@ -31,28 +32,30 @@ const Updates = props => {
       {
         allUpdates ?
           (
-            <UpdatePageDetails
-              currentTheme={currentTheme}
-              roles={roles}
-              handleChange={handleChange}
-              addOneUpdate={addOneUpdate}
-              updateChanges={updateChanges}
-              knownIssues={knownIssues}
-              allUpdates={allUpdates}
-              backToTopOfPage={backToTopOfPage}
-              checkUserEnteredUpdatedReleaseNoteInput={checkUserEnteredUpdatedReleaseNoteInput}
-              showEditOneUpdateModal={showEditOneUpdateModal}
-              editOneUpdateModal={editOneUpdateModal}
-              requestShowDeleteOneUpdateModal={requestShowDeleteOneUpdateModal}
-              requestHideEditOneUpdateModal={requestHideEditOneUpdateModal}
-              updateChangesToShowInModal={updateChangesToShowInModal}
-              knownIssuesToShowInModal={knownIssuesToShowInModal}
-              disableConfirmSaveEditReleaseNoteButton={disableConfirmSaveEditReleaseNoteButton}
-              handleDeleteOneReleaseNote={handleDeleteOneReleaseNote}
-              showDeleteOneUpdateModal={showDeleteOneUpdateModal}
-              requestHideDeleteOneUpdateModal={requestHideDeleteOneUpdateModal}
-              disableConfirmDeleteReleaseNoteButton={disableConfirmDeleteReleaseNoteButton}
-            />
+            <Container>
+              <UpdatePageDetails
+                currentTheme={currentTheme}
+                roles={roles}
+                handleChange={handleChange}
+                addOneUpdate={addOneUpdate}
+                updateChanges={updateChanges}
+                knownIssues={knownIssues}
+                allUpdates={allUpdates}
+                backToTopOfPage={backToTopOfPage}
+                checkUserEnteredUpdatedReleaseNoteInput={checkUserEnteredUpdatedReleaseNoteInput}
+                showEditOneUpdateModal={showEditOneUpdateModal}
+                editOneUpdateModal={editOneUpdateModal}
+                requestShowDeleteOneUpdateModal={requestShowDeleteOneUpdateModal}
+                requestHideEditOneUpdateModal={requestHideEditOneUpdateModal}
+                updateChangesToShowInModal={updateChangesToShowInModal}
+                knownIssuesToShowInModal={knownIssuesToShowInModal}
+                disableConfirmSaveEditReleaseNoteButton={disableConfirmSaveEditReleaseNoteButton}
+                handleDeleteOneReleaseNote={handleDeleteOneReleaseNote}
+                showDeleteOneUpdateModal={showDeleteOneUpdateModal}
+                requestHideDeleteOneUpdateModal={requestHideDeleteOneUpdateModal}
+                disableConfirmDeleteReleaseNoteButton={disableConfirmDeleteReleaseNoteButton}
+              />
+            </Container>
           ) :
           (
             <Loading />
