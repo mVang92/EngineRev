@@ -101,7 +101,7 @@ module.exports = {
     getAllThreads: (req, res) => {
         switch (req.params.sortCriteria) {
             case sortCriterias.oldestThreadsSort:
-                sortByDate(res, 0);
+                sortByDate(res, 1);
                 break;
             case sortCriterias.mostRecentThreadsSort:
                 sortByDate(res, -1);
