@@ -11,6 +11,7 @@ import eventLogHandler from "./utils/EventLogHandler/eventLogHandler";
 import userApi from "./utils/userApi";
 import displayNameApi from "./utils/displayNameApi";
 import updateApi from "./utils/updateApi";
+import forumApi from "./utils/forumApi";
 import eventLogApi from "./utils/eventLogApi";
 import Main from "./pages/Main";
 import Log from "./pages/Log";
@@ -36,6 +37,7 @@ export default class App extends Component {
       loggedin: false,
       user: "",
       creatorId: "",
+      uniqueCreatorId: "",
       email: "",
       newEmail: "",
       displayName: "",
@@ -89,9 +91,20 @@ export default class App extends Component {
       vehicleData: [],
       allUpdates: [],
       defaultProfilePicture: defaults.defaultProfilePicture,
-      defaultDisplayName: defaults.defaultDisplayName
+      defaultDisplayName: defaults.defaultDisplayName,
+      loadingSortedThreads: false,
+      threadTitle: "",
+      threadDescription: "",
+      allThreads: [],
+      disableSubmitNewThreadButton: false,
+      noSortResults: "",
+      defaultSortOrder: "",
+      disableSortThreadsButton: false
     };
   };
+
+  SELECTED_SORT_ORDER = "selectedSortOrder"
+  uniqueCreatorId;
 
   /**
    * Handle real-time changes
@@ -115,10 +128,12 @@ export default class App extends Component {
   onAuthStateChanged = () => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
+        this.uniqueCreatorId = user.uid;
         this.setState({
           user: user,
           loggedin: true,
           creatorId: user._delegate.uid,
+          uniqueCreatorId: user._delegate.uid,
           email: user._delegate.email,
           userAccountCreationTime: user._delegate.metadata.creationTime,
           userAccountLastSignIn: user._delegate.metadata.lastSignInTime,
@@ -132,6 +147,7 @@ export default class App extends Component {
       }
     });
     this.getUpdates();
+    this.getForumThreads();
   };
 
   /**
@@ -169,6 +185,9 @@ export default class App extends Component {
     });
   };
 
+  /**
+   * Retrieve the information for the user then load the page
+   */
   getUserInfoPartial = creatorId => {
     if (this.state.isUserNewUser) return;
     userApi.getUserInfoPartial(creatorId)
@@ -203,28 +222,49 @@ export default class App extends Component {
   };
 
   /**
-   * Get data for the user and load the page after data retrieval
+   * Add the vehicle for the user
+   * 
+   * @param newVehicle the vehicle data to record
    */
-  getUserDataForAccountPage = () => {
-    if (this.state.isUserNewUser) return;
-    const creatorId = this.state.creatorId;
-    const vehicleCount = userApi.getVehicleCount(creatorId);
-    const email = userApi.getEmail(creatorId);
-    const roles = userApi.getRoles(creatorId);
-    return Promise.all([vehicleCount, email, roles])
-      .then(([vehicleCount, email, roles]) => {
-        this.setState({
-          vehicleCount: vehicleCount.data[0].total,
-          email: email.data[0].email,
-          roles: roles.data[0].roles
-        });
+  handleAddOneVehicle = newVehicle => {
+    const creatorId = this.state.user._delegate.uid;
+    const email = this.state.user._delegate.email;
+    const event = events.addedNewVehicle;
+    userApi.addOneVehicle(creatorId, newVehicle)
+      .then(() => {
+        eventLogHandler.successful(creatorId, email, event);
+        this.getUserInfoPartial(creatorId);
+        this.getVehicleCount(creatorId);
+        this.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
+        this.setState({ disableAddVehicleButton: false });
+        document.getElementById("addVehicleInputForm").reset();
       })
-      .catch(err => {
-        this.setState({
-          loadingError: err,
-          pageLoaded: true
-        }, this.errorNotification(err));
+      .catch(error => {
+        eventLogHandler.failure(creatorId, email, event, error);
+        this.errorNotification(error);
+        this.setState({ disableAddVehicleButton: false });
       });
+  };
+
+  /**
+   * Check if the vehicle year is valid before adding it to the database
+   * 
+   * @param newVehicle the new vehicle data to check
+   */
+  checkIfVehicleYearIsValid = newVehicle => {
+    const date = new Date();
+    const futureYear = date.getFullYear() + 2;
+    this.setState({ disableAddVehicleButton: true });
+    if (
+      isNaN(newVehicle.year) ||
+      (newVehicle.year < 1885) ||
+      (newVehicle.year > futureYear)
+    ) {
+      this.requestShowAddVehicleYearNanErrorModal();
+      this.setState({ disableAddVehicleButton: false });
+    } else {
+      this.handleAddOneVehicle(newVehicle);
+    }
   };
 
   /**
@@ -277,29 +317,6 @@ export default class App extends Component {
   };
 
   /**
-   * Reset the specified input field
-   * 
-   * @param fieldToReset The input field to reset
-   */
-  resetInputFields = (e, fieldToReset) => {
-    e.preventDefault();
-    switch (fieldToReset) {
-      case defaults.newBackgroundPictureInput:
-        this.setState({ newBackgroundPicture: "" }, () => this.resetFieldNotification());
-        break;
-      case defaults.newProfilePictureInput:
-        this.setState({ newProfilePicture: "" }, () => this.resetFieldNotification());
-        break;
-      case defaults.newDisplayNameInput:
-        this.setState({ newDisplayName: "" }, () => this.resetFieldNotification());
-        break;
-      default:
-        this.errorNotification(defaults.resetInputFieldError);
-    }
-    document.getElementById(fieldToReset).value = "";
-  };
-
-  /**
    * Render the theme and background picture
    * 
    * @param theme the theme to render
@@ -316,6 +333,8 @@ export default class App extends Component {
       pageLoaded: true
     });
   };
+
+  // ********************BEGIN LOGIN FUNCTIONALITY********************
 
   /**
    * Handle user authentication when a user signs in
@@ -427,30 +446,9 @@ export default class App extends Component {
       });
   };
 
-  /**
-   * Add the vehicle for the user
-   * 
-   * @param newVehicle the vehicle data to record
-   */
-  handleAddOneVehicle = newVehicle => {
-    const creatorId = this.state.user._delegate.uid;
-    const email = this.state.user._delegate.email;
-    const event = events.addedNewVehicle;
-    userApi.addOneVehicle(creatorId, newVehicle)
-      .then(() => {
-        eventLogHandler.successful(creatorId, email, event);
-        this.getUserInfoPartial(creatorId);
-        this.getVehicleCount(creatorId);
-        this.addOneVehicleSuccessNotification(newVehicle.year, newVehicle.make, newVehicle.model);
-        this.setState({ disableAddVehicleButton: false });
-        document.getElementById("addVehicleInputForm").reset();
-      })
-      .catch(error => {
-        eventLogHandler.failure(creatorId, email, event, error);
-        this.errorNotification(error);
-        this.setState({ disableAddVehicleButton: false });
-      });
-  };
+  // ********************END LOGIN FUNCTIONALITY********************
+
+  // ********************BEGIN ACCOUNT PAGE FUNCTIONALITY********************
 
   /**
    * Get the vehicle count
@@ -464,14 +462,39 @@ export default class App extends Component {
   };
 
   /**
-    * Get the roles for the user
-    * 
-    * @param creatorId the creator id
-    */
+   * Get the roles for the user
+   * 
+   * @param creatorId the creator id
+   */
   getUserRoles = creatorId => {
     userApi.getRoles(creatorId)
       .then(roles => this.setState({ roles: roles.data[0].roles }))
       .catch(error => this.errorNotification(error));
+  };
+
+  /**
+   * Get data for the user and load the page after data retrieval
+   */
+  getUserDataForAccountPage = () => {
+    if (this.state.isUserNewUser) return;
+    const creatorId = this.state.creatorId;
+    const vehicleCount = userApi.getVehicleCount(creatorId);
+    const email = userApi.getEmail(creatorId);
+    const roles = userApi.getRoles(creatorId);
+    return Promise.all([vehicleCount, email, roles])
+      .then(([vehicleCount, email, roles]) => {
+        this.setState({
+          vehicleCount: vehicleCount.data[0].total,
+          email: email.data[0].email,
+          roles: roles.data[0].roles
+        });
+      })
+      .catch(err => {
+        this.setState({
+          loadingError: err,
+          pageLoaded: true
+        }, this.errorNotification(err));
+      });
   };
 
   /**
@@ -758,32 +781,31 @@ export default class App extends Component {
   };
 
   /**
-    * Reload the page
-    */
-  reloadPage = () => {
-    window.location.reload();
+   * Reset the specified input field
+   * 
+   * @param fieldToReset The input field to reset
+   */
+  resetInputFields = (e, fieldToReset) => {
+    e.preventDefault();
+    switch (fieldToReset) {
+      case defaults.newBackgroundPictureInput:
+        this.setState({ newBackgroundPicture: "" }, () => this.resetFieldNotification());
+        break;
+      case defaults.newProfilePictureInput:
+        this.setState({ newProfilePicture: "" }, () => this.resetFieldNotification());
+        break;
+      case defaults.newDisplayNameInput:
+        this.setState({ newDisplayName: "" }, () => this.resetFieldNotification());
+        break;
+      default:
+        this.errorNotification(defaults.resetInputFieldError);
+    }
+    document.getElementById(fieldToReset).value = "";
   };
 
-  /**
-   * Check if the vehicle year is valid before adding it to the database
-   * 
-   * @param newVehicle the new vehicle data to check
-   */
-  checkIfVehicleYearIsValid = newVehicle => {
-    const date = new Date();
-    const futureYear = date.getFullYear() + 2;
-    this.setState({ disableAddVehicleButton: true });
-    if (
-      isNaN(newVehicle.year) ||
-      (newVehicle.year < 1885) ||
-      (newVehicle.year > futureYear)
-    ) {
-      this.requestShowAddVehicleYearNanErrorModal();
-      this.setState({ disableAddVehicleButton: false });
-    } else {
-      this.handleAddOneVehicle(newVehicle);
-    }
-  };
+  // ********************END ACCOUNT PAGE FUNCTIONALITY********************
+
+  // ********************BEGIN RELEASE NOTES PAGE FUNCTIONALITY********************
 
   /**
    * Gets all of the updates and release notes from the database
@@ -929,6 +951,153 @@ export default class App extends Component {
     }
   };
 
+  // ********************END RELEASE NOTES PAGE FUNCTIONALITY********************
+
+  // ********************BEGIN FORUM PAGE FUNCTIONALITY********************
+
+  /**
+   * Render the threads according to the sort criteria
+   */
+  renderSortedThreads = () => {
+    let element = document.getElementById(defaults.sortThreadsDropdown);
+    let selectedSortOrder = element.options[element.selectedIndex].value;
+    localStorage.setItem(this.SELECTED_SORT_ORDER, selectedSortOrder);
+    this.setState({
+      defaultSortOrder: selectedSortOrder,
+      disableSortThreadsButton: true,
+      loadingSortedThreads: true,
+      allThreads: []
+    });
+    forumApi.getAllThreads(localStorage.getItem(this.SELECTED_SORT_ORDER))
+      .then(res => {
+        this.setState({
+          allThreads: res.data,
+          noSortResults: res.data === undefined || res.data.length === 0 ? defaults.noSortResults : null,
+          disableSortThreadsButton: false,
+          loadingSortedThreads: false
+        });
+      })
+      .catch(err => {
+        this.setState({
+          disableSortThreadsButton: false,
+          loadingSortedThreads: false
+        });
+        this.errorNotification(err);
+      });
+  };
+
+  /**
+   * Validate the input values for a new thread before saving it
+   */
+  validateThreadInputValues = e => {
+    e.preventDefault();
+    userApi.getUserInfoPartial(this.state.creatorId)
+      .then(res => {
+        if (res.data.creator === this.state.uniqueCreatorId) {
+          if (
+            this.state.threadTitle === "" ||
+            this.state.threadDescription === "" ||
+            this.checkIfStringIsBlank(this.state.threadTitle) ||
+            this.checkIfStringIsBlank(this.state.threadDescription)
+          ) {
+            this.warningNotification(defaults.threadDetailsCannotBeBlank);
+          } else {
+            let element = document.getElementById(defaults.threadCategoryDropdown);
+            this.handleAddOneThread(element.options[element.selectedIndex].value);
+          }
+        } else {
+          alert(defaults.noAuthorizationToPerformAction);
+          window.location = "/";
+        }
+      })
+      .catch(err => this.errorNotification(err));
+  };
+
+  /**
+   * Gets all of the forum threads from the database
+   */
+  getForumThreads = () => {
+    this.setState({ defaultSortOrder: localStorage.getItem(this.SELECTED_SORT_ORDER) });
+    if (localStorage.getItem(this.SELECTED_SORT_ORDER) === null) {
+      localStorage.setItem(this.SELECTED_SORT_ORDER, defaults.mostRecentThreadsSort);
+      forumApi.getAllThreads(this.SELECTED_SORT_ORDER)
+        .then(res => {
+          this.setState({
+            allThreads: res.data,
+            noSortResults: res.data === undefined || res.data.length === 0 ? defaults.noSortResults : null
+          });
+        })
+        .catch(err => {
+          this.errorNotification(err);
+          this.getUserInfoPartial();
+        });
+    } else {
+      forumApi.getAllThreads(localStorage.getItem(this.SELECTED_SORT_ORDER))
+        .then(res => {
+          this.setState({
+            allThreads: res.data,
+            noSortResults: res.data === undefined || res.data.length === 0 ? defaults.noSortResults : null
+          });
+        })
+        .catch(err => {
+          this.errorNotification(err);
+          this.getUserInfoPartial();
+        });
+    }
+  };
+
+  /**
+   * Add a new thread into the database
+   * 
+   * @param threadCategory the category to record for the thread
+   */
+  handleAddOneThread = threadCategory => {
+    this.setState({ disableSubmitNewThreadButton: true });
+    const creatorId = this.state.creatorId;
+    const email = this.state.email;
+    const displayName = this.state.displayName;
+    const event = events.addOneThread;
+    let newThreadPayload = {
+      creator: creatorId,
+      email: email,
+      displayName: displayName,
+      threadTitle: this.state.threadTitle,
+      threadDescription: this.state.threadDescription,
+      threadCategory: threadCategory,
+      views: 0,
+      hits: 0,
+      comments: []
+    };
+    forumApi.addOneThread(newThreadPayload)
+      .then(() => {
+        this.setState({
+          threadDescription: "",
+          threadTitle: "",
+          defaultSortOrder: defaults.mostRecentThreadsSort,
+          disableSubmitNewThreadButton: false
+        }, () => {
+          eventLogHandler.successful(creatorId, email, event);
+          localStorage.removeItem(this.SELECTED_SORT_ORDER);
+          this.successNotification(defaults.addThreadSuccessfully);
+          this.getForumThreads(this.state.defaultSortOrder);
+        });
+      })
+      .catch(err => {
+        eventLogHandler.failure(creatorId, email, event, err);
+        this.setState({ disableSubmitNewThreadButton: false });
+        this.errorNotification(err);
+      });
+  };
+
+  // ********************END FORUM PAGE FUNCTIONALITY********************
+
+  /**
+   * Reload the page
+   */
+  reloadPage = () => {
+    window.location.reload();
+  };
+
   /**
    * Alert the user and navigate to the origin URL
    */
@@ -985,8 +1154,8 @@ export default class App extends Component {
   };
 
   /**
- * Display the modal to notify the user the vehicle year must be a number
- */
+   * Display the modal to notify the user the vehicle year must be a number
+   */
   requestShowAddVehicleYearNanErrorModal = () => {
     this.setState({ showAddVehicleYearNanErrorModal: true });
   };
@@ -1257,6 +1426,20 @@ export default class App extends Component {
             path="/forum"
             element={
               <Forum
+                loggedin={this.state.loggedin}
+                currentTheme={this.state.currentTheme}
+                displayName={this.state.displayName}
+                loadingSortedThreads={this.state.loadingSortedThreads}
+                threadTitle={this.state.threadTitle}
+                threadDescription={this.state.threadDescription}
+                allThreads={this.state.allThreads}
+                disableSubmitNewThreadButton={this.state.disableSubmitNewThreadButton}
+                noSortResults={this.state.noSortResults}
+                defaultSortOrder={this.state.defaultSortOrder}
+                disableSortThreadsButton={this.state.disableSortThreadsButton}
+                handleChange={this.handleChange}
+                validateThreadInputValues={this.validateThreadInputValues}
+                renderSortedThreads={this.renderSortedThreads}
                 checkIfStringIsBlank={this.checkIfStringIsBlank}
                 successNotification={this.successNotification}
                 warningNotification={this.warningNotification}
@@ -1279,7 +1462,6 @@ export default class App extends Component {
             path="/account"
             element={
               <Account
-                handleChange={this.handleChange}
                 loggedin={this.state.loggedin}
                 pageLoaded={this.state.pageLoaded}
                 currentTheme={this.state.currentTheme}
@@ -1292,31 +1474,32 @@ export default class App extends Component {
                 newProfilePicture={this.state.newProfilePicture}
                 userAccountCreationTime={this.state.userAccountCreationTime}
                 userAccountLastSignIn={this.state.userAccountLastSignIn}
-                updateDisplayName={this.updateDisplayName}
-                canUserUpdateEmail={this.canUserUpdateEmail}
-                canUserUpdatePassword={this.canUserUpdatePassword}
                 newEmail={this.state.newEmail}
                 newPassword={this.state.newPassword}
                 confirmNewPassword={this.state.confirmNewPassword}
-                downloadEventLogCsvFile={this.downloadEventLogCsvFile}
-                backToTopOfPage={this.backToTopOfPage}
-                requestShowUpdateBackgroundPictureModal={this.requestShowUpdateBackgroundPictureModal}
                 showUpdateBackgroundPictureModal={this.state.showUpdateBackgroundPictureModal}
                 showUpdateProfilePictureModal={this.state.showUpdateProfilePictureModal}
-                saveThemeForUser={this.saveThemeForUser}
                 roles={this.state.roles}
                 disableThemeToggleButton={this.state.disableThemeToggleButton}
                 disableUpdateProfilePictureButton={this.state.disableUpdateProfilePictureButton}
-                resetInputFields={this.resetInputFields}
                 disableUpdateEmailButton={this.state.disableUpdateEmailButton}
                 disableUpdateDisplayNameButton={this.state.disableUpdateDisplayNameButton}
+                showUpdateProfilePictureSuccessModal={this.state.showUpdateProfilePictureSuccessModal}
+                handleChange={this.handleChange}
+                updateDisplayName={this.updateDisplayName}
+                canUserUpdateEmail={this.canUserUpdateEmail}
+                canUserUpdatePassword={this.canUserUpdatePassword}
+                downloadEventLogCsvFile={this.downloadEventLogCsvFile}
+                backToTopOfPage={this.backToTopOfPage}
+                saveThemeForUser={this.saveThemeForUser}
+                resetInputFields={this.resetInputFields}
                 updateBackgroundPicture={this.updateBackgroundPicture}
+                checkIfStringIsBlank={this.checkIfStringIsBlank}
+                updateProfilePicture={this.updateProfilePicture}
                 requestHideUpdateBackgroundPictureModal={this.requestHideUpdateBackgroundPictureModal}
                 requestShowUpdateProfilePictureModal={this.requestShowUpdateProfilePictureModal}
                 requestHideUpdateProfilePictureModal={this.requestHideUpdateProfilePictureModal}
-                checkIfStringIsBlank={this.checkIfStringIsBlank}
-                updateProfilePicture={this.updateProfilePicture}
-                showUpdateProfilePictureSuccessModal={this.state.showUpdateProfilePictureSuccessModal}
+                requestShowUpdateBackgroundPictureModal={this.requestShowUpdateBackgroundPictureModal}
                 requestHideUpdateProfilePictureSuccessModal={this.requestHideUpdateProfilePictureSuccessModal}
               />
             }
@@ -1333,25 +1516,25 @@ export default class App extends Component {
             path="/updates"
             element={
               <Updates
-                handleChange={this.handleChange}
                 roles={this.state.roles}
                 allUpdates={this.state.allUpdates}
                 updateChanges={this.state.updateChanges}
                 knownIssues={this.state.knownIssues}
                 updateChangesToShowInModal={this.state.updateChangesToShowInModal}
                 knownIssuesToShowInModal={this.state.knownIssuesToShowInModal}
-                backToTopOfPage={this.backToTopOfPage}
                 currentTheme={this.state.currentTheme}
-                addOneUpdate={this.addOneUpdate}
                 showEditOneUpdateModal={this.state.showEditOneUpdateModal}
+                showDeleteOneUpdateModal={this.state.showDeleteOneUpdateModal}
+                disableConfirmSaveEditReleaseNoteButton={this.state.disableConfirmSaveEditReleaseNoteButton}
+                disableConfirmDeleteReleaseNoteButton={this.state.disableConfirmDeleteReleaseNoteButton}
+                handleChange={this.handleChange}
+                backToTopOfPage={this.backToTopOfPage}
+                addOneUpdate={this.addOneUpdate}
                 editOneUpdateModal={this.editOneUpdateModal}
                 requestShowDeleteOneUpdateModal={this.requestShowDeleteOneUpdateModal}
                 requestHideEditOneUpdateModal={this.requestHideEditOneUpdateModal}
                 requestHideDeleteOneUpdateModal={this.requestHideDeleteOneUpdateModal}
                 handleDeleteOneReleaseNote={this.handleDeleteOneReleaseNote}
-                showDeleteOneUpdateModal={this.state.showDeleteOneUpdateModal}
-                disableConfirmSaveEditReleaseNoteButton={this.state.disableConfirmSaveEditReleaseNoteButton}
-                disableConfirmDeleteReleaseNoteButton={this.state.disableConfirmDeleteReleaseNoteButton}
                 checkUserEnteredUpdatedReleaseNoteInput={this.checkUserEnteredUpdatedReleaseNoteInput}
               />
             }
@@ -1360,34 +1543,34 @@ export default class App extends Component {
         </Routes>
         <SignInModal
           showSignInModal={this.state.showSignInModal}
+          disableSignInButton={this.state.disableSignInButton}
+          handleChange={this.handleChange}
           requestShowSignUpModal={this.requestShowSignUpModal}
           requestHideSignInModal={this.requestHideSignInModal}
           handleSignIn={this.handleSignIn}
           requestShowForgotPasswordModal={this.requestShowForgotPasswordModal}
-          disableSignInButton={this.state.disableSignInButton}
-          handleChange={this.handleChange}
         />
         <SignUpModal
           showSignUpModal={this.state.showSignUpModal}
+          disableSignUpButton={this.state.disableSignUpButton}
+          handleChange={this.handleChange}
           requestShowSignInModal={this.requestShowSignInModal}
           requestHideSignUpModal={this.requestHideSignUpModal}
           handleSignUp={this.handleSignUp}
-          disableSignUpButton={this.state.disableSignUpButton}
-          handleChange={this.handleChange}
         />
         <SignOutModal
+          currentTheme={this.state.currentTheme}
           showSignOutModal={this.state.showSignOutModal}
           disableDoSignOutButton={this.state.disableDoSignOutButton}
-          requestHideSignOutModal={this.requestHideSignOutModal}
-          currentTheme={this.state.currentTheme}
           handleSignOut={this.handleSignOut}
+          requestHideSignOutModal={this.requestHideSignOutModal}
         />
         <ForgotPasswordModal
           showForgotPasswordModal={this.state.showForgotPasswordModal}
-          requestHideForgotPasswordModal={this.requestHideForgotPasswordModal}
-          handlePasswordReset={this.handlePasswordReset}
           disableForgotPasswordSubmitButton={this.state.disableForgotPasswordSubmitButton}
           handleChange={this.handleChange}
+          requestHideForgotPasswordModal={this.requestHideForgotPasswordModal}
+          handlePasswordReset={this.handlePasswordReset}
         />
         <ToastContainer />
       </Router>
